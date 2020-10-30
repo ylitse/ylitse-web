@@ -18,7 +18,6 @@ module.exports = {
         'react': {
             'version': 'detect'
         },
-        
     },
     rules: {
         'eqeqeq': ['error', 'smart'],
