@@ -21,6 +21,12 @@ a web UI for all types of users of Ylitse service.
 
 ## Usage
 
+First initialize git-hooks.
+
+`git config core.hooksPath .githooks`
+
+
+
 1. Install node packages `npm i`
 1. Run tests `npm run test`
 1. Start the development server `npm run start`
