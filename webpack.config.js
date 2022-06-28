@@ -8,6 +8,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
+    historyApiFallback: true,
     static: {
       directory: './dist'
     }
@@ -23,6 +24,10 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      '@features': path.resolve(__dirname, 'src', 'features/'),
+      '@pages': path.resolve(__dirname, 'src', 'pages/'),
+    },
     extensions: [ '.tsx', '.ts', '.js' ],
   },
   output: {

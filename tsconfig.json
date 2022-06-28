@@ -3,11 +3,21 @@
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "es6",
+    "moduleResolution": "node",
     "target": "es5",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "strict": true,
     "allowJs": true,
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true
-  }
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "types": ["node", "jest"],
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.jsx",
+    "src/**/*.js"
+  ],
+  "exclude": ["e2e/**/*"]
 }
