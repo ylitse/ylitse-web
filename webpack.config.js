@@ -1,16 +1,17 @@
 const path = require('path');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   entry: {
-    app: path.join(__dirname, 'src', 'index.tsx')
+    app: path.join(__dirname, 'src', 'index.tsx'),
   },
   devtool: 'inline-source-map',
   devServer: {
+    historyApiFallback: true,
     static: {
-      directory: './dist'
-    }
+      directory: './dist',
+    },
   },
   target: 'web',
   module: {
@@ -20,10 +21,21 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
     filename: 'bundle.js',
@@ -31,7 +43,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: path.join(__dirname, 'src', 'index.html')
-    })
+      template: path.join(__dirname, 'src', 'index.html'),
+    }),
   ],
 };
