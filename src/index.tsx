@@ -1,8 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
+import LoadingPage from './features/LoadingPage/LoadingPage';
 
 const App = () => {
-  return <h1>Hello, world!</h1>;
+  return <LoadingPage />;
 };
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+ReactDOM.render(<App />, document.querySelector('#root'));
