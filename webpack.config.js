@@ -25,8 +25,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@features': path.resolve(__dirname, 'src', 'features/'),
-      '@pages': path.resolve(__dirname, 'src', 'pages/'),
+      '@': path.resolve(__dirname, 'src'),
     },
     extensions: [ '.tsx', '.ts', '.js' ],
   },

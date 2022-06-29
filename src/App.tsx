@@ -1,6 +1,6 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import RegisterPage from '@features/RegisterPage';
+import RegisterPage from '@/features/RegisterPage';
 
 const Wrapper = styled.section``;
 
