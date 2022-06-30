@@ -1,12 +1,9 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { StyledNavBar, StyledLogo, StyledNavLink, StyledLogoText, StyledNavBarItems } from './Navigation.styles';
-import Logo from './logo.svg';
 
 const NavigationBar = () => {
   return (
     <StyledNavBar>
-			<StyledLogo src={Logo} />
+			<StyledLogo />
       <StyledLogoText>YLITSE</StyledLogoText>
       <StyledNavBarItems>
 			<StyledNavLink to='/' className="navbar-link"><div>Koti</div></StyledNavLink>

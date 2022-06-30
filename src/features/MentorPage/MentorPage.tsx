@@ -4,7 +4,6 @@ import NavigationBar from '../Navigation';
 const MentorPage = () => {
   return (
     <StyledMentorPage>
-      <NavigationBar />
       <StyledMentorSearchElement>
 				<StyledMentorHeader>Mentorit</StyledMentorHeader>
 			</StyledMentorSearchElement>

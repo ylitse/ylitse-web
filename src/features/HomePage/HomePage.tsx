@@ -3,7 +3,7 @@ import NavigationBar from '../Navigation';
 
 const HomePage = () => {
   return (
-    <NavigationBar/>
+		<>Homehtunut</>
   );
 };
 
