@@ -14,8 +14,14 @@ export const StyledLogoText = styled.div`
   text-transform: uppercase;
 	color: white;
   flex: 1;
-	margin-left: 12%;
+
 	max-width: fit-content;
+`;
+
+export const StyledLogo = styled.img`
+  height: 40px;
+	margin-left: 12%;
+	margin-right: 1rem;
 `;
 
 export const StyledNavBarItem = styled.div`
@@ -27,10 +33,6 @@ export const StyledNavBarItem = styled.div`
 	justify-content: center;
 	align-items: center;
 	
-`;
-
-export const StyledNavText = styled.div `
-
 `;
 
 export const StyledNavLink = styled(NavLink)`
