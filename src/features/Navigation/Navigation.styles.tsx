@@ -51,6 +51,7 @@ export const StyledNavLink = styled(NavLink)`
 	}
 	&:active {
 		background-color: #43BFFF;
+		text-decoration: none;
 		color: #1C325D;
 		div {
 			height: 30px;
@@ -58,6 +59,7 @@ export const StyledNavLink = styled(NavLink)`
 		}
 	}
 	&.active {
+		text-decoration: none;
     background-color: #43BFFF;
 		color: #1C325D;
 		div {
@@ -65,6 +67,15 @@ export const StyledNavLink = styled(NavLink)`
 			border-bottom: 1px solid #1C325D;
 		}
   }
+	&:hover {
+		text-decoration: none;
+    background-color: #43BFFF;
+		color: #1C325D;
+		div {
+			height: 40px;
+			border-bottom: 1px solid #1C325D;
+		}
+	}
 `;
 
 export const StyledNavBar = styled.div`

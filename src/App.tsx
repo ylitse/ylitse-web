@@ -1,5 +1,6 @@
 import { Routes, Route, Link } from "react-router-dom";
-import NavigationBar from './features/Navigation';
+import HomePage from './features/HomePage';
+import MentorPage from './features/MentorPage';
 
 import styled from 'styled-components';
 import RegisterPage from './features/RegisterPage';
@@ -10,7 +11,8 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<NavigationBar />} />
+        <Route path="/" element={<HomePage />} />
+				<Route path="/mentorit" element={<MentorPage />} />
       </Routes>
     </div>
   );
