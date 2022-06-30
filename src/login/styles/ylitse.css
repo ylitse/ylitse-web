@@ -1,0 +1,384 @@
+html,
+body {
+  height: 100%;
+  background: linear-gradient(
+      180deg,
+      rgba(1, 165, 236, 0.58) 0%,
+      rgba(89, 58, 214, 0.58) 100%
+    ),
+    url(milad-fakurian-E8Ufcyxz514-unsplash.jpg) center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  min-width: 960px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+h1 {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 48px;
+  margin: 0 auto 30px auto;
+
+  /* blue/dark blue */
+  color: #1c325d;
+}
+
+.panel {
+  float: left;
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 48px;
+  text-align: center;
+}
+
+.left {
+  /* greyscale/white */
+  background: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 19px;
+  width: 596px !important;
+  height: 402px;
+  padding-top: 213px;
+}
+
+.right {
+  /* purple/purple */
+  background: #4c2ec6;
+  /* dropshadow_card */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 19px;
+  left: -21px;
+  width: 596px;
+  height: 442px;
+  padding-top: 175px;
+}
+
+input[type='text'],
+input[type='password'] {
+  /* Rectangle 122 */
+
+  box-sizing: border-box;
+
+  /* greyscale/white */
+  background: #ffffff;
+  /* purple/purple */
+  border: 1px solid #4a2acb;
+  border-radius: 5px;
+}
+
+/* Rekisteröidy */
+.right a,
+.button,
+button,
+input[type='button'] {
+  /* Rekisteröidy */
+
+  width: 126px;
+  height: 48px;
+
+  /* button/button large */
+  font-family: 'Baloo 2';
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 35px;
+
+  /* orange/orange */
+  color: #f0ba8c;
+
+  /* button-outline-large */
+
+  box-sizing: border-box;
+
+  gap: 10px;
+
+  /* orange/orange */
+
+  border: 3px solid #f0ba8c !important;
+  border-radius: 50px;
+}
+
+.right a {
+    padding: 3px 35px;
+}
+
+.right h1 {
+  /* Ylitse MentorApp */
+  /* headings/h1 */
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 48px;
+
+  /* greyscale/white */
+  color: #ffffff;
+}
+
+.right p {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+  width: 472px;
+  /* or 27px */
+
+  /* greyscale/white */
+  color: #ffffff;
+  margin-bottom: 65px;
+}
+
+form input {
+  width: 391px;
+  font-size: 14px;
+}
+
+label {
+  /* p/label */
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 150%;
+  text-align: left;
+  width: 391px !important;
+  margin: 20px auto 0 auto;
+  /* identical to box height, or 27px */
+
+  /* blue/dark blue */
+  color: #1c325d;
+}
+
+.footer h3 {
+  /* p/p-semibold */
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 150%;
+  /* identical to box height, or 27px */
+
+  margin: 40px auto 0 450px;
+  /* greyscale/white */
+  color: #ffffff;
+}
+
+#login-error {
+  display: none;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: none;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0)
+  );
+  /* font-weight: 400; */
+  font-size: 1.175rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  background-color: transparent;
+  padding: 6px 16px;
+  color: rgb(201, 69, 69);
+  border: 1px solid rgb(229, 115, 115);
+}
+
+#retrieve-password {
+  /* p/button link */
+  font-family: 'Baloo 2';
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+
+  /* purple/purple */
+  color: #4a2acb;
+  width: 391px !important;
+  margin: 5px auto 20px auto;
+}
+
+/* Skeleton css */
+
+.button,
+button,
+input[type='submit'],
+input[type='reset'],
+input[type='button'] {
+  display: inline-block;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0.1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.button:hover,
+button:hover,
+input[type='submit']:hover,
+input[type='reset']:hover,
+input[type='button']:hover,
+.button:focus,
+button:focus,
+input[type='submit']:focus,
+input[type='reset']:focus,
+input[type='button']:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0;
+}
+.button.button-primary,
+button.button-primary,
+input[type='submit'].button-primary,
+input[type='reset'].button-primary,
+input[type='button'].button-primary {
+  color: #fff;
+  background-color: #33c3f0;
+  border-color: #33c3f0;
+}
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type='submit'].button-primary:hover,
+input[type='reset'].button-primary:hover,
+input[type='button'].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type='submit'].button-primary:focus,
+input[type='reset'].button-primary:focus,
+input[type='button'].button-primary:focus {
+  color: #fff;
+  background-color: #1eaedb;
+  border-color: #1eaedb;
+}
+
+/* Forms
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type='email'],
+input[type='number'],
+input[type='search'],
+input[type='text'],
+input[type='tel'],
+input[type='url'],
+input[type='password'],
+textarea,
+select {
+  height: 38px;
+  padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+/* Removes awkward default styles on some inputs for iOS */
+input[type='email'],
+input[type='number'],
+input[type='search'],
+input[type='text'],
+input[type='tel'],
+input[type='url'],
+input[type='password'],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+input[type='email']:focus,
+input[type='number']:focus,
+input[type='search']:focus,
+input[type='text']:focus,
+input[type='tel']:focus,
+input[type='url']:focus,
+input[type='password']:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #33c3f0;
+  outline: 0;
+}
+label,
+legend {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+fieldset {
+  padding: 0;
+  border-width: 0;
+}
+
+input[type='submit'] {
+  /* button-default-large */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 24px;
+  gap: 10px;
+
+  position: absolute;
+  width: 194px;
+  height: 48px;
+  left: 189px;
+  top: 579px;
+
+  /* purple/purple */
+  background: #4a2acb;
+  border-radius: 50px;
+
+  /* container */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+
+  /* button/button large */
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* orange/orange */
+  color: #f0ba8c;
+}
