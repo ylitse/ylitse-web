@@ -12,7 +12,7 @@
                 return response.json();
             }
             var loginError = document.getElementById('login-error');
-            loginError.style.display = "block";
+            loginError.style.display = "flex";
             form.reset();
             form.elements[0].focus();
             throw new TypeError('Couldn\'t log in.');

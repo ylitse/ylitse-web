@@ -1,6 +1,6 @@
 html,
 body {
-  height: 100%;
+  height: 100vh;
   background: linear-gradient(
       180deg,
       rgba(1, 165, 236, 0.58) 0%,
@@ -27,7 +27,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+	align-items: center;
   overflow: hidden;
+	width: 100%;
 }
 
 h1 {
@@ -42,36 +44,41 @@ h1 {
   color: #1c325d;
 }
 
+.panels {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	align-items: stretch;
+	width: 90vw;
+	max-width: 800px;
+}
+
 .panel {
-  float: left;
-  position: relative;
-  z-index: 1;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 48px;
-  text-align: center;
+	flex: 0 0 100%;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 19px;
+  width: 50% !important;
+	max-width: 50vw;
+  height: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	position: relative;
 }
 
 .left {
   /* greyscale/white */
   background: #ffffff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-  border-radius: 19px;
-  width: 596px !important;
-  height: 402px;
-  padding-top: 213px;
+	padding-right: 4%;
 }
 
 .right {
   /* purple/purple */
   background: #4c2ec6;
-  /* dropshadow_card */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-  border-radius: 19px;
-  left: -21px;
-  width: 596px;
-  height: 442px;
-  padding-top: 175px;
+	z-index: 1;
+	margin-left: -4%;
 }
 
 input[type='text'],
@@ -92,36 +99,8 @@ input[type='password'] {
 .button,
 button,
 input[type='button'] {
-  /* Rekisteröidy */
-
-  width: 126px;
-  height: 48px;
-
-  /* button/button large */
-  font-family: 'Baloo 2';
-  text-decoration: none;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 35px;
-
-  /* orange/orange */
-  color: #f0ba8c;
-
-  /* button-outline-large */
-
-  box-sizing: border-box;
-
-  gap: 10px;
-
-  /* orange/orange */
-
   border: 3px solid #f0ba8c !important;
-  border-radius: 50px;
-}
-
-.right a {
-    padding: 3px 35px;
+	color: #f0ba8c;
 }
 
 .right h1 {
@@ -130,9 +109,11 @@ input[type='button'] {
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
-  line-height: 48px;
-
+  font-size: 3rem;
+  line-height: 150%;
+	width: 80%;
+	text-align: center;
+	margin: 1rem auto 1.5rem auto;
   /* greyscale/white */
   color: #ffffff;
 }
@@ -141,9 +122,10 @@ input[type='button'] {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 1.25rem;
   line-height: 150%;
-  width: 472px;
+  width: 80%;
+	text-align: center;
   /* or 27px */
 
   /* greyscale/white */
@@ -152,8 +134,8 @@ input[type='button'] {
 }
 
 form input {
-  width: 391px;
-  font-size: 14px;
+  width: 100%;
+  font-size: 1rem;
 }
 
 label {
@@ -164,8 +146,8 @@ label {
   font-size: 18px;
   line-height: 150%;
   text-align: left;
-  width: 391px !important;
-  margin: 20px auto 0 auto;
+  width: 80% !important;
+  margin: 20px auto 0 0;
   /* identical to box height, or 27px */
 
   /* blue/dark blue */
@@ -179,11 +161,21 @@ label {
   font-weight: 600;
   font-size: 18px;
   line-height: 150%;
-  /* identical to box height, or 27px */
-
-  margin: 40px auto 0 450px;
+	text-align: center;
+	margin: auto;
+  margin-top: 2rem;
   /* greyscale/white */
   color: #ffffff;
+}
+
+form[name=login] {
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	align-items: space-between;
+	margin-bottom: 15vh;
+	margin-top: 15vh;
+	width: 80%;
 }
 
 #login-error {
@@ -191,18 +183,29 @@ label {
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: 4px;
   box-shadow: none;
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0)
-  );
   /* font-weight: 400; */
   font-size: 1.175rem;
-  line-height: 1.43;
+  line-height: 125%;
   letter-spacing: 0.01071em;
-  background-color: transparent;
-  padding: 6px 16px;
-  color: rgb(201, 69, 69);
-  border: 1px solid rgb(229, 115, 115);
+  background-color:white;
+  color: #1C325D;
+  box-shadow: 0px 0px 10px -3px #972232;
+	box-sizing: border-box;
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+}
+
+#login-error:before {
+	content: "";
+	height: 100%;
+	width: 5%;
+	background-color: #972232;
+	position: relative;
+	display: block;
+	margin-right: 1rem;
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+	transform: translateY(-.5rem);
 }
 
 #retrieve-password {
@@ -219,7 +222,7 @@ label {
   /* purple/purple */
   color: #4a2acb;
   width: 391px !important;
-  margin: 5px auto 20px auto;
+  margin: 10px auto 20px 0;
 }
 
 /* Skeleton css */
@@ -229,34 +232,74 @@ button,
 input[type='submit'],
 input[type='reset'],
 input[type='button'] {
-  display: inline-block;
+  display: flex;
+	align-items: center;
+	justify-content: center;
   text-align: center;
-  font-size: 11px;
+  font-size: 1.5rem;
+	line-height: 1.5rem;
   font-weight: 600;
-  line-height: 38px;
-  letter-spacing: 0.1rem;
   text-decoration: none;
   white-space: nowrap;
   background-color: transparent;
-  border-radius: 4px;
+  border-radius: 1.75rem;
   border: 1px solid #bbb;
   cursor: pointer;
   box-sizing: border-box;
+	width: 12.5rem;
+	height: 3.5rem;
+	max-height: 3.5rem;
+	padding: 1rem 2rem;
+	font-family: 'Baloo 2';
+  text-decoration: none;
+	font-style: normal;
+  font-weight: 700;
+	align-self: center;
+	position: absolute;
+	bottom: 7vh;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: background-color 300ms forwards, color 300ms forwards;
 }
 .button:hover,
 button:hover,
 input[type='submit']:hover,
 input[type='reset']:hover,
-input[type='button']:hover,
+input[type='button']:hover {
+	background-color: #37119D;
+  outline: 0;
+}
+
 .button:focus,
 button:focus,
 input[type='submit']:focus,
 input[type='reset']:focus,
-input[type='button']:focus {
-  color: #333;
-  border-color: #888;
-  outline: 0;
+input[type='button']:focus,
+.button:active,
+button:active,
+input[type='submit']:active,
+input[type='reset']:active,
+input[type='button']:active,
+.button:target,
+button:target,
+input[type='submit']:target,
+input[type='reset']:target,
+input[type='button']:target   {
+	background-color: #4A2ACB;
+  outline: #4A2ACB solid 3px;
+	outline-offset: 4px;
 }
+
+.button:visited
+button:visited,
+input[type='submit']:visited,
+input[type='reset']:visited,
+input[type='button']:visited  {
+	background-color: #5C33FF	;
+}
+
+
+
 .button.button-primary,
 button.button-primary,
 input[type='submit'].button-primary,
@@ -325,7 +368,8 @@ input[type='url']:focus,
 input[type='password']:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid #33c3f0;
+	border: solid 2px #4A2ACB;
+	background-color: #E4F3FB;
   outline: 0;
 }
 label,
@@ -341,44 +385,24 @@ fieldset {
 
 input[type='submit'] {
   /* button-default-large */
-
-  /* Auto layout */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 24px;
-  gap: 10px;
-
-  position: absolute;
-  width: 194px;
-  height: 48px;
-  left: 189px;
-  top: 579px;
+	flex: 1;
 
   /* purple/purple */
   background: #4a2acb;
-  border-radius: 50px;
-
+	left: 46%;
   /* container */
-
-  /* Auto layout */
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 10px;
-
-  /* button/button large */
-  font-family: 'Baloo 2';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 35px;
-  display: flex;
-  align-items: center;
-  text-align: center;
 
   /* orange/orange */
   color: #f0ba8c;
+	border: none !important;
+}
+
+.right-text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	margin-bottom: 15vh;
+	margin-top: 15vh;
 }
