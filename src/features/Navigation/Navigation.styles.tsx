@@ -18,7 +18,8 @@ export const StyledLogoText = styled.div`
 	max-width: fit-content;
 `;
 
-export const StyledLogo = styled.img`
+export const StyledLogo = styled.div`
+	background-image: url('/features/Navigation/logo.svg');
   height: 40px;
 	margin-left: 12%;
 	margin-right: 1rem;

@@ -3,7 +3,6 @@ import { StyledNavBar, StyledLogo, StyledNavLink, StyledLogoText, StyledNavBarIt
 const NavigationBar = () => {
   return (
     <StyledNavBar>
-			<StyledLogo />
       <StyledLogoText>YLITSE</StyledLogoText>
       <StyledNavBarItems>
 			<StyledNavLink to='/' className="navbar-link"><div>Koti</div></StyledNavLink>
