@@ -1,10 +1,10 @@
 const path = require('path');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   entry: {
-    app: path.join(__dirname, 'src', 'index.tsx')
+    app: path.join(__dirname, 'src', 'index.tsx'),
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -43,7 +43,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: path.join(__dirname, 'src', 'index.html')
-    })
+      template: path.join(__dirname, 'src', 'index.html'),
+    }),
   ],
 };
