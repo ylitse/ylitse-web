@@ -10,7 +10,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     static: {
-      directory: './dist'
+      directory: './src'
     }
   },
   target: 'web',
@@ -26,6 +26,18 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
+          },
+        ],
+      },
+			{    
+				test: /\.(woff|woff2|eot|ttf|otf)$/,
+				loader: "file-loader"
+			},
+			{
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'css-loader',
           },
         ],
       },
