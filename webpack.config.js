@@ -46,15 +46,11 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
-			{    
-				test: /\.(woff|woff2|eot|ttf|otf|jp(e*)g|svg|gif|png)$/,
-				loader: "file-loader"
-			},
 			{
-        test: /\.css$/,
+        test: /\.(png|jp(e*)g|svg|gif)$/,
         use: [
           {
-            loader: 'css-loader',
+            loader: 'file-loader',
           },
         ],
       },
