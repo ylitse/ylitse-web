@@ -12,6 +12,10 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "types": ["node", "jest"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": [
     "src/**/*.ts",
