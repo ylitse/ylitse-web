@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 
 
 describe('<Navigation/>', () => {
-	it('Register page is rendered correctly', () => {
+	it('Navigation bar is rendered correctly', () => {
 		const { queryAllByText } = render(<BrowserRouter><Navigation /></BrowserRouter>);
 		expect(queryAllByText('Koti')).toBeTruthy();
 	});
