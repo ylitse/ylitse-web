@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../static/img/logo.svg';
+import Outsidelink from '../../static/img/outsidelink.svg';
 
 export const StyledLogoText = styled.div`
   font-family: 'Baloo 2', cursive;
@@ -100,4 +101,163 @@ export const StyledNavBarItems = styled.div`
   margin-right: 12%;
   display: flex;
   justify-content: flex-end;
+`;
+
+export const StyledNavDropdown = styled.div`
+	position: relative;
+`;
+
+export const StyledNavigationOutsideLink = styled.div`
+	display: none;
+	pointer-events: none;
+	color:  #1c325d;
+	background-color: #43bfff;
+  font-family: 'Baloo 2', cursive;
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: none;
+  height: 60px;
+  line-height: 60px;
+  div {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  &:active {
+    div {
+      height: 30px;
+      border-bottom: 1px solid #1c325d;
+    }
+  }
+  &.active {
+    div {
+      height: 40px;
+      border-bottom: 1px solid #1c325d;
+    }
+  }
+  &:hover {
+    div {
+      height: 40px;
+      border-bottom: 1px solid #1c325d;
+    }
+  }
+	${StyledNavDropdown}:hover & {
+		display: flex;
+		pointer-events: all;
+	}
+`;
+
+export const StyledOutsideLinkLogo = styled.div`
+	flex: 0 0 auto;
+	align-self: center;
+	justify-self: flex-start;
+	margin-left: 0 !important;
+	border-bottom: none !important;
+	background-image: url(${Outsidelink});
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 1rem !important;
+  width: 1rem;
+  background-color: transparent;
+`;
+
+export const StyledInfoScreenLink = styled.div`
+	display: none;
+	pointer-events: none;
+	color:  #1c325d;
+	background-color: #43bfff;
+  font-family: 'Baloo 2', cursive;
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: none;
+  height: 60px;
+  line-height: 60px;
+  div {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  &:active {
+    div {
+      height: 30px;
+      border-bottom: 1px solid #1c325d;
+    }
+  }
+  &.active {
+    div {
+      height: 40px;
+      border-bottom: 1px solid #1c325d;
+    }
+  }
+  &:hover {
+    div {
+      height: 40px;
+      border-bottom: 1px solid #1c325d;
+    }
+  }
+	${StyledNavDropdown}:hover & {
+		display: flex;
+		pointer-events: all;
+	}
+`;
+
+export const StyledInfoMenu = styled.div`
+	color: white;
+  font-family: 'Baloo 2', cursive;
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: none;
+  height: 60px;
+  line-height: 60px;
+	width: 4rem;
+	max-width: 4rem;
+  div {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  &:active {
+    background-color: #43bfff;
+    text-decoration: none;
+    color: #1c325d;
+    div {
+      height: 30px;
+      border-bottom: 1px solid #1c325d;
+    }
+  }
+  &.active {
+    text-decoration: none;
+    background-color: #43bfff;
+    color: #1c325d;
+    div {
+      height: 40px;
+      border-bottom: 1px solid #1c325d;
+    }
+  }
+  &:hover {
+    text-decoration: none;
+    background-color: #43bfff;
+    color: #1c325d;
+    div {
+      height: 40px;
+      border-bottom: 1px solid #1c325d;
+    }
+  }
+	${StyledNavDropdown}:hover & {
+		text-decoration: none;
+    background-color: #43bfff;
+    color: #1c325d;
+    div {
+      height: 40px;
+      border-bottom: 1px solid #1c325d;
+    }
+	}
+`;
+
+export const StyledDropdownItems = styled.div`
+		position: absolute;
+		width: max-content;
 `;
