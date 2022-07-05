@@ -118,26 +118,28 @@ export const StyledNavigationOutsideLink = styled.div`
   text-decoration: none;
   height: 60px;
   line-height: 60px;
-  div {
+  a {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+		color:  #1c325d;
+		text-decoration: none;
   }
   &:active {
-    div {
+    a {
       height: 30px;
       border-bottom: 1px solid #1c325d;
     }
   }
   &.active {
-    div {
+    a {
       height: 40px;
       border-bottom: 1px solid #1c325d;
     }
   }
   &:hover {
-    div {
+    a {
       height: 40px;
       border-bottom: 1px solid #1c325d;
     }

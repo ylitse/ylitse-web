@@ -15,6 +15,7 @@ import {
 /**
  * Navigation bar should be added to App.tsx before routers.
  * As pages get done, the to-links should be updated if necessary
+ * update the links to "Anna palautetta" and "Käyttöehdot ja tietosuojaseloste"
  */
 const NavigationBar = () => {
   return (
@@ -37,11 +38,11 @@ const NavigationBar = () => {
           </StyledInfoMenu>
           <StyledDropdownItems>
             <StyledNavigationOutsideLink>
-              <div>Anna palautetta</div>
+              <a href="http://www.google.com" rel="noopener noreferrer" target="_blank">Anna palautetta</a>
               <StyledOutsideLinkLogo />
             </StyledNavigationOutsideLink>
             <StyledNavigationOutsideLink>
-              <div>Käyttöehdot ja tietosuojaseloste</div>
+              <a href="http://www.google.com" rel="noopener noreferrer" target="_blank">Käyttöehdot ja tietosuojaseloste</a>
               <StyledOutsideLinkLogo />
             </StyledNavigationOutsideLink>
             <StyledInfoScreenLink>
