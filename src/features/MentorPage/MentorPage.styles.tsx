@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import SearchIcon from './search.svg'
 
 export const StyledMentorPage = styled.div `
 	background-color: #CDE8F8;
@@ -31,7 +30,7 @@ export const StyledMentorHeader = styled.div`
 	max-height: 80px;
 	height: 80px;
 	color: #1C325D;
-	font: "Baloo 2";
+	font-family: "Baloo 2", cursive;
 	font-weight: 700;
 	font-size: 30px;
 	display: flex;
@@ -42,7 +41,7 @@ export const StyledMentorHeader = styled.div`
 export const StyledMentorInfoText = styled.div`
   flex: 0 0 auto;
 	color: #1C325D;
-	font: "Baloo 2";
+	font-family: 'Source Sans Pro', cursive;
 	font-weight: 400;
 	font-size: 1.25rem;
 	width: 47%;
@@ -57,4 +56,8 @@ export const StyledMentorSearchDiv = styled.div`
 	width: 90%;
 	max-width: 90%;
 	margin: auto;
+`;
+
+export const StyledMentorCardContainer = styled.div`
+	flex: 1;
 `;
