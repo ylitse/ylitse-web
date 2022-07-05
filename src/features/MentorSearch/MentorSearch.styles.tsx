@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import SearchIcon from './search.svg'
+import SearchIcon from '@/static/img/search.svg'
 
 export const StyledMentorSearch = styled.input`
   flex: 1;
 	display: flex;
 	border: #4A2ACB solid 1px;
 	width: 100%;
-	font: "Baloo 2";
+	font-family: 'Source Sans Pro', cursive;
 	font-weight: 400;
 	font-size: 1.5rem;
 	padding: 1rem 4.5rem;
@@ -36,6 +36,5 @@ export const StyledSearchIcon = styled.div`
   flex: 0 0 auto;
 	display: flex;
 	position: absolute;
-	top: 1.2rem;
 	left: 1.5rem;
 `;
