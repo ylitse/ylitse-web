@@ -4,28 +4,71 @@
 reducing the need for intergenerational child protecting services by
 supporting young parents with a foster care background.
 
-Ylitse Web is a single-page application using [Ylitse API][]. It provides
+Ylitse Web is a single-page application using [Ylitse API](https://gitlab.com/ylitse/ylitse-api/). It provides
 a web UI for all types of users of Ylitse service.
 
-[Ylitse Project]: https://www.sos-lapsikyla.fi/ylitse-mentorapp/
-[Ylitse API]: https://gitlab.com/ylitse/ylitse-api/
-[Ylitse Mobile APP]: https://github.com/sos-lapsikyla/ylitse-app
+[ylitse project]: https://www.sos-lapsikyla.fi/ylitse-mentorapp/
+[ylitse api]: https://gitlab.com/ylitse/ylitse-api/
+[ylitse mobile app]: https://github.com/sos-lapsikyla/ylitse-app
 
 ## Dependencies
 
+The project depends on the following libraries:
+
+- [Typescript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+- [Styled-components](https://styled-components.com/)
+- [Redux](https://redux.js.org/)
+- [React-router](https://reactrouter.com/)
+- [Webpack](https://webpack.js.org/)
+- [Babel](https://babeljs.io/)
+- [ESLint](https://eslint.org/)
+- [Jest](https://jestjs.io/)
+- [Cypress](https://www.cypress.io/)
+- [Google fonts](https://fonts.google.com/)
 
 ## Project structure
 
--- src
+### Top level
 
+    .
+    ├── dist # Compiled files
+    ├── cypress # Cypress and e2e-tests
+    ├── src # Source files
+    ├── tools # Tools and utilities
+    ├── LICENSE
+    ├── _.config.js, ._, \*.json # Config files
+    └── README.md
+
+### React source files
+
+    src
+    ├── features # Feature based components etc.
+    │ Feature # The feature folder
+    │ ├── api # Feature's API related stuff
+    │ ├── SubComponent # Subfolder to structure subcomponents or similar
+    │ ├── Feature.tsx # React code for the feature
+    │ ├── \*.test.ts(x) # Unittest for the corresponding code
+    │ └── index.tsx # The default export
+    ├── hooks # Custom react hooks
+    ├── login # Static login page
+    ├── static # Static assets (images, styles, fonts)
+    ├── App.tsx # Main App component
+    ├── index.html # The main index.html
+    ├── index.tsx # The main React mounting point
+    └── store.ts # Redux store
 
 ## Usage
 
-First initialize git-hooks.
+### Prerequirities
+
+For local development it's recommended to have ylitse-api up and running. For this project you need Node.js and npm installed.
+
+Project uses [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) for pre-commit linting checks. Please initialize git-hooks locally as following:
 
 `git config core.hooksPath .githooks`
 
-
+### How to run the project?
 
 1. Install node packages `npm i`
 1. Run tests `npm run test`
@@ -37,7 +80,6 @@ Locally:
 
 1. Start dev server `npm run start`
 1. Run cypress `CYPRESS_BASE_URL=http://localhost:8080 npx cypress open`
-
 
 ## Development
 
