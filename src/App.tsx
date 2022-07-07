@@ -1,14 +1,11 @@
-import { Routes, Route, Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Routes, Route } from 'react-router-dom';
 import RegisterPage from '@/features/RegisterPage';
 import Navigation from '@/features/Navigation';
-
-const Wrapper = styled.section``;
 
 function App() {
   return (
     <div>
-			<Navigation/>
+      <Navigation />
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
       </Routes>

@@ -1,16 +1,39 @@
 import {
-  StyledNavBar,
-  StyledLogo,
-  StyledNavLink,
-  StyledLogoText,
-  StyledNavBarItems,
-  StyledNavDropdown,
-  StyledInfoMenu,
-  StyledNavigationOutsideLink,
-  StyledOutsideLinkLogo,
-  StyledInfoScreenLink,
-	StyledDropdownItems
+  Logo,
+  LogoText,
+  NavBar,
+  NavBarItems,
+  NavLink,
 } from './Navigation.styles';
+import { NavigationItem } from './types';
+import Dropdown from './Dropdown';
+import NavigationItems from './NavigationItems';
+
+const dropDownItems: Array<NavigationItem> = [
+  {
+    text: 'Anna palautetta',
+    url: 'https://www.sos-lapsikyla.fi',
+  },
+  {
+    text: 'Käyttöehdot ja tietosuojaseloste',
+    url: 'https://www.sos-lapsikyla.fi/tietosuojaselosteet',
+  },
+];
+
+const navigationItems: Array<NavigationItem> = [
+  {
+    text: 'Koti',
+    url: '/',
+  },
+  {
+    text: 'Mentorit',
+    url: '/mentors',
+  },
+  {
+    text: 'Chat',
+    url: '/chat',
+  },
+];
 
 /**
  * Navigation bar should be added to App.tsx before routers.
@@ -19,42 +42,17 @@ import {
  */
 const NavigationBar = () => {
   return (
-    <StyledNavBar>
-      <StyledLogo />
-      <StyledLogoText>YLITSE</StyledLogoText>
-      <StyledNavBarItems>
-        <StyledNavLink to="/" className="navbar-link">
-          <div>Koti</div>
-        </StyledNavLink>
-        <StyledNavLink to="/mentorit" className="navbar-link">
-          <div>Mentorit</div>
-        </StyledNavLink>
-        <StyledNavLink to="/chat" className="navbar-link">
-          <div>Chat</div>
-        </StyledNavLink>
-        <StyledNavDropdown>
-          <StyledInfoMenu>
-            <div>Info</div>
-          </StyledInfoMenu>
-          <StyledDropdownItems>
-            <StyledNavigationOutsideLink>
-              <a href="http://www.google.com" rel="noopener noreferrer" target="_blank">Anna palautetta</a>
-              <StyledOutsideLinkLogo />
-            </StyledNavigationOutsideLink>
-            <StyledNavigationOutsideLink>
-              <a href="http://www.google.com" rel="noopener noreferrer" target="_blank">Käyttöehdot ja tietosuojaseloste</a>
-              <StyledOutsideLinkLogo />
-            </StyledNavigationOutsideLink>
-            <StyledInfoScreenLink>
-              <div>Tiedot palvelusta</div>
-            </StyledInfoScreenLink>
-          </StyledDropdownItems>
-        </StyledNavDropdown>
-        <StyledNavLink to="/signout" className="navbar-link">
+    <NavBar>
+      <Logo />
+      <LogoText>YLITSE</LogoText>
+      <NavBarItems>
+        <NavigationItems items={navigationItems} />
+        <Dropdown items={dropDownItems} />
+        <NavLink to="/signout" className="navbar-link">
           <div>Kirjaudu ulos</div>
-        </StyledNavLink>
-      </StyledNavBarItems>
-    </StyledNavBar>
+        </NavLink>
+      </NavBarItems>
+    </NavBar>
   );
 };
 
