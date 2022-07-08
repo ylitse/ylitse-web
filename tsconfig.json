@@ -21,7 +21,8 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.jsx",
-    "src/**/*.js"
+    "src/**/*.js",
+		"src/custom.d.ts"
   ],
   "exclude": ["e2e/**/*"]
 }
