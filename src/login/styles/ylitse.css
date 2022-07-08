@@ -180,32 +180,24 @@ form[name=login] {
 
 #login-error {
   display: none;
-  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: 4px;
   box-shadow: none;
-  /* font-weight: 400; */
-  font-size: 1.175rem;
-  line-height: 125%;
   letter-spacing: 0.01071em;
-  background-color:white;
-  color: #1C325D;
-  box-shadow: 0px 0px 10px -3px #972232;
+  background-color:#F9E5E4;
+  color: #972232;
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 140%;
 	box-sizing: border-box;
 	padding-top: .5rem;
 	padding-bottom: .5rem;
 }
 
-#login-error:before {
-	content: "";
-	height: 100%;
-	width: 5%;
-	background-color: #972232;
-	position: relative;
-	display: block;
-	margin-right: 1rem;
-	padding-top: .5rem;
-	padding-bottom: .5rem;
-	transform: translateY(-.5rem);
+#login-error svg {
+  margin-right: 21px;
+  margin-left: 21px;
 }
 
 #retrieve-password {
