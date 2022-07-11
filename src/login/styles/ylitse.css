@@ -27,9 +27,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-	align-items: center;
+  align-items: center;
   overflow: hidden;
-	width: 100%;
+  width: 100%;
 }
 
 h1 {
@@ -45,40 +45,43 @@ h1 {
 }
 
 .panels {
-	display: flex;
-	flex: 1;
-	justify-content: center;
-	align-items: stretch;
-	width: 90vw;
-	max-width: 800px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: stretch;
+  width: 90vw;
+  max-width: 800px;
 }
 
 .panel {
-	flex: 0 0 100%;
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
   border-radius: 19px;
-  width: 50% !important;
-	max-width: 50vw;
-  height: auto;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	box-sizing: border-box;
-	position: relative;
+  /* width: 50% !important; */
+  min-width: 596px !important;
+  height: 702px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .left {
   /* greyscale/white */
   background: #ffffff;
-	padding-right: 4%;
+  padding-right: 4%;
 }
 
 .right {
   /* purple/purple */
   background: #4c2ec6;
-	z-index: 1;
-	margin-left: -4%;
+  z-index: 1;
+  margin-left: -4%;
+}
+
+.right svg {
+  margin-top: -60px;
 }
 
 input[type='text'],
@@ -100,21 +103,18 @@ input[type='password'] {
 button,
 input[type='button'] {
   border: 3px solid #f0ba8c !important;
-	color: #f0ba8c;
+  color: #f0ba8c;
 }
 
 .right h1 {
-  /* Ylitse MentorApp */
-  /* headings/h1 */
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 700;
-  font-size: 3rem;
-  line-height: 150%;
-	width: 80%;
-	text-align: center;
-	margin: 1rem auto 1.5rem auto;
-  /* greyscale/white */
+  font-size: 30px;
+  line-height: 48px;
+  width: 80%;
+  text-align: center;
+  margin: 34px auto 0 auto;
   color: #ffffff;
 }
 
@@ -123,14 +123,9 @@ input[type='button'] {
   font-style: normal;
   font-weight: 400;
   font-size: 1.25rem;
-  line-height: 150%;
-  width: 80%;
-	text-align: center;
-  /* or 27px */
-
-  /* greyscale/white */
+  width: 100%;
+  text-align: center;
   color: #ffffff;
-  margin-bottom: 65px;
 }
 
 form input {
@@ -161,21 +156,21 @@ label {
   font-weight: 600;
   font-size: 18px;
   line-height: 150%;
-	text-align: center;
-	margin: auto;
+  text-align: center;
+  margin: auto;
   margin-top: 2rem;
   /* greyscale/white */
   color: #ffffff;
 }
 
-form[name=login] {
-	height: fit-content;
-	display: flex;
-	flex-direction: column;
-	align-items: space-between;
-	margin-bottom: 15vh;
-	margin-top: 15vh;
-	width: 80%;
+form[name='login'] {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  margin-bottom: 15vh;
+  margin-top: 15vh;
+  width: 80%;
 }
 
 #login-error {
@@ -183,16 +178,16 @@ form[name=login] {
   border-radius: 4px;
   box-shadow: none;
   letter-spacing: 0.01071em;
-  background-color:#F9E5E4;
+  background-color: #f9e5e4;
   color: #972232;
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
   line-height: 140%;
-	box-sizing: border-box;
-	padding-top: .5rem;
-	padding-bottom: .5rem;
+  box-sizing: border-box;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 #login-error svg {
@@ -225,11 +220,11 @@ input[type='submit'],
 input[type='reset'],
 input[type='button'] {
   display: flex;
-	align-items: center;
-	justify-content: center;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   font-size: 1.5rem;
-	line-height: 1.5rem;
+  line-height: 1.5rem;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
@@ -238,27 +233,27 @@ input[type='button'] {
   border: 1px solid #bbb;
   cursor: pointer;
   box-sizing: border-box;
-	width: 12.5rem;
-	height: 3.5rem;
-	max-height: 3.5rem;
-	padding: 1rem 2rem;
-	font-family: 'Baloo 2';
+  width: 12.5rem;
+  height: 3.5rem;
+  max-height: 3.5rem;
+  padding: 1rem 2rem;
+  font-family: 'Baloo 2';
   text-decoration: none;
-	font-style: normal;
+  font-style: normal;
   font-weight: 700;
-	align-self: center;
-	position: absolute;
-	bottom: 7vh;
-	left: 50%;
-	transform: translateX(-50%);
-	transition: background-color 300ms forwards, color 300ms forwards;
+  align-self: center;
+  position: absolute;
+  bottom: 12vh;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: background-color 300ms forwards, color 300ms forwards;
 }
 .button:hover,
 button:hover,
 input[type='submit']:hover,
 input[type='reset']:hover,
 input[type='button']:hover {
-	background-color: #37119D;
+  background-color: #37119d;
   outline: 0;
 }
 
@@ -276,21 +271,18 @@ input[type='button']:active,
 button:target,
 input[type='submit']:target,
 input[type='reset']:target,
-input[type='button']:target   {
-	background-color: #4A2ACB;
-  outline: #4A2ACB solid 3px;
-	outline-offset: 4px;
+input[type='button']:target {
+  background-color: #4a2acb;
+  outline: #4a2acb solid 3px;
+  outline-offset: 4px;
 }
 
-.button:visited
-button:visited,
+.button:visited button:visited,
 input[type='submit']:visited,
 input[type='reset']:visited,
-input[type='button']:visited  {
-	background-color: #5C33FF	;
+input[type='button']:visited {
+  background-color: #5c33ff;
 }
-
-
 
 .button.button-primary,
 button.button-primary,
@@ -360,8 +352,8 @@ input[type='url']:focus,
 input[type='password']:focus,
 textarea:focus,
 select:focus {
-	border: solid 2px #4A2ACB;
-	background-color: #E4F3FB;
+  border: solid 2px #4a2acb;
+  background-color: #e4f3fb;
   outline: 0;
 }
 label,
@@ -377,24 +369,22 @@ fieldset {
 
 input[type='submit'] {
   /* button-default-large */
-	flex: 1;
+  flex: 1;
 
   /* purple/purple */
   background: #4a2acb;
-	left: 46%;
+  left: 46%;
   /* container */
 
   /* orange/orange */
   color: #f0ba8c;
-	border: none !important;
+  border: none !important;
 }
 
 .right-text {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 80%;
-	margin-bottom: 15vh;
-	margin-top: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
 }
