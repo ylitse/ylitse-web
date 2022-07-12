@@ -242,7 +242,7 @@ input[type='button'] {
   font-weight: 700;
   align-self: center;
   position: absolute;
-  bottom: 12vh;
+  bottom: 125px;
   left: 50%;
   transform: translateX(-50%);
   transition: background-color 300ms forwards, color 300ms forwards;
@@ -445,6 +445,6 @@ input[type='submit'] {
   }
 
   form[name='login'] {
-    margin-top: -7vh;
+    margin-top: 30px;
   }
 }
