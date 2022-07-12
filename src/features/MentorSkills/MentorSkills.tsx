@@ -27,12 +27,12 @@ const MentorSkillList: Array<MentorskillItem> = [
 ];
 
 const MentorSkills = () => {
-	console.log(MentorSkillList);
-	MentorSkillList.map(item => console.log(item));
+  console.log(MentorSkillList);
+  MentorSkillList.map(item => console.log(item));
   return (
     <SkillContainer>
-			<MentorSkill items={MentorSkillList } />
-      <ShowMoreSkills/>
+      <MentorSkill items={MentorSkillList} />
+      <ShowMoreSkills />
     </SkillContainer>
   );
 };

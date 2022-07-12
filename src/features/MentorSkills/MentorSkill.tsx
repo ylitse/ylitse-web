@@ -1,7 +1,7 @@
 import { MentorskillItem } from './types';
 import styled from 'styled-components';
 
-export const Skill = styled.button`
+const Skill = styled.button`
   flex: 0 0 auto;
   background-color: #e5e4ff;
   padding: 0.75rem 1.25rem;
@@ -27,7 +27,9 @@ const MentorSkill = ({ items }: { items: Array<MentorskillItem> }) => {
   return (
     <>
       {items.map(item => (
-        <Skill key={item.text} value={item.text}>{item.text}</Skill>
+        <Skill key={item.text} value={item.text}>
+          {item.text}
+        </Skill>
       ))}
     </>
   );
