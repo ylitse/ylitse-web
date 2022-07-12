@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import RegisterPage from '@/features/RegisterPage';
-import Navigation from '@/features/Navigation';
+import Footer from '@/features/Footer';
+
+const Wrapper = styled.section``;
 
 function App() {
   return (
@@ -9,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
+			<Footer/>
     </div>
   );
 }
