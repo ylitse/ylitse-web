@@ -8,7 +8,12 @@ function App() {
     <div>
       <Navigation />
       <Routes>
+<<<<<<< HEAD
         <Route path="/mentors" element={<MentorPage />} />
+=======
+        <Route path="/register" element={<RegisterPage />} />
+				<Route path="/mentors" element={<MentorPage />} />
+>>>>>>> 1fe3cc8 (Fixed route endpoint)
       </Routes>
       <Footer />
     </div>
