@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledMentorPage = styled.div `
+export const MentorPageElement = styled.div `
 	background-color: #CDE8F8;
 	position: absolute;
 	width: 100vw;
@@ -11,7 +11,7 @@ export const StyledMentorPage = styled.div `
 	flex-direction: column;
 `;
 
-export const StyledMentorSearchElement = styled.div`
+export const MentorSearchElement = styled.div`
   flex: 0 0 auto;
 	max-width: 76vw;
 	background-color: white;
@@ -22,7 +22,7 @@ export const StyledMentorSearchElement = styled.div`
 	height: fit-content;
 `;
 
-export const StyledMentorHeader = styled.div`
+export const MentorHeader = styled.div`
   flex: 1;
 	max-width: 76vw;
 	background-color: #43BFFF;
@@ -38,7 +38,7 @@ export const StyledMentorHeader = styled.div`
 	align-items: center;
 `;
 
-export const StyledMentorInfoText = styled.div`
+export const MentorInfoText = styled.div`
   flex: 0 0 auto;
 	color: #1C325D;
 	font-family: 'Source Sans Pro', cursive;
@@ -48,7 +48,7 @@ export const StyledMentorInfoText = styled.div`
 	padding-right: 5%;
 `;
 
-export const StyledMentorSearchDiv = styled.div`
+export const MentorSearchDiv = styled.div`
   flex: 1;
 	display: flex;
 	flex-wrap: wrap;
@@ -58,6 +58,6 @@ export const StyledMentorSearchDiv = styled.div`
 	margin: auto;
 `;
 
-export const StyledMentorCardContainer = styled.div`
+export const MentorCardContainer = styled.div`
 	flex: 1;
 `;

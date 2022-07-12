@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import SearchIcon from '@/static/img/search.svg'
+import SearchIconImg from '@/static/img/search.svg'
 
-export const StyledMentorSearch = styled.input`
+export const MentorSearch = styled.input`
   flex: 1;
 	display: flex;
 	border: #4A2ACB solid 1px;
@@ -18,7 +18,7 @@ export const StyledMentorSearch = styled.input`
 	}
 `;
 
-export const StyledMentorSearchBox = styled.div`
+export const MentorSearchBox = styled.div`
   flex: 0 0 auto;
 	width: 47%;
 	display: flex;
@@ -27,8 +27,8 @@ export const StyledMentorSearchBox = styled.div`
 	position: relative;
 `;
 
-export const StyledSearchIcon = styled.div`
-	background-image: url(${SearchIcon});
+export const SearchIcon = styled.div`
+	background-image: url(${SearchIconImg});
 	background-size: contain;
 	background-repeat: no-repeat;
   height: 2rem;
