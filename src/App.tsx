@@ -9,7 +9,7 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
-				<Route path="/mentorit" element={<MentorPage />} />
+				<Route path="/mentors" element={<MentorPage />} />
       </Routes>
     </div>
   );
