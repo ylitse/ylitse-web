@@ -6,8 +6,11 @@ function App() {
   return (
     <div>
       <Navigation />
-      <Routes></Routes>
-      <Footer />
+      <Routes>
+        <Route path="/register" element={<RegisterPage />} />
+				<Route path="/mentors" element={<MentorPage />} />
+      </Routes>
+			<Footer/>
     </div>
   );
 }
