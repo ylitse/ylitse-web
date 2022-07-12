@@ -442,6 +442,7 @@ input[type='submit'] {
   .left {
     margin-top: -40px;
     z-index: 1;
+    padding-right: 0;
   }
 
   form[name='login'] {
