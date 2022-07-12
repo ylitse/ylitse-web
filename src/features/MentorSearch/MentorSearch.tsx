@@ -1,15 +1,15 @@
 import {
-  StyledMentorSearch,
-  StyledMentorSearchBox,
-  StyledSearchIcon,
+  MentorSearch,
+  MentorSearchBox,
+  SearchIcon,
 } from './MentorSearch.styles';
 
 const MentorPage = () => {
   return (
-    <StyledMentorSearchBox>
-      <StyledSearchIcon />
-      <StyledMentorSearch type="text" placeholder="Etsi mentoria"></StyledMentorSearch>
-    </StyledMentorSearchBox>
+    <MentorSearchBox>
+      <SearchIcon />
+      <MentorSearch type="text" placeholder="Etsi mentoria"></MentorSearch>
+    </MentorSearchBox>
   );
 };
 

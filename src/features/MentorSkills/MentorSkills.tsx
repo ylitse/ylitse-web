@@ -1,22 +1,39 @@
-import {
-  StyledSkillContainer,
-  StyledSkill,
-  StyledMoreContainer,
-  StyledMoreIcon,
-  StyledShowMoreButton,
-} from './MentorSkills.styles';
+import { MentorskillItem } from './types';
+import styled from 'styled-components';
+import MentorSkill from './MentorSkill';
+import ShowMoreSkills from './ShowMoreSkills';
+
+const SkillContainer = styled.div`
+  flex: 0 0 auto;
+  width: 90%;
+  height: 20rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  justify-content: center;
+  position: relative;
+`;
+
+const MentorSkillList: Array<MentorskillItem> = [
+  {
+    text: 'Ahdistus',
+  },
+  {
+    text: 'Avioliitto',
+  },
+  {
+    text: 'Alkoholismi',
+  },
+];
 
 const MentorSkills = () => {
+  console.log(MentorSkillList);
+  MentorSkillList.map(item => console.log(item));
   return (
-    <StyledSkillContainer>
-      <StyledSkill>Ahdistus</StyledSkill>
-      <StyledSkill>Avioliitto</StyledSkill>
-      <StyledSkill>Alkoholismi</StyledSkill>
-      <StyledMoreContainer>
-        <StyledMoreIcon />
-        <StyledShowMoreButton>Näytä kaikki aiheet</StyledShowMoreButton>
-      </StyledMoreContainer>
-    </StyledSkillContainer>
+    <SkillContainer>
+      <MentorSkill items={MentorSkillList} />
+      <ShowMoreSkills />
+    </SkillContainer>
   );
 };
 
