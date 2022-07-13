@@ -1,7 +1,20 @@
 import styled from 'styled-components';
 import SearchIconImg from '@/static/img/search.svg';
 
-export const MentorSearch = styled.input`
+/** To do:
+ * rename mentorSearchBox etc
+ */
+
+const SearchBar = () => {
+  return (
+    <MentorSearchBox>
+      <SearchIcon />
+      <MentorSearchInput type="text" placeholder="Etsi mentoria"></MentorSearchInput>
+    </MentorSearchBox>
+  );
+};
+
+const MentorSearchInput = styled.input`
   flex: 1;
   display: flex;
   border: #4a2acb solid 1px;
@@ -18,7 +31,7 @@ export const MentorSearch = styled.input`
   }
 `;
 
-export const MentorSearchBox = styled.div`
+const MentorSearchBox = styled.div`
   flex: 0 0 auto;
   width: 47%;
   display: flex;
@@ -27,7 +40,7 @@ export const MentorSearchBox = styled.div`
   position: relative;
 `;
 
-export const SearchIcon = styled.div`
+const SearchIcon = styled.div`
   background-image: url(${SearchIconImg});
   background-size: contain;
   background-repeat: no-repeat;
@@ -38,3 +51,5 @@ export const SearchIcon = styled.div`
   position: absolute;
   left: 1.5rem;
 `;
+
+export default SearchBar;

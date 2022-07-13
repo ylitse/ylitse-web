@@ -1,7 +1,20 @@
-import { MentorskillItem } from './types';
+import { ChipProps } from './types';
 import styled from 'styled-components';
 
-const Skill = styled.button`
+/** To do:
+ * Mapping in parent element, this only for one chip
+ */
+
+// eslint-disable-next-line react/prop-types
+const Chip : React.FC<ChipProps> = ({ text }) => {
+  return (
+        <StyledChip key={text} value={text}>
+          {text}
+        </StyledChip>
+  );
+};
+
+const StyledChip = styled.button`
   flex: 0 0 auto;
   background-color: #e5e4ff;
   padding: 0.75rem 1.25rem;
@@ -23,16 +36,4 @@ const Skill = styled.button`
   }
 `;
 
-const MentorSkill = ({ items }: { items: Array<MentorskillItem> }) => {
-  return (
-    <>
-      {items.map(item => (
-        <Skill key={item.text} value={item.text}>
-          {item.text}
-        </Skill>
-      ))}
-    </>
-  );
-};
-
-export default MentorSkill;
+export default Chip;

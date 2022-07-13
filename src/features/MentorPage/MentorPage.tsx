@@ -1,32 +1,45 @@
-import {
-  MentorSearchElement,
-  MentorPageElement,
-  MentorHeader,
-  MentorInfoText,
-  MentorSearchDiv,
-  MentorCardContainer,
-} from './MentorPage.styles';
-import MentorSkills from '../MentorSkills';
-import MentorSearch from '../MentorSearch';
+import styled from 'styled-components';
+import OneCardLayout from './OneCardLayout';
+import MentorInfoSearchDiv from './MentorInfoSearch';
+import MentorChips from './MentorChips';
+import MentorCards from './MentorCards';
+
+const mentorPageHeadline = 'Mentorit';
 
 const MentorPage = () => {
   return (
-    <MentorPageElement>
-      <MentorSearchElement>
-        <MentorHeader>Mentorit</MentorHeader>
-        <MentorSearchDiv>
-          <MentorInfoText>
-            Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat
-            mentorit listassa ensimmäisenä. Hakutoimintoa käyttämällä voit
-            rajata mentoreita ongelmasi perusteella
-          </MentorInfoText>
-          <MentorSearch />
-          <MentorSkills />
-        </MentorSearchDiv>
-      </MentorSearchElement>
-      <MentorCardContainer></MentorCardContainer>
-    </MentorPageElement>
+    <BasicPageElement>
+      <PageContent>
+        <OneCardLayout headLine={mentorPageHeadline}>
+          <MentorInfoSearchDiv />
+          <MentorChips />
+        </OneCardLayout>
+        <MentorCards />
+      </PageContent>
+    </BasicPageElement>
   );
 };
+
+const BasicPageElement = styled.div`
+  background-color: #cde8f8;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+`;
+
+const PageContent = styled.div`
+  background-color: transparent;
+  position: relative;
+  width: 80vw;
+  height: calc(100vh - 60px - 3.5rem - 20vw);
+  top: 10vw;
+  left: 10vw;
+  display: flex;
+  flex-direction: column;
+`;
 
 export default MentorPage;
