@@ -1,7 +1,25 @@
 import styled from 'styled-components';
-import SearchIconImg from '@/static/img/search.svg';
+import SearchIconImg from '../../static/img/search.svg';
 
-export const MentorSearch = styled.input`
+/**
+ * Search bar styles and layout
+ */
+
+type SearchProps = {
+  placeholder: string;
+};
+
+// eslint-disable-next-line react/prop-types
+const SearchBar: React.FC<SearchProps> = ({ placeholder }) => {
+  return (
+    <SearchBox>
+      <SearchIcon />
+      <SearchInput type="text" placeholder={placeholder}></SearchInput>
+    </SearchBox>
+  );
+};
+
+const SearchInput = styled.input`
   flex: 1;
   display: flex;
   border: #4a2acb solid 1px;
@@ -18,7 +36,7 @@ export const MentorSearch = styled.input`
   }
 `;
 
-export const MentorSearchBox = styled.div`
+const SearchBox = styled.div`
   flex: 0 0 auto;
   width: 47%;
   display: flex;
@@ -27,7 +45,7 @@ export const MentorSearchBox = styled.div`
   position: relative;
 `;
 
-export const SearchIcon = styled.div`
+const SearchIcon = styled.div`
   background-image: url(${SearchIconImg});
   background-size: contain;
   background-repeat: no-repeat;
@@ -38,3 +56,5 @@ export const SearchIcon = styled.div`
   position: absolute;
   left: 1.5rem;
 `;
+
+export default SearchBar;

@@ -1,6 +1,22 @@
 import styled from 'styled-components';
 import ExpandIcon from '@/static/img/icon-expand.svg';
 
+/**
+ * Show more button style and layout
+ * Should update Skill Chips container when pressed?
+ */
+
+const ShowMoreChips = () => {
+  return (
+    <>
+      <MoreContainer>
+        <MoreIcon />
+        <ShowMoreButton>Näytä kaikki aiheet</ShowMoreButton>
+      </MoreContainer>
+    </>
+  );
+};
+
 const MoreContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -33,15 +49,4 @@ const ShowMoreButton = styled.button`
   line-height: 2rem;
 `;
 
-const ShowMoreSkills = () => {
-  return (
-    <>
-      <MoreContainer>
-        <MoreIcon />
-        <ShowMoreButton>Näytä kaikki aiheet</ShowMoreButton>
-      </MoreContainer>
-    </>
-  );
-};
-
-export default ShowMoreSkills;
+export default ShowMoreChips;

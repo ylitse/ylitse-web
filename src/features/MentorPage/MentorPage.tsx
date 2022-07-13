@@ -1,31 +1,20 @@
-import {
-  MentorSearchElement,
-  MentorPageElement,
-  MentorHeader,
-  MentorInfoText,
-  MentorSearchDiv,
-  MentorCardContainer,
-} from './MentorPage.styles';
-import MentorSkills from '../MentorSkills';
-import MentorSearch from '../MentorSearch';
+import OneContainerLayout from '../../components/OneContainerLayout';
+import MentorInfoSearchDiv from './MentorInfoSearch';
+import MentorChips from './MentorChips';
+import MentorCards from './MentorCards';
+import PageLayout from '../../components/PageLayout';
+
+const mentorPageHeadline = 'Mentorit';
 
 const MentorPage = () => {
   return (
-    <MentorPageElement>
-      <MentorSearchElement>
-        <MentorHeader>Mentorit</MentorHeader>
-        <MentorSearchDiv>
-          <MentorInfoText>
-            Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat
-            mentorit listassa ensimmäisenä. Hakutoimintoa käyttämällä voit
-            rajata mentoreita ongelmasi perusteella
-          </MentorInfoText>
-          <MentorSearch />
-          <MentorSkills />
-        </MentorSearchDiv>
-      </MentorSearchElement>
-      <MentorCardContainer></MentorCardContainer>
-    </MentorPageElement>
+    <PageLayout>
+      <OneContainerLayout headLine={mentorPageHeadline}>
+        <MentorInfoSearchDiv />
+        <MentorChips />
+      </OneContainerLayout>
+      <MentorCards />
+    </PageLayout>
   );
 };
 
