@@ -2,24 +2,27 @@ import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import React from 'react';
 
-/** Move to components */
+/** Layout for one container on page, like on mentor page */
 
-type CardProps = React.PropsWithChildren<{
+type OneContainerProps = React.PropsWithChildren<{
   headLine: string;
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>;
 
 // eslint-disable-next-line react/prop-types
-const OneCardLayout: React.FC<PropsWithChildren<CardProps>> = ({ headLine, children }) => {
+const OneContainerLayout: React.FC<PropsWithChildren<OneContainerProps>> = ({
+  headLine,
+  children,
+}) => {
   return (
-    <OneCard>
-      <CardHeader>{headLine}</CardHeader>
-			{children}
-    </OneCard>
+    <OneContainer>
+      <PageHeader>{headLine}</PageHeader>
+      {children}
+    </OneContainer>
   );
 };
 
-const OneCard = styled.div`
+const OneContainer = styled.div`
   flex: 0 0 auto;
   width: 100%;
   background-color: white;
@@ -28,7 +31,7 @@ const OneCard = styled.div`
   height: fit-content;
 `;
 
-const CardHeader = styled.div`
+const PageHeader = styled.div`
   flex: 1;
   background-color: #43bfff;
   border-radius: 10px;
@@ -43,4 +46,4 @@ const CardHeader = styled.div`
   align-items: center;
 `;
 
-export default OneCardLayout;
+export default OneContainerLayout;

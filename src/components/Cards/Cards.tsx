@@ -5,9 +5,7 @@ import styled from 'styled-components';
  */
 
 const Cards = () => {
-  return (
-    <CardsElement></CardsElement>
-  );
+  return <CardsElement></CardsElement>;
 };
 
 const CardsElement = styled.div`

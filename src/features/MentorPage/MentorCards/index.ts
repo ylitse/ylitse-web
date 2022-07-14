@@ -1,3 +1,3 @@
-import MentorCards from "./MentorCards";
+import MentorCards from './MentorCards';
 
 export default MentorCards;

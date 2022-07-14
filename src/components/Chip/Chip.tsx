@@ -1,16 +1,16 @@
 import { ChipProps } from './types';
 import styled from 'styled-components';
 
-/** To do:
- * Mapping in parent element, this only for one chip
+/**
+ * Layout to one Skill Chip
  */
 
 // eslint-disable-next-line react/prop-types
-const Chip : React.FC<ChipProps> = ({ text }) => {
+const Chip: React.FC<ChipProps> = ({ text }) => {
   return (
-        <StyledChip key={text} value={text}>
-          {text}
-        </StyledChip>
+    <StyledChip key={text} value={text}>
+      {text}
+    </StyledChip>
   );
 };
 

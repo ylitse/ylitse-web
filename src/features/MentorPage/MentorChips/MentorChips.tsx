@@ -10,9 +10,7 @@ import ShowMoreChips from './ShowMoreChips';
  * selected?
  */
 
-/** TODO vaihda nimet */
-
-const mentorSkillList: Array<ChipProps> = [
+const mentorChipList: Array<ChipProps> = [
   {
     text: 'Ahdistus',
   },
@@ -26,20 +24,20 @@ const mentorSkillList: Array<ChipProps> = [
 
 const MentorSkillChips = () => {
   return (
-    <SkillContainer>
-        {mentorSkillList.map(item => (
-          // eslint-disable-next-line react/jsx-key
-          <Chip text={item.text} />
-				))}
+    <ChipContainer>
+      {mentorChipList.map(item => (
+        // eslint-disable-next-line react/jsx-key
+        <Chip key={item.text} text={item.text} />
+      ))}
       <ShowMoreChips />
-    </SkillContainer>
+    </ChipContainer>
   );
 };
 
-const SkillContainer = styled.div`
+const ChipContainer = styled.div`
   flex: 0 0 auto;
-	padding-left: 10%;
-	padding-right: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
   height: 20rem;
   display: flex;
   flex-wrap: wrap;

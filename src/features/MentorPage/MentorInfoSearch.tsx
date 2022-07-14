@@ -6,9 +6,6 @@ import MentorSearch from './MentorSearch';
  * is shown, also contains searchBar in separate MentorSearch component
  */
 
-/** to do oma folderi
- */
-
 const MentorInfoSearchDiv = () => {
   return (
     <MentorSearchContainer>
@@ -17,7 +14,7 @@ const MentorInfoSearchDiv = () => {
         listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita
         ongelmasi perusteella
       </MentorInfoText>
-			<MentorSearch />
+      <MentorSearch />
     </MentorSearchContainer>
   );
 };

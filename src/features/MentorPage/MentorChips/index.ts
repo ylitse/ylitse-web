@@ -1,3 +1,3 @@
-import MentorChips from "./MentorChips";
+import MentorChips from './MentorChips';
 
 export default MentorChips;

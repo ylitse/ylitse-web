@@ -1,3 +1,3 @@
-import MentorPage from "./MentorPage";
+import MentorPage from './MentorPage';
 
 export default MentorPage;

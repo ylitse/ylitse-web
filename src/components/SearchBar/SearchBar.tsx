@@ -1,20 +1,25 @@
 import styled from 'styled-components';
-import SearchIconImg from '@/static/img/search.svg';
+import SearchIconImg from '../../static/img/search.svg';
 
-/** To do:
- * rename mentorSearchBox etc
+/**
+ * Search bar styles and layout
  */
 
-const SearchBar = () => {
+type SearchProps = {
+  placeholder: string;
+};
+
+// eslint-disable-next-line react/prop-types
+const SearchBar: React.FC<SearchProps> = ({ placeholder }) => {
   return (
-    <MentorSearchBox>
+    <SearchBox>
       <SearchIcon />
-      <MentorSearchInput type="text" placeholder="Etsi mentoria"></MentorSearchInput>
-    </MentorSearchBox>
+      <SearchInput type="text" placeholder={placeholder}></SearchInput>
+    </SearchBox>
   );
 };
 
-const MentorSearchInput = styled.input`
+const SearchInput = styled.input`
   flex: 1;
   display: flex;
   border: #4a2acb solid 1px;
@@ -31,7 +36,7 @@ const MentorSearchInput = styled.input`
   }
 `;
 
-const MentorSearchBox = styled.div`
+const SearchBox = styled.div`
   flex: 0 0 auto;
   width: 47%;
   display: flex;
