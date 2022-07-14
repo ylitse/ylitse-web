@@ -24,7 +24,7 @@ const MentorPage = () => {
     <PageLayout>
       <OneContainerLayout headLine={mentorPageHeadline}>
         <MentorInfoSearchDiv />
-        <MentorChips items={mentorChipList}/>
+        <MentorChips items={mentorChipList} />
       </OneContainerLayout>
       <MentorCards />
     </PageLayout>
