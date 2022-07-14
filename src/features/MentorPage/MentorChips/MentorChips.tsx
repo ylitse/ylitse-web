@@ -10,22 +10,10 @@ import ShowMoreChips from './ShowMoreChips';
  * selected?
  */
 
-const mentorChipList: Array<ChipProps> = [
-  {
-    text: 'Ahdistus',
-  },
-  {
-    text: 'Avioliitto',
-  },
-  {
-    text: 'Alkoholismi',
-  },
-];
-
-const MentorSkillChips = () => {
+const MentorSkillChips = ({ items }: { items: Array<ChipProps> }) => {
   return (
     <ChipContainer>
-      {mentorChipList.map(item => (
+      {items.map(item => (
         // eslint-disable-next-line react/jsx-key
         <Chip key={item.text} text={item.text} />
       ))}

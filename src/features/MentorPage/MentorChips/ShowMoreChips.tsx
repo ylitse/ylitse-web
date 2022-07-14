@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ExpandIcon from '@/static/img/icon-expand.svg';
+import ExpandIcon from '../../../static/img/icon-expand.svg';
 
 /**
  * Show more button style and layout
