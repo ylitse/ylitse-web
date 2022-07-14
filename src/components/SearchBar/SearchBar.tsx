@@ -7,14 +7,16 @@ import SearchIconImg from '../../static/img/search.svg';
 
 type SearchProps = {
   placeholder: string;
+	label: string;
 };
 
 // eslint-disable-next-line react/prop-types
-const SearchBar: React.FC<SearchProps> = ({ placeholder }) => {
-  return (
+const SearchBar: React.FC<SearchProps> = ({ placeholder, label }) => {
+  const iconLabel = label + " icon";
+	return (
     <SearchBox>
-      <SearchIcon />
-      <SearchInput type="text" placeholder={placeholder}></SearchInput>
+      <SearchIcon label={iconLabel}/>
+      <SearchInput type="text" label={label} placeholder={placeholder}></SearchInput>
     </SearchBox>
   );
 };
