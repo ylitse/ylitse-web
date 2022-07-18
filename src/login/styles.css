@@ -1,12 +1,12 @@
 html,
 body {
-  height: 150vh;
+  height: 100vh;
   background: linear-gradient(
       180deg,
       rgba(1, 165, 236, 0.58) 0%,
       rgba(89, 58, 214, 0.58) 100%
     ),
-    url(milad-fakurian-E8Ufcyxz514-unsplash.jpg) no-repeat fixed center;
+    url(milad-fakurian-E8Ufcyxz514-unsplash.jpg) center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -14,13 +14,12 @@ body {
 }
 
 main {
-  /* width: 100%;
-  height: 100%; */
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .container {
@@ -28,9 +27,8 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* overflow: hidden; */
+  overflow: hidden;
   width: 100%;
-  margin-top: 30px;
 }
 
 h1 {
@@ -39,22 +37,10 @@ h1 {
   font-weight: 700;
   font-size: 30px;
   line-height: 48px;
-  display: flex;
-  justify-content: center;
-  /* blue/dark blue */
-  color: #1c325d;
-}
+  margin: 0 auto 30px auto;
 
-h2 {
-  font-family: 'Baloo 2';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 26px;
-  line-height: 42px;
   /* blue/dark blue */
   color: #1c325d;
-  margin-top: 30px;
-  margin-bottom: 5px;
 }
 
 .panels {
@@ -71,6 +57,7 @@ h2 {
   border-radius: 19px;
   /* width: 50% !important; */
   min-width: 596px !important;
+  height: 702px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,10 +66,29 @@ h2 {
   position: relative;
 }
 
+.left {
+  /* greyscale/white */
+  background: #ffffff;
+  padding-right: 4%;
+}
+
+.right {
+  /* purple/purple */
+  background: #4c2ec6;
+  z-index: 1;
+  margin-left: -4%;
+}
+
+.right svg {
+  margin-top: -60px;
+}
+
 input[type='text'],
 input[type='password'] {
   /* Rectangle 122 */
+
   box-sizing: border-box;
+
   /* greyscale/white */
   background: #ffffff;
   /* purple/purple */
@@ -90,34 +96,40 @@ input[type='password'] {
   border-radius: 5px;
 }
 
-p {
+/* Rekisteröidy */
+.right a,
+.button,
+button,
+input[type='button'] {
+  border: 3px solid #f0ba8c !important;
+  color: #f0ba8c;
+}
+
+.right h1 {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 48px;
+  width: 80%;
+  text-align: center;
+  margin: 34px auto 0 auto;
+  color: #ffffff;
+}
+
+.right p {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 1.25rem;
   width: 100%;
-  margin: 0;
-  margin-bottom: 5px;
-}
-
-a {
-  font-weight: 700;
-}
-
-a img {
-  vertical-align: middle;
-}
-
-.paragraph p {
-  margin-bottom: 20px !important;
+  text-align: center;
+  color: #ffffff;
 }
 
 form input {
   width: 100%;
   font-size: 1rem;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
 }
 
 label {
@@ -127,7 +139,9 @@ label {
   font-weight: 600;
   font-size: 18px;
   line-height: 150%;
-  margin: 20px 0 0 0;
+  text-align: left;
+  width: 80% !important;
+  margin: 20px auto 0 0;
   /* identical to box height, or 27px */
 
   /* blue/dark blue */
@@ -156,170 +170,6 @@ form[name='login'] {
   margin-bottom: 15vh;
   margin-top: 15vh;
   width: 80%;
-}
-
-form[name='register'] {
-  background-color: white;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  margin: 100px auto 0;
-  padding: 60px 100px;
-  width: 500px;
-}
-
-form[name='register'] button:enabled {
-  margin-top: 30px;
-  border: 3px solid #f0ba8c !important;
-  background-color: #4a2acb;
-  color: #f0ba8c;
-}
-
-button:disabled,
-button[disabled] {
-  margin-top: 30px;
-  cursor: not-allowed;
-  outline: none;
-  border: 0;
-  background-color: #dbdbdb;
-  color: #616161;
-}
-
-button:disabled:hover {
-  background-color: #dbdbdb;
-  color: #616161;
-}
-
-button:disabled:focus,
-button:disabled:active,
-button:disabled:target {
-  outline: none;
-}
-
-.sameline {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.sameline label {
-  font-weight: 400;
-}
-
-.leftalign {
-  float: right;
-}
-
-/* Tooltip container */
-.tooltip {
-  position: relative;
-  display: inline-block;
-  margin-left: 20px;
-  vertical-align: middle;
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-  bottom: 125%;
-  left: 50%;
-  margin-left: -134px; /* Use half of the width (268/2 = 134), to center the tooltip */
-  visibility: hidden;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 17px;
-  width: 268px;
-  background-color: #f0ba8c;
-  color: #1c325d;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 10px;
-  white-space: wrap !important;
-
-  /* Position the tooltip text - see examples below! */
-  position: absolute;
-  z-index: 1;
-}
-
-.tooltip .tooltiptext::after {
-  content: ' ';
-  position: absolute;
-  top: 100%; /* At the bottom of the tooltip */
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #f0ba8c transparent transparent transparent;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: flex;
-  width: 60px !important;
-  height: 30px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  border: 2px solid;
-  border-color: #616161;
-  border-radius: 20px;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-.slider:before {
-  background-color: #616161;
-  border-radius: 50%;
-  position: absolute;
-  content: '';
-  height: 22px;
-  width: 22px;
-  left: 4px;
-  bottom: 2px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-input:checked + .slider {
-  border-color: #4a2acb !important;
-}
-
-input:checked + .slider:before {
-  background-color: #4a2acb;
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.field-info {
-  margin: 13px auto 0 0;
-  border-left: 14px #4a2acb solid;
-  box-shadow: none;
-  background-color: #e4f3fb;
-  color: #1c325d;
-  box-sizing: border-box;
-  padding: 10px 20px;
 }
 
 #login-error {
@@ -352,11 +202,13 @@ input:checked + .slider:before {
   font-weight: 700;
   font-size: 18px;
   line-height: 29px;
+  display: flex;
+  align-items: center;
 
   /* purple/purple */
   color: #4a2acb;
-  /* width: 391px !important; */
-  /* margin: 10px auto 20px 0; */
+  width: 391px !important;
+  margin: 10px auto 20px 0;
 }
 
 /* Skeleton css */
@@ -375,6 +227,7 @@ input[type='button'] {
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
+  background-color: transparent;
   border-radius: 1.75rem;
   border: 1px solid #bbb;
   cursor: pointer;
@@ -388,10 +241,10 @@ input[type='button'] {
   font-style: normal;
   font-weight: 700;
   align-self: center;
-  /* position: absolute; */
-  /* bottom: 125px; */
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
+  position: absolute;
+  bottom: 125px;
+  left: 50%;
+  transform: translateX(-50%);
   transition: background-color 300ms forwards, color 300ms forwards;
 }
 .button:hover,
@@ -423,8 +276,7 @@ input[type='button']:target {
   outline-offset: 4px;
 }
 
-.button:visited,
-button:visited,
+.button:visited button:visited,
 input[type='submit']:visited,
 input[type='reset']:visited,
 input[type='button']:visited {

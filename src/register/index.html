@@ -2,85 +2,138 @@
 <html lang="fi">
   <head>
     <meta charset="utf-8" />
+    <title>Ylitse MentorApp - SOS-Lapsikylä</title>
     <meta name="description" content="Ylitse web registration" />
     <meta name="author" content="SOS Children's Villages Finland" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/static/styles/normalize.css" />
-    <!-- <link rel="stylesheet" href="/static/styles/styles.css" /> -->
+    <link rel="stylesheet" href="/static/styles/styles.css" />
     <link rel="stylesheet" type="text/css" href="/static/styles/fonts.css" />
-    <title>Ylitse MentorApp - SOS-Lapsikylä</title>
   </head>
   <body>
     <main>
-      <div class="container">
-        <div>
-          <form name="register">
-            <h1>Rekisteröidy</h1>
-            <p>
-              Hienoa, että haluat aloittaa palvelun käytön. Huomaathan, että
-              palvelu on tarkoitettu yli 15-vuotiaille. Jos olet alle
-              15-vuotias, vieraile
-              <a href="https://apuu.fi"
-                >Apuu-chatissa.
-                <img
-                  src="/static/img/outsidelink.svg"
-                  alt="Siirryt apuu.fi verkkosivulle."
-                />
+      <form id="register-form" name="register">
+        <h1>Rekisteröidy</h1>
+        <p>
+          Hienoa, että haluat aloittaa palvelun käytön. Huomaathan, että palvelu
+          on tarkoitettu yli 15-vuotiaille. Jos olet alle 15-vuotias, vieraile
+          <a href="https://apuu.fi">Apuu-chatissa.</a>
+          <a href="https://apuu.fi">
+            <img
+              src="/static/img/outsidelink.svg"
+              alt="Siirry apuu.fi verkkosivulle."
+            />
+          </a>
+        </p>
+        <h2>Tilin tiedot</h2>
+        <p>Tähdellä * merkityt kentät ovat pakollisia.</p>
+        <fieldset>
+          <label for="username">Käyttäjätunnus *</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            onChange="checkForm()"
+            autofocus
+            required
+          />
+        </fieldset>
+        <fieldset>
+          <label for="password">
+            Salasana *
+            <span class="leftalign">
+              <a href="#!" onclick="togglePassword()" id="retrieve-password">
+                Näytä salasana
               </a>
-            </p>
-            <h2>Tilin tiedot</h2>
-            <p>Tähdellä * merkityt kentät ovat pakollisia.</p>
-            <p>
-              <label for="username">Käyttäjätunnus *</label>
-              <input type="text" id="username" name="username" autofocus />
-            </p>
-            <p>
-              <label for="password">Salasana *</label>
-              <input type="password" id="password" name="password" />
-            </p>
-            <label for="email">Sähköpostiosoite (vapaaehtoinen)</label>
-            <input type="text" id="email" name="email" />
-            <p>
-              <label for="screen-name">Julkinen nimimerkki *</label>
-              <input type="text" id="screen-name" name="screen-name" />
-            </p>
-            <h2>Yksityisyydensuoja</h2>
-            <p>
-              Käytämme tietojasi ainoastaan tämän palvelun mahdollis-tamiseksi.
-              Noudatamme tarkkoja tietoturvastandardeja ja teemme parhaamme,
-              jotta tietosi säilyvät turvassa ja yksityisinä. Huomaathan, että
-              keräämme anonyymejä tilastoja, jotta voimme kehittää palvelua
-              entistä paremmaksi. Rekisteröitymällä palvelun käyttäjäksi
-              hyväksyt, että käsittelemme sinua koskevia tietoja. Voit lukea
-              lisää:
-              <a href=""
-                >Tietoja yksityisyydensuojasta.
-                <img
-                  src="/static/img/outsidelink.svg"
-                  alt="Lataa yksityisyydensuojaseloste."
-                />
-              </a>
-            </p>
-            <p>
-              <label class="switch">
-                <input type="checkbox" />
-                <span class="slider round"></span>
-                Olen yli 15-vuotias
-              </label>
-            </p>
-            <p>
-              <label class="switch">
-                <input type="checkbox" />
-                <span class="slider round"></span>
-                Hyväksyn tietojeni käsittelyn
-              </label>
-            </p>
-            <input class="button" type="submit" value="Rekisteröidy" />
-          </form>
-        </div>
-        <div class="footer">
-          <h3>Palvelun tarjoaa SOS-Lapsikylä</h3>
-        </div>
+              <span class="tooltip">
+                <img src="/static/img/tooltip.svg" />
+                <span class="tooltiptext"
+                  >Salasanan tulee olla vähintään 5 merkkiä pitkä.</span
+                >
+              </span>
+            </span>
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            onChange="checkForm()"
+            required
+          />
+        </fieldset>
+        <fieldset>
+          <label for="email">Sähköpostiosoite (vapaaehtoinen)</label>
+          <input type="text" id="email" name="email" />
+          <p class="field-info">
+            Sähköpostiosoitteen tallentaminen mahdollistaa salasanan
+            palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin
+            tarkoituksiin.
+          </p>
+        </fieldset>
+        <fieldset>
+          <label for="screen-name">Julkinen nimimerkki *</label>
+          <input
+            type="text"
+            id="screen-name"
+            name="screen-name"
+            onChange="checkForm()"
+            required
+          />
+          <p class="field-info">
+            Jos haluat pysyä anonyymina mentoreille, syötä käyttäjänimi, josta
+            sinua ei voi tunnistaa.
+          </p>
+        </fieldset>
+        <h2>Yksityisyydensuoja</h2>
+        <section class="paragraph">
+          <p>
+            Käytämme tietojasi ainoastaan tämän palvelun mahdollis- tamiseksi.
+            Noudatamme tarkkoja tietoturvastandardeja ja teemme parhaamme, jotta
+            tietosi säilyvät turvassa ja yksityisinä.
+          </p>
+          <p>
+            Huomaathan, että keräämme anonyymejä tilastoja, jotta voimme
+            kehittää palvelua entistä paremmaksi.
+          </p>
+          <p>
+            Rekisteröitymällä palvelun käyttäjäksi hyväksyt, että käsittelemme
+            sinua koskevia tietoja. Voit lukea lisää:
+            <a href="">Tietoja yksityisyydensuojasta.</a>
+            <a href=""
+              ><img
+                src="/static/img/outsidelink.svg"
+                alt="Lataa tietosuojaseloste."
+            /></a>
+          </p>
+        </section>
+        <fieldset class="sameline">
+          <label class="switch">
+            <input
+              id="required-age"
+              type="checkbox"
+              onChange="checkForm()"
+              required
+            />
+            <span class="slider"></span>
+          </label>
+          <label for="required-age">Olen yli 15-vuotias</label>
+        </fieldset>
+        <fieldset class="sameline">
+          <label class="switch">
+            <input
+              id="privacy-consent"
+              type="checkbox"
+              onChange="checkForm()"
+              required
+            />
+            <span class="slider"></span>
+          </label>
+          <label for="privacy-consent">Hyväksyn tietojeni käsittelyn</label>
+        </fieldset>
+        <button id="submit-button" disabled>Rekisteröidy</button>
+      </form>
+      <div class="footer">
+        <h3 class="footer">Palvelun tarjoaa SOS-Lapsikylä</h3>
       </div>
     </main>
     <script src="index.js"></script>
