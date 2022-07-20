@@ -184,10 +184,10 @@ form[name='login'] {
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
+  gap: 10px;
   line-height: 140%;
   box-sizing: border-box;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding: 0.5rem;
 }
 
 #login-error svg {
