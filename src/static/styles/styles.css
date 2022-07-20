@@ -14,35 +14,32 @@ body {
 }
 
 main {
-  /* width: 100%;
-  height: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding-top: 100px;
   padding-bottom: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* overflow: hidden; */
 }
 
-.container {
+form {
+  background-color: white;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* overflow: hidden; */
-  width: 100%;
-  margin-top: 30px;
+  padding: 60px 100px;
+  width: 500px;
 }
 
 h1 {
+  display: flex;
+  justify-content: center;
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
   line-height: 48px;
-  display: flex;
-  justify-content: center;
+
   /* blue/dark blue */
   color: #1c325d;
 }
@@ -53,59 +50,39 @@ h2 {
   font-weight: 600;
   font-size: 26px;
   line-height: 42px;
-  /* blue/dark blue */
-  color: #1c325d;
   margin-top: 30px;
   margin-bottom: 5px;
+
+  /* blue/dark blue */
+  color: #1c325d;
 }
 
-.panels {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: stretch;
-  width: 90vw;
-  max-width: 800px;
+label {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 150%;
+  margin: 20px 0 0 0;
+
+  /* blue/dark blue */
+  color: #1c325d;
 }
 
-.panel {
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-  border-radius: 19px;
-  /* width: 50% !important; */
-  min-width: 596px !important;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  position: relative;
-}
+input {
+  width: 100%;
+  font-size: 1rem;
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
 
-input[type='text'],
-input[type='password'],
-input[type='email'] {
-  /* Rectangle 122 */
-  box-sizing: border-box;
-  /* greyscale/white */
   /* purple/purple */
   border: 1px solid #4a2acb;
   border-radius: 5px;
 }
 
-.checkmark {
-  background: url('/static/img/checkmark.svg');
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: 98% 50%;
-}
-
-.field-error {
-  border: 2px #972232 solid !important;
-}
-
-.email-label {
-  display: none;
-  color: #972232;
+a {
+  font-weight: 700;
 }
 
 p {
@@ -118,71 +95,56 @@ p {
   margin-bottom: 5px;
 }
 
-a {
-  font-weight: 700;
-}
-
-a img {
-  vertical-align: middle;
-}
-
 .paragraph p {
-  margin-bottom: 20px !important;
+  margin-bottom: 20px;
 }
 
-form input {
-  width: 100%;
-  font-size: 1rem;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
-}
-
-label {
-  /* p/label */
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 150%;
-  margin: 20px 0 0 0;
-  /* identical to box height, or 27px */
-
-  /* blue/dark blue */
+.field-info {
+  margin: 13px auto 0 0;
+  border-left: 14px #4a2acb solid;
+  box-shadow: none;
+  background-color: #e4f3fb;
   color: #1c325d;
+  box-sizing: border-box;
+  padding: 10px 20px;
 }
 
 .footer h3 {
-  /* p/p-semibold */
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   line-height: 150%;
-  text-align: center;
-  margin: auto;
   margin-top: 2rem;
   /* greyscale/white */
   color: #ffffff;
 }
 
-form[name='login'] {
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: space-between;
-  margin-bottom: 15vh;
-  margin-top: 15vh;
-  width: 80%;
+#toggle-password {
+  font-family: 'Baloo 2';
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 29px;
+  border: 0;
+  cursor: pointer;
+  background-color: white;
+
+  /* purple/purple */
+  color: #4a2acb;
 }
 
-form[name='register'] {
-  background-color: white;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  padding: 60px 100px;
-  width: 500px;
+#email-error {
+  display: none;
+  align-items: center;
+  color: #972232;
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  gap: 10px;
+  padding: 0.5rem 0;
 }
 
 #submit-button {
@@ -217,16 +179,6 @@ form[name='register'] {
   outline-offset: 4px;
 }
 
-.sameline {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.sameline label {
-  font-weight: 400;
-}
-
 .leftalign {
   float: right;
 }
@@ -255,7 +207,7 @@ form[name='register'] {
   text-align: center;
   padding: 5px 0;
   border-radius: 10px;
-  white-space: wrap !important;
+  white-space: wrap;
 
   /* Position the tooltip text - see examples below! */
   position: absolute;
@@ -276,6 +228,16 @@ form[name='register'] {
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.sameline {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.sameline label {
+  font-weight: 400;
 }
 
 /* The switch - the box around the slider */
@@ -331,53 +293,6 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
-}
-
-.field-info {
-  margin: 13px auto 0 0;
-  border-left: 14px #4a2acb solid;
-  box-shadow: none;
-  background-color: #e4f3fb;
-  color: #1c325d;
-  box-sizing: border-box;
-  padding: 10px 20px;
-}
-
-#email-error {
-  display: none;
-  align-items: center;
-  color: #972232;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-  gap: 10px;
-  padding: 0.5rem 0;
-  /* display:  vertical-align: middle;
-  box-shadow: none;
-  color: #972232;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-  gap: 10px; */
-}
-
-#toggle-password {
-  /* p/button link */
-  font-family: 'Baloo 2';
-  text-decoration: none;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 29px;
-  border: 0;
-  cursor: pointer;
-  background-color: white;
-  /* purple/purple */
-  color: #4a2acb;
-  /* width: 391px !important; */
-  /* margin: 10px auto 20px 0; */
 }
 
 /* Forms
@@ -451,14 +366,6 @@ input[type='submit'] {
   /* orange/orange */
   color: #f0ba8c;
   border: none !important;
-}
-
-.right-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
 }
 
 #mobile-header {
