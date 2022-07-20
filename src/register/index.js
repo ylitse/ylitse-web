@@ -42,21 +42,33 @@ function togglePassword() {
 }
 
 function checkForm() {
-  let requiredFieldsFilled = true;
+  var formError = false;
   document
     .getElementById('register-form')
-    .querySelectorAll('[required]')
+    .querySelectorAll('input')
     .forEach(function (field) {
-      if (!requiredFieldsFilled) return;
-      if (!field.checkValidity()) {
-        console.log(field);
-        requiredFieldsFilled = false;
-        return;
+      if (field.checkValidity()) {
+        field.classList.remove('field-error');
+        if (field.value.length > 0) {
+          field.classList.add('checkmark');
+        }
+        if (field.id === 'email') {
+          document.getElementById('email-error').style.display = 'none';
+        }
+      } else {
+        formError = true;
+        field.classList.remove('checkmark');
+        if (field.value.length > 0) {
+          field.classList.add('field-error');
+        }
+        if (field.id === 'email') {
+          document.getElementById('email-error').style.display = 'flex';
+        }
       }
     });
-  if (requiredFieldsFilled) {
-    document.getElementById('submit-button').disabled = false;
-  } else {
+  if (formError) {
     document.getElementById('submit-button').disabled = true;
+  } else {
+    document.getElementById('submit-button').disabled = false;
   }
 }

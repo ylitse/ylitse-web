@@ -57,13 +57,18 @@
             type="password"
             id="password"
             name="password"
+            minlength="5"
             onChange="checkForm()"
             required
           />
         </fieldset>
         <fieldset>
           <label for="email">Sähköpostiosoite (vapaaehtoinen)</label>
-          <input type="text" id="email" name="email" />
+          <input type="email" id="email" name="email" onChange="checkForm()" />
+          <span id="email-error">
+            <img src="/static/img/icon-warning.svg" />
+            Sähköpostiosoite on virheellinen
+          </span>
           <p class="field-info">
             Sähköpostiosoitteen tallentaminen mahdollistaa salasanan
             palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin
