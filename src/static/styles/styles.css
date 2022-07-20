@@ -171,7 +171,6 @@ form[name='register'] {
 
 form[name='register'] button:enabled {
   margin-top: 30px;
-  border: 3px solid #f0ba8c !important;
   background-color: #4a2acb;
   color: #f0ba8c;
 }
@@ -245,10 +244,10 @@ button:disabled:target {
 .tooltip .tooltiptext::after {
   content: ' ';
   position: absolute;
-  top: 100%; /* At the bottom of the tooltip */
+  top: 98%; /* At the bottom of the tooltip */
   left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
+  margin-left: -8px;
+  border-width: 8px;
   border-style: solid;
   border-color: #f0ba8c transparent transparent transparent;
 }
@@ -298,8 +297,8 @@ button:disabled:target {
   width: 22px;
   left: 4px;
   bottom: 2px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 
 input:checked + .slider {
