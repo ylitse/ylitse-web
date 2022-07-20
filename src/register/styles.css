@@ -81,6 +81,29 @@ input {
   border-radius: 5px;
 }
 
+.input-checkmark {
+  background: url('/static/img/checkmark.svg');
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: 98% 50%;
+}
+
+.input-error {
+  border: 2px #972232 solid !important;
+}
+
+#email-input-error {
+  display: none;
+  align-items: center;
+  color: #972232;
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  gap: 10px;
+  padding: 0.5rem 0;
+}
+
 a {
   font-weight: 700;
 }
@@ -133,18 +156,6 @@ p {
 
   /* purple/purple */
   color: #4a2acb;
-}
-
-#email-error {
-  display: none;
-  align-items: center;
-  color: #972232;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-  gap: 10px;
-  padding: 0.5rem 0;
 }
 
 #submit-button {
