@@ -82,7 +82,7 @@ input {
 }
 
 .input-checkmark {
-  background: url('/static/img/checkmark.svg');
+  background: url('/static/icons/checkmark.svg');
   background-repeat: no-repeat;
   background-size: 16px;
   background-position: 98% 50%;

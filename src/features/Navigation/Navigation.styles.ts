@@ -1,7 +1,7 @@
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import SvgLogo from '../../static/img/logo.svg';
-import Outsidelink from '../../static/img/outsidelink.svg';
+import Outsidelink from '../../static/icons/outsidelink.svg';
 
 export const LogoText = styled.div`
   font-family: 'Baloo 2', cursive;
