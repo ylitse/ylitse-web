@@ -42,9 +42,13 @@
           <label for="password">
             Salasana *
             <span class="leftalign">
-              <a href="#!" onclick="togglePassword()" id="retrieve-password">
+              <button
+                type="button"
+                onclick="togglePassword()"
+                id="toggle-password"
+              >
                 Näytä salasana
-              </a>
+              </button>
               <span class="tooltip">
                 <img src="/static/img/tooltip.svg" />
                 <span class="tooltiptext"
@@ -137,7 +141,7 @@
           </label>
           <label for="privacy-consent">Hyväksyn tietojeni käsittelyn</label>
         </fieldset>
-        <button id="submit-button" disabled>Rekisteröidy</button>
+        <button id="submit-button" type="submit" disabled>Rekisteröidy</button>
       </form>
       <div class="footer">
         <h3 class="footer">Palvelun tarjoaa SOS-Lapsikylä</h3>

@@ -185,31 +185,36 @@ form[name='register'] {
   width: 500px;
 }
 
-form[name='register'] button:enabled {
+#submit-button {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  border-radius: 1.75rem;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  width: 12.5rem;
+  height: 3.5rem;
+  max-height: 3.5rem;
+  padding: 1rem 2rem;
+  font-family: 'Baloo 2';
+  font-weight: 700;
+  align-self: center;
   margin-top: 30px;
   background-color: #4a2acb;
   color: #f0ba8c;
 }
 
-button:disabled,
-button[disabled] {
-  margin-top: 30px;
+#submit-button:disabled {
   cursor: not-allowed;
-  outline: none;
   border: 0;
   background-color: #dbdbdb;
   color: #616161;
 }
 
-button:disabled:hover {
-  background-color: #dbdbdb;
-  color: #616161;
-}
-
-button:disabled:focus,
-button:disabled:active,
-button:disabled:target {
-  outline: none;
+#submit-button:focus,
+#submit-button:active {
+  background-color: #4a2acb;
+  outline: #4a2acb solid 3px;
+  outline-offset: 4px;
 }
 
 .sameline {
@@ -358,7 +363,7 @@ input:checked + .slider:before {
   gap: 10px; */
 }
 
-#retrieve-password {
+#toggle-password {
   /* p/button link */
   font-family: 'Baloo 2';
   text-decoration: none;
@@ -366,107 +371,13 @@ input:checked + .slider:before {
   font-weight: 700;
   font-size: 18px;
   line-height: 29px;
-
+  border: 0;
+  cursor: pointer;
+  background-color: white;
   /* purple/purple */
   color: #4a2acb;
   /* width: 391px !important; */
   /* margin: 10px auto 20px 0; */
-}
-
-/* Skeleton css */
-
-.button,
-button,
-input[type='submit'],
-input[type='reset'],
-input[type='button'] {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 1.5rem;
-  line-height: 1.5rem;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-  border-radius: 1.75rem;
-  border: 1px solid #bbb;
-  cursor: pointer;
-  box-sizing: border-box;
-  width: 12.5rem;
-  height: 3.5rem;
-  max-height: 3.5rem;
-  padding: 1rem 2rem;
-  font-family: 'Baloo 2';
-  text-decoration: none;
-  font-style: normal;
-  font-weight: 700;
-  align-self: center;
-  /* position: absolute; */
-  /* bottom: 125px; */
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
-  transition: background-color 300ms forwards, color 300ms forwards;
-}
-.button:hover,
-button:hover,
-input[type='submit']:hover,
-input[type='reset']:hover,
-input[type='button']:hover {
-  background-color: #37119d;
-  outline: 0;
-}
-
-.button:focus,
-button:focus,
-input[type='submit']:focus,
-input[type='reset']:focus,
-input[type='button']:focus,
-.button:active,
-button:active,
-input[type='submit']:active,
-input[type='reset']:active,
-input[type='button']:active,
-.button:target,
-button:target,
-input[type='submit']:target,
-input[type='reset']:target,
-input[type='button']:target {
-  background-color: #4a2acb;
-  outline: #4a2acb solid 3px;
-  outline-offset: 4px;
-}
-
-.button:visited,
-button:visited,
-input[type='submit']:visited,
-input[type='reset']:visited,
-input[type='button']:visited {
-  background-color: #5c33ff;
-}
-
-.button.button-primary,
-button.button-primary,
-input[type='submit'].button-primary,
-input[type='reset'].button-primary,
-input[type='button'].button-primary {
-  color: #fff;
-  background-color: #33c3f0;
-  border-color: #33c3f0;
-}
-.button.button-primary:hover,
-button.button-primary:hover,
-input[type='submit'].button-primary:hover,
-input[type='reset'].button-primary:hover,
-input[type='button'].button-primary:hover,
-.button.button-primary:focus,
-button.button-primary:focus,
-input[type='submit'].button-primary:focus,
-input[type='reset'].button-primary:focus,
-input[type='button'].button-primary:focus {
-  color: #fff;
-  background-color: #1eaedb;
-  border-color: #1eaedb;
 }
 
 /* Forms
