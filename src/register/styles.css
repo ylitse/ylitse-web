@@ -108,6 +108,10 @@ a {
   font-weight: 700;
 }
 
+a img {
+  vertical-align: middle;
+}
+
 p {
   font-family: 'Source Sans Pro';
   font-style: normal;
