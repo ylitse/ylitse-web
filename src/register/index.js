@@ -31,7 +31,7 @@
 
 function togglePassword() {
   var passwordInput = document.getElementById('password');
-  var passwordHint = document.getElementById('retrieve-password');
+  var passwordHint = document.getElementById('toggle-password');
   if (passwordInput.getAttribute('type') === 'password') {
     passwordInput.type = 'text';
     passwordHint.innerHTML = 'Piilota salasana';
