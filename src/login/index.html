@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
   <head>
     <meta charset="utf-8" />
     <title>Ylitse MentorApp - SOS-Lapsikylä</title>
@@ -55,10 +55,21 @@
                 Käyttäjätunnus tai salasanasi on virheellinen. <br />Tarkista
                 syöttämäsi tiedot.
               </div>
-              <label>Käyttäjätunnus</label>
-              <input type="text" name="username" placeholder="" autofocus />
-              <label>Salasana</label>
-              <input type="password" name="password" placeholder="" />
+              <label for="username">Käyttäjätunnus</label>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                placeholder=""
+                autofocus
+              />
+              <label for="password">Salasana</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder=""
+              />
               <a id="retrieve-password" href="#">Unohditko salasanasi?</a>
               <input class="button" type="submit" value="Kirjaudu" />
             </form>
