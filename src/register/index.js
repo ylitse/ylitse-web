@@ -48,20 +48,25 @@ function checkForm() {
     .querySelectorAll('input')
     .forEach(function (field) {
       if (field.checkValidity()) {
-        field.classList.remove('input-error');
+        field.classList.remove('error-border');
         if (field.value.length > 0) {
+          console.log('moi');
           field.classList.add('input-checkmark');
         }
         if (field.id === 'email') {
+          document
+            .getElementById('email-label')
+            .classList.remove('error-color');
           document.getElementById('email-input-error').style.display = 'none';
         }
       } else {
         formError = true;
         field.classList.remove('input-checkmark');
         if (field.value.length > 0) {
-          field.classList.add('input-error');
+          field.classList.add('error-border');
         }
         if (field.id === 'email') {
+          document.getElementById('email-label').classList.add('error-color');
           document.getElementById('email-input-error').style.display = 'flex';
         }
       }

@@ -125,7 +125,11 @@ input:focus {
   background-position: 98% 50%;
 }
 
-.input-error {
+.error-color {
+  color: #972232;
+}
+
+.error-border {
   border: 2px #972232 solid;
 }
 
