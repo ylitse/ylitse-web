@@ -30,9 +30,9 @@
         <fieldset>
           <label for="username">Käyttäjätunnus *</label>
           <input
-            type="text"
             id="username"
             name="username"
+            type="text"
             onChange="checkForm()"
             autofocus
             required
@@ -41,26 +41,26 @@
         <fieldset>
           <label for="password">
             Salasana *
-            <span class="leftalign">
+            <span class="align-right">
               <button
+                id="password-toggle"
                 type="button"
                 onclick="togglePassword()"
-                id="toggle-password"
               >
                 Näytä salasana
               </button>
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
-                <span class="tooltiptext">
+                <span class="tooltip-text">
                   Salasanan tulee olla vähintään 5 merkkiä pitkä.
                 </span>
               </span>
             </span>
           </label>
           <input
-            type="password"
             id="password"
             name="password"
+            type="password"
             minlength="5"
             onChange="checkForm()"
             required
@@ -68,7 +68,7 @@
         </fieldset>
         <fieldset>
           <label for="email">Sähköpostiosoite (vapaaehtoinen)</label>
-          <input type="email" id="email" name="email" onChange="checkForm()" />
+          <input id="email" name="email" type="email" onChange="checkForm()" />
           <span id="email-input-error">
             <img src="/static/icons/warning.svg" />
             Sähköpostiosoite on virheellinen
@@ -82,9 +82,9 @@
         <fieldset>
           <label for="screen-name">Julkinen nimimerkki *</label>
           <input
-            type="text"
             id="screen-name"
             name="screen-name"
+            type="text"
             onChange="checkForm()"
             required
           />
@@ -94,7 +94,7 @@
           </p>
         </fieldset>
         <h2>Yksityisyydensuoja</h2>
-        <section class="paragraph">
+        <section>
           <p>
             Käytämme tietojasi ainoastaan tämän palvelun mahdollis- tamiseksi.
             Noudatamme tarkkoja tietoturvastandardeja ja teemme parhaamme, jotta
@@ -118,20 +118,21 @@
             </a>
           </p>
         </section>
-        <fieldset class="sameline">
+        <fieldset class="switch-line">
           <label class="switch" tabindex="0">
             <input
               id="required-age"
               type="checkbox"
               onChange="checkForm()"
-              tabindex="0"
               required
             />
             <span class="slider"></span>
           </label>
-          <label for="required-age">Olen yli 15-vuotias</label>
+          <label for="required-age" class="switch-label">
+            Olen yli 15-vuotias
+          </label>
         </fieldset>
-        <fieldset class="sameline">
+        <fieldset class="switch-line">
           <label class="switch" tabindex="0">
             <input
               id="privacy-consent"
@@ -141,12 +142,14 @@
             />
             <span class="slider"></span>
           </label>
-          <label for="privacy-consent">Hyväksyn tietojeni käsittelyn</label>
+          <label for="privacy-consent" class="switch-label">
+            Hyväksyn tietojeni käsittelyn
+          </label>
         </fieldset>
         <button id="submit-button" type="submit" disabled>Rekisteröidy</button>
       </form>
       <div class="footer">
-        <h3 class="footer">Palvelun tarjoaa SOS-Lapsikylä</h3>
+        <h3>Palvelun tarjoaa SOS-Lapsikylä</h3>
       </div>
     </main>
     <script src="index.js"></script>

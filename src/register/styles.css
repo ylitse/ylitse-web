@@ -17,30 +17,28 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 80px;
 }
 
 form {
-  background-color: white;
-  border-radius: 20px;
   display: flex;
   flex-direction: column;
-  padding: 60px 100px;
   width: 500px;
+  padding: 60px 100px;
+  border-radius: 20px;
+  background-color: white;
 }
 
 h1 {
-  display: flex;
-  justify-content: center;
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
   line-height: 48px;
-
-  /* blue/dark blue */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
   color: #1c325d;
 }
 
@@ -50,11 +48,43 @@ h2 {
   font-weight: 600;
   font-size: 26px;
   line-height: 42px;
+  margin: 0;
   margin-top: 30px;
-  margin-bottom: 5px;
-
-  /* blue/dark blue */
   color: #1c325d;
+}
+
+p {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  margin: 0;
+  color: #1c325d;
+}
+
+section p {
+  margin-bottom: 10px;
+}
+
+a {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  color: #4a2acb;
+}
+
+a img {
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+fieldset {
+  padding: 0;
+  margin-top: 20px;
+  border-width: 0;
 }
 
 label {
@@ -62,23 +92,30 @@ label {
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
-  line-height: 150%;
-  margin: 20px 0 0 0;
-
-  /* blue/dark blue */
+  line-height: 27px;
   color: #1c325d;
 }
 
 input {
-  width: 100%;
-  font-size: 1rem;
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
-
-  /* purple/purple */
+  font-size: 18px;
+  line-height: 27px;
+  height: 38px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  margin-top: 10px;
   border: 1px solid #4a2acb;
   border-radius: 5px;
+  color: #1c325d;
+}
+
+input:focus {
+  border: solid 2px #4a2acb;
+  background-color: #e4f3fb;
+  outline: 0;
 }
 
 .input-checkmark {
@@ -89,51 +126,18 @@ input {
 }
 
 .input-error {
-  border: 2px #972232 solid !important;
+  border: 2px #972232 solid;
 }
 
-#email-input-error {
-  display: none;
-  align-items: center;
-  color: #972232;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-  gap: 10px;
-  padding: 0.5rem 0;
-}
-
-a {
-  font-weight: 700;
-}
-
-a img {
-  vertical-align: middle;
-}
-
-p {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  width: 100%;
-  margin: 0;
-  margin-bottom: 5px;
-}
-
-.paragraph p {
-  margin-bottom: 20px;
+.align-right {
+  float: right;
 }
 
 .field-info {
-  margin: 13px auto 0 0;
-  border-left: 14px #4a2acb solid;
-  box-shadow: none;
-  background-color: #e4f3fb;
-  color: #1c325d;
-  box-sizing: border-box;
   padding: 10px 20px;
+  margin-top: 13px; /* blue/dark blue */
+  border-left: 14px #4a2acb solid;
+  background-color: #e4f3fb;
 }
 
 .footer h3 {
@@ -141,97 +145,46 @@ p {
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
-  line-height: 150%;
-  margin-top: 2rem;
-  /* greyscale/white */
+  line-height: 27px;
+  margin-top: 25px;
   color: #ffffff;
-}
-
-#toggle-password {
-  font-family: 'Baloo 2';
-  text-decoration: none;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 29px;
-  border: 0;
-  cursor: pointer;
-  background-color: white;
-
-  /* purple/purple */
-  color: #4a2acb;
-}
-
-#submit-button {
-  font-size: 1.5rem;
-  line-height: 1.5rem;
-  border-radius: 1.75rem;
-  border: 1px solid #bbb;
-  cursor: pointer;
-  width: 12.5rem;
-  height: 3.5rem;
-  max-height: 3.5rem;
-  padding: 1rem 2rem;
-  font-family: 'Baloo 2';
-  font-weight: 700;
-  align-self: center;
-  margin-top: 30px;
-  background-color: #4a2acb;
-  color: #f0ba8c;
-}
-
-#submit-button:disabled {
-  cursor: not-allowed;
-  border: 0;
-  background-color: #dbdbdb;
-  color: #616161;
-}
-
-#submit-button:focus,
-#submit-button:active {
-  background-color: #4a2acb;
-  outline: #4a2acb solid 3px;
-  outline-offset: 4px;
-}
-
-.leftalign {
-  float: right;
 }
 
 /* Tooltip container */
 .tooltip {
-  position: relative;
   display: inline-block;
+  position: relative;
   vertical-align: middle;
+  height: 27px;
 }
 
 /* Tooltip text */
-.tooltip .tooltiptext {
-  bottom: 125%;
-  left: 50%;
-  margin-left: -134px; /* Use half of the width (268/2 = 134), to center the tooltip */
-  visibility: hidden;
+.tooltip-text {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
   font-size: 17px;
-  width: 268px;
-  background-color: #f0ba8c;
-  color: #1c325d;
+  line-height: 29px;
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
   text-align: center;
+  bottom: 140%;
+  left: 50%;
+  width: 268px;
+  margin-left: -134px; /* Use half of the width (268/2 = 134), to center the tooltip */
   padding: 5px 0;
   border-radius: 10px;
   white-space: wrap;
-
-  /* Position the tooltip text - see examples below! */
-  position: absolute;
-  z-index: 1;
+  background-color: #f0ba8c;
+  color: #1c325d;
 }
 
-.tooltip .tooltiptext::after {
+/* Bottom arrow */
+.tooltip .tooltip-text::after {
   content: ' ';
   position: absolute;
-  top: 98%; /* At the bottom of the tooltip */
+  top: 100%; /* At the bottom of the tooltip */
   left: 50%;
   margin-left: -8px;
   border-width: 8px;
@@ -240,17 +193,17 @@ p {
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltip-text {
   visibility: visible;
 }
 
-.sameline {
+.switch-line {
   display: flex;
   flex-direction: row;
   gap: 20px;
 }
 
-.sameline label {
+.switch-label {
   font-weight: 400;
 }
 
@@ -258,7 +211,7 @@ p {
 .switch {
   position: relative;
   display: flex;
-  width: 60px !important;
+  width: 60px;
   height: 30px;
 }
 
@@ -299,7 +252,7 @@ p {
 }
 
 input:checked + .slider {
-  border-color: #4a2acb !important;
+  border-color: #4a2acb;
 }
 
 input:checked + .slider:before {
@@ -309,136 +262,66 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Forms
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-input[type='email'],
-input[type='number'],
-input[type='search'],
-input[type='text'],
-input[type='tel'],
-input[type='url'],
-input[type='password'],
-textarea,
-select {
-  height: 38px;
-  padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
-  border-radius: 4px;
-  box-shadow: none;
-  box-sizing: border-box;
-}
-/* Removes awkward default styles on some inputs for iOS */
-input[type='email'],
-input[type='number'],
-input[type='search'],
-input[type='text'],
-input[type='tel'],
-input[type='url'],
-input[type='password'],
-textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-textarea {
-  min-height: 65px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-input[type='email']:focus,
-input[type='number']:focus,
-input[type='search']:focus,
-input[type='text']:focus,
-input[type='tel']:focus,
-input[type='url']:focus,
-input[type='password']:focus,
-textarea:focus,
-select:focus {
-  border: solid 2px #4a2acb;
-  background-color: #e4f3fb;
-  outline: 0;
-}
-label,
-legend {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-fieldset {
+#password-toggle {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  cursor: pointer;
   padding: 0;
-  border-width: 0;
+  margin-right: 15px;
+  border: 0;
+  background-color: white;
+  color: #4a2acb;
 }
 
-input[type='submit'] {
-  /* button-default-large */
-  flex: 1;
-
-  /* purple/purple */
-  background: #4a2acb;
-  left: 46%;
-  /* container */
-
-  /* orange/orange */
-  color: #f0ba8c;
-  border: none !important;
-}
-
-#mobile-header {
+#email-input-error {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 21px;
   display: none;
-  left: 0px;
-  top: 0px;
-  background: #4a2acb;
-  /* shadow */
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 0px 0px 19px 19px;
-  min-height: 101px;
-  height: 101px;
-  color: #fff;
-  z-index: 2;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  color: #972232;
 }
 
-#mobile-header svg {
-  margin: 27px 32px 0 auto;
-  text-align: center;
+#submit-button {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 35px;
+  align-self: center;
+  cursor: pointer;
+  width: 194px;
+  height: 48px;
+  margin-top: 40px;
+  border: 1px solid #bbb;
+  border-radius: 50px;
+  background-color: #4a2acb;
+  color: #f0ba8c;
 }
 
-#mobile-header h1 {
-  color: #fff;
-  text-align: left;
-  margin: 27px auto 0 0;
+#submit-button:focus,
+#submit-button:active {
+  outline: #4a2acb solid 3px;
+  outline-offset: 4px;
+  background-color: #4a2acb;
 }
 
-@media only screen and (max-width: 960px) {
-  body {
-    height: auto;
-  }
-  main {
-    width: 100%;
-    min-width: none !important;
-  }
-  #mobile-header {
-    display: flex;
-  }
-  .panels {
-    flex-direction: column;
-    margin: 0;
-    width: 100%;
-    max-width: none;
-  }
-  .panel {
-    width: 100% !important;
-    border-radius: 0;
-    min-width: 100px !important;
-    margin: 0 auto 0 auto;
-  }
-  .right {
-    margin-left: 0px;
-  }
-  .left {
-    margin-top: -40px;
-    z-index: 1;
-  }
+#submit-button:disabled {
+  cursor: not-allowed;
+  border: 0;
+  outline: none;
+  background-color: #dbdbdb;
+  color: #616161;
+}
 
-  form[name='login'] {
-    margin-top: 30px;
-  }
+#submit-button:disabled:focus,
+#submit-button:disabled:active {
+  outline: none;
 }
