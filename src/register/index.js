@@ -5,7 +5,7 @@
   form.addEventListener(
     'submit',
     function (event) {
-      fetch('/api/webregister', {
+      fetch('/api/register', {
         method: 'POST',
         body: new FormData(form),
         credentials: 'include',
@@ -14,7 +14,6 @@
           if (response.ok) {
             return response.json();
           }
-          var registrationError = document.getElementById('registration-error');
         })
         .then(function (data) {
           window.location.href = '/login';
@@ -22,7 +21,6 @@
         .catch(function (error) {
           console.log(error.message);
         });
-
       event.preventDefault();
     },
     false,
@@ -31,13 +29,13 @@
 
 function togglePassword() {
   var passwordInput = document.getElementById('password');
-  var passwordHint = document.getElementById('password-toggle');
+  var passwordToggle = document.getElementById('password-toggle');
   if (passwordInput.getAttribute('type') === 'password') {
     passwordInput.type = 'text';
-    passwordHint.innerHTML = 'Piilota salasana';
+    passwordToggle.innerHTML = 'Piilota salasana';
   } else {
     passwordInput.type = 'password';
-    passwordHint.innerHTML = 'Näytä salasana';
+    passwordToggle.innerHTML = 'Näytä salasana';
   }
 }
 
@@ -50,7 +48,6 @@ function checkForm() {
       if (field.checkValidity()) {
         field.classList.remove('error-border');
         if (field.value.length > 0) {
-          console.log('moi');
           field.classList.add('input-checkmark');
         }
         if (field.id === 'email') {
