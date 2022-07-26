@@ -10,6 +10,8 @@ const Cards = () => {
 
 const CardsElement = styled.div`
   flex: 1;
+	height: 30vh;
+	width: 100%;
 `;
 
 export default Cards;

@@ -24,10 +24,10 @@ const OneContainerLayout: React.FC<OneContainerProps> = ({
 const OneContainer = styled.div`
   flex: 0 0 auto;
   width: 100%;
-  background-color: white;
   border-radius: 10px;
   margin: 0;
-  height: fit-content;
+  height: auto;
+	background-color: white;
 `;
 
 const PageHeader = styled.div`

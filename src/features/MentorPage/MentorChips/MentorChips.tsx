@@ -26,12 +26,13 @@ const ChipContainer = styled.div`
   flex: 0 0 auto;
   padding-left: 10%;
   padding-right: 10%;
-  height: 20rem;
+  height: fit-content;
   display: flex;
   flex-wrap: wrap;
   margin-top: 3rem;
   justify-content: center;
   position: relative;
+	padding-bottom: 6rem;
 `;
 
 export default MentorSkillChips;

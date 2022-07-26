@@ -24,7 +24,7 @@ const BasicPageElement = styled.div`
   background-color: #cde8f8;
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: auto;
   top: 0;
   left: 0;
   display: flex;
@@ -35,9 +35,9 @@ const PageContent = styled.div`
   background-color: transparent;
   position: relative;
   width: 80vw;
-  height: calc(100vh - 60px - 3.5rem - 20vw);
-  top: 10vw;
-  left: 10vw;
+  height: auto;
+  margin: auto;
+	margin-top: 10vw;
   display: flex;
   flex-direction: column;
 `;
