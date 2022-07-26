@@ -22,9 +22,10 @@ const PageLayout: React.FC<PageLayoutProps> = ({
 
 const BasicPageElement = styled.div`
   background-color: #cde8f8;
-  position: absolute;
+  position: relative;
   width: 100vw;
   height: auto;
+	min-height: calc(100vh - 60px - 3.5rem);
   top: 0;
   left: 0;
   display: flex;

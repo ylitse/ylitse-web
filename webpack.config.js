@@ -1,17 +1,44 @@
 const path = require('path');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+
+const redirect = (res, loc) => {
+  res.statusCode = 302;
+  res.statusMessage = 'Found';
+  res.headers.location = loc;
+};
+
+const checkAuth = (res, req) => {
+  if (req.url !== '/login' && [401].includes(res.statusCode)) {
+    // not logged in, redirect to login page
+    redirect(res, '/login');
+  }
+};
+
+const DEV_API = process.env.DEV_API
+  ? process.env.DEV_API
+  : 'http://localhost:8080';
 
 module.exports = {
   mode: 'development',
   entry: {
-    app: path.join(__dirname, 'src', 'index.tsx')
+    app: path.join(__dirname, 'src', 'index.tsx'),
   },
   devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
+    proxy: {
+      '/api/**': {
+        target: DEV_API,
+        pathRewrite: { '^/api': '' },
+        cookieDomainRewrite: JSON.stringify(DEV_API),
+        changeOrigin: true,
+        logLevel: 'debug',
+        onProxyRes: checkAuth,
+      },
+    },
     static: {
-      directory: './src'
-    }
+      directory: './src',
+    },
   },
   target: 'web',
   module: {
@@ -21,15 +48,19 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
-			{    
-				test: /\.(woff|woff2|eot|ttf|otf|jp(e*)g|svg|gif|png)$/,
-				loader: "file-loader"
-			},
-			{
+      {
         test: /\.css$/,
         use: [
           {
             loader: 'css-loader',
+          },
+        ],
+      },
+      {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
           },
         ],
       },
@@ -39,7 +70,7 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
     filename: 'bundle.js',
@@ -47,7 +78,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: path.join(__dirname, 'src', 'index.html')
-    })
+      template: path.join(__dirname, 'src', 'index.html'),
+    }),
   ],
 };
