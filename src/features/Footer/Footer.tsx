@@ -11,7 +11,7 @@ const Footer = () => {
 };
 
 const StyledFooter = styled.div`
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   background-color: ${cssVariables.palette.footerblue};
