@@ -1,4 +1,3 @@
-import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import React from 'react';
 
@@ -6,12 +5,12 @@ import React from 'react';
  * Basic page layout that gives margins for any containers created to page
  */
 
-type PageLayoutProps = React.PropsWithChildren<{
+type PageLayoutProps = {
   children: React.ReactNode;
-}>;
+};
 
 // eslint-disable-next-line react/prop-types
-const PageLayout: React.FC<PropsWithChildren<PageLayoutProps>> = ({
+const PageLayout: React.FC<PageLayoutProps> = ({
   children,
 }) => {
   return (

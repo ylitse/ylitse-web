@@ -1,16 +1,15 @@
-import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import React from 'react';
 
 /** Layout for one container on page, like on mentor page */
 
-type OneContainerProps = React.PropsWithChildren<{
+type OneContainerProps = {
   headLine: string;
   children: React.ReactNode;
-}>;
+};
 
 // eslint-disable-next-line react/prop-types
-const OneContainerLayout: React.FC<PropsWithChildren<OneContainerProps>> = ({
+const OneContainerLayout: React.FC<OneContainerProps> = ({
   headLine,
   children,
 }) => {
