@@ -1,16 +1,16 @@
-import { Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Navigation from '@/features/Navigation';
 import Footer from '@/features/Footer';
+import MentorPage from '@/features/MentorPage';
 
 function App() {
   return (
     <div>
       <Navigation />
       <Routes>
-        <Route path="/register" element={<RegisterPage />} />
-				<Route path="/mentors" element={<MentorPage />} />
+        <Route path="/mentors" element={<MentorPage />} />
       </Routes>
-			<Footer/>
+      <Footer />
     </div>
   );
 }
