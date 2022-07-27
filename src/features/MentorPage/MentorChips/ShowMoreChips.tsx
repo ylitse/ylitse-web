@@ -6,10 +6,14 @@ import ExpandIcon from '../../../static/img/icon-expand.svg';
  * Should update Skill Chips container when pressed?
  */
 
-const ShowMoreButtonHandler = () => {
+const ShowMoreButtonHandler = (event: React.MouseEvent<HTMLDivElement>) => {
   const showMoreButton = document.getElementById('skill-chips');
   if (showMoreButton) {
     showMoreButton.classList.toggle('show-more');
+    console.log(event.currentTarget);
+    event.currentTarget.innerText === 'Näytä kaikki aiheet'
+      ? (event.currentTarget.innerText = 'Näytä vähemmän')
+      : (event.currentTarget.innerText = 'Näytä kaikki aiheet');
   }
 };
 
@@ -32,7 +36,7 @@ const MoreContainer = styled.div`
   margin-top: 3rem;
   position: absolute;
   width: fit-content;
-  bottom: 3rem;
+  bottom: 2rem;
 `;
 
 const MoreIcon = styled.div`
