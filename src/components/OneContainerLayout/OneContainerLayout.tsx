@@ -8,7 +8,6 @@ type OneContainerProps = {
   children: React.ReactNode;
 };
 
-// eslint-disable-next-line react/prop-types
 const OneContainerLayout: React.FC<OneContainerProps> = ({
   headLine,
   children,

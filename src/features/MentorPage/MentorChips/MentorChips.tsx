@@ -11,11 +11,14 @@ import ShowMoreChips from './ShowMoreChips';
  */
 
 const MentorSkillChips = ({ items }: { items: Array<ChipProps> }) => {
+  items.map(item => {
+    item.text = item.text.charAt(0).toUpperCase() + item.text.slice(1);
+  });
+  items.sort((a, b) => a.text.localeCompare(b.text));
   return (
     <ChipContainer>
       <SkillChips id="skill-chips">
         {items.map(item => (
-          // eslint-disable-next-line react/jsx-key
           <Chip key={item.text} text={item.text} />
         ))}
       </SkillChips>

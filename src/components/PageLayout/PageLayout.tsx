@@ -9,10 +9,7 @@ type PageLayoutProps = {
   children: React.ReactNode;
 };
 
-// eslint-disable-next-line react/prop-types
-const PageLayout: React.FC<PageLayoutProps> = ({
-  children,
-}) => {
+const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
   return (
     <BasicPageElement>
       <PageContent>{children}</PageContent>
@@ -25,7 +22,7 @@ const BasicPageElement = styled.div`
   position: relative;
   width: 100vw;
   height: auto;
-	min-height: calc(100vh - 60px - 3.5rem);
+  min-height: calc(100vh - 60px - 3.5rem);
   top: 0;
   left: 0;
   display: flex;
@@ -38,7 +35,7 @@ const PageContent = styled.div`
   width: 80vw;
   height: auto;
   margin: auto;
-	margin-top: 10vw;
+  margin-top: 10vw;
   display: flex;
   flex-direction: column;
 `;
