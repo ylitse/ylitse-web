@@ -6,8 +6,8 @@
     <meta name="description" content="Ylitse web login" />
     <meta name="author" content="SOS Children's Villages Finland" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="styles/normalize.css" />
-    <link rel="stylesheet" href="styles/ylitse.css" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/login/styles.css" />
     <link rel="stylesheet" type="text/css" href="/static/styles/fonts.css" />
   </head>
   <body>
@@ -33,25 +33,7 @@
             <form name="login">
               <h1>Kirjaudu sisään</h1>
               <div id="login-error">
-                <svg
-                  width="21"
-                  height="23"
-                  viewBox="0 0 21 23"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="10.5" cy="10.5" r="10.5" fill="#972232" />
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M10.5 4C11.3284 4 12 4.67157 12 5.5L12 10C12 10.8284 11.3284 11.5 10.5 11.5C9.67157 11.5 9 10.8284 9 10L9 5.5C9 4.67157 9.67157 4 10.5 4Z"
-                    fill="white"
-                  />
-                  <path
-                    d="M12 14.5C12 15.3284 11.3284 16 10.5 16C9.67157 16 9 15.3284 9 14.5C9 13.6716 9.67157 13 10.5 13C11.3284 13 12 13.6716 12 14.5Z"
-                    fill="white"
-                  />
-                </svg>
+                <img src="/static/icons/warning.svg" />
                 Käyttäjätunnus tai salasanasi on virheellinen. <br />Tarkista
                 syöttämäsi tiedot.
               </div>

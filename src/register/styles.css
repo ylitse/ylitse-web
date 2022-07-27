@@ -1,0 +1,331 @@
+html,
+body {
+  background: linear-gradient(
+      180deg,
+      rgba(1, 165, 236, 0.58) 0%,
+      rgba(89, 58, 214, 0.58) 100%
+    ),
+    url(/static/img/milad-fakurian-E8Ufcyxz514-unsplash.jpg) no-repeat fixed
+      center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 80px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  padding: 60px 100px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+h1 {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 48px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  color: #1c325d;
+}
+
+h2 {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 42px;
+  margin: 0;
+  margin-top: 30px;
+  color: #1c325d;
+}
+
+p {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  margin: 0;
+  color: #1c325d;
+}
+
+section p {
+  margin-bottom: 10px;
+}
+
+a {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  color: #4a2acb;
+}
+
+a img {
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+fieldset {
+  padding: 0;
+  margin-top: 20px;
+  border-width: 0;
+}
+
+label {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  color: #1c325d;
+}
+
+input {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  height: 38px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  margin-top: 10px;
+  border: 1px solid #4a2acb;
+  border-radius: 5px;
+  color: #1c325d;
+}
+
+input:focus {
+  border: solid 2px #4a2acb;
+  background-color: #e4f3fb;
+  outline: 0;
+}
+
+.input-checkmark {
+  background: url('/static/icons/checkmark.svg');
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: 98% 50%;
+}
+
+.error-color {
+  color: #972232;
+}
+
+.error-border {
+  border: 2px #972232 solid;
+}
+
+.align-right {
+  float: right;
+}
+
+.field-info {
+  padding: 10px 20px;
+  margin-top: 13px; /* blue/dark blue */
+  border-left: 14px #4a2acb solid;
+  background-color: #e4f3fb;
+}
+
+.footer h3 {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  margin-top: 25px;
+  color: #ffffff;
+}
+
+/* Tooltip container */
+.tooltip {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  height: 27px;
+}
+
+/* Tooltip text */
+.tooltip-text {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 29px;
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  bottom: 140%;
+  left: 50%;
+  width: 268px;
+  margin-left: -134px; /* Use half of the width (268/2 = 134), to center the tooltip */
+  padding: 5px 0;
+  border-radius: 10px;
+  white-space: wrap;
+  background-color: #f0ba8c;
+  color: #1c325d;
+}
+
+/* Bottom arrow */
+.tooltip .tooltip-text::after {
+  content: ' ';
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #f0ba8c transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+
+.switch-line {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.switch-label {
+  font-weight: 400;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: flex;
+  width: 60px;
+  height: 30px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  border: 2px solid;
+  border-color: #616161;
+  border-radius: 20px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  background-color: #616161;
+  border-radius: 50%;
+  position: absolute;
+  content: '';
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 2px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+input:checked + .slider {
+  border-color: #4a2acb;
+}
+
+input:checked + .slider:before {
+  background-color: #4a2acb;
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+#password-toggle {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 15px;
+  border: 0;
+  background-color: white;
+  color: #4a2acb;
+}
+
+#email-input-error {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 21px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  color: #972232;
+}
+
+#submit-button {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 35px;
+  align-self: center;
+  cursor: pointer;
+  width: 194px;
+  height: 48px;
+  margin-top: 40px;
+  border: 1px solid #bbb;
+  border-radius: 50px;
+  background-color: #4a2acb;
+  color: #f0ba8c;
+}
+
+#submit-button:focus,
+#submit-button:active {
+  outline: #4a2acb solid 3px;
+  outline-offset: 4px;
+  background-color: #4a2acb;
+}
+
+#submit-button:disabled {
+  cursor: not-allowed;
+  border: 0;
+  outline: none;
+  background-color: #dbdbdb;
+  color: #616161;
+}
+
+#submit-button:disabled:focus,
+#submit-button:disabled:active {
+  outline: none;
+}
