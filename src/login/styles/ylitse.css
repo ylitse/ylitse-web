@@ -48,15 +48,14 @@ h1 {
   flex: 1;
   justify-content: center;
   align-items: stretch;
-  width: 90vw;
-  max-width: 800px;
 }
 
 .panel {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
   border-radius: 19px;
-  /* width: 50% !important; */
-  min-width: 596px !important;
+  width: 50%;
+  min-width: 306px;
+  max-width: 600px;
   height: 702px;
   display: flex;
   flex-direction: column;
@@ -125,6 +124,7 @@ input[type='button'] {
   width: 100%;
   text-align: center;
   color: #ffffff;
+  padding-bottom: 20px;
 }
 
 form input {
@@ -168,7 +168,7 @@ form[name='login'] {
   flex-direction: column;
   align-items: space-between;
   margin-bottom: 15vh;
-  margin-top: 15vh;
+  margin-top: 30px;
   width: 80%;
 }
 
@@ -208,7 +208,8 @@ form[name='login'] {
   /* purple/purple */
   color: #4a2acb;
   width: 391px !important;
-  margin: 10px auto 20px 0;
+  margin: 10px auto 10px 0;
+  padding-top: 20px;
 }
 
 /* Skeleton css */
@@ -385,7 +386,7 @@ input[type='submit'] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 90%;
 }
 
 #mobile-header {
@@ -413,7 +414,7 @@ input[type='submit'] {
   margin: 27px auto 0 0;
 }
 
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: 768px) {
   body {
     height: auto;
   }
@@ -434,6 +435,8 @@ input[type='submit'] {
     width: 100% !important;
     border-radius: 0;
     min-width: 100px !important;
+    max-width: none !important;
+    width: 100%;
     margin: 0 auto 0 auto;
   }
   .right {
@@ -442,9 +445,12 @@ input[type='submit'] {
   .left {
     margin-top: -40px;
     z-index: 1;
+    padding-right: 0;
   }
-
   form[name='login'] {
     margin-top: 30px;
+  }
+  input[type='submit'] {
+    left: 50%;
   }
 }
