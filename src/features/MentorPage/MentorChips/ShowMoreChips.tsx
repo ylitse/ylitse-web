@@ -6,23 +6,23 @@ import ExpandIcon from '../../../static/img/icon-expand.svg';
  * Should update Skill Chips container when pressed?
  */
 
-const ShowMoreButtonHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-  const showMoreButton = document.getElementById('skill-chips');
-  if (showMoreButton) {
-    showMoreButton.classList.toggle('show-more');
-    console.log(event.currentTarget);
-    event.currentTarget.innerText === 'Näytä kaikki aiheet'
-      ? (event.currentTarget.innerText = 'Näytä vähemmän')
-      : (event.currentTarget.innerText = 'Näytä kaikki aiheet');
+const ShowMoreButtonHandler = () => {
+  const skillChips = document.getElementById('skill-chips');
+  const showMoreButton = document.getElementById('show-more-button');
+  if (skillChips && showMoreButton) {
+    skillChips.classList.toggle('show-more');
+    showMoreButton.innerText === 'Näytä kaikki aiheet'
+      ? (showMoreButton.innerText = 'Näytä vähemmän')
+      : (showMoreButton.innerText = 'Näytä kaikki aiheet');
   }
 };
 
 const ShowMoreChips = () => {
   return (
     <>
-      <MoreContainer>
+      <MoreContainer onClick={ShowMoreButtonHandler}>
         <MoreIcon />
-        <ShowMoreButton onClick={ShowMoreButtonHandler}>
+        <ShowMoreButton id="show-more-button">
           Näytä kaikki aiheet
         </ShowMoreButton>
       </MoreContainer>

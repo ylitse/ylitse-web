@@ -2,6 +2,7 @@ import { ChipProps } from '../../../components/Chip/types';
 import styled from 'styled-components';
 import Chip from '../../../components/Chip';
 import ShowMoreChips from './ShowMoreChips';
+import React from 'react';
 
 /**
  * Logic to show skill chips. Array of SkillPillItems
@@ -11,10 +12,12 @@ import ShowMoreChips from './ShowMoreChips';
  */
 
 const MentorSkillChips = ({ items }: { items: Array<ChipProps> }) => {
+  //change the first letter of every skill to uppercase, then alphabetize
   items.map(item => {
     item.text = item.text.charAt(0).toUpperCase() + item.text.slice(1);
   });
   items.sort((a, b) => a.text.localeCompare(b.text));
+
   return (
     <ChipContainer>
       <SkillChips id="skill-chips">

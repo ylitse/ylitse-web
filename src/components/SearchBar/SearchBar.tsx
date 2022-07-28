@@ -10,7 +10,6 @@ type SearchProps = {
   label: string;
 };
 
-// eslint-disable-next-line react/prop-types
 const SearchBar: React.FC<SearchProps> = ({ placeholder, label }) => {
   const iconLabel = `${label} icon`;
   return (
