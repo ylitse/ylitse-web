@@ -1,8 +1,8 @@
 import { ChipProps } from './types';
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '@/static/styles/variables';
-import DeleteActiveIconImg from '@/static/img/icon-delete-active.svg';
+import * as cssVariables from '../../static/styles/variables';
+import DeleteActiveIconImg from '../../static/img/icon-delete-active.svg';
 
 /**
  * Layout to one Skill Chip
