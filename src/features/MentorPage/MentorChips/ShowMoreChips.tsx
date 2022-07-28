@@ -6,25 +6,23 @@ import ExpandIcon from '../../../static/img/icon-expand.svg';
  * Should update Skill Chips container when pressed?
  */
 
-const ShowMoreButtonHandler = () => {
-  const skillChips = document.getElementById('skill-chips');
-  const showMoreButton = document.getElementById('show-more-button');
-  if (skillChips && showMoreButton) {
-    skillChips.classList.toggle('show-more');
-    showMoreButton.innerText === 'Näytä kaikki aiheet'
-      ? (showMoreButton.innerText = 'Näytä vähemmän')
-      : (showMoreButton.innerText = 'Näytä kaikki aiheet');
-  }
+type ShowMoreSkillsProps = {
+  setShouldShowAllSkills: () => void;
+  shouldShowAllSkills: boolean;
 };
 
-const ShowMoreChips = () => {
+const ShowMoreChips = ({
+  setShouldShowAllSkills,
+  shouldShowAllSkills,
+}: ShowMoreSkillsProps) => {
+  const buttonText = shouldShowAllSkills
+    ? 'Näytä vähemmän'
+    : 'Näytä kaikki aiheet';
   return (
     <>
-      <MoreContainer onClick={ShowMoreButtonHandler}>
+      <MoreContainer onClick={setShouldShowAllSkills}>
         <MoreIcon />
-        <ShowMoreButton id="show-more-button">
-          Näytä kaikki aiheet
-        </ShowMoreButton>
+        <ShowMoreButton>{buttonText}</ShowMoreButton>
       </MoreContainer>
     </>
   );

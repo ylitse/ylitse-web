@@ -12,27 +12,36 @@ import React from 'react';
  */
 
 const MentorSkillChips = ({ items }: { items: Array<ChipProps> }) => {
+  const [shouldShowAllSkills, setShowAllSkills] = React.useState(false);
+
+  const handleShowMoreSkillsChange = () =>
+    setShowAllSkills(!shouldShowAllSkills);
+
   //change the first letter of every skill to uppercase, then alphabetize
   items.map(item => {
     item.text = item.text.charAt(0).toUpperCase() + item.text.slice(1);
   });
   items.sort((a, b) => a.text.localeCompare(b.text));
 
+  const showAllClass = shouldShowAllSkills ? 'show-more' : 'show-less';
+
   return (
     <ChipContainer>
-      <SkillChips id="skill-chips">
+      <SkillChips className={showAllClass}>
         {items.map(item => (
           <Chip key={item.text} text={item.text} />
         ))}
       </SkillChips>
-      <ShowMoreChips />
+      <ShowMoreChips
+        shouldShowAllSkills={shouldShowAllSkills}
+        setShouldShowAllSkills={handleShowMoreSkillsChange}
+      />
     </ChipContainer>
   );
 };
 
 const SkillChips = styled.div`
   flex: 0 0 auto;
-  height: 10.5rem;
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -41,6 +50,9 @@ const SkillChips = styled.div`
   position: relative;
   &.show-more {
     height: fit-content;
+  }
+  &.show-less {
+    height: 10.5rem;
   }
 `;
 
