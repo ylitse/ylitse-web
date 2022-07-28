@@ -5,10 +5,9 @@ import ShowMoreChips from './ShowMoreChips';
 import React from 'react';
 
 /**
- * Logic to show skill chips. Array of SkillPillItems
- * should be passed to SkillPill, where styles and layout
- * will be added. Should call MentorCards when chips are
- * selected?
+ * Logic to show skill chips. Array of skill names is
+ * mapped and passed to Chip one by on, where styles and layout
+ * will be added.
  */
 
 const MentorSkillChips = ({ items }: { items: Array<ChipProps> }) => {
@@ -18,17 +17,20 @@ const MentorSkillChips = ({ items }: { items: Array<ChipProps> }) => {
     setShowAllSkills(!shouldShowAllSkills);
 
   //change the first letter of every skill to uppercase, then alphabetize
-  items.map(item => {
-    item.text = item.text.charAt(0).toUpperCase() + item.text.slice(1);
+  const upperCaseSkills = items.map(item => {
+    const newItem: ChipProps = {
+      text: item.text.charAt(0).toUpperCase() + item.text.slice(1),
+    };
+    return newItem;
   });
-  items.sort((a, b) => a.text.localeCompare(b.text));
-
-  const showAllClass = shouldShowAllSkills ? 'show-more' : 'show-less';
+  const sortedSkills = [...upperCaseSkills].sort((a, b) =>
+    a.text.localeCompare(b.text),
+  );
 
   return (
     <ChipContainer>
-      <SkillChips className={showAllClass}>
-        {items.map(item => (
+      <SkillChips isSelected={shouldShowAllSkills}>
+        {sortedSkills.map(item => (
           <Chip key={item.text} text={item.text} />
         ))}
       </SkillChips>
@@ -40,7 +42,10 @@ const MentorSkillChips = ({ items }: { items: Array<ChipProps> }) => {
   );
 };
 
-const SkillChips = styled.div`
+/** height of skillChips container depends wether all chips are shown
+ * or just the few first ones. By changing the height three rows are
+ * always shown regardless of screen size */
+const SkillChips = styled.div<{ isSelected: boolean }>`
   flex: 0 0 auto;
   width: 100%;
   overflow: hidden;
@@ -48,12 +53,7 @@ const SkillChips = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
-  &.show-more {
-    height: fit-content;
-  }
-  &.show-less {
-    height: 10.5rem;
-  }
+  height: ${props => (props.isSelected ? `fit-content` : '10.5rem')};
 `;
 
 const ChipContainer = styled.div`

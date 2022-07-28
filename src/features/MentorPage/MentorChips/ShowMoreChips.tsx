@@ -6,7 +6,7 @@ import ExpandIcon from '../../../static/img/icon-expand.svg';
  * Should update Skill Chips container when pressed?
  */
 
-type ShowMoreSkillsProps = {
+type Props = {
   setShouldShowAllSkills: () => void;
   shouldShowAllSkills: boolean;
 };
@@ -14,7 +14,7 @@ type ShowMoreSkillsProps = {
 const ShowMoreChips = ({
   setShouldShowAllSkills,
   shouldShowAllSkills,
-}: ShowMoreSkillsProps) => {
+}: Props) => {
   const buttonText = shouldShowAllSkills
     ? 'Näytä vähemmän'
     : 'Näytä kaikki aiheet';
