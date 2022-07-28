@@ -2,8 +2,9 @@ import OneContainerLayout from '../../components/OneContainerLayout';
 import MentorInfoSearchDiv from './MentorInfoSearch';
 import MentorChips from './MentorChips';
 import { ChipProps } from '../../components/Chip/types';
-import MentorCards from './MentorCards';
+import MentorListItems from './MentorListItems';
 import PageLayout from '../../components/PageLayout';
+import { MentorProps } from '@/components/ListCard/types';
 
 const mentorPageHeadline = 'Mentorit';
 
@@ -420,7 +421,7 @@ const MentorPage = () => {
         <MentorInfoSearchDiv />
         <MentorChips items={mentorChipList} />
       </OneContainerLayout>
-      <MentorCards />
+      <MentorListItems listitems={mentorListCards} />
     </PageLayout>
   );
 };

@@ -20,6 +20,11 @@ export const breakpoints = {
   mobile: '600px',
 };
 
+//spacing
+export const spacing = {
+	layout_spacing: '5rem'
+};
+
 //typography
 export const heading1_white = styled.h1`
   font-family: 'Baloo 2';
@@ -52,7 +57,7 @@ export const paragraph_white = styled.p`
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
-  font-size: 1.8rem;
+  font-size: 1rem;
   line-height: 150%;
   color: #ffffff;
 `;
@@ -97,7 +102,7 @@ export const paragraph_dark = styled.p`
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
-  font-size: 1.8rem;
+  font-size: 1rem;
   line-height: 150%;
   color: ${palette.darkblue};
 `;

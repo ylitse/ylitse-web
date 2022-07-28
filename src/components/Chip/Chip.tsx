@@ -4,6 +4,13 @@ import React from 'react';
 import * as cssVariables from '../../static/styles/variables';
 import DeleteActiveIconImg from '../../static/img/icon-delete-active.svg';
 
+<<<<<<< HEAD
+=======
+/**
+ * Layout to one Skill Chip
+ */
+
+>>>>>>> 04828d4 (Mentor cards list on mentor page started. Card header layout finished)
 const Chip: React.FC<ChipProps> = ({ text }) => {
   const [isChipSelected, setChipSelected] = React.useState(false);
 

@@ -1,0 +1,16 @@
+import { ChipProps } from '../Chip/types';
+
+export type MentorProps = {
+  displayName: string;
+  birthYear: number;
+  region: string;
+  story: string;
+  skills: Array<ChipProps>;
+  languages: Array<string>;
+};
+
+export type ListCardProps = {
+  mentor: MentorProps;
+  isLoggedIn: boolean;
+  contactMessage: string;
+};
