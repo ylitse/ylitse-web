@@ -9,64 +9,52 @@ import DeleteActiveIconImg from '@/static/img/icon-delete-active.svg';
  */
 
 const Chip: React.FC<ChipProps> = ({ text }) => {
-  const [chipSelected, setChipSelected] = React.useState(false);
+  const [isChipSelected, setChipSelected] = React.useState(false);
 
-  const handleChipClick = () => setChipSelected(!chipSelected);
+  const handleChipClick = () => setChipSelected(!isChipSelected);
 
-  if (chipSelected) {
-    return (
-      <StyledSelectedChip key={text} value={text} onClick={handleChipClick}>
-        {text}
-      </StyledSelectedChip>
-    );
-  } else {
-    return (
-      <StyledChip key={text} value={text} onClick={handleChipClick}>
-        {text}
-      </StyledChip>
-    );
-  }
+  return (
+    <StyledChip
+      key={text}
+      value={text}
+      onClick={handleChipClick}
+      isSelected={isChipSelected}
+    >
+      {text}
+    </StyledChip>
+  );
 };
 
-const StyledSelectedChip = styled.button`
+const StyledChip = styled.button<{ isSelected: boolean }>`
   flex: 0 0 auto;
-  background-color: ${cssVariables.palette.purple};
+  background-color: ${props =>
+    props.isSelected
+      ? cssVariables.palette.purple
+      : cssVariables.palette.palepurple};
   padding: 0.75rem 1.25rem;
   font-family: 'Source Sans Pro', cursive;
   font-style: normal;
   font-weight: 400;
   font-size: 1.25rem;
   line-height: 100%;
-  color: white;
+  color: ${props =>
+    props.isSelected
+      ? cssVariables.palette.white
+      : cssVariables.palette.darkblue};
   border-radius: 1.75rem;
   margin: 0.5rem;
   height: 2.75rem;
   appearance: none;
   border: none;
-  background-image: url(${DeleteActiveIconImg});
+  background-image: ${props =>
+    props.isSelected ? `url(${DeleteActiveIconImg})` : 'none'};
   background-size: 1rem;
   background-repeat: no-repeat;
   background-position: right 1rem center;
-  padding-right: 3rem;
-`;
-
-const StyledChip = styled.button`
-  flex: 0 0 auto;
-  background-color: ${cssVariables.palette.palepurple};
-  padding: 0.75rem 1.25rem;
-  font-family: 'Source Sans Pro', cursive;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.25rem;
-  line-height: 100%;
-  color: ${cssVariables.palette.darkblue};
-  border-radius: 1.75rem;
-  margin: 0.5rem;
-  height: 2.75rem;
-  appearance: none;
-  border: none;
+  padding-right: ${props => (props.isSelected ? '3rem' : '1.25rem')};
   &:hover {
-    background-color: #cdcbff;
+    background-color: ${props =>
+      props.isSelected ? cssVariables.palette.purple : '#cdcbff'};
   }
 `;
 

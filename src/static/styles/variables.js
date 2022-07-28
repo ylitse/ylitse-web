@@ -12,6 +12,7 @@ export const palette = {
   footerblue: '#01A5EC',
   orange: '#F0BA8C',
   warningred: '#972232',
+	white: '#fff'
 };
 
 //breakpoints
