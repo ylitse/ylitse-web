@@ -4,12 +4,6 @@ import React from 'react';
 import * as cssVariables from '../../static/styles/variables';
 import DeleteActiveIconImg from '../../static/img/icon-delete-active.svg';
 
-/**
- * Layout to one Skill Chip. Each chip has a state to tell if it is
- * selected. State defines the color etc of the button on styled
- * element css
- */
-
 const Chip: React.FC<ChipProps> = ({ text }) => {
   const [isChipSelected, setChipSelected] = React.useState(false);
 

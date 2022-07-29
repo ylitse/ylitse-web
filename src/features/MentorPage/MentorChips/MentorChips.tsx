@@ -17,12 +17,10 @@ const MentorSkillChips = ({ items }: { items: Array<ChipProps> }) => {
     setShowAllSkills(!shouldShowAllSkills);
 
   //change the first letter of every skill to uppercase, then alphabetize
-  const upperCaseSkills = items.map(item => {
-    const newItem: ChipProps = {
-      text: item.text.charAt(0).toUpperCase() + item.text.slice(1),
-    };
-    return newItem;
-  });
+  const upperCaseSkills = items.map(item => ({
+    ...item,
+    text: `${item.text.charAt(0).toUpperCase()}${item.text.slice(1)}`,
+  }));
   const sortedSkills = [...upperCaseSkills].sort((a, b) =>
     a.text.localeCompare(b.text),
   );
@@ -42,9 +40,6 @@ const MentorSkillChips = ({ items }: { items: Array<ChipProps> }) => {
   );
 };
 
-/** height of skillChips container depends wether all chips are shown
- * or just the few first ones. By changing the height three rows are
- * always shown regardless of screen size */
 const SkillChips = styled.div<{ isSelected: boolean }>`
   flex: 0 0 auto;
   width: 100%;
