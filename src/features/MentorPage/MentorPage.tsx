@@ -414,6 +414,60 @@ const mentorChipList: Array<ChipProps> = [
   },
 ];
 
+const mentorListCards: Array<MentorProps> = [
+  {
+    displayName: 'Matti Meikäläinen',
+    birthYear: 1993,
+    region: 'Pirkanmaa',
+    story:
+      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
+    skills: [
+      { text: 'Lastensuojelu' },
+      { text: 'Itsenäistyminen' },
+      { text: 'Vanhemmuus' },
+      { text: 'Opiskelu' },
+      { text: 'Kela-asiointi' },
+      { text: 'Raskausaika' },
+      { text: 'Päihdeongelmat' },
+    ],
+    languages: ['Suomi', 'Englanti'],
+  },
+  {
+    displayName: 'Maija',
+    birthYear: 1993,
+    region: 'Pirkanmaa',
+    story:
+      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
+    skills: [
+      { text: 'Lastensuojelu' },
+      { text: 'Itsenäistyminen' },
+      { text: 'Vanhemmuus' },
+      { text: 'Opiskelu' },
+      { text: 'Kela-asiointi' },
+      { text: 'Raskausaika' },
+      { text: 'Päihdeongelmat' },
+    ],
+    languages: ['Suomi', 'Englanti'],
+  },
+  {
+    displayName: 'Kaapo',
+    birthYear: 1993,
+    region: 'Pirkanmaa',
+    story:
+      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
+    skills: [
+      { text: 'Lastensuojelu' },
+      { text: 'Itsenäistyminen' },
+      { text: 'Vanhemmuus' },
+      { text: 'Opiskelu' },
+      { text: 'Kela-asiointi' },
+      { text: 'Raskausaika' },
+      { text: 'Päihdeongelmat' },
+    ],
+    languages: ['Suomi', 'Englanti'],
+  },
+];
+
 const MentorPage = () => {
   return (
     <PageLayout>
@@ -425,5 +479,4 @@ const MentorPage = () => {
     </PageLayout>
   );
 };
-
 export default MentorPage;

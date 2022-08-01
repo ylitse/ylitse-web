@@ -17,7 +17,8 @@ const ListCard = ({ mentordata }: { mentordata: ListCardProps }) => {
         name={mentordata.mentor.displayName}
         age={age}
         region={mentordata.mentor.region}
-        availability={mentordata.isLoggedIn}
+        available={mentordata.isLoggedIn}
+        newMentor={mentordata.isNewMentor}
         message={mentordata.contactMessage}
       />
     </ListCardElement>

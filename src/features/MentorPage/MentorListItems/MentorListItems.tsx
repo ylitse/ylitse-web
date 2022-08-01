@@ -12,6 +12,7 @@ const CreateListCard = ({ item }: { item: MentorProps }) => {
   const cardProps: ListCardProps = {
     mentor: item,
     isLoggedIn: Math.random() < 0.5 ? true : false,
+    isNewMentor: Math.random() < 0.5 ? true : false,
     contactMessage:
       Math.random() < 0.5 ? 'Olen tavoitettavissa joka päivä 16-18' : '',
   };

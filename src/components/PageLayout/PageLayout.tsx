@@ -35,12 +35,8 @@ const PageContent = styled.div`
   width: 80vw;
   height: auto;
   margin: auto;
-<<<<<<< HEAD
-  margin-top: 10vw;
-=======
   margin-top: 3.75rem;
   margin-bottom: 3.75rem;
->>>>>>> 04828d4 (Mentor cards list on mentor page started. Card header layout finished)
   display: flex;
   flex-direction: column;
 `;

@@ -12,5 +12,6 @@ export type MentorProps = {
 export type ListCardProps = {
   mentor: MentorProps;
   isLoggedIn: boolean;
+  isNewMentor: boolean;
   contactMessage: string;
 };

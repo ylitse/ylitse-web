@@ -3,11 +3,12 @@ import * as cssVariables from '../../static/styles/variables';
 import ProfilePicPlaceholder from '../../static/img/icon-chat-profilepic.svg';
 import CSS from 'csstype';
 
-type ListCardHeaderProps = {
+type Props = {
   name: string;
   age: number;
   region: string;
-  availability: boolean;
+  available: boolean;
+  newMentor: boolean;
   message: string;
 };
 
@@ -25,15 +26,24 @@ const truncateText: CSS.Properties = {
   width: 'calc(24vw - 9.45rem)',
 };
 
-const ListCardHeader: React.FC<ListCardHeaderProps> = ({
+const ListCardHeader: React.FC<Props> = ({
   name,
   age,
   region,
-  availability,
+  available,
+  newMentor,
   message,
 }) => {
+  let availabilityMessage = newMentor ? 'Uusi' : '';
+  availabilityMessage = available ? availabilityMessage : 'Ei tavoitettavissa';
   return (
-    <StyledListCardHeader>
+    <StyledListCardHeader isSelected={available}>
+      <MentorAvailability
+        isShowing={availabilityMessage != ''}
+        isNew={availabilityMessage === 'Uusi'}
+      >
+        {availabilityMessage}
+      </MentorAvailability>
       <ProfilePicContainer />
       <BasicInfoContainer>
         <cssVariables.heading2_white style={{ margin: 0 }}>
@@ -43,7 +53,7 @@ const ListCardHeader: React.FC<ListCardHeaderProps> = ({
           {age} v. <StyledDivider>|</StyledDivider> {region}
         </cssVariables.paragraph_white>
         <cssVariables.paragraph_white style={{ margin: 0 }}>
-          {availability}
+          {available}
         </cssVariables.paragraph_white>
         <cssVariables.paragraph_white title={message} style={truncateText}>
           {message}
@@ -53,17 +63,21 @@ const ListCardHeader: React.FC<ListCardHeaderProps> = ({
   );
 };
 
-const StyledListCardHeader = styled.div`
+const StyledListCardHeader = styled.div<{ isSelected: boolean }>`
   flex: 1;
   display: flex;
   align-items: center;
   height: 7.5rem;
   width: 24vw;
-  background-color: ${cssVariables.palette.purple};
+  background-color: ${props =>
+    props.isSelected
+      ? cssVariables.palette.purple
+      : cssVariables.palette.bluegrey};
   color: white;
   border-radius: 0.75rem;
   padding: 1.9rem;
   box-sizing: border-box;
+  position: relative;
 `;
 
 const ProfilePicContainer = styled.div`
@@ -86,6 +100,24 @@ const BasicInfoContainer = styled.div`
 const StyledDivider = styled.span`
   padding-left: 1rem;
   padding-right: 1rem;
+`;
+
+const MentorAvailability = styled.div<{ isShowing: boolean; isNew: boolean }>`
+  display: ${props => (props.isShowing ? `flex` : `none`)};
+  background-color: ${props =>
+    props.isNew ? cssVariables.palette.orange : cssVariables.palette.whiteblue};
+  color: ${cssVariables.palette.darkblue};
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 150%;
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
+  transform: translate(-1rem, -50%);
 `;
 
 export default ListCardHeader;
