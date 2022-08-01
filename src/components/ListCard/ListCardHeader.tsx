@@ -68,6 +68,7 @@ const StyledListCardHeader = styled.div<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
   height: 7.5rem;
+	max-height: 7.5rem;
   width: 24vw;
   background-color: ${props =>
     props.isSelected

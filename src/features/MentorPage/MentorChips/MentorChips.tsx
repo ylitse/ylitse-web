@@ -1,6 +1,6 @@
 import { ChipProps } from '../../../components/Chip/types';
 import styled from 'styled-components';
-import Chip from '../../../components/Chip';
+import { Chip } from '../../../components/Chip';
 import ShowMoreChips from './ShowMoreChips';
 import React from 'react';
 
