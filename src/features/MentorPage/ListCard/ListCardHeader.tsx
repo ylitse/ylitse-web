@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../static/styles/variables';
-import ProfilePicPlaceholder from '../../static/img/icon-chat-profilepic.svg';
+import * as cssVariables from '../../../static/styles/variables';
+import ProfilePicPlaceholder from '../../../static/img/icon-chat-profilepic.svg';
 import CSS from 'csstype';
 
 type Props = {
@@ -68,7 +68,7 @@ const StyledListCardHeader = styled.div<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
   height: 7.5rem;
-	max-height: 7.5rem;
+  max-height: 7.5rem;
   width: 24vw;
   background-color: ${props =>
     props.isSelected

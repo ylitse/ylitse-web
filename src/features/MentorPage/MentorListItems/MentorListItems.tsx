@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ListCard from '../../../components/ListCard';
-import { ListCardProps, MentorProps } from '@/components/ListCard/types';
+import ListCard from '../ListCard';
+import { MentorListItemsProps } from './types';
 
 /**
  * The logic for mentor cards shown in the Mentor page
@@ -8,25 +8,18 @@ import { ListCardProps, MentorProps } from '@/components/ListCard/types';
  * passed to CardsElement where layout will be added.
  */
 
-const CreateListCard = ({ item }: { item: MentorProps }) => {
-  const cardProps: ListCardProps = {
-    mentor: item,
-    isLoggedIn: Math.random() < 0.5 ? true : false,
-    isNewMentor: Math.random() < 0.5 ? true : false,
-    contactMessage:
-      Math.random() < 0.5 ? 'Olen tavoitettavissa joka päivä 16-18' : '',
-  };
-  return cardProps;
-};
-
-const MentorListItems = ({ listitems }: { listitems: Array<MentorProps> }) => {
+const MentorListItems = ({
+  setVisibleCard,
+  mentordata,
+}: MentorListItemsProps) => {
   return (
     <CardsList data-testid="mentor-cards-container">
-      {listitems.map(item => (
+      {mentordata.map(item => (
         // eslint-disable-next-line react/jsx-key
         <ListCard
-          key={item.displayName}
-          mentordata={CreateListCard({ item })}
+          key={item.mentor.displayName}
+          mentordata={item}
+          setVisibleCard={setVisibleCard}
         />
       ))}
     </CardsList>

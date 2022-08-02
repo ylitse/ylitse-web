@@ -5,10 +5,7 @@ import * as cssVariables from '../../static/styles/variables';
 
 const SimpleChip: React.FC<ChipProps> = ({ text }) => {
   return (
-    <StyledSimpleChip
-      key={text}
-      value={text}
-    >
+    <StyledSimpleChip key={text} value={text}>
       {text}
     </StyledSimpleChip>
   );

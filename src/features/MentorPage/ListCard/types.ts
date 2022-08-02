@@ -1,4 +1,4 @@
-import { ChipProps } from '../Chip/types';
+import { ChipProps } from '../../../components/Chip/types';
 
 export type MentorProps = {
   displayName: string;

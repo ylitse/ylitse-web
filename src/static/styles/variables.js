@@ -5,7 +5,7 @@ export const palette = {
   purple: '#4A2ACB',
   darkpurple: '#37119D',
   palepurple: '#E5E4FF',
-	bluegrey: '#4C6282',
+  bluegrey: '#4C6282',
   blue2: '#43BFFF',
   darkblue: '#1C325D',
   lightblue: '#CDE8F8',
@@ -13,7 +13,7 @@ export const palette = {
   footerblue: '#01A5EC',
   orange: '#F0BA8C',
   warningred: '#972232',
-	white: '#fff'
+  white: '#fff',
 };
 
 //breakpoints
@@ -23,8 +23,9 @@ export const breakpoints = {
 
 //spacing
 export const spacing = {
-	layout_spacing: '5rem',
-	button_padding: "0.75rem 1.25rem"
+  layout_spacing: '5rem',
+  button_padding: '0.75rem 1.25rem',
+  small_button_padding: '.5rem 2rem',
 };
 
 //typography

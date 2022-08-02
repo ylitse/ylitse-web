@@ -4,7 +4,11 @@ import MentorChips from './MentorChips';
 import { ChipProps } from '../../components/Chip/types';
 import MentorListItems from './MentorListItems';
 import PageLayout from '../../components/PageLayout';
-import { MentorProps } from '@/components/ListCard/types';
+import {
+  ListCardProps,
+  MentorProps,
+} from '@/features/MentorPage/ListCard/types';
+import React from 'react';
 
 const mentorPageHeadline = 'Mentorit';
 
@@ -414,7 +418,7 @@ const mentorChipList: Array<ChipProps> = [
   },
 ];
 
-const mentorListCards: Array<MentorProps> = [
+const mentorCards: Array<MentorProps> = [
   {
     displayName: 'Matti Meikäläinen',
     birthYear: 1993,
@@ -438,15 +442,7 @@ const mentorListCards: Array<MentorProps> = [
     region: 'Pirkanmaa',
     story:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    skills: [
-      { text: 'Lastensuojelu' },
-      { text: 'Itsenäistyminen' },
-      { text: 'Vanhemmuus' },
-      { text: 'Opiskelu' },
-      { text: 'Kela-asiointi' },
-      { text: 'Raskausaika' },
-      { text: 'Päihdeongelmat' },
-    ],
+    skills: [{ text: 'Lastensuojelu' }],
     languages: ['Suomi', 'Englanti'],
   },
   {
@@ -468,14 +464,37 @@ const mentorListCards: Array<MentorProps> = [
   },
 ];
 
+const mentorListCards: Array<ListCardProps> = mentorCards.map(item => {
+  const cardProps: ListCardProps = {
+    mentor: item,
+    isLoggedIn: Math.random() < 0.5 ? true : false,
+    isNewMentor: Math.random() < 0.5 ? true : false,
+    contactMessage:
+      Math.random() < 0.5 ? 'Olen tavoitettavissa joka päivä 16-18' : '',
+  };
+  return cardProps;
+});
+
 const MentorPage = () => {
+  const [shouldShowMentorCard, setVisibleCard] = React.useState<{
+    [key: string]: any;
+  }>({});
+
+  const handleSetVisibleCard = (mentorCardData: ListCardProps) => {
+    setVisibleCard(mentorCardData);
+    console.log('shouldShowVisibleCard:', shouldShowMentorCard);
+  };
+
   return (
     <PageLayout>
       <OneContainerLayout headLine={mentorPageHeadline}>
         <MentorInfoSearchDiv />
         <MentorChips items={mentorChipList} />
       </OneContainerLayout>
-      <MentorListItems listitems={mentorListCards} />
+      <MentorListItems
+        setVisibleCard={handleSetVisibleCard}
+        mentordata={mentorListCards}
+      />
     </PageLayout>
   );
 };
