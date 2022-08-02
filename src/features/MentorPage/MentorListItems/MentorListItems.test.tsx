@@ -1,12 +1,10 @@
 /**
  * @jest-environment jsdom
  */
-import { queryAllByText, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import MentorListItems from './MentorListItems';
 import { BrowserRouter } from 'react-router-dom';
 import { ListCardProps } from '../ListCard/types';
-import React from 'react';
-import { MentorListItemsProps } from './types';
 
 /**
  * When card layout is done, card rendering should be added

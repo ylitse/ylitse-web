@@ -1,4 +1,4 @@
-import { ListCardProps, MentorProps } from '../ListCard/types';
+import { ListCardProps } from '../ListCard/types';
 
 export type MentorListItemsProps = {
   setVisibleCard: (mentorCardData: ListCardProps) => void;

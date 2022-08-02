@@ -477,7 +477,7 @@ const mentorListCards: Array<ListCardProps> = mentorCards.map(item => {
 
 const MentorPage = () => {
   const [shouldShowMentorCard, setVisibleCard] = React.useState<{
-    [key: string]: any;
+    [key: string]: unknown;
   }>({});
 
   const handleSetVisibleCard = (mentorCardData: ListCardProps) => {
