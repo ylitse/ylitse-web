@@ -69,7 +69,6 @@ const StyledListCardHeader = styled.div<{ isSelected: boolean }>`
   align-items: center;
   height: 7.5rem;
   max-height: 7.5rem;
-  max-width: 440px;
   background-color: ${props =>
     props.isSelected
       ? cssVariables.palette.purple
@@ -79,6 +78,34 @@ const StyledListCardHeader = styled.div<{ isSelected: boolean }>`
   padding: 1.9rem;
   box-sizing: border-box;
   position: relative;
+  max-width: calc(
+    ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 3) -
+      (${cssVariables.spacing.layout_spacing} * 2)
+  );
+  @media screen and (min-width: 2100px) {
+    max-width: calc(
+      ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 4) -
+        (${cssVariables.spacing.layout_spacing} * 2)
+    );
+  }
+  @media screen and (min-width: 2550px) {
+    max-width: calc(
+      ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 5) -
+        (${cssVariables.spacing.layout_spacing} * 2)
+    );
+  }
+  @media screen and (max-width: 1500px) {
+    max-width: calc(
+      ((1130px + (${cssVariables.spacing.layout_spacing} * 2)) / 3) -
+        (${cssVariables.spacing.layout_spacing} * 2)
+    );
+  }
+  @media screen and (max-width: 1194px) {
+    max-width: calc((100vw / 3) - (${cssVariables.spacing.layout_spacing} * 2));
+  }
+  @media screen and (max-width: 900px) {
+    max-width: calc((100vw / 2) - (${cssVariables.spacing.layout_spacing} * 2));
+  }
 `;
 
 const ProfilePicContainer = styled.div`
@@ -115,7 +142,7 @@ const MentorAvailability = styled.div<{ isShowing: boolean; isNew: boolean }>`
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 150%;
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;

@@ -40,6 +40,10 @@ const PageContent = styled.div`
   margin-bottom: ${cssVariables.spacing.layout_outer_spacing};
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1500px) {
+    width: 1130px;
+    max-width: calc(100vw - (${cssVariables.spacing.layout_spacing} * 2));
+  }
 `;
 
 export default PageLayout;

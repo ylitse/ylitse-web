@@ -5,6 +5,7 @@ import ListCardLanguages from './ListCardLanguages';
 import ListCardSkills from './ListCardSkills';
 import ListCardStory from './ListCardStory';
 import OpenCardButton from './OpenCardButton';
+import * as cssVariables from '../../../components/variables';
 
 /**
  * Div to hold mentor cards. Needs a parameter added
@@ -42,15 +43,46 @@ const ListCard = ({ setVisibleCard, mentordata }: Props) => {
 };
 
 const ListCardElement = styled.div`
-  flex: 0 0 auto;
+  flex: 0 0 30%;
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
-  max-width: 440px;
   background-color: white;
   border-radius: 0.75rem;
   flex-direction: column;
-  margin: 1.9rem;
+  margin: ${cssVariables.spacing.layout_spacing};
+  max-width: calc(
+    ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 3) -
+      (${cssVariables.spacing.layout_spacing} * 2)
+  );
+  @media screen and (min-width: 2100px) {
+    flex: 0 0 25%;
+    max-width: calc(
+      ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 4) -
+        (${cssVariables.spacing.layout_spacing} * 2)
+    );
+  }
+  @media screen and (min-width: 2550px) {
+    flex: 0 0 20%;
+    max-width: calc(
+      ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 5) -
+        (${cssVariables.spacing.layout_spacing} * 2)
+    );
+  }
+  @media screen and (max-width: 1500px) {
+    flex: 0 0 30%;
+    max-width: calc(
+      ((1130px + (${cssVariables.spacing.layout_spacing} * 2)) / 3) -
+        (${cssVariables.spacing.layout_spacing} * 2)
+    );
+  }
+  @media screen and (max-width: 1194px) {
+    max-width: calc((100vw / 3) - (${cssVariables.spacing.layout_spacing} * 2));
+  }
+  @media screen and (max-width: 900px) {
+    flex: 0 0 50%;
+    max-width: calc((100vw / 2) - (${cssVariables.spacing.layout_spacing} * 2));
+  }
 `;
 
 const CardContent = styled.div`

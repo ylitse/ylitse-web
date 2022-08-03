@@ -14,16 +14,16 @@ const SimpleChip: React.FC<ChipProps> = ({ text }) => {
 const StyledSimpleChip = styled.button`
   flex: 0 0 auto;
   background-color: ${cssVariables.palette.lightblue};
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1rem;
   font-family: 'Source Sans Pro', cursive;
   font-style: normal;
   font-weight: 400;
-  font-size: 1.25rem;
-  line-height: 100%;
+  font-size: 1rem;
+  line-height: 1rem;
   color: ${cssVariables.palette.darkblue};
   border-radius: 1.75rem;
   margin: 0.5rem;
-  height: 2.75rem;
+  height: 2rem;
   appearance: none;
   border: none;
 `;

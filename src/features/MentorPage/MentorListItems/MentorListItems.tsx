@@ -33,9 +33,13 @@ const CardsList = styled.div`
   flex-wrap: wrap;
   justify-content: stretch;
   height: auto;
-  width: calc(100% + 3.8rem);
-  margin-top: calc(${cssVariables.spacing.layout_spacing} / 2);
-  margin-left: -1.9rem;
+  width: calc(76vw + (${cssVariables.spacing.layout_spacing} * 2));
+  margin-top: ${cssVariables.spacing.layout_spacing};
+  margin-left: calc(${cssVariables.spacing.layout_spacing} * -1);
+  @media screen and (max-width: 1500px) {
+    width: calc(1130px + (${cssVariables.spacing.layout_spacing} * 2));
+    max-width: 100vw;
+  }
 `;
 
 export default MentorListItems;
