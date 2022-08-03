@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ListCard from '../ListCard';
 import { MentorListItemsProps } from './types';
+import * as cssVariables from '../../../components/variables';
 
 /**
  * The logic for mentor cards shown in the Mentor page
@@ -30,10 +31,11 @@ const CardsList = styled.div`
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: stretch;
   height: auto;
-  width: 100%;
-  margin-top: 3.75rem;
+  width: calc(100% + 3.8rem);
+  margin-top: calc(${cssVariables.spacing.layout_spacing} / 2);
+  margin-left: -1.9rem;
 `;
 
 export default MentorListItems;

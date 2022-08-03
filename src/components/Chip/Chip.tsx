@@ -1,8 +1,7 @@
 import { ChipProps } from './types';
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../../static/styles/variables';
-import DeleteActiveIconImg from '../../static/img/icon-delete-active.svg';
+import * as cssVariables from '../variables';
 
 const Chip: React.FC<ChipProps> = ({ text }) => {
   const [isChipSelected, setChipSelected] = React.useState(false);
@@ -42,12 +41,6 @@ const StyledChip = styled.button<{ isSelected: boolean }>`
   height: 2.75rem;
   appearance: none;
   border: none;
-  background-image: ${props =>
-    props.isSelected ? `url(${DeleteActiveIconImg})` : 'none'};
-  background-size: 1rem;
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  padding-right: ${props => (props.isSelected ? '3rem' : '1.25rem')};
   &:hover {
     background-color: ${props =>
       props.isSelected ? cssVariables.palette.purple : '#cdcbff'};

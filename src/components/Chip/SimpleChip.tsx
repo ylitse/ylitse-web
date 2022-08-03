@@ -1,7 +1,7 @@
 import { ChipProps } from './types';
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../../static/styles/variables';
+import * as cssVariables from '../variables';
 
 const SimpleChip: React.FC<ChipProps> = ({ text }) => {
   return (

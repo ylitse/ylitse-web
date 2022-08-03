@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../static/styles/variables';
+import * as cssVariables from '../../../components/variables';
 
 const ListCardStory = ({ story }: { story: string }) => {
   return (
@@ -19,21 +19,13 @@ const TruncatedMultiline = styled.p`
   font-size: 1rem;
   line-height: 150%;
   color: ${cssVariables.palette.darkblue};
-  width: calc(24vw - 3.8rem);
+  width: 100%;
   height: 6rem;
   position: relative;
   overflow: hidden;
-  &:after {
-    position: absolute;
-    display: block;
-    width: 3rem;
-    height: 1.5rem;
-    content: '...';
-    bottom: 0;
-    right: 0;
-    z-index: 10;
-    background-color: white;
-  }
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 `;
 
 export default ListCardStory;

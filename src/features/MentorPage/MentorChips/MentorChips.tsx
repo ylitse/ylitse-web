@@ -48,7 +48,7 @@ const SkillChips = styled.div<{ isSelected: boolean }>`
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
-  height: ${props => (props.isSelected ? `fit-content` : '10.5rem')};
+  height: ${props => (props.isSelected ? `fit-content` : '11rem')};
 `;
 
 const ChipContainer = styled.div`
@@ -60,7 +60,7 @@ const ChipContainer = styled.div`
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
-  margin-top: 3rem;
+  margin-top: 0;
   justify-content: center;
   position: relative;
   padding-bottom: 6rem;

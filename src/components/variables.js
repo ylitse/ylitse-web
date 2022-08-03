@@ -23,9 +23,12 @@ export const breakpoints = {
 
 //spacing
 export const spacing = {
-  layout_spacing: '5rem',
+  layout_spacing: '6.5vw',
   button_padding: '0.75rem 1.25rem',
   small_button_padding: '.5rem 2rem',
+	layout_outer_spacing: '6vw',
+	content_width: '76vw',
+
 };
 
 //typography

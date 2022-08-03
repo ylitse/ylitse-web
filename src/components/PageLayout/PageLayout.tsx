@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import * as cssVariables from '../variables';
 
 /**
  * Basic page layout that gives margins for any containers created to page
@@ -32,11 +33,11 @@ const BasicPageElement = styled.div`
 const PageContent = styled.div`
   background-color: transparent;
   position: relative;
-  width: 80vw;
+  width: 76vw;
   height: auto;
   margin: auto;
-  margin-top: 3.75rem;
-  margin-bottom: 3.75rem;
+  margin-top: ${cssVariables.spacing.layout_outer_spacing};
+  margin-bottom: ${cssVariables.spacing.layout_outer_spacing};
   display: flex;
   flex-direction: column;
 `;

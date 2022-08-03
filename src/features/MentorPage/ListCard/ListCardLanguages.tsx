@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../static/styles/variables';
+import * as cssVariables from '../../../components/variables';
 import { SimpleChip } from '../../../components/Chip';
 
 const ListCardLanguages = ({ languages }: { languages: Array<string> }) => {

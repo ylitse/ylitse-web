@@ -46,10 +46,11 @@ const ListCardElement = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
-  width: 24vw;
+  max-width: 440px;
   background-color: white;
   border-radius: 0.75rem;
   flex-direction: column;
+  margin: 1.9rem;
 `;
 
 const CardContent = styled.div`

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../static/styles/variables';
+import * as cssVariables from '../../../components/variables';
 import ProfilePicPlaceholder from '../../../static/img/icon-chat-profilepic.svg';
 import CSS from 'csstype';
 
@@ -23,7 +23,7 @@ const truncateText: CSS.Properties = {
   whiteSpace: 'nowrap',
   overflow: 'hidden',
   margin: '0px',
-  width: 'calc(24vw - 9.45rem)',
+  width: '100%',
 };
 
 const ListCardHeader: React.FC<Props> = ({
@@ -64,12 +64,12 @@ const ListCardHeader: React.FC<Props> = ({
 };
 
 const StyledListCardHeader = styled.div<{ isSelected: boolean }>`
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   height: 7.5rem;
   max-height: 7.5rem;
-  width: 24vw;
+  max-width: 440px;
   background-color: ${props =>
     props.isSelected
       ? cssVariables.palette.purple
@@ -94,7 +94,8 @@ const BasicInfoContainer = styled.div`
   padding-left: 1.9rem;
   display: flex;
   flex-direction: column;
-  flex: 0 0 auto;
+  flex: 0 0 100%;
+  max-width: calc(100% - 3.8rem);
   box-sizing: border-box;
 `;
 

@@ -36,8 +36,7 @@ const SearchInput = styled.input`
   border-radius: 1.75rem;
   box-sizing: border-box;
   &:focus {
-    border: #4a2acb solid 2px;
-    outline: none;
+    outline: #4a2acb solid 2px;
   }
 `;
 

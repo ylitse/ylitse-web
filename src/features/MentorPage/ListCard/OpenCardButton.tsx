@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../static/styles/variables';
+import * as cssVariables from '../../../components/variables';
 import { ListCardProps } from './types';
 
 type Props = {
