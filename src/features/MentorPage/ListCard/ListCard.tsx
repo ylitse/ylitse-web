@@ -76,7 +76,7 @@ const ListCardElement = styled.div`
         (${cssVariables.spacing.layout_spacing} * 2)
     );
   }
-  @media screen and (max-width: 1194px) {
+  @media screen and (max-width: 1186px) {
     max-width: calc((100vw / 3) - (${cssVariables.spacing.layout_spacing} * 2));
   }
   @media screen and (max-width: 900px) {

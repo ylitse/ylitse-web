@@ -31,14 +31,14 @@ const SkillChips = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   position: relative;
-  height: 7rem;
+  height: 6rem;
   &:after {
     width: 100%;
     height: 2.5rem;
     content: '';
     display: block;
     position: absolute;
-    top: 4.5rem;
+    top: 3.5rem;
     background: linear-gradient(transparent, white);
   }
 `;
