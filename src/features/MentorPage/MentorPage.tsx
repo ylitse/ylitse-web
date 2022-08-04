@@ -1,5 +1,5 @@
 import OneContainerLayout from '../../components/OneContainerLayout';
-import MentorInfoSearchDiv from './MentorInfoSearch';
+import MentorInfoSearchDiv from './MentorSearch';
 import MentorChips from './MentorChips';
 import { ChipProps } from '../../components/Chip/types';
 import MentorListItems from './MentorListItems';

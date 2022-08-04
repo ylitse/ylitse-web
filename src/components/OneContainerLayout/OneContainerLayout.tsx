@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
 
-/** Layout for one container on page, like on mentor page */
-
 type OneContainerProps = {
   headLine: string;
   children: React.ReactNode;

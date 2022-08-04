@@ -1,10 +1,5 @@
 import SearchBar from '../../../components/SearchBar';
 
-/**
- * Logic for SerachBar should be added here.
- * Styles and layout are fetched from Searcbar
- */
-
 const mentorSearchbarPlaceholder = 'Etsi mentoria';
 
 const MentorSearch = () => {

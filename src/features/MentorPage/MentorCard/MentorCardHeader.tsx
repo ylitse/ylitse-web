@@ -4,10 +4,6 @@ import ProfilePicPlaceholder from '../../../static/img/icon-chat-profilepic.svg'
 import * as cssVariables from '../../../components/CommonTextStyles/variables';
 import MentorCardHeaderBasicInfo from './MentorCardHeaderBasicInfo';
 
-/**
- * Header of the mentor card
- */
-
 type Props = {
   mentorCardData: ListCardProps;
 };

@@ -1,3 +1,4 @@
-import MentorSearch from './MentorSearch';
+import MentorInfoSearch from './MentorInfoSearch';
 
-export default MentorSearch;
+export default MentorInfoSearch;
+

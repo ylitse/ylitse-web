@@ -4,9 +4,7 @@ import { MentorListItemsProps } from './types';
 import * as cssVariables from '../../../components/CommonTextStyles/variables';
 
 /**
- * The logic for mentor cards shown in the Mentor page
- * An array with cards that need to be shown should be
- * passed to CardsElement where layout will be added.
+ * Mentor cards listing on mentor page
  */
 
 const MentorListItems = ({

@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import React from 'react';
 import * as cssVariables from '../CommonTextStyles/variables';
 
+/**
+ * Creates a non-selectable chip
+ */
+
 const SimpleChip: React.FC<ChipProps> = ({ text }) => {
   return (
     <StyledSimpleChip key={text} value={text}>

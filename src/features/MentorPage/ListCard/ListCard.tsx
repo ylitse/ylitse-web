@@ -9,8 +9,7 @@ import * as cssVariables from '../../../components/CommonTextStyles/variables';
 import { handleSetVisibleCardProps } from '../MentorPage';
 
 /**
- * Div to hold mentor cards. Needs a parameter added
- * That hold the info for cards that need to be showed.
+ * A single card with mentor info on mentor page card listing
  */
 
 type Props = {

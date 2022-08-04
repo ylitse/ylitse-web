@@ -7,12 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { ListCardProps } from '../ListCard/types';
 import { handleSetVisibleCardProps } from '../MentorPage';
 
-/**
- * When card layout is done, card rendering should be added
- * When card fetching logic is added, some checking that
- * right cards are rendered should be added
- */
-
 const mentorListCards: ListCardProps = {
   mentor: {
     displayName: 'Matti Meikäläinen',

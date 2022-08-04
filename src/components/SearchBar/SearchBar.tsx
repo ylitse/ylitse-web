@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import SearchIconImg from '../../static/img/search.svg';
 
-/**
- * Search bar styles and layout
- */
-
 type SearchProps = {
   placeholder: string;
   label: string;
