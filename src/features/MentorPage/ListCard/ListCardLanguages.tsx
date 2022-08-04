@@ -5,7 +5,7 @@ import { Text } from '../../../components/CommonTextStyles/Text';
 const ListCardLanguages = ({ languages }: { languages: Array<string> }) => {
   return (
     <Languages>
-      <Text variant="heading3_dark" style={{ margin: '1.5rem 0 0 0' }}>
+      <Text variant="h3" style={{ margin: '1.5rem 0 0 0' }}>
         Puhun näitä kieliä
       </Text>
       <SkillChips>

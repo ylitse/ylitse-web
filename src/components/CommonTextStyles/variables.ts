@@ -1,4 +1,6 @@
 //colors
+export type Color = keyof typeof palette;
+
 export const palette = {
   purple: '#4A2ACB',
   darkpurple: '#37119D',

@@ -6,7 +6,7 @@ import { Text } from '../../../components/CommonTextStyles/Text';
 const ListCardSkills = ({ skills }: { skills: Array<ChipProps> }) => {
   return (
     <Skills>
-      <Text variant="heading3_dark" style={{ margin: '1.5rem 0 0 0' }}>
+      <Text variant="h3" style={{ margin: '1.5rem 0 0 0' }}>
         Voin auttaa myös näissä
       </Text>
       <SkillChips>

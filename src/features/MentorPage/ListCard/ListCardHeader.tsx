@@ -55,13 +55,13 @@ const ListCardHeader: React.FC<Props> = ({
       </MentorAvailability>
       <ProfilePicContainer />
       <BasicInfoContainer>
-        <Text variant="heading2_white" style={{ margin: 0 }}>
+        <Text color="white" variant="h2" style={{ margin: 0 }}>
           {name}
         </Text>
-        <Text variant="paragraph_white" style={customStylus}>
+        <Text color="white" variant="p" style={customStylus}>
           {age} v. <StyledDivider>|</StyledDivider> {region}
         </Text>
-        <Text variant="paragraph_white" style={{ margin: 0 }}>
+        <Text color="white" variant="p" style={{ margin: 0 }}>
           {isAvailable}
         </Text>
         <p title={message} style={truncateText}>

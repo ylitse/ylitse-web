@@ -1,4 +1,3 @@
-import * as cssVariables from './variables';
 import CSS from 'csstype';
 import { TextVariant } from './Text';
 
@@ -10,7 +9,7 @@ type TextProp = {
 };
 
 export const variants: Record<TextVariant, TextProp> = {
-  heading1_white: {
+  h1: {
     element: 'h1',
     styles: {
       fontFamily: '"Baloo 2"',
@@ -18,10 +17,9 @@ export const variants: Record<TextVariant, TextProp> = {
       fontWeight: '700',
       fontSize: '1.5rem',
       lineHeight: '2.2rem',
-      color: '#ffffff',
     },
   },
-  heading2_white: {
+  h2: {
     element: 'h2',
     styles: {
       fontFamily: '"Baloo 2"',
@@ -29,10 +27,9 @@ export const variants: Record<TextVariant, TextProp> = {
       fontWeight: '600',
       fontSize: '1.25rem',
       lineHeight: '2rem',
-      color: '#ffffff',
     },
   },
-  heading3_white: {
+  h3: {
     element: 'h3',
     styles: {
       fontFamily: '"Baloo 2"',
@@ -40,10 +37,9 @@ export const variants: Record<TextVariant, TextProp> = {
       fontWeight: '600',
       fontSize: '1.1rem',
       lineHeight: '1.6rem',
-      color: '#ffffff',
     },
   },
-  paragraph_white: {
+  p: {
     element: 'p',
     styles: {
       fontFamily: '"Source Sans Pro"',
@@ -51,10 +47,9 @@ export const variants: Record<TextVariant, TextProp> = {
       fontWeight: '400',
       fontSize: '1rem',
       lineHeight: '1.5rem',
-      color: '#ffffff',
     },
   },
-  link_white: {
+  a: {
     element: 'a',
     styles: {
       fontFamily: '"Source Sans Pro"',
@@ -62,67 +57,6 @@ export const variants: Record<TextVariant, TextProp> = {
       fontWeight: '700',
       fontSize: '1rem',
       lineHeight: '1.5rem',
-      color: '#ffffff',
-    },
-  },
-
-  heading1_dark: {
-    element: 'h1',
-    styles: {
-      fontFamily: '"Baloo 2"',
-      fontStyle: 'normal',
-      fontWeight: '700',
-      fontSize: '1.5rem',
-      lineHeight: '2.2rem',
-      color: cssVariables.palette.darkblue,
-    },
-  },
-
-  heading2_dark: {
-    element: 'h2',
-    styles: {
-      fontFamily: '"Baloo 2"',
-      fontStyle: 'normal',
-      fontWeight: '600',
-      fontSize: '1.25rem',
-      lineHeight: '2rem',
-      color: cssVariables.palette.darkblue,
-    },
-  },
-
-  heading3_dark: {
-    element: 'h3',
-    styles: {
-      fontFamily: '"Baloo 2"',
-      fontStyle: 'normal',
-      fontWeight: '600',
-      fontSize: '1.1rem',
-      lineHeight: '1.6rem',
-      color: cssVariables.palette.darkblue,
-    },
-  },
-
-  paragraph_dark: {
-    element: 'p',
-    styles: {
-      fontFamily: '"Source Sans Pro"',
-      fontStyle: 'normal',
-      fontWeight: '400',
-      fontSize: '1rem',
-      lineHeight: '1.5rem',
-      color: cssVariables.palette.darkblue,
-    },
-  },
-
-  link_dark: {
-    element: 'a',
-    styles: {
-      fontFamily: '"Source Sans Pro"',
-      fontStyle: 'normal',
-      fontWeight: '700',
-      fontSize: '1rem',
-      lineHeight: '1.5rem',
-      color: cssVariables.palette.purple,
     },
   },
 };

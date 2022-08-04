@@ -5,7 +5,7 @@ import * as cssVariables from '../../../components/CommonTextStyles/variables';
 const ListCardStory = ({ story }: { story: string }) => {
   return (
     <>
-      <Text variant="heading3_dark" style={{ margin: 0 }}>
+      <Text variant="h3" style={{ margin: 0 }}>
         Tarinani
       </Text>
       <TruncatedMultiline>{story}</TruncatedMultiline>
