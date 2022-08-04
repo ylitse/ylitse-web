@@ -5,7 +5,7 @@ import ListCardLanguages from './ListCardLanguages';
 import ListCardSkills from './ListCardSkills';
 import ListCardStory from './ListCardStory';
 import OpenCardButton from './OpenCardButton';
-import * as cssVariables from '../../../components/variables';
+import * as cssVariables from '../../../components/CommonTextStyles/variables';
 
 /**
  * Div to hold mentor cards. Needs a parameter added
@@ -14,28 +14,28 @@ import * as cssVariables from '../../../components/variables';
 
 type Props = {
   setVisibleCard: (mentorCardData: ListCardProps) => void;
-  mentordata: ListCardProps;
+  mentorData: ListCardProps;
 };
 
-const ListCard = ({ setVisibleCard, mentordata }: Props) => {
-  const age = new Date().getFullYear() - mentordata.mentor.birthYear;
+const ListCard = ({ setVisibleCard, mentorData }: Props) => {
+  const age = new Date().getFullYear() - mentorData.mentor.birthYear;
   return (
     <ListCardElement>
       <ListCardHeader
-        name={mentordata.mentor.displayName}
+        name={mentorData.mentor.displayName}
         age={age}
-        region={mentordata.mentor.region}
-        available={mentordata.isLoggedIn}
-        newMentor={mentordata.isNewMentor}
-        message={mentordata.contactMessage}
+        region={mentorData.mentor.region}
+        isAvailable={mentorData.isLoggedIn}
+        isNewMentor={mentorData.isNewMentor}
+        message={mentorData.contactMessage}
       />
       <CardContent>
-        <ListCardStory story={mentordata.mentor.story} />
-        <ListCardLanguages languages={mentordata.mentor.languages} />
-        <ListCardSkills skills={mentordata.mentor.skills} />
+        <ListCardStory story={mentorData.mentor.story} />
+        <ListCardLanguages languages={mentorData.mentor.languages} />
+        <ListCardSkills skills={mentorData.mentor.skills} />
         <OpenCardButton
           setVisibleCard={setVisibleCard}
-          mentordata={mentordata}
+          mentorData={mentorData}
         />
       </CardContent>
     </ListCardElement>

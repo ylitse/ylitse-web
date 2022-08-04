@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../components/variables';
+import { Text } from '../../../components/CommonTextStyles/Text';
+import * as cssVariables from '../../../components/CommonTextStyles/variables';
 
 const ListCardStory = ({ story }: { story: string }) => {
   return (
     <>
-      <cssVariables.heading3_dark style={{ margin: 0 }}>
+      <Text variant="heading3_dark" style={{ margin: 0 }}>
         Tarinani
-      </cssVariables.heading3_dark>
+      </Text>
       <TruncatedMultiline>{story}</TruncatedMultiline>
     </>
   );

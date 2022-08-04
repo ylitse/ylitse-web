@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ListCard from '../ListCard';
 import { MentorListItemsProps } from './types';
-import * as cssVariables from '../../../components/variables';
+import * as cssVariables from '../../../components/CommonTextStyles/variables';
 
 /**
  * The logic for mentor cards shown in the Mentor page
@@ -11,15 +11,14 @@ import * as cssVariables from '../../../components/variables';
 
 const MentorListItems = ({
   setVisibleCard,
-  mentordata,
+  mentorData,
 }: MentorListItemsProps) => {
   return (
     <CardsList data-testid="mentor-cards-container">
-      {mentordata.map(item => (
-        // eslint-disable-next-line react/jsx-key
+      {mentorData.map(item => (
         <ListCard
           key={item.mentor.displayName}
-          mentordata={item}
+          mentorData={item}
           setVisibleCard={setVisibleCard}
         />
       ))}

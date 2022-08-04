@@ -1,7 +1,7 @@
 import { ChipProps } from './types';
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../variables';
+import * as cssVariables from '../CommonTextStyles/variables';
 
 const Chip: React.FC<ChipProps> = ({ text }) => {
   const [isChipSelected, setChipSelected] = React.useState(false);

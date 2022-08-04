@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../components/variables';
+import * as cssVariables from '../../../components/CommonTextStyles/variables';
 import { ListCardProps } from './types';
 
 type Props = {
   setVisibleCard: (mentorCardData: ListCardProps) => void;
-  mentordata: ListCardProps;
+  mentorData: ListCardProps;
 };
 
-const OpenCardButton = ({ setVisibleCard, mentordata }: Props) => {
+const OpenCardButton = ({ setVisibleCard, mentorData }: Props) => {
   const handleClick = () => {
-    setVisibleCard(mentordata);
+    setVisibleCard(mentorData);
   };
 
   return (

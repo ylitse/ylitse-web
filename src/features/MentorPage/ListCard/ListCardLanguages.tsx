@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../components/variables';
 import { SimpleChip } from '../../../components/Chip';
+import { Text } from '../../../components/CommonTextStyles/Text';
 
 const ListCardLanguages = ({ languages }: { languages: Array<string> }) => {
   return (
     <Languages>
-      <cssVariables.heading3_dark style={{ margin: '1.5rem 0 0 0' }}>
+      <Text variant="heading3_dark" style={{ margin: '1.5rem 0 0 0' }}>
         Puhun näitä kieliä
-      </cssVariables.heading3_dark>
+      </Text>
       <SkillChips>
         {languages.map(item => (
           <SimpleChip key={item} text={item} />

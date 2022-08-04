@@ -545,7 +545,7 @@ const MentorPage = () => {
       </OneContainerLayout>
       <MentorListItems
         setVisibleCard={handleSetVisibleCard}
-        mentordata={mentorListCards}
+        mentorData={mentorListCards}
       />
     </PageLayout>
   );

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../variables';
+import * as cssVariables from '../CommonTextStyles/variables';
 
 /**
  * Basic page layout that gives margins for any containers created to page

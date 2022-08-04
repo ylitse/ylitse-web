@@ -96,7 +96,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentordata={mentorListCards}
+          mentorData={mentorListCards}
         />
       </BrowserRouter>,
     );
@@ -110,7 +110,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentordata={mentorListCards}
+          mentorData={mentorListCards}
         />
       </BrowserRouter>,
     );
@@ -124,7 +124,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentordata={mentorListCards}
+          mentorData={mentorListCards}
         />
       </BrowserRouter>,
     );
@@ -138,7 +138,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentordata={mentorListCards2}
+          mentorData={mentorListCards2}
         />
       </BrowserRouter>,
     );
@@ -152,7 +152,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentordata={mentorListCards3}
+          mentorData={mentorListCards3}
         />
       </BrowserRouter>,
     );

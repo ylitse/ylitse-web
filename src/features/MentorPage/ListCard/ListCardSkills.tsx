@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../components/variables';
 import { SimpleChip } from '../../../components/Chip';
 import { ChipProps } from '@/components/Chip/types';
+import { Text } from '../../../components/CommonTextStyles/Text';
 
 const ListCardSkills = ({ skills }: { skills: Array<ChipProps> }) => {
   return (
     <Skills>
-      <cssVariables.heading3_dark style={{ margin: '1.5rem 0 0 0' }}>
+      <Text variant="heading3_dark" style={{ margin: '1.5rem 0 0 0' }}>
         Voin auttaa myös näissä
-      </cssVariables.heading3_dark>
+      </Text>
       <SkillChips>
         {skills.map(item => (
           <SimpleChip key={item.text} text={item.text} />

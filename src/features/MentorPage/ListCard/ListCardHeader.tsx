@@ -1,14 +1,15 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../components/variables';
+import * as cssVariables from '../../../components/CommonTextStyles/variables';
 import ProfilePicPlaceholder from '../../../static/img/icon-chat-profilepic.svg';
 import CSS from 'csstype';
+import { Text } from '../../../components/CommonTextStyles/Text';
 
 type Props = {
   name: string;
   age: number;
   region: string;
-  available: boolean;
-  newMentor: boolean;
+  isAvailable: boolean;
+  isNewMentor: boolean;
   message: string;
 };
 
@@ -24,20 +25,28 @@ const truncateText: CSS.Properties = {
   overflow: 'hidden',
   margin: '0px',
   width: '100%',
+  fontFamily: '"Source Sans Pro"',
+  fontStyle: 'normal',
+  fontWeight: '400',
+  fontSize: '1rem',
+  lineHeight: '1.5rem',
+  color: '#ffffff',
 };
 
 const ListCardHeader: React.FC<Props> = ({
   name,
   age,
   region,
-  available,
-  newMentor,
+  isAvailable,
+  isNewMentor,
   message,
 }) => {
-  let availabilityMessage = newMentor ? 'Uusi' : '';
-  availabilityMessage = available ? availabilityMessage : 'Ei tavoitettavissa';
+  const newCardMessage = isNewMentor ? 'Uusi' : '';
+  const availabilityMessage = isAvailable
+    ? newCardMessage
+    : 'Ei tavoitettavissa';
   return (
-    <StyledListCardHeader isSelected={available}>
+    <StyledListCardHeader isSelected={isAvailable}>
       <MentorAvailability
         isShowing={availabilityMessage != ''}
         isNew={availabilityMessage === 'Uusi'}
@@ -46,18 +55,18 @@ const ListCardHeader: React.FC<Props> = ({
       </MentorAvailability>
       <ProfilePicContainer />
       <BasicInfoContainer>
-        <cssVariables.heading2_white style={{ margin: 0 }}>
+        <Text variant="heading2_white" style={{ margin: 0 }}>
           {name}
-        </cssVariables.heading2_white>
-        <cssVariables.paragraph_white style={customStylus}>
+        </Text>
+        <Text variant="paragraph_white" style={customStylus}>
           {age} v. <StyledDivider>|</StyledDivider> {region}
-        </cssVariables.paragraph_white>
-        <cssVariables.paragraph_white style={{ margin: 0 }}>
-          {available}
-        </cssVariables.paragraph_white>
-        <cssVariables.paragraph_white title={message} style={truncateText}>
+        </Text>
+        <Text variant="paragraph_white" style={{ margin: 0 }}>
+          {isAvailable}
+        </Text>
+        <p title={message} style={truncateText}>
           {message}
-        </cssVariables.paragraph_white>
+        </p>
       </BasicInfoContainer>
     </StyledListCardHeader>
   );
