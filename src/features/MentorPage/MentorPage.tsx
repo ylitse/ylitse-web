@@ -2,8 +2,13 @@ import OneContainerLayout from '../../components/OneContainerLayout';
 import MentorInfoSearchDiv from './MentorInfoSearch';
 import MentorChips from './MentorChips';
 import { ChipProps } from '../../components/Chip/types';
-import MentorCards from './MentorCards';
+import MentorListItems from './MentorListItems';
 import PageLayout from '../../components/PageLayout';
+import {
+  ListCardProps,
+  MentorProps,
+} from '@/features/MentorPage/ListCard/types';
+import React from 'react';
 
 const mentorPageHeadline = 'Mentorit';
 
@@ -413,16 +418,136 @@ const mentorChipList: Array<ChipProps> = [
   },
 ];
 
+const mentorCards: Array<MentorProps> = [
+  {
+    displayName: 'Matti Meikäläinen',
+    birthYear: 1993,
+    region: 'Pirkanmaa',
+    story:
+      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
+    skills: [
+      { text: 'Lastensuojelu' },
+      { text: 'Itsenäistyminen' },
+      { text: 'Vanhemmuus' },
+      { text: 'Opiskelu' },
+      { text: 'Kela-asiointi' },
+      { text: 'Raskausaika' },
+      { text: 'Päihdeongelmat' },
+    ],
+    languages: ['Suomi', 'Englanti'],
+  },
+  {
+    displayName: 'Maija',
+    birthYear: 1993,
+    region: 'Pirkanmaa',
+    story:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    skills: [{ text: 'Lastensuojelu' }],
+    languages: ['Suomi', 'Englanti'],
+  },
+  {
+    displayName: 'Kaapo',
+    birthYear: 1993,
+    region: 'Pirkanmaa',
+    story:
+      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
+    skills: [
+      { text: 'Lastensuojelu' },
+      { text: 'Itsenäistyminen' },
+      { text: 'Vanhemmuus' },
+      { text: 'Opiskelu' },
+      { text: 'Kela-asiointi' },
+      { text: 'Raskausaika' },
+      { text: 'Päihdeongelmat' },
+    ],
+    languages: ['Suomi', 'Englanti'],
+  },
+  {
+    displayName: 'Maija 2',
+    birthYear: 1993,
+    region: 'Pirkanmaa',
+    story:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    skills: [{ text: 'Lastensuojelu' }],
+    languages: ['Suomi', 'Englanti'],
+  },
+  {
+    displayName: 'Kaapo 2',
+    birthYear: 1993,
+    region: 'Pirkanmaa',
+    story:
+      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
+    skills: [
+      { text: 'Lastensuojelu' },
+      { text: 'Itsenäistyminen' },
+      { text: 'Vanhemmuus' },
+      { text: 'Opiskelu' },
+      { text: 'Kela-asiointi' },
+      { text: 'Raskausaika' },
+      { text: 'Päihdeongelmat' },
+    ],
+    languages: ['Suomi', 'Englanti'],
+  },
+  {
+    displayName: 'Maija 3',
+    birthYear: 1993,
+    region: 'Pirkanmaa',
+    story:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    skills: [{ text: 'Lastensuojelu' }],
+    languages: ['Suomi', 'Englanti'],
+  },
+  {
+    displayName: 'Kaapo 3',
+    birthYear: 1993,
+    region: 'Pirkanmaa',
+    story:
+      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
+    skills: [
+      { text: 'Lastensuojelu' },
+      { text: 'Itsenäistyminen' },
+      { text: 'Vanhemmuus' },
+      { text: 'Opiskelu' },
+      { text: 'Kela-asiointi' },
+      { text: 'Raskausaika' },
+      { text: 'Päihdeongelmat' },
+    ],
+    languages: ['Suomi', 'Englanti'],
+  },
+];
+
+const mentorListCards: Array<ListCardProps> = mentorCards.map(item => {
+  const cardProps: ListCardProps = {
+    mentor: item,
+    isLoggedIn: Math.random() < 0.5 ? true : false,
+    isNewMentor: Math.random() < 0.5 ? true : false,
+    contactMessage:
+      Math.random() < 0.5 ? 'Olen tavoitettavissa joka päivä 16-18' : '',
+  };
+  return cardProps;
+});
+
 const MentorPage = () => {
+  const [shouldShowMentorCard, setVisibleCard] = React.useState<{
+    [key: string]: unknown;
+  }>({});
+
+  const handleSetVisibleCard = (mentorCardData: ListCardProps) => {
+    setVisibleCard(mentorCardData);
+    console.log('shouldShowVisibleCard:', shouldShowMentorCard);
+  };
+
   return (
     <PageLayout>
       <OneContainerLayout headLine={mentorPageHeadline}>
         <MentorInfoSearchDiv />
         <MentorChips items={mentorChipList} />
       </OneContainerLayout>
-      <MentorCards />
+      <MentorListItems
+        setVisibleCard={handleSetVisibleCard}
+        mentorData={mentorListCards}
+      />
     </PageLayout>
   );
 };
-
 export default MentorPage;

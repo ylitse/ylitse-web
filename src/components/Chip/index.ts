@@ -1,3 +1,4 @@
 import Chip from './Chip';
+import SimpleChip from './SimpleChip';
 
-export default Chip;
+export { Chip, SimpleChip };

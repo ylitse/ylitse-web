@@ -33,6 +33,7 @@ const MentorSearchContainer = styled.div`
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   padding: 2rem 0;
   width: 90%;
   max-width: 90%;

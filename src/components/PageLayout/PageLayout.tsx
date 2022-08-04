@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import * as cssVariables from '../CommonTextStyles/variables';
 
 /**
  * Basic page layout that gives margins for any containers created to page
@@ -32,12 +33,17 @@ const BasicPageElement = styled.div`
 const PageContent = styled.div`
   background-color: transparent;
   position: relative;
-  width: 80vw;
+  width: 76vw;
   height: auto;
   margin: auto;
-  margin-top: 10vw;
+  margin-top: ${cssVariables.spacing.layout_outer_spacing};
+  margin-bottom: ${cssVariables.spacing.layout_outer_spacing};
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1500px) {
+    width: 1130px;
+    max-width: calc(100vw - (${cssVariables.spacing.layout_spacing} * 2));
+  }
 `;
 
 export default PageLayout;
