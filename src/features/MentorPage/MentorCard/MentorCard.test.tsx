@@ -1,11 +1,10 @@
 /**
  * @jest-environment jsdom
  */
-import { render } from '@testing-library/react';
-import MentorListItems from './MentorListItems';
-import { BrowserRouter } from 'react-router-dom';
-import { ListCardProps } from '../ListCard/types';
-import { handleSetVisibleCardProps } from '../MentorPage';
+//import { render } from '@testing-library/react';
+//import MentorListItems from './MentorCard';
+//import { BrowserRouter } from 'react-router-dom';
+//import { ListCardProps } from '../ListCard/types';
 
 /**
  * When card layout is done, card rendering should be added
@@ -13,7 +12,7 @@ import { handleSetVisibleCardProps } from '../MentorPage';
  * right cards are rendered should be added
  */
 
-const mentorListCards: Array<ListCardProps> = [
+/*const mentorListCards: Array<ListCardProps> = [
   {
     mentor: {
       displayName: 'Matti Meikäläinen',
@@ -38,7 +37,7 @@ const mentorListCards: Array<ListCardProps> = [
   },
 ];
 
-/*const mentorListCards2: Array<ListCardProps> = [
+const mentorListCards2: Array<ListCardProps> = [
   {
     mentor: {
       displayName: 'Matti Meikäläinen',
@@ -86,27 +85,24 @@ const mentorListCards3: Array<ListCardProps> = [
     isNewMentor: false,
     contactMessage: 'Voit ottaa yhteyttä!',
   },
-];*/
+];
 
 describe('<MentorListItem />', () => {
   it('Mentor List Item with mentor cards is rendered correctly', () => {
-    const handleSetVisibleCard = ({
-      shouldShowMentorCard,
-      mentorCardData,
-    }: handleSetVisibleCardProps) => {
-      console.log(shouldShowMentorCard, mentorCardData);
+    const handleSetVisibleCard = (mentorCardData: ListCardProps) => {
+      console.log(mentorCardData);
     };
     const { queryAllByTestId } = render(
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentorData={mentorListCards}
+          mentordata={mentorListCards}
         />
       </BrowserRouter>,
     );
     expect(queryAllByTestId('mentor-cards-container')).toBeTruthy();
   });
-  /*it('Mentor List Item name in header is rendered correctly', () => {
+  it('Mentor List Item name in header is rendered correctly', () => {
     const handleSetVisibleCard = (mentorCardData: ListCardProps) => {
       console.log(mentorCardData);
     };
@@ -114,7 +110,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentorData={mentorListCards}
+          mentordata={mentorListCards}
         />
       </BrowserRouter>,
     );
@@ -128,7 +124,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentorData={mentorListCards}
+          mentordata={mentorListCards}
         />
       </BrowserRouter>,
     );
@@ -142,7 +138,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentorData={mentorListCards2}
+          mentordata={mentorListCards2}
         />
       </BrowserRouter>,
     );
@@ -156,10 +152,10 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentorData={mentorListCards3}
+          mentordata={mentorListCards3}
         />
       </BrowserRouter>,
     );
     expect(queryByText('Ei tavoitettavissa')).toBeNull();
-  });*/
-});
+  });
+});*/

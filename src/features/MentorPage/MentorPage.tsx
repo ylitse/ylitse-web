@@ -9,6 +9,7 @@ import {
   MentorProps,
 } from '@/features/MentorPage/ListCard/types';
 import React from 'react';
+import MentorCard from './MentorCard';
 
 const mentorPageHeadline = 'Mentorit';
 
@@ -527,16 +528,41 @@ const mentorListCards: Array<ListCardProps> = mentorCards.map(item => {
   return cardProps;
 });
 
+export type handleSetVisibleCardProps = {
+  shouldShowMentorCard: boolean;
+  mentorCardData: ListCardProps;
+};
+
+let currentCard: ListCardProps;
+
 const MentorPage = () => {
-  const [shouldShowMentorCard, setVisibleCard] = React.useState<{
-    [key: string]: unknown;
-  }>({});
+  const [shouldShowMentorCard, setVisibleCard] = React.useState(false);
 
-  const handleSetVisibleCard = (mentorCardData: ListCardProps) => {
-    setVisibleCard(mentorCardData);
-    console.log('shouldShowVisibleCard:', shouldShowMentorCard);
+  const handleSetVisibleCard = ({
+    shouldShowMentorCard,
+    mentorCardData,
+  }: handleSetVisibleCardProps) => {
+    setVisibleCard(shouldShowMentorCard);
+    currentCard = mentorCardData;
   };
-
+  if (shouldShowMentorCard) {
+    return (
+      <PageLayout>
+        <OneContainerLayout headLine={mentorPageHeadline}>
+          <MentorCard
+            setVisibleCard={handleSetVisibleCard}
+            mentorCardData={currentCard}
+          />
+          <MentorInfoSearchDiv />
+          <MentorChips items={mentorChipList} />
+        </OneContainerLayout>
+        <MentorListItems
+          setVisibleCard={handleSetVisibleCard}
+          mentordata={mentorListCards}
+        />
+      </PageLayout>
+    );
+  }
   return (
     <PageLayout>
       <OneContainerLayout headLine={mentorPageHeadline}>

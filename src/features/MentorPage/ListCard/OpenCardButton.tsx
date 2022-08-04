@@ -1,15 +1,20 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../../components/variables';
+import { handleSetVisibleCardProps } from '../MentorPage';
 import { ListCardProps } from './types';
 
 type Props = {
-  setVisibleCard: (mentorCardData: ListCardProps) => void;
-  mentorData: ListCardProps;
+  setVisibleCard: ({
+    shouldShowMentorCard,
+    mentorCardData,
+  }: handleSetVisibleCardProps) => void;
+  mentorCardData: ListCardProps;
 };
 
-const OpenCardButton = ({ setVisibleCard, mentorData }: Props) => {
+const OpenCardButton = ({ setVisibleCard, mentorCardData }: Props) => {
   const handleClick = () => {
-    setVisibleCard(mentorData);
+    const shouldShowMentorCard = true;
+    setVisibleCard({ shouldShowMentorCard, mentorCardData });
   };
 
   return (

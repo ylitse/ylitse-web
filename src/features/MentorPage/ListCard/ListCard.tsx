@@ -5,7 +5,8 @@ import ListCardLanguages from './ListCardLanguages';
 import ListCardSkills from './ListCardSkills';
 import ListCardStory from './ListCardStory';
 import OpenCardButton from './OpenCardButton';
-import * as cssVariables from '../../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../../components/variables';
+import { handleSetVisibleCardProps } from '../MentorPage';
 
 /**
  * Div to hold mentor cards. Needs a parameter added
@@ -13,8 +14,11 @@ import * as cssVariables from '../../../components/CommonTextStyles/variables';
  */
 
 type Props = {
-  setVisibleCard: (mentorCardData: ListCardProps) => void;
-  mentorData: ListCardProps;
+  setVisibleCard: ({
+    shouldShowMentorCard,
+    mentorCardData,
+  }: handleSetVisibleCardProps) => void;
+  mentordata: ListCardProps;
 };
 
 const ListCard = ({ setVisibleCard, mentorData }: Props) => {
@@ -35,7 +39,7 @@ const ListCard = ({ setVisibleCard, mentorData }: Props) => {
         <ListCardSkills skills={mentorData.mentor.skills} />
         <OpenCardButton
           setVisibleCard={setVisibleCard}
-          mentorData={mentorData}
+          mentorCardData={mentordata}
         />
       </CardContent>
     </ListCardElement>
