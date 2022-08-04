@@ -11,14 +11,14 @@ import * as cssVariables from '../../../components/CommonTextStyles/variables';
 
 const MentorListItems = ({
   setVisibleCard,
-  mentorData,
+  mentorCardData,
 }: MentorListItemsProps) => {
   return (
     <CardsList data-testid="mentor-cards-container">
-      {mentorData.map(item => (
+      {mentorCardData.map(item => (
         <ListCard
           key={item.mentor.displayName}
-          mentorData={item}
+          mentorCardData={item}
           setVisibleCard={setVisibleCard}
         />
       ))}

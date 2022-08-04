@@ -5,7 +5,7 @@ import ListCardLanguages from './ListCardLanguages';
 import ListCardSkills from './ListCardSkills';
 import ListCardStory from './ListCardStory';
 import OpenCardButton from './OpenCardButton';
-import * as cssVariables from '../../../components/variables';
+import * as cssVariables from '../../../components/CommonTextStyles/variables';
 import { handleSetVisibleCardProps } from '../MentorPage';
 
 /**
@@ -18,28 +18,28 @@ type Props = {
     shouldShowMentorCard,
     mentorCardData,
   }: handleSetVisibleCardProps) => void;
-  mentordata: ListCardProps;
+  mentorCardData: ListCardProps;
 };
 
-const ListCard = ({ setVisibleCard, mentorData }: Props) => {
-  const age = new Date().getFullYear() - mentorData.mentor.birthYear;
+const ListCard = ({ setVisibleCard, mentorCardData }: Props) => {
+  const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
   return (
     <ListCardElement>
       <ListCardHeader
-        name={mentorData.mentor.displayName}
+        name={mentorCardData.mentor.displayName}
         age={age}
-        region={mentorData.mentor.region}
-        isAvailable={mentorData.isLoggedIn}
-        isNewMentor={mentorData.isNewMentor}
-        message={mentorData.contactMessage}
+        region={mentorCardData.mentor.region}
+        isAvailable={mentorCardData.isLoggedIn}
+        isNewMentor={mentorCardData.isNewMentor}
+        message={mentorCardData.contactMessage}
       />
       <CardContent>
-        <ListCardStory story={mentorData.mentor.story} />
-        <ListCardLanguages languages={mentorData.mentor.languages} />
-        <ListCardSkills skills={mentorData.mentor.skills} />
+        <ListCardStory story={mentorCardData.mentor.story} />
+        <ListCardLanguages languages={mentorCardData.mentor.languages} />
+        <ListCardSkills skills={mentorCardData.mentor.skills} />
         <OpenCardButton
           setVisibleCard={setVisibleCard}
-          mentorCardData={mentordata}
+          mentorCardData={mentorCardData}
         />
       </CardContent>
     </ListCardElement>

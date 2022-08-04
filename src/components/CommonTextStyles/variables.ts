@@ -26,6 +26,6 @@ export const spacing = {
   layout_spacing: '2rem',
   button_padding: '0.75rem 1.25rem',
   small_button_padding: '.5rem 2rem',
-	layout_outer_spacing: '6vw',
-	content_width: '76vw',
+  layout_outer_spacing: '6vw',
+  content_width: '76vw',
 };

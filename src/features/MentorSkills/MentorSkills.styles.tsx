@@ -60,8 +60,8 @@ export const StyledShowMoreButton = styled.button`
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
-	border: none;
-	background-color: transparent;
-	color: #4A2ACB;
-	line-height: 2rem;
+  border: none;
+  background-color: transparent;
+  color: #4a2acb;
+  line-height: 2rem;
 `;

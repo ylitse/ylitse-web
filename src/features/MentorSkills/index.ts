@@ -1,3 +1,3 @@
-import MentorSkills from "./MentorSkills";
+import MentorSkills from './MentorSkills';
 
 export default MentorSkills;

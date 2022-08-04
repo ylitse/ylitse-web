@@ -6,5 +6,5 @@ export type MentorListItemsProps = {
     shouldShowMentorCard,
     mentorCardData,
   }: handleSetVisibleCardProps) => void;
-  mentordata: Array<ListCardProps>;
+  mentorCardData: Array<ListCardProps>;
 };

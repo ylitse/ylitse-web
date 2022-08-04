@@ -7,7 +7,7 @@ import PageLayout from '../../components/PageLayout';
 import {
   ListCardProps,
   MentorProps,
-} from '@/features/MentorPage/ListCard/types';
+} from '../../features/MentorPage/ListCard/types';
 import React from 'react';
 import MentorCard from './MentorCard';
 
@@ -548,17 +548,17 @@ const MentorPage = () => {
   if (shouldShowMentorCard) {
     return (
       <PageLayout>
+        <MentorCard
+          setVisibleCard={handleSetVisibleCard}
+          mentorCardData={currentCard}
+        />
         <OneContainerLayout headLine={mentorPageHeadline}>
-          <MentorCard
-            setVisibleCard={handleSetVisibleCard}
-            mentorCardData={currentCard}
-          />
           <MentorInfoSearchDiv />
           <MentorChips items={mentorChipList} />
         </OneContainerLayout>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentordata={mentorListCards}
+          mentorCardData={mentorListCards}
         />
       </PageLayout>
     );
@@ -571,7 +571,7 @@ const MentorPage = () => {
       </OneContainerLayout>
       <MentorListItems
         setVisibleCard={handleSetVisibleCard}
-        mentorData={mentorListCards}
+        mentorCardData={mentorListCards}
       />
     </PageLayout>
   );

@@ -38,7 +38,7 @@ const mentorListCards: Array<ListCardProps> = [
   },
 ];
 
-/*const mentorListCards2: Array<ListCardProps> = [
+const mentorListCards2: Array<ListCardProps> = [
   {
     mentor: {
       displayName: 'Matti Meikäläinen',
@@ -86,80 +86,68 @@ const mentorListCards3: Array<ListCardProps> = [
     isNewMentor: false,
     contactMessage: 'Voit ottaa yhteyttä!',
   },
-];*/
+];
 
 describe('<MentorListItem />', () => {
+  const handleSetVisibleCard = ({
+    shouldShowMentorCard,
+    mentorCardData,
+  }: handleSetVisibleCardProps) => {
+    console.log(shouldShowMentorCard, mentorCardData);
+  };
   it('Mentor List Item with mentor cards is rendered correctly', () => {
-    const handleSetVisibleCard = ({
-      shouldShowMentorCard,
-      mentorCardData,
-    }: handleSetVisibleCardProps) => {
-      console.log(shouldShowMentorCard, mentorCardData);
-    };
     const { queryAllByTestId } = render(
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentorData={mentorListCards}
+          mentorCardData={mentorListCards}
         />
       </BrowserRouter>,
     );
     expect(queryAllByTestId('mentor-cards-container')).toBeTruthy();
   });
-  /*it('Mentor List Item name in header is rendered correctly', () => {
-    const handleSetVisibleCard = (mentorCardData: ListCardProps) => {
-      console.log(mentorCardData);
-    };
+  it('Mentor List Item name in header is rendered correctly', () => {
     const { queryAllByText } = render(
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentorData={mentorListCards}
+          mentorCardData={mentorListCards}
         />
       </BrowserRouter>,
     );
     expect(queryAllByText('Matti Meikäläinen')).toBeTruthy();
   });
   it('New mentor is rendered correctly', () => {
-    const handleSetVisibleCard = (mentorCardData: ListCardProps) => {
-      console.log(mentorCardData);
-    };
     const { queryAllByText } = render(
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentorData={mentorListCards}
+          mentorCardData={mentorListCards}
         />
       </BrowserRouter>,
     );
     expect(queryAllByText('Uusi')).toBeTruthy();
   });
   it('Offline mentor is rendered correctly', () => {
-    const handleSetVisibleCard = (mentorCardData: ListCardProps) => {
-      console.log(mentorCardData);
-    };
     const { queryAllByText } = render(
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentorData={mentorListCards2}
+          mentorCardData={mentorListCards2}
         />
       </BrowserRouter>,
     );
     expect(queryAllByText('Ei tavoitettavissa')).toBeTruthy();
   });
   it('Online mentor is rendered correctly', () => {
-    const handleSetVisibleCard = (mentorCardData: ListCardProps) => {
-      console.log(mentorCardData);
-    };
     const { queryByText } = render(
       <BrowserRouter>
         <MentorListItems
           setVisibleCard={handleSetVisibleCard}
-          mentorData={mentorListCards3}
+          mentorCardData={mentorListCards3}
         />
       </BrowserRouter>,
     );
     expect(queryByText('Ei tavoitettavissa')).toBeNull();
-  });*/
+  });
 });

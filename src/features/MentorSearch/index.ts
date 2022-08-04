@@ -1,3 +1,3 @@
-import MentorSearch from "./MentorSearch";
+import MentorSearch from './MentorSearch';
 
 export default MentorSearch;

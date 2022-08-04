@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../components/variables';
+import * as cssVariables from '../../../components/CommonTextStyles/variables';
 import { handleSetVisibleCardProps } from '../MentorPage';
 import { ListCardProps } from './types';
 

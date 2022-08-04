@@ -8,7 +8,10 @@ const MentorPage = () => {
   return (
     <StyledMentorSearchBox>
       <StyledSearchIcon />
-      <StyledMentorSearch type="text" placeholder="Etsi mentoria"></StyledMentorSearch>
+      <StyledMentorSearch
+        type="text"
+        placeholder="Etsi mentoria"
+      ></StyledMentorSearch>
     </StyledMentorSearchBox>
   );
 };
