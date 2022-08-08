@@ -22,9 +22,9 @@ describe('register', () => {
   };
 
   const submitShouldBeDisabled = () =>
-    cy.get('button[id="submit-button').should('be.disabled');
+    cy.get('button[id="submit').should('be.disabled');
 
-  const clickSubmit = () => cy.get('button[id="submit-button').click();
+  const clickSubmit = () => cy.get('button[id="submit').click();
 
   beforeEach(() => {
     cy.visit('/register');

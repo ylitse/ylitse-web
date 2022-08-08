@@ -69,8 +69,8 @@ function checkForm() {
       }
     });
   if (formError) {
-    document.getElementById('submit-button').disabled = true;
+    document.getElementById('submit').disabled = true;
   } else {
-    document.getElementById('submit-button').disabled = false;
+    document.getElementById('submit').disabled = false;
   }
 }
