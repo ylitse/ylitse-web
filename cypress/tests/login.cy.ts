@@ -1,7 +1,9 @@
 describe('login', () => {
   const testErrorVisible = () => {
-    cy.contains('Käyttäjätunnus tai salasanasi on virheellinen.');
-    cy.contains('Tarkista syöttämäsi tiedot.');
+    cy.contains('Käyttäjätunnus tai salasanasi on virheellinen.').should(
+      'be.visible',
+    );
+    cy.contains('Tarkista syöttämäsi tiedot.').should('be.visible');
   };
 
   const clickLogin = () => {
