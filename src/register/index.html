@@ -67,6 +67,34 @@
           />
         </fieldset>
         <fieldset>
+          <label for="password-confirmation">
+            Vahvista salasana *
+            <span class="align-right">
+              <button
+                id="password-confirmation-toggle"
+                type="button"
+                onclick="togglePasswordConfirmation()"
+              >
+                Näytä salasana
+              </button>
+              <span class="tooltip">
+                <img src="/static/icons/tooltip.svg" />
+                <span class="tooltip-text">
+                  Salasanan tulee olla vähintään 5 merkkiä pitkä.
+                </span>
+              </span>
+            </span>
+          </label>
+          <input
+            id="password-confirmation"
+            name="password-confirmation"
+            type="password"
+            minlength="5"
+            onChange="checkForm()"
+            required
+          />
+        </fieldset>
+        <fieldset>
           <label id="email-label" for="email"
             >Sähköpostiosoite (vapaaehtoinen)</label
           >

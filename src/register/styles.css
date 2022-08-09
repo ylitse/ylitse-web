@@ -266,7 +266,8 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-#password-toggle {
+#password-toggle,
+#password-confirmation-toggle {
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 700;

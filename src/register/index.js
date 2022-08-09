@@ -27,9 +27,9 @@
   );
 })(window, document);
 
-function togglePassword() {
-  var passwordInput = document.getElementById('password');
-  var passwordToggle = document.getElementById('password-toggle');
+function togglePasswordInput(inputId, toggleId) {
+  var passwordInput = document.getElementById(inputId);
+  var passwordToggle = document.getElementById(toggleId);
   if (passwordInput.getAttribute('type') === 'password') {
     passwordInput.type = 'text';
     passwordToggle.innerHTML = 'Piilota salasana';
@@ -37,6 +37,14 @@ function togglePassword() {
     passwordInput.type = 'password';
     passwordToggle.innerHTML = 'Näytä salasana';
   }
+}
+
+function togglePassword() {
+  togglePasswordInput('password', 'password-toggle');
+}
+
+function togglePasswordConfirmation() {
+  togglePasswordInput('password-confirmation', 'password-confirmation-toggle');
 }
 
 function checkForm() {
