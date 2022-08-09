@@ -39,7 +39,7 @@
           />
         </fieldset>
         <fieldset>
-          <label for="password">
+          <label id="password-label" for="password">
             Salasana *
             <span class="align-right">
               <button
@@ -65,9 +65,13 @@
             onChange="checkForm()"
             required
           />
+          <span id="password-input-error">
+            <img src="/static/icons/warning.svg" />
+            Salasana on liian lyhyt
+          </span>
         </fieldset>
         <fieldset>
-          <label for="password-confirmation">
+          <label id="password-confirmation-label" for="password-confirmation">
             Vahvista salasana *
             <span class="align-right">
               <button
@@ -89,10 +93,13 @@
             id="password-confirmation"
             name="password-confirmation"
             type="password"
-            minlength="5"
             onChange="checkForm()"
             required
           />
+          <span id="password-confirmation-input-error">
+            <img src="/static/icons/warning.svg" />
+            Salasanat eivät täsmää
+          </span>
         </fieldset>
         <fieldset>
           <label id="email-label" for="email"
