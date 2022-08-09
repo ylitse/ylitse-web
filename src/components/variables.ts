@@ -16,8 +16,8 @@ export const palette = {
   orange2: '#FFD79B',
   warningred: '#972232',
   white: '#fff',
-	midgray: '#DBDBDB',
-	fadedgray: '#616161'
+  midgray: '#DBDBDB',
+  fadedgray: '#616161',
 };
 
 //breakpoints

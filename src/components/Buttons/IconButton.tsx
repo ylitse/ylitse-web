@@ -1,6 +1,5 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react';
 import styled from 'styled-components';
-import { variant } from 'styled-system';
 import CloseIcon from '../../static/icons/close.svg';
 import SearchIcon from '../../static/icons/search.svg';
 import BackIcon from '../../static/icons/back.svg';
@@ -39,61 +38,59 @@ const IconButton = <T extends ElementType = 'button'>({
   return <StyledIconButton variant={variant} {...rest} />;
 };
 
-const StyledIconButton = styled('button')(
-  {
-    position: 'absolute',
-    top: '1rem',
-    right: '1rem',
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
-    height: '2rem',
-    width: '2rem',
-    backgroundColor: 'transparent',
-    border: 'none',
-    appearance: 'none',
-    zIndex: '10',
-    cursor: 'pointer',
+const variantOptions = {
+  close: {
+    backgroundImage: `url(${CloseIcon})`,
   },
-  variant({
-    variants: {
-      close: {
-        backgroundImage: `url(${CloseIcon})`,
-      },
-      search: {
-        backgroundImage: `url(${SearchIcon})`,
-      },
-      back: {
-        backgroundImage: `url(${BackIcon})`,
-      },
-      edit: {
-        backgroundImage: `url(${EditIcon})`,
-      },
-      send: {
-        backgroundImage: `url(${SendIcon})`,
-      },
-      menu: {
-        backgroundImage: `url(${MenuIcon})`,
-      },
-      delete: {
-        backgroundImage: `url(${DeleteIcon})`,
-      },
-      prev: {
-        backgroundImage: `url(${PrevIcon})`,
-      },
-      next: {
-        backgroundImage: `url(${NextIcon})`,
-      },
-      rewind: {
-        backgroundImage: `url(${RewindIcon})`,
-      },
-      forward: {
-        backgroundImage: `url(${ForwardIcon})`,
-      },
-      tooltip: {
-        backgroundImage: `url(${TooltipIcon})`,
-      },
-    },
-  }),
-);
+  search: {
+    backgroundImage: `url(${SearchIcon})`,
+  },
+  back: {
+    backgroundImage: `url(${BackIcon})`,
+  },
+  edit: {
+    backgroundImage: `url(${EditIcon})`,
+  },
+  send: {
+    backgroundImage: `url(${SendIcon})`,
+  },
+  menu: {
+    backgroundImage: `url(${MenuIcon})`,
+  },
+  delete: {
+    backgroundImage: `url(${DeleteIcon})`,
+  },
+  prev: {
+    backgroundImage: `url(${PrevIcon})`,
+  },
+  next: {
+    backgroundImage: `url(${NextIcon})`,
+  },
+  rewind: {
+    backgroundImage: `url(${RewindIcon})`,
+  },
+  forward: {
+    backgroundImage: `url(${ForwardIcon})`,
+  },
+  tooltip: {
+    backgroundImage: `url(${TooltipIcon})`,
+  },
+};
+
+const StyledIconButton = styled.button<{ variant: ButtonIcon }>`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 2rem;
+  width: 2rem;
+  background-color: transparent;
+  border: none;
+  appearance: none;
+  z-index: 10;
+  cursor: pointer;
+  ${({ variant }) => variant && variantOptions[variant]}
+`;
 
 export default IconButton;
