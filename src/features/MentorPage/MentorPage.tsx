@@ -451,7 +451,7 @@ const mentorCards: Array<MentorProps> = [
     birthYear: 1993,
     region: 'Pirkanmaa',
     story:
-      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
+      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka! Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka! Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
     skills: [
       { text: 'Lastensuojelu' },
       { text: 'Itsenäistyminen' },
@@ -460,6 +460,16 @@ const mentorCards: Array<MentorProps> = [
       { text: 'Kela-asiointi' },
       { text: 'Raskausaika' },
       { text: 'Päihdeongelmat' },
+      { text: 'Päihdeongelmat2' },
+      { text: 'Päihdeongelmat3' },
+      { text: 'Päihdeongelmat4' },
+      { text: 'Päihdeongelmat5' },
+      { text: 'Päihdeongelmat6' },
+      { text: 'Päihdeongelmat7' },
+      { text: 'Päihdeongelmat8' },
+      { text: 'Päihdeongelmat9' },
+      { text: 'Päihdeongelmat10' },
+      { text: 'Päihdeongelmat11' },
     ],
     languages: ['Suomi', 'Englanti'],
   },
@@ -530,20 +540,21 @@ const mentorListCards: Array<ListCardProps> = mentorCards.map(item => {
 
 export type handleSetVisibleCardProps = {
   shouldShowMentorCard: boolean;
-  mentorCardData: ListCardProps;
+  mentorCardData: ListCardProps | undefined;
 };
-
-let currentCard: ListCardProps;
 
 const MentorPage = () => {
   const [shouldShowMentorCard, setVisibleCard] = React.useState(false);
+  const [currentCard, setCurrentCard] = React.useState<
+    ListCardProps | undefined
+  >();
 
   const handleSetVisibleCard = ({
     shouldShowMentorCard,
     mentorCardData,
   }: handleSetVisibleCardProps) => {
     setVisibleCard(shouldShowMentorCard);
-    currentCard = mentorCardData;
+    setCurrentCard(mentorCardData);
   };
   if (shouldShowMentorCard) {
     return (

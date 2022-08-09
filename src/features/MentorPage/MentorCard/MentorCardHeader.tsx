@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ListCardProps } from '../../../../../mentor_card/src/features/MentorPage/ListCard/types';
 import ProfilePicPlaceholder from '../../../static/img/icon-chat-profilepic.svg';
-import * as cssVariables from '../../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../../components/variables';
 import MentorCardHeaderBasicInfo from './MentorCardHeaderBasicInfo';
 
 type Props = {
@@ -9,34 +9,39 @@ type Props = {
 };
 
 const MentorCardHeader = ({ mentorCardData }: Props) => {
-  const newCardMessage = mentorCardData.isNewMentor ? 'Uusi' : '';
-  const availabilityMessage = mentorCardData.isLoggedIn
-    ? newCardMessage
-    : 'Ei tavoitettavissa';
-  return (
-    <MentorCardHeaderContainer>
-      <MentorAvailability
-        isShowing={availabilityMessage != ''}
-        isNew={availabilityMessage === 'Uusi'}
-      >
-        {availabilityMessage}
-      </MentorAvailability>
-      <ProfilePicContainer />
-      <MentorCardHeaderBasicInfo mentorCardData={mentorCardData} />
-    </MentorCardHeaderContainer>
-  );
+  if (mentorCardData !== undefined) {
+    const newCardMessage = mentorCardData.isNewMentor ? 'Uusi' : '';
+    const availabilityMessage = mentorCardData.isLoggedIn
+      ? newCardMessage
+      : 'Ei tavoitettavissa';
+    return (
+      <MentorCardHeaderContainer isLoggedIn={mentorCardData.isLoggedIn}>
+        <MentorAvailability
+          isShowing={availabilityMessage != ''}
+          isNew={availabilityMessage === 'Uusi'}
+        >
+          {availabilityMessage}
+        </MentorAvailability>
+        <ProfilePicContainer />
+        <MentorCardHeaderBasicInfo mentorCardData={mentorCardData} />
+      </MentorCardHeaderContainer>
+    );
+  }
+  return <></>;
 };
 
-const MentorCardHeaderContainer = styled.div`
+const MentorCardHeaderContainer = styled.div<{ isLoggedIn: boolean }>`
   flex: 0 0 21vw;
   min-height: 57vh;
-  height: 100%;
   width: 21vw;
   border-radius: 10px;
   position: relative;
   top: 0;
   left: 0;
-  background-color: ${cssVariables.palette.purple};
+  background-color: ${props =>
+    props.isLoggedIn
+      ? cssVariables.palette.purple
+      : cssVariables.palette.bluegrey};
 `;
 
 const ProfilePicContainer = styled.div`
@@ -68,6 +73,7 @@ const MentorAvailability = styled.div<{ isShowing: boolean; isNew: boolean }>`
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
   transform: translate(-50%, -50%);
+  width: fit-content;
 `;
 
 export default MentorCardHeader;

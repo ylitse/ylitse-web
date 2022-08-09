@@ -1,7 +1,7 @@
 import CSS from 'csstype';
 import { variants } from './variants';
-import { Color } from './variables';
-import * as cssVariables from './variables';
+import { Color } from '../variables';
+import * as cssVariables from '../variables';
 
 export type TextVariant = 'h1' | 'h2' | 'h3' | 'p' | 'a';
 

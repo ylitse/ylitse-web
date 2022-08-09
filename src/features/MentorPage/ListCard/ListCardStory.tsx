@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Text } from '../../../components/CommonTextStyles/Text';
-import * as cssVariables from '../../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../../components/variables';
 
 const ListCardStory = ({ story }: { story: string }) => {
   return (

@@ -1,27 +1,47 @@
 import styled from 'styled-components';
 import ListCard from '../ListCard';
 import { MentorListItemsProps } from './types';
-import * as cssVariables from '../../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../../components/variables';
+import { handleSetVisibleCardProps } from '../MentorPage';
+import { ListCardProps } from '../ListCard/types';
 
 /**
  * Mentor cards listing on mentor page
  */
 
+type Props = {
+  setVisibleCard: ({
+    shouldShowMentorCard,
+    mentorCardData,
+  }: handleSetVisibleCardProps) => void;
+  item: ListCardProps;
+};
+
+const MapMentorCard = ({ setVisibleCard, item }: Props) => {
+  if (item) {
+    return (
+      <ListCard
+        key={item.mentor.displayName}
+        mentorCardData={item}
+        setVisibleCard={setVisibleCard}
+      />
+    );
+  }
+  return <></>;
+};
+
 const MentorListItems = ({
   setVisibleCard,
   mentorCardData,
 }: MentorListItemsProps) => {
-  return (
-    <CardsList data-testid="mentor-cards-container">
-      {mentorCardData.map(item => (
-        <ListCard
-          key={item.mentor.displayName}
-          mentorCardData={item}
-          setVisibleCard={setVisibleCard}
-        />
-      ))}
-    </CardsList>
-  );
+  if (mentorCardData !== undefined) {
+    return (
+      <CardsList data-testid="mentor-cards-container">
+        {mentorCardData.map(item => MapMentorCard({ setVisibleCard, item }))}
+      </CardsList>
+    );
+  }
+  return <></>;
 };
 
 const CardsList = styled.div`

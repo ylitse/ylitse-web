@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../../components/variables';
 import ProfilePicPlaceholder from '../../../static/img/icon-chat-profilepic.svg';
 import CSS from 'csstype';
 import { Text } from '../../../components/CommonTextStyles/Text';

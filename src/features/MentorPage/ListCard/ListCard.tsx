@@ -5,7 +5,7 @@ import ListCardLanguages from './ListCardLanguages';
 import ListCardSkills from './ListCardSkills';
 import ListCardStory from './ListCardStory';
 import OpenCardButton from './OpenCardButton';
-import * as cssVariables from '../../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../../components/variables';
 import { handleSetVisibleCardProps } from '../MentorPage';
 
 /**
@@ -21,28 +21,31 @@ type Props = {
 };
 
 const ListCard = ({ setVisibleCard, mentorCardData }: Props) => {
-  const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
-  return (
-    <ListCardElement>
-      <ListCardHeader
-        name={mentorCardData.mentor.displayName}
-        age={age}
-        region={mentorCardData.mentor.region}
-        isAvailable={mentorCardData.isLoggedIn}
-        isNewMentor={mentorCardData.isNewMentor}
-        message={mentorCardData.contactMessage}
-      />
-      <CardContent>
-        <ListCardStory story={mentorCardData.mentor.story} />
-        <ListCardLanguages languages={mentorCardData.mentor.languages} />
-        <ListCardSkills skills={mentorCardData.mentor.skills} />
-        <OpenCardButton
-          setVisibleCard={setVisibleCard}
-          mentorCardData={mentorCardData}
+  if (mentorCardData !== undefined) {
+    const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
+    return (
+      <ListCardElement>
+        <ListCardHeader
+          name={mentorCardData.mentor.displayName}
+          age={age}
+          region={mentorCardData.mentor.region}
+          isAvailable={mentorCardData.isLoggedIn}
+          isNewMentor={mentorCardData.isNewMentor}
+          message={mentorCardData.contactMessage}
         />
-      </CardContent>
-    </ListCardElement>
-  );
+        <CardContent>
+          <ListCardStory story={mentorCardData.mentor.story} />
+          <ListCardLanguages languages={mentorCardData.mentor.languages} />
+          <ListCardSkills skills={mentorCardData.mentor.skills} />
+          <OpenCardButton
+            setVisibleCard={setVisibleCard}
+            mentorCardData={mentorCardData}
+          />
+        </CardContent>
+      </ListCardElement>
+    );
+  }
+  return <></>;
 };
 
 const ListCardElement = styled.div`

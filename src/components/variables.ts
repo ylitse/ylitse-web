@@ -3,6 +3,7 @@ export type Color = keyof typeof palette;
 
 export const palette = {
   purple: '#4A2ACB',
+  midpurple: '#5C33FF',
   darkpurple: '#37119D',
   palepurple: '#E5E4FF',
   bluegrey: '#4C6282',
@@ -12,8 +13,11 @@ export const palette = {
   whiteblue: '#E4F3FB',
   footerblue: '#01A5EC',
   orange: '#F0BA8C',
+  orange2: '#FFD79B',
   warningred: '#972232',
   white: '#fff',
+	midgray: '#DBDBDB',
+	fadedgray: '#616161'
 };
 
 //breakpoints

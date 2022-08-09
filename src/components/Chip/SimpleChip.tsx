@@ -1,7 +1,7 @@
 import { ChipProps } from './types';
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../CommonTextStyles/variables';
+import * as cssVariables from '../variables';
 
 /**
  * Creates a non-selectable chip

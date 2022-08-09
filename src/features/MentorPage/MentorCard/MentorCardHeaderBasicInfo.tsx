@@ -26,26 +26,33 @@ const truncateText: CSS.Properties = {
   fontSize: '1rem',
   lineHeight: '1.5rem',
   color: '#ffffff',
+  textAlign: 'center',
 };
 
 const MentorCardHeaderBasicInfo = ({ mentorCardData }: Props) => {
-  const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
-  return (
-    <BasicInfoContainer>
-      <Text color="white" variant="h2" style={{ margin: 0 }}>
-        {mentorCardData.mentor.displayName}
-      </Text>
-      <NameDivider />
-      <Text color="white" variant="p" style={customStylus}>
-        {age} v. <StyledDivider>|</StyledDivider> {mentorCardData.mentor.region}
-      </Text>
-      <Text color="white" variant="p" style={{ margin: 0 }}>
-        {mentorCardData.isLoggedIn}
-      </Text>
-      <p style={truncateText}>{mentorCardData.contactMessage}</p>
-      <MentorCardLanguages languages={mentorCardData.mentor.languages} />
-    </BasicInfoContainer>
-  );
+  if (mentorCardData !== undefined) {
+    const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
+    return (
+      <BasicInfoContainer>
+        <Text color="white" variant="h2" style={{ margin: 0 }}>
+          {mentorCardData.mentor.displayName}
+        </Text>
+        <NameDivider />
+        <Text color="white" variant="p" style={customStylus}>
+          {age} v. <StyledDivider>|</StyledDivider>{' '}
+          {mentorCardData.mentor.region}
+        </Text>
+        <Text color="white" variant="p" style={{ margin: 0 }}>
+          {mentorCardData.isLoggedIn}
+        </Text>
+        <p title={mentorCardData.contactMessage} style={truncateText}>
+          {mentorCardData.contactMessage}
+        </p>
+        <MentorCardLanguages languages={mentorCardData.mentor.languages} />
+      </BasicInfoContainer>
+    );
+  }
+  return <></>;
 };
 
 const BasicInfoContainer = styled.div`

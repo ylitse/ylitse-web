@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { ListCardProps } from '../../../../../mentor_card/src/features/MentorPage/ListCard/types';
 import { handleSetVisibleCardProps } from '../MentorPage';
 import MentorCardHeader from './MentorCardHeader';
-import CloseIcon from '../../../static/icons/icon-close.svg';
 import MentorContent from './MentorContent';
+import { IconButton } from '../../../components/Buttons';
 
 /**
  * Selected mentor card in mentor page
@@ -18,49 +18,37 @@ type Props = {
 };
 
 const MentorCard = ({ setVisibleCard, mentorCardData }: Props) => {
-  const handleClick = () => {
-    const shouldShowMentorCard = false;
-    setVisibleCard({ shouldShowMentorCard, mentorCardData });
-  };
-
-  if (mentorCardData) {
+  if (mentorCardData !== undefined) {
+    const handleClick = () => {
+      setVisibleCard({
+        shouldShowMentorCard: false,
+        mentorCardData: undefined,
+      });
+    };
     return (
       <MentorCardContainer>
-        <StyledMentorCard className="mentorikortti">
+        <StyledMentorCard>
           <MentorCardHeader mentorCardData={mentorCardData} />
-          <CloseButton onClick={handleClick}></CloseButton>
+          <IconButton variant="close" onClick={handleClick}></IconButton>
           <MentorContent mentorCardData={mentorCardData} />
         </StyledMentorCard>
       </MentorCardContainer>
     );
-  } else {
-    return <></>;
   }
+  return <></>;
 };
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background-image: url(${CloseIcon});
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 2rem;
-  width: 2rem;
-  background-color: transparent;
-  border: none;
-  appearance: none;
-  z-index: 10;
-`;
 
 const StyledMentorCard = styled.div`
   position: fixed;
   display: flex;
-  top: 21.5vh;
-  left: 17.5vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
   width: 65vw;
   min-height: 57vh;
   height: fit-content;
+  max-height: 80vh;
   background-color: white;
   opacity: 1;
   border-radius: 10px;
