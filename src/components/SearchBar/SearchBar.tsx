@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import SearchIconImg from '../../static/img/search.svg';
+import { basicSourceSansText } from '../variables';
 
 type SearchProps = {
   placeholder: string;
@@ -25,7 +26,7 @@ const SearchInput = styled.input`
   display: flex;
   border: #4a2acb solid 1px;
   width: 100%;
-  font-family: 'Source Sans Pro', cursive;
+  ${basicSourceSansText};
   font-weight: 400;
   font-size: 1.5rem;
   padding: 1rem 4.5rem;

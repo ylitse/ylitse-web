@@ -19,7 +19,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
 };
 
 const BasicPageElement = styled.div`
-  background-color: #cde8f8;
+  background-color: ${cssVariables.palette.lightblue};
   position: relative;
   width: 100vw;
   height: auto;

@@ -70,10 +70,7 @@ const variantOptions = {
 };
 
 const StyledTextButton = styled.button<{ variant: ButtonColorVariant }>`
-  font-family: 'Baloo 2', cursive;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1rem;
+  ${cssVariables.basicBalooText}
   border: none;
   line-height: 150%;
   padding: ${cssVariables.spacing.small_button_padding};

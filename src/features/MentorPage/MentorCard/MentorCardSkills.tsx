@@ -8,21 +8,18 @@ type Props = {
 };
 
 const MentorCardSkills = ({ mentorCardData }: Props) => {
-  if (mentorCardData !== undefined) {
-    return (
-      <Skills>
-        <Text variant="h3" style={{ margin: '3rem 0 0 0' }}>
-          Voin auttaa myös näissä
-        </Text>
-        <SkillChips>
-          {mentorCardData.mentor.skills.map(item => (
-            <SimpleChip key={item.text} text={item.text} />
-          ))}
-        </SkillChips>
-      </Skills>
-    );
-  }
-  return <></>;
+  return (
+    <Skills>
+      <Text variant="h3" style={{ margin: '3rem 0 0 0' }}>
+        Voin auttaa myös näissä
+      </Text>
+      <SkillChips>
+        {mentorCardData.mentor.skills.map(item => (
+          <SimpleChip key={item.text} text={item.text} />
+        ))}
+      </SkillChips>
+    </Skills>
+  );
 };
 
 const Skills = styled.div`

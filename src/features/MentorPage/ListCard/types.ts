@@ -9,11 +9,9 @@ export type MentorProps = {
   languages: Array<string>;
 };
 
-export type ListCardProps =
-  | {
-      mentor: MentorProps;
-      isLoggedIn: boolean;
-      isNewMentor: boolean;
-      contactMessage: string;
-    }
-  | undefined;
+export type ListCardProps = {
+  mentor: MentorProps;
+  isLoggedIn: boolean;
+  isNewMentor: boolean;
+  contactMessage: string;
+};

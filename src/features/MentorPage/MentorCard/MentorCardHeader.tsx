@@ -9,25 +9,22 @@ type Props = {
 };
 
 const MentorCardHeader = ({ mentorCardData }: Props) => {
-  if (mentorCardData !== undefined) {
-    const newCardMessage = mentorCardData.isNewMentor ? 'Uusi' : '';
-    const availabilityMessage = mentorCardData.isLoggedIn
-      ? newCardMessage
-      : 'Ei tavoitettavissa';
-    return (
-      <MentorCardHeaderContainer isLoggedIn={mentorCardData.isLoggedIn}>
-        <MentorAvailability
-          isShowing={availabilityMessage != ''}
-          isNew={availabilityMessage === 'Uusi'}
-        >
-          {availabilityMessage}
-        </MentorAvailability>
-        <ProfilePicContainer />
-        <MentorCardHeaderBasicInfo mentorCardData={mentorCardData} />
-      </MentorCardHeaderContainer>
-    );
-  }
-  return <></>;
+  const newCardMessage = mentorCardData.isNewMentor ? 'Uusi' : '';
+  const availabilityMessage = mentorCardData.isLoggedIn
+    ? newCardMessage
+    : 'Ei tavoitettavissa';
+  return (
+    <MentorCardHeaderContainer isLoggedIn={mentorCardData.isLoggedIn}>
+      <MentorAvailability
+        isShowing={availabilityMessage != ''}
+        isNew={availabilityMessage === 'Uusi'}
+      >
+        {availabilityMessage}
+      </MentorAvailability>
+      <ProfilePicContainer />
+      <MentorCardHeaderBasicInfo mentorCardData={mentorCardData} />
+    </MentorCardHeaderContainer>
+  );
 };
 
 const MentorCardHeaderContainer = styled.div<{ isLoggedIn: boolean }>`
@@ -65,8 +62,7 @@ const MentorAvailability = styled.div<{ isShowing: boolean; isNew: boolean }>`
   position: absolute;
   top: 0;
   left: 50%;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
+  ${cssVariables.basicSourceSansText};
   font-weight: 600;
   font-size: 1rem;
   line-height: 150%;

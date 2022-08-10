@@ -148,8 +148,7 @@ const MentorAvailability = styled.div<{ isShowing: boolean; isNew: boolean }>`
   position: absolute;
   top: 0;
   right: 0;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
+  ${cssVariables.basicSourceSansText};
   font-weight: 600;
   font-size: 1rem;
   line-height: 150%;

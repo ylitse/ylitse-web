@@ -19,9 +19,7 @@ const StyledSimpleChip = styled.button`
   flex: 0 0 auto;
   background-color: ${cssVariables.palette.lightblue};
   padding: 0.5rem 1rem;
-  font-family: 'Source Sans Pro', cursive;
-  font-style: normal;
-  font-weight: 400;
+  ${cssVariables.basicSourceSansText};
   font-size: 1rem;
   line-height: 1rem;
   color: ${cssVariables.palette.darkblue};

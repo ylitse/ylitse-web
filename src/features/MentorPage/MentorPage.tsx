@@ -556,26 +556,14 @@ const MentorPage = () => {
     setVisibleCard(shouldShowMentorCard);
     setCurrentCard(mentorCardData);
   };
-  if (shouldShowMentorCard) {
-    return (
-      <PageLayout>
+  return (
+    <PageLayout>
+      {shouldShowMentorCard && currentCard && (
         <MentorCard
           setVisibleCard={handleSetVisibleCard}
           mentorCardData={currentCard}
         />
-        <OneContainerLayout headLine={mentorPageHeadline}>
-          <MentorInfoSearchDiv />
-          <MentorChips items={mentorChipList} />
-        </OneContainerLayout>
-        <MentorListItems
-          setVisibleCard={handleSetVisibleCard}
-          mentorCardData={mentorListCards}
-        />
-      </PageLayout>
-    );
-  }
-  return (
-    <PageLayout>
+      )}
       <OneContainerLayout headLine={mentorPageHeadline}>
         <MentorInfoSearchDiv />
         <MentorChips items={mentorChipList} />

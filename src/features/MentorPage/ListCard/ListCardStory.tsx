@@ -14,8 +14,7 @@ const ListCardStory = ({ story }: { story: string }) => {
 };
 
 const TruncatedMultiline = styled.p`
-  font-family: 'Source Sans Pro';
-  font-style: normal;
+  ${cssVariables.basicSourceSansText};
   font-weight: 400;
   font-size: 1rem;
   line-height: 150%;

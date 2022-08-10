@@ -4,6 +4,7 @@ import { handleSetVisibleCardProps } from '../MentorPage';
 import MentorCardHeader from './MentorCardHeader';
 import MentorContent from './MentorContent';
 import { IconButton } from '../../../components/Buttons';
+import * as cssVariables from '../../../components/variables';
 
 /**
  * Selected mentor card in mentor page
@@ -18,24 +19,21 @@ type Props = {
 };
 
 const MentorCard = ({ setVisibleCard, mentorCardData }: Props) => {
-  if (mentorCardData !== undefined) {
-    const handleClick = () => {
-      setVisibleCard({
-        shouldShowMentorCard: false,
-        mentorCardData: undefined,
-      });
-    };
-    return (
-      <MentorCardContainer>
-        <StyledMentorCard>
-          <MentorCardHeader mentorCardData={mentorCardData} />
-          <IconButton variant="close" onClick={handleClick}></IconButton>
-          <MentorContent mentorCardData={mentorCardData} />
-        </StyledMentorCard>
-      </MentorCardContainer>
-    );
-  }
-  return <></>;
+  const handleClick = () => {
+    setVisibleCard({
+      shouldShowMentorCard: false,
+      mentorCardData: undefined,
+    });
+  };
+  return (
+    <MentorCardContainer>
+      <StyledMentorCard>
+        <MentorCardHeader mentorCardData={mentorCardData} />
+        <IconButton variant="close" onClick={handleClick}></IconButton>
+        <MentorContent mentorCardData={mentorCardData} />
+      </StyledMentorCard>
+    </MentorCardContainer>
+  );
 };
 
 const StyledMentorCard = styled.div`
@@ -61,7 +59,7 @@ const MentorCardContainer = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(57, 57, 57, 0.75);
+  background-color: ${cssVariables.palette.blurbackground};
   z-index: 10;
 `;
 

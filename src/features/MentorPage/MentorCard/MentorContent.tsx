@@ -19,26 +19,23 @@ const customStylus: CSS.Properties = {
 };
 
 const MentorCardContent = ({ mentorCardData }: Props) => {
-  if (mentorCardData !== undefined) {
-    const handleClick = () => {
-      console.log('open conversation');
-    };
-    return (
-      <MentorContentContainer>
-        <MentorContent>
-          <Text variant="h3" style={{ margin: 0 }}>
-            Tarinani
-          </Text>
-          <Text variant="p">{mentorCardData.mentor.story}</Text>
-          <MentorCardSkills mentorCardData={mentorCardData} />
-          <TextButton onClick={handleClick} style={customStylus}>
-            Avaa keskustelu
-          </TextButton>
-        </MentorContent>
-      </MentorContentContainer>
-    );
-  }
-  return <></>;
+  const handleClick = () => {
+    console.log('open conversation');
+  };
+  return (
+    <MentorContentContainer>
+      <MentorContent>
+        <Text variant="h3" style={{ margin: 0 }}>
+          Tarinani
+        </Text>
+        <Text variant="p">{mentorCardData.mentor.story}</Text>
+        <MentorCardSkills mentorCardData={mentorCardData} />
+        <TextButton onClick={handleClick} style={customStylus}>
+          Avaa keskustelu
+        </TextButton>
+      </MentorContent>
+    </MentorContentContainer>
+  );
 };
 
 const MentorContentContainer = styled.div`
@@ -51,7 +48,7 @@ const MentorContentContainer = styled.div`
   max-height: 90vh;
   margin-bottom: 3.15vw;
   flex: 0 0 37.7vw;
-  overflow: scroll;
+  overflow: auto;
   box-sizing: border-box;
 `;
 const MentorContent = styled.div`

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import MentorSearch from './MentorSearch';
+import * as cssVariables from '../../../components/variables';
 
 /**
  * Div under the "Mentorit" -header where info about mentorsearch
@@ -21,8 +22,8 @@ const MentorInfoSearchDiv = () => {
 
 const MentorInfoText = styled.div`
   flex: 0 0 auto;
-  color: #1c325d;
-  font-family: 'Source Sans Pro', cursive;
+  color: ${cssVariables.palette.darkblue};
+  ${cssVariables.basicSourceSansText};
   font-weight: 400;
   font-size: 1.25rem;
   width: 47%;

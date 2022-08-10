@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import * as cssVariables from '../../components/variables';
 
 export const StyledMentorPage = styled.div`
-  background-color: #cde8f8;
+  background-color: ${cssVariables.palette.lightblue};
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -25,12 +26,12 @@ export const StyledMentorSearchElement = styled.div`
 export const StyledMentorHeader = styled.div`
   flex: 1;
   max-width: 76vw;
-  background-color: #43bfff;
+  background-color: ${cssVariables.palette.blue2};
   border-radius: 10px;
   max-height: 80px;
   height: 80px;
-  color: #1c325d;
-  font-family: 'Baloo 2', cursive;
+  color: ${cssVariables.palette.darkblue};
+  ${cssVariables.basicBalooText};
   font-weight: 700;
   font-size: 30px;
   display: flex;
@@ -40,8 +41,8 @@ export const StyledMentorHeader = styled.div`
 
 export const StyledMentorInfoText = styled.div`
   flex: 0 0 auto;
-  color: #1c325d;
-  font-family: 'Source Sans Pro', cursive;
+  color: ${cssVariables.palette.darkblue};
+  ${cssVariables.basicSourceSansText};
   font-weight: 400;
   font-size: 1.25rem;
   width: 47%;
