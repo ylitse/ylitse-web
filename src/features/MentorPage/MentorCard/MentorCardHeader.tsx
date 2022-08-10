@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../../../../../mentor_card/src/features/MentorPage/ListCard/types';
+import { ListCardProps } from '../ListCard/types';
 import ProfilePicPlaceholder from '../../../static/img/icon-chat-profilepic.svg';
 import * as cssVariables from '../../../components/variables';
 import MentorCardHeaderBasicInfo from './MentorCardHeaderBasicInfo';

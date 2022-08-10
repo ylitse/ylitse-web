@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../../../../../mentor_card/src/features/MentorPage/ListCard/types';
+import { ListCardProps } from '../ListCard/types';
 import { handleSetVisibleCardProps } from '../MentorPage';
 import MentorCardHeader from './MentorCardHeader';
 import MentorContent from './MentorContent';

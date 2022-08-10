@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../../../../../mentor_card/src/features/MentorPage/ListCard/types';
+import { ListCardProps } from '../ListCard/types';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import MentorCardSkills from './MentorCardSkills';
 import { TextButton } from '../../../components/Buttons';

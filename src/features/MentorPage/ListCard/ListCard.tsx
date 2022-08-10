@@ -21,31 +21,28 @@ type Props = {
 };
 
 const ListCard = ({ setVisibleCard, mentorCardData }: Props) => {
-  if (mentorCardData !== undefined) {
-    const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
-    return (
-      <ListCardElement>
-        <ListCardHeader
-          name={mentorCardData.mentor.displayName}
-          age={age}
-          region={mentorCardData.mentor.region}
-          isAvailable={mentorCardData.isLoggedIn}
-          isNewMentor={mentorCardData.isNewMentor}
-          message={mentorCardData.contactMessage}
+  const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
+  return (
+    <ListCardElement>
+      <ListCardHeader
+        name={mentorCardData.mentor.displayName}
+        age={age}
+        region={mentorCardData.mentor.region}
+        isAvailable={mentorCardData.isLoggedIn}
+        isNewMentor={mentorCardData.isNewMentor}
+        message={mentorCardData.contactMessage}
+      />
+      <CardContent>
+        <ListCardStory story={mentorCardData.mentor.story} />
+        <ListCardLanguages languages={mentorCardData.mentor.languages} />
+        <ListCardSkills skills={mentorCardData.mentor.skills} />
+        <OpenCardButton
+          setVisibleCard={setVisibleCard}
+          mentorCardData={mentorCardData}
         />
-        <CardContent>
-          <ListCardStory story={mentorCardData.mentor.story} />
-          <ListCardLanguages languages={mentorCardData.mentor.languages} />
-          <ListCardSkills skills={mentorCardData.mentor.skills} />
-          <OpenCardButton
-            setVisibleCard={setVisibleCard}
-            mentorCardData={mentorCardData}
-          />
-        </CardContent>
-      </ListCardElement>
-    );
-  }
-  return <></>;
+      </CardContent>
+    </ListCardElement>
+  );
 };
 
 const ListCardElement = styled.div`
