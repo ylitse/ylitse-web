@@ -20,7 +20,7 @@ describe('register', () => {
   };
 
   const submitShouldBeDisabled = () =>
-    cy.get('button[id="submit').should('be.disabled');
+    cy.get('button[id="submit"]').should('be.disabled');
 
   beforeEach(() => {
     cy.visit('/register');
