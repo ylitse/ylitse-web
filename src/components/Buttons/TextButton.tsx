@@ -40,7 +40,7 @@ const variantOptions = {
   },
   light: {
     border: `2px solid ${cssVariables.palette.purple}`,
-    backgroundColor: 'white',
+    backgroundColor: cssVariables.palette.white,
     color: cssVariables.palette.purple,
     ['&: hover']: {
       border: `2px solid ${cssVariables.palette.darkpurple}`,

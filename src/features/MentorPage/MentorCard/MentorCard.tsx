@@ -47,7 +47,7 @@ const StyledMentorCard = styled.div`
   min-height: 57vh;
   height: fit-content;
   max-height: 80vh;
-  background-color: white;
+  background-color: ${cssVariables.palette.white};
   opacity: 1;
   border-radius: 10px;
   z-index: 100;

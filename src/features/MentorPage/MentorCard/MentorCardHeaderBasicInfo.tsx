@@ -3,6 +3,7 @@ import { ListCardProps } from '../ListCard/types';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import CSS from 'csstype';
 import MentorCardLanguages from './MentorCardLanguages';
+import * as cssVariables from '../../../components/variables';
 
 type Props = {
   mentorCardData: ListCardProps;
@@ -25,7 +26,7 @@ const truncateText: CSS.Properties = {
   fontWeight: '400',
   fontSize: '1rem',
   lineHeight: '1.5rem',
-  color: '#ffffff',
+  color: cssVariables.palette.white,
   textAlign: 'center',
 };
 
@@ -67,7 +68,7 @@ const BasicInfoContainer = styled.div`
 const NameDivider = styled.div`
   width: 16vw;
   height: 2px;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid ${cssVariables.palette.white};
   margin-top: 0.25rem;
   margin-bottom: 0.5rem;
 `;

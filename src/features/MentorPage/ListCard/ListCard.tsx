@@ -50,7 +50,7 @@ const ListCardElement = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
-  background-color: white;
+  background-color: ${cssVariables.palette.white};
   border-radius: 0.75rem;
   flex-direction: column;
   margin: ${cssVariables.spacing.layout_spacing};

@@ -15,7 +15,7 @@ export const StyledMentorPage = styled.div`
 export const StyledMentorSearchElement = styled.div`
   flex: 0 0 auto;
   max-width: 76vw;
-  background-color: white;
+  background-color: ${cssVariables.palette.white};
   border-radius: 10px;
   margin-left: 12vw;
   margin-right: 12vw;

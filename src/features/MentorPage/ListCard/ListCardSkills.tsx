@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { SimpleChip } from '../../../components/Chip';
 import { ChipProps } from '@/components/Chip/types';
 import { Text } from '../../../components/CommonTextStyles/Text';
+import * as cssVariables from '../../../components/variables';
 
 const ListCardSkills = ({ skills }: { skills: Array<ChipProps> }) => {
   return (
@@ -39,7 +40,7 @@ const SkillChips = styled.div`
     display: block;
     position: absolute;
     top: 3.5rem;
-    background: linear-gradient(transparent, white);
+    background: linear-gradient(transparent, ${cssVariables.palette.white});
   }
 `;
 

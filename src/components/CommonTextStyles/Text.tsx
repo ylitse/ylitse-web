@@ -32,5 +32,5 @@ export const Text: React.FC<Props> = ({
 };
 
 const commonStyles = {
-  color: '#FFF',
+  color: cssVariables.palette.white,
 };

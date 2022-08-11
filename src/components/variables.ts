@@ -6,6 +6,7 @@ export const palette = {
   midpurple: '#5C33FF',
   darkpurple: '#37119D',
   palepurple: '#E5E4FF',
+  hoverpurple: '#cdcbff',
   bluegrey: '#4C6282',
   blue2: '#43BFFF',
   darkblue: '#1C325D',

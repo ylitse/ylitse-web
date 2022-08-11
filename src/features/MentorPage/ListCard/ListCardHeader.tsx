@@ -30,7 +30,7 @@ const truncateText: CSS.Properties = {
   fontWeight: '400',
   fontSize: '1rem',
   lineHeight: '1.5rem',
-  color: '#ffffff',
+  color: cssVariables.palette.white,
 };
 
 const ListCardHeader: React.FC<Props> = ({
@@ -82,7 +82,7 @@ const StyledListCardHeader = styled.div<{ isSelected: boolean }>`
     props.isSelected
       ? cssVariables.palette.purple
       : cssVariables.palette.bluegrey};
-  color: white;
+  color: ${cssVariables.palette.white};
   border-radius: 0.75rem;
   padding: 1.9rem;
   box-sizing: border-box;

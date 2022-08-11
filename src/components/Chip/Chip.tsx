@@ -45,7 +45,9 @@ const StyledChip = styled.button<{ isSelected: boolean }>`
   cursor: pointer;
   &:hover {
     background-color: ${props =>
-      props.isSelected ? cssVariables.palette.purple : '#cdcbff'};
+      props.isSelected
+        ? cssVariables.palette.purple
+        : cssVariables.palette.hoverpurple};
   }
 `;
 

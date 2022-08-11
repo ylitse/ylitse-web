@@ -25,7 +25,7 @@ const OneContainer = styled.div`
   border-radius: 10px;
   margin: 0;
   height: auto;
-  background-color: white;
+  background-color: ${cssVariables.palette.white};
 `;
 
 const PageHeader = styled.div`
