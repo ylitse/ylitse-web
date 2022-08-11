@@ -47,6 +47,32 @@ function togglePasswordConfirmation() {
   togglePasswordInput('password-confirmation', 'password-confirmation-toggle');
 }
 
+function clearError(field) {
+  field.classList.remove('error-border');
+  if (field.id === 'password' || field.id === 'email') {
+    document
+      .getElementById(`${field.id}-label`)
+      .classList.remove('error-color');
+    document.getElementById(`${field.id}-input-error`).style.display = 'none';
+  }
+}
+
+function displayError(field) {
+  var notEmpty = field.value.length > 0;
+  if (notEmpty) {
+    field.classList.add('error-border');
+  }
+  if (
+    (field.id === 'password' && notEmpty) ||
+    (field.id === 'password-confirmation' && notEmpty) ||
+    field.id === 'email'
+  ) {
+    document.getElementById(`${field.id}-label`).classList.add('error-color');
+    document.getElementById(`${field.id}-input-error`).style.display = 'flex';
+  }
+  field.classList.remove('input-checkmark');
+}
+
 function checkForm() {
   var formError = false;
   document
@@ -54,75 +80,27 @@ function checkForm() {
     .querySelectorAll('input')
     .forEach(function (field) {
       if (field.id === 'password-confirmation') {
-        var passwordField = document.getElementById('password');
-        var passwordConfirmationField = document.getElementById(
-          'password-confirmation',
-        );
         var passwordsMatch =
-          passwordField.value === passwordConfirmationField.value;
+          field.value === document.getElementById('password').value;
         if (passwordsMatch) {
-          passwordConfirmationField.classList.remove('error-border');
-          document
-            .getElementById('password-confirmation-label')
-            .classList.remove('error-color');
-          document.getElementById(
-            'password-confirmation-input-error',
-          ).style.display = 'none';
-          if (passwordConfirmationField.value.length >= 5) {
-            passwordConfirmationField.classList.add('input-checkmark');
+          clearError(field);
+          if (field.value.length >= 5) {
+            field.classList.add('input-checkmark');
           }
         } else {
           formError = true;
-          passwordConfirmationField.classList.remove('input-checkmark');
-          if (passwordConfirmationField.value.length > 0) {
-            passwordConfirmationField.classList.add('error-border');
-            document
-              .getElementById('password-confirmation-label')
-              .classList.add('error-color');
-            document.getElementById(
-              'password-confirmation-input-error',
-            ).style.display = 'flex';
-          }
+          displayError(field);
         }
       } else if (field.checkValidity()) {
-        field.classList.remove('error-border');
+        clearError(field);
         if (field.value.length > 0) {
           field.classList.add('input-checkmark');
         }
-        if (field.id === 'password') {
-          document
-            .getElementById('password-label')
-            .classList.remove('error-color');
-          document.getElementById('password-input-error').style.display =
-            'none';
-        } else if (field.id === 'email') {
-          document
-            .getElementById('email-label')
-            .classList.remove('error-color');
-          document.getElementById('email-input-error').style.display = 'none';
-        }
       } else {
         formError = true;
-        field.classList.remove('input-checkmark');
-        if (field.value.length > 0) {
-          field.classList.add('error-border');
-        }
-        if (field.id === 'password' && field.value.length > 0) {
-          document
-            .getElementById('password-label')
-            .classList.add('error-color');
-          document.getElementById('password-input-error').style.display =
-            'flex';
-        }
-        if (field.id === 'email') {
-          document.getElementById('email-label').classList.add('error-color');
-          document.getElementById('email-input-error').style.display = 'flex';
-        }
+        displayError(field);
       }
     });
-  if (formError) {
-    document.getElementById('submit').disabled = true;
-  } else {
-    document.getElementById('submit').disabled = false;
-  }
+  // Submit button is disabled if there is a form error
+  document.getElementById('submit').disabled = formError;
 }
