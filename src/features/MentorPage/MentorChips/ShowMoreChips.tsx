@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ExpandIcon from '../../../static/img/icon-expand.svg';
+import * as cssVariables from '../../../components/variables';
 
 type Props = {
   setShouldShowAllSkills: () => void;
@@ -45,13 +46,12 @@ const MoreIcon = styled.div`
 `;
 
 const ShowMoreButton = styled.button`
-  font-family: 'Baloo 2', cursive;
-  font-style: normal;
+  ${cssVariables.basicBalooText};
   font-weight: 700;
   font-size: 18px;
   border: none;
   background-color: transparent;
-  color: #4a2acb;
+  color: ${cssVariables.palette.purple};
   line-height: 2rem;
 `;
 

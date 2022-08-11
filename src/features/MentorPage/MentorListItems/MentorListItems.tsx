@@ -1,24 +1,22 @@
 import styled from 'styled-components';
 import ListCard from '../ListCard';
 import { MentorListItemsProps } from './types';
-import * as cssVariables from '../../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../../components/variables';
 
 /**
- * The logic for mentor cards shown in the Mentor page
- * An array with cards that need to be shown should be
- * passed to CardsElement where layout will be added.
+ * Mentor cards listing on mentor page
  */
 
 const MentorListItems = ({
   setVisibleCard,
-  mentorData,
+  mentorCardData,
 }: MentorListItemsProps) => {
   return (
     <CardsList data-testid="mentor-cards-container">
-      {mentorData.map(item => (
+      {mentorCardData.map(item => (
         <ListCard
           key={item.mentor.displayName}
-          mentorData={item}
+          mentorCardData={item}
           setVisibleCard={setVisibleCard}
         />
       ))}

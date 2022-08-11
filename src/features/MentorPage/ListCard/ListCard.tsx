@@ -5,37 +5,40 @@ import ListCardLanguages from './ListCardLanguages';
 import ListCardSkills from './ListCardSkills';
 import ListCardStory from './ListCardStory';
 import OpenCardButton from './OpenCardButton';
-import * as cssVariables from '../../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../../components/variables';
+import { handleSetVisibleCardProps } from '../MentorPage';
 
 /**
- * Div to hold mentor cards. Needs a parameter added
- * That hold the info for cards that need to be showed.
+ * A single card with mentor info on mentor page card listing
  */
 
 type Props = {
-  setVisibleCard: (mentorCardData: ListCardProps) => void;
-  mentorData: ListCardProps;
+  setVisibleCard: ({
+    shouldShowMentorCard,
+    mentorCardData,
+  }: handleSetVisibleCardProps) => void;
+  mentorCardData: ListCardProps;
 };
 
-const ListCard = ({ setVisibleCard, mentorData }: Props) => {
-  const age = new Date().getFullYear() - mentorData.mentor.birthYear;
+const ListCard = ({ setVisibleCard, mentorCardData }: Props) => {
+  const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
   return (
     <ListCardElement>
       <ListCardHeader
-        name={mentorData.mentor.displayName}
+        name={mentorCardData.mentor.displayName}
         age={age}
-        region={mentorData.mentor.region}
-        isAvailable={mentorData.isLoggedIn}
-        isNewMentor={mentorData.isNewMentor}
-        message={mentorData.contactMessage}
+        region={mentorCardData.mentor.region}
+        isAvailable={mentorCardData.isLoggedIn}
+        isNewMentor={mentorCardData.isNewMentor}
+        message={mentorCardData.contactMessage}
       />
       <CardContent>
-        <ListCardStory story={mentorData.mentor.story} />
-        <ListCardLanguages languages={mentorData.mentor.languages} />
-        <ListCardSkills skills={mentorData.mentor.skills} />
+        <ListCardStory story={mentorCardData.mentor.story} />
+        <ListCardLanguages languages={mentorCardData.mentor.languages} />
+        <ListCardSkills skills={mentorCardData.mentor.skills} />
         <OpenCardButton
           setVisibleCard={setVisibleCard}
-          mentorData={mentorData}
+          mentorCardData={mentorCardData}
         />
       </CardContent>
     </ListCardElement>
@@ -47,7 +50,7 @@ const ListCardElement = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
-  background-color: white;
+  background-color: ${cssVariables.palette.white};
   border-radius: 0.75rem;
   flex-direction: column;
   margin: ${cssVariables.spacing.layout_spacing};

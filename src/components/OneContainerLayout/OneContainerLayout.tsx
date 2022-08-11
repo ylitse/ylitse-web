@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-
-/** Layout for one container on page, like on mentor page */
+import * as cssVariables from '../variables';
 
 type OneContainerProps = {
   headLine: string;
@@ -26,18 +25,17 @@ const OneContainer = styled.div`
   border-radius: 10px;
   margin: 0;
   height: auto;
-  background-color: white;
+  background-color: ${cssVariables.palette.white};
 `;
 
 const PageHeader = styled.div`
   flex: 1;
-  background-color: #43bfff;
+  background-color: ${cssVariables.palette.blue2};
   border-radius: 10px;
   max-height: 80px;
   height: 80px;
-  color: #1c325d;
-  font-family: 'Baloo 2', cursive;
-  font-weight: 700;
+  color: ${cssVariables.palette.darkblue};
+  ${cssVariables.basicBalooText};
   font-size: 30px;
   display: flex;
   justify-content: center;

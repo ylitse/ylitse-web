@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../CommonTextStyles/variables';
+import * as cssVariables from '../variables';
 
 /**
  * Basic page layout that gives margins for any containers created to page
@@ -19,7 +19,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
 };
 
 const BasicPageElement = styled.div`
-  background-color: #cde8f8;
+  background-color: ${cssVariables.palette.lightblue};
   position: relative;
   width: 100vw;
   height: auto;

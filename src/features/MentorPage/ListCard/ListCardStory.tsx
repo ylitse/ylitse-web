@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Text } from '../../../components/CommonTextStyles/Text';
-import * as cssVariables from '../../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../../components/variables';
 
 const ListCardStory = ({ story }: { story: string }) => {
   return (
@@ -14,8 +14,7 @@ const ListCardStory = ({ story }: { story: string }) => {
 };
 
 const TruncatedMultiline = styled.p`
-  font-family: 'Source Sans Pro';
-  font-style: normal;
+  ${cssVariables.basicSourceSansText};
   font-weight: 400;
   font-size: 1rem;
   line-height: 150%;

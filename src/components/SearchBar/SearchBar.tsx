@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import SearchIconImg from '../../static/img/search.svg';
-
-/**
- * Search bar styles and layout
- */
+import { basicSourceSansText } from '../variables';
+import * as cssVariables from '../variables';
 
 type SearchProps = {
   placeholder: string;
@@ -27,16 +25,16 @@ const SearchBar: React.FC<SearchProps> = ({ placeholder, label }) => {
 const SearchInput = styled.input`
   flex: 1;
   display: flex;
-  border: #4a2acb solid 1px;
+  border: ${cssVariables.palette.purple} solid 1px;
   width: 100%;
-  font-family: 'Source Sans Pro', cursive;
+  ${basicSourceSansText};
   font-weight: 400;
   font-size: 1.5rem;
   padding: 1rem 4.5rem;
   border-radius: 1.75rem;
   box-sizing: border-box;
   &:focus {
-    outline: #4a2acb solid 2px;
+    outline: ${cssVariables.palette.purple} solid 2px;
   }
 `;
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import FooterLogo from '../../static/img/footer-logo.svg';
-import * as cssVariables from '../../components/CommonTextStyles/variables';
+import * as cssVariables from '../../components/variables';
 
 const Footer = () => {
   return (
@@ -23,9 +23,8 @@ const StyledFooter = styled.div`
 `;
 
 const StyledFooterText = styled.div`
-  font-family: 'Source Sans Pro', cursive;
-  font-style: normal;
-  font-weight: 600;
+  ${cssVariables.basicSourceSansText};
+  font-size: 1rem;
   color: ${cssVariables.palette.darkblue};
   line-height: 3.5rem;
   &:after {
@@ -44,9 +43,8 @@ const StyledFooterText = styled.div`
     @media screen and (max-width: ${cssVariables.breakpoints.mobile}) {
       background-image: none;
       content: 'SOS-lapsikylä';
-      font-family: 'Source Sans Pro', cursive;
-      font-style: normal;
-      font-weight: 600;
+      ${cssVariables.basicSourceSansText};
+      font-size: 1rem;
       color: ${cssVariables.palette.darkblue};
       width: 6rem;
     }
