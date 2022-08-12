@@ -7,16 +7,11 @@ import * as cssVariables from '../variables';
  */
 
 type Props = {
-  key: string;
   text: string;
 };
 
-const SimpleChip: React.FC<Props> = ({ key, text }) => {
-  return (
-    <StyledSimpleChip key={key} value={text}>
-      {text}
-    </StyledSimpleChip>
-  );
+const SimpleChip: React.FC<Props> = ({ text }) => {
+  return <StyledSimpleChip value={text}>{text}</StyledSimpleChip>;
 };
 
 const StyledSimpleChip = styled.button`

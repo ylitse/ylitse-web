@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../ListCard/types';
 import ProfilePicPlaceholder from '../../../static/img/icon-chat-profilepic.svg';
 import * as cssVariables from '../../../components/variables';
 import MentorCardHeaderBasicInfo from './MentorCardHeaderBasicInfo';
@@ -16,11 +15,8 @@ const MentorCardHeader = ({ mentorCardData }: Props) => {
     ? 'Ei tavoitettavissa'
     : newCardMessage;
   return (
-    <MentorCardHeaderContainer isLoggedIn={mentorCardData.isLoggedIn}>
-      <MentorAvailability
-        isShowing={availabilityMessage != ''}
-        isNew={availabilityMessage === 'Uusi'}
-      >
+    <MentorCardHeaderContainer isLoggedIn={!mentorCardData.is_vacationing}>
+      <MentorAvailability isShowing={availabilityMessage != ''} isNew={false}>
         {availabilityMessage}
       </MentorAvailability>
       <ProfilePicContainer />

@@ -5,12 +5,13 @@ import MentorListItems from './MentorListItems';
 import PageLayout from '../../components/PageLayout';
 import React from 'react';
 import MentorCard from './MentorCard';
-import { Mentor, useGetMentorsQuery } from './mentorPageApi';
+import { Mentor, Mentors, useGetMentorsQuery } from './mentorPageApi';
+import { alphabetize } from '@/functions/alphabetize';
 
 const mentorPageHeadline = 'Mentorit';
 
 //test content for multiple chips
-const mentorChipList: Array<string> = [
+/*const mentorChipList: Array<string> = [
   '2-suuntainen',
   '2-suuntaisen läheisenä oleminen',
   'ARFID',
@@ -146,10 +147,25 @@ const mentorChipList: Array<string> = [
   'vanhemmuus',
   'väkivalta',
 ];
+*/
 
 export type handleSetVisibleCardProps = {
   shouldShowMentorCard: boolean;
   mentorCardData: Mentor | undefined;
+};
+
+const createSkills = (data: Mentors) => {
+  const locale = 'fi';
+  const returnableSkillList: Array<string> = [];
+  Object.values(data).forEach(value => {
+    value.skills.forEach(el => {
+      if (!returnableSkillList.includes(el)) {
+        returnableSkillList.push(el);
+      }
+    });
+  });
+  const sortedSkills = alphabetize({ data: returnableSkillList, locale });
+  return sortedSkills;
 };
 
 const MentorPage = () => {
@@ -163,33 +179,37 @@ const MentorPage = () => {
   if (error) {
     console.log(error);
   }
+  if (data) {
+    const mentorChipList: Array<string> = createSkills(data);
 
-  const handleSetVisibleCard = ({
-    shouldShowMentorCard,
-    mentorCardData,
-  }: handleSetVisibleCardProps) => {
-    setVisibleCard(shouldShowMentorCard);
-    setCurrentCard(mentorCardData);
-  };
-  return (
-    <PageLayout>
-      {shouldShowMentorCard && currentCard && (
-        <MentorCard
-          setVisibleCard={handleSetVisibleCard}
-          mentorCardData={currentCard}
-        />
-      )}
-      <OneContainerLayout headLine={mentorPageHeadline}>
-        <MentorInfoSearchDiv />
-        <MentorChips items={mentorChipList} />
-      </OneContainerLayout>
-      {data && (
-        <MentorListItems
-          setVisibleCard={handleSetVisibleCard}
-          mentorCardData={data}
-        />
-      )}
-    </PageLayout>
-  );
+    const handleSetVisibleCard = ({
+      shouldShowMentorCard,
+      mentorCardData,
+    }: handleSetVisibleCardProps) => {
+      setVisibleCard(shouldShowMentorCard);
+      setCurrentCard(mentorCardData);
+    };
+    return (
+      <PageLayout>
+        {shouldShowMentorCard && currentCard && (
+          <MentorCard
+            setVisibleCard={handleSetVisibleCard}
+            mentorCardData={currentCard}
+          />
+        )}
+        <OneContainerLayout headLine={mentorPageHeadline}>
+          <MentorInfoSearchDiv />
+          <MentorChips items={mentorChipList} />
+        </OneContainerLayout>
+        {data && (
+          <MentorListItems
+            setVisibleCard={handleSetVisibleCard}
+            mentorCardData={data}
+          />
+        )}
+      </PageLayout>
+    );
+  }
+  return <p>Error loading content</p>;
 };
 export default MentorPage;

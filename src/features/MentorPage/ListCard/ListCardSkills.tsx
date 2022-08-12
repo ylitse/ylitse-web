@@ -1,16 +1,19 @@
+import { alphabetize } from '@/functions/alphabetize';
 import styled from 'styled-components';
 import { SimpleChip } from '../../../components/Chip';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import * as cssVariables from '../../../components/variables';
 
 const ListCardSkills = ({ skills }: { skills: Array<string> }) => {
+  const locale = 'fi';
+  const sortedSkills = alphabetize({ data: skills, locale });
   return (
     <Skills>
       <Text variant="h3" style={{ margin: '1.5rem 0 0 0' }}>
         Voin auttaa myös näissä
       </Text>
       <SkillChips>
-        {skills.map(item => (
+        {sortedSkills.map(item => (
           <SimpleChip key={item} text={item} />
         ))}
       </SkillChips>

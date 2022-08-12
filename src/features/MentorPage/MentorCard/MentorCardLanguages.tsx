@@ -1,8 +1,12 @@
+import { alphabetize } from '@/functions/alphabetize';
 import styled from 'styled-components';
 import { SimpleChip } from '../../../components/Chip';
 import { Text } from '../../../components/CommonTextStyles/Text';
 
 const MentorCardLanguages = ({ languages }: { languages: Array<string> }) => {
+  const locale = 'fi';
+  const sortedLanguages = alphabetize({ data: languages, locale });
+
   return (
     <Languages>
       <Text
@@ -13,7 +17,7 @@ const MentorCardLanguages = ({ languages }: { languages: Array<string> }) => {
         Puhun näitä kieliä
       </Text>
       <SkillChips>
-        {languages.map(item => (
+        {sortedLanguages.map(item => (
           <SimpleChip key={item} text={item} />
         ))}
       </SkillChips>
@@ -32,7 +36,8 @@ const SkillChips = styled.div`
   justify-content: center;
   position: relative;
   height: fit-content;
-  max-height: 7rem;
+  height: 7rem;
+  min-height: 7rem;
   margin-top: 0.5rem;
 `;
 

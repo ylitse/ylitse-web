@@ -5,13 +5,6 @@ import { TextButton } from '../../../components/Buttons';
 import CSS from 'csstype';
 import { Mentor } from '../mentorPageApi';
 
-const customStylus: CSS.Properties = {
-  bottom: '3.15vw',
-  position: 'absolute',
-  left: '50%',
-  transform: 'translateX(-50%)',
-};
-
 type Props = {
   mentorCardData: Mentor;
 };
@@ -35,7 +28,7 @@ const MentorCardContent = ({ mentorCardData }: Props) => {
         <Text variant="h3" style={{ margin: 0 }}>
           Tarinani
         </Text>
-        <Text variant="p">{mentorCardData.mentor.story}</Text>
+        <Text variant="p">{mentorCardData.story}</Text>
         <MentorCardSkills mentorCardData={mentorCardData} />
         <TextButton onClick={handleClick} style={customStylus}>
           Avaa keskustelu

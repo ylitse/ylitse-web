@@ -2,19 +2,22 @@ import styled from 'styled-components';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import { SimpleChip } from '../../../components/Chip';
 import { Mentor } from '../mentorPageApi';
+import { alphabetize } from '@/functions/alphabetize';
 
 type Props = {
   mentorCardData: Mentor;
 };
 
 const MentorCardSkills = ({ mentorCardData }: Props) => {
+  const locale = 'fi';
+  const sortedSkills = alphabetize({ data: mentorCardData.skills, locale });
   return (
     <Skills>
       <Text variant="h3" style={{ margin: '3rem 0 0 0' }}>
         Voin auttaa myös näissä
       </Text>
       <SkillChips>
-        {mentorCardData.skills.map(item => (
+        {sortedSkills.map(item => (
           <SimpleChip key={item} text={item} />
         ))}
       </SkillChips>

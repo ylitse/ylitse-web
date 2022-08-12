@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../ListCard/types';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import CSS from 'csstype';
 import MentorCardLanguages from './MentorCardLanguages';
+import { Mentor } from '../mentorPageApi';
 import * as cssVariables from '../../../components/variables';
 
 type Props = {
-  mentorCardData: ListCardProps;
+  mentorCardData: Mentor;
 };
 
 const customStylus: CSS.Properties = {

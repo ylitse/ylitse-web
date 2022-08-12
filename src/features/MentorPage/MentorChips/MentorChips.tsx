@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Chip } from '../../../components/Chip';
 import ShowMoreChips from './ShowMoreChips';
 import React from 'react';
+import { alphabetize } from '@/functions/alphabetize';
 
 /**
  * Logic to show skill chips. Array of skill names is
@@ -10,24 +11,18 @@ import React from 'react';
  */
 
 const MentorSkillChips = ({ items }: { items: Array<string> }) => {
+  const locale = 'fi';
   const [shouldShowAllSkills, setShowAllSkills] = React.useState(false);
+  const sortedItems = alphabetize({ data: items, locale });
 
   const handleShowMoreSkillsChange = () =>
     setShowAllSkills(!shouldShowAllSkills);
 
-  //change the first letter of every skill to uppercase, then alphabetize
-  const upperCaseSkills = items.map(item => ({
-    text: `${item.charAt(0).toUpperCase()}${item.slice(1)}`,
-  }));
-  const sortedSkills = [...upperCaseSkills].sort((a, b) =>
-    a.text.localeCompare(b.text),
-  );
-
   return (
     <ChipContainer>
       <SkillChips isSelected={shouldShowAllSkills}>
-        {sortedSkills.map(item => (
-          <Chip key={item.text} text={item.text} />
+        {sortedItems.map(item => (
+          <Chip key={item} text={item} />
         ))}
       </SkillChips>
       <ShowMoreChips
