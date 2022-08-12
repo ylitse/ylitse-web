@@ -1,80 +1,59 @@
 /**
  * @jest-environment jsdom
  */
-/*
+
 import { render } from '@testing-library/react';
 import MentorCard from './MentorCard';
 import { BrowserRouter } from 'react-router-dom';
-import { ListCardProps } from '../ListCard/types';
 import { handleSetVisibleCardProps } from '../MentorPage';
+import { Mentor } from '../mentorPageApi';
 
-const mentorListCards: ListCardProps = {
-  mentor: {
-    displayName: 'Matti Meikäläinen',
-    birthYear: 1993,
-    region: 'Pirkanmaa',
-    story:
-      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
-    skills: [
-      { text: 'Lastensuojelu' },
-      { text: 'Itsenäistyminen' },
-      { text: 'Vanhemmuus' },
-      { text: 'Opiskelu' },
-      { text: 'Kela-asiointi' },
-      { text: 'Raskausaika' },
-      { text: 'Päihdeongelmat' },
-    ],
-    languages: ['Suomi', 'Englanti'],
-  },
-  isLoggedIn: true,
-  isNewMentor: true,
-  contactMessage: 'Voit ottaa yhteyttä!',
+const mentorListCard: Mentor = {
+  mentorId: 'asdf908asdf',
+  buddyId: 'asdf908asdf',
+  gender: 'muusu',
+  communication_channels: [],
+  name: 'Matti Meikäläinen',
+  age: 21,
+  region: 'Pirkanmaa',
+  story:
+    'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
+  skills: [
+    'Lastensuojelu',
+    'Itsenäistyminen',
+    'Vanhemmuus',
+    'Opiskelu',
+    'Kela-asiointi',
+    'Raskausaika',
+    'Päihdeongelmat',
+  ],
+  languages: ['Suomi', 'Englanti'],
+  is_vacationing: true,
+  status_message: 'Voit ottaa yhteyttä!',
 };
 
-const mentorListCards2: ListCardProps = {
-  mentor: {
-    displayName: 'Matti Meikäläinen',
-    birthYear: 1993,
-    region: 'Pirkanmaa',
-    story:
-      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
-    skills: [
-      { text: 'Lastensuojelu' },
-      { text: 'Itsenäistyminen' },
-      { text: 'Vanhemmuus' },
-      { text: 'Opiskelu' },
-      { text: 'Kela-asiointi' },
-      { text: 'Raskausaika' },
-      { text: 'Päihdeongelmat' },
-    ],
-    languages: ['Suomi', 'Englanti'],
-  },
-  isLoggedIn: false,
-  isNewMentor: true,
-  contactMessage: 'Voit ottaa yhteyttä!',
-};
-
-const mentorListCards3: ListCardProps = {
-  mentor: {
-    displayName: 'Matti Meikäläinen',
-    birthYear: 1993,
-    region: 'Pirkanmaa',
-    story:
-      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
-    skills: [
-      { text: 'Lastensuojelu' },
-      { text: 'Itsenäistyminen' },
-      { text: 'Vanhemmuus' },
-      { text: 'Opiskelu' },
-      { text: 'Kela-asiointi' },
-      { text: 'Raskausaika' },
-      { text: 'Päihdeongelmat' },
-    ],
-    languages: ['Suomi', 'Englanti'],
-  },
-  isLoggedIn: true,
-  isNewMentor: false,
-  contactMessage: 'Voit ottaa yhteyttä!',
+const mentorListCard2: Mentor = {
+  mentorId: 'asdfasdertsdf',
+  buddyId: 'asdfasdertsdf',
+  gender: 'muusu',
+  communication_channels: [],
+  name: 'Matti Meikäläinen',
+  age: 21,
+  region: 'Pirkanmaa',
+  story:
+    'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
+  skills: [
+    'Lastensuojelu',
+    'Itsenäistyminen',
+    'Vanhemmuus',
+    'Opiskelu',
+    'Kela-asiointi',
+    'Raskausaika',
+    'Päihdeongelmat',
+  ],
+  languages: ['Suomi', 'Englanti'],
+  is_vacationing: false,
+  status_message: 'Voit ottaa yhteyttä!',
 };
 
 describe('<MentorListItem />', () => {
@@ -89,7 +68,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorCard
           setVisibleCard={handleSetVisibleCard}
-          mentorCardData={mentorListCards}
+          mentorCardData={mentorListCard}
         />
       </BrowserRouter>,
     );
@@ -100,7 +79,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorCard
           setVisibleCard={handleSetVisibleCard}
-          mentorCardData={mentorListCards}
+          mentorCardData={mentorListCard}
         />
       </BrowserRouter>,
     );
@@ -111,7 +90,7 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorCard
           setVisibleCard={handleSetVisibleCard}
-          mentorCardData={mentorListCards}
+          mentorCardData={mentorListCard}
         />
       </BrowserRouter>,
     );
@@ -122,21 +101,10 @@ describe('<MentorListItem />', () => {
       <BrowserRouter>
         <MentorCard
           setVisibleCard={handleSetVisibleCard}
-          mentorCardData={mentorListCards2}
+          mentorCardData={mentorListCard2}
         />
       </BrowserRouter>,
     );
     expect(queryAllByText('Ei tavoitettavissa')).toBeTruthy();
   });
-  it('Online mentor is rendered correctly', () => {
-    const { queryByText } = render(
-      <BrowserRouter>
-        <MentorCard
-          setVisibleCard={handleSetVisibleCard}
-          mentorCardData={mentorListCards3}
-        />
-      </BrowserRouter>,
-    );
-    expect(queryByText('Ei tavoitettavissa')).toBeNull();
-  });
-});*/
+});

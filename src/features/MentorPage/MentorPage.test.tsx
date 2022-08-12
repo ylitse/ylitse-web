@@ -1,6 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+
+//Does not work with fetchBaseQuery
+
 import { render } from '@testing-library/react';
 import MentorPage from './MentorPage';
 import { BrowserRouter } from 'react-router-dom';

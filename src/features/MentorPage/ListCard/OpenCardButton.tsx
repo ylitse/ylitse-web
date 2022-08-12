@@ -1,6 +1,5 @@
 import { TextButton } from '../../../components/Buttons';
 import { handleSetVisibleCardProps } from '../MentorPage';
-import { ListCardProps } from './types';
 import CSS from 'csstype';
 import { Mentor } from '../mentorPageApi';
 

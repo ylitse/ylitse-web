@@ -6,7 +6,7 @@ import PageLayout from '../../components/PageLayout';
 import React from 'react';
 import MentorCard from './MentorCard';
 import { Mentor, Mentors, useGetMentorsQuery } from './mentorPageApi';
-import { alphabetize } from '@/functions/alphabetize';
+import { alphabetize } from '../../functions/alphabetize';
 
 const mentorPageHeadline = 'Mentorit';
 

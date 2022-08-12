@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import { SimpleChip } from '../../../components/Chip';
 import { Mentor } from '../mentorPageApi';
-import { alphabetize } from '@/functions/alphabetize';
+import { alphabetize } from '../../../functions/alphabetize';
 
 type Props = {
   mentorCardData: Mentor;

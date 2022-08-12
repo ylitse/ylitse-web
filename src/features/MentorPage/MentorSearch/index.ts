@@ -1,3 +1,3 @@
-import MentorInfoSearch from './MentorInfoSearch';
+import MentorSearchDiv from './MentorSearchDiv';
 
-export default MentorInfoSearch;
+export default MentorSearchDiv;

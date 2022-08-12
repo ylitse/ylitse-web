@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Chip } from '../../../components/Chip';
 import ShowMoreChips from './ShowMoreChips';
 import React from 'react';
-import { alphabetize } from '@/functions/alphabetize';
+import { alphabetize } from '../../../functions/alphabetize';
 
 /**
  * Logic to show skill chips. Array of skill names is

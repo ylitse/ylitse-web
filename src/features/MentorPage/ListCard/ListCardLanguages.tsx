@@ -1,4 +1,4 @@
-import { alphabetize } from '@/functions/alphabetize';
+import { alphabetize } from '../../../functions/alphabetize';
 import styled from 'styled-components';
 import { SimpleChip } from '../../../components/Chip';
 import { Text } from '../../../components/CommonTextStyles/Text';

@@ -1,13 +1,15 @@
 import styled from 'styled-components';
-import MentorSearch from './MentorSearch';
 import * as cssVariables from '../../../components/variables';
+import SearchBar from '../../../components/SearchBar';
 
 /**
  * Div under the "Mentorit" -header where info about mentorsearch
  * is shown, also contains searchBar in separate MentorSearch component
  */
 
-const MentorInfoSearchDiv = () => {
+const mentorSearchbarPlaceholder = 'Etsi mentoria';
+
+const MentorSearchDiv = () => {
   return (
     <MentorSearchContainer>
       <MentorInfoText>
@@ -15,7 +17,10 @@ const MentorInfoSearchDiv = () => {
         listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita
         ongelmasi perusteella
       </MentorInfoText>
-      <MentorSearch />
+      <SearchBar
+      placeholder={mentorSearchbarPlaceholder}
+      label={mentorSearchbarPlaceholder}
+    />
     </MentorSearchContainer>
   );
 };
@@ -41,4 +46,4 @@ const MentorSearchContainer = styled.div`
   margin: auto;
 `;
 
-export default MentorInfoSearchDiv;
+export default MentorSearchDiv;
