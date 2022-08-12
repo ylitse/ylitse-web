@@ -31,23 +31,23 @@ const truncateText: CSS.Properties = {
 };
 
 const MentorCardHeaderBasicInfo = ({ mentorCardData }: Props) => {
-  const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
   return (
     <BasicInfoContainer>
       <Text color="white" variant="h2" style={{ margin: 0 }}>
-        {mentorCardData.mentor.displayName}
+        {mentorCardData.name}
       </Text>
       <NameDivider />
       <Text color="white" variant="p" style={customStylus}>
-        {age} v. <StyledDivider>|</StyledDivider> {mentorCardData.mentor.region}
+        {mentorCardData.age} v. <StyledDivider>|</StyledDivider>{' '}
+        {mentorCardData.region}
       </Text>
       <Text color="white" variant="p" style={{ margin: 0 }}>
-        {mentorCardData.isLoggedIn}
+        {!mentorCardData.is_vacationing}
       </Text>
-      <p title={mentorCardData.contactMessage} style={truncateText}>
-        {mentorCardData.contactMessage}
+      <p title={mentorCardData.status_message} style={truncateText}>
+        {mentorCardData.status_message}
       </p>
-      <MentorCardLanguages languages={mentorCardData.mentor.languages} />
+      <MentorCardLanguages languages={mentorCardData.languages} />
     </BasicInfoContainer>
   );
 };

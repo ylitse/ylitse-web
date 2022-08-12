@@ -2,13 +2,14 @@ import { TextButton } from '../../../components/Buttons';
 import { handleSetVisibleCardProps } from '../MentorPage';
 import { ListCardProps } from './types';
 import CSS from 'csstype';
+import { Mentor } from '../mentorPageApi';
 
 type Props = {
   setVisibleCard: ({
     shouldShowMentorCard,
     mentorCardData,
   }: handleSetVisibleCardProps) => void;
-  mentorCardData: ListCardProps;
+  mentorCardData: Mentor;
 };
 
 const customStylus: CSS.Properties = {

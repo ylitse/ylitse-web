@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import ListCard from '../ListCard';
 import { MentorListItemsProps } from './types';
 import * as cssVariables from '../../../components/variables';
+import { Mentor } from '../mentorPageApi';
 
 /**
  * Mentor cards listing on mentor page
@@ -13,13 +14,19 @@ const MentorListItems = ({
 }: MentorListItemsProps) => {
   return (
     <CardsList data-testid="mentor-cards-container">
-      {mentorCardData.map(item => (
-        <ListCard
-          key={item.mentor.displayName}
-          mentorCardData={item}
-          setVisibleCard={setVisibleCard}
-        />
-      ))}
+      <>
+        {Object.values(mentorCardData).map(value => {
+          const untypedValue: unknown = value;
+          const typedValue = untypedValue as Mentor;
+          return (
+            <ListCard
+              key={typedValue.buddyId}
+              mentorCardData={typedValue}
+              setVisibleCard={setVisibleCard}
+            />
+          );
+        })}
+      </>
     </CardsList>
   );
 };

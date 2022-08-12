@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../ListCard/types';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import { SimpleChip } from '../../../components/Chip';
+import { Mentor } from '../mentorPageApi';
 
 type Props = {
-  mentorCardData: ListCardProps;
+  mentorCardData: Mentor;
 };
 
 const MentorCardSkills = ({ mentorCardData }: Props) => {
@@ -14,8 +14,8 @@ const MentorCardSkills = ({ mentorCardData }: Props) => {
         Voin auttaa myös näissä
       </Text>
       <SkillChips>
-        {mentorCardData.mentor.skills.map(item => (
-          <SimpleChip key={item.text} text={item.text} />
+        {mentorCardData.skills.map(item => (
+          <SimpleChip key={item} text={item} />
         ))}
       </SkillChips>
     </Skills>

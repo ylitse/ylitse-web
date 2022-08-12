@@ -1,12 +1,19 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../ListCard/types';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import MentorCardSkills from './MentorCardSkills';
 import { TextButton } from '../../../components/Buttons';
 import CSS from 'csstype';
+import { Mentor } from '../mentorPageApi';
+
+const customStylus: CSS.Properties = {
+  bottom: '3.15vw',
+  position: 'absolute',
+  left: '50%',
+  transform: 'translateX(-50%)',
+};
 
 type Props = {
-  mentorCardData: ListCardProps;
+  mentorCardData: Mentor;
 };
 
 const customStylus: CSS.Properties = {

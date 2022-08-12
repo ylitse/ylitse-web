@@ -1,4 +1,3 @@
-import { ChipProps } from './types';
 import styled from 'styled-components';
 import React from 'react';
 import * as cssVariables from '../variables';
@@ -7,9 +6,14 @@ import * as cssVariables from '../variables';
  * Creates a non-selectable chip
  */
 
-const SimpleChip: React.FC<ChipProps> = ({ text }) => {
+type Props = {
+  key: string;
+  text: string;
+};
+
+const SimpleChip: React.FC<Props> = ({ key, text }) => {
   return (
-    <StyledSimpleChip key={text} value={text}>
+    <StyledSimpleChip key={key} value={text}>
       {text}
     </StyledSimpleChip>
   );

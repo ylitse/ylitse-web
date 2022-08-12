@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../ListCard/types';
 import { handleSetVisibleCardProps } from '../MentorPage';
 import MentorCardHeader from './MentorCardHeader';
 import MentorContent from './MentorContent';
 import { IconButton } from '../../../components/Buttons';
 import * as cssVariables from '../../../components/variables';
+import { Mentor } from '../mentorPageApi';
 
 /**
  * Selected mentor card in mentor page
@@ -15,7 +15,7 @@ type Props = {
     shouldShowMentorCard,
     mentorCardData,
   }: handleSetVisibleCardProps) => void;
-  mentorCardData: ListCardProps;
+  mentorCardData: Mentor;
 };
 
 const MentorCard = ({ setVisibleCard, mentorCardData }: Props) => {

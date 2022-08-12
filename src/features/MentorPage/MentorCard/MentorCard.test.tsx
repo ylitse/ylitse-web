@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+/*
 import { render } from '@testing-library/react';
 import MentorCard from './MentorCard';
 import { BrowserRouter } from 'react-router-dom';
@@ -138,4 +139,4 @@ describe('<MentorListItem />', () => {
     );
     expect(queryByText('Ei tavoitettavissa')).toBeNull();
   });
-});
+});*/

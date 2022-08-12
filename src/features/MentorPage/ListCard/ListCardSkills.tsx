@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import { SimpleChip } from '../../../components/Chip';
-import { ChipProps } from '@/components/Chip/types';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import * as cssVariables from '../../../components/variables';
 
-const ListCardSkills = ({ skills }: { skills: Array<ChipProps> }) => {
+const ListCardSkills = ({ skills }: { skills: Array<string> }) => {
   return (
     <Skills>
       <Text variant="h3" style={{ margin: '1.5rem 0 0 0' }}>
@@ -12,7 +11,7 @@ const ListCardSkills = ({ skills }: { skills: Array<ChipProps> }) => {
       </Text>
       <SkillChips>
         {skills.map(item => (
-          <SimpleChip key={item.text} text={item.text} />
+          <SimpleChip key={item} text={item} />
         ))}
       </SkillChips>
     </Skills>
