@@ -266,7 +266,8 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-#password-toggle {
+#password-toggle,
+#password-confirmation-toggle {
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 700;
@@ -280,6 +281,8 @@ input:checked + .slider:before {
   color: #4a2acb;
 }
 
+#password-input-error,
+#password-confirmation-input-error,
 #email-input-error {
   font-family: 'Source Sans Pro';
   font-style: normal;
@@ -293,7 +296,7 @@ input:checked + .slider:before {
   color: #972232;
 }
 
-#submit-button {
+#submit {
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 700;
@@ -310,14 +313,14 @@ input:checked + .slider:before {
   color: #f0ba8c;
 }
 
-#submit-button:focus,
-#submit-button:active {
+#submit:focus,
+#submit:active {
   outline: #4a2acb solid 3px;
   outline-offset: 4px;
   background-color: #4a2acb;
 }
 
-#submit-button:disabled {
+#submit:disabled {
   cursor: not-allowed;
   border: 0;
   outline: none;
@@ -325,7 +328,7 @@ input:checked + .slider:before {
   color: #616161;
 }
 
-#submit-button:disabled:focus,
-#submit-button:disabled:active {
+#submit:disabled:focus,
+#submit:disabled:active {
   outline: none;
 }

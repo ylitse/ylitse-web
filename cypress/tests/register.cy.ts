@@ -1,27 +1,26 @@
 describe('register', () => {
-  const addUsername = () =>
-    cy.get('input[name="username"]').type('exampleUsername');
-  const addPassword = () =>
-    cy.get('input[name="password"]').type('examplePassword');
-  const addScreenName = () =>
-    cy.get('input[name="screen-name"]').type('exampleScreenName');
-  const checkRequiredAge = () =>
-    cy.get('input[id="required-age"]').parent().click();
-  const checkPrivacyConsent = () =>
-    cy.get('input[id="privacy-consent"]').parent().click();
+  const fill = (field: string, value: string) =>
+    cy.get(`input[name="${field}"]`).type(value).blur();
+
+  const clear = (field: string) =>
+    cy.get(`input[name="${field}"]`).clear().blur();
+
+  const click = (field: string) => cy.get(`button[id="${field}"]`).click();
+
+  const toggle = (field: string) =>
+    cy.get(`input[id="${field}"]`).parent().click();
 
   const fillOutForm = () => {
-    addUsername();
-    addPassword();
-    addScreenName();
-    checkRequiredAge();
-    checkPrivacyConsent();
+    fill('username', 'exampleUsername');
+    fill('password', 'examplePassword');
+    fill('password-confirmation', 'examplePassword');
+    fill('screen-name', 'exampleScreenName');
+    toggle('required-age');
+    toggle('privacy-consent');
   };
 
   const submitShouldBeDisabled = () =>
-    cy.get('button[id="submit-button').should('be.disabled');
-
-  const clickSubmit = () => cy.get('button[id="submit-button').click();
+    cy.get('button[id="submit"]').should('be.disabled');
 
   beforeEach(() => {
     cy.visit('/register');
@@ -33,76 +32,94 @@ describe('register', () => {
   });
 
   it('hides password as default', () => {
-    addPassword();
+    fill('password', 'examplePassword');
     cy.get('input[name="password"]').should('not.contain', 'examplePassword');
   });
 
   it('shows password after toggle click', () => {
-    addPassword();
-    cy.get('button[id="password-toggle"]').click();
+    fill('password', 'examplePassword');
+    click('password-toggle');
     cy.get('input[name="password"]').should('have.value', 'examplePassword');
   });
 
+  it('hides password confirmation as default', () => {
+    fill('password-confirmation', 'examplePassword');
+    cy.get('input[name="password-confirmation"]').should(
+      'not.contain',
+      'examplePassword',
+    );
+  });
+
+  it('shows password confirmation after toggle click', () => {
+    fill('password-confirmation', 'examplePassword');
+    click('password-confirmation-toggle');
+    cy.get('input[name="password-confirmation"]').should(
+      'have.value',
+      'examplePassword',
+    );
+  });
+
+  it('shows error message if passwords are different', () => {
+    fill('password', 'examplePassword');
+    fill('password-confirmation', 'wrongPassword');
+    cy.contains('Salasanat eivät täsmää').should('be.visible');
+  });
+
+  it('shows no error message if passwords are the same', () => {
+    fill('password', 'examplePassword');
+    fill('password-confirmation', 'examplePassword');
+    cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
+  });
+
   it('shows error message if invalid email', () => {
-    cy.get('input[name="email"]').type('email').blur();
+    fill('email', 'exampleEmail');
     cy.contains('Sähköpostiosoite on virheellinen').should('be.visible');
   });
 
   it('shows no error message if valid email', () => {
-    cy.get('input[name="email"]').type('firstname.lastname@example.com').blur();
+    fill('email', 'firstname.lastname@example.com');
     cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
   });
 
   it('prevents registration if username field is empty', () => {
-    addPassword();
-    addScreenName();
-    checkRequiredAge();
-    checkPrivacyConsent();
+    fillOutForm();
+    clear('username');
     submitShouldBeDisabled();
   });
 
   it('prevents registration if password field is empty', () => {
-    addUsername();
-    addScreenName();
-    checkRequiredAge();
-    checkPrivacyConsent();
+    fillOutForm();
+    clear('password');
+    submitShouldBeDisabled();
+  });
+
+  it('prevents registration if password confirmation field is empty', () => {
+    fillOutForm();
+    clear('password-confirmation');
     submitShouldBeDisabled();
   });
 
   it('prevents registration if screen name field is empty', () => {
-    addUsername();
-    addPassword();
-    checkRequiredAge();
-    checkPrivacyConsent();
+    fillOutForm();
+    clear('screen-name');
     submitShouldBeDisabled();
   });
 
   it('prevents registration if required age toggle is off', () => {
-    addUsername();
-    addPassword();
-    addScreenName();
-    checkPrivacyConsent();
+    fillOutForm();
+    toggle('required-age');
     submitShouldBeDisabled();
   });
 
   it('prevents registration if privacy consent toggle is off', () => {
-    addUsername();
-    addPassword();
-    addScreenName();
-    checkRequiredAge();
+    fillOutForm();
+    toggle('privacy-consent');
     submitShouldBeDisabled();
   });
 
   it('allows registration if all fields are filled', () => {
     fillOutForm();
-    clickSubmit();
+    click('submit');
     cy.url().should('contain', '/login');
-  });
-
-  it('prevents registration if field is emptied', () => {
-    fillOutForm();
-    cy.get('input[name="username"]').clear();
-    clickSubmit();
-    cy.url().should('contain', '/register');
   });
 });

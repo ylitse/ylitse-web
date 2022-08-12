@@ -39,7 +39,7 @@
           />
         </fieldset>
         <fieldset>
-          <label for="password">
+          <label id="password-label" for="password">
             Salasana *
             <span class="align-right">
               <button
@@ -65,6 +65,41 @@
             onChange="checkForm()"
             required
           />
+          <span id="password-input-error">
+            <img src="/static/icons/warning.svg" />
+            Salasana on liian lyhyt
+          </span>
+        </fieldset>
+        <fieldset>
+          <label id="password-confirmation-label" for="password-confirmation">
+            Vahvista salasana *
+            <span class="align-right">
+              <button
+                id="password-confirmation-toggle"
+                type="button"
+                onclick="togglePasswordConfirmation()"
+              >
+                Näytä salasana
+              </button>
+              <span class="tooltip">
+                <img src="/static/icons/tooltip.svg" />
+                <span class="tooltip-text">
+                  Salasanan tulee olla vähintään 5 merkkiä pitkä.
+                </span>
+              </span>
+            </span>
+          </label>
+          <input
+            id="password-confirmation"
+            name="password-confirmation"
+            type="password"
+            onChange="checkForm()"
+            required
+          />
+          <span id="password-confirmation-input-error">
+            <img src="/static/icons/warning.svg" />
+            Salasanat eivät täsmää
+          </span>
         </fieldset>
         <fieldset>
           <label id="email-label" for="email"
@@ -152,7 +187,7 @@
             Hyväksyn tietojeni käsittelyn
           </label>
         </fieldset>
-        <button id="submit-button" type="submit" disabled>Rekisteröidy</button>
+        <button id="submit" type="submit" disabled>Rekisteröidy</button>
       </form>
       <div class="footer">
         <h3>Palvelun tarjoaa SOS-Lapsikylä</h3>
