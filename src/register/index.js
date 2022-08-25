@@ -5,18 +5,30 @@
   form.addEventListener(
     'submit',
     function (event) {
-      fetch('/api/register', {
+      var formData = new FormData(form);
+      var body = {
+        password: formData.get('password'),
+        account: {
+          role: 'mentee',
+          display_name: formData.get('screen-name'),
+          login_name: formData.get('username'),
+          email: formData.get('email'),
+        },
+      };
+
+      fetch('/api/accounts', {
         method: 'POST',
-        body: new FormData(form),
+        body: JSON.stringify(body),
         credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
         .then(function (response) {
           if (response.ok) {
-            return response.json();
+            console.log(response.json());
+            window.location.href = '/login';
           }
-        })
-        .then(function (data) {
-          window.location.href = '/login';
         })
         .catch(function (error) {
           console.log(error.message);
