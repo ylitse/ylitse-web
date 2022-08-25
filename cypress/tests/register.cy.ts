@@ -68,7 +68,7 @@ describe('register', () => {
   it('shows no error message if passwords are the same', () => {
     fill('password', 'examplePassword');
     fill('password-confirmation', 'examplePassword');
-    cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
+    cy.contains('Salasanat eivät täsmää').should('not.be.visible');
   });
 
   it('shows error message if invalid email', () => {
