@@ -14,7 +14,7 @@ describe('register', () => {
     fill('username', 'exampleUsername');
     fill('password', 'examplePassword');
     fill('password-confirmation', 'examplePassword');
-    fill('screen-name', 'exampleScreenName');
+    fill('display-name', 'exampleDisplayName');
     toggle('required-age');
     toggle('privacy-consent');
   };
@@ -114,9 +114,9 @@ describe('register', () => {
     submitShouldBeDisabled();
   });
 
-  it('prevents registration if screen name field is empty', () => {
+  it('prevents registration if display name field is empty', () => {
     fillOutForm();
-    clear('screen-name');
+    clear('display-name');
     submitShouldBeDisabled();
   });
 
