@@ -74,6 +74,7 @@ describe('register', () => {
   it('shows no error message if different passwords are corrected', () => {
     fill('password', 'examplePassword');
     fill('password-confirmation', 'wrongPassword');
+    clear('password-confirmation');
     fill('password-confirmation', 'examplePassword');
     cy.contains('Salasanat eivät täsmää').should('not.be.visible');
   });
@@ -90,6 +91,7 @@ describe('register', () => {
 
   it('shows no error message if invalid email is corrected', () => {
     fill('email', 'wrongEmail');
+    clear('email');
     fill('email', 'firstname.lastname@example.com');
     cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
   });
