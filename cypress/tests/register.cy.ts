@@ -79,12 +79,12 @@ describe('register', () => {
     cy.contains('Salasanat eivät täsmää').should('not.be.visible');
   });
 
-  it('shows error message if invalid email', () => {
-    fill('email', 'exampleEmail');
+  it('shows error message if email is invalid', () => {
+    fill('email', 'wrongEmail');
     cy.contains('Sähköpostiosoite on virheellinen').should('be.visible');
   });
 
-  it('shows no error message if valid email', () => {
+  it('shows no error message if email is valid', () => {
     fill('email', 'firstname.lastname@example.com');
     cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
   });
@@ -132,7 +132,7 @@ describe('register', () => {
     submitShouldBeDisabled();
   });
 
-  it('allows registration if all fields are filled', () => {
+  it('allows registration if all fields are correctly filled', () => {
     fillOutForm();
     click('submit');
     cy.url().should('contain', '/login');
