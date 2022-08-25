@@ -88,6 +88,12 @@ describe('register', () => {
     cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
   });
 
+  it('shows no error message if invalid email is corrected', () => {
+    fill('email', 'wrongEmail');
+    fill('email', 'firstname.lastname@example.com');
+    cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
+  });
+
   it('prevents registration if username field is empty', () => {
     fillOutForm();
     clear('username');
