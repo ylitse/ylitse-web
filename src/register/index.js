@@ -10,7 +10,7 @@
         password: formData.get('password'),
         account: {
           role: 'mentee',
-          display_name: formData.get('display-name'),
+          // display_name: formData.get('display-name'),
           login_name: formData.get('username'),
           email: formData.get('email'),
         },
