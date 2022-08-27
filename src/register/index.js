@@ -6,18 +6,17 @@
     'submit',
     function (event) {
       var formData = new FormData(form);
-      var body = {
-        password: formData.get('password'),
-        account: {
-          role: 'mentee',
-          login_name: formData.get('username'),
-          email: formData.get('email'),
-        },
-      };
 
       fetch('/api/accounts', {
         method: 'POST',
-        body: JSON.stringify(body),
+        body: JSON.stringify({
+          password: formData.get('password'),
+          account: {
+            role: 'mentee',
+            login_name: formData.get('username'),
+            email: formData.get('email'),
+          },
+        }),
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
@@ -27,8 +26,7 @@
           return response.json();
         })
         .then(function (data) {
-          var url = '/api/users/' + data.user.id;
-          fetch(url, {
+          fetch('/api/users/' + data.user.id, {
             method: 'PUT',
             body: JSON.stringify({
               display_name: formData.get('display-name'),
