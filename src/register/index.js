@@ -10,7 +10,6 @@
         password: formData.get('password'),
         account: {
           role: 'mentee',
-          // display_name: formData.get('display-name'),
           login_name: formData.get('username'),
           email: formData.get('email'),
         },
@@ -25,10 +24,25 @@
         },
       })
         .then(function (response) {
-          if (response.ok) {
-            console.log(response.json());
-            window.location.href = '/login';
-          }
+          return response.json();
+        })
+        .then(function (data) {
+          var url = '/api/users/' + data.user.id;
+          fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify({
+              display_name: formData.get('display-name'),
+            }),
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+          });
+        })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          console.log(data);
+          window.location.replace('/login');
         })
         .catch(function (error) {
           console.log(error.message);
