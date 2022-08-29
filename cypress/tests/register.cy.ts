@@ -68,15 +68,30 @@ describe('register', () => {
   it('shows no error message if passwords are the same', () => {
     fill('password', 'examplePassword');
     fill('password-confirmation', 'examplePassword');
-    cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
+    cy.contains('Salasanat eivät täsmää').should('not.be.visible');
   });
 
-  it('shows error message if invalid email', () => {
-    fill('email', 'exampleEmail');
+  it('shows no error message if different passwords are corrected', () => {
+    fill('password', 'examplePassword');
+    fill('password-confirmation', 'wrongPassword');
+    clear('password-confirmation');
+    fill('password-confirmation', 'examplePassword');
+    cy.contains('Salasanat eivät täsmää').should('not.be.visible');
+  });
+
+  it('shows error message if email is invalid', () => {
+    fill('email', 'wrongEmail');
     cy.contains('Sähköpostiosoite on virheellinen').should('be.visible');
   });
 
-  it('shows no error message if valid email', () => {
+  it('shows no error message if email is valid', () => {
+    fill('email', 'firstname.lastname@example.com');
+    cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
+  });
+
+  it('shows no error message if invalid email is corrected', () => {
+    fill('email', 'wrongEmail');
+    clear('email');
     fill('email', 'firstname.lastname@example.com');
     cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
   });
@@ -117,7 +132,7 @@ describe('register', () => {
     submitShouldBeDisabled();
   });
 
-  it('allows registration if all fields are filled', () => {
+  it('allows registration if all fields are correctly filled', () => {
     fillOutForm();
     click('submit');
     cy.url().should('contain', '/login');

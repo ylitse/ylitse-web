@@ -49,7 +49,11 @@ function togglePasswordConfirmation() {
 
 function clearError(field) {
   field.classList.remove('error-border');
-  if (field.id === 'password' || field.id === 'email') {
+  if (
+    field.id === 'password' ||
+    field.id === 'password-confirmation' ||
+    field.id === 'email'
+  ) {
     document
       .getElementById(`${field.id}-label`)
       .classList.remove('error-color');
