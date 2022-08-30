@@ -134,7 +134,6 @@ describe('register', () => {
 
   it('allows registration if all fields are correctly filled', () => {
     fillOutForm();
-    click('submit');
-    cy.url().should('contain', '/login');
+    cy.get('button[id="submit"]').should('be.enabled');
   });
 });
