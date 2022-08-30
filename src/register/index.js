@@ -1,4 +1,11 @@
 /* eslint-disable */
+function handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+}
+
 (function (window, document) {
   var form = document.forms.namedItem('register');
 
@@ -23,6 +30,7 @@
           'Content-Type': 'application/json',
         },
       })
+        .then(handleErrors)
         .then(function (response) {
           return response.json();
         })
@@ -39,6 +47,7 @@
             headers: { 'Content-Type': 'application/json' },
           });
         })
+        .then(handleErrors)
         .then(function (response) {
           return response.json();
         })
@@ -58,13 +67,12 @@
             },
           });
         })
-        .then(function (response) {
-          if (response.ok) {
-            window.location.replace('/login');
-          }
+        .then(handleErrors)
+        .then(function () {
+          window.location.replace('/login');
         })
         .catch(function (error) {
-          console.log(error.message);
+          console.error(error.message);
         });
       event.preventDefault();
     },
