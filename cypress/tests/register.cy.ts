@@ -19,8 +19,8 @@ describe('register', () => {
     toggle('privacy-consent');
   };
 
-  const submitShouldBeDisabled = () =>
-    cy.get('button[id="submit"]').should('be.disabled');
+  const submitShouldBe = buttonState =>
+    cy.get('button[id="submit"]').should(`be.${buttonState}`);
 
   beforeEach(() => {
     cy.visit('/register');
@@ -99,41 +99,41 @@ describe('register', () => {
   it('prevents registration if username field is empty', () => {
     fillOutForm();
     clear('username');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
   it('prevents registration if password field is empty', () => {
     fillOutForm();
     clear('password');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
   it('prevents registration if password confirmation field is empty', () => {
     fillOutForm();
     clear('password-confirmation');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
   it('prevents registration if display name field is empty', () => {
     fillOutForm();
     clear('display-name');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
   it('prevents registration if required age toggle is off', () => {
     fillOutForm();
     toggle('required-age');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
   it('prevents registration if privacy consent toggle is off', () => {
     fillOutForm();
     toggle('privacy-consent');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
   it('allows registration if all fields are correctly filled', () => {
     fillOutForm();
-    cy.get('button[id="submit"]').should('be.enabled');
+    submitShouldBe('enabled');
   });
 });
