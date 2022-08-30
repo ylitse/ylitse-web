@@ -6,6 +6,7 @@
     'submit',
     function (event) {
       var formData = new FormData(form);
+      var createdUser;
 
       fetch('/api/accounts', {
         method: 'POST',
@@ -26,10 +27,13 @@
           return response.json();
         })
         .then(function (data) {
-          fetch('/api/users/' + data.user.id, {
-            method: 'PUT',
+          createdUser = data.user;
+
+          return fetch('/api/login', {
+            method: 'POST',
             body: JSON.stringify({
-              display_name: formData.get('display-name'),
+              login_name: formData.get('username'),
+              password: formData.get('password'),
             }),
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
@@ -39,8 +43,25 @@
           return response.json();
         })
         .then(function (data) {
-          console.log(data);
-          window.location.replace('/login');
+          return fetch('/api/users/' + createdUser.id, {
+            method: 'PUT',
+            body: JSON.stringify({
+              display_name: formData.get('display-name'),
+              role: createdUser.role,
+              account_id: createdUser.account_id,
+              id: createdUser.id,
+            }),
+            credentials: 'include',
+            headers: {
+              Authorization: 'Bearer ' + data.tokens.access_token,
+              'Content-Type': 'application/json',
+            },
+          });
+        })
+        .then(function (response) {
+          if (response.ok) {
+            window.location.replace('/login');
+          }
         })
         .catch(function (error) {
           console.log(error.message);
