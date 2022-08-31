@@ -14,13 +14,13 @@ describe('register', () => {
     fill('username', 'exampleUsername');
     fill('password', 'examplePassword');
     fill('password-confirmation', 'examplePassword');
-    fill('screen-name', 'exampleScreenName');
+    fill('display-name', 'exampleDisplayName');
     toggle('required-age');
     toggle('privacy-consent');
   };
 
-  const submitShouldBeDisabled = () =>
-    cy.get('button[id="submit"]').should('be.disabled');
+  const submitShouldBe = buttonState =>
+    cy.get('button[id="submit"]').should(`be.${buttonState}`);
 
   beforeEach(() => {
     cy.visit('/register');
@@ -99,42 +99,41 @@ describe('register', () => {
   it('prevents registration if username field is empty', () => {
     fillOutForm();
     clear('username');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
   it('prevents registration if password field is empty', () => {
     fillOutForm();
     clear('password');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
   it('prevents registration if password confirmation field is empty', () => {
     fillOutForm();
     clear('password-confirmation');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
-  it('prevents registration if screen name field is empty', () => {
+  it('prevents registration if display name field is empty', () => {
     fillOutForm();
-    clear('screen-name');
-    submitShouldBeDisabled();
+    clear('display-name');
+    submitShouldBe('disabled');
   });
 
   it('prevents registration if required age toggle is off', () => {
     fillOutForm();
     toggle('required-age');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
   it('prevents registration if privacy consent toggle is off', () => {
     fillOutForm();
     toggle('privacy-consent');
-    submitShouldBeDisabled();
+    submitShouldBe('disabled');
   });
 
   it('allows registration if all fields are correctly filled', () => {
     fillOutForm();
-    click('submit');
-    cy.url().should('contain', '/login');
+    submitShouldBe('enabled');
   });
 });

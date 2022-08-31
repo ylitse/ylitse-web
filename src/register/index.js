@@ -1,25 +1,78 @@
 /* eslint-disable */
+function handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+}
+
 (function (window, document) {
   var form = document.forms.namedItem('register');
 
   form.addEventListener(
     'submit',
     function (event) {
-      fetch('/api/register', {
+      var formData = new FormData(form);
+      var createdUser;
+
+      fetch('/api/accounts', {
         method: 'POST',
-        body: new FormData(form),
+        body: JSON.stringify({
+          password: formData.get('password'),
+          account: {
+            role: 'mentee',
+            login_name: formData.get('username'),
+            email: formData.get('email'),
+          },
+        }),
         credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
+        .then(handleErrors)
         .then(function (response) {
-          if (response.ok) {
-            return response.json();
-          }
+          return response.json();
         })
         .then(function (data) {
-          window.location.href = '/login';
+          createdUser = data.user;
+
+          return fetch('/api/login', {
+            method: 'POST',
+            body: JSON.stringify({
+              login_name: formData.get('username'),
+              password: formData.get('password'),
+            }),
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+          });
+        })
+        .then(handleErrors)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          return fetch('/api/users/' + createdUser.id, {
+            method: 'PUT',
+            body: JSON.stringify({
+              display_name: formData.get('display-name'),
+              role: createdUser.role,
+              account_id: createdUser.account_id,
+              id: createdUser.id,
+            }),
+            credentials: 'include',
+            headers: {
+              Authorization: 'Bearer ' + data.tokens.access_token,
+              'Content-Type': 'application/json',
+            },
+          });
+        })
+        .then(handleErrors)
+        .then(function () {
+          window.location.replace('/login');
         })
         .catch(function (error) {
-          console.log(error.message);
+          console.error(error.message);
         });
       event.preventDefault();
     },
