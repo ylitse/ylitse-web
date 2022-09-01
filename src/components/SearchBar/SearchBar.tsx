@@ -5,19 +5,13 @@ import * as cssVariables from '../variables';
 
 type SearchProps = {
   placeholder: string;
-  label: string;
 };
 
-const SearchBar: React.FC<SearchProps> = ({ placeholder, label }) => {
-  const iconLabel = `${label} icon`;
+const SearchBar: React.FC<SearchProps> = ({ placeholder }) => {
   return (
     <SearchBox>
-      <SearchIcon label={iconLabel} />
-      <SearchInput
-        type="text"
-        label={label}
-        placeholder={placeholder}
-      ></SearchInput>
+      <SearchIcon />
+      <SearchInput type="text" placeholder={placeholder}></SearchInput>
     </SearchBox>
   );
 };
