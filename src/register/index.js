@@ -109,13 +109,13 @@ function togglePasswordConfirmation() {
 }
 
 function clearError(field) {
-  field.classList.remove('error-border');
   if (
     field.id === 'username' ||
     field.id === 'password' ||
     field.id === 'password-confirmation' ||
     field.id === 'email'
   ) {
+    field.classList.remove('error-border');
     document
       .getElementById(`${field.id}-label`)
       .classList.remove('error-color');
@@ -125,15 +125,14 @@ function clearError(field) {
 
 function displayError(field) {
   var notEmpty = field.value.length > 0;
-  if (notEmpty) {
-    field.classList.add('error-border');
-  }
   if (
-    (field.id === 'username' && notEmpty) ||
-    (field.id === 'password' && notEmpty) ||
-    (field.id === 'password-confirmation' && notEmpty) ||
-    field.id === 'email'
+    notEmpty &&
+    (field.id === 'username' ||
+      field.id === 'password' ||
+      field.id === 'password-confirmation' ||
+      field.id === 'email')
   ) {
+    field.classList.add('error-border');
     document.getElementById(`${field.id}-label`).classList.add('error-color');
     document.getElementById(`${field.id}-input-error`).style.display = 'flex';
   }
