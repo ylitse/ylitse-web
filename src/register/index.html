@@ -28,7 +28,7 @@
         <h2>Tilin tiedot</h2>
         <p>Tähdellä * merkityt kentät ovat pakollisia.</p>
         <fieldset>
-          <label for="username">Käyttäjätunnus *</label>
+          <label id="username-label" for="username">Käyttäjätunnus *</label>
           <input
             id="username"
             name="username"
@@ -37,6 +37,10 @@
             autofocus
             required
           />
+          <span id="username-input-error">
+            <img src="/static/icons/warning.svg" />
+            Käyttäjätunnus on varattu
+          </span>
         </fieldset>
         <fieldset>
           <label id="password-label" for="password">

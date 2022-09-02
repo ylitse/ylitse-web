@@ -80,6 +80,14 @@ function handleErrors(response) {
   );
 })(window, document);
 
+function isUsernameFree(username) {
+  return fetch('/api/search?login_name=' + username, { method: 'HEAD' }).then(
+    function (response) {
+      return response.status === 204;
+    },
+  );
+}
+
 function togglePasswordInput(inputId, toggleId) {
   var passwordInput = document.getElementById(inputId);
   var passwordToggle = document.getElementById(toggleId);
@@ -103,6 +111,7 @@ function togglePasswordConfirmation() {
 function clearError(field) {
   field.classList.remove('error-border');
   if (
+    field.id === 'username' ||
     field.id === 'password' ||
     field.id === 'password-confirmation' ||
     field.id === 'email'
@@ -120,6 +129,7 @@ function displayError(field) {
     field.classList.add('error-border');
   }
   if (
+    (field.id === 'username' && notEmpty) ||
     (field.id === 'password' && notEmpty) ||
     (field.id === 'password-confirmation' && notEmpty) ||
     field.id === 'email'
@@ -136,7 +146,24 @@ function checkForm() {
     .getElementById('register-form')
     .querySelectorAll('input')
     .forEach(function (field) {
-      if (field.id === 'password-confirmation') {
+      if (field.id === 'username') {
+        if (field.value.length > 0) {
+          var username = document.getElementById(field.id).value;
+          isUsernameFree(username).then(function (isUsernameFree) {
+            if (isUsernameFree) {
+              clearError(field);
+              field.classList.add('input-checkmark');
+            } else {
+              formError = true;
+              displayError(field);
+              document.getElementById('submit').disabled = formError;
+            }
+          });
+        } else {
+          clearError(field);
+          field.classList.remove('input-checkmark');
+        }
+      } else if (field.id === 'password-confirmation') {
         var passwordsMatch =
           field.value === document.getElementById('password').value;
         if (passwordsMatch) {
