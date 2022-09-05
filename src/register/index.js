@@ -109,13 +109,7 @@ function togglePasswordConfirmation() {
 }
 
 function clearError(field) {
-  if (
-    field.id === 'username' ||
-    field.id === 'password' ||
-    field.id === 'password-confirmation' ||
-    field.id === 'email' ||
-    field.id === 'display-name'
-  ) {
+  if (field.type !== 'checkbox') {
     field.classList.remove('error-border');
     document
       .getElementById(`${field.id}-label`)
@@ -125,15 +119,7 @@ function clearError(field) {
 }
 
 function displayError(field) {
-  var notEmpty = field.value.length > 0;
-  if (
-    notEmpty &&
-    (field.id === 'username' ||
-      field.id === 'password' ||
-      field.id === 'password-confirmation' ||
-      field.id === 'email' ||
-      field.id === 'display-name')
-  ) {
+  if (field.value.length > 0) {
     field.classList.add('error-border');
     document.getElementById(`${field.id}-label`).classList.add('error-color');
     document.getElementById(`${field.id}-input-error`).style.display = 'flex';
@@ -192,7 +178,9 @@ function checkForm() {
         }
       } else {
         formError = true;
-        displayError(field);
+        if (field.type !== 'checkbox') {
+          displayError(field);
+        }
       }
     });
   // Submit button is disabled if there is a form error
