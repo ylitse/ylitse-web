@@ -28,11 +28,22 @@
         <h2>Tilin tiedot</h2>
         <p>Tähdellä * merkityt kentät ovat pakollisia.</p>
         <fieldset>
-          <label id="username-label" for="username">Käyttäjätunnus *</label>
+          <label id="username-label" for="username">
+            Käyttäjätunnus *
+            <span class="align-right">
+              <span class="tooltip">
+                <img src="/static/icons/tooltip.svg" />
+                <span class="tooltip-text">
+                  Käyttäjätunnuksen tulee olla vähintään 2 merkkiä pitkä.
+                </span>
+              </span>
+            </span>
+          </label>
           <input
             id="username"
             name="username"
             type="text"
+            minlength="2"
             onChange="checkForm()"
             autofocus
             required

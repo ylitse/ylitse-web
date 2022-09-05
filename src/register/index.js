@@ -146,7 +146,8 @@ function checkForm() {
     .querySelectorAll('input')
     .forEach(function (field) {
       if (field.id === 'username') {
-        if (field.value.length > 0) {
+        // Username must be at least 2 characters long
+        if (field.value.length >= 2) {
           var username = document.getElementById(field.id).value;
           isUsernameFree(username).then(function (isUsernameFree) {
             if (isUsernameFree) {
@@ -158,6 +159,12 @@ function checkForm() {
               document.getElementById('submit').disabled = formError;
             }
           });
+        } else if (field.value.length === 1) {
+          formError = true;
+          displayError(field);
+          document.getElementById('username-input-error').innerHTML =
+            'Käyttäjätunnus on liian lyhyt';
+          document.getElementById('submit').disabled = formError;
         } else {
           clearError(field);
           field.classList.remove('input-checkmark');
