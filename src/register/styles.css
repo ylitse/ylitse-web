@@ -281,6 +281,7 @@ input:checked + .slider:before {
   color: #4a2acb;
 }
 
+#username-input-error,
 #password-input-error,
 #password-confirmation-input-error,
 #email-input-error {
