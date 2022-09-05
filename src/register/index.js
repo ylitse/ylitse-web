@@ -113,7 +113,8 @@ function clearError(field) {
     field.id === 'username' ||
     field.id === 'password' ||
     field.id === 'password-confirmation' ||
-    field.id === 'email'
+    field.id === 'email' ||
+    field.id === 'display-name'
   ) {
     field.classList.remove('error-border');
     document
@@ -130,7 +131,8 @@ function displayError(field) {
     (field.id === 'username' ||
       field.id === 'password' ||
       field.id === 'password-confirmation' ||
-      field.id === 'email')
+      field.id === 'email' ||
+      field.id === 'display-name')
   ) {
     field.classList.add('error-border');
     document.getElementById(`${field.id}-label`).classList.add('error-color');

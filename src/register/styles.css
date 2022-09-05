@@ -285,7 +285,8 @@ input:checked + .slider:before {
 #username-length-error,
 #password-input-error,
 #password-confirmation-input-error,
-#email-input-error {
+#email-input-error,
+#display-name-input-error {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 700;
