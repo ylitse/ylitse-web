@@ -282,7 +282,6 @@ input:checked + .slider:before {
 }
 
 #username-input-error,
-#username-length-error,
 #password-input-error,
 #password-confirmation-input-error,
 #email-input-error,
