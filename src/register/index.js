@@ -157,15 +157,17 @@ function checkForm() {
               field.classList.add('input-checkmark');
             } else {
               formError = true;
+              document.getElementById('username-input-error').innerHTML =
+                'Käyttäjätunnus on jo käytössä';
               displayError(field);
               document.getElementById('submit').disabled = formError;
             }
           });
         } else if (field.value.length === 1) {
           formError = true;
-          displayError(field);
           document.getElementById('username-input-error').innerHTML =
             'Käyttäjätunnus on liian lyhyt';
+          displayError(field);
           document.getElementById('submit').disabled = formError;
         } else {
           clearError(field);
