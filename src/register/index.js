@@ -112,7 +112,7 @@ function clearError(field) {
   if (field.type !== 'checkbox') {
     field.classList.remove('error-border');
     document
-      .getElementById(`${field.id}-label`)
+      .querySelector(`label[for=${field.id}]`)
       .classList.remove('error-color');
     document.getElementById(`${field.id}-input-error`).style.display = 'none';
   }
@@ -121,7 +121,9 @@ function clearError(field) {
 function displayError(field) {
   if (field.value.length > 0) {
     field.classList.add('error-border');
-    document.getElementById(`${field.id}-label`).classList.add('error-color');
+    document
+      .querySelector(`label[for=${field.id}]`)
+      .classList.add('error-color');
     document.getElementById(`${field.id}-input-error`).style.display = 'flex';
   }
   field.classList.remove('input-checkmark');
