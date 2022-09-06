@@ -86,6 +86,11 @@ h1 {
 
 input[type='text'],
 input[type='password'] {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
   /* Rectangle 122 */
 
   box-sizing: border-box;
