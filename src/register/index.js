@@ -108,13 +108,19 @@ function togglePasswordConfirmation() {
   togglePasswordInput('password-confirmation', 'password-confirmation-toggle');
 }
 
+function getInputError(inputId) {
+  return document
+    .getElementById(inputId)
+    .parentElement.querySelector('.input-error');
+}
+
 function clearError(field) {
   if (field.type !== 'checkbox') {
     field.classList.remove('error-border');
     document
       .querySelector(`label[for=${field.id}]`)
       .classList.remove('error-color');
-    document.getElementById(`${field.id}-input-error`).style.display = 'none';
+    getInputError(field.id).style.display = 'none';
   }
 }
 
@@ -124,7 +130,7 @@ function displayError(field) {
     document
       .querySelector(`label[for=${field.id}]`)
       .classList.add('error-color');
-    document.getElementById(`${field.id}-input-error`).style.display = 'flex';
+    getInputError(field.id).style.display = 'flex';
   }
   field.classList.remove('input-checkmark');
 }
@@ -145,7 +151,7 @@ function checkForm() {
               field.classList.add('input-checkmark');
             } else {
               formError = true;
-              document.getElementById('username-input-error').innerHTML =
+              getInputError('username').innerHTML =
                 'Käyttäjätunnus on jo käytössä';
               displayError(field);
               document.getElementById('submit').disabled = formError;
@@ -153,8 +159,7 @@ function checkForm() {
           });
         } else if (field.value.length === 1) {
           formError = true;
-          document.getElementById('username-input-error').innerHTML =
-            'Käyttäjätunnus on liian lyhyt';
+          getInputError('username').innerHTML = 'Käyttäjätunnus on liian lyhyt';
           displayError(field);
           document.getElementById('submit').disabled = formError;
         } else {

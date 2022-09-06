@@ -49,7 +49,7 @@
             autofocus
             required
           />
-          <span id="username-input-error">
+          <span class="input-error">
             <img src="/static/icons/warning.svg" />
             Käyttäjätunnus on jo käytössä
           </span>
@@ -82,7 +82,7 @@
             onChange="checkForm()"
             required
           />
-          <span id="password-input-error">
+          <span class="input-error">
             <img src="/static/icons/warning.svg" />
             Salasana on liian lyhyt
           </span>
@@ -114,15 +114,13 @@
             onChange="checkForm()"
             required
           />
-          <span id="password-confirmation-input-error">
+          <span class="input-error">
             <img src="/static/icons/warning.svg" />
             Salasanat eivät täsmää
           </span>
         </fieldset>
         <fieldset>
-          <label for="email"
-            >Sähköpostiosoite (vapaaehtoinen)</label
-          >
+          <label for="email">Sähköpostiosoite (vapaaehtoinen)</label>
           <input
             id="email"
             name="email"
@@ -130,7 +128,7 @@
             maxlength="200"
             onChange="checkForm()"
           />
-          <span id="email-input-error">
+          <span class="input-error">
             <img src="/static/icons/warning.svg" />
             Sähköpostiosoite on virheellinen
           </span>
@@ -161,7 +159,7 @@
             onChange="checkForm()"
             required
           />
-          <span id="display-name-input-error">
+          <span class="input-error">
             <img src="/static/icons/warning.svg" />
             Nimimerkki on liian lyhyt
           </span>

@@ -125,6 +125,19 @@ input:focus {
   background-position: 98% 50%;
 }
 
+.input-error {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 21px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  color: #972232;
+}
+
 .error-color {
   color: #972232;
 }
@@ -279,23 +292,6 @@ input:checked + .slider:before {
   border: 0;
   background-color: white;
   color: #4a2acb;
-}
-
-#username-input-error,
-#password-input-error,
-#password-confirmation-input-error,
-#email-input-error,
-#display-name-input-error {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 21px;
-  display: none;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 0;
-  color: #972232;
 }
 
 #submit {
