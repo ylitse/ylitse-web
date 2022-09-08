@@ -68,7 +68,15 @@ const isUsernameFree = async username => {
   const response = await fetch('/api/search?login_name=' + username, {
     method: 'HEAD',
   });
-  return response.status === 204;
+  if (response.status === 200) {
+    // Response 200 OK: username exists
+    return false;
+  } else if (response.status === 204) {
+    // Response 204 No Content: username doesn't exist
+    return true;
+  } else {
+    throw Error;
+  }
 };
 
 const toggleInput = id => {
@@ -87,9 +95,15 @@ const getInputError = id =>
   document.getElementById(id).parentElement.querySelector('.input-error');
 
 const displayError = input => {
+  input.classList.remove('input-checkmark');
   input.classList.add('error-border');
   document.querySelector(`label[for=${input.id}]`).classList.add('error-color');
   getInputError(input.id).style.display = 'flex';
+};
+
+const displayErrorWithMessage = (input, message) => {
+  getInputError(input.id).querySelector('span').innerHTML = message;
+  displayError(input);
 };
 
 const removeError = input => {
@@ -120,23 +134,28 @@ const checkForm = async () => {
       if (input.checkValidity()) {
         // Username is long enough
         const username = document.getElementById(input.id).value;
-        const usernameIsFree = await isUsernameFree(username);
-        if (usernameIsFree) {
-          removeError(input);
-          input.classList.add('input-checkmark');
-        } else {
-          // Username is taken
+        try {
+          const usernameIsFree = await isUsernameFree(username);
+          if (usernameIsFree) {
+            removeError(input);
+            input.classList.add('input-checkmark');
+          } else {
+            // Username is taken
+            formError = true;
+            displayErrorWithMessage(input, 'Käyttäjätunnus on jo käytössä.');
+          }
+        } catch (error) {
+          // Username validation failed
           formError = true;
-          input.classList.remove('input-checkmark');
-          getInputError('username').innerHTML = 'Käyttäjätunnus on jo käytössä';
-          displayError(input);
+          displayErrorWithMessage(
+            input,
+            'Emme pystyneet tarkistamaan käyttäjätunnusta. Syötä tunnus uudelleen hetken kuluttua.',
+          );
         }
       } else {
         // Username is too short
         formError = true;
-        input.classList.remove('input-checkmark');
-        getInputError('username').innerHTML = 'Käyttäjätunnus on liian lyhyt';
-        displayError(input);
+        displayErrorWithMessage(input, 'Käyttäjätunnus on liian lyhyt');
       }
     } else if (input.id === 'password-confirmation') {
       if (input.value === document.getElementById('password').value) {
@@ -149,7 +168,6 @@ const checkForm = async () => {
         // Passwords don't match
         formError = true;
         displayError(input);
-        input.classList.remove('input-checkmark');
       }
     } else if (input.checkValidity()) {
       // Input value is valid
@@ -162,7 +180,6 @@ const checkForm = async () => {
       formError = true;
       if (input.type !== 'checkbox') {
         displayError(input);
-        input.classList.remove('input-checkmark');
       }
     }
   }
