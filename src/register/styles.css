@@ -125,7 +125,8 @@ input:focus {
   background-position: 98% 50%;
 }
 
-.input-error {
+.input-error,
+#submit-error {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 700;
