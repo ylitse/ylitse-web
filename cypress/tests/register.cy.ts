@@ -1,6 +1,12 @@
 describe('register', () => {
-  const fill = (field: string, value: string) =>
+  const fill = (field: string, value: string) => {
     cy.get(`input[name="${field}"]`).type(value).blur();
+    if (field === 'username') {
+      // Wait for API response
+      cy.intercept('/api/search').as('usernameCheck');
+      cy.wait('@usernameCheck');
+    }
+  };
 
   const clear = (field: string) =>
     cy.get(`input[name="${field}"]`).clear().blur();
@@ -11,7 +17,7 @@ describe('register', () => {
     cy.get(`input[id="${field}"]`).parent().click();
 
   const fillOutForm = () => {
-    fill('username', 'exampleUsername');
+    fill('username', 'freeUsername');
     fill('password', 'examplePassword');
     fill('password-confirmation', 'examplePassword');
     fill('display-name', 'exampleDisplayName');
@@ -29,6 +35,26 @@ describe('register', () => {
   it('loads page', () => {
     cy.contains('Rekisteröidy');
     cy.contains('Hienoa, että haluat aloittaa palvelun käytön.');
+  });
+
+  it('shows error message if username is too short', () => {
+    fill('username', 'a');
+    cy.contains('Käyttäjätunnus on liian lyhyt').should('be.visible');
+  });
+
+  it('shows error message if username is taken', () => {
+    fill('username', 'takenUsername');
+    cy.contains('Käyttäjätunnus on jo käytössä').should('be.visible');
+  });
+
+  it('shows no error message if username is long enough', () => {
+    fill('username', 'freeUsername');
+    cy.contains('Käyttäjätunnus on liian lyhyt').should('not.be.visible');
+  });
+
+  it('shows no error message if username is free', () => {
+    fill('username', 'freeUsername');
+    cy.contains('Käyttäjätunnus on jo käytössä').should('not.be.visible');
   });
 
   it('hides password as default', () => {
@@ -94,6 +120,16 @@ describe('register', () => {
     clear('email');
     fill('email', 'firstname.lastname@example.com');
     cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
+  });
+
+  it('shows error message if display name is too short', () => {
+    fill('display-name', 'a');
+    cy.contains('Nimimerkki on liian lyhyt').should('be.visible');
+  });
+
+  it('shows no error message if display name is long enough', () => {
+    fill('display-name', 'exampleDisplayName');
+    cy.contains('Nimimerkki on liian lyhyt').should('not.be.visible');
   });
 
   it('prevents registration if username field is empty', () => {

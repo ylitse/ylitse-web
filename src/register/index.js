@@ -122,15 +122,7 @@ const checkForm = async () => {
 
   // Validate all inputs
   for (const input of inputs) {
-    if (!input.value && input.type !== 'checkbox') {
-      // Text input is empty
-      if (input.id !== 'email') {
-        // A missing email is not an error
-        formError = true;
-      }
-      removeError(input);
-      input.classList.remove('input-checkmark');
-    } else if (input.id === 'username') {
+    if (input.id === 'username') {
       if (input.checkValidity()) {
         // Username is long enough
         const username = document.getElementById(input.id).value;
@@ -173,7 +165,9 @@ const checkForm = async () => {
       // Input value is valid
       if (input.type !== 'checkbox') {
         removeError(input);
-        input.classList.add('input-checkmark');
+        if (input.id !== 'email' || input.value)
+          // Empty email gets no checkmark
+          input.classList.add('input-checkmark');
       }
     } else {
       // Input value is invalid
