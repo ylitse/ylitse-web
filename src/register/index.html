@@ -27,7 +27,7 @@
         </p>
         <h2>Tilin tiedot</h2>
         <p>Tähdellä * merkityt kentät ovat pakollisia.</p>
-        <fieldset>
+        <fieldset id="username-field">
           <label for="username">
             Käyttäjätunnus *
             <span class="align-right">
@@ -45,16 +45,22 @@
             type="text"
             maxlength="100"
             minlength="2"
+            pattern=".{2,100}"
             onChange="checkForm()"
             autofocus
             required
           />
-          <span class="input-error">
+          <label class="error-message">
             <img src="/static/icons/warning.svg" />
-            <span>Käyttäjätunnus on jo käytössä</span>
-          </span>
+            <span id="too-short-message">Käyttäjätunnus on liian lyhyt</span>
+            <span id="taken-message">Käyttäjätunnus on jo käytössä</span>
+            <span id="try-again-message">
+              Emme pystyneet tarkistamaan käyttäjätunnusta. Syötä tunnus
+              uudelleen hetken kuluttua.
+            </span>
+          </label>
         </fieldset>
-        <fieldset>
+        <fieldset id="password-field">
           <label for="password">
             Salasana *
             <span class="align-right">
@@ -79,15 +85,16 @@
             type="password"
             maxlength="100"
             minlength="8"
+            pattern=".{8,100}"
             onChange="checkForm()"
             required
           />
-          <span class="input-error">
+          <label class="error-message">
             <img src="/static/icons/warning.svg" />
             Salasana on liian lyhyt
-          </span>
+          </label>
         </fieldset>
-        <fieldset>
+        <fieldset id="password-confirmation-field">
           <label for="password-confirmation">
             Vahvista salasana *
             <span class="align-right">
@@ -114,12 +121,12 @@
             onChange="checkForm()"
             required
           />
-          <span class="input-error">
+          <label class="error-message">
             <img src="/static/icons/warning.svg" />
             Salasanat eivät täsmää
-          </span>
+          </label>
         </fieldset>
-        <fieldset>
+        <fieldset id="email-field">
           <label for="email">Sähköpostiosoite (vapaaehtoinen)</label>
           <input
             id="email"
@@ -128,17 +135,17 @@
             maxlength="200"
             onChange="checkForm()"
           />
-          <span class="input-error">
+          <label class="error-message">
             <img src="/static/icons/warning.svg" />
             Sähköpostiosoite on virheellinen
-          </span>
+          </label>
           <p class="field-info">
             Sähköpostiosoitteen tallentaminen mahdollistaa salasanan
             palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin
             tarkoituksiin.
           </p>
         </fieldset>
-        <fieldset>
+        <fieldset id="display-name-field">
           <label for="display-name">
             Julkinen nimimerkki *
             <span class="align-right">
@@ -156,13 +163,14 @@
             type="text"
             maxlength="30"
             minlength="2"
+            pattern=".{2,30}"
             onChange="checkForm()"
             required
           />
-          <span class="input-error">
+          <label class="error-message">
             <img src="/static/icons/warning.svg" />
             Nimimerkki on liian lyhyt
-          </span>
+          </label>
           <p class="field-info">
             Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta
             sinua ei voi tunnistaa.
@@ -226,11 +234,9 @@
           </label>
         </fieldset>
         <button id="submit" type="submit" disabled>Rekisteröidy</button>
-        <fieldset>
-          <span id="submit-error">
-            Lomakkeen lähettäminen epäonnistui. Yritä hetken kuluttua uudelleen
-          </span>
-        </fieldset>
+        <label for="submit" class="error-message">
+          Lomakkeen lähettäminen epäonnistui. Yritä hetken kuluttua uudelleen
+        </label>
       </form>
       <div class="footer">
         <h3>Palvelun tarjoaa SOS-Lapsikylä</h3>

@@ -59,7 +59,7 @@
         window.location.replace('/login');
       }
     } catch (error) {
-      document.getElementById('submit-error').style.display = 'flex';
+      document.querySelector(`label[for=submit]`).style.display = 'flex';
     }
   });
 })(window, document);
@@ -91,19 +91,24 @@ const toggleInput = id => {
   }
 };
 
-const getInputError = id =>
-  document.getElementById(id).parentElement.querySelector('.input-error');
+const getErrorMessage = id =>
+  document.getElementById(`${id}-field`).querySelector('.error-message');
+
+const hideAllUsernameErrors = () =>
+  getErrorMessage('username')
+    .querySelectorAll('span')
+    .forEach(message => (message.style.display = 'none'));
+
+const changeUsernameError = errorId => {
+  hideAllUsernameErrors();
+  document.getElementById(errorId).style.display = 'flex';
+};
 
 const displayError = input => {
   input.classList.remove('input-checkmark');
   input.classList.add('error-border');
   document.querySelector(`label[for=${input.id}]`).classList.add('error-color');
-  getInputError(input.id).style.display = 'flex';
-};
-
-const displayErrorWithMessage = (input, message) => {
-  getInputError(input.id).querySelector('span').innerHTML = message;
-  displayError(input);
+  getErrorMessage(input.id).style.display = 'flex';
 };
 
 const removeError = input => {
@@ -111,7 +116,7 @@ const removeError = input => {
   document
     .querySelector(`label[for=${input.id}]`)
     .classList.remove('error-color');
-  getInputError(input.id).style.display = 'none';
+  getErrorMessage(input.id).style.display = 'none';
 };
 
 const checkForm = async () => {
@@ -129,25 +134,26 @@ const checkForm = async () => {
         try {
           const usernameIsFree = await isUsernameFree(username);
           if (usernameIsFree) {
+            hideAllUsernameErrors();
             removeError(input);
             input.classList.add('input-checkmark');
           } else {
             // Username is taken
             formError = true;
-            displayErrorWithMessage(input, 'Käyttäjätunnus on jo käytössä.');
+            changeUsernameError('taken-message');
+            displayError(input);
           }
         } catch (error) {
           // Username validation failed
           formError = true;
-          displayErrorWithMessage(
-            input,
-            'Emme pystyneet tarkistamaan käyttäjätunnusta. Syötä tunnus uudelleen hetken kuluttua.',
-          );
+          changeUsernameError('try-again-message');
+          displayError(input);
         }
       } else {
         // Username is too short
         formError = true;
-        displayErrorWithMessage(input, 'Käyttäjätunnus on liian lyhyt');
+        changeUsernameError('too-short-message');
+        displayError(input);
       }
     } else if (input.id === 'password-confirmation') {
       if (input.value === document.getElementById('password').value) {
