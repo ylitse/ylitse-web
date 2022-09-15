@@ -7,7 +7,7 @@
     "test": "jest",
     "build": "webpack",
     "start": "webpack serve --open",
-    "e2e": "CYPRESS_BASE_URL=http://localhost:8080 npx cypress open",
+    "e2e": "CYPRESS_BASE_URL=http://localhost:8081 npx cypress open",
     "eslint:check": "eslint-config-prettier src/App.tsx",
     "eslint": "npm run eslint:check && eslint '{src,e2e}/**/*.{ts,tsx}'",
     "eslint:fix": "npm run eslint:check && eslint --fix '{src,e2e}/**/*.{ts,tsx}'",

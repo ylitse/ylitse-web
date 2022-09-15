@@ -79,7 +79,7 @@ Project uses [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hook
 Locally:
 
 1. Start dev server `npm run start`
-1. Run cypress `CYPRESS_BASE_URL=http://localhost:8080 npx cypress open`
+1. Run cypress `CYPRESS_BASE_URL=http://localhost:8081 npx cypress open`
 
 ## Development
 
