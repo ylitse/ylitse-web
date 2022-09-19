@@ -78,8 +78,11 @@ Project uses [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hook
 
 Locally:
 
+1. Start Ylitse-API `YLITSE_POSTGRES_DATA= make run-gunicorn`
 1. Start dev server `npm run start`
 1. Run cypress `CYPRESS_BASE_URL=http://localhost:8081 npx cypress open`
+
+The API needs to be restarted every time the tests are run to clear the database.
 
 ## Development
 
