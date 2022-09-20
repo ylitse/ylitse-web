@@ -29,29 +29,29 @@ describe('login', () => {
   });
 
   it('shows error if empty username', () => {
-    cy.get('input[id="password"]').type('password');
+    cy.fillInput('password', 'examplePassword');
     clickLogin();
     testErrorVisible();
   });
 
   it('shows error if empty password', () => {
-    cy.get('input[id="username"]').type('username');
+    cy.fillInput('username', 'exampleUsername');
     clickLogin();
     testErrorVisible();
   });
 
   it('shows error if no account exists', () => {
-    cy.get('input[id="username"]').type('wrongUsername');
-    cy.get('input[id="password"]').type('wrongPassword');
+    cy.fillInput('username', 'wrongUsername');
+    cy.fillInput('password', 'wrongPassword');
     clickLogin();
     testErrorVisible();
   });
 
   it('can log in with registered account', () => {
-    cy.registerUser('username', 'password');
+    cy.registerUser('exampleUsername', 'examplePassword');
     cy.location('pathname').should('contain', '/login');
-    cy.get('input[id="username"]').focus().type('username');
-    cy.get('input[id="password"]').focus().type('password');
+    cy.fillInput('username', 'exampleUsername');
+    cy.fillInput('password', 'examplePassword');
     clickLogin();
     cy.location('pathname').should('eq', '/');
   });
