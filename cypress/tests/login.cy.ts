@@ -18,6 +18,7 @@ describe('login', () => {
     cy.contains('Rekisteröidy');
     cy.contains('Kirjaudu');
   });
+
   it('has right content', () => {
     cy.contains('Kirjaudu sisään');
     cy.contains(
@@ -26,20 +27,32 @@ describe('login', () => {
     cy.contains('Ylitse MentorApp');
     cy.contains('Unohditko salasanasi?');
   });
+
   it('shows error if empty username', () => {
-    cy.get('[name="password"]').type('passwordd');
+    cy.get('input[id="password"]').type('password');
     clickLogin();
     testErrorVisible();
   });
+
   it('shows error if empty password', () => {
-    cy.get('[name="username"]').type('usernameTest');
+    cy.get('input[id="username"]').type('username');
     clickLogin();
     testErrorVisible();
   });
-  it('shows error if bad username and password', () => {
-    cy.get('[name="username"]').type(' bad userName');
-    cy.get('[name="password"]').type('bad password');
+
+  it('shows error if no account exists', () => {
+    cy.get('input[id="username"]').type('wrongUsername');
+    cy.get('input[id="password"]').type('wrongPassword');
     clickLogin();
     testErrorVisible();
+  });
+
+  it('can log in with registered account', () => {
+    cy.registerUser('username', 'password');
+    cy.location('pathname').should('contain', '/login');
+    cy.get('input[id="username"]').focus().type('username');
+    cy.get('input[id="password"]').focus().type('password');
+    clickLogin();
+    cy.location('pathname').should('eq', '/');
   });
 });

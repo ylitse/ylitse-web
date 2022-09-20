@@ -15,7 +15,7 @@ Cypress.Commands.add(
     cy.visit('/register');
     fill('username', username);
     fill('password', password);
-    fill('password-confirmation', 'examplePassword');
+    fill('password-confirmation', password);
     fill('display-name', 'exampleDisplayName');
     toggle('required-age');
     toggle('privacy-consent');
