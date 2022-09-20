@@ -1,22 +1,22 @@
 describe('register', () => {
-  const fill = (input: string, value: string) => {
+  const fill = (input: string, value: string): void => {
     cy.get(`input[id="${input}"]`).type(value).blur();
   };
 
-  const clear = (input: string) => {
+  const clear = (input: string): void => {
     cy.get(`input[id="${input}"]`).clear().blur();
   };
 
-  const click = (button: string) => {
+  const click = (button: string): void => {
     cy.get(`button[id="${button}"]`).click();
   };
 
-  const toggle = (input: string) => {
+  const toggle = (input: string): void => {
     cy.get(`input[id="${input}"]`).parent().click();
   };
 
-  const fillOutForm = () => {
-    fill('username', 'freeUsername');
+  const fillOutForm = (username: string): void => {
+    fill('username', username);
     fill('password', 'examplePassword');
     fill('password-confirmation', 'examplePassword');
     fill('display-name', 'exampleDisplayName');
@@ -24,16 +24,16 @@ describe('register', () => {
     toggle('privacy-consent');
   };
 
-  const submitShouldBe = buttonState =>
-    cy.get('button[id="submit"]').should(`be.${buttonState}`);
-
-  beforeEach(() => {
-    cy.visit('/register');
-  });
+  beforeEach(() => cy.visit('/register'));
 
   it('loads page', () => {
     cy.contains('Rekisteröidy');
     cy.contains('Hienoa, että haluat aloittaa palvelun käytön.');
+  });
+
+  it('registers new user if form is correctly filled', () => {
+    cy.registerUser('takenUsername');
+    cy.url().should('contain', '/login');
   });
 
   // Username
@@ -59,9 +59,9 @@ describe('register', () => {
   });
 
   it('prevents registration if username field is empty', () => {
-    fillOutForm();
+    fillOutForm('freeUsername');
     clear('username');
-    submitShouldBe('disabled');
+    cy.get('button[id="submit"]').should(`be.disabled`);
   });
 
   // Password
@@ -78,9 +78,9 @@ describe('register', () => {
   });
 
   it('prevents registration if password field is empty', () => {
-    fillOutForm();
+    fillOutForm('freeUsername');
     clear('password');
-    submitShouldBe('disabled');
+    cy.get('button[id="submit"]').should(`be.disabled`);
   });
 
   // Password confirmation
@@ -123,9 +123,9 @@ describe('register', () => {
   });
 
   it('prevents registration if password confirmation field is empty', () => {
-    fillOutForm();
+    fillOutForm('freeUsername');
     clear('password-confirmation');
-    submitShouldBe('disabled');
+    cy.get('button[id="submit"]').should(`be.disabled`);
   });
 
   // Email
@@ -153,31 +153,24 @@ describe('register', () => {
   });
 
   it('prevents registration if display name field is empty', () => {
-    fillOutForm();
+    fillOutForm('freeUsername');
     clear('display-name');
-    submitShouldBe('disabled');
+    cy.get('button[id="submit"]').should(`be.disabled`);
   });
 
   // Required age
 
   it('prevents registration if required age toggle is off', () => {
-    fillOutForm();
+    fillOutForm('freeUsername');
     toggle('required-age');
-    submitShouldBe('disabled');
+    cy.get('button[id="submit"]').should(`be.disabled`);
   });
 
   // Privacy consent
 
   it('prevents registration if privacy consent toggle is off', () => {
-    fillOutForm();
+    fillOutForm('freeUsername');
     toggle('privacy-consent');
-    submitShouldBe('disabled');
-  });
-
-  // Submit
-
-  it('allows registration if all fields are correctly filled', () => {
-    fillOutForm();
-    submitShouldBe('enabled');
+    cy.get('button[id="submit"]').should(`be.disabled`);
   });
 });
