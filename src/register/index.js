@@ -1,21 +1,14 @@
 /* eslint-disable */
-function handleErrors(response) {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-}
+((window, document) => {
+  const form = document.forms.namedItem('register');
 
-(function (window, document) {
-  var form = document.forms.namedItem('register');
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    const formData = new FormData(form);
 
-  form.addEventListener(
-    'submit',
-    function (event) {
-      var formData = new FormData(form);
-      var createdUser;
-
-      fetch('/api/accounts', {
+    try {
+      // Create a new account
+      const createAccountResponse = await fetch('/api/accounts', {
         method: 'POST',
         body: JSON.stringify({
           password: formData.get('password'),
@@ -29,135 +22,167 @@ function handleErrors(response) {
         headers: {
           'Content-Type': 'application/json',
         },
-      })
-        .then(handleErrors)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          createdUser = data.user;
+      });
+      const accountData = await createAccountResponse.json();
+      const createdUser = accountData.user;
 
-          return fetch('/api/login', {
-            method: 'POST',
-            body: JSON.stringify({
-              login_name: formData.get('username'),
-              password: formData.get('password'),
-            }),
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-          });
-        })
-        .then(handleErrors)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          return fetch('/api/users/' + createdUser.id, {
-            method: 'PUT',
-            body: JSON.stringify({
-              display_name: formData.get('display-name'),
-              role: createdUser.role,
-              account_id: createdUser.account_id,
-              id: createdUser.id,
-            }),
-            credentials: 'include',
-            headers: {
-              Authorization: 'Bearer ' + data.tokens.access_token,
-              'Content-Type': 'application/json',
-            },
-          });
-        })
-        .then(handleErrors)
-        .then(function () {
-          window.location.replace('/login');
-        })
-        .catch(function (error) {
-          console.error(error.message);
-        });
-      event.preventDefault();
-    },
-    false,
-  );
+      // Log in using the created account
+      const loginResponse = await fetch('/api/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          login_name: formData.get('username'),
+          password: formData.get('password'),
+        }),
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const loginData = await loginResponse.json();
+
+      // Update the user by adding the display name
+      const updateUserResponse = await fetch(`/api/users/${createdUser.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          display_name: formData.get('display-name'),
+          role: createdUser.role,
+          account_id: createdUser.account_id,
+          id: createdUser.id,
+        }),
+        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${loginData.tokens.access_token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      // Redirect to login page
+      if (updateUserResponse.ok) {
+        window.location.replace('/login');
+      }
+    } catch (error) {
+      document.querySelector(`label[for=submit]`).style.display = 'flex';
+    }
+  });
 })(window, document);
 
-function togglePasswordInput(inputId, toggleId) {
-  var passwordInput = document.getElementById(inputId);
-  var passwordToggle = document.getElementById(toggleId);
-  if (passwordInput.getAttribute('type') === 'password') {
-    passwordInput.type = 'text';
-    passwordToggle.innerHTML = 'Piilota salasana';
+const isUsernameFree = async username => {
+  const response = await fetch('/api/search?login_name=' + username, {
+    method: 'HEAD',
+  });
+  if (response.status === 200) {
+    // Response 200 OK: username exists
+    return false;
+  } else if (response.status === 204) {
+    // Response 204 No Content: username doesn't exist
+    return true;
   } else {
-    passwordInput.type = 'password';
-    passwordToggle.innerHTML = 'Näytä salasana';
+    throw Error;
   }
-}
+};
 
-function togglePassword() {
-  togglePasswordInput('password', 'password-toggle');
-}
-
-function togglePasswordConfirmation() {
-  togglePasswordInput('password-confirmation', 'password-confirmation-toggle');
-}
-
-function clearError(field) {
-  field.classList.remove('error-border');
-  if (
-    field.id === 'password' ||
-    field.id === 'password-confirmation' ||
-    field.id === 'email'
-  ) {
-    document
-      .getElementById(`${field.id}-label`)
-      .classList.remove('error-color');
-    document.getElementById(`${field.id}-input-error`).style.display = 'none';
+const toggleInput = id => {
+  const input = document.getElementById(id);
+  const toggle = document.getElementById(`${id}-toggle`);
+  if (input.getAttribute('type') === 'password') {
+    input.type = 'text';
+    toggle.innerHTML = 'Piilota salasana';
+  } else {
+    input.type = 'password';
+    toggle.innerHTML = 'Näytä salasana';
   }
-}
+};
 
-function displayError(field) {
-  var notEmpty = field.value.length > 0;
-  if (notEmpty) {
-    field.classList.add('error-border');
-  }
-  if (
-    (field.id === 'password' && notEmpty) ||
-    (field.id === 'password-confirmation' && notEmpty) ||
-    field.id === 'email'
-  ) {
-    document.getElementById(`${field.id}-label`).classList.add('error-color');
-    document.getElementById(`${field.id}-input-error`).style.display = 'flex';
-  }
-  field.classList.remove('input-checkmark');
-}
+const getErrorMessage = id =>
+  document.getElementById(`${id}-field`).querySelector('.error-message');
 
-function checkForm() {
-  var formError = false;
+const hideAllUsernameErrors = () =>
+  getErrorMessage('username')
+    .querySelectorAll('span')
+    .forEach(message => (message.style.display = 'none'));
+
+const changeUsernameError = errorId => {
+  hideAllUsernameErrors();
+  document.getElementById(errorId).style.display = 'flex';
+};
+
+const displayError = input => {
+  input.classList.remove('input-checkmark');
+  input.classList.add('error-border');
+  document.querySelector(`label[for=${input.id}]`).classList.add('error-color');
+  getErrorMessage(input.id).style.display = 'flex';
+};
+
+const removeError = input => {
+  input.classList.remove('error-border');
   document
+    .querySelector(`label[for=${input.id}]`)
+    .classList.remove('error-color');
+  getErrorMessage(input.id).style.display = 'none';
+};
+
+const checkForm = async () => {
+  let formError = false;
+  const inputs = document
     .getElementById('register-form')
-    .querySelectorAll('input')
-    .forEach(function (field) {
-      if (field.id === 'password-confirmation') {
-        var passwordsMatch =
-          field.value === document.getElementById('password').value;
-        if (passwordsMatch) {
-          clearError(field);
-          if (field.value.length >= 5) {
-            field.classList.add('input-checkmark');
+    .querySelectorAll('input');
+
+  // Validate all inputs
+  for (const input of inputs) {
+    if (input.id === 'username') {
+      if (input.checkValidity()) {
+        // Username is long enough
+        const username = document.getElementById(input.id).value;
+        try {
+          const usernameIsFree = await isUsernameFree(username);
+          if (usernameIsFree) {
+            hideAllUsernameErrors();
+            removeError(input);
+            input.classList.add('input-checkmark');
+          } else {
+            // Username is taken
+            formError = true;
+            changeUsernameError('taken-message');
+            displayError(input);
           }
-        } else {
+        } catch (error) {
+          // Username validation failed
           formError = true;
-          displayError(field);
-        }
-      } else if (field.checkValidity()) {
-        clearError(field);
-        if (field.value.length > 0) {
-          field.classList.add('input-checkmark');
+          changeUsernameError('try-again-message');
+          displayError(input);
         }
       } else {
+        // Username is too short
         formError = true;
-        displayError(field);
+        changeUsernameError('too-short-message');
+        displayError(input);
       }
-    });
-  // Submit button is disabled if there is a form error
+    } else if (input.id === 'password-confirmation') {
+      if (input.value === document.getElementById('password').value) {
+        // Passwords match
+        removeError(input);
+        if (input.value.length >= 8) {
+          input.classList.add('input-checkmark');
+        }
+      } else {
+        // Passwords don't match
+        formError = true;
+        displayError(input);
+      }
+    } else if (input.checkValidity()) {
+      // Input value is valid
+      if (input.type !== 'checkbox') {
+        removeError(input);
+        if (input.id !== 'email' || input.value)
+          // Empty email gets no checkmark
+          input.classList.add('input-checkmark');
+      }
+    } else {
+      // Input value is invalid
+      formError = true;
+      if (input.type !== 'checkbox') {
+        displayError(input);
+      }
+    }
+  }
+  // Disable submit button if any input is invalid
   document.getElementById('submit').disabled = formError;
-}
+};

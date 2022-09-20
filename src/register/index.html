@@ -27,32 +27,54 @@
         </p>
         <h2>Tilin tiedot</h2>
         <p>Tähdellä * merkityt kentät ovat pakollisia.</p>
-        <fieldset>
-          <label for="username">Käyttäjätunnus *</label>
+        <fieldset id="username-field">
+          <label for="username">
+            Käyttäjätunnus *
+            <span class="align-right">
+              <span class="tooltip">
+                <img src="/static/icons/tooltip.svg" />
+                <span class="tooltip-text">
+                  Käyttäjätunnuksen tulee olla vähintään 2 merkkiä pitkä.
+                </span>
+              </span>
+            </span>
+          </label>
           <input
             id="username"
             name="username"
             type="text"
+            maxlength="100"
+            minlength="2"
+            pattern=".{2,100}"
             onChange="checkForm()"
             autofocus
             required
           />
+          <label class="error-message">
+            <img src="/static/icons/warning.svg" />
+            <span id="too-short-message">Käyttäjätunnus on liian lyhyt</span>
+            <span id="taken-message">Käyttäjätunnus on jo käytössä</span>
+            <span id="try-again-message">
+              Emme pystyneet tarkistamaan käyttäjätunnusta. Syötä tunnus
+              uudelleen hetken kuluttua.
+            </span>
+          </label>
         </fieldset>
-        <fieldset>
-          <label id="password-label" for="password">
+        <fieldset id="password-field">
+          <label for="password">
             Salasana *
             <span class="align-right">
               <button
                 id="password-toggle"
                 type="button"
-                onclick="togglePassword()"
+                onclick="toggleInput('password')"
               >
                 Näytä salasana
               </button>
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
                 <span class="tooltip-text">
-                  Salasanan tulee olla vähintään 5 merkkiä pitkä.
+                  Salasanan tulee olla vähintään 8 merkkiä pitkä.
                 </span>
               </span>
             </span>
@@ -61,30 +83,32 @@
             id="password"
             name="password"
             type="password"
-            minlength="5"
+            maxlength="100"
+            minlength="8"
+            pattern=".{8,100}"
             onChange="checkForm()"
             required
           />
-          <span id="password-input-error">
+          <label class="error-message">
             <img src="/static/icons/warning.svg" />
             Salasana on liian lyhyt
-          </span>
+          </label>
         </fieldset>
-        <fieldset>
-          <label id="password-confirmation-label" for="password-confirmation">
+        <fieldset id="password-confirmation-field">
+          <label for="password-confirmation">
             Vahvista salasana *
             <span class="align-right">
               <button
                 id="password-confirmation-toggle"
                 type="button"
-                onclick="togglePasswordConfirmation()"
+                onclick="toggleInput('password-confirmation')"
               >
                 Näytä salasana
               </button>
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
                 <span class="tooltip-text">
-                  Salasanan tulee olla vähintään 5 merkkiä pitkä.
+                  Salasanan tulee olla vähintään 8 merkkiä pitkä.
                 </span>
               </span>
             </span>
@@ -93,40 +117,62 @@
             id="password-confirmation"
             name="password-confirmation"
             type="password"
+            maxlength="100"
             onChange="checkForm()"
             required
           />
-          <span id="password-confirmation-input-error">
+          <label class="error-message">
             <img src="/static/icons/warning.svg" />
             Salasanat eivät täsmää
-          </span>
+          </label>
         </fieldset>
-        <fieldset>
-          <label id="email-label" for="email"
-            >Sähköpostiosoite (vapaaehtoinen)</label
-          >
-          <input id="email" name="email" type="email" onChange="checkForm()" />
-          <span id="email-input-error">
+        <fieldset id="email-field">
+          <label for="email">Sähköpostiosoite (vapaaehtoinen)</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            maxlength="200"
+            onChange="checkForm()"
+          />
+          <label class="error-message">
             <img src="/static/icons/warning.svg" />
             Sähköpostiosoite on virheellinen
-          </span>
+          </label>
           <p class="field-info">
             Sähköpostiosoitteen tallentaminen mahdollistaa salasanan
             palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin
             tarkoituksiin.
           </p>
         </fieldset>
-        <fieldset>
-          <label for="display-name">Julkinen nimimerkki *</label>
+        <fieldset id="display-name-field">
+          <label for="display-name">
+            Julkinen nimimerkki *
+            <span class="align-right">
+              <span class="tooltip">
+                <img src="/static/icons/tooltip.svg" />
+                <span class="tooltip-text">
+                  Nimimerkin tulee olla vähintään 2 merkkiä pitkä.
+                </span>
+              </span>
+            </span>
+          </label>
           <input
             id="display-name"
             name="display-name"
             type="text"
+            maxlength="30"
+            minlength="2"
+            pattern=".{2,30}"
             onChange="checkForm()"
             required
           />
+          <label class="error-message">
+            <img src="/static/icons/warning.svg" />
+            Nimimerkki on liian lyhyt
+          </label>
           <p class="field-info">
-            Jos haluat pysyä anonyymina mentoreille, syötä käyttäjänimi, josta
+            Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta
             sinua ei voi tunnistaa.
           </p>
         </fieldset>
@@ -188,6 +234,9 @@
           </label>
         </fieldset>
         <button id="submit" type="submit" disabled>Rekisteröidy</button>
+        <label for="submit" class="error-message">
+          Lomakkeen lähettäminen epäonnistui. Yritä hetken kuluttua uudelleen
+        </label>
       </form>
       <div class="footer">
         <h3>Palvelun tarjoaa SOS-Lapsikylä</h3>

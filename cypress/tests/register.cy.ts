@@ -1,17 +1,22 @@
 describe('register', () => {
-  const fill = (field: string, value: string) =>
-    cy.get(`input[name="${field}"]`).type(value).blur();
+  const fill = (input: string, value: string): void => {
+    cy.get(`input[id="${input}"]`).type(value).blur();
+  };
 
-  const clear = (field: string) =>
-    cy.get(`input[name="${field}"]`).clear().blur();
+  const clear = (input: string): void => {
+    cy.get(`input[id="${input}"]`).clear().blur();
+  };
 
-  const click = (field: string) => cy.get(`button[id="${field}"]`).click();
+  const click = (button: string): void => {
+    cy.get(`button[id="${button}"]`).click();
+  };
 
-  const toggle = (field: string) =>
-    cy.get(`input[id="${field}"]`).parent().click();
+  const toggle = (input: string): void => {
+    cy.get(`input[id="${input}"]`).parent().click();
+  };
 
-  const fillOutForm = () => {
-    fill('username', 'exampleUsername');
+  const fillOutForm = (username: string): void => {
+    fill('username', username);
     fill('password', 'examplePassword');
     fill('password-confirmation', 'examplePassword');
     fill('display-name', 'exampleDisplayName');
@@ -19,32 +24,70 @@ describe('register', () => {
     toggle('privacy-consent');
   };
 
-  const submitShouldBe = buttonState =>
-    cy.get('button[id="submit"]').should(`be.${buttonState}`);
-
-  beforeEach(() => {
-    cy.visit('/register');
-  });
+  beforeEach(() => cy.visit('/register'));
 
   it('loads page', () => {
     cy.contains('Rekisteröidy');
     cy.contains('Hienoa, että haluat aloittaa palvelun käytön.');
   });
 
+  it('registers new user if form is correctly filled', () => {
+    cy.registerUser('takenUsername');
+    cy.url().should('contain', '/login');
+  });
+
+  // Username
+
+  it('shows error message if username is too short', () => {
+    fill('username', 'a');
+    cy.contains('Käyttäjätunnus on liian lyhyt').should('be.visible');
+  });
+
+  it('shows no error message if username is long enough', () => {
+    fill('username', 'freeUsername');
+    cy.contains('Käyttäjätunnus on liian lyhyt').should('not.be.visible');
+  });
+
+  it('shows error message if username is taken', () => {
+    fill('username', 'takenUsername');
+    cy.contains('Käyttäjätunnus on jo käytössä').should('be.visible');
+  });
+
+  it('shows no error message if username is free', () => {
+    fill('username', 'freeUsername');
+    cy.contains('Käyttäjätunnus on jo käytössä').should('not.be.visible');
+  });
+
+  it('prevents registration if username field is empty', () => {
+    fillOutForm('freeUsername');
+    clear('username');
+    cy.get('button[id="submit"]').should(`be.disabled`);
+  });
+
+  // Password
+
   it('hides password as default', () => {
     fill('password', 'examplePassword');
-    cy.get('input[name="password"]').should('not.contain', 'examplePassword');
+    cy.get('input[id="password"]').should('not.contain', 'examplePassword');
   });
 
   it('shows password after toggle click', () => {
     fill('password', 'examplePassword');
     click('password-toggle');
-    cy.get('input[name="password"]').should('have.value', 'examplePassword');
+    cy.get('input[id="password"]').should('have.value', 'examplePassword');
   });
+
+  it('prevents registration if password field is empty', () => {
+    fillOutForm('freeUsername');
+    clear('password');
+    cy.get('button[id="submit"]').should(`be.disabled`);
+  });
+
+  // Password confirmation
 
   it('hides password confirmation as default', () => {
     fill('password-confirmation', 'examplePassword');
-    cy.get('input[name="password-confirmation"]').should(
+    cy.get('input[id="password-confirmation"]').should(
       'not.contain',
       'examplePassword',
     );
@@ -53,7 +96,7 @@ describe('register', () => {
   it('shows password confirmation after toggle click', () => {
     fill('password-confirmation', 'examplePassword');
     click('password-confirmation-toggle');
-    cy.get('input[name="password-confirmation"]').should(
+    cy.get('input[id="password-confirmation"]').should(
       'have.value',
       'examplePassword',
     );
@@ -72,12 +115,20 @@ describe('register', () => {
   });
 
   it('shows no error message if different passwords are corrected', () => {
-    fill('password', 'examplePassword');
-    fill('password-confirmation', 'wrongPassword');
-    clear('password-confirmation');
+    fill('password', 'wrongPassword');
     fill('password-confirmation', 'examplePassword');
+    clear('password');
+    fill('password', 'examplePassword');
     cy.contains('Salasanat eivät täsmää').should('not.be.visible');
   });
+
+  it('prevents registration if password confirmation field is empty', () => {
+    fillOutForm('freeUsername');
+    clear('password-confirmation');
+    cy.get('button[id="submit"]').should(`be.disabled`);
+  });
+
+  // Email
 
   it('shows error message if email is invalid', () => {
     fill('email', 'wrongEmail');
@@ -89,51 +140,37 @@ describe('register', () => {
     cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
   });
 
-  it('shows no error message if invalid email is corrected', () => {
-    fill('email', 'wrongEmail');
-    clear('email');
-    fill('email', 'firstname.lastname@example.com');
-    cy.contains('Sähköpostiosoite on virheellinen').should('not.be.visible');
+  // Display name
+
+  it('shows error message if display name is too short', () => {
+    fill('display-name', 'a');
+    cy.contains('Nimimerkki on liian lyhyt').should('be.visible');
   });
 
-  it('prevents registration if username field is empty', () => {
-    fillOutForm();
-    clear('username');
-    submitShouldBe('disabled');
-  });
-
-  it('prevents registration if password field is empty', () => {
-    fillOutForm();
-    clear('password');
-    submitShouldBe('disabled');
-  });
-
-  it('prevents registration if password confirmation field is empty', () => {
-    fillOutForm();
-    clear('password-confirmation');
-    submitShouldBe('disabled');
+  it('shows no error message if display name is long enough', () => {
+    fill('display-name', 'exampleDisplayName');
+    cy.contains('Nimimerkki on liian lyhyt').should('not.be.visible');
   });
 
   it('prevents registration if display name field is empty', () => {
-    fillOutForm();
+    fillOutForm('freeUsername');
     clear('display-name');
-    submitShouldBe('disabled');
+    cy.get('button[id="submit"]').should(`be.disabled`);
   });
+
+  // Required age
 
   it('prevents registration if required age toggle is off', () => {
-    fillOutForm();
+    fillOutForm('freeUsername');
     toggle('required-age');
-    submitShouldBe('disabled');
+    cy.get('button[id="submit"]').should(`be.disabled`);
   });
+
+  // Privacy consent
 
   it('prevents registration if privacy consent toggle is off', () => {
-    fillOutForm();
+    fillOutForm('freeUsername');
     toggle('privacy-consent');
-    submitShouldBe('disabled');
-  });
-
-  it('allows registration if all fields are correctly filled', () => {
-    fillOutForm();
-    submitShouldBe('enabled');
+    cy.get('button[id="submit"]').should(`be.disabled`);
   });
 });
