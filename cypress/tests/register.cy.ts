@@ -32,7 +32,7 @@ describe('register', () => {
   });
 
   it('registers new user if form is correctly filled', () => {
-    cy.registerUser('takenUsername');
+    cy.registerUser('takenUsername', 'examplePassword');
     cy.url().should('contain', '/login');
   });
 
