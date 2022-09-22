@@ -46,7 +46,7 @@
             maxlength="100"
             minlength="2"
             pattern=".{2,100}"
-            onChange="checkForm()"
+            onkeyup="checkInput('username')"
             autofocus
             required
           />
@@ -86,7 +86,7 @@
             maxlength="100"
             minlength="8"
             pattern=".{8,100}"
-            onChange="checkForm()"
+            onkeyup="checkInput('password')"
             required
           />
           <label class="error-message">
@@ -118,7 +118,7 @@
             name="password-confirmation"
             type="password"
             maxlength="100"
-            onChange="checkForm()"
+            onkeyup="checkInput('password-confirmation')"
             required
           />
           <label class="error-message">
@@ -133,7 +133,7 @@
             name="email"
             type="email"
             maxlength="200"
-            onChange="checkForm()"
+            onkeyup="checkInput('email')"
           />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
@@ -164,7 +164,7 @@
             maxlength="30"
             minlength="2"
             pattern=".{2,30}"
-            onChange="checkForm()"
+            onkeyup="checkInput('display-name')"
             required
           />
           <label class="error-message">
@@ -210,7 +210,7 @@
             <input
               id="required-age"
               type="checkbox"
-              onChange="checkForm()"
+              onchange="checkForm()"
               required
             />
             <span class="slider"></span>
@@ -224,7 +224,7 @@
             <input
               id="privacy-consent"
               type="checkbox"
-              onChange="checkForm()"
+              onchange="checkForm()"
               required
             />
             <span class="slider"></span>
