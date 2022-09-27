@@ -2,7 +2,7 @@
 /// <reference types="cypress" />
 
 Cypress.Commands.add('fillInput', (id: string, value: string): void => {
-  cy.get(`input[id="${id}"]`).type(value).blur();
+  cy.get(`input[id="${id}"]`).type(value);
 });
 
 Cypress.Commands.add(
