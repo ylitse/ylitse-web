@@ -33,7 +33,7 @@ const BasicPageElement = styled.div`
 const PageContent = styled.div`
   background-color: transparent;
   position: relative;
-  width: 76vw;
+  max-width: 76vw;
   height: auto;
   margin: auto;
   margin-top: ${cssVariables.spacing.layout_outer_spacing};

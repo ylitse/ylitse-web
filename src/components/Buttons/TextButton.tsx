@@ -82,7 +82,7 @@ const StyledTextButton = styled.button<{ variant: ButtonColorVariant }>`
   transform: translateX(-50%);
   width: fit-content;
   cursor: pointer;
-  ${({ variant }) => variant && variantOptions[variant]}
+  ${({ variant }) => variantOptions[variant]}
 `;
 
 export default TextButton;
