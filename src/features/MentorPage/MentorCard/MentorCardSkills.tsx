@@ -1,21 +1,20 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../ListCard/types';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import { SimpleChip } from '../../../components/Chip';
 
 type Props = {
-  mentorCardData: ListCardProps;
+  skills: Array<string>;
 };
 
-const MentorCardSkills = ({ mentorCardData }: Props) => {
+const MentorCardSkills = ({ skills }: Props) => {
   return (
     <Skills>
       <Text variant="h3" style={{ margin: '3rem 0 0 0' }}>
         Voin auttaa myös näissä
       </Text>
       <SkillChips>
-        {mentorCardData.mentor.skills.map(item => (
-          <SimpleChip key={item.text} text={item.text} />
+        {skills.map(skill => (
+          <SimpleChip key={skill} text={skill} />
         ))}
       </SkillChips>
     </Skills>

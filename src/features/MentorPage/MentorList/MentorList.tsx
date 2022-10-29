@@ -1,25 +1,29 @@
 import styled from 'styled-components';
 import ListCard from '../ListCard';
-import { MentorListItemsProps } from './types';
 import * as cssVariables from '../../../components/variables';
+import { Mentors, Mentor } from '../mentorPageApi';
 
 /**
  * Mentor cards listing on mentor page
  */
 
-const MentorListItems = ({
-  setVisibleCard,
-  mentorCardData,
-}: MentorListItemsProps) => {
+type Props = {
+  mentors: Mentors;
+  setVisibleCard: (mentor: Mentor) => void;
+};
+
+const MentorList: React.FC<Props> = ({ setVisibleCard, mentors }) => {
   return (
     <CardsList data-testid="mentor-cards-container">
-      {mentorCardData.map(item => (
-        <ListCard
-          key={item.mentor.displayName}
-          mentorCardData={item}
-          setVisibleCard={setVisibleCard}
-        />
-      ))}
+      <>
+        {Object.entries(mentors).map(([buddyId, mentor]) => (
+          <ListCard
+            key={buddyId}
+            mentor={mentor}
+            setVisibleCard={setVisibleCard}
+          />
+        ))}
+      </>
     </CardsList>
   );
 };
@@ -39,4 +43,4 @@ const CardsList = styled.div`
   }
 `;
 
-export default MentorListItems;
+export default MentorList;

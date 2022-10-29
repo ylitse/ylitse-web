@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../ListCard/types';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import MentorCardSkills from './MentorCardSkills';
 import { TextButton } from '../../../components/Buttons';
 import CSS from 'csstype';
+import { Mentor } from '../mentorPageApi';
 
 type Props = {
-  mentorCardData: ListCardProps;
+  mentor: Mentor;
 };
 
 const customStylus: CSS.Properties = {
@@ -18,7 +18,7 @@ const customStylus: CSS.Properties = {
   justifySelf: 'flex-end',
 };
 
-const MentorCardContent = ({ mentorCardData }: Props) => {
+const MentorCardContent = ({ mentor: { skills, story } }: Props) => {
   const handleClick = () => {
     console.log('open conversation');
   };
@@ -28,8 +28,8 @@ const MentorCardContent = ({ mentorCardData }: Props) => {
         <Text variant="h3" style={{ margin: 0 }}>
           Tarinani
         </Text>
-        <Text variant="p">{mentorCardData.mentor.story}</Text>
-        <MentorCardSkills mentorCardData={mentorCardData} />
+        <Text variant="p">{story}</Text>
+        <MentorCardSkills skills={skills} />
         <TextButton onClick={handleClick} style={customStylus}>
           Avaa keskustelu
         </TextButton>

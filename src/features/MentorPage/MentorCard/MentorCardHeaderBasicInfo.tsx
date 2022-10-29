@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { ListCardProps } from '../ListCard/types';
 import { Text } from '../../../components/CommonTextStyles/Text';
 import CSS from 'csstype';
 import MentorCardLanguages from './MentorCardLanguages';
+import { Mentor } from '../mentorPageApi';
 import * as cssVariables from '../../../components/variables';
 
 type Props = {
-  mentorCardData: ListCardProps;
+  mentor: Mentor;
 };
 
 const customStylus: CSS.Properties = {
@@ -30,24 +30,25 @@ const truncateText: CSS.Properties = {
   textAlign: 'center',
 };
 
-const MentorCardHeaderBasicInfo = ({ mentorCardData }: Props) => {
-  const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
+const MentorCardHeaderBasicInfo = ({
+  mentor: { name, age, region, is_vacationing, status_message, languages },
+}: Props) => {
   return (
     <BasicInfoContainer>
       <Text color="white" variant="h2" style={{ margin: 0 }}>
-        {mentorCardData.mentor.displayName}
+        {name}
       </Text>
       <NameDivider />
       <Text color="white" variant="p" style={customStylus}>
-        {age} v. <StyledDivider>|</StyledDivider> {mentorCardData.mentor.region}
+        {age} v. <StyledDivider>|</StyledDivider> {region}
       </Text>
       <Text color="white" variant="p" style={{ margin: 0 }}>
-        {mentorCardData.isLoggedIn}
+        {!is_vacationing}
       </Text>
-      <p title={mentorCardData.contactMessage} style={truncateText}>
-        {mentorCardData.contactMessage}
+      <p title={status_message} style={truncateText}>
+        {status_message}
       </p>
-      <MentorCardLanguages languages={mentorCardData.mentor.languages} />
+      <MentorCardLanguages languages={languages} />
     </BasicInfoContainer>
   );
 };

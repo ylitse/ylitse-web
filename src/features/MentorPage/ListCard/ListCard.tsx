@@ -1,45 +1,37 @@
 import styled from 'styled-components';
-import { ListCardProps } from './types';
 import ListCardHeader from './ListCardHeader';
 import ListCardLanguages from './ListCardLanguages';
 import ListCardSkills from './ListCardSkills';
 import ListCardStory from './ListCardStory';
 import OpenCardButton from './OpenCardButton';
 import * as cssVariables from '../../../components/variables';
-import { handleSetVisibleCardProps } from '../MentorPage';
+import { Mentor } from '../mentorPageApi';
 
 /**
  * A single card with mentor info on mentor page card listing
  */
 
 type Props = {
-  setVisibleCard: ({
-    shouldShowMentorCard,
-    mentorCardData,
-  }: handleSetVisibleCardProps) => void;
-  mentorCardData: ListCardProps;
+  setVisibleCard: (mentor: Mentor) => void;
+  mentor: Mentor;
 };
 
-const ListCard = ({ setVisibleCard, mentorCardData }: Props) => {
-  const age = new Date().getFullYear() - mentorCardData.mentor.birthYear;
+const ListCard: React.FC<Props> = ({ setVisibleCard, mentor }) => {
   return (
     <ListCardElement>
       <ListCardHeader
-        name={mentorCardData.mentor.displayName}
-        age={age}
-        region={mentorCardData.mentor.region}
-        isAvailable={mentorCardData.isLoggedIn}
-        isNewMentor={mentorCardData.isNewMentor}
-        message={mentorCardData.contactMessage}
+        name={mentor.name}
+        age={mentor.age}
+        region={mentor.region}
+        isAvailable={mentor.is_vacationing}
+        isNewMentor={false}
+        message={mentor.status_message}
       />
       <CardContent>
-        <ListCardStory story={mentorCardData.mentor.story} />
-        <ListCardLanguages languages={mentorCardData.mentor.languages} />
-        <ListCardSkills skills={mentorCardData.mentor.skills} />
-        <OpenCardButton
-          setVisibleCard={setVisibleCard}
-          mentorCardData={mentorCardData}
-        />
+        <ListCardStory story={mentor.story} />
+        <ListCardLanguages languages={mentor.languages} />
+        <ListCardSkills skills={mentor.skills} />
+        <OpenCardButton setVisibleCard={setVisibleCard} mentor={mentor} />
       </CardContent>
     </ListCardElement>
   );

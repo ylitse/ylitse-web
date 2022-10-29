@@ -1,4 +1,3 @@
-import { ChipProps } from '../../../components/Chip/types';
 import styled from 'styled-components';
 import { Chip } from '../../../components/Chip';
 import ShowMoreChips from './ShowMoreChips';
@@ -10,26 +9,17 @@ import React from 'react';
  * will be added.
  */
 
-const MentorSkillChips = ({ items }: { items: Array<ChipProps> }) => {
+const MentorSkillChips = ({ skills }: { skills: Array<string> }) => {
   const [shouldShowAllSkills, setShowAllSkills] = React.useState(false);
 
   const handleShowMoreSkillsChange = () =>
     setShowAllSkills(!shouldShowAllSkills);
 
-  //change the first letter of every skill to uppercase, then alphabetize
-  const upperCaseSkills = items.map(item => ({
-    ...item,
-    text: `${item.text.charAt(0).toUpperCase()}${item.text.slice(1)}`,
-  }));
-  const sortedSkills = [...upperCaseSkills].sort((a, b) =>
-    a.text.localeCompare(b.text),
-  );
-
   return (
     <ChipContainer>
       <SkillChips isSelected={shouldShowAllSkills}>
-        {sortedSkills.map(item => (
-          <Chip key={item.text} text={item.text} />
+        {skills.map(skill => (
+          <Chip key={skill} text={skill} />
         ))}
       </SkillChips>
       <ShowMoreChips
