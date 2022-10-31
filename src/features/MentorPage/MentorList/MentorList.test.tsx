@@ -1,13 +1,7 @@
-/**
- * @jest-environment jsdom
- */
-
 import { render } from '@testing-library/react';
 import MentorList from './MentorList';
-import { BrowserRouter } from 'react-router-dom';
-import { Mentors } from '../mentorPageApi';
 
-const mentorListCards: Mentors = {
+const mentorListCards = {
   asdf908asdf: {
     mentorId: 'asdf908asdf',
     buddyId: 'asdf908asdf',
@@ -31,9 +25,6 @@ const mentorListCards: Mentors = {
     is_vacationing: true,
     status_message: 'Voit ottaa yhteyttä!',
   },
-};
-
-const mentorListCards2: Mentors = {
   asdfasdertsdf: {
     mentorId: 'asdfasdertsdf',
     buddyId: 'asdfasdertsdf',
@@ -63,45 +54,37 @@ describe('<MentorListItem />', () => {
   const setVisibleMentor = jest.fn();
   it('Mentor List Item with mentor cards is rendered correctly', () => {
     const { queryAllByTestId } = render(
-      <BrowserRouter>
-        <MentorList
-          setVisibleCard={setVisibleMentor}
-          mentors={mentorListCards}
-        />
-      </BrowserRouter>,
+      <MentorList
+        setVisibleCard={setVisibleMentor}
+        mentors={mentorListCards}
+      />,
     );
     expect(queryAllByTestId('mentor-cards-container')).toBeTruthy();
   });
   it('Mentor List Item name in header is rendered correctly', () => {
     const { queryAllByText } = render(
-      <BrowserRouter>
-        <MentorList
-          setVisibleCard={setVisibleMentor}
-          mentors={mentorListCards}
-        />
-      </BrowserRouter>,
+      <MentorList
+        setVisibleCard={setVisibleMentor}
+        mentors={mentorListCards}
+      />,
     );
     expect(queryAllByText('Matti Meikäläinen')).toBeTruthy();
   });
   it('New mentor is rendered correctly', () => {
     const { queryAllByText } = render(
-      <BrowserRouter>
-        <MentorList
-          setVisibleCard={setVisibleMentor}
-          mentors={mentorListCards}
-        />
-      </BrowserRouter>,
+      <MentorList
+        setVisibleCard={setVisibleMentor}
+        mentors={mentorListCards}
+      />,
     );
     expect(queryAllByText('Uusi')).toBeTruthy();
   });
   it('Offline mentor is rendered correctly', () => {
     const { queryAllByText } = render(
-      <BrowserRouter>
-        <MentorList
-          setVisibleCard={setVisibleMentor}
-          mentors={mentorListCards2}
-        />
-      </BrowserRouter>,
+      <MentorList
+        setVisibleCard={setVisibleMentor}
+        mentors={mentorListCards}
+      />,
     );
     expect(queryAllByText('Ei tavoitettavissa')).toBeTruthy();
   });

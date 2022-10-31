@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const Spinner: React.FC<Props> = ({ variant }) => {
-  return <LoadingCircle variant={variant} />;
+  return <LoadingCircle id="loading" role="progressbar" variant={variant} />;
 };
 
 const spinAnimation = keyframes`

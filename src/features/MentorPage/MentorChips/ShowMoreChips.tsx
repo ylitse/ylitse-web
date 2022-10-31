@@ -14,13 +14,12 @@ const ShowMoreChips = ({
   const buttonText = shouldShowAllSkills
     ? 'Näytä vähemmän'
     : 'Näytä kaikki aiheet';
+
   return (
-    <>
-      <MoreContainer onClick={setShouldShowAllSkills}>
-        <MoreIcon />
-        <ShowMoreButton>{buttonText}</ShowMoreButton>
-      </MoreContainer>
-    </>
+    <MoreContainer onClick={setShouldShowAllSkills}>
+      <MoreIcon />
+      <ShowMoreButton>{buttonText}</ShowMoreButton>
+    </MoreContainer>
   );
 };
 

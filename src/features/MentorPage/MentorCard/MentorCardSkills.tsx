@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Text } from '../../../components/CommonTextStyles/Text';
+import { Text } from '../../../components/Text/Text';
 import { SimpleChip } from '../../../components/Chip';
 
 type Props = {

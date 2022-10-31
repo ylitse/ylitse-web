@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import * as cssVariables from '../variables';
+import { Text } from '../Text/Text';
 
 type OneContainerProps = {
   headLine: string;
@@ -13,7 +14,9 @@ const OneContainerLayout: React.FC<OneContainerProps> = ({
 }) => {
   return (
     <OneContainer>
-      <PageHeader>{headLine}</PageHeader>
+      <PageHeader>
+        <Text variant="h1">{headLine}</Text>
+      </PageHeader>
       {children}
     </OneContainer>
   );
@@ -36,7 +39,6 @@ const PageHeader = styled.div`
   height: 80px;
   color: ${cssVariables.palette.darkblue};
   ${cssVariables.basicBalooText};
-  font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;

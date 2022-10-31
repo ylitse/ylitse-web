@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Text } from '../../../components/CommonTextStyles/Text';
+import { Text } from '../../../components/Text/Text';
 import MentorCardSkills from './MentorCardSkills';
 import { TextButton } from '../../../components/Buttons';
 import CSS from 'csstype';

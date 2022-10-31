@@ -11,7 +11,8 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "types": ["node", "jest"],
+    "resolveJsonModule": true,
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
@@ -24,5 +25,5 @@
     "src/**/*.js",
     "src/custom.d.ts"
   ],
-  "exclude": ["e2e/**/*"]
+  "exclude": ["e2e/**/*"],
 }

@@ -2,7 +2,8 @@
 import { createSelector } from 'reselect';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import * as D from 'io-ts/Decoder';
-import { validateAndTransformTo } from '@/utils/http';
+import { validateAndTransformTo } from '../../utils/http';
+import { baseUrl } from '../../utils/endpoints';
 
 type ApiMentor = D.TypeOf<typeof apiMentorType>;
 
@@ -51,7 +52,7 @@ const toMentorRecord = ({ resources }: MentorsResponse) =>
 // Define a service using a base URL and expected endpoints
 export const mentorsApi = createApi({
   reducerPath: 'mentors',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://dev.ylitse.fi/api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: builder => ({
     getMentors: builder.query<Mentors, void>({
       query: () => 'mentors',

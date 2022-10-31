@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { SimpleChip } from '../../../components/Chip';
-import { Text } from '../../../components/CommonTextStyles/Text';
+import { Text } from '../../../components/Text/Text';
 import * as cssVariables from '../../../components/variables';
 
 const ListCardSkills = ({ skills }: { skills: Array<string> }) => {

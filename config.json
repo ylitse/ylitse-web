@@ -1,0 +1,9 @@
+{
+"loginUrl": "http://localhost:8080",
+"baseUrl": "http://localhost:8080",
+"termsUrl": "https://sos-lapsikyla.fi/fileadmin/user_upload/tiedostot/kuvat/pdf-tiedostot/Ylitse_MentorApp_kayttyoehdot_tietosuojaseloste.pdf",
+"feedBackUrl": "https://forms.gle/1QnYEENA48xVPmkw9",
+"apuuUrl": "https://apuu.fi",
+"userGuideUrl": "https://www.sos-lapsikyla.fi/fileadmin/user_upload/tiedostot/kuvat/pdf-tiedostot/Ylitse-vertaismentorointiopas-web.pdf",
+"messageFetchDelay":5000
+}

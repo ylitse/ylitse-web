@@ -21,3 +21,6 @@ dist
 *.sw?
 .cypress/screenshots/*
 .cypress/videos/*
+
+# secrets
+.config.json
