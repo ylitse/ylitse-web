@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import MentorList from './MentorList';
 
-const mentorListCards = {
-  asdf908asdf: {
+const mentorListCards = [
+  {
     mentorId: 'asdf908asdf',
     buddyId: 'asdf908asdf',
     gender: 'muusu',
@@ -25,7 +25,7 @@ const mentorListCards = {
     is_vacationing: true,
     status_message: 'Voit ottaa yhteyttä!',
   },
-  asdfasdertsdf: {
+  {
     mentorId: 'asdfasdertsdf',
     buddyId: 'asdfasdertsdf',
     gender: 'muusu',
@@ -48,7 +48,7 @@ const mentorListCards = {
     is_vacationing: false,
     status_message: 'Voit ottaa yhteyttä!',
   },
-};
+];
 
 describe('<MentorListItem />', () => {
   const setVisibleMentor = jest.fn();

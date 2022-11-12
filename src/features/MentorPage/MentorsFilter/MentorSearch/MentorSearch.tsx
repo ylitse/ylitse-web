@@ -1,13 +1,23 @@
 import styled from 'styled-components';
-import { Search } from './Search';
 import * as cssVariables from '../../../../components/variables';
+import SearchBar from '../../../../components/SearchBar';
+import { selectSearchString, changeSearchString } from '../mentorsFilterSlice';
+import { useAppDispatch, useAppSelector } from '../../../../store';
 
 /**
  * Div under the "Mentorit" -header where info about mentorsearch
  * is shown, also contains searchBar in separate MentorSearch component
  */
 
+const placeholder = 'Etsi mentoria';
 export const MentorSearch = () => {
+  const searchString = useAppSelector(selectSearchString);
+
+  const dispatch = useAppDispatch();
+
+  const handleSearchStringChange = (value: string) =>
+    dispatch(changeSearchString(value));
+
   return (
     <Container>
       <InfoText>
@@ -15,7 +25,11 @@ export const MentorSearch = () => {
         listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita
         ongelmasi perusteella
       </InfoText>
-      <Search />
+      <SearchBar
+        placeholder={placeholder}
+        value={searchString}
+        onChange={handleSearchStringChange}
+      />
     </Container>
   );
 };

@@ -2,15 +2,16 @@ import styled from 'styled-components';
 import { Chip } from '../../../../components/Chip';
 import ShowMoreChips from './ShowMoreChips';
 import React from 'react';
-
-/**
- * Logic to show skill chips. Array of skill names is
- * mapped and passed to Chip one by on, where styles and layout
- * will be added.
- */
+import { selectSelectedSkills, toggleSkill } from '../mentorsFilterSlice';
+import { useAppDispatch, useAppSelector } from '../../../../store';
 
 export const SkillChips = ({ skills }: { skills: Array<string> }) => {
   const [shouldShowAllSkills, setShowAllSkills] = React.useState(false);
+  const selectedSkills = useAppSelector(selectSelectedSkills);
+
+  const dispatch = useAppDispatch();
+
+  const handleSkillToggle = (skill: string) => dispatch(toggleSkill(skill));
 
   const handleShowMoreSkillsChange = () =>
     setShowAllSkills(!shouldShowAllSkills);
@@ -18,9 +19,19 @@ export const SkillChips = ({ skills }: { skills: Array<string> }) => {
   return (
     <Container>
       <Skills isSelected={shouldShowAllSkills}>
-        {skills.map(skill => (
-          <Chip key={skill} text={skill} />
-        ))}
+        {skills.map(skill => {
+          const isSelected = selectedSkills.some(
+            selected => selected === skill,
+          );
+          return (
+            <Chip
+              key={skill}
+              text={skill}
+              isSelected={isSelected}
+              onToggle={handleSkillToggle}
+            />
+          );
+        })}
       </Skills>
       <ShowMoreChips
         shouldShowAllSkills={shouldShowAllSkills}

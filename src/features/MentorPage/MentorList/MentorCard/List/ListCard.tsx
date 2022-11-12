@@ -23,8 +23,7 @@ export const ListCard: React.FC<Props> = ({ setVisibleCard, mentor }) => {
         name={mentor.name}
         age={mentor.age}
         region={mentor.region}
-        isAvailable={mentor.is_vacationing}
-        isNewMentor={false}
+        isAvailable={!mentor.is_vacationing}
         message={mentor.status_message}
       />
       <CardContent>

@@ -9,7 +9,6 @@ type Props = {
   age: number;
   region: string;
   isAvailable: boolean;
-  isNewMentor: boolean;
   message: string;
 };
 
@@ -38,19 +37,13 @@ export const Header: React.FC<Props> = ({
   age,
   region,
   isAvailable,
-  isNewMentor,
   message,
 }) => {
-  const newCardMessage = isNewMentor ? 'Uusi' : '';
-  const availabilityMessage = isAvailable
-    ? newCardMessage
-    : 'Ei tavoitettavissa';
+  const availabilityMessage = isAvailable ? '' : 'Ei tavoitettavissa';
+
   return (
-    <StyledListCardHeader isSelected={isAvailable}>
-      <Availability
-        isShowing={availabilityMessage != ''}
-        isNew={availabilityMessage === 'Uusi'}
-      >
+    <StyledHeader isAvailable={isAvailable}>
+      <Availability isShowing={!isAvailable}>
         {availabilityMessage}
       </Availability>
       <ProfilePicture />
@@ -68,18 +61,18 @@ export const Header: React.FC<Props> = ({
           {message}
         </p>
       </BasicInfo>
-    </StyledListCardHeader>
+    </StyledHeader>
   );
 };
 
-const StyledListCardHeader = styled.div<{ isSelected: boolean }>`
+const StyledHeader = styled.div<{ isAvailable: boolean }>`
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   height: 7.5rem;
   max-height: 7.5rem;
   background-color: ${props =>
-    props.isSelected
+    props.isAvailable
       ? cssVariables.palette.purple
       : cssVariables.palette.bluegrey};
   color: ${cssVariables.palette.white};
@@ -140,10 +133,9 @@ const StyledDivider = styled.span`
   padding-right: 1rem;
 `;
 
-const Availability = styled.div<{ isShowing: boolean; isNew: boolean }>`
+const Availability = styled.div<{ isShowing: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
-  background-color: ${props =>
-    props.isNew ? cssVariables.palette.orange : cssVariables.palette.whiteblue};
+  background-color: ${cssVariables.palette.whiteblue};
   color: ${cssVariables.palette.darkblue};
   position: absolute;
   top: 0;

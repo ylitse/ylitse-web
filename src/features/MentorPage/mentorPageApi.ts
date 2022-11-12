@@ -1,9 +1,12 @@
-// Need to use the React-specific entry point to import createApi
 import { createSelector } from 'reselect';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import * as D from 'io-ts/Decoder';
 import { validateAndTransformTo } from '../../utils/http';
-import * as config from '../../utils/endpoints';
+import {
+  selectSelectedSkills,
+  selectSearchString,
+} from './MentorsFilter/mentorsFilterSlice';
+import { capitalize } from '../../utils/utils';
 
 type ApiMentor = D.TypeOf<typeof apiMentorType>;
 
@@ -32,6 +35,7 @@ const toMentor = ({
   display_name,
   user_id,
   id,
+  skills,
   ...props
 }: ApiMentor) => ({
   ...props,
@@ -39,6 +43,7 @@ const toMentor = ({
   buddyId: user_id,
   age: new Date().getFullYear() - birth_year,
   name: display_name,
+  skills: skills.map(skill => capitalize(skill)),
 });
 
 export type Mentors = Record<string, Mentor>;
@@ -49,10 +54,9 @@ const toMentorRecord = ({ resources }: MentorsResponse) =>
     return { ...acc, [mentor.buddyId]: mentor };
   }, {});
 
-// Define a service using a base URL and expected endpoints
 export const mentorsApi = createApi({
   reducerPath: 'mentors',
-  baseQuery: fetchBaseQuery({ baseUrl: config.baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'api/' }),
   endpoints: builder => ({
     getMentors: builder.query<Mentors, void>({
       query: () => 'mentors',
@@ -79,6 +83,34 @@ const mapSkills = (mentors: Mentors) => {
 export const selectSkills = () =>
   createSelector(selectMentors, response => mapSkills(response.data ?? {}));
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
+const withSkills =
+  (selectedSkills: Array<string>) =>
+  ({ skills: mentorSkills }: Mentor) =>
+    selectedSkills.length > 0
+      ? mentorSkills.some(skill => selectedSkills.includes(skill))
+      : true;
+
+const withSearchString =
+  (searchString: string) =>
+  ({ name, region, story, status_message }: Mentor) =>
+    searchString.length > 0
+      ? [name, region, story, status_message].some(value =>
+          value.toLowerCase().includes(searchString.toLowerCase()),
+        )
+      : true;
+
+export const selectFilteredMentors = () =>
+  createSelector(
+    selectMentors,
+    selectSelectedSkills,
+    selectSearchString,
+    (mentorsQuery, selectedSkills, searchString) => {
+      const mentors = mentorsQuery.data ?? {};
+      const filteredMentors = Object.values(mentors)
+        .filter(withSkills(selectedSkills))
+        .filter(withSearchString(searchString));
+      return filteredMentors;
+    },
+  );
+
 export const { useGetMentorsQuery } = mentorsApi;

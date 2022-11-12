@@ -4,14 +4,20 @@ import MentorList from './MentorList';
 import PageLayout from '../../components/PageLayout';
 import MentorCard from './MentorList/MentorCard/Expanded';
 import Spinner from '../../components/Spinner';
-import { Mentor, useGetMentorsQuery } from './mentorPageApi';
+import {
+  Mentor,
+  selectFilteredMentors,
+  useGetMentorsQuery,
+} from './mentorPageApi';
+import { useAppSelector } from '../../store';
 
 const MentorPage = () => {
   const [selectedMentor, setSelectedMentor] = React.useState<Mentor | null>(
     null,
   );
 
-  const { data: mentors, isLoading } = useGetMentorsQuery();
+  const { isLoading } = useGetMentorsQuery();
+  const mentors = useAppSelector(selectFilteredMentors());
 
   return (
     <PageLayout>
@@ -26,12 +32,10 @@ const MentorPage = () => {
             />
           )}
           <MentorsFilter />
-          {mentors && (
-            <MentorList
-              setVisibleCard={mentor => setSelectedMentor(mentor)}
-              mentors={mentors}
-            />
-          )}
+          <MentorList
+            setVisibleCard={mentor => setSelectedMentor(mentor)}
+            mentors={mentors}
+          />
         </>
       )}
     </PageLayout>

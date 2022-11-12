@@ -2,13 +2,13 @@ import OneContainerLayout from '../../../components/OneContainerLayout';
 import MentorSearch from './MentorSearch';
 import SkillChips from './Skills/';
 
-import { useSelector } from 'react-redux';
 import { selectSkills } from '../mentorPageApi';
+import { useAppSelector } from '../../../store';
 
 const mentorPageHeadline = 'Mentorit';
 
 const MentorsFilter = () => {
-  const skills = useSelector(selectSkills());
+  const skills = useAppSelector(selectSkills());
 
   return (
     <OneContainerLayout headLine={mentorPageHeadline}>

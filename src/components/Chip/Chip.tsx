@@ -1,4 +1,3 @@
-import { ChipProps } from './types';
 import styled from 'styled-components';
 import React from 'react';
 import * as cssVariables from '../variables';
@@ -7,17 +6,19 @@ import * as cssVariables from '../variables';
  * Creates a selectable chip
  */
 
-const Chip: React.FC<ChipProps> = ({ text }) => {
-  const [isChipSelected, setChipSelected] = React.useState(false);
+type Props = {
+  text: string;
+  isSelected: boolean;
+  onToggle: (text: string) => void;
+};
 
-  const handleChipClick = () => setChipSelected(!isChipSelected);
-
+const Chip: React.FC<Props> = ({ text, isSelected, onToggle }) => {
   return (
     <StyledChip
       key={text}
       value={text}
-      onClick={handleChipClick}
-      isSelected={isChipSelected}
+      onClick={() => onToggle(text)}
+      isSelected={isSelected}
     >
       {text}
     </StyledChip>

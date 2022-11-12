@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 import ListCard from './MentorCard/List';
 import * as cssVariables from '../../../components/variables';
-import { Mentors, Mentor } from '../mentorPageApi';
-
-/**
- * Mentor cards listing on mentor page
- */
+import { Mentor } from '../mentorPageApi';
 
 type Props = {
-  mentors: Mentors;
+  mentors: Array<Mentor>;
   setVisibleCard: (mentor: Mentor) => void;
 };
 
@@ -16,9 +12,9 @@ const MentorList: React.FC<Props> = ({ setVisibleCard, mentors }) => {
   return (
     <CardsList data-testid="mentor-cards-container">
       <>
-        {Object.entries(mentors).map(([buddyId, mentor]) => (
+        {mentors.map(mentor => (
           <ListCard
-            key={buddyId}
+            key={mentor.buddyId}
             mentor={mentor}
             setVisibleCard={setVisibleCard}
           />

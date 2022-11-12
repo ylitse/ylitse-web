@@ -2,7 +2,6 @@ import MentorPage from './MentorPage';
 import { server } from '../../test/server';
 import { renderWithProviders } from '../../test/testStore';
 import { rest } from 'msw';
-import * as config from '../../utils/endpoints';
 
 const mentorsResponse = {
   resources: [
@@ -40,20 +39,17 @@ const mentorsResponse = {
 // Enable API mocking before tests.
 beforeAll(() => server.listen());
 
-// Reset any runtime request handlers we may add during the tests.
-afterEach(() => server.resetHandlers());
-
 // Disable API mocking after the tests are done.
 afterAll(() => server.close());
 
+server.use(
+  rest.get(`api/mentors`, (_req, res, ctx) => {
+    return res(ctx.json(mentorsResponse), ctx.delay(150));
+  }),
+);
+
 describe('<MentorPage />', () => {
   it('displays fetched mentors in list and can open the card for more information', async () => {
-    server.use(
-      rest.get(`${config.baseUrl}/mentors`, (_req, res, ctx) => {
-        return res(ctx.json(mentorsResponse), ctx.delay(150));
-      }),
-    );
-
     const { user, getByRole, findByRole, getByText, getAllByRole } =
       renderWithProviders(<MentorPage />);
 
@@ -84,9 +80,68 @@ describe('<MentorPage />', () => {
     expect(closeButton).not.toBeInTheDocument();
   });
 
+  it('displays fetched mentors in list and can filter by skills', async () => {
+    const { user, getByRole, findByRole, queryByText, getAllByRole } =
+      renderWithProviders(<MentorPage />);
+
+    // should be loading initially
+    expect(getByRole('progressbar')).toBeInTheDocument();
+
+    // after some time, the mentors should be received
+    expect(
+      await findByRole('heading', { name: /Mentorit/i }),
+    ).toBeInTheDocument();
+
+    // click the skill
+    // There is one pill in the skill-list, and one in the mentor-card
+    const skillPills = getAllByRole('button', {
+      name: mentorsResponse.resources[0].skills[0],
+    });
+    await user.click(skillPills[0]);
+
+    // other mentor is shown on the list, but other one is not
+    const mentorWithSkill = queryByText(
+      mentorsResponse.resources[0].display_name,
+    );
+    expect(mentorWithSkill).toBeInTheDocument();
+
+    const mentorWithoutSkill = queryByText(
+      mentorsResponse.resources[1].display_name,
+    );
+    expect(mentorWithoutSkill).not.toBeInTheDocument();
+  });
+
+  it('displays fetched mentors in list and can filter by searchString', async () => {
+    const { user, getByRole, findByRole, queryByText } = renderWithProviders(
+      <MentorPage />,
+    );
+
+    // should be loading initially
+    expect(getByRole('progressbar')).toBeInTheDocument();
+
+    // after some time, the mentors should be received
+    expect(
+      await findByRole('heading', { name: /Mentorit/i }),
+    ).toBeInTheDocument();
+
+    // write a search-string
+    const searchInput = getByRole('textbox');
+    await user.click(searchInput);
+    await user.keyboard(mentorsResponse.resources[1].display_name);
+
+    // other mentor is shown on the list, but other one is not
+    const foundMentor = queryByText(mentorsResponse.resources[1].display_name);
+    expect(foundMentor).toBeInTheDocument();
+
+    const notFoundMentor = queryByText(
+      mentorsResponse.resources[0].display_name,
+    );
+    expect(notFoundMentor).not.toBeInTheDocument();
+  });
+
   it('wont display mentors if response is not correct', async () => {
     server.use(
-      rest.get(`${config.baseUrl}/mentors`, (_req, res, ctx) => {
+      rest.get(`api/mentors`, (_req, res, ctx) => {
         return res(
           ctx.json([{ resources: [{ wrong: 'data' }] }]),
           ctx.delay(150),
