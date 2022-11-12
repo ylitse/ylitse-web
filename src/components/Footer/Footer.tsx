@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import FooterLogo from '../../static/img/footer-logo.svg';
-import * as cssVariables from '../../components/variables';
+import * as cssVariables from '../variables';
 
 const Footer = () => {
   return (

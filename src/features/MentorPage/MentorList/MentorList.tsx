@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ListCard from '../ListCard';
+import ListCard from './MentorCard/List';
 import * as cssVariables from '../../../components/variables';
 import { Mentors, Mentor } from '../mentorPageApi';
 

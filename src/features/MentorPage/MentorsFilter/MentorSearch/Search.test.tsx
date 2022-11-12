@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import MentorSearch from './MentorSearch';
+import MentorSearch from './Search';
 
 describe('<MentorSearch />', () => {
   it('Mentor search input is rendered correctly', () => {

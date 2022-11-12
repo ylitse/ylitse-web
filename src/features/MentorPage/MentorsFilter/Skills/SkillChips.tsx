@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Chip } from '../../../components/Chip';
+import { Chip } from '../../../../components/Chip';
 import ShowMoreChips from './ShowMoreChips';
 import React from 'react';
 
@@ -9,28 +9,28 @@ import React from 'react';
  * will be added.
  */
 
-const MentorSkillChips = ({ skills }: { skills: Array<string> }) => {
+export const SkillChips = ({ skills }: { skills: Array<string> }) => {
   const [shouldShowAllSkills, setShowAllSkills] = React.useState(false);
 
   const handleShowMoreSkillsChange = () =>
     setShowAllSkills(!shouldShowAllSkills);
 
   return (
-    <ChipContainer>
-      <SkillChips isSelected={shouldShowAllSkills}>
+    <Container>
+      <Skills isSelected={shouldShowAllSkills}>
         {skills.map(skill => (
           <Chip key={skill} text={skill} />
         ))}
-      </SkillChips>
+      </Skills>
       <ShowMoreChips
         shouldShowAllSkills={shouldShowAllSkills}
         setShouldShowAllSkills={handleShowMoreSkillsChange}
       />
-    </ChipContainer>
+    </Container>
   );
 };
 
-const SkillChips = styled.div<{ isSelected: boolean }>`
+const Skills = styled.div<{ isSelected: boolean }>`
   flex: 0 0 auto;
   width: 100%;
   overflow: hidden;
@@ -41,7 +41,7 @@ const SkillChips = styled.div<{ isSelected: boolean }>`
   height: ${props => (props.isSelected ? `fit-content` : '11rem')};
 `;
 
-const ChipContainer = styled.div`
+const Container = styled.div`
   flex: 0 0 auto;
   padding-left: 10%;
   padding-right: 10%;
@@ -55,5 +55,3 @@ const ChipContainer = styled.div`
   position: relative;
   padding-bottom: 6rem;
 `;
-
-export default MentorSkillChips;

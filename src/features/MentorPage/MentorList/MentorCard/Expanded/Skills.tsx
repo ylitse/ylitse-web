@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import { Text } from '../../../components/Text/Text';
-import { SimpleChip } from '../../../components/Chip';
+import { Text } from '../../../../../components/Text/Text';
+import { SimpleChip } from '../../../../../components/Chip';
 
 type Props = {
   skills: Array<string>;
 };
 
-const MentorCardSkills = ({ skills }: Props) => {
+export const Skills = ({ skills }: Props) => {
   return (
-    <Skills>
+    <Container>
       <Text variant="h3" style={{ margin: '3rem 0 0 0' }}>
         Voin auttaa myös näissä
       </Text>
@@ -17,11 +17,11 @@ const MentorCardSkills = ({ skills }: Props) => {
           <SimpleChip key={skill} text={skill} />
         ))}
       </SkillChips>
-    </Skills>
+    </Container>
   );
 };
 
-const Skills = styled.div`
+const Container = styled.div`
   height: fit-content;
 `;
 
@@ -37,5 +37,3 @@ const SkillChips = styled.div`
   margin-bottom: 5vw;
   margin-top: 1em;
 `;
-
-export default MentorCardSkills;

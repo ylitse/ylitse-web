@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import ListCardHeader from './ListCardHeader';
-import ListCardLanguages from './ListCardLanguages';
-import ListCardSkills from './ListCardSkills';
-import ListCardStory from './ListCardStory';
-import OpenCardButton from './OpenCardButton';
-import * as cssVariables from '../../../components/variables';
-import { Mentor } from '../mentorPageApi';
+import { Header } from './Header';
+import { Languages } from './Languages';
+import { Skills } from './Skills';
+import { Story } from './Story';
+import { ExpandButton } from './ExpandButton';
+import * as cssVariables from '../../../../../components/variables';
+import { Mentor } from '../../../mentorPageApi';
 
 /**
  * A single card with mentor info on mentor page card listing
@@ -16,10 +16,10 @@ type Props = {
   mentor: Mentor;
 };
 
-const ListCard: React.FC<Props> = ({ setVisibleCard, mentor }) => {
+export const ListCard: React.FC<Props> = ({ setVisibleCard, mentor }) => {
   return (
-    <ListCardElement>
-      <ListCardHeader
+    <Container>
+      <Header
         name={mentor.name}
         age={mentor.age}
         region={mentor.region}
@@ -28,16 +28,16 @@ const ListCard: React.FC<Props> = ({ setVisibleCard, mentor }) => {
         message={mentor.status_message}
       />
       <CardContent>
-        <ListCardStory story={mentor.story} />
-        <ListCardLanguages languages={mentor.languages} />
-        <ListCardSkills skills={mentor.skills} />
-        <OpenCardButton setVisibleCard={setVisibleCard} mentor={mentor} />
+        <Story story={mentor.story} />
+        <Languages languages={mentor.languages} />
+        <Skills skills={mentor.skills} />
+        <ExpandButton setVisibleCard={setVisibleCard} mentor={mentor} />
       </CardContent>
-    </ListCardElement>
+    </Container>
   );
 };
 
-const ListCardElement = styled.div`
+const Container = styled.div`
   flex: 0 0 30%;
   display: flex;
   flex-wrap: wrap;
@@ -84,5 +84,3 @@ const CardContent = styled.div`
   flex: 1;
   padding: 1.9rem;
 `;
-
-export default ListCard;

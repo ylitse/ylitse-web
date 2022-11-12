@@ -1,23 +1,23 @@
 import styled from 'styled-components';
-import ProfilePicPlaceholder from '../../../static/img/icon-chat-profilepic.svg';
-import * as cssVariables from '../../../components/variables';
-import MentorCardHeaderBasicInfo from './MentorCardHeaderBasicInfo';
-import { Mentor } from '../mentorPageApi';
+import ProfilePicPlaceholder from '../../../../../static/img/icon-chat-profilepic.svg';
+import * as cssVariables from '../../../../../components/variables';
+import { BasicInfo } from './BasicInfo';
+import { Mentor } from '../../../mentorPageApi';
 
 type Props = {
   mentor: Mentor;
 };
 
-const MentorCardHeader = ({ mentor }: Props) => {
+export const Header = ({ mentor }: Props) => {
   const availabilityMessage = mentor.is_vacationing ? 'Ei tavoitettavissa' : '';
 
   return (
     <MentorCardHeaderContainer isLoggedIn={!mentor.is_vacationing}>
-      <MentorAvailability isShowing={availabilityMessage != ''} isNew={false}>
+      <Availability isShowing={availabilityMessage != ''} isNew={false}>
         {availabilityMessage}
-      </MentorAvailability>
-      <ProfilePicContainer />
-      <MentorCardHeaderBasicInfo mentor={mentor} />
+      </Availability>
+      <ProfilePicture />
+      <BasicInfo mentor={mentor} />
     </MentorCardHeaderContainer>
   );
 };
@@ -36,7 +36,7 @@ const MentorCardHeaderContainer = styled.div<{ isLoggedIn: boolean }>`
       : cssVariables.palette.bluegrey};
 `;
 
-const ProfilePicContainer = styled.div`
+const ProfilePicture = styled.div`
   background-image: url(${ProfilePicPlaceholder});
   width: 10vw;
   height: 10vw;
@@ -49,7 +49,7 @@ const ProfilePicContainer = styled.div`
   transform: translateX(-50%);
 `;
 
-const MentorAvailability = styled.div<{ isShowing: boolean; isNew: boolean }>`
+const Availability = styled.div<{ isShowing: boolean; isNew: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
   background-color: ${props =>
     props.isNew ? cssVariables.palette.orange : cssVariables.palette.whiteblue};
@@ -66,5 +66,3 @@ const MentorAvailability = styled.div<{ isShowing: boolean; isNew: boolean }>`
   transform: translate(-50%, -50%);
   width: fit-content;
 `;
-
-export default MentorCardHeader;

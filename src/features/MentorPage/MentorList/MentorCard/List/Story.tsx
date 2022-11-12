@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Text } from '../../../components/Text/Text';
-import * as cssVariables from '../../../components/variables';
+import { Text } from '../../../../../components/Text/Text';
+import * as cssVariables from '../../../../../components/variables';
 
-const ListCardStory = ({ story }: { story: string }) => {
+export const Story = ({ story }: { story: string }) => {
   return (
     <>
       <Text variant="h3" style={{ margin: 0 }}>
@@ -28,4 +28,4 @@ const TruncatedMultiline = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-export default ListCardStory;
+export default Story;

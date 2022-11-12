@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { SimpleChip } from '../../../components/Chip';
-import { Text } from '../../../components/Text/Text';
-import * as cssVariables from '../../../components/variables';
+import { SimpleChip } from '../../../../../components/Chip';
+import { Text } from '../../../../../components/Text/Text';
+import * as cssVariables from '../../../../../components/variables';
 
-const ListCardSkills = ({ skills }: { skills: Array<string> }) => {
+export const Skills = ({ skills }: { skills: Array<string> }) => {
   return (
-    <Skills>
+    <Container>
       <Text variant="h3" style={{ margin: '1.5rem 0 0 0' }}>
         Voin auttaa myös näissä
       </Text>
@@ -14,11 +14,11 @@ const ListCardSkills = ({ skills }: { skills: Array<string> }) => {
           <SimpleChip key={item} text={item} />
         ))}
       </SkillChips>
-    </Skills>
+    </Container>
   );
 };
 
-const Skills = styled.div`
+const Container = styled.div`
   height: fit-content;
   max-height: 8.6rem;
 `;
@@ -42,5 +42,3 @@ const SkillChips = styled.div`
     background: linear-gradient(transparent, ${cssVariables.palette.white});
   }
 `;
-
-export default ListCardSkills;

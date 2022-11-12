@@ -2,7 +2,7 @@ import MentorPage from './MentorPage';
 import { server } from '../../test/server';
 import { renderWithProviders } from '../../test/testStore';
 import { rest } from 'msw';
-import { baseUrl } from '../../utils/endpoints';
+import * as config from '../../utils/endpoints';
 
 const mentorsResponse = {
   resources: [
@@ -49,7 +49,7 @@ afterAll(() => server.close());
 describe('<MentorPage />', () => {
   it('displays fetched mentors in list and can open the card for more information', async () => {
     server.use(
-      rest.get(`${baseUrl}/mentors`, (_req, res, ctx) => {
+      rest.get(`${config.baseUrl}/mentors`, (_req, res, ctx) => {
         return res(ctx.json(mentorsResponse), ctx.delay(150));
       }),
     );
@@ -86,7 +86,7 @@ describe('<MentorPage />', () => {
 
   it('wont display mentors if response is not correct', async () => {
     server.use(
-      rest.get(`${baseUrl}/mentors`, (_req, res, ctx) => {
+      rest.get(`${config.baseUrl}/mentors`, (_req, res, ctx) => {
         return res(
           ctx.json([{ resources: [{ wrong: 'data' }] }]),
           ctx.delay(150),

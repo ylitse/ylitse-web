@@ -1,15 +1,10 @@
 import React from 'react';
-import OneContainerLayout from '../../components/OneContainerLayout';
-import MentorInfoSearchDiv from './MentorSearch';
-import MentorChips from './MentorChips';
+import MentorsFilter from './MentorsFilter';
 import MentorList from './MentorList';
 import PageLayout from '../../components/PageLayout';
-import MentorCard from './MentorCard';
+import MentorCard from './MentorList/MentorCard/Expanded';
 import Spinner from '../../components/Spinner';
-import { Mentor, useGetMentorsQuery, selectSkills } from './mentorPageApi';
-import { useSelector } from 'react-redux';
-
-const mentorPageHeadline = 'Mentorit';
+import { Mentor, useGetMentorsQuery } from './mentorPageApi';
 
 const MentorPage = () => {
   const [selectedMentor, setSelectedMentor] = React.useState<Mentor | null>(
@@ -17,7 +12,6 @@ const MentorPage = () => {
   );
 
   const { data: mentors, isLoading } = useGetMentorsQuery();
-  const skills = useSelector(selectSkills());
 
   return (
     <PageLayout>
@@ -31,10 +25,7 @@ const MentorPage = () => {
               onDismiss={() => setSelectedMentor(null)}
             />
           )}
-          <OneContainerLayout headLine={mentorPageHeadline}>
-            <MentorInfoSearchDiv />
-            <MentorChips skills={skills} />
-          </OneContainerLayout>
+          <MentorsFilter />
           {mentors && (
             <MentorList
               setVisibleCard={mentor => setSelectedMentor(mentor)}

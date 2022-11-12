@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import { SimpleChip } from '../../../components/Chip';
-import { Text } from '../../../components/Text/Text';
+import { SimpleChip } from '../../../../../components/Chip';
+import { Text } from '../../../../../components/Text/Text';
 
-const ListCardLanguages = ({ languages }: { languages: Array<string> }) => {
+export const Languages = ({ languages }: { languages: Array<string> }) => {
   return (
-    <Languages>
-      <Text variant="h3" style={{ margin: '1.5rem 0 0 0' }}>
+    <>
+      <Text
+        color="white"
+        variant="p"
+        style={{ margin: '3rem 0 0 0', textAlign: 'center' }}
+      >
         Puhun näitä kieliä
       </Text>
       <SkillChips>
@@ -13,11 +17,9 @@ const ListCardLanguages = ({ languages }: { languages: Array<string> }) => {
           <SimpleChip key={item} text={item} />
         ))}
       </SkillChips>
-    </Languages>
+    </>
   );
 };
-
-const Languages = styled.div``;
 
 const SkillChips = styled.div`
   flex: 0 0 auto;
@@ -25,10 +27,9 @@ const SkillChips = styled.div`
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   position: relative;
   height: fit-content;
   max-height: 7rem;
+  margin-top: 0.5rem;
 `;
-
-export default ListCardLanguages;

@@ -1,26 +1,26 @@
 import styled from 'styled-components';
-import MentorSearch from './MentorSearch';
-import * as cssVariables from '../../../components/variables';
+import { Search } from './Search';
+import * as cssVariables from '../../../../components/variables';
 
 /**
  * Div under the "Mentorit" -header where info about mentorsearch
  * is shown, also contains searchBar in separate MentorSearch component
  */
 
-const MentorInfoSearchDiv = () => {
+export const MentorSearch = () => {
   return (
-    <MentorSearchContainer>
-      <MentorInfoText>
+    <Container>
+      <InfoText>
         Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit
         listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita
         ongelmasi perusteella
-      </MentorInfoText>
-      <MentorSearch />
-    </MentorSearchContainer>
+      </InfoText>
+      <Search />
+    </Container>
   );
 };
 
-const MentorInfoText = styled.div`
+const InfoText = styled.div`
   flex: 0 0 auto;
   color: ${cssVariables.palette.darkblue};
   ${cssVariables.basicSourceSansText};
@@ -30,7 +30,7 @@ const MentorInfoText = styled.div`
   padding-right: 5%;
 `;
 
-const MentorSearchContainer = styled.div`
+const Container = styled.div`
   flex: 1;
   display: flex;
   flex-wrap: wrap;
@@ -40,5 +40,3 @@ const MentorSearchContainer = styled.div`
   max-width: 90%;
   margin: auto;
 `;
-
-export default MentorInfoSearchDiv;

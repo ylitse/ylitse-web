@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { Text } from '../../../components/Text/Text';
+import { Text } from '../../../../../components/Text/Text';
 import CSS from 'csstype';
-import MentorCardLanguages from './MentorCardLanguages';
-import { Mentor } from '../mentorPageApi';
-import * as cssVariables from '../../../components/variables';
+import { Languages } from './Languages';
+import { Mentor } from '../../../mentorPageApi';
+import * as cssVariables from '../../../../../components/variables';
 
 type Props = {
   mentor: Mentor;
@@ -30,11 +30,11 @@ const truncateText: CSS.Properties = {
   textAlign: 'center',
 };
 
-const MentorCardHeaderBasicInfo = ({
+export const BasicInfo = ({
   mentor: { name, age, region, is_vacationing, status_message, languages },
 }: Props) => {
   return (
-    <BasicInfoContainer>
+    <Container>
       <Text color="white" variant="h2" style={{ margin: 0 }}>
         {name}
       </Text>
@@ -48,12 +48,12 @@ const MentorCardHeaderBasicInfo = ({
       <p title={status_message} style={truncateText}>
         {status_message}
       </p>
-      <MentorCardLanguages languages={languages} />
-    </BasicInfoContainer>
+      <Languages languages={languages} />
+    </Container>
   );
 };
 
-const BasicInfoContainer = styled.div`
+const Container = styled.div`
   position: absolute;
   margin-left: 50%;
   top: 16vw;
@@ -78,5 +78,3 @@ const StyledDivider = styled.span`
   padding-left: 1rem;
   padding-right: 1rem;
 `;
-
-export default MentorCardHeaderBasicInfo;

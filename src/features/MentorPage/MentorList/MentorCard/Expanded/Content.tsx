@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { Text } from '../../../components/Text/Text';
-import MentorCardSkills from './MentorCardSkills';
-import { TextButton } from '../../../components/Buttons';
+import { Text } from '../../../../../components/Text/Text';
+import { Skills } from './Skills';
+import { TextButton } from '../../../../../components/Buttons';
 import CSS from 'csstype';
-import { Mentor } from '../mentorPageApi';
+import { Mentor } from '../../../mentorPageApi';
 
 type Props = {
   mentor: Mentor;
@@ -18,27 +18,27 @@ const customStylus: CSS.Properties = {
   justifySelf: 'flex-end',
 };
 
-const MentorCardContent = ({ mentor: { skills, story } }: Props) => {
+export const Content = ({ mentor: { skills, story } }: Props) => {
   const handleClick = () => {
     console.log('open conversation');
   };
   return (
-    <MentorContentContainer>
-      <MentorContent>
+    <Container>
+      <StyledContent>
         <Text variant="h3" style={{ margin: 0 }}>
           Tarinani
         </Text>
         <Text variant="p">{story}</Text>
-        <MentorCardSkills skills={skills} />
+        <Skills skills={skills} />
         <TextButton onClick={handleClick} style={customStylus}>
           Avaa keskustelu
         </TextButton>
-      </MentorContent>
-    </MentorContentContainer>
+      </StyledContent>
+    </Container>
   );
 };
 
-const MentorContentContainer = styled.div`
+const Container = styled.div`
   position: relative;
   top: 0;
   margin: 3.15vw;
@@ -51,7 +51,7 @@ const MentorContentContainer = styled.div`
   overflow: auto;
   box-sizing: border-box;
 `;
-const MentorContent = styled.div`
+const StyledContent = styled.div`
   position: relative;
   width: auto;
   min-height: 57vh;
@@ -60,5 +60,3 @@ const MentorContent = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-export default MentorCardContent;

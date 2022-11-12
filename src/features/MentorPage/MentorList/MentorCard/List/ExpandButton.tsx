@@ -1,6 +1,6 @@
-import { TextButton } from '../../../components/Buttons';
+import { TextButton } from '../../../../../components/Buttons';
 import CSS from 'csstype';
-import { Mentor } from '../mentorPageApi';
+import { Mentor } from '../../../mentorPageApi';
 
 type Props = {
   setVisibleCard: (mentor: Mentor) => void;
@@ -12,10 +12,8 @@ const customStylus: CSS.Properties = {
   marginTop: '1.5rem',
 };
 
-const OpenCardButton = ({ setVisibleCard, mentor }: Props) => (
+export const ExpandButton = ({ setVisibleCard, mentor }: Props) => (
   <TextButton onClick={() => setVisibleCard(mentor)} style={customStylus}>
     Avaa kortti
   </TextButton>
 );
-
-export default OpenCardButton;

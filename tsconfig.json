@@ -10,8 +10,8 @@
     "allowJs": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
     "types": ["node", "jest", "@testing-library/jest-dom"],
     "baseUrl": "./",
     "paths": {

@@ -1,9 +1,7 @@
-import SearchBar from '../../../components/SearchBar';
+import SearchBar from '../../../../components/SearchBar';
 
 const mentorSearchbarPlaceholder = 'Etsi mentoria';
 
-const MentorSearch = () => {
+export const Search = () => {
   return <SearchBar placeholder={mentorSearchbarPlaceholder} />;
 };
-
-export default MentorSearch;

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import MentorCardHeader from './MentorCardHeader';
-import MentorContent from './MentorContent';
-import { IconButton } from '../../../components/Buttons';
-import * as cssVariables from '../../../components/variables';
-import { Mentor } from '../mentorPageApi';
+import { Header } from './Header';
+import { Content } from './Content';
+import { IconButton } from '../../../../../components/Buttons';
+import * as cssVariables from '../../../../../components/variables';
+import { Mentor } from '../../../mentorPageApi';
 
 /**
  * Selected mentor card in mentor page
@@ -14,19 +14,19 @@ type Props = {
   mentor: Mentor;
 };
 
-const MentorCard = ({ mentor, onDismiss }: Props) => {
+export const MentorCard = ({ mentor, onDismiss }: Props) => {
   return (
-    <MentorCardContainer>
-      <StyledMentorCard>
-        <MentorCardHeader mentor={mentor} />
+    <Container>
+      <StyledCard>
+        <Header mentor={mentor} />
         <IconButton variant="close" onClick={onDismiss}></IconButton>
-        <MentorContent mentor={mentor} />
-      </StyledMentorCard>
-    </MentorCardContainer>
+        <Content mentor={mentor} />
+      </StyledCard>
+    </Container>
   );
 };
 
-const StyledMentorCard = styled.div`
+const StyledCard = styled.div`
   position: fixed;
   display: flex;
   top: 50%;
@@ -43,7 +43,7 @@ const StyledMentorCard = styled.div`
   z-index: 100;
 `;
 
-const MentorCardContainer = styled.div`
+const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -52,5 +52,3 @@ const MentorCardContainer = styled.div`
   background-color: ${cssVariables.palette.blurbackground};
   z-index: 10;
 `;
-
-export default MentorCard;

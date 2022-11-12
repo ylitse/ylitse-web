@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ExpandIcon from '../../../static/img/icon-expand.svg';
-import * as cssVariables from '../../../components/variables';
+import ExpandIcon from '../../../../static/img/icon-expand.svg';
+import * as cssVariables from '../../../../components/variables';
 
 type Props = {
   setShouldShowAllSkills: () => void;

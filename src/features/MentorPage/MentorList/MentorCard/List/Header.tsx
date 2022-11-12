@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../components/variables';
-import ProfilePicPlaceholder from '../../../static/img/icon-chat-profilepic.svg';
+import * as cssVariables from '../../../../../components/variables';
+import ProfilePicPlaceholder from '../../../../../static/img/icon-chat-profilepic.svg';
 import CSS from 'csstype';
-import { Text } from '../../../components/Text/Text';
+import { Text } from '../../../../../components/Text/Text';
 
 type Props = {
   name: string;
@@ -33,7 +33,7 @@ const truncateText: CSS.Properties = {
   color: cssVariables.palette.white,
 };
 
-const ListCardHeader: React.FC<Props> = ({
+export const Header: React.FC<Props> = ({
   name,
   age,
   region,
@@ -47,14 +47,14 @@ const ListCardHeader: React.FC<Props> = ({
     : 'Ei tavoitettavissa';
   return (
     <StyledListCardHeader isSelected={isAvailable}>
-      <MentorAvailability
+      <Availability
         isShowing={availabilityMessage != ''}
         isNew={availabilityMessage === 'Uusi'}
       >
         {availabilityMessage}
-      </MentorAvailability>
-      <ProfilePicContainer />
-      <BasicInfoContainer>
+      </Availability>
+      <ProfilePicture />
+      <BasicInfo>
         <Text color="white" variant="h2" style={{ margin: 0 }}>
           {name}
         </Text>
@@ -67,7 +67,7 @@ const ListCardHeader: React.FC<Props> = ({
         <p title={message} style={truncateText}>
           {message}
         </p>
-      </BasicInfoContainer>
+      </BasicInfo>
     </StyledListCardHeader>
   );
 };
@@ -117,7 +117,7 @@ const StyledListCardHeader = styled.div<{ isSelected: boolean }>`
   }
 `;
 
-const ProfilePicContainer = styled.div`
+const ProfilePicture = styled.div`
   background-image: url(${ProfilePicPlaceholder});
   width: 3.75rem;
   height: 3.75rem;
@@ -126,7 +126,7 @@ const ProfilePicContainer = styled.div`
   flex: 0 0 3.75rem;
 `;
 
-const BasicInfoContainer = styled.div`
+const BasicInfo = styled.div`
   padding-left: 1.9rem;
   display: flex;
   flex-direction: column;
@@ -140,7 +140,7 @@ const StyledDivider = styled.span`
   padding-right: 1rem;
 `;
 
-const MentorAvailability = styled.div<{ isShowing: boolean; isNew: boolean }>`
+const Availability = styled.div<{ isShowing: boolean; isNew: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
   background-color: ${props =>
     props.isNew ? cssVariables.palette.orange : cssVariables.palette.whiteblue};
@@ -156,5 +156,3 @@ const MentorAvailability = styled.div<{ isShowing: boolean; isNew: boolean }>`
   border-radius: 0.25rem;
   transform: translate(-1rem, -50%);
 `;
-
-export default ListCardHeader;
