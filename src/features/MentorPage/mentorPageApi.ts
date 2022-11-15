@@ -73,12 +73,19 @@ export const mentorsApi = createApi({
 
 const selectMentors = mentorsApi.endpoints.getMentors.select();
 
-const mapSkills = (mentors: Mentors) => {
-  return Object.values(mentors)
+export const mapSkills = (mentors: Mentors) => {
+  const allSkills = Object.values(mentors)
     .map(mentor => mentor.skills)
-    .flat()
-    .filter((item, index, self) => self.indexOf(item) === index) // remove duplicates
-    .sort();
+    .flat();
+
+  const amountMap = allSkills.reduce<Record<string, number>>((acc, skill) => {
+    const amount = (acc[skill] ?? 0) + 1;
+    return { ...acc, [skill]: amount };
+  }, {});
+
+  return Object.entries(amountMap)
+    .sort(([, amountA], [, amountB]) => amountB - amountA)
+    .map(([skill]) => skill);
 };
 export const selectSkills = () =>
   createSelector(selectMentors, response => mapSkills(response.data ?? {}));
@@ -92,9 +99,9 @@ const withSkills =
 
 const withSearchString =
   (searchString: string) =>
-  ({ name, region, story, status_message }: Mentor) =>
+  ({ name, region, story, status_message, skills }: Mentor) =>
     searchString.length > 0
-      ? [name, region, story, status_message].some(value =>
+      ? [name, region, story, status_message, ...skills].some(value =>
           value.toLowerCase().includes(searchString.toLowerCase()),
         )
       : true;
