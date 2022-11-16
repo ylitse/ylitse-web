@@ -61,18 +61,23 @@ const mentors = {
 
 describe('mapSkills-function', () => {
   it('orders skills based on rarity', () => {
-    const skills = mapSkills(mentors);
+    const skills = mapSkills(mentors, []);
     expect(skills[0]).toBe('Juggling');
     expect(skills[1]).toBe('Belly dancing');
   });
 
+  it('selected skills always first', () => {
+    const skills = mapSkills(mentors, ['Frisbee throwing']);
+    expect(skills[0]).toBe('Frisbee throwing');
+  });
+
   it('all skills are mapped once', () => {
-    const skills = mapSkills(mentors);
+    const skills = mapSkills(mentors, []);
     expect(skills.length).toBe(5);
   });
 
   it('if no mentors, no skills', () => {
-    const skills = mapSkills({});
+    const skills = mapSkills({}, []);
     expect(skills.length).toBe(0);
   });
 
@@ -82,6 +87,7 @@ describe('mapSkills-function', () => {
         const updated = { ...current, skills: [] };
         return { ...mentors, [current.buddyId]: updated };
       }, {}),
+      [],
     );
     expect(skills.length).toBe(0);
   });

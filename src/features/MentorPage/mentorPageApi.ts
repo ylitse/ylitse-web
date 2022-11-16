@@ -73,7 +73,7 @@ export const mentorsApi = createApi({
 
 const selectMentors = mentorsApi.endpoints.getMentors.select();
 
-export const mapSkills = (mentors: Mentors) => {
+export const mapSkills = (mentors: Mentors, selectedSkills: Array<string>) => {
   const allSkills = Object.values(mentors)
     .map(mentor => mentor.skills)
     .flat();
@@ -83,12 +83,21 @@ export const mapSkills = (mentors: Mentors) => {
     return { ...acc, [skill]: amount };
   }, {});
 
-  return Object.entries(amountMap)
+  const sortedByRarity = Object.entries(amountMap)
     .sort(([, amountA], [, amountB]) => amountB - amountA)
     .map(([skill]) => skill);
+
+  return selectedSkills.concat(
+    sortedByRarity.filter(skill => !selectedSkills.includes(skill)),
+  );
 };
 export const selectSkills = () =>
-  createSelector(selectMentors, response => mapSkills(response.data ?? {}));
+  createSelector(
+    selectMentors,
+    selectSelectedSkills,
+    (mentorsResponse, selectedSkills) =>
+      mapSkills(mentorsResponse.data ?? {}, selectedSkills),
+  );
 
 const withSkills =
   (selectedSkills: Array<string>) =>
