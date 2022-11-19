@@ -4,37 +4,23 @@ import { Chip } from '../../../../components/Chip';
 import ShowMoreChips from './ShowMoreChips';
 import { selectSelectedSkills, toggleSkill } from '../mentorsFilterSlice';
 import { useAppDispatch, useAppSelector } from '../../../../store';
-import useIsFirstRender from '../../../../hooks/useIsFirstRender';
+import { usePillShakeChecker } from './usePillShakeChecker';
 
 export const SkillChips = ({ skills }: { skills: Array<string> }) => {
   const [shouldShowAllSkills, setShowAllSkills] = React.useState(false);
   const selectedSkills = useAppSelector(selectSelectedSkills);
-  const [existingSelected, setExistingSelected] = React.useState<
-    Record<string, boolean>
-  >({});
-
-  const isFirstRender = useIsFirstRender();
+  const { existingSelected: shouldNotAnimate, syncExisting } =
+    usePillShakeChecker(selectedSkills);
 
   const dispatch = useAppDispatch();
 
   const handleSkillToggle = (skill: string) => {
     dispatch(toggleSkill(skill));
-
-    if (existingSelected[skill]) {
-      setExistingSelected({ ...existingSelected, [skill]: false });
-    }
+    syncExisting(skill);
   };
 
   const handleShowMoreSkillsChange = () =>
     setShowAllSkills(!shouldShowAllSkills);
-
-  React.useEffect(() => {
-    const existingSelected = selectedSkills.reduce(
-      (selected, skill) => ({ ...selected, [skill]: true }),
-      {},
-    );
-    setExistingSelected(existingSelected);
-  }, []);
 
   return (
     <Container>
@@ -43,8 +29,7 @@ export const SkillChips = ({ skills }: { skills: Array<string> }) => {
           const isSelected = selectedSkills.some(
             selected => selected === skill,
           );
-          const shouldShakeAnimate =
-            isSelected && !isFirstRender && !existingSelected[skill];
+          const shouldShakeAnimate = isSelected && !shouldNotAnimate[skill];
           return (
             <Chip
               key={skill}
