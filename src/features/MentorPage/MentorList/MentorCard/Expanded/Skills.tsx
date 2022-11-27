@@ -9,9 +9,7 @@ type Props = {
 export const Skills = ({ skills }: Props) => {
   return (
     <Container>
-      <Text variant="h3" style={{ margin: '3rem 0 0 0' }}>
-        Voin auttaa myös näissä
-      </Text>
+      <Header variant="h3">Voin auttaa myös näissä</Header>
       <SkillChips>
         {skills.map(skill => (
           <SimpleChip key={skill} text={skill} />
@@ -36,4 +34,8 @@ const SkillChips = styled.div`
   height: fit-content;
   margin-bottom: 5vw;
   margin-top: 1em;
+`;
+
+const Header = styled(Text)`
+  margin: 3rem 0 0 0;
 `;

@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 import { SimpleChip } from '../../../../../components/Chip';
-import { Text } from '../../../../../components/Text/Text';
+import { StyledText } from './Languages';
 import * as cssVariables from '../../../../../components/variables';
 
 export const Skills = ({ skills }: { skills: Array<string> }) => {
   return (
     <Container>
-      <Text variant="h3" style={{ margin: '1.5rem 0 0 0' }}>
-        Voin auttaa myös näissä
-      </Text>
+      <StyledText variant="h3">Voin auttaa myös näissä</StyledText>
       <SkillChips>
         {skills.map(item => (
           <SimpleChip key={item} text={item} />

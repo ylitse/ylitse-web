@@ -5,9 +5,7 @@ import * as cssVariables from '../../../../../components/variables';
 export const Story = ({ story }: { story: string }) => {
   return (
     <>
-      <Text variant="h3" style={{ margin: 0 }}>
-        Tarinani
-      </Text>
+      <Text variant="h3">Tarinani</Text>
       <TruncatedMultiline>{story}</TruncatedMultiline>
     </>
   );

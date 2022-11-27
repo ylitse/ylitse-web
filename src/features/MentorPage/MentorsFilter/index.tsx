@@ -1,4 +1,5 @@
-import OneContainerLayout from '../../../components/OneContainerLayout';
+import { useState } from 'react';
+import Filters from './Filters/Filters';
 import MentorSearch from './MentorSearch';
 import SkillChips from './Skills/';
 
@@ -9,12 +10,24 @@ const mentorPageHeadline = 'Mentorit';
 
 const MentorsFilter = () => {
   const skills = useAppSelector(selectSkills());
+  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
   return (
-    <OneContainerLayout headLine={mentorPageHeadline}>
-      <MentorSearch />
-      <SkillChips skills={skills} />
-    </OneContainerLayout>
+    <Filters
+      headLine={mentorPageHeadline}
+      onFiltersClose={() => setIsFiltersVisible(true)}
+      isFiltersVisible={isFiltersVisible}
+    >
+      {isFiltersVisible && (
+        <>
+          <MentorSearch />
+          <SkillChips
+            skills={skills}
+            onFiltersClose={() => setIsFiltersVisible(false)}
+          />
+        </>
+      )}
+    </Filters>
   );
 };
 

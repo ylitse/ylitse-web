@@ -1,28 +1,34 @@
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../variables';
-import { Text } from '../Text/Text';
+import * as cssVariables from '../../../../components/variables';
+import { Text } from '../../../../components/Text/Text';
+import { FiltersButton } from './FiltersButton';
 
-type OneContainerProps = {
+type Props = {
   headLine: string;
   children: React.ReactNode;
+  onFiltersClose: () => void;
+  isFiltersVisible: boolean;
 };
 
-const OneContainerLayout: React.FC<OneContainerProps> = ({
+const Filters: React.FC<Props> = ({
   headLine,
+  onFiltersClose,
+  isFiltersVisible,
   children,
 }) => {
   return (
-    <OneContainer>
+    <Container>
       <PageHeader>
         <Text variant="h1">{headLine}</Text>
+        {!isFiltersVisible && <FiltersButton onFiltersClose={onFiltersClose} />}
       </PageHeader>
       {children}
-    </OneContainer>
+    </Container>
   );
 };
 
-const OneContainer = styled.div`
+const Container = styled.div`
   flex: 0 0 auto;
   width: 100%;
   border-radius: 10px;
@@ -32,16 +38,13 @@ const OneContainer = styled.div`
 `;
 
 const PageHeader = styled.div`
-  flex: 1;
   background-color: ${cssVariables.palette.blue2};
   border-radius: 10px;
   max-height: 80px;
   height: 80px;
-  color: ${cssVariables.palette.darkblue};
-  ${cssVariables.basicBalooText};
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-export default OneContainerLayout;
+export default Filters;

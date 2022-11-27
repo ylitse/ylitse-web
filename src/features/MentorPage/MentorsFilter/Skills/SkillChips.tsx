@@ -1,13 +1,14 @@
-import React from 'react';
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Chip } from '../../../../components/Chip';
-import ShowMoreChips from './ShowMoreChips';
+import { Pagination, SKILL_AMOUNT_ON_PAGE } from './Pagination';
 import { selectSelectedSkills, toggleSkill } from '../mentorsFilterSlice';
 import { useAppDispatch, useAppSelector } from '../../../../store';
 import { usePillShakeChecker } from './usePillShakeChecker';
 
-export const SkillChips = ({ skills }: { skills: Array<string> }) => {
-  const [shouldShowAllSkills, setShowAllSkills] = React.useState(false);
+type Props = { skills: Array<string>; onFiltersClose: () => void };
+export const SkillChips = ({ skills, onFiltersClose }: Props) => {
+  const [currentPage, setCurrentPage] = useState(1);
   const selectedSkills = useAppSelector(selectSelectedSkills);
   const { existingSelected: shouldNotAnimate, syncExisting } =
     usePillShakeChecker(selectedSkills);
@@ -19,13 +20,19 @@ export const SkillChips = ({ skills }: { skills: Array<string> }) => {
     syncExisting(skill);
   };
 
-  const handleShowMoreSkillsChange = () =>
-    setShowAllSkills(!shouldShowAllSkills);
+  const pageSkills = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * SKILL_AMOUNT_ON_PAGE;
+    const lastPageIndex = firstPageIndex + SKILL_AMOUNT_ON_PAGE;
+    const pageSkills = skills.slice(firstPageIndex, lastPageIndex);
+    return selectedSkills.concat(
+      pageSkills.filter(s => !selectedSkills.includes(s)),
+    );
+  }, [currentPage, selectedSkills]);
 
   return (
     <Container>
-      <Skills isSelected={shouldShowAllSkills}>
-        {skills.map(skill => {
+      <Skills>
+        {pageSkills.map(skill => {
           const isSelected = selectedSkills.some(
             selected => selected === skill,
           );
@@ -41,15 +48,17 @@ export const SkillChips = ({ skills }: { skills: Array<string> }) => {
           );
         })}
       </Skills>
-      <ShowMoreChips
-        shouldShowAllSkills={shouldShowAllSkills}
-        setShouldShowAllSkills={handleShowMoreSkillsChange}
+      <Pagination
+        skillTotalAmount={skills.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        onFiltersClose={onFiltersClose}
       />
     </Container>
   );
 };
 
-const Skills = styled.div<{ isSelected: boolean }>`
+const Skills = styled.div`
   flex: 0 0 auto;
   width: 100%;
   overflow: hidden;
@@ -57,7 +66,7 @@ const Skills = styled.div<{ isSelected: boolean }>`
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
-  height: ${props => (props.isSelected ? `fit-content` : '11rem')};
+  height: '11rem';
 `;
 
 const Container = styled.div`

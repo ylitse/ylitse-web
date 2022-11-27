@@ -8,14 +8,14 @@ export type TextVariant = 'h1' | 'h2' | 'h3' | 'p' | 'a';
 type Props = {
   variant?: TextVariant;
   color?: Color;
-  style?: CSS.Properties;
+  className?: string;
   children: React.ReactNode;
 };
 
 export const Text: React.FC<Props> = ({
   variant = 'p',
   color = 'darkblue',
-  style,
+  className,
   children,
 }) => {
   const TextElement = variants[variant].element;
@@ -24,7 +24,8 @@ export const Text: React.FC<Props> = ({
 
   return (
     <TextElement
-      style={{ ...commonStyles, ...variantStyles, ...variantColor, ...style }}
+      className={className}
+      style={{ ...commonStyles, ...variantStyles, ...variantColor }}
     >
       {children}
     </TextElement>

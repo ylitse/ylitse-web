@@ -5,9 +5,7 @@ import { Text } from '../../../../../components/Text/Text';
 export const Languages = ({ languages }: { languages: Array<string> }) => {
   return (
     <>
-      <Text variant="h3" style={{ margin: '1.5rem 0 0 0' }}>
-        Puhun näitä kieliä
-      </Text>
+      <StyledText variant="h3">Puhun näitä kieliä</StyledText>
       <SkillChips>
         {languages.map(item => (
           <SimpleChip key={item} text={item} />
@@ -27,4 +25,9 @@ const SkillChips = styled.div`
   position: relative;
   height: fit-content;
   max-height: 7rem;
+`;
+
+export const StyledText = styled(Text)`
+  margin: 1.5rem 0 0 0;
+  textalign: center;
 `;

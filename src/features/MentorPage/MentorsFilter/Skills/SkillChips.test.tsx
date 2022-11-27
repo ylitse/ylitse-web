@@ -15,16 +15,17 @@ describe('<MentorChips />', () => {
     'Fax machinge repairing',
   ];
 
-  it('Mentor chips are rendered correctly', () => {
-    const { getAllByRole } = renderWithProviders(<SkillChips skills={items} />);
+  const props = { skills: items, onFiltersClose: jest.fn() };
 
-    // There will be pills + show-more button
-    expect(getAllByRole('button').length).toBe(11);
+  it('Mentor chips are rendered correctly', () => {
+    const { getAllByRole } = renderWithProviders(<SkillChips {...props} />);
+
+    expect(getAllByRole('button').length).toBe(12);
   });
 
   it('Selecting skill will change the state', async () => {
     const { getByText, store, user } = renderWithProviders(
-      <SkillChips skills={items} />,
+      <SkillChips {...props} />,
     );
 
     const skillPill = getByText(items[0]);
@@ -37,7 +38,7 @@ describe('<MentorChips />', () => {
   });
 
   it('Selected chips have different bg', () => {
-    const { getByText } = renderWithProviders(<SkillChips skills={items} />, {
+    const { getByText } = renderWithProviders(<SkillChips {...props} />, {
       preloadedState: {
         mentorsFilter: { selectedSkills: [items[0]], searchString: '' },
       },

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import * as cssVariables from '../../../../../components/variables';
 import ProfilePicPlaceholder from '../../../../../static/img/icon-chat-profilepic.svg';
-import CSS from 'csstype';
+import { WrappedText, TruncateText } from '../Expanded/BasicInfo';
 import { Text } from '../../../../../components/Text/Text';
 
 type Props = {
@@ -10,26 +10,6 @@ type Props = {
   region: string;
   isAvailable: boolean;
   message: string;
-};
-
-const customStylus: CSS.Properties = {
-  margin: '0px',
-  display: 'flex',
-  flexWrap: 'wrap',
-};
-
-const truncateText: CSS.Properties = {
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  margin: '0px',
-  width: '100%',
-  fontFamily: '"Source Sans Pro"',
-  fontStyle: 'normal',
-  fontWeight: '400',
-  fontSize: '1rem',
-  lineHeight: '1.5rem',
-  color: cssVariables.palette.white,
 };
 
 export const Header: React.FC<Props> = ({
@@ -48,18 +28,16 @@ export const Header: React.FC<Props> = ({
       </Availability>
       <ProfilePicture />
       <BasicInfo>
-        <Text color="white" variant="h2" style={{ margin: 0 }}>
+        <Text color="white" variant="h2">
           {name}
         </Text>
-        <Text color="white" variant="p" style={customStylus}>
+        <WrappedText color="white" variant="p">
           {age} v. <StyledDivider>|</StyledDivider> {region}
-        </Text>
-        <Text color="white" variant="p" style={{ margin: 0 }}>
+        </WrappedText>
+        <Text color="white" variant="p">
           {isAvailable}
         </Text>
-        <p title={message} style={truncateText}>
-          {message}
-        </p>
+        <TruncateText>{message}</TruncateText>
       </BasicInfo>
     </StyledHeader>
   );

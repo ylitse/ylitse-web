@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Text } from '../../../../../components/Text/Text';
-import CSS from 'csstype';
 import { Languages } from './Languages';
 import { Mentor } from '../../../mentorPageApi';
 import * as cssVariables from '../../../../../components/variables';
@@ -9,45 +8,22 @@ type Props = {
   mentor: Mentor;
 };
 
-const customStylus: CSS.Properties = {
-  margin: '0px',
-  display: 'flex',
-  flexWrap: 'wrap',
-};
-
-const truncateText: CSS.Properties = {
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  margin: '0px',
-  width: '100%',
-  fontFamily: '"Source Sans Pro"',
-  fontStyle: 'normal',
-  fontWeight: '400',
-  fontSize: '1rem',
-  lineHeight: '1.5rem',
-  color: cssVariables.palette.white,
-  textAlign: 'center',
-};
-
 export const BasicInfo = ({
   mentor: { name, age, region, is_vacationing, status_message, languages },
 }: Props) => {
   return (
     <Container>
-      <Text color="white" variant="h2" style={{ margin: 0 }}>
+      <Text color="white" variant="h2">
         {name}
       </Text>
       <NameDivider />
-      <Text color="white" variant="p" style={customStylus}>
+      <WrappedText color="white" variant="p">
         {age} v. <StyledDivider>|</StyledDivider> {region}
-      </Text>
-      <Text color="white" variant="p" style={{ margin: 0 }}>
+      </WrappedText>
+      <Text color="white" variant="p">
         {!is_vacationing}
       </Text>
-      <p title={status_message} style={truncateText}>
-        {status_message}
-      </p>
+      <TruncateText>{status_message}</TruncateText>
       <Languages languages={languages} />
     </Container>
   );
@@ -77,4 +53,25 @@ const NameDivider = styled.div`
 const StyledDivider = styled.span`
   padding-left: 1rem;
   padding-right: 1rem;
+`;
+
+export const WrappedText = styled(Text)`
+  margin: 0px;
+  display: flex;
+  flexwrap: wrap;
+`;
+
+export const TruncateText = styled(Text)`
+  textoverflow: ellipsis;
+  whitespace: nowrap;
+  overflow: hidden;
+  margin: 0px;
+  width: 100%;
+  fontfamily: 'Source Sans Pro';
+  fontstyle: normal;
+  fontweight: 400;
+  fontsize: 1rem;
+  lineheight: 1.5rem;
+  color: ${cssVariables.palette.white};
+  textalign: center;
 `;

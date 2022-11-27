@@ -31,6 +31,9 @@ export const mentorsFilter = createSlice({
         selectedSkills: nextSkills,
       };
     },
+    resetFilters: () => {
+      return initialState;
+    },
   },
 });
 
@@ -39,4 +42,5 @@ export const selectSelectedSkills = ({ mentorsFilter }: RootState) =>
 
 export const selectSearchString = ({ mentorsFilter }: RootState) =>
   mentorsFilter.searchString;
-export const { changeSearchString, toggleSkill } = mentorsFilter.actions;
+export const { changeSearchString, toggleSkill, resetFilters } =
+  mentorsFilter.actions;

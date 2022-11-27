@@ -74,14 +74,14 @@ describe('<MentorPage />', () => {
     expect(openChatButton).toBeInTheDocument();
 
     // close the mentorcard again
-    const closeButton = getByRole('button', { name: /close/i });
+    const closeButton = getByRole('button', { name: 'close' });
     expect(closeButton).toBeInTheDocument();
     await user.click(closeButton);
     expect(closeButton).not.toBeInTheDocument();
   });
 
   it('displays fetched mentors in list and can filter by skills', async () => {
-    const { user, getByRole, findByRole, queryByText, getAllByRole } =
+    const { user, getByRole, findByRole, queryByText, findAllByRole } =
       renderWithProviders(<MentorPage />);
 
     // should be loading initially
@@ -92,11 +92,17 @@ describe('<MentorPage />', () => {
       await findByRole('heading', { name: /Mentorit/i }),
     ).toBeInTheDocument();
 
+    // show the filters
+    const showFiltersButton = getByRole('button', { name: /show-filters/i });
+    user.click(showFiltersButton);
+    await findByRole('textbox');
+
     // click the skill
     // There is one pill in the skill-list, and one in the mentor-card
-    const skillPills = getAllByRole('button', {
+    const skillPills = await findAllByRole('button', {
       name: mentorsResponse.resources[0].skills[0],
     });
+
     await user.click(skillPills[0]);
 
     // other mentor is shown on the list, but other one is not
@@ -124,8 +130,12 @@ describe('<MentorPage />', () => {
       await findByRole('heading', { name: /Mentorit/i }),
     ).toBeInTheDocument();
 
+    // show the filters
+    const showFiltersButton = getByRole('button', { name: /show-filters/i });
+    user.click(showFiltersButton);
+
     // write a search-string
-    const searchInput = getByRole('textbox');
+    const searchInput = await findByRole('textbox');
     await user.click(searchInput);
     await user.keyboard(mentorsResponse.resources[1].display_name);
 

@@ -22,12 +22,11 @@ export const Content = ({ mentor: { skills, story } }: Props) => {
   const handleClick = () => {
     console.log('open conversation');
   };
+
   return (
     <Container>
       <StyledContent>
-        <Text variant="h3" style={{ margin: 0 }}>
-          Tarinani
-        </Text>
+        <Text variant="h3">Tarinani</Text>
         <Text variant="p">{story}</Text>
         <Skills skills={skills} />
         <TextButton onClick={handleClick} style={customStylus}>
