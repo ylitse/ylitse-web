@@ -83,14 +83,30 @@ export const mapSkills = (mentors: Mentors, selectedSkills: Array<string>) => {
     return { ...acc, [skill]: amount };
   }, {});
 
-  const sortedByRarity = Object.entries(amountMap)
-    .sort(([, amountA], [, amountB]) => amountB - amountA)
+  return Object.entries(amountMap)
+    .sort(bySelectionOrRarity(selectedSkills))
     .map(([skill]) => skill);
-
-  return selectedSkills.concat(
-    sortedByRarity.filter(skill => !selectedSkills.includes(skill)),
-  );
 };
+
+const bySelectionOrRarity =
+  (selectedSkills: Array<string>) =>
+  (
+    [skillA, amountA]: [string, number],
+    [skillB, amountB]: [string, number],
+  ) => {
+    const isASelected = selectedSkills.includes(skillA);
+    const isBSelected = selectedSkills.includes(skillB);
+    if (isASelected && !isBSelected) {
+      return -1;
+    }
+
+    if (isBSelected && !isASelected) {
+      return 1;
+    }
+
+    return amountB - amountA;
+  };
+
 export const selectSkills = () =>
   createSelector(
     selectMentors,

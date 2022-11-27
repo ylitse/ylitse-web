@@ -71,6 +71,12 @@ describe('mapSkills-function', () => {
     expect(skills[0]).toBe('Frisbee throwing');
   });
 
+  it('if selected skill that is not on any mentor, it wont show up', () => {
+    const skills = mapSkills(mentors, ['Non existing']);
+    expect(skills[0]).not.toBe('Frisbee throwing');
+    expect(skills.includes('Non existing')).toBe(false);
+  });
+
   it('all skills are mapped once', () => {
     const skills = mapSkills(mentors, []);
     expect(skills.length).toBe(5);
