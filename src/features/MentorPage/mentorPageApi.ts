@@ -36,6 +36,9 @@ const toMentor = ({
   user_id,
   id,
   skills,
+  communication_channels,
+  is_vacationing,
+  status_message,
   ...props
 }: ApiMentor) => ({
   ...props,
@@ -44,6 +47,9 @@ const toMentor = ({
   age: new Date().getFullYear() - birth_year,
   name: display_name,
   skills: skills.map(skill => capitalize(skill)),
+  statusMessage: status_message,
+  isVacationing: is_vacationing,
+  communicationChannels: communication_channels,
 });
 
 export type Mentors = Record<string, Mentor>;
@@ -124,9 +130,9 @@ const withSkills =
 
 const withSearchString =
   (searchString: string) =>
-  ({ name, region, story, status_message, skills }: Mentor) =>
+  ({ name, region, story, statusMessage, skills }: Mentor) =>
     searchString.length > 0
-      ? [name, region, story, status_message, ...skills].some(value =>
+      ? [name, region, story, statusMessage, ...skills].some(value =>
           value.toLowerCase().includes(searchString.toLowerCase()),
         )
       : true;

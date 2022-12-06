@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const BasicInfo = ({
-  mentor: { name, age, region, is_vacationing, status_message, languages },
+  mentor: { name, age, region, isVacationing, statusMessage, languages },
 }: Props) => {
   return (
     <Container>
@@ -21,9 +21,9 @@ export const BasicInfo = ({
         {age} v. <StyledDivider>|</StyledDivider> {region}
       </WrappedText>
       <Text color="white" variant="p">
-        {!is_vacationing}
+        {!isVacationing}
       </Text>
-      <TruncateText>{status_message}</TruncateText>
+      <TruncateText>{statusMessage}</TruncateText>
       <Languages languages={languages} />
     </Container>
   );

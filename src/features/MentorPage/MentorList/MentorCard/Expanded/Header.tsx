@@ -9,10 +9,10 @@ type Props = {
 };
 
 export const Header = ({ mentor }: Props) => {
-  const availabilityMessage = mentor.is_vacationing ? 'Ei tavoitettavissa' : '';
+  const availabilityMessage = mentor.isVacationing ? 'Ei tavoitettavissa' : '';
 
   return (
-    <MentorCardHeaderContainer isLoggedIn={!mentor.is_vacationing}>
+    <MentorCardHeaderContainer isLoggedIn={!mentor.isVacationing}>
       <Availability isShowing={availabilityMessage != ''} isNew={false}>
         {availabilityMessage}
       </Availability>
