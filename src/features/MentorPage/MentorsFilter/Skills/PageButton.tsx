@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import * as cssVariables from '../../../../components/variables';
-import { DOTS } from './usePagination';
+import { THREE_DOTS } from './usePagination';
 
 type Props = {
   isSelected: boolean;
@@ -10,7 +10,7 @@ type Props = {
 
 export const PageButton = ({ isSelected, onClick, page }: Props) => {
   const handleOnClick = () => {
-    if (page === DOTS) return;
+    if (page === THREE_DOTS) return;
 
     onClick();
   };
@@ -19,7 +19,7 @@ export const PageButton = ({ isSelected, onClick, page }: Props) => {
     <PageNumber
       isSelected={isSelected}
       onClick={handleOnClick}
-      isClickable={page !== DOTS}
+      isClickable={page !== THREE_DOTS}
     >
       {page}
     </PageNumber>

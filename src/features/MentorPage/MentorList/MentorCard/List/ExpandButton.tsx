@@ -9,15 +9,13 @@ type Props = {
 };
 
 export const ExpandButton = ({ setVisibleCard, mentor }: Props) => (
-  <StyledButton onClick={() => setVisibleCard(mentor)}>
-    Avaa kortti
-  </StyledButton>
+  <Container>
+    <TextButton onClick={() => setVisibleCard(mentor)}>Avaa kortti</TextButton>
+  </Container>
 );
 
-const StyledButton = styled(TextButton)`
-  bottom: 0;
-  margintop: 1.5rem;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  z-index: 10;
 `;

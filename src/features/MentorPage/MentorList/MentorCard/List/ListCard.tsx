@@ -7,10 +7,6 @@ import { ExpandButton } from './ExpandButton';
 import * as cssVariables from '../../../../../components/variables';
 import { Mentor } from '../../../mentorPageApi';
 
-/**
- * A single card with mentor info on mentor page card listing
- */
-
 type Props = {
   setVisibleCard: (mentor: Mentor) => void;
   mentor: Mentor;
@@ -40,7 +36,6 @@ const Container = styled.div`
   flex: 0 0 30%;
   display: flex;
   flex-wrap: wrap;
-  height: fit-content;
   background-color: ${cssVariables.palette.white};
   border-radius: 0.75rem;
   flex-direction: column;
@@ -81,5 +76,8 @@ const Container = styled.div`
 
 const CardContent = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 1.9rem;
+  justify-content: space-between;
 `;

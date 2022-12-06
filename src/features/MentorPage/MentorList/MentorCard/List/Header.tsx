@@ -28,20 +28,22 @@ export const Header: React.FC<Props> = ({
       </Availability>
       <ProfilePicture />
       <BasicInfo>
-        <Text color="white" variant="h2">
+        <NameText color="white" variant="h2">
           {name}
-        </Text>
+        </NameText>
         <WrappedText color="white" variant="p">
           {age} v. <StyledDivider>|</StyledDivider> {region}
         </WrappedText>
-        <Text color="white" variant="p">
-          {isAvailable}
-        </Text>
-        <TruncateText>{message}</TruncateText>
+        <TruncateText color="white">{message}</TruncateText>
       </BasicInfo>
     </StyledHeader>
   );
 };
+
+const NameText = styled(Text)`
+  margin-top: 0;
+  margin-bottom: 0;
+`;
 
 const StyledHeader = styled.div<{ isAvailable: boolean }>`
   flex: 0 0 auto;
@@ -90,11 +92,11 @@ const StyledHeader = styled.div<{ isAvailable: boolean }>`
 
 const ProfilePicture = styled.div`
   background-image: url(${ProfilePicPlaceholder});
-  width: 3.75rem;
-  height: 3.75rem;
+  width: 4rem;
+  height: 4rem;
   background-size: contain;
   background-repeat: no-repeat;
-  flex: 0 0 3.75rem;
+  flex: 0 0 4rem;
 `;
 
 const BasicInfo = styled.div`

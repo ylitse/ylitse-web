@@ -4,11 +4,6 @@ import SearchBar from '../../../../components/SearchBar';
 import { selectSearchString, changeSearchString } from '../mentorsFilterSlice';
 import { useAppDispatch, useAppSelector } from '../../../../store';
 
-/**
- * Div under the "Mentorit" -header where info about mentorsearch
- * is shown, also contains searchBar in separate MentorSearch component
- */
-
 const placeholder = 'Etsi mentoria';
 export const MentorSearch = () => {
   const searchString = useAppSelector(selectSearchString);
@@ -23,7 +18,7 @@ export const MentorSearch = () => {
       <InfoText>
         Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit
         listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita
-        ongelmasi perusteella
+        ongelmasi perusteella.
       </InfoText>
       <SearchBar
         placeholder={placeholder}

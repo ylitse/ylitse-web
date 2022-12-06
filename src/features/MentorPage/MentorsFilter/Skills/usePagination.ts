@@ -7,7 +7,7 @@ type Pagination = {
   currentPage: number;
 };
 
-export const DOTS = '...';
+export const THREE_DOTS = '...';
 
 const range = (start: number, end: number) => {
   const length = end - start + 1;
@@ -39,18 +39,24 @@ export const usePagination = ({
       const leftItemCount = 1 + 2 * siblingCount;
       const leftRange = range(1, leftItemCount);
 
-      return [...leftRange, DOTS, totalPages];
+      return [...leftRange, THREE_DOTS, totalPages];
     }
 
     if (shouldShowLeftDots && !shouldShowRightDots) {
       const rightItemCount = 1 + 2 * siblingCount;
       const rightRange = range(totalPages - rightItemCount + 1, totalPages);
-      return [firstPageIndex, DOTS, ...rightRange];
+      return [firstPageIndex, THREE_DOTS, ...rightRange];
     }
 
     if (shouldShowLeftDots && shouldShowRightDots) {
       const middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [firstPageIndex, DOTS, ...middleRange, DOTS, totalPages];
+      return [
+        firstPageIndex,
+        THREE_DOTS,
+        ...middleRange,
+        THREE_DOTS,
+        totalPages,
+      ];
     }
   }, [totalCount, pageSize, siblingCount, currentPage]);
 

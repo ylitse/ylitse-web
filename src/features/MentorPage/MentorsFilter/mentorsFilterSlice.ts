@@ -42,5 +42,6 @@ export const selectSelectedSkills = ({ mentorsFilter }: RootState) =>
 
 export const selectSearchString = ({ mentorsFilter }: RootState) =>
   mentorsFilter.searchString;
+
 export const { changeSearchString, toggleSkill, resetFilters } =
   mentorsFilter.actions;
