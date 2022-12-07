@@ -153,7 +153,10 @@ input:focus {
 .field-info {
   padding: 10px 20px;
   margin-top: 13px; /* blue/dark blue */
-  border-left: 14px #4a2acb solid;
+  position: relative;
+  left: 10px; /* to adjust for the box shadow  */
+  box-shadow: -10px 0px #01a5ec;
+  border-left: 6px white solid;
   background-color: #e4f3fb;
 }
 
