@@ -35,7 +35,7 @@ const IconButton = <T extends ElementType = 'button'>({
   variant = 'close',
   ...rest
 }: ButtonProps<T>): JSX.Element => {
-  return <StyledIconButton variant={variant} {...rest} />;
+  return <StyledIconButton variant={variant} {...rest} aria-label={variant} />;
 };
 
 const variantOptions = {

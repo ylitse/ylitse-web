@@ -5,16 +5,20 @@ import * as cssVariables from '../variables';
 
 type SearchProps = {
   placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
 };
 
-const SearchBar: React.FC<SearchProps> = ({ placeholder }) => {
-  return (
-    <SearchBox>
-      <SearchIcon />
-      <SearchInput type="text" placeholder={placeholder}></SearchInput>
-    </SearchBox>
-  );
-};
+const SearchBar: React.FC<SearchProps> = ({ onChange, ...props }) => (
+  <SearchBox>
+    <SearchIcon />
+    <SearchInput
+      type="text"
+      {...props}
+      onChange={e => onChange(e.target.value)}
+    ></SearchInput>
+  </SearchBox>
+);
 
 const SearchInput = styled.input`
   flex: 1;

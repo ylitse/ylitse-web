@@ -1,17 +1,31 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import loadingReducer from '@/features/Loading/loadingSlice';
+import {
+  configureStore,
+  combineReducers,
+  PreloadedState,
+} from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
+import { mentorsApi } from './features/MentorPage/mentorPageApi';
+import { mentorsFilter } from './features/MentorPage/MentorsFilter/mentorsFilterSlice';
 
-export const store = configureStore({
-  reducer: {
-    loading: loadingReducer,
-  },
+const rootReducer = combineReducers({
+  [mentorsApi.reducerPath]: mentorsApi.reducer,
+  [mentorsFilter.name]: mentorsFilter.reducer,
 });
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({ immutableCheck: true }).concat(
+        mentorsApi.middleware,
+      ),
+  });
+};
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];
+export const useAppDispatch: () => AppDispatch = useDispatch; // Export a hook that can be reused to resolve types
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

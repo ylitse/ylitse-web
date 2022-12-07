@@ -1,12 +1,14 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import * as cssVariables from '../variables';
 import styled from 'styled-components';
+import { variants } from './variants';
 
 export type ButtonColorVariant = 'light' | 'dark' | 'disabled';
 
 type ButtonProps<T extends ElementType> = {
   children: ReactNode;
   variant?: ButtonColorVariant;
+  className?: string;
 } & ComponentPropsWithoutRef<T>;
 
 const TextButton = <T extends ElementType = 'button'>({
@@ -21,54 +23,6 @@ const TextButton = <T extends ElementType = 'button'>({
   );
 };
 
-const variantOptions = {
-  dark: {
-    backgroundColor: cssVariables.palette.purple,
-    color: cssVariables.palette.orange,
-    ['&: hover']: {
-      backgroundColor: cssVariables.palette.darkpurple,
-    },
-    ['&: focus']: {
-      outline: `1px solid ${cssVariables.palette.purple}`,
-      outlineOffset: '3px',
-    },
-    ['&: active, &: visited']: {
-      backgroundColor: cssVariables.palette.midpurple,
-      color: cssVariables.palette.orange2,
-      outline: 'none',
-    },
-  },
-  light: {
-    border: `2px solid ${cssVariables.palette.purple}`,
-    backgroundColor: cssVariables.palette.white,
-    color: cssVariables.palette.purple,
-    ['&: hover']: {
-      border: `2px solid ${cssVariables.palette.darkpurple}`,
-      color: cssVariables.palette.darkpurple,
-      outline: `none`,
-    },
-    ['&: focus']: {
-      outline: 'none',
-    },
-    ['&: active, &: visited']: {
-      outline: 'none',
-    },
-  },
-  disabled: {
-    backgroundColor: cssVariables.palette.midgray,
-    color: cssVariables.palette.fadedgray,
-    ['&: hover']: {
-      outline: `none`,
-    },
-    ['&: focus']: {
-      outline: 'none',
-    },
-    ['&: active, &: visited']: {
-      outline: 'none',
-    },
-  },
-};
-
 const StyledTextButton = styled.button<{ variant: ButtonColorVariant }>`
   ${cssVariables.basicBalooText}
   border: none;
@@ -76,13 +30,13 @@ const StyledTextButton = styled.button<{ variant: ButtonColorVariant }>`
   padding: ${cssVariables.spacing.small_button_padding};
   margin-bottom: 4px;
   border-radius: 1.25rem;
-  position: relative;
-  left: 50%;
   bottom: ${cssVariables.spacing.layout_spacing};
-  transform: translateX(-50%);
   width: fit-content;
   cursor: pointer;
-  ${({ variant }) => variant && variantOptions[variant]}
+  &:hover {
+    opacity: 0.7;
+  }
+  ${({ variant }) => variants[variant]}
 `;
 
 export default TextButton;

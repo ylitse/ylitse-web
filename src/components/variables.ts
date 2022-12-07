@@ -18,6 +18,7 @@ export const palette = {
   warningred: '#972232',
   white: '#fff',
   midgray: '#DBDBDB',
+  spinnerBackgrond: '#DDEBE9',
   fadedgray: '#616161',
   blurbackground: 'rgba(57, 57, 57, 0.75)',
 };

@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Navigation from '@/features/Navigation';
-import Footer from '@/features/Footer';
+import Footer from '@/components/Footer';
 import MentorPage from '@/features/MentorPage';
 
 function App() {
