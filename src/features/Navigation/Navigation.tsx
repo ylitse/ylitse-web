@@ -48,7 +48,7 @@ const NavigationBar = () => {
       <NavBarItems>
         <NavigationItems items={navigationItems} />
         <Dropdown items={dropDownItems} />
-        <NavLink to="/logout" className="navbar-link">
+        <NavLink id="logout-link" to="/logout" className="navbar-link">
           <div>Kirjaudu ulos</div>
         </NavLink>
       </NavBarItems>

@@ -6,9 +6,13 @@ describe('login', () => {
     cy.contains('Tarkista syöttämäsi tiedot.').should('be.visible');
   };
 
-  const clickLogin = () => {
+  const clickLogin = (): void => {
     cy.get('form > .button').click();
   };
+
+  before(() => {
+    cy.registerUser('loginTestUsername', 'examplePassword');
+  });
 
   beforeEach(() => {
     cy.visit('/login');
@@ -47,10 +51,8 @@ describe('login', () => {
     testErrorVisible();
   });
 
-  it('can log in with registered account', () => {
-    cy.registerUser('exampleUsername', 'examplePassword');
-    cy.location('pathname').should('contain', '/login');
-    cy.fillInput('username', 'exampleUsername');
+  it('can log in and out with registered account', () => {
+    cy.fillInput('username', 'loginTestUsername');
     cy.fillInput('password', 'examplePassword');
     clickLogin();
     cy.location('pathname').should('eq', '/');

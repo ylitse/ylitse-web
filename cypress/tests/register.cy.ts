@@ -28,7 +28,7 @@ describe('register', () => {
   });
 
   it('registers new user if form is correctly filled', () => {
-    cy.registerUser('takenUsername', 'examplePassword');
+    cy.registerUser('registerTestUsername', 'examplePassword');
     cy.location('pathname').should('contain', '/login');
   });
 
@@ -45,7 +45,7 @@ describe('register', () => {
   });
 
   it('shows error message if username is taken', () => {
-    cy.fillInput('username', 'takenUsername');
+    cy.fillInput('username', 'registerTestUsername');
     cy.contains('Käyttäjätunnus on jo käytössä').should('be.visible');
   });
 
