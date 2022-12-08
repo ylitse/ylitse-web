@@ -4,10 +4,11 @@ import { useEffect } from 'react';
 const Logout = () => {
   useEffect(() => {
     const logoutSession = async () => {
-      sessionStorage.setItem('user', '');
       try {
-        await fetch('/api/logout');
-        window.location.href = '/login';
+        const response = await fetch('/api/logout');
+        if (response.ok) {
+          window.location.href = '/login';
+        }
       } catch (error) {
         console.error(error);
       }
