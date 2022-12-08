@@ -1,5 +1,5 @@
-import Spinner from '@/components/Spinner';
 import { useEffect } from 'react';
+import Spinner from '@/components/Spinner';
 
 const Logout = () => {
   useEffect(() => {

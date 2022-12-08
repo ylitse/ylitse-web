@@ -21,7 +21,6 @@
           throw new TypeError("Couldn't log in.");
         })
         .then(function (data) {
-          sessionStorage.setItem('user', 'token');
           window.location.href = '/';
         })
         .catch(function (error) {
