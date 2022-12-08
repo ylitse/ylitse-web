@@ -13,24 +13,28 @@ function App() {
       if (response.redirected) {
         // If there is no active session, the user is redirected to the login page
         window.location.href = response.url;
-      } else {
+      } else if (response.ok) {
         setAuthenticated(true);
+      } else {
+        window.location.href = '/login';
       }
     };
     authenticateUser();
   }, []);
 
-  return authenticated ? (
+  return (
     <>
-      <Navigation />
-      <Routes>
-        <Route path="/mentors" element={<MentorPage />} />
-        <Route path="/logout" element={<Logout />} />
-      </Routes>
-      <Footer />
+      {authenticated && (
+        <div>
+          <Navigation />
+          <Routes>
+            <Route path="/mentors" element={<MentorPage />} />
+            <Route path="/logout" element={<Logout />} />
+          </Routes>
+          <Footer />
+        </div>
+      )}
     </>
-  ) : (
-    <></>
   );
 }
 
