@@ -31,8 +31,12 @@ const LoadingCircle = styled.div<{ variant: Variant }>`
       height: ${diameter}rem; 
       width: ${diameter}rem; 
       border: ${border};
+      margin-top: ${diameter / 2}rem;
+      margin-bottom: ${diameter / 2}rem;
       `;
   }}
+  margin-right: auto;
+  margin-left: auto;
   border-radius: 50%;
   border-left-color: ${palette.spinnerBackgrond};
   border-bottom-color: ${palette.spinnerBackgrond};

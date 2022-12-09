@@ -23,9 +23,20 @@ Cypress.Commands.add(
   },
 );
 
+Cypress.Commands.add(
+  'loginUser',
+  (username: string, password: string): void => {
+    cy.visit('/login');
+    cy.fillInput('username', username);
+    cy.fillInput('password', password);
+    cy.get('form > .button').click();
+  },
+);
+
 declare namespace Cypress {
   interface Chainable {
     fillInput(id: string, value: string): Chainable<void>;
     registerUser(username: string, password: string): Chainable<void>;
+    loginUser(username: string, password: string): Chainable<void>;
   }
 }
