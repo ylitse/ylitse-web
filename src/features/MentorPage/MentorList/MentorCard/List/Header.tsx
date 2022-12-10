@@ -46,6 +46,7 @@ const NameText = styled(Text)`
 `;
 
 const StyledHeader = styled.div<{ isAvailable: boolean }>`
+  position: relative;
   flex: 0 0 auto;
   display: flex;
   align-items: center;
@@ -59,35 +60,6 @@ const StyledHeader = styled.div<{ isAvailable: boolean }>`
   border-radius: 0.75rem;
   padding: 1.9rem;
   box-sizing: border-box;
-  position: relative;
-  max-width: calc(
-    ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 3) -
-      (${cssVariables.spacing.layout_spacing} * 2)
-  );
-  @media screen and (min-width: 2100px) {
-    max-width: calc(
-      ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 4) -
-        (${cssVariables.spacing.layout_spacing} * 2)
-    );
-  }
-  @media screen and (min-width: 2550px) {
-    max-width: calc(
-      ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 5) -
-        (${cssVariables.spacing.layout_spacing} * 2)
-    );
-  }
-  @media screen and (max-width: 1500px) {
-    max-width: calc(
-      ((1130px + (${cssVariables.spacing.layout_spacing} * 2)) / 3) -
-        (${cssVariables.spacing.layout_spacing} * 2)
-    );
-  }
-  @media screen and (max-width: 1194px) {
-    max-width: calc((100vw / 3) - (${cssVariables.spacing.layout_spacing} * 2));
-  }
-  @media screen and (max-width: 900px) {
-    max-width: calc((100vw / 2) - (${cssVariables.spacing.layout_spacing} * 2));
-  }
 `;
 
 const ProfilePicture = styled.div`

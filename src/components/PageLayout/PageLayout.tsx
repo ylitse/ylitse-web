@@ -1,19 +1,22 @@
 import styled from 'styled-components';
 import React from 'react';
 import * as cssVariables from '../variables';
-
-/**
- * Basic page layout that gives margins for any containers created to page
- */
+import { useMobileMode } from '@/hooks/useMobileMode';
 
 type PageLayoutProps = {
   children: React.ReactNode;
 };
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
+  const isMobile = useMobileMode();
+
   return (
     <BasicPageElement>
-      <PageContent>{children}</PageContent>
+      {isMobile ? (
+        children
+      ) : (
+        <PageContent isMobile={isMobile}>{children}</PageContent>
+      )}
     </BasicPageElement>
   );
 };
@@ -30,9 +33,8 @@ const BasicPageElement = styled.div`
   flex-direction: column;
 `;
 
-const PageContent = styled.div`
-  background-color: transparent;
-  position: relative;
+const PageContent = styled.div<{ isMobile: boolean }>`
+  ${({ isMobile }) => isMobile && `flex: 1;`}
   max-width: 76vw;
   height: auto;
   margin: auto;
