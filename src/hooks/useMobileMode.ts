@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const MOBILE_WIDTH_TRESHOLD = 768;
+const MOBILE_WIDTH_TRESHOLD = 700;
 export const useMobileMode = () => {
   const [width, setWidth] = useState<number>(window.innerWidth);
 

@@ -41,6 +41,9 @@ export const Header: React.FC<Props> = ({
 };
 
 const NameText = styled(Text)`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   margin-top: 0;
   margin-bottom: 0;
 `;
