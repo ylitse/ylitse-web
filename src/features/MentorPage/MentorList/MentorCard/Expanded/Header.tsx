@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ProfilePicPlaceholder from '../../../../../static/img/icon-chat-profilepic.svg';
 import * as cssVariables from '../../../../../components/variables';
 import { BasicInfo } from './BasicInfo';
 import { Mentor } from '../../../mentorPageApi';
+import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {
   mentor: Mentor;
@@ -10,59 +11,84 @@ type Props = {
 
 export const Header = ({ mentor }: Props) => {
   const availabilityMessage = mentor.isVacationing ? 'Ei tavoitettavissa' : '';
+  const isMobile = useMobileMode();
 
-  return (
-    <MentorCardHeaderContainer isLoggedIn={!mentor.isVacationing}>
-      <Availability isShowing={availabilityMessage != ''} isNew={false}>
+  return isMobile ? (
+    <Container isLoggedIn={!mentor.isVacationing}>
+      <HeaderWrapper>
+        <AvatarWrapper>
+          <Availability isShowing={availabilityMessage.length > 0} isMobile>
+            {availabilityMessage}
+          </Availability>
+          <ProfilePicture isMobile />
+        </AvatarWrapper>
+        <BasicInfo mentor={mentor} />
+      </HeaderWrapper>
+    </Container>
+  ) : (
+    <Container isLoggedIn={!mentor.isVacationing}>
+      <Availability isShowing={availabilityMessage.length > 0} isMobile={false}>
         {availabilityMessage}
       </Availability>
-      <ProfilePicture />
+      <ProfilePicture isMobile={false} />
       <BasicInfo mentor={mentor} />
-    </MentorCardHeaderContainer>
+    </Container>
   );
 };
 
-const MentorCardHeaderContainer = styled.div<{ isLoggedIn: boolean }>`
+const Container = styled.div<{ isLoggedIn: boolean }>`
   flex: 0 0 21vw;
-  min-height: 57vh;
-  width: 21vw;
   border-radius: 10px;
-  position: relative;
-  top: 0;
-  left: 0;
   background-color: ${props =>
     props.isLoggedIn
       ? cssVariables.palette.purple
       : cssVariables.palette.bluegrey};
 `;
 
-const ProfilePicture = styled.div`
+const ProfilePicture = styled.div<{ isMobile: boolean }>`
   background-image: url(${ProfilePicPlaceholder});
-  width: 10vw;
-  height: 10vw;
   background-size: contain;
   background-repeat: no-repeat;
-  flex: 0 0 10vw;
-  position: relative;
-  top: 3vw;
-  left: 50%;
-  transform: translateX(-50%);
+
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          width: 20vw;
+          height: 20vw;
+          margin: 2rem 1rem;
+        `
+      : css`
+          width: 10vw;
+          height: 10vw;
+          flex: 0 0 10vw;
+          margin: 2rem auto;
+        `}
 `;
 
-const Availability = styled.div<{ isShowing: boolean; isNew: boolean }>`
+const Availability = styled.div<{ isShowing: boolean; isMobile: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
-  background-color: ${props =>
-    props.isNew ? cssVariables.palette.orange : cssVariables.palette.whiteblue};
+  background-color: ${cssVariables.palette.whiteblue};
   color: ${cssVariables.palette.darkblue};
-  position: absolute;
-  top: 0;
-  left: 50%;
   ${cssVariables.basicSourceSansText};
   font-weight: 600;
   font-size: 1rem;
   line-height: 150%;
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
-  transform: translate(-50%, -50%);
   width: fit-content;
+  ${({ isMobile }) =>
+    isMobile
+      ? css`margin -1rem 1rem;`
+      : css`
+          margin: -1rem auto;
+        `}
+`;
+
+const HeaderWrapper = styled.div`
+  display: flex;
+`;
+
+const AvatarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

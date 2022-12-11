@@ -78,9 +78,6 @@ const variantOptions = {
 };
 
 const StyledIconButton = styled.button<{ variant: ButtonIcon }>`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
   background-size: contain;
   background-repeat: no-repeat;
   height: 2rem;

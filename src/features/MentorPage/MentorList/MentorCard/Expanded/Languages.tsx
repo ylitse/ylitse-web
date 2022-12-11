@@ -1,14 +1,20 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { SimpleChip } from '../../../../../components/Chip';
 import { Text } from '../../../../../components/Text/Text';
 
-export const Languages = ({ languages }: { languages: Array<string> }) => {
+export const Languages = ({
+  languages,
+  isMobile,
+}: {
+  languages: Array<string>;
+  isMobile: boolean;
+}) => {
   return (
     <>
-      <StyledText color="white" variant="p">
+      <StyledText variant="h3" color={isMobile ? 'darkpurple' : 'white'}>
         Puhun näitä kieliä
       </StyledText>
-      <SkillChips>
+      <SkillChips isMobile={isMobile}>
         {languages.map(item => (
           <SimpleChip key={item} text={item} />
         ))}
@@ -17,17 +23,21 @@ export const Languages = ({ languages }: { languages: Array<string> }) => {
   );
 };
 
-const SkillChips = styled.div`
+const SkillChips = styled.div<{ isMobile: boolean }>`
   flex: 0 0 auto;
   width: 100%;
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   position: relative;
   height: fit-content;
   max-height: 7rem;
   margin-top: 0.5rem;
+  ${({ isMobile }) =>
+    !isMobile &&
+    css`
+      justify-content: center;
+    `}
 `;
 
 const StyledText = styled(Text)`

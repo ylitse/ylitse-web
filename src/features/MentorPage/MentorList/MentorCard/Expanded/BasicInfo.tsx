@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Text } from '../../../../../components/Text/Text';
 import { Languages } from './Languages';
 import { Mentor } from '../../../mentorPageApi';
 import * as cssVariables from '../../../../../components/variables';
+import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {
   mentor: Mentor;
@@ -11,12 +12,14 @@ type Props = {
 export const BasicInfo = ({
   mentor: { name, age, region, isVacationing, statusMessage, languages },
 }: Props) => {
+  const isMobile = useMobileMode();
+
   return (
-    <Container>
-      <Text color="white" variant="h2">
+    <Container isMobile={isMobile}>
+      <Text color="white" variant={isMobile ? 'h1' : 'h2'}>
         {name}
       </Text>
-      <NameDivider />
+      {!isMobile && <NameDivider />}
       <WrappedText color="white" variant="p">
         {age} v. <StyledDivider>|</StyledDivider> {region}
       </WrappedText>
@@ -24,22 +27,27 @@ export const BasicInfo = ({
         {!isVacationing}
       </Text>
       <TruncateText>{statusMessage}</TruncateText>
-      <Languages languages={languages} />
+      {!isMobile && <Languages languages={languages} isMobile={isMobile} />}
     </Container>
   );
 };
 
-const Container = styled.div`
-  position: absolute;
-  margin-left: 50%;
-  top: 16vw;
-  transform: translateX(-50%);
+const Container = styled.div<{ isMobile: boolean }>`
   display: flex;
   flex-direction: column;
-  align-items: center;
   flex: 0 0 100%;
   max-width: 70%;
   box-sizing: border-box;
+  margin: 0 auto;
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          align-items: flex-start;
+          justify-content: center;
+        `
+      : css`
+          align-items: center;
+        `}
 `;
 
 const NameDivider = styled.div`
