@@ -1,10 +1,11 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Text } from '../../../../../components/Text/Text';
 import { Skills } from './Skills';
 import { TextButton } from '../../../../../components/Buttons';
 import { Mentor } from '../../../mentorPageApi';
 import { Languages } from './Languages';
 import { useMobileMode } from '@/hooks/useMobileMode';
+import { breakpoints } from '@/components/variables';
 
 type Props = {
   mentor: Mentor;
@@ -23,7 +24,7 @@ export const Content = ({ mentor: { skills, story, languages } }: Props) => {
       <Text variant="p">{story}</Text>
       {isMobile && <Languages languages={languages} isMobile={isMobile} />}
       <Skills skills={skills} />
-      <OpenConversationButton onClick={handleClick} isMobile={isMobile}>
+      <OpenConversationButton onClick={handleClick}>
         Avaa keskustelu
       </OpenConversationButton>
     </Container>
@@ -37,13 +38,12 @@ const Container = styled.div`
   padding: 2rem;
 `;
 
-const OpenConversationButton = styled(TextButton)<{ isMobile: boolean }>`
+const OpenConversationButton = styled(TextButton)`
   bottom: 0;
   margin-top: auto;
   align-self: center;
-  ${({ isMobile }) =>
-    isMobile &&
-    css`
-      padding: 0.75rem 3rem;
-    `}
+
+  @media screen and (max-width: ${breakpoints.mobile}) {
+    padding: 0.75rem 3rem;
+  }
 `;

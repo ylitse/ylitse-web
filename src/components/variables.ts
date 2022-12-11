@@ -24,8 +24,9 @@ export const palette = {
 };
 
 //breakpoints
+export const MOBILE_TRESHOLD = 600;
 export const breakpoints = {
-  mobile: '600px',
+  mobile: `${MOBILE_TRESHOLD}px`,
 };
 
 //spacing

@@ -5,6 +5,7 @@ import { IconButton } from '../../../../../components/Buttons';
 import * as cssVariables from '../../../../../components/variables';
 import { Mentor } from '../../../mentorPageApi';
 import { useMobileMode } from '@/hooks/useMobileMode';
+import { breakpoints } from '@/components/variables';
 
 type Props = {
   onDismiss: () => void;
@@ -15,14 +16,10 @@ export const MentorCard = ({ mentor, onDismiss }: Props) => {
   const isMobile = useMobileMode();
 
   return (
-    <Container isMobile={isMobile}>
+    <Container>
       <Card isMobile={isMobile}>
         <Header mentor={mentor} />
-        <CloseButton
-          variant="close"
-          onClick={onDismiss}
-          isMobile={isMobile}
-        ></CloseButton>
+        <CloseButton variant="close" onClick={onDismiss}></CloseButton>
         <Content mentor={mentor} />
       </Card>
     </Container>
@@ -34,6 +31,7 @@ const Card = styled.div<{ isMobile: boolean }>`
   opacity: 1;
   border-radius: 10px;
   z-index: 100;
+
   ${({ isMobile }) =>
     isMobile
       ? css`
@@ -56,39 +54,33 @@ const Card = styled.div<{ isMobile: boolean }>`
         `}
 `;
 
-const Container = styled.div<{ isMobile: boolean }>`
+const Container = styled.div`
   background-color: ${cssVariables.palette.blurbackground};
   z-index: 10;
   position: fixed;
-  ${({ isMobile }) =>
-    isMobile
-      ? css`
-          display: flex;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        `
-      : css`
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-        `}
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  @media screen and (max-width: ${breakpoints.mobile}) {
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
-const CloseButton = styled(IconButton)<{ isMobile: boolean }>`
+const CloseButton = styled(IconButton)`
   position: absolute;
-  ${({ isMobile }) =>
-    isMobile
-      ? css`
-          top: 3rem;
-          right: 3rem;
-          height: 3rem;
-          width: 3rem;
-        `
-      : css`
-          top: 1rem;
-          right: 1rem;
-        `}
+  top: 1rem;
+  right: 1rem;
+
+  @media screen and (max-width: ${breakpoints.mobile}) {
+    top: 3rem;
+    right: 3rem;
+    height: 3rem;
+    width: 3rem;
+  }
 `;

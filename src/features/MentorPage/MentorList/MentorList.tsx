@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import * as cssVariables from '../../../components/variables';
+import { spacing } from '../../../components/variables';
 import ListCard from './MentorCard/List';
 import { Mentor } from '../mentorPageApi';
 import { useMobileMode } from '../../../hooks/useMobileMode';
@@ -45,14 +45,15 @@ const CardsList = styled.div<{ isMobile: boolean }>`
           flex-wrap: wrap;
           justify-content: stretch;
           height: auto;
-          width: calc(76vw + (${cssVariables.spacing.layout_spacing} * 2));
-          margin-top: ${cssVariables.spacing.layout_spacing};
-          margin-left: calc(${cssVariables.spacing.layout_spacing} * -1);
-          @media screen and (max-width: 1500px) {
-            width: calc(1130px + (${cssVariables.spacing.layout_spacing} * 2));
-            max-width: 100vw;
-          }
+          width: calc(76vw + (${spacing.layout_spacing} * 2));
+          margin-top: ${spacing.layout_spacing};
+          margin-left: calc(${spacing.layout_spacing} * -1);
         `}
+
+  @media screen and (max-width: 1500px) {
+    width: calc(1130px + (${spacing.layout_spacing} * 2));
+    max-width: 100vw;
+  }
 `;
 
 export default MentorList;

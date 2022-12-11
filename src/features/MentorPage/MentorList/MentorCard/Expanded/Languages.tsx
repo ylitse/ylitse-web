@@ -1,6 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { SimpleChip } from '../../../../../components/Chip';
 import { Text } from '../../../../../components/Text/Text';
+import { breakpoints } from '@/components/variables';
 
 export const Languages = ({
   languages,
@@ -14,7 +15,7 @@ export const Languages = ({
       <StyledText variant="h3" color={isMobile ? 'darkpurple' : 'white'}>
         Puhun näitä kieliä
       </StyledText>
-      <SkillChips isMobile={isMobile}>
+      <SkillChips>
         {languages.map(item => (
           <SimpleChip key={item} text={item} />
         ))}
@@ -23,7 +24,7 @@ export const Languages = ({
   );
 };
 
-const SkillChips = styled.div<{ isMobile: boolean }>`
+const SkillChips = styled.div`
   flex: 0 0 auto;
   width: 100%;
   overflow: hidden;
@@ -33,11 +34,11 @@ const SkillChips = styled.div<{ isMobile: boolean }>`
   height: fit-content;
   max-height: 7rem;
   margin-top: 0.5rem;
-  ${({ isMobile }) =>
-    !isMobile &&
-    css`
-      justify-content: center;
-    `}
+  justify-content: center;
+
+  @media screen and (max-width: ${breakpoints.mobile}) {
+    justify-content: flex-start;
+  }
 `;
 
 const StyledText = styled(Text)`

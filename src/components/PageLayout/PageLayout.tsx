@@ -12,11 +12,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
 
   return (
     <BasicPageElement>
-      {isMobile ? (
-        children
-      ) : (
-        <PageContent isMobile={isMobile}>{children}</PageContent>
-      )}
+      {isMobile ? children : <PageContent>{children}</PageContent>}
     </BasicPageElement>
   );
 };
@@ -33,8 +29,7 @@ const BasicPageElement = styled.div`
   flex-direction: column;
 `;
 
-const PageContent = styled.div<{ isMobile: boolean }>`
-  ${({ isMobile }) => isMobile && `flex: 1;`}
+const PageContent = styled.div`
   max-width: 76vw;
   height: auto;
   margin: auto;
@@ -45,6 +40,10 @@ const PageContent = styled.div<{ isMobile: boolean }>`
   @media screen and (max-width: 1500px) {
     width: 1130px;
     max-width: calc(100vw - (${cssVariables.spacing.layout_spacing} * 2));
+  }
+
+  @media screen and (max-width: ${cssVariables.breakpoints.mobile}) {
+    flex: 1;
   }
 `;
 

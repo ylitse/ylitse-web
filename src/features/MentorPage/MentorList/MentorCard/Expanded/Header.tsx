@@ -1,6 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import ProfilePicPlaceholder from '../../../../../static/img/icon-chat-profilepic.svg';
-import * as cssVariables from '../../../../../components/variables';
+import {
+  breakpoints,
+  palette,
+  basicSourceSansText,
+} from '../../../../../components/variables';
 import { BasicInfo } from './BasicInfo';
 import { Mentor } from '../../../mentorPageApi';
 import { useMobileMode } from '@/hooks/useMobileMode';
@@ -17,7 +21,7 @@ export const Header = ({ mentor }: Props) => {
     <Container isLoggedIn={!mentor.isVacationing}>
       <HeaderWrapper>
         <AvatarWrapper>
-          <Availability isShowing={availabilityMessage.length > 0} isMobile>
+          <Availability isShowing={availabilityMessage.length > 0}>
             {availabilityMessage}
           </Availability>
           <ProfilePicture isMobile />
@@ -27,7 +31,7 @@ export const Header = ({ mentor }: Props) => {
     </Container>
   ) : (
     <Container isLoggedIn={!mentor.isVacationing}>
-      <Availability isShowing={availabilityMessage.length > 0} isMobile={false}>
+      <Availability isShowing={availabilityMessage.length > 0}>
         {availabilityMessage}
       </Availability>
       <ProfilePicture isMobile={false} />
@@ -40,48 +44,42 @@ const Container = styled.div<{ isLoggedIn: boolean }>`
   flex: 0 0 21vw;
   border-radius: 10px;
   background-color: ${props =>
-    props.isLoggedIn
-      ? cssVariables.palette.purple
-      : cssVariables.palette.bluegrey};
+    props.isLoggedIn ? palette.purple : palette.bluegrey};
 `;
 
 const ProfilePicture = styled.div<{ isMobile: boolean }>`
   background-image: url(${ProfilePicPlaceholder});
   background-size: contain;
   background-repeat: no-repeat;
+  width: 10vw;
+  height: 10vw;
+  flex: 0 0 10vw;
+  margin: 2rem auto;
 
-  ${({ isMobile }) =>
-    isMobile
-      ? css`
-          width: 20vw;
-          height: 20vw;
-          margin: 2rem 1rem;
-        `
-      : css`
-          width: 10vw;
-          height: 10vw;
-          flex: 0 0 10vw;
-          margin: 2rem auto;
-        `}
+  @media screen and (max-width: ${breakpoints.mobile}) {
+    width: 20vw;
+    height: 20vw;
+    margin: 2rem 1rem;
+    flex: 1;
+  }
 `;
 
-const Availability = styled.div<{ isShowing: boolean; isMobile: boolean }>`
+const Availability = styled.div<{ isShowing: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
-  background-color: ${cssVariables.palette.whiteblue};
-  color: ${cssVariables.palette.darkblue};
-  ${cssVariables.basicSourceSansText};
+  background-color: ${palette.whiteblue};
+  color: ${palette.darkblue};
+  ${basicSourceSansText};
   font-weight: 600;
   font-size: 1rem;
   line-height: 150%;
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
   width: fit-content;
-  ${({ isMobile }) =>
-    isMobile
-      ? css`margin -1rem 1rem;`
-      : css`
           margin: -1rem auto;
-        `}
+
+  @media screen and (max-width: ${breakpoints.mobile}) {
+margin -1rem 1rem;
+  }
 `;
 
 const HeaderWrapper = styled.div`

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
+import { MOBILE_TRESHOLD } from '@/components/variables';
 
-const MOBILE_WIDTH_TRESHOLD = 700;
 export const useMobileMode = () => {
   const [width, setWidth] = useState<number>(window.innerWidth);
 
@@ -13,7 +13,7 @@ export const useMobileMode = () => {
     };
   }, []);
 
-  const isMobile = width <= MOBILE_WIDTH_TRESHOLD;
+  const isMobile = width <= MOBILE_TRESHOLD;
 
   return isMobile;
 };

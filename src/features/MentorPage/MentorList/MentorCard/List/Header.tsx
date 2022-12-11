@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../../../components/variables';
+import {
+  palette,
+  basicSourceSansText,
+} from '../../../../../components/variables';
 import ProfilePicPlaceholder from '../../../../../static/img/icon-chat-profilepic.svg';
 import { WrappedText, TruncateText } from '../Expanded/BasicInfo';
 import { Text } from '../../../../../components/Text/Text';
@@ -56,10 +59,8 @@ const StyledHeader = styled.div<{ isAvailable: boolean }>`
   height: 7.5rem;
   max-height: 7.5rem;
   background-color: ${props =>
-    props.isAvailable
-      ? cssVariables.palette.purple
-      : cssVariables.palette.bluegrey};
-  color: ${cssVariables.palette.white};
+    props.isAvailable ? palette.purple : palette.bluegrey};
+  color: ${palette.white};
   border-radius: 0.75rem;
   padding: 1.9rem;
   box-sizing: border-box;
@@ -90,12 +91,12 @@ const StyledDivider = styled.span`
 
 const Availability = styled.div<{ isShowing: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
-  background-color: ${cssVariables.palette.whiteblue};
-  color: ${cssVariables.palette.darkblue};
+  background-color: ${palette.whiteblue};
+  color: ${palette.darkblue};
   position: absolute;
   top: 0;
   right: 0;
-  ${cssVariables.basicSourceSansText};
+  ${basicSourceSansText};
   font-weight: 600;
   font-size: 1rem;
   line-height: 150%;
