@@ -17,5 +17,5 @@ export const ExpandButton = ({ setVisibleCard, mentor }: Props) => (
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  z-index: 10;
+  z-index: 2;
 `;

@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { Text } from '../../../../../components/Text/Text';
 import { Languages } from './Languages';
 import { Mentor } from '../../../mentorPageApi';
-import * as cssVariables from '../../../../../components/variables';
+import { breakpoints, palette } from '../../../../../components/variables';
+import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {
   mentor: Mentor;
@@ -11,12 +12,14 @@ type Props = {
 export const BasicInfo = ({
   mentor: { name, age, region, isVacationing, statusMessage, languages },
 }: Props) => {
+  const isMobile = useMobileMode();
+
   return (
     <Container>
-      <Text color="white" variant="h2">
+      <Text color="white" variant={isMobile ? 'h1' : 'h2'}>
         {name}
       </Text>
-      <NameDivider />
+      {!isMobile && <NameDivider />}
       <WrappedText color="white" variant="p">
         {age} v. <StyledDivider>|</StyledDivider> {region}
       </WrappedText>
@@ -24,28 +27,30 @@ export const BasicInfo = ({
         {!isVacationing}
       </Text>
       <TruncateText>{statusMessage}</TruncateText>
-      <Languages languages={languages} />
+      {!isMobile && <Languages languages={languages} isMobile={isMobile} />}
     </Container>
   );
 };
 
 const Container = styled.div`
-  position: absolute;
-  margin-left: 50%;
-  top: 16vw;
-  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  align-items: center;
   flex: 0 0 100%;
   max-width: 70%;
   box-sizing: border-box;
+  margin: 0 auto;
+  align-items: center;
+
+  @media screen and (max-width: ${breakpoints.mobile}) {
+    align-items: flex-start;
+    justify-content: center;
+  }
 `;
 
 const NameDivider = styled.div`
   width: 16vw;
   height: 2px;
-  border-bottom: 1px solid ${cssVariables.palette.white};
+  border-bottom: 1px solid ${palette.white};
   margin-top: 0.25rem;
   margin-bottom: 0.5rem;
 `;
@@ -72,6 +77,6 @@ export const TruncateText = styled(Text)`
   fontweight: 400;
   fontsize: 1rem;
   lineheight: 1.5rem;
-  color: ${cssVariables.palette.white};
+  color: ${palette.white};
   textalign: center;
 `;

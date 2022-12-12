@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../../../components/variables';
+import {
+  palette,
+  basicSourceSansText,
+} from '../../../../../components/variables';
 import ProfilePicPlaceholder from '../../../../../static/img/icon-chat-profilepic.svg';
 import { WrappedText, TruncateText } from '../Expanded/BasicInfo';
 import { Text } from '../../../../../components/Text/Text';
@@ -41,53 +44,26 @@ export const Header: React.FC<Props> = ({
 };
 
 const NameText = styled(Text)`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   margin-top: 0;
   margin-bottom: 0;
 `;
 
 const StyledHeader = styled.div<{ isAvailable: boolean }>`
+  position: relative;
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   height: 7.5rem;
   max-height: 7.5rem;
   background-color: ${props =>
-    props.isAvailable
-      ? cssVariables.palette.purple
-      : cssVariables.palette.bluegrey};
-  color: ${cssVariables.palette.white};
+    props.isAvailable ? palette.purple : palette.bluegrey};
+  color: ${palette.white};
   border-radius: 0.75rem;
   padding: 1.9rem;
   box-sizing: border-box;
-  position: relative;
-  max-width: calc(
-    ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 3) -
-      (${cssVariables.spacing.layout_spacing} * 2)
-  );
-  @media screen and (min-width: 2100px) {
-    max-width: calc(
-      ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 4) -
-        (${cssVariables.spacing.layout_spacing} * 2)
-    );
-  }
-  @media screen and (min-width: 2550px) {
-    max-width: calc(
-      ((76vw + ${cssVariables.spacing.layout_spacing} * 2) / 5) -
-        (${cssVariables.spacing.layout_spacing} * 2)
-    );
-  }
-  @media screen and (max-width: 1500px) {
-    max-width: calc(
-      ((1130px + (${cssVariables.spacing.layout_spacing} * 2)) / 3) -
-        (${cssVariables.spacing.layout_spacing} * 2)
-    );
-  }
-  @media screen and (max-width: 1194px) {
-    max-width: calc((100vw / 3) - (${cssVariables.spacing.layout_spacing} * 2));
-  }
-  @media screen and (max-width: 900px) {
-    max-width: calc((100vw / 2) - (${cssVariables.spacing.layout_spacing} * 2));
-  }
 `;
 
 const ProfilePicture = styled.div`
@@ -115,12 +91,12 @@ const StyledDivider = styled.span`
 
 const Availability = styled.div<{ isShowing: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
-  background-color: ${cssVariables.palette.whiteblue};
-  color: ${cssVariables.palette.darkblue};
+  background-color: ${palette.whiteblue};
+  color: ${palette.darkblue};
   position: absolute;
   top: 0;
   right: 0;
-  ${cssVariables.basicSourceSansText};
+  ${basicSourceSansText};
   font-weight: 600;
   font-size: 1rem;
   line-height: 150%;

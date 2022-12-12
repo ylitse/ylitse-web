@@ -3,6 +3,7 @@ import React from 'react';
 import * as cssVariables from '../../../../components/variables';
 import { Text } from '../../../../components/Text/Text';
 import { FiltersButton } from './FiltersButton';
+import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {
   headLine: string;
@@ -17,7 +18,18 @@ const Filters: React.FC<Props> = ({
   isFiltersVisible,
   children,
 }) => {
-  return (
+  const isMobile = useMobileMode();
+
+  return isMobile ? (
+    <MobileContainer>
+      <MobileHeader variant="h1">{headLine}</MobileHeader>
+      <Text variant="p">
+        Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit
+        listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita
+        ongelmasi perusteella.{' '}
+      </Text>
+    </MobileContainer>
+  ) : (
     <Container>
       <PageHeader>
         <Text variant="h1">{headLine}</Text>
@@ -34,7 +46,7 @@ const Container = styled.div`
   border-radius: 10px;
   margin: 0;
   height: auto;
-  background-color: ${cssVariables.palette.white};
+  position: relative;
 `;
 
 const PageHeader = styled.div`
@@ -45,6 +57,19 @@ const PageHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const MobileContainer = styled.div`
+  background-color: ${cssVariables.palette.white};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+`;
+
+const MobileHeader = styled(Text)`
+  align-self: flex-start;
 `;
 
 export default Filters;
