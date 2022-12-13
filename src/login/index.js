@@ -1,6 +1,46 @@
 /* eslint-disable */
 (function (window, document) {
-  var form = document.forms.namedItem('login');
+  const locale = 'fi';
+
+  let translations = {};
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setLocale(locale);
+  });
+
+  const switcher = document.getElementById('localization-switcher');
+
+  switcher.onchange = e => {
+    setLocale(e.target.value);
+  };
+
+  const fetchTranslations = async newLocale => {
+    const response = await fetch(`/static/locales/${newLocale}/login.json`);
+
+    if (!response.ok) {
+      console.log(`Could not fetch translations for locale ${newLocale}`);
+    }
+
+    return await response.json();
+  };
+
+  const translatePage = () => {
+    document.querySelectorAll('[localization-key]').forEach(element => {
+      let key = element.getAttribute('localization-key');
+
+      let translation = translations[key];
+
+      element.innerText = translation;
+    });
+  };
+
+  const setLocale = async newLocale => {
+    translations = await fetchTranslations(newLocale);
+
+    translatePage();
+  };
+
+  const form = document.forms.namedItem('login');
 
   form.addEventListener(
     'submit',
@@ -14,7 +54,7 @@
           if (response.ok) {
             return response.json();
           }
-          var loginError = document.getElementById('login-error');
+          const loginError = document.getElementById('login-error');
           loginError.style.display = 'flex';
           form.reset();
           form.elements[0].focus();

@@ -1,0 +1,14 @@
+{
+  "pageTitle": "Ylitse MentorApp - SOS-Lapsikylä",
+  "shortTitle": "Ylitse",
+  "longTitle": "Ylitse MentorApp",
+  "loginTitle": "Kirjaudu sisään",
+  "usernameLabel": "Käyttäjätunnus",
+  "passwordLabel": "Salasana",
+  "retrievePasswordText": "Unohditko salasanasi?",
+  "loginErrorText": "Käyttäjätunnus tai salasanasi on virheellinen. Tarkista syöttämäsi tiedot.",
+  "loginButtonText": "Kirjaudu",
+  "appDescription": "Uusi täällä? Palvelussa voit jutella SOS-Lapsikylän valmentamien vertaismentoreiden kanssa mistä tahansa mieltäsi painavasta asiasta. Palvelun käyttö on luottamuksellista ja täysin maksutonta.",
+  "registrationLinkText": "Rekisteröidy",
+  "footerText": "Palvelun tarjoaa SOS-Lapsikylä"
+}

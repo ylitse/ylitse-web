@@ -1,0 +1,14 @@
+{
+  "pageTitle": "Ylitse MentorApp - SOS Children's Village",
+  "shortTitle": "Ylitse",
+  "longTitle": "Ylitse MentorApp",
+  "loginTitle": "Login",
+  "usernameLabel": "Username",
+  "passwordLabel": "Password",
+  "retrievePasswordText": "Forgot your password?",
+  "loginErrorText": "Your username or password is invalid. Check the information you provided.",
+  "loginButtonText": "Login",
+  "appDescription": "New here? Using this application, you can chat with a mentor trained by SOS Children's Village about any topic that is on your mind. Using the application is confidential and completely free.",
+  "registrationLinkText": "Register",
+  "footerText": "Provided by SOS Children's Village"
+}
