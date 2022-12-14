@@ -175,24 +175,6 @@ form[name='login'] {
   width: 80%;
 }
 
-#language-buttons {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  margin-bottom: 25px;
-  margin-top: 25px;
-}
-
-#language-buttons a {
-  color: #37119d;
-  margin: 0;
-}
-
-#separator {
-  border-right: 1px solid #1c325d;
-  height: 25px;
-}
-
 #login-error {
   display: none;
   border-radius: 4px;

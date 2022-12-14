@@ -1,5 +1,45 @@
 /* eslint-disable */
 ((window, document) => {
+  const locale = 'fi';
+
+  let translations = {};
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setLocale(locale);
+  });
+
+  // const switcher = document.getElementById('localization-switcher');
+
+  // switcher.onchange = e => {
+  //   setLocale(e.target.value);
+  // };
+
+  const fetchTranslations = async newLocale => {
+    const response = await fetch(`/static/locales/${newLocale}/register.json`);
+
+    if (!response.ok) {
+      console.log(`Could not fetch translations for locale ${newLocale}`);
+    }
+
+    return await response.json();
+  };
+
+  const translatePage = () => {
+    document.querySelectorAll('[localization-key]').forEach(element => {
+      let key = element.getAttribute('localization-key');
+
+      let translation = translations[key];
+
+      element.innerText = translation;
+    });
+  };
+
+  const setLocale = async newLocale => {
+    translations = await fetchTranslations(newLocale);
+
+    translatePage();
+  };
+
   const form = document.forms.namedItem('register');
 
   form.addEventListener('submit', async event => {
@@ -76,18 +116,6 @@ const isUsernameFree = async username => {
     return true;
   } else {
     throw Error;
-  }
-};
-
-const toggleInput = id => {
-  const input = document.getElementById(id);
-  const toggle = document.getElementById(`${id}-toggle`);
-  if (input.getAttribute('type') === 'password') {
-    input.type = 'text';
-    toggle.innerHTML = 'Piilota salasana';
-  } else {
-    input.type = 'password';
-    toggle.innerHTML = 'Näytä salasana';
   }
 };
 

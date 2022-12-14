@@ -2,6 +2,24 @@ html {
   font-size: 16px;
 }
 
+#language-buttons {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+#language-buttons a {
+  color: #37119d;
+  margin: 0;
+}
+
+#separator {
+  border-right: 1px solid #1c325d;
+  height: 25px;
+}
+
 @media screen and (max-width: 1200px) {
   html {
     font-size: 14px;
