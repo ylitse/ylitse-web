@@ -25,13 +25,9 @@
     <main>
       <div class="container">
         <div id="language-buttons">
-          <a id="localization-switcher"
-            href="#"
-            value="fi">Suomeksi</a>
+          <a class="language-button">Suomeksi</a>
           <span id="separator"></span>
-          <a id="localization-switcher"
-            href="#"
-            value="en">In English</a>
+          <a class="language-button">In English</a>
         </div>
         <div class="panels">
           <div id="mobile-header">
@@ -71,7 +67,7 @@
               <a href="#"
                 localization-key="retrievePasswordLink"></a>
               <button type="submit"
-                localization-key="loginButton"></button>
+                localization-key="loginButton" />
             </form>
           </div>
           <div class="right panel">
@@ -88,8 +84,9 @@
               <h1 localization-key="longTitle"></h1>
               <p localization-key="appDescription">
               </p>
-              <button href="/register/"
-                localization-key="registrationLink"></button>
+              <a class="button"
+                href="/register/"
+                localization-key="registrationLink"></a>
             </div>
           </div>
         </div>

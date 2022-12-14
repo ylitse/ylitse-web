@@ -8,12 +8,6 @@
     setLocale(locale);
   });
 
-  const switcher = document.getElementById('localization-switcher');
-
-  switcher.onchange = e => {
-    setLocale(e.target.value);
-  };
-
   const fetchTranslations = async newLocale => {
     const response = await fetch(`/static/locales/${newLocale}/login.json`);
 
@@ -39,24 +33,6 @@
 
     translatePage();
   };
-
-  const toggleInput = id => {
-    const input = document.getElementById(id);
-    const toggle = document.getElementById(`${id}-toggle`);
-    if (input.getAttribute('type') === 'password') {
-      input.type = 'text';
-      toggle.innerHTML = translations['hidePassword'];
-    } else {
-      input.type = 'password';
-      toggle.innerHTML = translations['showPasswordText'];
-    }
-  };
-
-  document.getElementById('password-toggle').onchange = () =>
-    toggleInput('password');
-
-  document.getElementById('password-confirmation-toggle').onchange = () =>
-    toggleInput('password-confirmation');
 
   const form = document.forms.namedItem('login');
 
