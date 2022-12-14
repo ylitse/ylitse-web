@@ -4,13 +4,20 @@
   <head>
     <meta charset="utf-8" />
     <title localization-key="pageTitle"></title>
-    <meta name="description" content="Ylitse web registration" />
-    <meta name="author" content="SOS Children's Villages Finland" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/static/styles/normalize.css" />
-    <link rel="stylesheet" href="/static/styles/styles.css" />
-    <link rel="stylesheet" href="/static/styles/fonts.css" />
-    <link rel="stylesheet" href="/register/styles.css" />
+    <meta name="description"
+      content="Ylitse web registration" />
+    <meta name="author"
+      content="SOS Children's Villages Finland" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet"
+      href="/static/styles/normalize.css" />
+    <link rel="stylesheet"
+      href="/static/styles/styles.css" />
+    <link rel="stylesheet"
+      href="/static/styles/fonts.css" />
+    <link rel="stylesheet"
+      href="/register/styles.css" />
   </head>
 
   <body>
@@ -18,103 +25,134 @@
       <div id="language-buttons">
         <!-- <a id="localization-switcher" href="#" value="sv">På svenska</a> -->
         <span id="separator"></span>
-        <a id="localization-switcher" href="#" value="en">In English</a>
+        <a id="localization-switcher"
+          href="#"
+          value="en">In English</a>
       </div>
-      <form id="register-form" name="register">
+      <form id="register-form"
+        name="register">
         <h1 localization-key="registerTitle"></h1>
         <p>
           <span localization-key="description">
           </span>
-          <a href="https://apuu.fi" localization-key="apuuLinkText"></a>
+          <a href="https://apuu.fi"
+            localization-key="apuuLink"></a>
           <a href="https://apuu.fi">
             <img src="/static/icons/outsidelink.svg"
               alt="Siirry apuu.fi verkkosivulle." />
           </a>
         </p>
         <h2 localization-key="accountInfoTitle"></h2>
-        <p localization-key="requiredFieldNotice"></p>
+        <p localization-key="requiredFieldInfo"></p>
         <fieldset id="username-field">
-          <label for="username" localization-key="usernameLabel">
+          <label for="username"
+            localization-key="usernameLabel">
             <span class="align-right">
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
-                <span class="tooltip-text" localization-key="usernameTooltip">
+                <span class="tooltip-text"
+                  localization-key="usernameTooltip">
                 </span>
               </span>
             </span>
           </label>
-          <input id="username" name="username" type="text" maxlength="100"
-            minlength="2" pattern=".{2,100}" onkeyup="checkInput('username')"
+          <input id="username"
+            name="username"
+            type="text"
+            maxlength="100"
+            minlength="2"
+            pattern=".{2,100}"
+            onkeyup="checkInput('username')"
             required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
             <span id="too-short-message"
-              localization-key="usernameTooShortErrorText"></span>
+              localization-key="usernameTooShortError"></span>
             <span id="taken-message"
-              localization-key="usernameTakenErrorText"></span>
-            <span id="try-again-message" localization-key="tryAgainMessageText">
+              localization-key="usernameTakenError"></span>
+            <span id="try-again-message"
+              localization-key="tryAgainMessage">
             </span>
           </label>
         </fieldset>
         <fieldset id="password-field">
-          <label for="password" localization-key="passwordLabel">
+          <label for="password"
+            localization-key="passwordLabel">
             <span class="align-right">
-              <button id="password-toggle" type="button">
-                <span localization-key="showPasswordText">
+              <button id="password-toggle"
+                type="button">
+                <span localization-key="showPassword">
                 </span>
               </button>
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
-                <span class="tooltip-text" localization-key="passwordTooltip">
+                <span class="tooltip-text"
+                  localization-key="passwordTooltip">
                 </span>
               </span>
             </span>
           </label>
-          <input id="password" name="password" type="password" maxlength="100"
-            minlength="8" pattern=".{8,100}" onkeyup="checkInput('password')"
+          <input id="password"
+            name="password"
+            type="password"
+            maxlength="100"
+            minlength="8"
+            pattern=".{8,100}"
+            onkeyup="checkInput('password')"
             required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
-            <span localization-key="passwordTooShortErrorText"></span>
+            <span localization-key="passwordTooShortError"></span>
           </label>
         </fieldset>
         <fieldset id="password-confirmation-field">
           <label for="password-confirmation"
             localization-key="passwordConfirmationLabel">
             <span class="align-right">
-              <button id="password-confirmation-toggle" type="button">
-                <span localization-key="showPasswordText">
+              <button id="password-confirmation-toggle"
+                type="button">
+                <span localization-key="showPassword">
                 </span>
               </button>
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
-                <span class="tooltip-text" localization-key="passwordTooltip">
+                <span class="tooltip-text"
+                  localization-key="passwordTooltip">
                 </span>
               </span>
             </span>
           </label>
-          <input id="password-confirmation" name="password-confirmation"
-            type="password" maxlength="100"
-            onkeyup="checkInput('password-confirmation')" required />
+          <input id="password-confirmation"
+            name="password-confirmation"
+            type="password"
+            maxlength="100"
+            onkeyup="checkInput('password-confirmation')"
+            required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
-            <span localization-key="passwordsDontMatchErrorText"></span>
+            <span localization-key="passwordsDontMatchError"></span>
           </label>
         </fieldset>
         <fieldset id="email-field">
-          <label for="email" localization-key="emailLabel"></label>
-          <input id="email" name="email" type="email" maxlength="200"
+          <label for="email"
+            localization-key="emailLabel"></label>
+          <input id="email"
+            name="email"
+            type="email"
+            maxlength="200"
             onkeyup="checkInput('email')" />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
-            <span localization-key="emailErrorText">
+            <span localization-key="emailError">
             </span>
           </label>
-          <p class="field-info" localization-key="emailFieldInfo">
+          <p class="field-info"
+            localization-key="emailFieldInfo">
           </p>
         </fieldset>
         <fieldset id="display-name-field">
-          <label for="display-name" localization-key="displayNameLabel">
+          <label for="display-name"
+            localization-key="displayNameLabel">
             <span class="align-right">
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
@@ -124,14 +162,20 @@
               </span>
             </span>
           </label>
-          <input id="display-name" name="display-name" type="text"
-            maxlength="30" minlength="2" pattern=".{2,30}"
-            onkeyup="checkInput('display-name')" required />
+          <input id="display-name"
+            name="display-name"
+            type="text"
+            maxlength="30"
+            minlength="2"
+            pattern=".{2,30}"
+            onkeyup="checkInput('display-name')"
+            required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
-            <span localization-key="displayNameTooShortErrorText"></span>
+            <span localization-key="displayNameTooShortError"></span>
           </label>
-          <p class="field-info" localization-key="displayNameFieldInfo">
+          <p class="field-info"
+            localization-key="displayNameFieldInfo">
           </p>
         </fieldset>
         <h2 localization-key="privacyTitle"></h2>
@@ -143,7 +187,7 @@
           <p>
             <span localization-key="privacyParagraph3"></span>
             <a href="https://www.sos-lapsikyla.fi/wp-content/uploads/2021/02/Ylitse_MentorApp_kayttyoehdot_tietosuojaseloste.pdf"
-              localization-key="privacyPolicyLinkText">
+              localization-key="privacyPolicyLink">
             </a>
             <a
               href="https://www.sos-lapsikyla.fi/wp-content/uploads/2021/02/Ylitse_MentorApp_kayttyoehdot_tietosuojaseloste.pdf">
@@ -153,32 +197,43 @@
           </p>
         </section>
         <fieldset class="switch-line">
-          <label class="switch" tabindex="0">
-            <input id="required-age" type="checkbox" onchange="checkForm()"
+          <label class="switch"
+            tabindex="0">
+            <input id="required-age"
+              type="checkbox"
+              onchange="checkForm()"
               required />
             <span class="slider"></span>
           </label>
-          <label for="required-age" class="switch-label"
-            localization-key="requiredAgeSwitchText">
+          <label for="required-age"
+            class="switch-label"
+            localization-key="requiredAgeSwitch">
           </label>
         </fieldset>
         <fieldset class="switch-line">
-          <label class="switch" tabindex="0">
-            <input id="privacy-consent" type="checkbox" onchange="checkForm()"
+          <label class="switch"
+            tabindex="0">
+            <input id="privacy-consent"
+              type="checkbox"
+              onchange="checkForm()"
               required />
             <span class="slider"></span>
           </label>
-          <label for="privacy-consent" class="switch-label"
-            localization-key="privacyConsentSwitchText">
+          <label for="privacy-consent"
+            class="switch-label"
+            localization-key="privacyConsentSwitch">
           </label>
         </fieldset>
-        <button id="submit" type="submit" disabled>Rekisteröidy</button>
-        <label for="submit" class="error-message"
-          localization-key="submitErrorText">
+        <button id="submit"
+          type="submit"
+          disabled>Rekisteröidy</button>
+        <label for="submit"
+          class="error-message"
+          localization-key="submitError">
         </label>
       </form>
       <div class="footer">
-        <h3 localization-key="footerText"></h3>
+        <h3 localization-key="footer"></h3>
       </div>
     </main>
     <script src="index.js"></script>

@@ -45,7 +45,7 @@
     const toggle = document.getElementById(`${id}-toggle`);
     if (input.getAttribute('type') === 'password') {
       input.type = 'text';
-      toggle.innerHTML = translations['hidePasswordText'];
+      toggle.innerHTML = translations['hidePassword'];
     } else {
       input.type = 'password';
       toggle.innerHTML = translations['showPasswordText'];
