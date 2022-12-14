@@ -1,7 +1,7 @@
 {
   "pageTitle": "Ylitse MentorApp - SOS-Lapsikylä",
   "registerTitle": "Rekisteröidy",
-  "description": "Hienoa, että haluat aloittaa palvelun käytön. Huomaathan, että palvelu on tarkoitettu yli 15-vuotiaille. Jos olet alle 15-vuotias, vieraile",
+  "description": "Hienoa, että haluat aloittaa palvelun käytön. Huomaathan, että palvelu on tarkoitettu vähintään 15-vuotiaille. Jos olet alle 15-vuotias, vieraile",
   "apuuLinkText": "Apuu-chatissa.",
   "apuuLinkAltText": "Siirry apuu.fi verkkosivulle",
   "accountInfoTitle": "Tilin tiedot",
@@ -31,7 +31,7 @@
   "privacyParagraph3": "Rekisteröitymällä palvelun käyttäjäksi hyväksyt, että käsittelemme sinua koskevia tietoja. Voit lukea lisää:",
   "privacyPolicyLinkText": "Tietoja yksityisyydensuojasta.",
   "privacyPolicyLinkAltText": "Lataa tietosuojaseloste",
-  "requiredAgeSwitchText": "Olen yli 15-vuotias",
+  "requiredAgeSwitchText": "Olen vähintään 15-vuotias",
   "privacyConsentSwitchText": "Hyväksyn tietojeni käsittelyn",
   "registerButtonText": "Rekisteröidy",
   "submitErrorText": "Lomakkeen lähettäminen epäonnistui. Yritä hetken kuluttua uudelleen",
