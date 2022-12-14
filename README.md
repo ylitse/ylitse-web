@@ -52,6 +52,7 @@ The project depends on the following libraries:
     │ └── index.tsx # The default export
     ├── hooks # Custom react hooks
     ├── login # Static login page
+    ├── register # Static registration page
     ├── static # Static assets (images, styles, fonts)
     ├── App.tsx # Main App component
     ├── index.html # The main index.html
