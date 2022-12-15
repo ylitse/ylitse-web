@@ -40,6 +40,21 @@
     translatePage();
   };
 
+  const enButton = document.getElementById('en-button');
+  const fiButton = document.getElementById('fi-button');
+
+  enButton.onclick = event => {
+    event.preventDefault();
+    setLocale('en');
+    console.log(event);
+  };
+
+  fiButton.onclick = event => {
+    event.preventDefault();
+    setLocale('fi');
+    console.log(event);
+  };
+
   const toggleInput = id => {
     const input = document.getElementById(id);
     const toggle = document.getElementById(`${id}-toggle`);
