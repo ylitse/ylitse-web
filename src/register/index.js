@@ -74,14 +74,14 @@
       toggle.innerHTML = translations['hidePassword'];
     } else {
       input.type = 'password';
-      toggle.innerHTML = translations['showPasswordText'];
+      toggle.innerHTML = translations['showPassword'];
     }
   };
 
-  document.getElementById('password-toggle').onchange = () =>
+  document.getElementById('password-toggle').onclick = () =>
     toggleInput('password');
 
-  document.getElementById('password-confirmation-toggle').onchange = () =>
+  document.getElementById('password-confirmation-toggle').onclick = () =>
     toggleInput('password-confirmation');
 
   const form = document.forms.namedItem('register');
