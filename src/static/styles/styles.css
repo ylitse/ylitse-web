@@ -11,12 +11,19 @@ html {
 }
 
 #language-buttons a {
+  font-family: 'Baloo 2';
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
   color: #37119d;
   margin: 0;
 }
 
 #separator {
-  color: #37119d;
   border-right: 1px solid #1c325d;
   height: 25px;
 }

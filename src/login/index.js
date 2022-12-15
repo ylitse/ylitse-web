@@ -28,10 +28,29 @@
     });
   };
 
+  const styleButton = (button, color, fontWeight, pointerEvents) => {
+    button.style.color = color;
+    button.style.fontWeight = fontWeight;
+    button.style.pointerEvents = pointerEvents;
+  };
+
+  const enableLanguageButton = button =>
+    styleButton(button, '#37119d', '700', 'auto');
+
+  const disableLanguageButton = button =>
+    styleButton(button, '#1c325d', '500', 'none');
+
   const setLocale = async newLocale => {
     translations = await fetchTranslations(newLocale);
 
     translatePage();
+    if (newLocale === 'en') {
+      disableLanguageButton(enButton);
+      enableLanguageButton(fiButton);
+    } else {
+      disableLanguageButton(fiButton);
+      enableLanguageButton(enButton);
+    }
   };
 
   const enButton = document.getElementById('en-button');
@@ -40,13 +59,11 @@
   enButton.onclick = event => {
     event.preventDefault();
     setLocale('en');
-    console.log(event);
   };
 
   fiButton.onclick = event => {
     event.preventDefault();
     setLocale('fi');
-    console.log(event);
   };
 
   const form = document.forms.namedItem('login');
