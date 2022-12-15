@@ -34,6 +34,21 @@
     translatePage();
   };
 
+  const enButton = document.getElementById('en-button');
+  const fiButton = document.getElementById('fi-button');
+
+  enButton.onclick = event => {
+    event.preventDefault();
+    setLocale('en');
+    console.log(event);
+  };
+
+  fiButton.onclick = event => {
+    event.preventDefault();
+    setLocale('fi');
+    console.log(event);
+  };
+
   const form = document.forms.namedItem('login');
 
   form.addEventListener(
