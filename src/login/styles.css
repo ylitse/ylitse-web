@@ -152,18 +152,6 @@ label {
   color: #1c325d;
 }
 
-.footer h3 {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 150%;
-  text-align: center;
-  margin: auto;
-  margin-top: 2rem;
-  color: #ffffff;
-}
-
 form[name='login'] {
   height: fit-content;
   display: flex;

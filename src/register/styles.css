@@ -159,16 +159,6 @@ input:focus {
   background-color: #e4f3fb;
 }
 
-.footer h3 {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 27px;
-  margin-top: 25px;
-  color: #ffffff;
-}
-
 /* Tooltip container */
 .tooltip {
   display: inline-block;

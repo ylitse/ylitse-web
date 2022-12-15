@@ -1,8 +1,4 @@
-html {
-  font-size: 16px;
-}
-
-#language-buttons {
+.language-buttons {
   display: flex;
   align-items: center;
   gap: 25px;
@@ -10,7 +6,7 @@ html {
   margin-top: 25px;
 }
 
-#language-buttons a {
+.language-buttons a {
   font-family: 'Baloo 2';
   text-decoration: none;
   font-style: normal;
@@ -23,23 +19,17 @@ html {
   margin: 0;
 }
 
-#separator {
+.separator {
   border-right: 1px solid #1c325d;
   height: 25px;
 }
 
-@media screen and (max-width: 1200px) {
-  html {
-    font-size: 14px;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  html {
-    font-size: 12px;
-  }
-}
-
-body {
-  margin: 0;
+.footer h3 {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  margin-top: 25px;
+  color: #ffffff;
 }
