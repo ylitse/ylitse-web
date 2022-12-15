@@ -16,6 +16,7 @@ html {
 }
 
 #separator {
+  color: #37119d;
   border-right: 1px solid #1c325d;
   height: 25px;
 }
