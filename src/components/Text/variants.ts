@@ -1,7 +1,15 @@
 import CSS from 'csstype';
-import { TextVariant } from './Text';
 
-export type TextElement = 'h1' | 'h2' | 'h3' | 'p' | 'a';
+export type TextVariant =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'p'
+  | 'a'
+  | 'logo'
+  | 'link'
+  | 'linkBold';
+export type TextElement = 'h1' | 'h2' | 'h3' | 'p' | 'a' | 'span';
 
 type TextProp = {
   element: TextElement;
@@ -57,6 +65,33 @@ export const variants: Record<TextVariant, TextProp> = {
       fontWeight: '700',
       fontSize: '1rem',
       lineHeight: '1.5rem',
+    },
+  },
+  logo: {
+    element: 'p',
+    styles: {
+      fontFamily: '"Baloo 2", cursive',
+      fontStyle: 'normal',
+      fontWeight: '600',
+      fontSize: '2.0rem',
+    },
+  },
+  link: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Baloo 2", cursive',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      lineHeight: '60px',
+    },
+  },
+  linkBold: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Baloo 2", cursive',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      lineHeight: '58px',
     },
   },
 };

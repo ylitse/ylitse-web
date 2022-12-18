@@ -1,22 +1,26 @@
-import { NavLink } from './Navigation.styles';
-import { NavigationItem } from './types';
+import Text from '@/components/Text';
+import { Link } from './Link';
+export type NavigationItem = {
+  text: string;
+  url: string;
+};
 
-const NavItem = ({ text, url }: NavigationItem) => {
+export const Item = ({ text, url }: NavigationItem) => {
   return (
-    <NavLink to={url} className="navbar-link">
-      <div>{text}</div>
-    </NavLink>
+    <Link to={url} className="navbar-link">
+      <Text variant="link" color="white">
+        {text}
+      </Text>
+    </Link>
   );
 };
 
-const NavigationItems = ({ items }: { items: Array<NavigationItem> }) => {
+export const Items = ({ items }: { items: Array<NavigationItem> }) => {
   return (
     <>
       {items.map(item => (
-        <NavItem key={item.text} text={item.text} url={item.url} />
+        <Item key={item.text} text={item.text} url={item.url} />
       ))}
     </>
   );
 };
-
-export default NavigationItems;
