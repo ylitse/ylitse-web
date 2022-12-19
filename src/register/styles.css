@@ -271,8 +271,7 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-#password-toggle,
-#password-confirmation-toggle {
+.password-toggle {
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 700;
@@ -284,6 +283,11 @@ input:checked + .slider:before {
   border: 0;
   background-color: white;
   color: #4a2acb;
+}
+
+#hide-password,
+#hide-password-confirmation {
+  display: none;
 }
 
 #submit {

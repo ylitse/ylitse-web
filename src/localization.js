@@ -74,25 +74,4 @@
     event.preventDefault();
     setLocale('fi');
   };
-
-  // Registration page password and password confirmation
-  if (page === 'register') {
-    const toggleInput = id => {
-      const input = document.getElementById(id);
-      const toggle = document.getElementById(`${id}-toggle`);
-      if (input.getAttribute('type') === 'password') {
-        input.type = 'text';
-        toggle.innerHTML = translations['hidePassword'];
-      } else {
-        input.type = 'password';
-        toggle.innerHTML = translations['showPassword'];
-      }
-    };
-
-    document.getElementById('password-toggle').onclick = () =>
-      toggleInput('password');
-
-    document.getElementById('password-confirmation-toggle').onclick = () =>
-      toggleInput('password-confirmation');
-  }
 })(document);

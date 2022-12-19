@@ -79,6 +79,29 @@ const isUsernameFree = async username => {
   }
 };
 
+const changeVisibility = (id, visibility) =>
+  (document.getElementById(id).style.display = visibility);
+
+const toggleInput = (input, show) => {
+  const inputField = document.getElementById(input);
+  inputField.type = show ? 'text' : 'password';
+  // Hide the current toggle and show the opposite
+  changeVisibility(`${show ? 'show' : 'hide'}-${input}`, 'none');
+  changeVisibility(`${!show ? 'show' : 'hide'}-${input}`, 'unset');
+};
+
+document.getElementById('show-password').onclick = () =>
+  toggleInput('password', true);
+
+document.getElementById('hide-password').onclick = () =>
+  toggleInput('password', false);
+
+document.getElementById('show-password-confirmation').onclick = () =>
+  toggleInput('password-confirmation', true);
+
+document.getElementById('hide-password-confirmation').onclick = () =>
+  toggleInput('password-confirmation', false);
+
 const getInputValue = id => document.getElementById(id).value;
 
 const getErrorMessage = id =>

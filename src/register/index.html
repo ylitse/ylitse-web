@@ -79,9 +79,17 @@
           <label for="password">
             <span localization-key="passwordLabel"></span>
             <span class="align-right">
-              <button id="password-toggle"
+              <button id="show-password"
+                class="password-toggle"
                 type="button"
+                onclick="togglePassword('password', true)"
                 localization-key="showPassword">
+              </button>
+              <button id="hide-password"
+                class="password-toggle"
+                type="button"
+                onclick="togglePassword('password', false)"
+                localization-key="hidePassword">
               </button>
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
@@ -108,9 +116,17 @@
           <label for="password-confirmation">
             <span localization-key="passwordConfirmationLabel"></span>
             <span class="align-right">
-              <button id="password-confirmation-toggle"
+              <button id="show-password-confirmation"
+                class="password-toggle"
                 type="button"
+                onclick="togglePassword('password-confirmation', true)"
                 localization-key="showPassword">
+              </button>
+              <button id="hide-password-confirmation"
+                class="password-toggle"
+                type="button"
+                onclick="togglePassword('password-confirmation', false)"
+                localization-key="hidePassword">
               </button>
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
