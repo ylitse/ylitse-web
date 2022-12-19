@@ -1,17 +1,16 @@
 import styled from 'styled-components';
+
 import SvgLogo from '@/static/img/logo.svg';
 import Text from '@/components/Text';
 
-export const LeftContainer = () => {
-  return (
-    <Container>
-      <Logo />
-      <Text variant="logo" color="white">
-        YLITSE
-      </Text>
-    </Container>
-  );
-};
+export const LeftContainer = () => (
+  <Container>
+    <Logo />
+    <Text variant="logo" color="white">
+      YLITSE
+    </Text>
+  </Container>
+);
 
 const Logo = styled.div`
   background-image: url(${SvgLogo});

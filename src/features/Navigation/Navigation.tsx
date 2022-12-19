@@ -1,17 +1,15 @@
-import type { NavigationItem } from './NavigationItems';
-
+import { palette } from '@/components/variables';
 import styled from 'styled-components';
 
 import { Items, Item } from './NavigationItems';
 import { LeftContainer } from './LeftContainer';
 import { InfoDropdown } from './InfoDropdown';
 import { Routes, Route } from 'react-router-dom';
+
 import MentorPage from '@/features/MentorPage';
 import Logout from '@/features/Logout';
 
-import { palette } from '@/components/variables';
-
-const navigationItems: Array<NavigationItem> = [
+const navigationItems = [
   {
     text: 'Koti',
     url: '/',
@@ -26,27 +24,25 @@ const navigationItems: Array<NavigationItem> = [
   },
 ];
 
-const Navigation = () => {
-  return (
-    <>
-      <Container>
-        <LeftContainer />
-        <RightContainer>
-          <Items items={navigationItems} />
-          <InfoDropdown />
-          <Item text="Kirjaudu ulos" url="/logout" />
-        </RightContainer>
-      </Container>
+const Navigation = () => (
+  <>
+    <Container>
+      <LeftContainer />
+      <RightContainer>
+        <Items items={navigationItems} />
+        <InfoDropdown />
+        <Item text="Kirjaudu ulos" url="/logout" />
+      </RightContainer>
+    </Container>
 
-      <Routes>
-        <Route path="/*" element={<div>KOTISIVU</div>} />
-        <Route path="/chat" element={<div>CHATSIVU</div>} />
-        <Route path="/mentors" element={<MentorPage />} />
-        <Route path="/logout" element={<Logout />} />
-      </Routes>
-    </>
-  );
-};
+    <Routes>
+      <Route path="/*" element={<div>KOTISIVU</div>} />
+      <Route path="/chat" element={<div>CHATSIVU</div>} />
+      <Route path="/mentors" element={<MentorPage />} />
+      <Route path="/logout" element={<Logout />} />
+    </Routes>
+  </>
+);
 
 export const Container = styled.div`
   width: 100%;
@@ -65,11 +61,6 @@ export const RightContainer = styled.div`
   margin-right: 12%;
   display: flex;
   justify-content: flex-end;
-`;
-
-export const DropdownItems = styled.div`
-  position: absolute;
-  width: max-content;
 `;
 
 export default Navigation;

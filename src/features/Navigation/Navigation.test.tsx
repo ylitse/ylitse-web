@@ -28,7 +28,7 @@ describe('<Navigation/>', () => {
       </BrowserRouter>,
     );
 
-    // Go to Mentors-page
+    // Go to Chat-page
     const link = getByRole('link', { name: 'Chat' });
     user.click(link);
 

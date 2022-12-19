@@ -1,11 +1,13 @@
 import type { NavigationItem } from './NavigationItems';
 
-import styled from 'styled-components';
-import Dropdown from '../../components/Dropdown';
-import { DropdownItem, DropdownLink } from './DropdownItem';
-import Text from '@/components/Text';
+import { useComponentVisible } from '@/hooks/useComponentShow';
 
 import { palette } from '@/components/variables';
+import styled, { css } from 'styled-components';
+import chevronup from '@/static/icons/chevron_up.svg';
+import chevrondown from '@/static/icons/chevron_down.svg';
+import { DropdownItem, DropdownLink } from './DropdownItem';
+import Text from '@/components/Text';
 
 const dropDownItems: Array<NavigationItem> = [
   {
@@ -19,16 +21,29 @@ const dropDownItems: Array<NavigationItem> = [
 ];
 
 export const InfoDropdown = () => {
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(false);
+
   return (
-    <Dropdown
-      button={
-        <InfoButton>
-          <Text variant="link" color="white">
-            Info
-          </Text>
-        </InfoButton>
-      }
-      content={
+    <Container>
+      <InfoButton
+        ref={ref}
+        isExpanded={isComponentVisible}
+        onClick={() => setIsComponentVisible(true)}
+      >
+        <Text
+          variant={'link'}
+          color={isComponentVisible ? 'darkblue' : 'white'}
+        >
+          Info
+        </Text>
+        <img
+          src={isComponentVisible ? chevronup : chevrondown}
+          width="8px"
+          height="8px"
+        />
+      </InfoButton>
+      {isComponentVisible && (
         <MenuContainer>
           {dropDownItems.map(item => (
             <DropdownItem key={item.text} {...item} />
@@ -39,16 +54,30 @@ export const InfoDropdown = () => {
             </Text>
           </DropdownLink>
         </MenuContainer>
-      }
-    />
+      )}
+    </Container>
   );
 };
 
-const InfoButton = styled.div`
-  height: 60px;
-  width: 4rem;
-  max-width: 4rem;
+const Container = styled.div`
+  position: relative;
+`;
+
+const InfoButton = styled.button<{ isExpanded?: boolean }>`
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
   text-align: center;
+  padding: 0 1rem;
+
+  ${({ isExpanded }) =>
+    isExpanded &&
+    css`
+      background-color: ${palette.white};
+    `}
 
   &:hover {
     background-color: ${palette.blue2};
@@ -60,9 +89,14 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: max-content;
-`;
+  margin-left: -1px;
 
-export const DropdownItems = styled.div`
-  position: absolute;
-  width: max-content;
+  div:first-of-type {
+    border-top: 0.1rem solid ${palette.midgray};
+  }
+
+  div:last-of-type {
+    border-radius: 0 0 16px 16px;
+    border-bottom: 2px solid ${palette.purple};
+  }
 `;

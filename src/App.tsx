@@ -1,4 +1,5 @@
-import Navigation from '@/features/Navigation';
+import Navigation from './features/Navigation';
+import Footer from './components/Footer';
 import Spinner from './components/Spinner';
 import styled from 'styled-components';
 
@@ -10,6 +11,7 @@ const App = () => {
   return isAuthenticated ? (
     <AppWrapper>
       <Navigation />
+      <Footer />
     </AppWrapper>
   ) : (
     <Spinner variant="large" />
