@@ -41,6 +41,16 @@
     button.style.pointerEvents = pointerEvents;
   };
 
+  const showClass = className =>
+    document
+      .querySelectorAll(`.${className}`)
+      .forEach(element => (element.style.display = 'unset'));
+
+  const hideClass = className =>
+    document
+      .querySelectorAll(`.${className}`)
+      .forEach(element => (element.style.display = 'none'));
+
   const enableLanguageButton = button =>
     styleButton(button, '#37119d', '700', 'auto');
 
@@ -51,11 +61,18 @@
     translations = await fetchTranslations(newLocale);
     translatePage();
 
+    // Set document language.
     document.documentElement.setAttribute('lang', newLocale);
+
+    // Set alt texts and language buttons.
     if (newLocale === 'en') {
+      showClass('en-alt-text');
+      hideClass('fi-alt-text');
       disableLanguageButton(enButton);
       enableLanguageButton(fiButton);
     } else {
+      showClass('fi-alt-text');
+      hideClass('en-alt-text');
       disableLanguageButton(fiButton);
       enableLanguageButton(enButton);
     }

@@ -1,3 +1,7 @@
+.en-alt-text {
+  display: none;
+}
+
 .language-buttons {
   display: flex;
   align-items: center;
