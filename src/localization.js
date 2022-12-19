@@ -13,10 +13,13 @@
   const getBrowserLocale = () => {
     const language = navigator.language;
     if (!language) return null;
-    supportedLanguages.forEach(supportedLanguage => {
-      if (language.includes(supportedLanguage)) return supportedLanguage;
-    });
-    return null;
+
+    let languageMatch = null;
+    for (const supportedLanguage of supportedLanguages) {
+      if (language.includes(supportedLanguage))
+        languageMatch = supportedLanguage;
+    }
+    return languageMatch;
   };
 
   const fetchTranslations = async newLocale => {
@@ -78,8 +81,10 @@
     }
   };
 
-  document.addEventListener('DOMContentLoaded', () => {
-    setLocale(getBrowserLocale() ?? 'fi');
+  document.addEventListener('DOMContentLoaded', async () => {
+    const browserLocale = getBrowserLocale();
+    console.log('browser on', browserLocale);
+    setLocale(browserLocale ?? 'fi');
   });
 
   enButton.onclick = event => {
