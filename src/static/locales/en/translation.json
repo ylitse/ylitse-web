@@ -1,7 +1,3 @@
 {
-  "title": "Welcome to react",
-  "description": {
-    "part1": "Logout",
-    "part2": "Switch language between english and german using buttons above."
-  }
+  "logoutButton": "Logout"
 }

@@ -1,7 +1,3 @@
 {
-  "title": " using react-i18next",
-  "description": {
-    "part1": "Kirjaudu ulos",
-    "part2": "Switch language between english and german using buttons above."
-  }
+  "logoutButton": "Kirjaudu ulos"
 }

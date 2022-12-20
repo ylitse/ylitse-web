@@ -53,7 +53,7 @@ The project depends on the following libraries:
     ├── hooks # Custom react hooks
     ├── login # Static login page
     ├── register # Static registration page
-    ├── static # Static assets (images, styles, fonts)
+    ├── static # Static assets (fonts, images, locales, styles)
     ├── App.tsx # Main App component
     ├── index.html # The main index.html
     ├── index.tsx # The main React mounting point

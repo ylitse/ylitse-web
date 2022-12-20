@@ -83,7 +83,6 @@
 
   document.addEventListener('DOMContentLoaded', async () => {
     const browserLocale = getBrowserLocale();
-    console.log('browser on', browserLocale);
     setLocale(browserLocale ?? 'fi');
   });
 
