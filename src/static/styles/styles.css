@@ -2,7 +2,7 @@
   display: none;
 }
 
-.language-buttons {
+#language-buttons {
   display: flex;
   align-items: center;
   gap: 25px;
@@ -10,7 +10,7 @@
   margin-top: 25px;
 }
 
-.language-buttons a {
+#language-buttons a {
   font-family: 'Baloo 2';
   text-decoration: none;
   font-style: normal;

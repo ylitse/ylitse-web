@@ -30,6 +30,13 @@ describe('login', () => {
     cy.contains('Unohditko salasanasi?');
   });
 
+  it('changes language on button press', () => {
+    cy.switchLanguage('en');
+    cy.contains('Login');
+    cy.switchLanguage('fi');
+    cy.contains('Kirjaudu sisään');
+  });
+
   it('shows error if empty username', () => {
     cy.fillInput('password', 'examplePassword');
     clickLogin();

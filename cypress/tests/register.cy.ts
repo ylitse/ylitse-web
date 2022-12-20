@@ -30,6 +30,13 @@ describe('register', () => {
     cy.contains('Hienoa, että haluat aloittaa palvelun käytön.');
   });
 
+  it('changes language on button press', () => {
+    cy.switchLanguage('en');
+    cy.contains('Register');
+    cy.switchLanguage('fi');
+    cy.contains('Rekisteröidy');
+  });
+
   it('registers new user if form is correctly filled', () => {
     cy.registerUser('registerTestUsername', 'examplePassword');
     cy.location('pathname').should('contain', '/login');

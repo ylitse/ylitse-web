@@ -2,8 +2,10 @@
 /// <reference types="cypress" />
 
 Cypress.Commands.add('switchLanguage', (language: string): void => {
-  cy.get(`a[id="${language}-button"]`).should('be.visible');
-  cy.get(`a[id="${language}-button"]`).click();
+  if (document.documentElement.lang !== language) {
+    cy.get(`[id="language-buttons"]`).should('be.visible');
+    cy.get(`a[id="${language}-button"]`).click({ force: true });
+  }
 });
 
 Cypress.Commands.add('fillInput', (id: string, value: string): void => {
