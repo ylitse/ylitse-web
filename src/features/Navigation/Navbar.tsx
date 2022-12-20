@@ -7,6 +7,7 @@ import { Items, Item } from './NavigationItems';
 import { LeftContainer } from './LeftContainer';
 import { InfoDropdown } from './InfoDropdown';
 import { MobileDropdown } from './MobileDropdown';
+import { LangDropdown } from './LangDropdown';
 
 const navigationItems = [
   {
@@ -39,6 +40,7 @@ export const Navbar = () => {
           <RightContainer>
             <Items items={navigationItems} />
             <InfoDropdown />
+            <LangDropdown />
             <Item text="Kirjaudu ulos" url="/logout" />
           </RightContainer>
         </Container>

@@ -22,14 +22,13 @@ export const infoItems: Array<NavigationItem> = [
 
 export const InfoDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
-    useComponentVisible(false);
+    useComponentVisible<HTMLDivElement>(false);
 
   return (
-    <Container>
-      <InfoButton
-        ref={ref}
+    <Anchor ref={ref}>
+      <Button
         isExpanded={isComponentVisible}
-        onClick={() => setIsComponentVisible(true)}
+        onClick={() => setIsComponentVisible(!isComponentVisible)}
       >
         <Text
           variant={'link'}
@@ -42,9 +41,10 @@ export const InfoDropdown = () => {
         ) : (
           <ChevronDown size={8} color="white" />
         )}
-      </InfoButton>
+      </Button>
+
       {isComponentVisible && (
-        <MenuContainer>
+        <Menu>
           {infoItems.map(item => (
             <DropdownItem key={item.text} {...item} />
           ))}
@@ -53,17 +53,18 @@ export const InfoDropdown = () => {
               Tietoa palvelusta
             </Text>
           </DropdownLink>
-        </MenuContainer>
+        </Menu>
       )}
-    </Container>
+    </Anchor>
   );
 };
 
-const Container = styled.div`
+export const Anchor = styled.div`
   position: relative;
 `;
 
-const InfoButton = styled.button<{ isExpanded?: boolean }>`
+export const Button = styled.button<{ isExpanded?: boolean }>`
+  position: relative;
   all: unset;
   cursor: pointer;
   display: flex;
@@ -84,12 +85,13 @@ const InfoButton = styled.button<{ isExpanded?: boolean }>`
   }
 `;
 
-const MenuContainer = styled.div`
+export const Menu = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
   width: max-content;
-  margin-left: -1px;
+  top: 60px;
+  left: -1px;
 
   div:first-of-type {
     border-top: 0.1rem solid ${palette.midgray};

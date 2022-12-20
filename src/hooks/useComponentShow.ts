@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 
-export const useComponentVisible = (initialIsVisible: boolean) => {
+export function useComponentVisible<
+  A extends HTMLButtonElement | HTMLDivElement,
+>(initialIsVisible: boolean) {
   const [isComponentVisible, setIsComponentVisible] =
     useState(initialIsVisible);
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<A>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (ref.current && !ref.current.contains(event.target as Node)) {
@@ -19,4 +21,4 @@ export const useComponentVisible = (initialIsVisible: boolean) => {
   }, []);
 
   return { ref, isComponentVisible, setIsComponentVisible };
-};
+}
