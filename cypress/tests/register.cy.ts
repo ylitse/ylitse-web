@@ -20,7 +20,10 @@ describe('register', () => {
     toggle('privacy-consent');
   };
 
-  beforeEach(() => cy.visit('/register'));
+  beforeEach(() => {
+    cy.visit('/register');
+    cy.switchLanguage('fi');
+  });
 
   it('loads page', () => {
     cy.contains('Rekisteröidy');
@@ -69,7 +72,7 @@ describe('register', () => {
 
   it('shows password after toggle click', () => {
     cy.fillInput('password', 'examplePassword');
-    click('password-toggle');
+    click('show-password');
     cy.get('input[id="password"]').should('have.value', 'examplePassword');
   });
 
@@ -91,7 +94,7 @@ describe('register', () => {
 
   it('shows password confirmation after toggle click', () => {
     cy.fillInput('password-confirmation', 'examplePassword');
-    click('password-confirmation-toggle');
+    click('show-password-confirmation');
     cy.get('input[id="password-confirmation"]').should(
       'have.value',
       'examplePassword',

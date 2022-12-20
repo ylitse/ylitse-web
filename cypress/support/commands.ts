@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /// <reference types="cypress" />
 
+Cypress.Commands.add('switchLanguage', (language: string): void => {
+  cy.get(`a[id="${language}-button"]`).should('be.visible');
+  cy.get(`a[id="${language}-button"]`).click();
+});
+
 Cypress.Commands.add('fillInput', (id: string, value: string): void => {
   cy.get(`input[id="${id}"]`).type(value);
 });
@@ -29,12 +34,13 @@ Cypress.Commands.add(
     cy.visit('/login');
     cy.fillInput('username', username);
     cy.fillInput('password', password);
-    cy.get('form > .button').click();
+    cy.get('button[id="submit"]').click();
   },
 );
 
 declare namespace Cypress {
   interface Chainable {
+    switchLanguage(language: string): Chainable<void>;
     fillInput(id: string, value: string): Chainable<void>;
     registerUser(username: string, password: string): Chainable<void>;
     loginUser(username: string, password: string): Chainable<void>;
