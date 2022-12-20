@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { palette } from '@/components/variables';
 
 import { NavLink as RouterNavLink } from 'react-router-dom';
+
 export type NavigationItem = {
   text: string;
   url: string;

@@ -8,7 +8,8 @@ export type TextVariant =
   | 'a'
   | 'logo'
   | 'link'
-  | 'linkBold';
+  | 'linkBold'
+  | 'linkMobile';
 export type TextElement = 'h1' | 'h2' | 'h3' | 'p' | 'a' | 'span';
 
 type TextProp = {
@@ -92,6 +93,16 @@ export const variants: Record<TextVariant, TextProp> = {
       fontStyle: 'normal',
       fontWeight: '700',
       lineHeight: '58px',
+    },
+  },
+  linkMobile: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Baloo 2", cursive',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      lineHeight: '40px',
+      fontSize: 'larger',
     },
   },
 };

@@ -1,39 +1,12 @@
-import { palette } from '@/components/variables';
-import styled from 'styled-components';
-
-import { Items, Item } from './NavigationItems';
-import { LeftContainer } from './LeftContainer';
-import { InfoDropdown } from './InfoDropdown';
+import { Navbar } from './Navbar';
 import { Routes, Route } from 'react-router-dom';
 
 import MentorPage from '@/features/MentorPage';
 import Logout from '@/features/Logout';
 
-const navigationItems = [
-  {
-    text: 'Koti',
-    url: '/',
-  },
-  {
-    text: 'Mentorit',
-    url: '/mentors',
-  },
-  {
-    text: 'Chat',
-    url: '/chat',
-  },
-];
-
 const Navigation = () => (
   <>
-    <Container>
-      <LeftContainer />
-      <RightContainer>
-        <Items items={navigationItems} />
-        <InfoDropdown />
-        <Item text="Kirjaudu ulos" url="/logout" />
-      </RightContainer>
-    </Container>
+    <Navbar />
 
     <Routes>
       <Route path="/*" element={<div>KOTISIVU</div>} />
@@ -43,24 +16,4 @@ const Navigation = () => (
     </Routes>
   </>
 );
-
-export const Container = styled.div`
-  width: 100%;
-  height: 60px;
-  z-index: 10;
-  background-color: ${palette.purple};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  position: relative;
-`;
-
-export const RightContainer = styled.div`
-  flex: 1;
-  margin-right: 12%;
-  display: flex;
-  justify-content: flex-end;
-`;
-
 export default Navigation;

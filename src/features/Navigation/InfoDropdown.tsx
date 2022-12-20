@@ -4,12 +4,12 @@ import { useComponentVisible } from '@/hooks/useComponentShow';
 
 import { palette } from '@/components/variables';
 import styled, { css } from 'styled-components';
-import chevronup from '@/static/icons/chevron_up.svg';
-import chevrondown from '@/static/icons/chevron_down.svg';
 import { DropdownItem, DropdownLink } from './DropdownItem';
 import Text from '@/components/Text';
+import { ChevronUp } from '@/components/Icons/ChevronUp';
+import { ChevronDown } from '@/components/Icons/ChevronDown';
 
-const dropDownItems: Array<NavigationItem> = [
+export const infoItems: Array<NavigationItem> = [
   {
     text: 'Anna palautetta',
     url: 'https://www.sos-lapsikyla.fi',
@@ -37,15 +37,15 @@ export const InfoDropdown = () => {
         >
           Info
         </Text>
-        <img
-          src={isComponentVisible ? chevronup : chevrondown}
-          width="8px"
-          height="8px"
-        />
+        {isComponentVisible ? (
+          <ChevronUp size={8} color="purple" />
+        ) : (
+          <ChevronDown size={8} color="white" />
+        )}
       </InfoButton>
       {isComponentVisible && (
         <MenuContainer>
-          {dropDownItems.map(item => (
+          {infoItems.map(item => (
             <DropdownItem key={item.text} {...item} />
           ))}
           <DropdownLink onClick={() => console.log('TODO: show modal')}>
