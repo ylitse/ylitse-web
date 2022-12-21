@@ -1,13 +1,12 @@
 html,
 body {
-  height: 100vh;
   background: linear-gradient(
       180deg,
       rgba(1, 165, 236, 0.58) 0%,
       rgba(89, 58, 214, 0.58) 100%
     ),
     url(/static/img/milad-fakurian-E8Ufcyxz514-unsplash.jpg) no-repeat fixed
-      center;
+      right top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -39,8 +38,20 @@ h1 {
   font-size: 30px;
   line-height: 48px;
   margin: 0 auto 30px auto;
-  /* blue/dark blue */
   color: #1c325d;
+}
+
+a {
+  font-family: 'Baloo 2';
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  color: #4a2acb;
+  margin: 10px auto 20px 0;
 }
 
 .panels {
@@ -66,13 +77,11 @@ h1 {
 }
 
 .left {
-  /* greyscale/white */
   background: #ffffff;
   padding-right: 4%;
 }
 
 .right {
-  /* purple/purple */
   background: #4c2ec6;
   z-index: 1;
   margin-left: -4%;
@@ -89,19 +98,14 @@ input[type='password'] {
   font-weight: 400;
   font-size: 18px;
   line-height: 27px;
-  /* Rectangle 122 */
-
   box-sizing: border-box;
-
-  /* greyscale/white */
   background: #ffffff;
-  /* purple/purple */
   border: 1px solid #4a2acb;
   border-radius: 5px;
 }
 
 /* Rekisteröidy */
-.right a,
+
 .button,
 button,
 input[type='button'] {
@@ -137,7 +141,6 @@ form input {
 }
 
 label {
-  /* p/label */
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 600;
@@ -146,24 +149,7 @@ label {
   text-align: left;
   width: 80% !important;
   margin: 20px auto 0 0;
-  /* identical to box height, or 27px */
-
-  /* blue/dark blue */
   color: #1c325d;
-}
-
-.footer h3 {
-  /* p/p-semibold */
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 150%;
-  text-align: center;
-  margin: auto;
-  margin-top: 2rem;
-  /* greyscale/white */
-  color: #ffffff;
 }
 
 form[name='login'] {
@@ -198,28 +184,11 @@ form[name='login'] {
   margin-left: 21px;
 }
 
-#retrieve-password {
-  /* p/button link */
-  font-family: 'Baloo 2';
-  text-decoration: none;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 29px;
-  display: flex;
-  align-items: center;
-
-  /* purple/purple */
-  color: #4a2acb;
-  width: 391px !important;
-  margin: 10px auto 20px 0;
-}
-
 /* Skeleton css */
 
 .button,
 button,
-input[type='submit'],
+button[type='submit'] input[type='submit'],
 input[type='reset'],
 input[type='button'] {
   display: flex;
@@ -253,6 +222,7 @@ input[type='button'] {
 }
 .button:hover,
 button:hover,
+button[type='submit']:hover,
 input[type='submit']:hover,
 input[type='reset']:hover,
 input[type='button']:hover {
@@ -262,6 +232,7 @@ input[type='button']:hover {
 
 .button:focus,
 button:focus,
+button[type='submit']:focus,
 input[type='submit']:focus,
 input[type='reset']:focus,
 input[type='button']:focus,
@@ -281,6 +252,7 @@ input[type='button']:target {
 }
 
 .button:visited button:visited,
+button[type='submit']:visited,
 input[type='submit']:visited,
 input[type='reset']:visited,
 input[type='button']:visited {
@@ -289,6 +261,7 @@ input[type='button']:visited {
 
 .button.button-primary,
 button.button-primary,
+button[type='submit'].button-primary,
 input[type='submit'].button-primary,
 input[type='reset'].button-primary,
 input[type='button'].button-primary {
@@ -298,11 +271,13 @@ input[type='button'].button-primary {
 }
 .button.button-primary:hover,
 button.button-primary:hover,
+button[type='submit'].button.button-primary:hover,
 input[type='submit'].button-primary:hover,
 input[type='reset'].button-primary:hover,
 input[type='button'].button-primary:hover,
 .button.button-primary:focus,
 button.button-primary:focus,
+button[type='submit'].button.button-primary:focus,
 input[type='submit'].button-primary:focus,
 input[type='reset'].button-primary:focus,
 input[type='button'].button-primary:focus {
@@ -370,16 +345,11 @@ fieldset {
   border-width: 0;
 }
 
-input[type='submit'] {
-  /* button-default-large */
+input[type='submit'],
+button[type='submit'] {
   flex: 1;
-
-  /* purple/purple */
   background: #4a2acb;
   left: 46%;
-  /* container */
-
-  /* orange/orange */
   color: #f0ba8c;
   border: none !important;
 }
@@ -397,7 +367,6 @@ input[type='submit'] {
   left: 0px;
   top: 0px;
   background: #4a2acb;
-  /* shadow */
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
   border-radius: 0px 0px 19px 19px;
   min-height: 101px;

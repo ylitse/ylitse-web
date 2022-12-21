@@ -1,247 +1,268 @@
 <!DOCTYPE html>
 <html lang="fi">
+
   <head>
     <meta charset="utf-8" />
-    <title>Ylitse MentorApp - SOS-Lapsikylä</title>
-    <meta name="description" content="Ylitse web registration" />
-    <meta name="author" content="SOS Children's Villages Finland" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/static/styles/normalize.css" />
-    <link rel="stylesheet" href="/static/styles/fonts.css" />
-    <link rel="stylesheet" href="/register/styles.css" />
+    <title localization-key="pageTitle"></title>
+    <meta name="description"
+      content="Ylitse web registration" />
+    <meta name="author"
+      content="SOS Children's Villages Finland" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet"
+      href="/static/styles/normalize.css" />
+    <link rel="stylesheet"
+      href="/static/styles/styles.css" />
+    <link rel="stylesheet"
+      href="/static/styles/fonts.css" />
+    <link rel="stylesheet"
+      href="/register/styles.css" />
   </head>
+
   <body>
     <main>
-      <form id="register-form" name="register">
-        <h1>Rekisteröidy</h1>
+      <div id="language-buttons">
+        <a id="fi-button"
+          href="#">Suomeksi</a>
+        <span class="separator"></span>
+        <a id="en-button"
+          href="#">In English</a>
+      </div>
+      </div>
+      <form id="register-form"
+        name="register">
+        <h1 localization-key="registerTitle"></h1>
         <p>
-          Hienoa, että haluat aloittaa palvelun käytön. Huomaathan, että palvelu
-          on tarkoitettu yli 15-vuotiaille. Jos olet alle 15-vuotias, vieraile
-          <a href="https://apuu.fi">Apuu-chatissa.</a>
+          <span localization-key="description"></span>
+          <a href="https://apuu.fi"
+            localization-key="apuuLink"></a>
           <a href="https://apuu.fi">
-            <img
+            <img class="fi-alt-text"
               src="/static/icons/outsidelink.svg"
-              alt="Siirry apuu.fi verkkosivulle."
-            />
+              alt="Siirry apuu.fi verkkosivulle." />
+            <img class="en-alt-text"
+              src="/static/icons/outsidelink.svg"
+              alt="Visit the apuu.fi website." />
           </a>
         </p>
-        <h2>Tilin tiedot</h2>
-        <p>Tähdellä * merkityt kentät ovat pakollisia.</p>
+        <h2 localization-key="accountInfoTitle"></h2>
+        <p localization-key="requiredFieldInfo"></p>
         <fieldset id="username-field">
           <label for="username">
-            Käyttäjätunnus *
+            <span localization-key="usernameLabel"></span>
             <span class="align-right">
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
-                <span class="tooltip-text">
-                  Käyttäjätunnuksen tulee olla vähintään 2 merkkiä pitkä.
+                <span class="tooltip-text"
+                  localization-key="usernameTooltip">
                 </span>
               </span>
             </span>
           </label>
-          <input
-            id="username"
+          <input id="username"
             name="username"
             type="text"
             maxlength="100"
             minlength="2"
             pattern=".{2,100}"
             onkeyup="checkInput('username')"
-            autofocus
-            required
-          />
+            required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
-            <span id="too-short-message">Käyttäjätunnus on liian lyhyt</span>
-            <span id="taken-message">Käyttäjätunnus on jo käytössä</span>
-            <span id="try-again-message">
-              Emme pystyneet tarkistamaan käyttäjätunnusta. Syötä tunnus
-              uudelleen hetken kuluttua.
+            <span id="too-short-message"
+              localization-key="usernameTooShortError">
+            </span>
+            <span id="taken-message"
+              localization-key="usernameTakenError">
+            </span>
+            <span id="try-again-message"
+              localization-key="tryAgainMessage">
             </span>
           </label>
         </fieldset>
         <fieldset id="password-field">
           <label for="password">
-            Salasana *
+            <span localization-key="passwordLabel"></span>
             <span class="align-right">
-              <button
-                id="password-toggle"
+              <button id="show-password"
+                class="password-toggle"
                 type="button"
-                onclick="toggleInput('password')"
-              >
-                Näytä salasana
+                onclick="togglePassword('password', true)"
+                localization-key="showPassword">
+              </button>
+              <button id="hide-password"
+                class="password-toggle"
+                type="button"
+                onclick="togglePassword('password', false)"
+                localization-key="hidePassword">
               </button>
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
-                <span class="tooltip-text">
-                  Salasanan tulee olla vähintään 8 merkkiä pitkä.
+                <span class="tooltip-text"
+                  localization-key="passwordTooltip">
                 </span>
               </span>
             </span>
           </label>
-          <input
-            id="password"
+          <input id="password"
             name="password"
             type="password"
             maxlength="100"
             minlength="8"
             pattern=".{8,100}"
             onkeyup="checkInput('password')"
-            required
-          />
+            required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
-            Salasana on liian lyhyt
+            <span localization-key="passwordTooShortError" />
           </label>
         </fieldset>
         <fieldset id="password-confirmation-field">
           <label for="password-confirmation">
-            Vahvista salasana *
+            <span localization-key="passwordConfirmationLabel"></span>
             <span class="align-right">
-              <button
-                id="password-confirmation-toggle"
+              <button id="show-password-confirmation"
+                class="password-toggle"
                 type="button"
-                onclick="toggleInput('password-confirmation')"
-              >
-                Näytä salasana
+                onclick="togglePassword('password-confirmation', true)"
+                localization-key="showPassword">
+              </button>
+              <button id="hide-password-confirmation"
+                class="password-toggle"
+                type="button"
+                onclick="togglePassword('password-confirmation', false)"
+                localization-key="hidePassword">
               </button>
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
-                <span class="tooltip-text">
-                  Salasanan tulee olla vähintään 8 merkkiä pitkä.
+                <span class="tooltip-text"
+                  localization-key="passwordTooltip">
                 </span>
               </span>
             </span>
           </label>
-          <input
-            id="password-confirmation"
+          <input id="password-confirmation"
             name="password-confirmation"
             type="password"
             maxlength="100"
             onkeyup="checkInput('password-confirmation')"
-            required
-          />
+            required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
-            Salasanat eivät täsmää
+            <span localization-key="passwordsDontMatchError" />
           </label>
         </fieldset>
         <fieldset id="email-field">
-          <label for="email">Sähköpostiosoite (vapaaehtoinen)</label>
-          <input
-            id="email"
+          <label for="email"
+            localization-key="emailLabel"></label>
+          <input id="email"
             name="email"
             type="email"
             maxlength="200"
-            onkeyup="checkInput('email')"
-          />
+            onkeyup="checkInput('email')" />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
-            Sähköpostiosoite on virheellinen
+            <span localization-key="emailError">
+            </span>
           </label>
-          <p class="field-info">
-            Sähköpostiosoitteen tallentaminen mahdollistaa salasanan
-            palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin
-            tarkoituksiin.
+          <p class="field-info"
+            localization-key="emailFieldInfo">
           </p>
         </fieldset>
         <fieldset id="display-name-field">
           <label for="display-name">
-            Julkinen nimimerkki *
+            <span localization-key="displayNameLabel"></span>
             <span class="align-right">
               <span class="tooltip">
                 <img src="/static/icons/tooltip.svg" />
-                <span class="tooltip-text">
-                  Nimimerkin tulee olla vähintään 2 merkkiä pitkä.
+                <span class="tooltip-text"
+                  localization-key="displayNameTooltip">
                 </span>
               </span>
             </span>
           </label>
-          <input
-            id="display-name"
+          <input id="display-name"
             name="display-name"
             type="text"
             maxlength="30"
             minlength="2"
             pattern=".{2,30}"
             onkeyup="checkInput('display-name')"
-            required
-          />
+            required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
-            Nimimerkki on liian lyhyt
+            <span localization-key="displayNameTooShortError" />
           </label>
-          <p class="field-info">
-            Syötä nimimerkki, josta sinua ei voi tunnistaa, jos haluat käyttää
-            palvelua anonyymisti.
+          <p class="field-info"
+            localization-key="displayNameFieldInfo">
           </p>
         </fieldset>
-        <h2>Yksityisyydensuoja</h2>
+        <h2 localization-key="privacyTitle"></h2>
         <section>
-          <p>
-            Käytämme tietojasi ainoastaan tämän palvelun mahdollis- tamiseksi.
-            Noudatamme tarkkoja tietoturvastandardeja ja teemme parhaamme, jotta
-            tietosi säilyvät turvassa ja yksityisinä.
+          <p localization-key="privacyParagraph1">
+          </p>
+          <p localization-key="privacyParagraph2">
           </p>
           <p>
-            Huomaathan, että keräämme anonyymejä tilastoja, jotta voimme
-            kehittää palvelua entistä paremmaksi.
-          </p>
-          <p>
-            Rekisteröitymällä palvelun käyttäjäksi hyväksyt, että käsittelemme
-            sinua koskevia tietoja. Voit lukea lisää:
-            <a
-              href="https://www.sos-lapsikyla.fi/wp-content/uploads/2021/02/Ylitse_MentorApp_kayttyoehdot_tietosuojaseloste.pdf"
-            >
-              Tietoja yksityisyydensuojasta.
+            <span localization-key="privacyParagraph3"></span>
+            <a href="https://www.sos-lapsikyla.fi/wp-content/uploads/2021/02/Ylitse_MentorApp_kayttyoehdot_tietosuojaseloste.pdf"
+              localization-key="privacyPolicyLink">
             </a>
             <a
-              href="https://www.sos-lapsikyla.fi/wp-content/uploads/2021/02/Ylitse_MentorApp_kayttyoehdot_tietosuojaseloste.pdf"
-            >
-              <img
+              href="https://www.sos-lapsikyla.fi/wp-content/uploads/2021/02/Ylitse_MentorApp_kayttyoehdot_tietosuojaseloste.pdf">
+              <img class="fi-alt-text"
                 src="/static/icons/outsidelink.svg"
-                alt="Lataa tietosuojaseloste."
-              />
+                alt="Lataa tietosuojaseloste." />
+              <img class="en-alt-text"
+                src="/static/icons/outsidelink.svg"
+                alt="Download privacy policy." />
             </a>
           </p>
         </section>
         <fieldset class="switch-line">
-          <label class="switch" tabindex="0">
-            <input
-              id="required-age"
+          <label class="switch"
+            tabindex="0">
+            <input id="required-age"
               type="checkbox"
               onchange="checkForm()"
-              required
-            />
-            <span class="slider"></span>
+              required />
+            <span class="slider" />
           </label>
-          <label for="required-age" class="switch-label">
-            Olen yli 15-vuotias
+          <label for="required-age"
+            class="switch-label"
+            localization-key="requiredAgeSwitch">
           </label>
         </fieldset>
         <fieldset class="switch-line">
-          <label class="switch" tabindex="0">
-            <input
-              id="privacy-consent"
+          <label class="switch"
+            tabindex="0">
+            <input id="privacy-consent"
               type="checkbox"
               onchange="checkForm()"
-              required
-            />
-            <span class="slider"></span>
+              required />
+            <span class="slider" />
           </label>
-          <label for="privacy-consent" class="switch-label">
-            Hyväksyn tietojeni käsittelyn
+          <label for="privacy-consent"
+            class="switch-label"
+            localization-key="privacyConsentSwitch">
           </label>
         </fieldset>
-        <button id="submit" type="submit" disabled>Rekisteröidy</button>
-        <label for="submit" class="error-message">
-          Lomakkeen lähettäminen epäonnistui. Yritä hetken kuluttua uudelleen
+        <button id="submit"
+          type="submit"
+          disabled
+          localization-key="registerButton" />
+        <label for="submit"
+          class="error-message"
+          localization-key="submitError">
         </label>
       </form>
       <div class="footer">
-        <h3>Palvelun tarjoaa SOS-Lapsikylä</h3>
+        <h3 localization-key="footer"></h3>
       </div>
     </main>
     <script src="index.js"></script>
+    <script src="../localization.js"></script>
   </body>
+
 </html>

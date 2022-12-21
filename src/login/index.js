@@ -1,6 +1,6 @@
 /* eslint-disable */
 (function (window, document) {
-  var form = document.forms.namedItem('login');
+  const form = document.forms.namedItem('login');
 
   form.addEventListener(
     'submit',
@@ -14,7 +14,7 @@
           if (response.ok) {
             return response.json();
           }
-          var loginError = document.getElementById('login-error');
+          const loginError = document.getElementById('login-error');
           loginError.style.display = 'flex';
           form.reset();
           form.elements[0].focus();

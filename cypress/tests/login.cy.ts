@@ -1,13 +1,10 @@
 describe('login', () => {
   const testErrorVisible = () => {
-    cy.contains('Käyttäjätunnus tai salasanasi on virheellinen.').should(
-      'be.visible',
-    );
-    cy.contains('Tarkista syöttämäsi tiedot.').should('be.visible');
+    cy.get('[id="login-error"]').should('be.visible');
   };
 
   const clickLogin = (): void => {
-    cy.get('form > .button').click();
+    cy.get('button[id="submit"]').click();
   };
 
   before(() => {
@@ -16,6 +13,7 @@ describe('login', () => {
 
   beforeEach(() => {
     cy.visit('/login');
+    cy.switchLanguage('fi');
   });
 
   it('contains buttons', () => {
@@ -30,6 +28,13 @@ describe('login', () => {
     );
     cy.contains('Ylitse MentorApp');
     cy.contains('Unohditko salasanasi?');
+  });
+
+  it('changes language on button press', () => {
+    cy.switchLanguage('en');
+    cy.contains('Login');
+    cy.switchLanguage('fi');
+    cy.contains('Kirjaudu sisään');
   });
 
   it('shows error if empty username', () => {

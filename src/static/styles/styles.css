@@ -1,19 +1,39 @@
-html {
-  font-size: 16px;
+.en-alt-text {
+  display: none;
 }
 
-@media screen and (max-width: 1200px) {
-  html {
-    font-size: 14px;
-  }
+#language-buttons {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 25px;
+  margin-top: 25px;
 }
 
-@media screen and (max-width: 1000px) {
-  html {
-    font-size: 12px;
-  }
-}
-
-body {
+#language-buttons a {
+  font-family: 'Baloo 2';
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  color: #37119d;
   margin: 0;
+}
+
+.separator {
+  border-right: 1px solid #1c325d;
+  height: 25px;
+}
+
+.footer h3 {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  margin-top: 25px;
+  color: #ffffff;
 }

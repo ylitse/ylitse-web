@@ -6,7 +6,7 @@ body {
       rgba(89, 58, 214, 0.58) 100%
     ),
     url(/static/img/milad-fakurian-E8Ufcyxz514-unsplash.jpg) no-repeat fixed
-      center;
+      right top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -160,16 +160,6 @@ input:focus {
   background-color: #e4f3fb;
 }
 
-.footer h3 {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 27px;
-  margin-top: 25px;
-  color: #ffffff;
-}
-
 /* Tooltip container */
 .tooltip {
   display: inline-block;
@@ -282,8 +272,7 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-#password-toggle,
-#password-confirmation-toggle {
+.password-toggle {
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 700;
@@ -295,6 +284,11 @@ input:checked + .slider:before {
   border: 0;
   background-color: white;
   color: #4a2acb;
+}
+
+#hide-password,
+#hide-password-confirmation {
+  display: none;
 }
 
 #submit {

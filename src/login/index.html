@@ -1,93 +1,106 @@
 <!DOCTYPE html>
 <html lang="fi">
+
   <head>
     <meta charset="utf-8" />
-    <title>Ylitse MentorApp - SOS-Lapsikylä</title>
-    <meta name="description" content="Ylitse web login" />
-    <meta name="author" content="SOS Children's Villages Finland" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/static/styles/normalize.css" />
-    <link rel="stylesheet" href="/login/styles.css" />
-    <link rel="stylesheet" type="text/css" href="/static/styles/fonts.css" />
+    <title localization-key="pageTitle"></title>
+    <meta name="description"
+      content="Ylitse web login" />
+    <meta name="author"
+      content="SOS Children's Villages Finland" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet"
+      href="/static/styles/normalize.css" />
+    <link rel="stylesheet"
+      href="/static/styles/styles.css" />
+    <link rel="stylesheet"
+      href="/login/styles.css" />
+    <link rel="stylesheet"
+      type="text/css"
+      href="/static/styles/fonts.css" />
   </head>
+
   <body>
     <main>
       <div class="container">
+        <div id="language-buttons">
+          <a id="fi-button"
+            href="#">Suomeksi</a>
+          <span class="separator"></span>
+          <a id="en-button"
+            href="#">In English</a>
+        </div>
         <div class="panels">
           <div id="mobile-header">
-            <svg
-              width="29"
+            <svg width="29"
               height="48"
               viewBox="0 0 29 48"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M11.6637 46.2633C11.9706 46.2633 12.2207 46.0348 12.3912 45.5891C12.6186 45.1435 12.7891 44.538 12.9255 43.7839C13.187 42.3556 13.3461 40.5275 13.3916 38.288V34.2661C11.8797 37.4311 11.0839 40.1162 10.9929 42.2985C10.8679 44.995 11.0839 46.309 11.6637 46.2633ZM4.20619 5.63294C4.11525 7.28969 4.09251 8.95787 4.13798 10.6489C4.13798 13.7681 4.34261 16.6246 4.74049 19.2183C5.13838 21.8119 5.71815 23.1945 6.46844 23.3659C7.84398 23.7201 9.3332 22.4289 10.9361 19.4811C12.4935 16.4875 13.312 11.1516 13.403 3.48488C13.7554 2.77648 14.7558 2.70793 16.4042 3.27922C18.0866 3.90764 18.8369 4.91312 19.3258 6.29564C19.1439 10.1804 19.1325 10.5575 19.178 13.014C19.2234 15.5163 19.2234 15.9619 19.2689 19.3554V21.0921C20.4285 19.5268 21.5312 17.9729 22.5998 16.4075C23.5774 14.9793 24.4187 13.6425 25.1348 12.3856C25.851 11.1288 26.3512 10.0433 26.6695 9.1064C27.1129 8.96929 27.488 8.90074 27.8064 8.90074C28.1247 8.90074 28.5112 8.99214 29 9.16353C28.5112 11.0374 27.2948 13.4254 25.3395 16.3275C23.3387 19.2297 21.3834 22.0176 19.4735 24.6913C19.4281 24.7827 19.3826 24.8512 19.3371 24.8969V25.1026C19.3826 27.0678 19.3599 29.0102 19.2689 30.9298C19.178 32.4951 19.0643 34.0262 18.9392 35.5458C18.8028 37.0198 18.6323 38.4251 18.4049 39.762C17.9161 42.1728 17.2227 44.1381 16.3359 45.6577C15.4492 47.223 14.1987 48 12.6072 48H12.4708C9.49236 48 8.07134 46.3661 8.20776 43.1097C8.34418 39.8077 9.81066 35.6601 12.6072 30.6556C12.7891 30.3014 12.9824 29.9243 13.2097 29.513C13.1642 27.6391 13.1188 25.8338 13.0733 24.0857C12.9824 21.8577 12.9369 20.6579 12.9369 19.3668C12.8005 19.9952 12.4026 20.8865 11.7432 22.0405C11.0384 23.2402 10.1631 24.0857 9.13994 24.8055C8.69659 25.0683 8.2305 25.2968 7.74167 25.4796C7.29831 25.6168 6.80949 25.6168 6.27519 25.4796C5.29753 25.2968 4.45629 24.8512 3.7401 24.1428C3.03528 23.4687 2.43277 22.6232 1.94394 21.5949C1.45511 20.5208 1.07997 18.8641 0.807133 17.5273C0.534299 16.1904 0.341041 14.8079 0.204624 13.3797C0.0682072 11.86 0 10.3861 0 8.95787C0 7.88384 0.045472 6.83266 0.136417 5.81576C0.318306 3.4049 0.443355 1.71388 0.5343 0.731255C0.977655 0.239943 1.53469 0 2.19404 0C2.37593 0 2.54645 0.0228517 2.72834 0.0685551C3.66053 0.205665 4.30851 0.559867 4.66092 1.14259C4.44492 2.47941 4.28577 3.9762 4.20619 5.63294Z"
-                fill="white"
-              />
+                fill="white" />
             </svg>
-            <h1>YLITSE</h1>
+            <h1 localization-key="shortTitle"></h1>
           </div>
           <div class="left panel">
             <form name="login">
-              <h1>Kirjaudu sisään</h1>
+              <h1 localization-key="loginTitle"></h1>
               <div id="login-error">
                 <img src="/static/icons/warning.svg" />
-                Käyttäjätunnus tai salasanasi on virheellinen. <br />Tarkista
-                syöttämäsi tiedot.
+                <div localization-key="loginError"></div>
               </div>
-              <label for="username">Käyttäjätunnus</label>
-              <input
-                id="username"
+              <label for="username"
+                localization-key="usernameLabel"></label>
+              <input id="username"
                 name="username"
                 type="text"
                 maxlength="100"
                 placeholder=""
-                autofocus
-              />
-              <label for="password">Salasana</label>
-              <input
-                id="password"
+                autofocus />
+              <label for="password"
+                localization-key="passwordLabel"></label>
+              <input id="password"
                 name="password"
                 type="password"
                 maxlength="100"
-                placeholder=""
-              />
-              <a id="retrieve-password" href="#">Unohditko salasanasi?</a>
-              <input class="button" type="submit" value="Kirjaudu" />
+                placeholder="" />
+              <a href="#"
+                localization-key="retrievePasswordLink"></a>
+              <button id="submit"
+                type="submit"
+                localization-key="loginButton" />
             </form>
           </div>
           <div class="right panel">
             <div class="right-text">
-              <svg
-                width="91"
+              <svg width="91"
                 height="150"
                 viewBox="0 0 91 150"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+                xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M36.3492 144.596C37.3058 144.596 38.0852 143.886 38.6166 142.501C39.3252 141.116 39.8566 139.234 40.2817 136.89C41.0966 132.452 41.5926 126.77 41.7343 119.81V107.31C37.0223 117.146 34.5424 125.491 34.259 132.274C33.8692 140.655 34.5424 144.738 36.3492 144.596ZM13.1084 18.3194C12.825 23.4685 12.7541 28.6531 12.8958 33.9087C12.8958 43.6032 13.5335 52.4809 14.7735 60.5419C16.0135 68.6029 17.8203 72.8997 20.1586 73.4324C24.4454 74.5332 29.0865 70.5205 34.0818 61.3587C38.9355 52.0548 41.4863 35.4712 41.7697 11.6433C42.868 9.44166 45.9857 9.2286 51.1227 11.0041C56.3661 12.9572 58.7043 16.0822 60.2277 20.379C59.6609 32.4528 59.6255 33.6246 59.7672 41.2595C59.9089 49.0364 59.9089 50.4213 60.0506 60.9681V66.3657C63.6643 61.5007 67.1008 56.6712 70.431 51.8062C73.4778 47.3674 76.0995 43.2126 78.3315 39.3064C80.5635 35.4002 82.1223 32.0266 83.1143 29.1147C84.496 28.6886 85.6651 28.4755 86.6571 28.4755C87.6491 28.4755 88.8536 28.7596 90.3771 29.2923C88.8536 35.1161 85.0628 42.5379 78.9692 51.5577C72.7339 60.5774 66.6402 69.2421 60.6883 77.5517C60.5466 77.8358 60.4049 78.0488 60.2632 78.1909V78.8301C60.4049 84.938 60.334 90.9748 60.0506 96.9407C59.7672 101.806 59.4129 106.564 59.0232 111.287C58.5981 115.868 58.0666 120.236 57.3581 124.391C55.8347 131.883 53.6735 137.991 50.9102 142.714C48.1468 147.579 44.2497 149.994 39.2897 149.994H38.8646C29.5825 149.994 25.1539 144.916 25.5791 134.795C26.0042 124.533 30.5744 111.642 39.2897 96.0884C39.8566 94.9876 40.4589 93.8157 41.1674 92.5373C41.0257 86.7135 40.884 81.1028 40.7423 75.6696C40.4589 68.745 40.3172 65.0163 40.3172 61.0036C39.892 62.9567 38.652 65.7265 36.5972 69.3131C34.4007 73.0418 31.6727 75.6696 28.4842 77.9068C27.1025 78.7235 25.6499 79.4338 24.1265 80.0019C22.7448 80.4281 21.2214 80.4281 19.5563 80.0019C16.5095 79.4338 13.8878 78.0488 11.6558 75.8472C9.4593 73.752 7.58161 71.1242 6.0582 67.9282C4.53479 64.5902 3.36566 59.4411 2.51539 55.2863C1.66512 51.1315 1.06284 46.8347 0.637701 42.3958C0.212564 37.6729 0 33.092 0 28.6531C0 25.3151 0.141711 22.0481 0.425136 18.8876C0.991985 11.3948 1.38169 6.13914 1.66512 3.0852C3.04681 1.55823 4.78279 0.8125 6.83762 0.8125C7.40447 0.8125 7.93589 0.883522 8.50274 1.02557C11.4078 1.4517 13.4272 2.55254 14.5255 4.3636C13.8524 8.51838 13.3564 13.1703 13.1084 18.3194Z"
-                  fill="white"
-                />
+                  fill="white" />
               </svg>
-              <h1>Ylitse MentorApp</h1>
-              <p>
-                Uusi täällä? Palvelussa voit jutella SOS-Lapsikylän valmentamien
-                vertaismentoreiden kanssa mistä tahansa mieltäsi painavasta
-                asiasta. Palvelun käyttö on luottamuksellista ja täysin
-                maksutonta.
+              <h1 localization-key="longTitle"></h1>
+              <p localization-key="appDescription">
               </p>
-              <a class="button" href="/register/">Rekisteröidy</a>
+              <a id="register-button"
+                class="button"
+                href="/register/"
+                localization-key="registrationLink"></a>
             </div>
           </div>
         </div>
         <div class="footer">
-          <h3>Palvelun tarjoaa SOS-Lapsikylä</h3>
+          <h3 localization-key="footer"></h3>
         </div>
       </div>
     </main>
     <script src="index.js"></script>
+    <script src="../localization.js"></script>
   </body>
+
 </html>

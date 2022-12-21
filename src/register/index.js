@@ -1,5 +1,5 @@
 /* eslint-disable */
-((window, document) => {
+(function (window, document) {
   const form = document.forms.namedItem('register');
 
   form.addEventListener('submit', async event => {
@@ -79,17 +79,28 @@ const isUsernameFree = async username => {
   }
 };
 
-const toggleInput = id => {
-  const input = document.getElementById(id);
-  const toggle = document.getElementById(`${id}-toggle`);
-  if (input.getAttribute('type') === 'password') {
-    input.type = 'text';
-    toggle.innerHTML = 'Piilota salasana';
-  } else {
-    input.type = 'password';
-    toggle.innerHTML = 'Näytä salasana';
-  }
+const changeVisibility = (id, visibility) =>
+  (document.getElementById(id).style.display = visibility);
+
+const toggleInput = (input, show) => {
+  const inputField = document.getElementById(input);
+  inputField.type = show ? 'text' : 'password';
+  // Hide the current toggle and show the opposite
+  changeVisibility(`${show ? 'show' : 'hide'}-${input}`, 'none');
+  changeVisibility(`${!show ? 'show' : 'hide'}-${input}`, 'unset');
 };
+
+document.getElementById('show-password').onclick = () =>
+  toggleInput('password', true);
+
+document.getElementById('hide-password').onclick = () =>
+  toggleInput('password', false);
+
+document.getElementById('show-password-confirmation').onclick = () =>
+  toggleInput('password-confirmation', true);
+
+document.getElementById('hide-password-confirmation').onclick = () =>
+  toggleInput('password-confirmation', false);
 
 const getInputValue = id => document.getElementById(id).value;
 
