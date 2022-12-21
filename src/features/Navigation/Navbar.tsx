@@ -1,4 +1,5 @@
 import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/variables';
 import styled, { css } from 'styled-components';
@@ -8,25 +9,25 @@ import { LogoContainer } from './LogoContainer';
 import { InfoDropdown } from './InfoDropdown';
 import { MobileDropdown } from './MobileDropdown';
 import { LangDropdown } from './LangDropdown';
-import { t } from 'i18next';
-
-const navigationItems = [
-  {
-    text: 'Koti',
-    url: '/',
-  },
-  {
-    text: 'Mentorit',
-    url: '/mentors',
-  },
-  {
-    text: 'Chat',
-    url: '/chat',
-  },
-];
 
 export const Navbar = () => {
   const isMobile = useMobileMode();
+  const { t } = useTranslation();
+
+  const navigationItems = [
+    {
+      text: t('navigation.home'),
+      url: '/',
+    },
+    {
+      text: t('navigation.mentors'),
+      url: '/mentors',
+    },
+    {
+      text: t('navigation.chat'),
+      url: '/chat',
+    },
+  ];
 
   return (
     <>
@@ -42,7 +43,7 @@ export const Navbar = () => {
             <Items items={navigationItems} />
             <InfoDropdown />
             <LangDropdown />
-            <Item text={t('logoutButton')} url="/logout" />
+            <Item text={t('navigation.logout')} url="/logout" />
           </RightContainer>
         </Container>
       )}

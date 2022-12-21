@@ -1,3 +1,22 @@
 {
-  "logoutButton": "Kirjaudu ulos"
+  "navigation": {
+    "logo": "YLITSE",
+    "mobile": { "menu": "Valikko" },
+    "home": "Koti",
+    "mentors": "Mentorit",
+    "chat": "Chat",
+    "info": {
+      "title": "Info",
+      "feedback": "Anna palautetta",
+      "termsAndPrivacy": "Käyttöehdot ja tietosuojaseloste",
+      "applicationInfo": "Tietoa palvelusta"
+    },
+    "language": {
+      "shortEnglish": "EN",
+      "longEnglish": "EN - In English",
+      "shortFinnish": "FI",
+      "longFinnish": "FI - Suomeksi"
+    },
+    "logout": "Kirjaudu ulos"
+  }
 }

@@ -1,6 +1,5 @@
-import type { NavigationItem } from './NavigationItems';
-
 import { useComponentVisible } from '@/hooks/useComponentShow';
+import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/variables';
 import styled, { css, keyframes } from 'styled-components';
@@ -9,20 +8,12 @@ import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 
-export const infoItems: Array<NavigationItem> = [
-  {
-    text: 'Anna palautetta',
-    url: 'https://www.sos-lapsikyla.fi',
-  },
-  {
-    text: 'Käyttöehdot ja tietosuojaseloste',
-    url: 'https://www.sos-lapsikyla.fi/tietosuojaselosteet',
-  },
-];
+export const infoItems: Array<string> = ['feedback', 'termsAndPrivacy'];
 
 export const InfoDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
+  const { t } = useTranslation();
 
   return (
     <Anchor ref={ref}>
@@ -34,7 +25,7 @@ export const InfoDropdown = () => {
           variant={'link'}
           color={isComponentVisible ? 'darkblue' : 'white'}
         >
-          Info
+          {t('navigation.info.title')}
         </Text>
         {isComponentVisible ? (
           <ChevronUp size={8} color="purple" />
@@ -46,11 +37,11 @@ export const InfoDropdown = () => {
       {isComponentVisible && (
         <Menu>
           {infoItems.map(item => (
-            <InfoItem key={item.text} {...item} />
+            <DropdownItem key={item} {t(`navigation.info.link.${item}.text`), t(`navigation.info.link.${item}.url`) } />
           ))}
           <Container onClick={() => console.log('TODO: show modal')}>
             <Text variant="linkBold" color="purple">
-              Tietoa palvelusta
+              {t('navigation.info.applicationInfo')}
             </Text>
           </Container>
         </Menu>

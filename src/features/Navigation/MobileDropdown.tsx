@@ -2,16 +2,16 @@ import { useComponentVisible } from '@/hooks/useComponentShow';
 
 import type { NavigationItem } from './NavigationItems';
 
-import { infoItems, growDownAnimation } from './InfoDropdown';
-
 import { palette } from '@/components/variables';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import { languages } from './LangDropdown';
+import { growDownAnimation } from './InfoDropdown';
 
 type Props = {
   items: Array<NavigationItem>;
@@ -19,6 +19,18 @@ type Props = {
 export const MobileDropdown: React.FC<Props> = ({ items }) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLButtonElement>(true);
+  const { t } = useTranslation();
+
+  const infoItems: Array<NavigationItem> = [
+    {
+      text: t('navigation.info.feedback'),
+      url: 'https://www.sos-lapsikyla.fi',
+    },
+    {
+      text: t('navigation.info.termsAndPrivacy'),
+      url: 'https://www.sos-lapsikyla.fi/tietosuojaselosteet',
+    },
+  ];
 
   const handleLangChange = () => {
     console.log('change language');
@@ -31,7 +43,7 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
       onClick={() => setIsComponentVisible(!isComponentVisible)}
     >
       <Text variant={'linkMobile'} color={'white'}>
-        Valikko
+        {t('navigation.mobile.menu')}
       </Text>
       {isComponentVisible ? (
         <ChevronUp size={8} color="white" />
@@ -53,13 +65,13 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
 
           {infoItems.map(item => (
             <UnstyledLink
-              key={item.text}
-              href={item.url}
+              key={t(`navigation.info.link.${item}.text`)}
+              href={t(`navigation.info.link.${item}.url`)}
               target="_blank"
               rel="noreferrer"
             >
               <Text variant="linkMobile" color="purple">
-                {item.text}
+                {t(`navigation.info.link.${item}.text`)}
               </Text>
             </UnstyledLink>
           ))}
@@ -78,7 +90,7 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
 
           <UnstyledRouteLink to="/logout">
             <Text variant="linkMobile" color="purple">
-              Kirjaudu ulos
+              {t('navigation.logout')}
             </Text>
           </UnstyledRouteLink>
         </Menu>

@@ -2,15 +2,20 @@ import styled from 'styled-components';
 
 import SvgLogo from '@/static/img/logo.svg';
 import Text from '@/components/Text';
+import { useTranslation } from 'react-i18next';
 
-export const LogoContainer = () => (
-  <Container>
-    <Logo />
-    <Text variant="logo" color="white">
-      YLITSE
-    </Text>
-  </Container>
-);
+export const LeftContainer = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Container>
+      <Logo />
+      <Text variant="logo" color="white">
+        {t('navigation.logo')}
+      </Text>
+    </Container>
+  );
+};
 
 const Logo = styled.div`
   background-image: url(${SvgLogo});

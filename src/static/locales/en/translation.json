@@ -1,3 +1,21 @@
 {
-  "logoutButton": "Logout"
+  "navigation": {
+    "logo": "YLITSE",
+    "home": "Home",
+    "mentors": "Mentors",
+    "chat": "Chat",
+    "info": {
+      "title": "Info",
+      "feedback": "Give feedback",
+      "termsAndPrivacy": "Terms and privacy policy",
+      "applicationInfo": "Application info"
+    },
+    "language": {
+      "shortEnglish": "EN",
+      "longEnglish": "EN - In English",
+      "shortFinnish": "FI",
+      "longFinnish": "FI - Suomeksi"
+    },
+    "logout": "Logout"
+  }
 }
