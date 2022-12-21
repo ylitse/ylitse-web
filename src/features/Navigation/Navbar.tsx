@@ -8,6 +8,7 @@ import { LogoContainer } from './LogoContainer';
 import { InfoDropdown } from './InfoDropdown';
 import { MobileDropdown } from './MobileDropdown';
 import { LangDropdown } from './LangDropdown';
+import { t } from 'i18next';
 
 const navigationItems = [
   {
@@ -41,7 +42,7 @@ export const Navbar = () => {
             <Items items={navigationItems} />
             <InfoDropdown />
             <LangDropdown />
-            <Item text="Kirjaudu ulos" url="/logout" />
+            <Item text={t('logoutButton')} url="/logout" />
           </RightContainer>
         </Container>
       )}

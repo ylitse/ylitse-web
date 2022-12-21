@@ -23,7 +23,7 @@
     "src/**/*.tsx",
     "src/**/*.jsx",
     "src/**/*.js",
-    "src/custom.d.ts"
+    "@/types/*.d.ts"
   ],
-  "exclude": ["e2e/**/*"],
+  "exclude": ["e2e/**/*"]
 }
