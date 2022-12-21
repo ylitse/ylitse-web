@@ -5,10 +5,12 @@ import { initReactI18next } from 'react-i18next';
 import enTranslation from './static/locales/en/translation.json';
 import fiTranslation from './static/locales/fi/translation.json';
 
-const resources = {
+export const defaultNS = 'translation';
+
+export const resources = {
   en: { translation: enTranslation },
   fi: { translation: fiTranslation },
-};
+} as const;
 
 i18n
   .use(LanguageDetector)
@@ -19,6 +21,8 @@ i18n
     interpolation: {
       escapeValue: false,
     },
+    ns: ['translation'],
+    defaultNS,
     resources,
   });
 
