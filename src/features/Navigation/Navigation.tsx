@@ -1,59 +1,19 @@
-import {
-  Logo,
-  LogoText,
-  NavBar,
-  NavBarItems,
-  NavLink,
-} from './Navigation.styles';
-import { NavigationItem } from './types';
-import Dropdown from './Dropdown';
-import NavigationItems from './NavigationItems';
+import { Navbar } from './Navbar';
+import { Routes, Route } from 'react-router-dom';
 
-const dropDownItems: Array<NavigationItem> = [
-  {
-    text: 'Anna palautetta',
-    url: 'https://www.sos-lapsikyla.fi',
-  },
-  {
-    text: 'Käyttöehdot ja tietosuojaseloste',
-    url: 'https://www.sos-lapsikyla.fi/tietosuojaselosteet',
-  },
-];
+import MentorPage from '@/features/MentorPage';
+import Logout from '@/features/Logout';
 
-const navigationItems: Array<NavigationItem> = [
-  {
-    text: 'Koti',
-    url: '/',
-  },
-  {
-    text: 'Mentorit',
-    url: '/mentors',
-  },
-  {
-    text: 'Chat',
-    url: '/chat',
-  },
-];
+const Navigation = () => (
+  <>
+    <Navbar />
 
-/**
- * Navigation bar should be added to App.tsx before routers.
- * As pages get done, the to-links should be updated if necessary
- * update the links to "Anna palautetta" and "Käyttöehdot ja tietosuojaseloste"
- */
-const NavigationBar = () => {
-  return (
-    <NavBar>
-      <Logo />
-      <LogoText>YLITSE</LogoText>
-      <NavBarItems>
-        <NavigationItems items={navigationItems} />
-        <Dropdown items={dropDownItems} />
-        <NavLink id="logout-link" to="/logout" className="navbar-link">
-          <div>Kirjaudu ulos</div>
-        </NavLink>
-      </NavBarItems>
-    </NavBar>
-  );
-};
-
-export default NavigationBar;
+    <Routes>
+      <Route path="/*" element={<div>KOTISIVU</div>} />
+      <Route path="/chat" element={<div>CHATSIVU</div>} />
+      <Route path="/mentors" element={<MentorPage />} />
+      <Route path="/logout" element={<Logout />} />
+    </Routes>
+  </>
+);
+export default Navigation;

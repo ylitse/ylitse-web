@@ -1,9 +1,8 @@
 import CSS from 'csstype';
 import { variants } from './variants';
-import { Color } from '../variables';
-import * as cssVariables from '../variables';
-
-export type TextVariant = 'h1' | 'h2' | 'h3' | 'p' | 'a';
+import { palette } from '../variables';
+import type { TextVariant } from './variants';
+import type { Color } from '../variables';
 
 type Props = {
   variant?: TextVariant;
@@ -20,7 +19,7 @@ export const Text: React.FC<Props> = ({
 }) => {
   const TextElement = variants[variant].element;
   const variantStyles = variants[variant].styles;
-  const variantColor: CSS.Properties = { color: cssVariables.palette[color] };
+  const variantColor: CSS.Properties = { color: palette[color] };
 
   return (
     <TextElement
@@ -33,5 +32,5 @@ export const Text: React.FC<Props> = ({
 };
 
 const commonStyles = {
-  color: cssVariables.palette.white,
+  color: palette.white,
 };

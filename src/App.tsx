@@ -1,8 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
-import Navigation from '@/features/Navigation';
-import Footer from '@/components/Footer';
-import MentorPage from '@/features/MentorPage';
-import Logout from '@/features/Logout';
+import Navigation from './features/Navigation';
+import Footer from './components/Footer';
 import Spinner from './components/Spinner';
 import styled from 'styled-components';
 
@@ -14,10 +11,6 @@ const App = () => {
   return isAuthenticated ? (
     <AppWrapper>
       <Navigation />
-      <Routes>
-        <Route path="/mentors" element={<MentorPage />} />
-        <Route path="/logout" element={<Logout />} />
-      </Routes>
       <Footer />
     </AppWrapper>
   ) : (
