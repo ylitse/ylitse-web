@@ -1,4 +1,5 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
+import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/variables';
 import styled from 'styled-components';
@@ -7,17 +8,15 @@ import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 import { Anchor, Button, Menu } from './InfoDropdown';
 
-export const languages = [
-  { code: 'fi', label: 'FI - Suomeksi' },
-  { code: 'en', label: 'EN - In English' },
-];
+export const languages = ['en', 'fi'];
 
 export const LangDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
+  const { t, i18n } = useTranslation();
 
-  const handleLangChange = () => {
-    console.log('change the language');
+  const changeLanguage = (langCode: string): void => {
+    i18n.changeLanguage(langCode);
     setIsComponentVisible(false);
   };
 
@@ -31,7 +30,7 @@ export const LangDropdown = () => {
           variant={'link'}
           color={isComponentVisible ? 'darkblue' : 'white'}
         >
-          FI
+          {t(`navigation.language.${i18n.language}.short`)}
         </Text>
         {isComponentVisible ? (
           <ChevronUp size={8} color="purple" />
@@ -43,9 +42,9 @@ export const LangDropdown = () => {
       {isComponentVisible && (
         <Menu>
           {languages.map(lang => (
-            <Item key={lang.code} onClick={handleLangChange}>
+            <Item key={lang} onClick={() => changeLanguage(lang)}>
               <Text color="purple" variant="linkBold">
-                {lang.label}
+                {t(`navigation.language.${lang}.long`)}
               </Text>
             </Item>
           ))}

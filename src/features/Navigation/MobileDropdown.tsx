@@ -19,21 +19,10 @@ type Props = {
 export const MobileDropdown: React.FC<Props> = ({ items }) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLButtonElement>(true);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const infoItems: Array<NavigationItem> = [
-    {
-      text: t('navigation.info.feedback'),
-      url: 'https://www.sos-lapsikyla.fi',
-    },
-    {
-      text: t('navigation.info.termsAndPrivacy'),
-      url: 'https://www.sos-lapsikyla.fi/tietosuojaselosteet',
-    },
-  ];
-
-  const handleLangChange = () => {
-    console.log('change language');
+  const changeLanguage = (langCode: string): void => {
+    i18n.changeLanguage(langCode);
     setIsComponentVisible(false);
   };
 
@@ -79,9 +68,9 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
           <Divider />
 
           {languages.map(lang => (
-            <UnstyledDiv key={lang.code} onClick={handleLangChange}>
+            <UnstyledDiv key={lang} onClick={() => changeLanguage(lang)}>
               <Text variant="linkMobile" color="purple">
-                {lang.label}
+                {t(`navigation.language.${lang}.long`)}
               </Text>
             </UnstyledDiv>
           ))}

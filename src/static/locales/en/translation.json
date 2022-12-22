@@ -6,15 +6,27 @@
     "chat": "Chat",
     "info": {
       "title": "Info",
-      "feedback": "Give feedback",
-      "termsAndPrivacy": "Terms and privacy policy",
+      "link": {
+        "feedback": {
+          "text": "Give feedback",
+          "url": "https://www.sos-lapsikyla.fi"
+        },
+        "termsAndPrivacy": {
+          "text": "Terms and privacy policy",
+          "url": "https://www.sos-lapsikyla.fi/tietosuojaselosteet"
+        }
+      },
       "applicationInfo": "Application info"
     },
     "language": {
-      "shortEnglish": "EN",
-      "longEnglish": "EN - In English",
-      "shortFinnish": "FI",
-      "longFinnish": "FI - Suomeksi"
+      "en": {
+        "short": "En",
+        "long": "EN - In English"
+      },
+      "fi": {
+        "short": "Fi",
+        "long": "Fi - Suomeksi"
+      }
     },
     "logout": "Logout"
   }
