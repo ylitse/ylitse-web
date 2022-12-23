@@ -6,7 +6,7 @@ import {
   basicSourceSansText,
 } from '@/components/variables';
 import { BasicInfo } from './BasicInfo';
-import { Mentor } from '../../../mentorPageApi';
+import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {

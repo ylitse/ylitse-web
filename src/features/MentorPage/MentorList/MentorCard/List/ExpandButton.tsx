@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { TextButton } from '@/components/Buttons';
-import { Mentor } from '../../../mentorPageApi';
+import { Mentor } from '@/features/MentorPage/mentorPageApi';
 
 import { useTranslation } from 'react-i18next';
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Text } from '@/components/Text/Text';
 import { Skills } from './Skills';
 import { TextButton } from '@/components/Buttons';
-import { Mentor } from '../../../mentorPageApi';
+import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { Languages } from './Languages';
 import { breakpoints } from '@/components/variables';
 

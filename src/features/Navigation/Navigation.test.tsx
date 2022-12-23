@@ -1,6 +1,6 @@
 import Navigation from './Navigation';
 import { BrowserRouter } from 'react-router-dom';
-import { server } from '../../test/server';
+import { server } from '@/test/server';
 import { rest } from 'msw';
 import { renderWithProviders } from '@/test/testStore';
 import { act } from '@testing-library/react';

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../../../../components/variables';
-import { Text } from '../../../../components/Text/Text';
+import * as cssVariables from '@/components/variables';
+import { Text } from '@/components/Text/Text';
 import { FiltersButton } from './FiltersButton';
 import { useMobileMode } from '@/hooks/useMobileMode';
 import { useTranslation } from 'react-i18next';

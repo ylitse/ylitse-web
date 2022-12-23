@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import * as cssVariables from '../../../../components/variables';
+import * as cssVariables from '@/components/variables';
 import { THREE_DOTS } from './usePagination';
 
 type Props = {

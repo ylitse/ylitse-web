@@ -3,13 +3,13 @@ import MentorsFilter from './MentorsFilter';
 import MentorList from './MentorList';
 import PageWithTransition from '../../components/PageWithTransition';
 import MentorCard from './MentorList/MentorCard/Expanded';
-import Spinner from '../../components/Spinner';
+import Spinner from '@/components/Spinner';
 import {
   Mentor,
   selectFilteredMentors,
   useGetMentorsQuery,
 } from './mentorPageApi';
-import { useAppSelector } from '../../store';
+import { useAppSelector } from '@/store';
 
 const MentorPage = () => {
   const [selectedMentor, setSelectedMentor] = React.useState<Mentor | null>(

@@ -1,6 +1,6 @@
 import MentorPage from './MentorPage';
-import { server } from '../../test/server';
-import { renderWithProviders } from '../../test/testStore';
+import { server } from '@/test/server';
+import { renderWithProviders } from '@/test/testStore';
 import { rest } from 'msw';
 
 const mentorsResponse = {
