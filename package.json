@@ -66,6 +66,9 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.2"
   },
+  "resolutions": {
+    "react-i18next": ">=11.16.4"
+  },
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
