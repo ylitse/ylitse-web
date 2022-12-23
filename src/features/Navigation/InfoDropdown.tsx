@@ -37,7 +37,11 @@ export const InfoDropdown = () => {
       {isComponentVisible && (
         <Menu>
           {infoItems.map(item => (
-            <DropdownItem key={item} {t(`navigation.info.link.${item}.text`), t(`navigation.info.link.${item}.url`) } />
+            <DropdownItem
+              key={item}
+              text={t(`navigation.info.link.${item}.text`)}
+              url={t(`navigation.info.link.${item}.url`)}
+            />
           ))}
           <Container onClick={() => console.log('TODO: show modal')}>
             <Text variant="linkBold" color="purple">

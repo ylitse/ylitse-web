@@ -52,9 +52,9 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
 
           <Divider />
 
-          {infoItems.map(item => (
+          {infoItems.map((item: string) => (
             <UnstyledLink
-              key={t(`navigation.info.link.${item}.text`)}
+              key={item}
               href={t(`navigation.info.link.${item}.url`)}
               target="_blank"
               rel="noreferrer"
