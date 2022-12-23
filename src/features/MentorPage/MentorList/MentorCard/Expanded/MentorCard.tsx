@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import { Header } from './Header';
 import { Content } from './Content';
-import { IconButton } from '../../../../../components/Buttons';
-import * as cssVariables from '../../../../../components/variables';
+import { IconButton } from '@/components/Buttons';
+import * as cssVariables from '@/components/variables';
 import { Mentor } from '../../../mentorPageApi';
 import { useMobileMode } from '@/hooks/useMobileMode';
 import { breakpoints } from '@/components/variables';

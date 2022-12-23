@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import FooterLogo from '../../static/img/footer-logo.svg';
+import { useTranslation } from 'react-i18next';
+
+import FooterLogo from '@/static/img/footer-logo.svg';
 import * as cssVariables from '../variables';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <StyledFooter>
-      <StyledFooterText>Palvelun tarjoaa</StyledFooterText>
+      <StyledFooterText>{t('footer')}</StyledFooterText>
     </StyledFooter>
   );
 };

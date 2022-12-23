@@ -1,15 +1,18 @@
 import styled from 'styled-components';
-import { Text } from '../../../../../components/Text/Text';
-import { SimpleChip } from '../../../../../components/Chip';
+import { Text } from '@/components/Text/Text';
+import { SimpleChip } from '@/components/Chip';
+
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   skills: Array<string>;
 };
 
 export const Skills = ({ skills }: Props) => {
+  const { t } = useTranslation();
   return (
     <Container>
-      <Header variant="h3">Voin auttaa myös näissä</Header>
+      <Header variant="h3">{t('mentorPage.card.skills')}</Header>
       <SkillChips>
         {skills.map(skill => (
           <SimpleChip key={skill} text={skill} />

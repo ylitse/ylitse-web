@@ -1,12 +1,15 @@
 import styled from 'styled-components';
-import { SimpleChip } from '../../../../../components/Chip';
+import { SimpleChip } from '@/components/Chip';
 import { StyledText } from './Languages';
-import * as cssVariables from '../../../../../components/variables';
+import * as cssVariables from '@/components/variables';
+
+import { useTranslation } from 'react-i18next';
 
 export const Skills = ({ skills }: { skills: Array<string> }) => {
+  const { t } = useTranslation();
   return (
     <Container>
-      <StyledText variant="h3">Voin auttaa myös näissä</StyledText>
+      <StyledText variant="h3">{t('mentorPage.card.skills')}</StyledText>
       <SkillChips>
         {skills.map(item => (
           <SimpleChip key={item} text={item} />

@@ -4,6 +4,7 @@ import * as cssVariables from '../../../../components/variables';
 import { Text } from '../../../../components/Text/Text';
 import { FiltersButton } from './FiltersButton';
 import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   headLine: string;
@@ -19,15 +20,12 @@ const Filters: React.FC<Props> = ({
   children,
 }) => {
   const isMobile = useMobileMode();
+  const { t } = useTranslation();
 
   return isMobile ? (
     <MobileContainer>
       <MobileHeader variant="h1">{headLine}</MobileHeader>
-      <Text variant="p">
-        Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit
-        listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita
-        ongelmasi perusteella.{' '}
-      </Text>
+      <Text variant="p">{t('mentorPage.filters.description')}</Text>
     </MobileContainer>
   ) : (
     <Container>

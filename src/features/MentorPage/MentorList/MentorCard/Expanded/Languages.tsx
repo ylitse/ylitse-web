@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { SimpleChip } from '../../../../../components/Chip';
-import { Text } from '../../../../../components/Text/Text';
+import { SimpleChip } from '@/components/Chip';
+import { Text } from '@/components/Text/Text';
 import { breakpoints } from '@/components/variables';
+
+import { useTranslation } from 'react-i18next';
 
 export const Languages = ({
   languages,
@@ -10,10 +12,11 @@ export const Languages = ({
   languages: Array<string>;
   isMobile: boolean;
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       <StyledText variant="h3" color={isMobile ? 'darkpurple' : 'white'}>
-        Puhun näitä kieliä
+        {t('mentorPage.card.languages')}
       </StyledText>
       <SkillChips>
         {languages.map(item => (

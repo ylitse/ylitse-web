@@ -1,11 +1,14 @@
 import styled from 'styled-components';
-import { Text } from '../../../../../components/Text/Text';
-import * as cssVariables from '../../../../../components/variables';
+import { Text } from '@/components/Text/Text';
+import * as cssVariables from '@/components/variables';
+
+import { useTranslation } from 'react-i18next';
 
 export const Story = ({ story }: { story: string }) => {
+  const { t } = useTranslation();
   return (
     <>
-      <Text variant="h3">Tarinani</Text>
+      <Text variant="h3">{t('mentorPage.card.bio')}</Text>
       <TruncatedMultiline>{story}</TruncatedMultiline>
     </>
   );
