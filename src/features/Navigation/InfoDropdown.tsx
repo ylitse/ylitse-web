@@ -8,8 +8,6 @@ import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 
-export const infoItems: Array<string> = ['feedback', 'termsAndPrivacy'];
-
 export const InfoDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
@@ -36,14 +34,19 @@ export const InfoDropdown = () => {
 
       {isComponentVisible && (
         <Menu>
-          {infoItems.map(item => (
-            <DropdownItem
-              key={item}
-              text={t(`navigation.info.link.${item}.text`)}
-              url={t(`navigation.info.link.${item}.url`)}
-            />
-          ))}
-          <Container onClick={() => console.log('TODO: show modal')}>
+          <DropdownItem
+            {...{
+              text: t('navigation.info.link.feedback.text'),
+              url: t('navigation.info.link.feedback.url'),
+            }}
+          />
+          <DropdownItem
+            {...{
+              text: t('navigation.info.link.termsAndPrivacy.text'),
+              url: t('navigation.info.link.termsAndPrivacy.url'),
+            }}
+          />
+          <DropdownLink onClick={() => console.log('TODO: show modal')}>
             <Text variant="linkBold" color="purple">
               {t('navigation.info.applicationInfo')}
             </Text>

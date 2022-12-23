@@ -8,8 +8,6 @@ import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 import { Anchor, Button, Menu } from './InfoDropdown';
 
-export const languages = ['en', 'fi'];
-
 export const LangDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
@@ -30,7 +28,9 @@ export const LangDropdown = () => {
           variant={'link'}
           color={isComponentVisible ? 'darkblue' : 'white'}
         >
-          {t(`navigation.language.${i18n.language}.short`)}
+          {i18n.language === 'en'
+            ? t(`navigation.language.en.short`)
+            : t(`navigation.language.fi.short`)}
         </Text>
         {isComponentVisible ? (
           <ChevronUp size={8} color="purple" />
@@ -41,13 +41,16 @@ export const LangDropdown = () => {
 
       {isComponentVisible && (
         <Menu>
-          {languages.map(lang => (
-            <Item key={lang} onClick={() => changeLanguage(lang)}>
-              <Text color="purple" variant="linkBold">
-                {t(`navigation.language.${lang}.long`)}
-              </Text>
-            </Item>
-          ))}
+          <Item onClick={() => changeLanguage('en')}>
+            <Text color="purple" variant="linkBold">
+              {t(`navigation.language.en.long`)}
+            </Text>
+          </Item>
+          <Item onClick={() => changeLanguage('fi')}>
+            <Text color="purple" variant="linkBold">
+              {t(`navigation.language.fi.long`)}
+            </Text>
+          </Item>
         </Menu>
       )}
     </Anchor>

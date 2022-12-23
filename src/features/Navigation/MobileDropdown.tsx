@@ -1,17 +1,15 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
+import { useTranslation } from 'react-i18next';
 
 import type { NavigationItem } from './NavigationItems';
 
 import { palette } from '@/components/variables';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
 
 import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import { languages } from './LangDropdown';
-import { growDownAnimation } from './InfoDropdown';
 
 type Props = {
   items: Array<NavigationItem>;
@@ -51,29 +49,37 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
           ))}
 
           <Divider />
-
-          {infoItems.map((item: string) => (
-            <UnstyledLink
-              key={item}
-              href={t(`navigation.info.link.${item}.url`)}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Text variant="linkMobile" color="purple">
-                {t(`navigation.info.link.${item}.text`)}
-              </Text>
-            </UnstyledLink>
-          ))}
+          <UnstyledLink
+            href={t(`navigation.info.link.feedback.url`)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Text variant="linkMobile" color="purple">
+              {t('navigation.info.link.feedback.text')}
+            </Text>
+          </UnstyledLink>
+          <UnstyledLink
+            href={t(`navigation.info.link.termsAndPrivacy.url`)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Text variant="linkMobile" color="purple">
+              {t('navigation.info.link.termsAndPrivacy.text')}
+            </Text>
+          </UnstyledLink>
 
           <Divider />
 
-          {languages.map(lang => (
-            <UnstyledDiv key={lang} onClick={() => changeLanguage(lang)}>
-              <Text variant="linkMobile" color="purple">
-                {t(`navigation.language.${lang}.long`)}
-              </Text>
-            </UnstyledDiv>
-          ))}
+          <UnstyledDiv onClick={() => changeLanguage('en')}>
+            <Text variant="linkMobile" color="purple">
+              {t(`navigation.language.en.long`)}
+            </Text>
+          </UnstyledDiv>
+          <UnstyledDiv onClick={() => changeLanguage('fi')}>
+            <Text variant="linkMobile" color="purple">
+              {t(`navigation.language.fi.long`)}
+            </Text>
+          </UnstyledDiv>
 
           <Divider />
 
