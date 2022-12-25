@@ -2,7 +2,7 @@ import { useComponentVisible } from '@/hooks/useComponentShow';
 
 import type { NavigationItem } from './NavigationItems';
 
-import { infoItems } from './InfoDropdown';
+import { infoItems, growDownAnimation } from './InfoDropdown';
 
 import { palette } from '@/components/variables';
 import styled from 'styled-components';
@@ -108,6 +108,9 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 1px 0.5px ${palette.midgray};
+
+  animation: ${growDownAnimation} 400ms ease-in-out forwards;
+  transform-origin: top center;
 `;
 
 const UnstyledLink = styled.a`

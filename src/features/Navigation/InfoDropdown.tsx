@@ -3,7 +3,7 @@ import type { NavigationItem } from './NavigationItems';
 import { useComponentVisible } from '@/hooks/useComponentShow';
 
 import { palette } from '@/components/variables';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { DropdownItem, DropdownLink } from './DropdownItem';
 import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
@@ -85,6 +85,18 @@ export const Button = styled.button<{ isExpanded?: boolean }>`
   }
 `;
 
+export const growDownAnimation = keyframes`
+    0% {
+        transform: scaleY(0)
+    }
+    80% {
+        transform: scaleY(1.1)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+`;
+
 export const Menu = styled.div`
   position: absolute;
   display: flex;
@@ -92,6 +104,8 @@ export const Menu = styled.div`
   width: max-content;
   top: 60px;
   left: -1px;
+  animation: ${growDownAnimation} 400ms ease-in-out forwards;
+  transform-origin: top center;
 
   div:first-of-type {
     border-top: 0.1rem solid ${palette.midgray};
