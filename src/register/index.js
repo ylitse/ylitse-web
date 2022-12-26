@@ -59,7 +59,7 @@
         window.location.replace('/login');
       }
     } catch (error) {
-      document.querySelector(`label[for=submit]`).style.display = 'flex';
+      document.getElementById('submit-error').style.display = 'flex';
     }
   });
 })(window, document);

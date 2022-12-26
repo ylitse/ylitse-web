@@ -28,7 +28,11 @@
   height: 25px;
 }
 
-footer h3 {
+#submit-error {
+  display: none;
+}
+
+.footer h3 {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 600;
