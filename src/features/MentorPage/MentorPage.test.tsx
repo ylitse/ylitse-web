@@ -44,7 +44,7 @@ afterAll(() => server.close());
 
 server.use(
   rest.get(`api/mentors`, (_req, res, ctx) => {
-    return res(ctx.json(mentorsResponse), ctx.delay(150));
+    return res(ctx.json(mentorsResponse), ctx.delay(1000));
   }),
 );
 
@@ -54,7 +54,7 @@ describe('<MentorPage />', () => {
       renderWithProviders(<MentorPage />);
 
     // should be loading initially
-    expect(getByRole('progressbar')).toBeInTheDocument();
+    expect(await findByRole('progressbar')).toBeInTheDocument();
 
     // after some time, the mentors should be received
     expect(
@@ -85,7 +85,7 @@ describe('<MentorPage />', () => {
       renderWithProviders(<MentorPage />);
 
     // should be loading initially
-    expect(getByRole('progressbar')).toBeInTheDocument();
+    expect(await findByRole('progressbar')).toBeInTheDocument();
 
     // after some time, the mentors should be received
     expect(
@@ -123,7 +123,7 @@ describe('<MentorPage />', () => {
     );
 
     // should be loading initially
-    expect(getByRole('progressbar')).toBeInTheDocument();
+    expect(await findByRole('progressbar')).toBeInTheDocument();
 
     // after some time, the mentors should be received
     expect(
@@ -154,17 +154,15 @@ describe('<MentorPage />', () => {
       rest.get(`api/mentors`, (_req, res, ctx) => {
         return res(
           ctx.json([{ resources: [{ wrong: 'data' }] }]),
-          ctx.delay(150),
+          ctx.delay(1000),
         );
       }),
     );
 
-    const { getByRole, findByRole, queryAllByRole } = renderWithProviders(
-      <MentorPage />,
-    );
+    const { findByRole, queryAllByRole } = renderWithProviders(<MentorPage />);
 
     // should be loading initially
-    expect(getByRole('progressbar')).toBeInTheDocument();
+    expect(await findByRole('progressbar')).toBeInTheDocument();
 
     // after some time, the response should be received
     expect(
