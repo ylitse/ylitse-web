@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../variables';
+import { breakpoints, spacing, palette } from '../variables';
 import { useMobileMode } from '@/hooks/useMobileMode';
 
-type PageLayoutProps = {
+type Props = {
   children: React.ReactNode;
 };
 
-const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
+const PageLayout: React.FC<Props> = ({ children }) => {
   const isMobile = useMobileMode();
 
   return (
@@ -18,7 +18,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
 };
 
 const BasicPageElement = styled.div`
-  background-color: ${cssVariables.palette.lightblue};
+  background-color: ${palette.lightblue};
   position: relative;
   width: 100vw;
   height: auto;
@@ -33,16 +33,16 @@ const PageContent = styled.div`
   max-width: 76vw;
   height: auto;
   margin: auto;
-  margin-top: ${cssVariables.spacing.layout_outer_spacing};
-  margin-bottom: ${cssVariables.spacing.layout_outer_spacing};
+  margin-top: ${spacing.layout_outer_spacing};
+  margin-bottom: ${spacing.layout_outer_spacing};
   display: flex;
   flex-direction: column;
   @media screen and (max-width: 1500px) {
     width: 1130px;
-    max-width: calc(100vw - (${cssVariables.spacing.layout_spacing} * 2));
+    max-width: calc(100vw - (${spacing.layout_spacing} * 2));
   }
 
-  @media screen and (max-width: ${cssVariables.breakpoints.mobile}) {
+  @media screen and (max-width: ${breakpoints.mobile}) {
     flex: 1;
   }
 `;
