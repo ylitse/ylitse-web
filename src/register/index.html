@@ -66,7 +66,7 @@
             maxlength="100"
             minlength="2"
             pattern=".{2,100}"
-            onkeyup="checkInput('username')"
+            onblur="checkInput('username')"
             required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
@@ -111,7 +111,7 @@
             maxlength="100"
             minlength="8"
             pattern=".{8,100}"
-            onkeyup="checkInput('password')"
+            onblur="checkInput('password')"
             required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
@@ -146,7 +146,7 @@
             name="password-confirmation"
             type="password"
             maxlength="100"
-            onkeyup="checkInput('password-confirmation')"
+            onblur="checkInput('password-confirmation')"
             required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
@@ -160,7 +160,7 @@
             name="email"
             type="email"
             maxlength="200"
-            onkeyup="checkInput('email')" />
+            onblur="checkInput('email')" />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
             <span localization-key="emailError">
@@ -188,7 +188,7 @@
             maxlength="30"
             minlength="2"
             pattern=".{2,30}"
-            onkeyup="checkInput('display-name')"
+            onblur="checkInput('display-name')"
             required />
           <label class="error-message">
             <img src="/static/icons/warning.svg" />
