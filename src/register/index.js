@@ -64,6 +64,8 @@
   });
 })(window, document);
 
+let passwordConfirmationHasBeenAccessed = false;
+
 const isUsernameFree = async username => {
   const response = await fetch('/api/search?login_name=' + username, {
     method: 'HEAD',
@@ -161,6 +163,8 @@ const removeError = input => {
 };
 
 const validatePasswordConfirmation = () => {
+  passwordConfirmationHasBeenAccessed = true;
+
   const password = document.getElementById('password');
   const confirmation = document.getElementById('password-confirmation');
   password.value === confirmation.value
@@ -210,8 +214,10 @@ const checkInput = async id => {
       }
     }
   } else {
-    if (input.id !== 'password-confirmation') validateInput(input);
-    if (input.id === 'password' || input.id === 'password-confirmation')
+    if (input.id === 'password-confirmation') validatePasswordConfirmation();
+    else validateInput(input);
+
+    if (input.id === 'password' && passwordConfirmationHasBeenAccessed)
       validatePasswordConfirmation();
   }
 };
