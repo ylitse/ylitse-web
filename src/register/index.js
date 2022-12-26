@@ -59,7 +59,8 @@
         window.location.replace('/login');
       }
     } catch (error) {
-      document.getElementById('submit-error').style.display = 'flex';
+      document.getElementById('submit-error-snackbar').className = 'show';
+      // document.getElementById('submit-error-snackbar').className.replace('show', '');
     }
   });
 })(window, document);
