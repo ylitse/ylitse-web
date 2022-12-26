@@ -167,11 +167,15 @@ const validatePasswordConfirmation = () => {
 
   const password = document.getElementById('password');
   const confirmation = document.getElementById('password-confirmation');
-  password.value === confirmation.value
-    ? removeError(confirmation) // Passwords match
-    : displayError(confirmation); // Passwords don't match
-  if (confirmation.value.length >= 8)
-    confirmation.classList.add('input-checkmark');
+  if (password.value === confirmation.value) {
+    // Passwords match
+    removeError(confirmation);
+    if (confirmation.value.length >= 8)
+      confirmation.classList.add('input-checkmark');
+  } else {
+    // Passwords don't match
+    displayError(confirmation);
+  }
 };
 
 const validateInput = input => {
