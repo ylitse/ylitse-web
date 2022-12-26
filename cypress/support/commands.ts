@@ -9,7 +9,7 @@ Cypress.Commands.add('switchLanguage', (language: string): void => {
 });
 
 Cypress.Commands.add('fillInput', (id: string, value: string): void => {
-  cy.get(`input[id="${id}"]`).type(value);
+  cy.get(`input[id="${id}"]`).type(value).blur();
 });
 
 Cypress.Commands.add(

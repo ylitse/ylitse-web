@@ -1,6 +1,6 @@
 describe('register', () => {
   const clear = (input: string): void => {
-    cy.get(`input[id="${input}"]`).clear();
+    cy.get(`input[id="${input}"]`).clear().blur();
   };
 
   const click = (button: string): void => {
