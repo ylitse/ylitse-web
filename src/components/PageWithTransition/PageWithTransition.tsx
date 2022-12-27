@@ -28,10 +28,30 @@ const PageWithTransition: React.FC<Props> = ({ children }) => {
       ) : (
         <Content>{children}</Content>
       )}
-      <Layer isTransition={isTransition} color="blue2" delay={0} />
-      <Layer isTransition={isTransition} color="purple" delay={0.3} />
-      <Layer isTransition={isTransition} color="white" delay={0.12} />
-      <Layer isTransition={isTransition} color="orange2" delay={0.08} />
+      <Layer
+        role="transition"
+        isTransition={isTransition}
+        color="blue2"
+        delay={0}
+      />
+      <Layer
+        role="transition"
+        isTransition={isTransition}
+        color="purple"
+        delay={0.3}
+      />
+      <Layer
+        role="transition"
+        isTransition={isTransition}
+        color="white"
+        delay={0.12}
+      />
+      <Layer
+        role="transition"
+        isTransition={isTransition}
+        color="orange2"
+        delay={0.08}
+      />
     </Container>
   );
 };

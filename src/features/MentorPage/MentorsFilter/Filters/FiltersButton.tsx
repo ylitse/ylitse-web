@@ -6,7 +6,7 @@ import {
 import { useAppSelector } from '../../../../store';
 
 import styled from 'styled-components';
-import * as cssVariables from '../../../../components/variables';
+import { palette } from '../../../../components/variables';
 import { Text } from '../../../../components/Text/Text';
 import SearchIcon from '../../../../static/icons/search.svg';
 
@@ -53,14 +53,12 @@ const SearchButton = styled.button<{ isFiltersApplied: boolean }>`
   right: 1rem;
   border: none;
   background-color: ${({ isFiltersApplied }) =>
-    isFiltersApplied
-      ? cssVariables.palette.darkpurple
-      : cssVariables.palette.whiteblue};
+    isFiltersApplied ? palette.darkpurple : palette.whiteblue};
 
   border-radius: 16px;
   height: 3rem;
   padding: 0.6rem;
-  box-shadow: 0.1rem 0.1rem ${cssVariables.palette.blurbackground};
+  box-shadow: 0.1rem 0.1rem ${palette.blurbackground};
 
   &:hover {
     opacity: 0.7;
