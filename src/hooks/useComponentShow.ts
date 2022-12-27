@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
+import { useEscape } from './useEscape';
 
-export function useComponentVisible<
+export const useComponentVisible = <
   A extends HTMLButtonElement | HTMLDivElement,
->(initialIsVisible: boolean) {
+>(
+  initialIsVisible: boolean,
+) => {
   const [isComponentVisible, setIsComponentVisible] =
     useState(initialIsVisible);
   const ref = useRef<A>(null);
@@ -13,6 +16,8 @@ export function useComponentVisible<
     }
   };
 
+  useEscape(() => setIsComponentVisible(false));
+
   useEffect(() => {
     document.addEventListener('click', handleClickOutside, true);
     return () => {
@@ -21,4 +26,4 @@ export function useComponentVisible<
   }, []);
 
   return { ref, isComponentVisible, setIsComponentVisible };
-}
+};
