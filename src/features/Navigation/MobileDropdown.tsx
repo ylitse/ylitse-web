@@ -10,6 +10,7 @@ import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 import { NavLink as RouterNavLink } from 'react-router-dom';
+import { growDownAnimation } from './InfoDropdown';
 
 type Props = {
   items: Array<NavigationItem>;

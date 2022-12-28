@@ -34,19 +34,19 @@ export const InfoDropdown = () => {
 
       {isComponentVisible && (
         <Menu>
-          <DropdownItem
+          <InfoItem
             {...{
               text: t('navigation.info.link.feedback.text'),
               url: t('navigation.info.link.feedback.url'),
             }}
           />
-          <DropdownItem
+          <InfoItem
             {...{
               text: t('navigation.info.link.termsAndPrivacy.text'),
               url: t('navigation.info.link.termsAndPrivacy.url'),
             }}
           />
-          <DropdownLink onClick={() => console.log('TODO: show modal')}>
+          <Container onClick={() => console.log('TODO: show modal')}>
             <Text variant="linkBold" color="purple">
               {t('navigation.info.applicationInfo')}
             </Text>

@@ -4,7 +4,7 @@ import SvgLogo from '@/static/img/logo.svg';
 import Text from '@/components/Text';
 import { useTranslation } from 'react-i18next';
 
-export const LeftContainer = () => {
+export const LogoContainer = () => {
   const { t } = useTranslation();
 
   return (
