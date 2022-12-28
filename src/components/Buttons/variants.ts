@@ -1,29 +1,29 @@
-import * as cssVariables from '../variables';
+import { palette } from '../variables';
 
 export const variants = {
   dark: {
-    backgroundColor: cssVariables.palette.purple,
-    color: cssVariables.palette.orange,
+    backgroundColor: palette.purple,
+    color: palette.orange,
     ['&: hover']: {
-      backgroundColor: cssVariables.palette.darkpurple,
+      backgroundColor: palette.darkpurple,
     },
     ['&: focus']: {
-      outline: `1px solid ${cssVariables.palette.purple}`,
+      outline: `1px solid ${palette.purple}`,
       outlineOffset: '3px',
     },
     ['&: active, &: visited']: {
-      backgroundColor: cssVariables.palette.midpurple,
-      color: cssVariables.palette.orange2,
+      backgroundColor: palette.midpurple,
+      color: palette.orange2,
       outline: 'none',
     },
   },
   light: {
-    border: `2px solid ${cssVariables.palette.purple}`,
-    backgroundColor: cssVariables.palette.white,
-    color: cssVariables.palette.purple,
+    border: `2px solid ${palette.purple}`,
+    backgroundColor: palette.white,
+    color: palette.purple,
     ['&: hover']: {
-      border: `2px solid ${cssVariables.palette.darkpurple}`,
-      color: cssVariables.palette.darkpurple,
+      border: `2px solid ${palette.darkpurple}`,
+      color: palette.darkpurple,
       outline: `none`,
     },
     ['&: focus']: {
@@ -34,8 +34,8 @@ export const variants = {
     },
   },
   disabled: {
-    backgroundColor: cssVariables.palette.midgray,
-    color: cssVariables.palette.fadedgray,
+    backgroundColor: palette.midgray,
+    color: palette.fadedgray,
     ['&: hover']: {
       outline: `none`,
     },

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { SimpleChip } from '@/components/Chip';
 import { StyledText } from './Languages';
-import * as cssVariables from '@/components/variables';
+import { palette } from '@/components/variables';
 
 import { useTranslation } from 'react-i18next';
 
@@ -40,6 +40,6 @@ const SkillChips = styled.div`
     display: block;
     position: absolute;
     top: 3.5rem;
-    background: linear-gradient(transparent, ${cssVariables.palette.white});
+    background: linear-gradient(transparent, ${palette.white});
   }
 `;

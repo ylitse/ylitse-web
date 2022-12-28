@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import FooterLogo from '@/static/img/footer-logo.svg';
-import * as cssVariables from '../variables';
+import { palette, basicSourceSansText, breakpoints } from '../variables';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -18,7 +18,7 @@ const StyledFooter = styled.div`
   position: relative;
   bottom: 0;
   left: 0;
-  background-color: ${cssVariables.palette.footerblue};
+  background-color: ${palette.footerblue};
   width: 100vw;
   height: 3.5rem;
   display: flex;
@@ -27,9 +27,9 @@ const StyledFooter = styled.div`
 `;
 
 const StyledFooterText = styled.div`
-  ${cssVariables.basicSourceSansText};
+  ${basicSourceSansText};
   font-size: 1rem;
-  color: ${cssVariables.palette.darkblue};
+  color: ${palette.darkblue};
   line-height: 3.5rem;
   &:after {
     position: relative;
@@ -44,12 +44,12 @@ const StyledFooterText = styled.div`
     width: 11rem;
     background-color: transparent;
     margin-left: 1rem;
-    @media screen and (max-width: ${cssVariables.breakpoints.mobile}) {
+    @media screen and (max-width: ${breakpoints.mobile}) {
       background-image: none;
       content: 'SOS-lapsikylä';
-      ${cssVariables.basicSourceSansText};
+      ${basicSourceSansText};
       font-size: 1rem;
-      color: ${cssVariables.palette.darkblue};
+      color: ${palette.darkblue};
       width: 6rem;
     }
   }

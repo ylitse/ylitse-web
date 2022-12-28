@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
-import * as cssVariables from '../variables';
 import styled from 'styled-components';
+import { basicBalooText, spacing } from '../variables';
 import { variants } from './variants';
 
 export type ButtonColorVariant = 'light' | 'dark' | 'disabled';
@@ -24,13 +24,13 @@ const TextButton = <T extends ElementType = 'button'>({
 };
 
 const StyledTextButton = styled.button<{ variant: ButtonColorVariant }>`
-  ${cssVariables.basicBalooText}
+  ${basicBalooText}
   border: none;
   line-height: 150%;
-  padding: ${cssVariables.spacing.small_button_padding};
+  padding: ${spacing.small_button_padding};
   margin-bottom: 4px;
   border-radius: 1.25rem;
-  bottom: ${cssVariables.spacing.layout_spacing};
+  bottom: ${spacing.layout_spacing};
   width: fit-content;
   cursor: pointer;
   &:hover {

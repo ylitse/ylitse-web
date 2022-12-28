@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as cssVariables from '@/components/variables';
+import { palette, basicSourceSansText } from '@/components/variables';
 import SearchBar from '@/components/SearchBar';
 import { selectSearchString, changeSearchString } from '../mentorsFilterSlice';
 import { useAppDispatch, useAppSelector } from '@/store';
@@ -28,8 +28,8 @@ export const MentorSearch = () => {
 
 const InfoText = styled.div`
   flex: 0 0 auto;
-  color: ${cssVariables.palette.darkblue};
-  ${cssVariables.basicSourceSansText};
+  color: ${palette.darkblue};
+  ${basicSourceSansText};
   font-weight: 400;
   font-size: 1.25rem;
   width: 47%;
