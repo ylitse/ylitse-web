@@ -18,6 +18,5 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/*", "@types/*"],
-  "exclude": ["e2e/**/*"]
+  "include": ["src/*", "@types/*"]
 }
