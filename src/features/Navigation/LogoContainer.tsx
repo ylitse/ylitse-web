@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SvgLogo from '@/static/img/logo.svg';
 import Text from '@/components/Text';
 
-export const LeftContainer = () => (
+export const LogoContainer = () => (
   <Container>
     <Logo />
     <Text variant="logo" color="white">

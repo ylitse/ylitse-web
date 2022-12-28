@@ -3,8 +3,8 @@ import type { NavigationItem } from './NavigationItems';
 import { useComponentVisible } from '@/hooks/useComponentShow';
 
 import { palette } from '@/components/variables';
-import styled, { css } from 'styled-components';
-import { DropdownItem, DropdownLink } from './DropdownItem';
+import styled, { css, keyframes } from 'styled-components';
+import { InfoItem, Container } from './InfoItem';
 import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
@@ -46,13 +46,13 @@ export const InfoDropdown = () => {
       {isComponentVisible && (
         <Menu>
           {infoItems.map(item => (
-            <DropdownItem key={item.text} {...item} />
+            <InfoItem key={item.text} {...item} />
           ))}
-          <DropdownLink onClick={() => console.log('TODO: show modal')}>
+          <Container onClick={() => console.log('TODO: show modal')}>
             <Text variant="linkBold" color="purple">
               Tietoa palvelusta
             </Text>
-          </DropdownLink>
+          </Container>
         </Menu>
       )}
     </Anchor>
@@ -65,8 +65,9 @@ export const Anchor = styled.div`
 
 export const Button = styled.button<{ isExpanded?: boolean }>`
   position: relative;
-  all: unset;
   cursor: pointer;
+  background: transparent;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,6 +86,18 @@ export const Button = styled.button<{ isExpanded?: boolean }>`
   }
 `;
 
+export const growDownAnimation = keyframes`
+    0% {
+        transform: scaleY(0)
+    }
+    80% {
+        transform: scaleY(1.1)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+`;
+
 export const Menu = styled.div`
   position: absolute;
   display: flex;
@@ -92,12 +105,14 @@ export const Menu = styled.div`
   width: max-content;
   top: 60px;
   left: -1px;
+  animation: ${growDownAnimation} 400ms ease-in-out forwards;
+  transform-origin: top center;
 
   div:first-of-type {
     border-top: 0.1rem solid ${palette.midgray};
   }
 
-  div:last-of-type {
+  button:last-of-type {
     border-radius: 0 0 16px 16px;
     border-bottom: 2px solid ${palette.purple};
   }

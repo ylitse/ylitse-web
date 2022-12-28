@@ -1,7 +1,7 @@
 import React from 'react';
 import MentorsFilter from './MentorsFilter';
 import MentorList from './MentorList';
-import PageLayout from '../../components/PageLayout';
+import PageWithTransition from '../../components/PageWithTransition';
 import MentorCard from './MentorList/MentorCard/Expanded';
 import Spinner from '../../components/Spinner';
 import {
@@ -20,7 +20,7 @@ const MentorPage = () => {
   const mentors = useAppSelector(selectFilteredMentors());
 
   return (
-    <PageLayout>
+    <PageWithTransition>
       {isLoading ? (
         <Spinner variant="large" />
       ) : (
@@ -38,7 +38,7 @@ const MentorPage = () => {
           />
         </>
       )}
-    </PageLayout>
+    </PageWithTransition>
   );
 };
 export default MentorPage;

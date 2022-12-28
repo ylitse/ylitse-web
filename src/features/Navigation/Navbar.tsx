@@ -4,7 +4,7 @@ import { palette } from '@/components/variables';
 import styled, { css } from 'styled-components';
 
 import { Items, Item } from './NavigationItems';
-import { LeftContainer } from './LeftContainer';
+import { LogoContainer } from './LogoContainer';
 import { InfoDropdown } from './InfoDropdown';
 import { MobileDropdown } from './MobileDropdown';
 import { LangDropdown } from './LangDropdown';
@@ -31,12 +31,12 @@ export const Navbar = () => {
     <>
       {isMobile ? (
         <Container isMobile>
-          <LeftContainer />
+          <LogoContainer />
           <MobileDropdown items={navigationItems} />
         </Container>
       ) : (
         <Container>
-          <LeftContainer />
+          <LogoContainer />
           <RightContainer>
             <Items items={navigationItems} />
             <InfoDropdown />

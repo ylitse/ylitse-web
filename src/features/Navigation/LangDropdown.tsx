@@ -55,7 +55,9 @@ export const LangDropdown = () => {
   );
 };
 
-export const Item = styled.div`
+export const Item = styled.button`
+  background: transparent;
+  border: none;
   gap: 0.5rem;
   display: flex;
   background-color: ${palette.white};

@@ -6,8 +6,8 @@ import { palette } from '@/components/variables';
 import Outsidelink from '@/static/icons/outsidelink.svg';
 import Text from '@/components/Text';
 
-export const DropdownItem = ({ text, url }: NavigationItem) => (
-  <DropdownLink>
+export const InfoItem = ({ text, url }: NavigationItem) => (
+  <Container>
     <a
       href={url}
       target="_blank"
@@ -19,7 +19,7 @@ export const DropdownItem = ({ text, url }: NavigationItem) => (
       </Text>
     </a>
     <OutsideLinkLogo />
-  </DropdownLink>
+  </Container>
 );
 
 export const OutsideLinkLogo = styled.span`
@@ -34,7 +34,10 @@ export const OutsideLinkLogo = styled.span`
   width: 1rem;
   background-color: transparent;
 `;
-export const DropdownLink = styled.div`
+
+export const Container = styled.button`
+  background: transparent;
+  border: none;
   gap: 0.5rem;
   display: flex;
   background-color: ${palette.white};
