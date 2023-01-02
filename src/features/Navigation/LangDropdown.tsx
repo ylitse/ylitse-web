@@ -2,7 +2,7 @@ import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/variables';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
@@ -41,23 +41,40 @@ export const LangDropdown = () => {
 
       {isComponentVisible && (
         <Menu>
-          <Item onClick={() => changeLanguage('en')}>
-            <Text color="purple" variant="linkBold">
-              {t(`navigation.language.en.long`)}
-            </Text>
-          </Item>
-          <Item onClick={() => changeLanguage('fi')}>
-            <Text color="purple" variant="linkBold">
-              {t(`navigation.language.fi.long`)}
-            </Text>
-          </Item>
+          {i18n.language === 'en' ? (
+            <>
+              <Item disabled>
+                <Text color="darkblue" variant="linkDisabled">
+                  {t(`navigation.language.en.long`)}
+                </Text>
+              </Item>
+              <Item onClick={() => changeLanguage('fi')}>
+                <Text color="purple" variant="linkBold">
+                  {t(`navigation.language.fi.long`)}
+                </Text>
+              </Item>
+            </>
+          ) : (
+            <>
+              <Item onClick={() => changeLanguage('en')}>
+                <Text color="purple" variant="linkBold">
+                  {t(`navigation.language.en.long`)}
+                </Text>
+              </Item>
+              <Item disabled>
+                <Text color="darkblue" variant="linkDisabled">
+                  {t(`navigation.language.fi.long`)}
+                </Text>
+              </Item>
+            </>
+          )}
         </Menu>
       )}
     </Anchor>
   );
 };
 
-export const Item = styled.button`
+export const Item = styled.button<{ disabled?: boolean }>`
   background: transparent;
   border: none;
   gap: 0.5rem;
@@ -68,6 +85,7 @@ export const Item = styled.button`
   cursor: pointer;
   border-left: 2px solid ${palette.purple};
   border-right: 2px solid ${palette.purple};
+  ${({ disabled }) => disabled && `pointer-events: none;`}
 
   &:hover {
     background-color: ${palette.lightblue};

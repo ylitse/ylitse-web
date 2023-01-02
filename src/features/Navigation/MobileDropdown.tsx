@@ -70,17 +70,33 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
           </UnstyledLink>
 
           <Divider />
-
-          <UnstyledDiv onClick={() => changeLanguage('en')}>
-            <Text variant="linkMobile" color="purple">
-              {t(`navigation.language.en.long`)}
-            </Text>
-          </UnstyledDiv>
-          <UnstyledDiv onClick={() => changeLanguage('fi')}>
-            <Text variant="linkMobile" color="purple">
-              {t(`navigation.language.fi.long`)}
-            </Text>
-          </UnstyledDiv>
+          {i18n.language === 'en' ? (
+            <>
+              <UnstyledDiv disabled onClick={e => e.stopPropagation()}>
+                <Text variant="linkDisabled" color="darkblue">
+                  {t(`navigation.language.en.long`)}
+                </Text>
+              </UnstyledDiv>
+              <UnstyledDiv onClick={() => changeLanguage('fi')}>
+                <Text variant="linkMobile" color="purple">
+                  {t(`navigation.language.fi.long`)}
+                </Text>
+              </UnstyledDiv>
+            </>
+          ) : (
+            <>
+              <UnstyledDiv onClick={() => changeLanguage('en')}>
+                <Text variant="linkMobile" color="purple">
+                  {t(`navigation.language.en.long`)}
+                </Text>
+              </UnstyledDiv>
+              <UnstyledDiv disabled onClick={e => e.stopPropagation()}>
+                <Text variant="linkDisabled" color="darkblue">
+                  {t(`navigation.language.fi.long`)}
+                </Text>
+              </UnstyledDiv>
+            </>
+          )}
 
           <Divider />
 
@@ -126,9 +142,9 @@ const UnstyledLink = styled.a`
   text-decoration: none;
 `;
 
-const UnstyledDiv = styled.a`
+const UnstyledDiv = styled.a<{ disabled?: boolean }>`
   padding: 0 2rem;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 `;
 
 const UnstyledRouteLink = styled(RouterNavLink)`
