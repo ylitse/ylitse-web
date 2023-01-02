@@ -42,11 +42,11 @@ describe('<Navigation/>', () => {
     });
 
     // Go to Chat-page
-    const link = getByRole('link', { name: 'Mentorit' });
+    const link = getByRole('link', { name: 'navigation.mentors' });
     user.click(link);
 
     // the mentors should be received
-    const heading = await findByRole('heading', { name: 'Mentorit' });
+    const heading = await findByRole('heading', { name: 'mentorPage.title' });
     expect(heading).toBeInTheDocument();
   });
 });
