@@ -1,6 +1,7 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 
+import type { LangCode } from './LangDropdown';
 import type { NavigationItem } from './NavigationItems';
 
 import { palette } from '@/components/variables';
@@ -11,6 +12,7 @@ import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import { growDownAnimation } from './InfoDropdown';
+import { MobileLangItem } from './MobileLangItem';
 
 type Props = {
   items: Array<NavigationItem>;
@@ -20,9 +22,11 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
     useComponentVisible<HTMLButtonElement>(true);
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = (langCode: string): void => {
+  const isSelected = (langCode: LangCode): boolean =>
+    i18n.language === langCode;
+
+  const changeLanguage = (langCode: LangCode): void => {
     i18n.changeLanguage(langCode);
-    setIsComponentVisible(false);
   };
 
   return (
@@ -70,36 +74,17 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
           </UnstyledLink>
 
           <Divider />
-          {i18n.language === 'en' ? (
-            <>
-              <UnstyledDiv disabled onClick={e => e.stopPropagation()}>
-                <Text variant="linkDisabled" color="darkblue">
-                  {t(`navigation.language.en.long`)}
-                </Text>
-              </UnstyledDiv>
-              <UnstyledDiv onClick={() => changeLanguage('fi')}>
-                <Text variant="linkMobile" color="purple">
-                  {t(`navigation.language.fi.long`)}
-                </Text>
-              </UnstyledDiv>
-            </>
-          ) : (
-            <>
-              <UnstyledDiv onClick={() => changeLanguage('en')}>
-                <Text variant="linkMobile" color="purple">
-                  {t(`navigation.language.en.long`)}
-                </Text>
-              </UnstyledDiv>
-              <UnstyledDiv disabled onClick={e => e.stopPropagation()}>
-                <Text variant="linkDisabled" color="darkblue">
-                  {t(`navigation.language.fi.long`)}
-                </Text>
-              </UnstyledDiv>
-            </>
-          )}
-
+          <MobileLangItem
+            changeLang={() => changeLanguage('en')}
+            isSelected={isSelected('en')}
+            text={t(`navigation.language.en.long`)}
+          />
+          <MobileLangItem
+            changeLang={() => changeLanguage('fi')}
+            isSelected={isSelected('fi')}
+            text={t(`navigation.language.fi.long`)}
+          />
           <Divider />
-
           <UnstyledRouteLink to="/logout">
             <Text variant="linkMobile" color="purple">
               {t('navigation.logout')}
@@ -140,11 +125,6 @@ const Menu = styled.div`
 const UnstyledLink = styled.a`
   padding: 0 2rem;
   text-decoration: none;
-`;
-
-const UnstyledDiv = styled.a<{ disabled?: boolean }>`
-  padding: 0 2rem;
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 `;
 
 const UnstyledRouteLink = styled(RouterNavLink)`

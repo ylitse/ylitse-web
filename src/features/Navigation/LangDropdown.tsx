@@ -1,19 +1,23 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 
-import { palette } from '@/components/variables';
-import styled, { css } from 'styled-components';
 import Text from '@/components/Text';
+import { LangItem } from './LangItem';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 import { Anchor, Button, Menu } from './InfoDropdown';
+
+export type LangCode = 'en' | 'fi';
 
 export const LangDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = (langCode: string): void => {
+  const isSelected = (langCode: LangCode): boolean =>
+    i18n.language === langCode;
+
+  const changeLanguage = (langCode: LangCode): void => {
     i18n.changeLanguage(langCode);
     setIsComponentVisible(false);
   };
@@ -41,53 +45,18 @@ export const LangDropdown = () => {
 
       {isComponentVisible && (
         <Menu>
-          {i18n.language === 'en' ? (
-            <>
-              <Item disabled>
-                <Text color="darkblue" variant="linkDisabled">
-                  {t(`navigation.language.en.long`)}
-                </Text>
-              </Item>
-              <Item onClick={() => changeLanguage('fi')}>
-                <Text color="purple" variant="linkBold">
-                  {t(`navigation.language.fi.long`)}
-                </Text>
-              </Item>
-            </>
-          ) : (
-            <>
-              <Item onClick={() => changeLanguage('en')}>
-                <Text color="purple" variant="linkBold">
-                  {t(`navigation.language.en.long`)}
-                </Text>
-              </Item>
-              <Item disabled>
-                <Text color="darkblue" variant="linkDisabled">
-                  {t(`navigation.language.fi.long`)}
-                </Text>
-              </Item>
-            </>
-          )}
+          <LangItem
+            changeLang={() => changeLanguage('en')}
+            isSelected={isSelected('en')}
+            text={t(`navigation.language.en.long`)}
+          />
+          <LangItem
+            changeLang={() => changeLanguage('fi')}
+            isSelected={isSelected('fi')}
+            text={t(`navigation.language.fi.long`)}
+          />
         </Menu>
       )}
     </Anchor>
   );
 };
-
-export const Item = styled.button<{ disabled?: boolean }>`
-  background: transparent;
-  border: none;
-  gap: 0.5rem;
-  display: flex;
-  background-color: ${palette.white};
-  height: 58px;
-  padding: 0 1rem;
-  cursor: pointer;
-  border-left: 2px solid ${palette.purple};
-  border-right: 2px solid ${palette.purple};
-  ${({ disabled }) => disabled && `pointer-events: none;`}
-
-  &:hover {
-    background-color: ${palette.lightblue};
-  }
-`;
