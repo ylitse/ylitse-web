@@ -18,7 +18,7 @@ export const MobileLangItem: React.FC<LangItemProps> = ({
   >
     <Text
       color={isSelected ? 'darkblue' : 'purple'}
-      variant={isSelected ? 'linkDisabled' : 'linkMobile'}
+      variant={isSelected ? 'linkDisabledMobile' : 'linkMobile'}
     >
       {text}
     </Text>
