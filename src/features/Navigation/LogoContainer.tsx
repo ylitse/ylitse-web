@@ -32,8 +32,6 @@ const Container = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   color: white;
   flex: 1;
   max-width: fit-content;

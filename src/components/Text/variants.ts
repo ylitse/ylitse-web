@@ -77,6 +77,8 @@ export const variants: Record<TextVariant, TextProp> = {
       fontStyle: 'normal',
       fontWeight: '600',
       fontSize: '2.0rem',
+      letterSpacing: '0.1em',
+      textTransform: 'uppercase',
     },
   },
   link: {
