@@ -1,17 +1,17 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react';
 import styled from 'styled-components';
-import CloseIcon from '../../static/icons/close.svg';
-import SearchIcon from '../../static/icons/search.svg';
-import BackIcon from '../../static/icons/back.svg';
-import EditIcon from '../../static/icons/edit.svg';
-import SendIcon from '../../static/icons/send.svg';
-import MenuIcon from '../../static/icons/menu.svg';
-import DeleteIcon from '../../static/icons/delete.svg';
-import PrevIcon from '../../static/icons/prev.svg';
-import NextIcon from '../../static/icons/next.svg';
-import ForwardIcon from '../../static/icons/forward.svg';
-import RewindIcon from '../../static/icons/rewind.svg';
-import TooltipIcon from '../../static/icons/tooltip.svg';
+import CloseIcon from '@/static/icons/close.svg';
+import SearchIcon from '@/static/icons/search.svg';
+import BackIcon from '@/static/icons/back.svg';
+import EditIcon from '@/static/icons/edit.svg';
+import SendIcon from '@/static/icons/send.svg';
+import MenuIcon from '@/static/icons/menu.svg';
+import DeleteIcon from '@/static/icons/delete.svg';
+import PrevIcon from '@/static/icons/prev.svg';
+import NextIcon from '@/static/icons/next.svg';
+import ForwardIcon from '@/static/icons/forward.svg';
+import RewindIcon from '@/static/icons/rewind.svg';
+import TooltipIcon from '@/static/icons/tooltip.svg';
 
 export type ButtonIcon =
   | 'search'

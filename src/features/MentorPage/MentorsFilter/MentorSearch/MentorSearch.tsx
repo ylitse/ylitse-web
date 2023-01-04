@@ -1,27 +1,24 @@
 import styled from 'styled-components';
-import * as cssVariables from '../../../../components/variables';
-import SearchBar from '../../../../components/SearchBar';
+import { palette, basicSourceSansText } from '@/components/variables';
+import SearchBar from '@/components/SearchBar';
 import { selectSearchString, changeSearchString } from '../mentorsFilterSlice';
-import { useAppDispatch, useAppSelector } from '../../../../store';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { useTranslation } from 'react-i18next';
 
-const placeholder = 'Etsi mentoria';
 export const MentorSearch = () => {
   const searchString = useAppSelector(selectSearchString);
 
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const handleSearchStringChange = (value: string) =>
     dispatch(changeSearchString(value));
 
   return (
     <Container>
-      <InfoText>
-        Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit
-        listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita
-        ongelmasi perusteella.
-      </InfoText>
+      <InfoText>{t('mentorPage.filters.description')}</InfoText>
       <SearchBar
-        placeholder={placeholder}
+        placeholder={t('mentorPage.filters.search')}
         value={searchString}
         onChange={handleSearchStringChange}
       />
@@ -31,8 +28,8 @@ export const MentorSearch = () => {
 
 const InfoText = styled.div`
   flex: 0 0 auto;
-  color: ${cssVariables.palette.darkblue};
-  ${cssVariables.basicSourceSansText};
+  color: ${palette.darkblue};
+  ${basicSourceSansText};
   font-weight: 400;
   font-size: 1.25rem;
   width: 47%;

@@ -4,9 +4,9 @@ import { Languages } from './Languages';
 import { Skills } from './Skills';
 import { Story } from './Story';
 import { ExpandButton } from './ExpandButton';
-import { spacing, palette } from '../../../../../components/variables';
-import { Mentor } from '../../../mentorPageApi';
-import { useMobileMode } from '../../../../../hooks/useMobileMode';
+import { spacing, palette } from '@/components/variables';
+import { Mentor } from '@/features/MentorPage/mentorPageApi';
+import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {
   setVisibleCard: (mentor: Mentor) => void;

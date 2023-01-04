@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../../../../components/variables';
-import { Text } from '../../../../components/Text/Text';
+import { palette } from '@/components/variables';
+import { Text } from '@/components/Text/Text';
 import { FiltersButton } from './FiltersButton';
 import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   headLine: string;
@@ -19,15 +20,12 @@ const Filters: React.FC<Props> = ({
   children,
 }) => {
   const isMobile = useMobileMode();
+  const { t } = useTranslation();
 
   return isMobile ? (
     <MobileContainer>
       <MobileHeader variant="h1">{headLine}</MobileHeader>
-      <Text variant="p">
-        Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit
-        listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita
-        ongelmasi perusteella.{' '}
-      </Text>
+      <Text variant="p">{t('mentorPage.filters.description')}</Text>
     </MobileContainer>
   ) : (
     <Container>
@@ -50,7 +48,7 @@ const Container = styled.div`
 `;
 
 const PageHeader = styled.div`
-  background-color: ${cssVariables.palette.blue2};
+  background-color: ${palette.blue2};
   border-radius: 10px;
   max-height: 80px;
   height: 80px;
@@ -60,7 +58,7 @@ const PageHeader = styled.div`
 `;
 
 const MobileContainer = styled.div`
-  background-color: ${cssVariables.palette.white};
+  background-color: ${palette.white};
   display: flex;
   flex-direction: column;
   justify-content: center;

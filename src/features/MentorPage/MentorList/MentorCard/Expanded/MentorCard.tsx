@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components';
 import { Header } from './Header';
 import { Content } from './Content';
-import { IconButton } from '../../../../../components/Buttons';
-import * as cssVariables from '../../../../../components/variables';
-import { Mentor } from '../../../mentorPageApi';
+import { IconButton } from '@/components/Buttons';
+import { palette, breakpoints } from '@/components/variables';
+import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { useMobileMode } from '@/hooks/useMobileMode';
-import { breakpoints } from '@/components/variables';
 
 type Props = {
   onDismiss: () => void;
@@ -27,7 +26,7 @@ export const MentorCard = ({ mentor, onDismiss }: Props) => {
 };
 
 const Card = styled.div<{ isMobile: boolean }>`
-  background-color: ${cssVariables.palette.white};
+  background-color: ${palette.white};
   opacity: 1;
   border-radius: 10px;
   z-index: 100;
@@ -55,7 +54,7 @@ const Card = styled.div<{ isMobile: boolean }>`
 `;
 
 const Container = styled.div`
-  background-color: ${cssVariables.palette.blurbackground};
+  background-color: ${palette.blurbackground};
   z-index: 10;
   position: fixed;
   top: 0;

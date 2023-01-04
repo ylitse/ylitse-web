@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import ProfilePicPlaceholder from '../../../../../static/img/icon-chat-profilepic.svg';
+import ProfilePicPlaceholder from '@/static/img/icon-chat-profilepic.svg';
 import {
   breakpoints,
   palette,
   basicSourceSansText,
-} from '../../../../../components/variables';
+} from '@/components/variables';
 import { BasicInfo } from './BasicInfo';
-import { Mentor } from '../../../mentorPageApi';
+import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {

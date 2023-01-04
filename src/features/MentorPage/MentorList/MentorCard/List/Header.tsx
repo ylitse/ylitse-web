@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import {
-  palette,
-  basicSourceSansText,
-} from '../../../../../components/variables';
-import ProfilePicPlaceholder from '../../../../../static/img/icon-chat-profilepic.svg';
+import { palette, basicSourceSansText } from '@/components/variables';
+import ProfilePicPlaceholder from '@/static/img/icon-chat-profilepic.svg';
 import { WrappedText, TruncateText } from '../Expanded/BasicInfo';
-import { Text } from '../../../../../components/Text/Text';
+import { Text } from '@/components/Text/Text';
+
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   name: string;
@@ -22,7 +21,11 @@ export const Header: React.FC<Props> = ({
   isAvailable,
   message,
 }) => {
-  const availabilityMessage = isAvailable ? '' : 'Ei tavoitettavissa';
+  const { t } = useTranslation();
+
+  const availabilityMessage = isAvailable
+    ? ''
+    : t('mentorPage.card.unavailable');
 
   return (
     <StyledHeader isAvailable={isAvailable}>
@@ -35,7 +38,8 @@ export const Header: React.FC<Props> = ({
           {name}
         </NameText>
         <WrappedText color="white" variant="p">
-          {age} v. <StyledDivider>|</StyledDivider> {region}
+          {age} {t('mentorPage.card.age')} <StyledDivider>|</StyledDivider>
+          {region}
         </WrappedText>
         <TruncateText color="white">{message}</TruncateText>
       </BasicInfo>

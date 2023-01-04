@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import * as cssVariables from '../../../../components/variables';
+import { basicBalooText, palette } from '@/components/variables';
 import { THREE_DOTS } from './usePagination';
 
 type Props = {
@@ -30,15 +30,15 @@ const PageNumber = styled.span<{ isSelected: boolean; isClickable: boolean }>`
   padding: 0.2rem 1rem;
   border-radius: 16%;
 
-  ${cssVariables.basicBalooText}
+  ${basicBalooText}
 
   ${({ isSelected }) =>
     isSelected
       ? css`
-          background-color: ${cssVariables.palette.blue2};
+          background-color: ${palette.blue2};
         `
       : css`
-          color: ${cssVariables.palette.darkpurple};
+          color: ${palette.darkpurple};
         `}
 
   ${({ isClickable }) =>

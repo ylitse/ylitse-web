@@ -9,7 +9,9 @@ export type TextVariant =
   | 'logo'
   | 'link'
   | 'linkBold'
-  | 'linkMobile';
+  | 'linkMobile'
+  | 'linkDisabled'
+  | 'linkDisabledMobile';
 export type TextElement = 'h1' | 'h2' | 'h3' | 'p' | 'a' | 'span';
 
 type TextProp = {
@@ -75,6 +77,8 @@ export const variants: Record<TextVariant, TextProp> = {
       fontStyle: 'normal',
       fontWeight: '600',
       fontSize: '2.0rem',
+      letterSpacing: '0.1em',
+      textTransform: 'uppercase',
     },
   },
   link: {
@@ -103,6 +107,27 @@ export const variants: Record<TextVariant, TextProp> = {
       fontWeight: '700',
       lineHeight: '40px',
       fontSize: 'larger',
+    },
+  },
+  linkDisabled: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Baloo 2", cursive',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      lineHeight: '58px',
+      textDecoration: 'underline',
+    },
+  },
+  linkDisabledMobile: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Baloo 2", cursive',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      lineHeight: '40px',
+      fontSize: 'larger',
+      textDecoration: 'underline',
     },
   },
 };

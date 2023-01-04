@@ -2,8 +2,8 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
-import enTranslation from './static/locales/en/translation.json';
-import fiTranslation from './static/locales/fi/translation.json';
+import enTranslation from '@/static/locales/en/translation.json';
+import fiTranslation from '@/static/locales/fi/translation.json';
 
 export const defaultNS = 'translation';
 

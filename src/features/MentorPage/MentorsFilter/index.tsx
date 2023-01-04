@@ -4,17 +4,17 @@ import MentorSearch from './MentorSearch';
 import SkillChips from './Skills/';
 
 import { selectSkills } from '../mentorPageApi';
-import { useAppSelector } from '../../../store';
-
-const mentorPageHeadline = 'Mentorit';
+import { useAppSelector } from '@/store';
+import { useTranslation } from 'react-i18next';
 
 const MentorsFilter = () => {
   const skills = useAppSelector(selectSkills());
+  const { t } = useTranslation();
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
   return (
     <Filters
-      headLine={mentorPageHeadline}
+      headLine={t('mentorPage.title')}
       onFiltersClose={() => setIsFiltersVisible(true)}
       isFiltersVisible={isFiltersVisible}
     >

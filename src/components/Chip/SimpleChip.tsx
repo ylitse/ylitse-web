@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import * as cssVariables from '../variables';
+import { palette, basicSourceSansText } from '../variables';
 
 /**
  * Creates a non-selectable chip
@@ -20,12 +20,12 @@ const SimpleChip: React.FC<Props> = ({ text }) => {
 
 const StyledSimpleChip = styled.button`
   flex: 0 0 auto;
-  background-color: ${cssVariables.palette.lightblue};
+  background-color: ${palette.lightblue};
   padding: 0.5rem 1rem;
-  ${cssVariables.basicSourceSansText};
+  ${basicSourceSansText};
   font-size: 1rem;
   line-height: 1rem;
-  color: ${cssVariables.palette.darkblue};
+  color: ${palette.darkblue};
   border-radius: 1.75rem;
   margin: 0.5rem;
   height: 2rem;

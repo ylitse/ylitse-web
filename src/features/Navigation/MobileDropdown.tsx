@@ -1,8 +1,8 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
+import { useTranslation } from 'react-i18next';
 
+import type { LangCode } from './LangDropdown';
 import type { NavigationItem } from './NavigationItems';
-
-import { infoItems, growDownAnimation } from './InfoDropdown';
 
 import { palette } from '@/components/variables';
 import styled from 'styled-components';
@@ -11,7 +11,8 @@ import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import { languages } from './LangDropdown';
+import { growDownAnimation } from './InfoDropdown';
+import { MobileLangItem } from './MobileLangItem';
 
 type Props = {
   items: Array<NavigationItem>;
@@ -19,10 +20,13 @@ type Props = {
 export const MobileDropdown: React.FC<Props> = ({ items }) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLButtonElement>(true);
+  const { t, i18n } = useTranslation();
 
-  const handleLangChange = () => {
-    console.log('change language');
-    setIsComponentVisible(false);
+  const isSelected = (langCode: LangCode): boolean =>
+    i18n.language === langCode;
+
+  const changeLanguage = (langCode: LangCode): void => {
+    i18n.changeLanguage(langCode);
   };
 
   return (
@@ -31,7 +35,7 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
       onClick={() => setIsComponentVisible(!isComponentVisible)}
     >
       <Text variant={'linkMobile'} color={'white'}>
-        Valikko
+        {t('navigation.mobile.menu')}
       </Text>
       {isComponentVisible ? (
         <ChevronUp size={8} color="white" />
@@ -50,35 +54,40 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
           ))}
 
           <Divider />
-
-          {infoItems.map(item => (
-            <UnstyledLink
-              key={item.text}
-              href={item.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Text variant="linkMobile" color="purple">
-                {item.text}
-              </Text>
-            </UnstyledLink>
-          ))}
-
-          <Divider />
-
-          {languages.map(lang => (
-            <UnstyledDiv key={lang.code} onClick={handleLangChange}>
-              <Text variant="linkMobile" color="purple">
-                {lang.label}
-              </Text>
-            </UnstyledDiv>
-          ))}
+          <UnstyledLink
+            href={t(`navigation.info.link.feedback.url`)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Text variant="linkMobile" color="purple">
+              {t('navigation.info.link.feedback.text')}
+            </Text>
+          </UnstyledLink>
+          <UnstyledLink
+            href={t(`navigation.info.link.termsAndPrivacy.url`)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Text variant="linkMobile" color="purple">
+              {t('navigation.info.link.termsAndPrivacy.text')}
+            </Text>
+          </UnstyledLink>
 
           <Divider />
-
+          <MobileLangItem
+            changeLang={() => changeLanguage('en')}
+            isSelected={isSelected('en')}
+            text={t(`navigation.language.en.long`)}
+          />
+          <MobileLangItem
+            changeLang={() => changeLanguage('fi')}
+            isSelected={isSelected('fi')}
+            text={t(`navigation.language.fi.long`)}
+          />
+          <Divider />
           <UnstyledRouteLink to="/logout">
             <Text variant="linkMobile" color="purple">
-              Kirjaudu ulos
+              {t('navigation.logout')}
             </Text>
           </UnstyledRouteLink>
         </Menu>
@@ -116,11 +125,6 @@ const Menu = styled.div`
 const UnstyledLink = styled.a`
   padding: 0 2rem;
   text-decoration: none;
-`;
-
-const UnstyledDiv = styled.a`
-  padding: 0 2rem;
-  cursor: pointer;
 `;
 
 const UnstyledRouteLink = styled(RouterNavLink)`

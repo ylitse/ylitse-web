@@ -364,6 +364,8 @@ button[type='submit'] {
 
 #mobile-header {
   display: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   left: 0px;
   top: 0px;
   background: #4a2acb;

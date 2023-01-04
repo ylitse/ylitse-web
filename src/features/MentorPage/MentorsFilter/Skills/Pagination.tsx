@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { usePagination } from './usePagination';
+import { useAppDispatch } from '@/store';
+import { useTranslation } from 'react-i18next';
 
 import { PageButton } from './PageButton';
-import { Text } from '../../../../components/Text/Text';
-import TextButton from '../../../../components/Buttons/TextButton';
-import { useAppDispatch } from '../../../../store';
+import { Text } from '@/components/Text/Text';
+import TextButton from '@/components/Buttons/TextButton';
 import { resetFilters } from '../mentorsFilterSlice';
 
 type Props = {
@@ -27,8 +28,8 @@ export const Pagination = ({
     totalCount: skillTotalAmount,
     pageSize: SKILL_AMOUNT_ON_PAGE,
   });
-
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const handleReset = () => {
     dispatch(resetFilters());
@@ -41,7 +42,7 @@ export const Pagination = ({
         variant="light"
         onClick={handleReset}
       >
-        <ButtonText>Poista suodattimet</ButtonText>
+        <ButtonText>{t('mentorPage.filters.clear')}</ButtonText>
       </TextButton>
       <PaginationContainer>
         {paginationRange?.map((page, index) => (
@@ -58,7 +59,7 @@ export const Pagination = ({
         variant="light"
         onClick={onFiltersClose}
       >
-        <ButtonText>Sulje</ButtonText>
+        <ButtonText>{t('mentorPage.filters.close')}</ButtonText>
       </TextButton>
     </Container>
   );

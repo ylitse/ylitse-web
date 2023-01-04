@@ -1,11 +1,13 @@
 import styled from 'styled-components';
-import { SimpleChip } from '../../../../../components/Chip';
-import { Text } from '../../../../../components/Text/Text';
+import { SimpleChip } from '@/components/Chip';
+import { Text } from '@/components/Text/Text';
+import { useTranslation } from 'react-i18next';
 
 export const Languages = ({ languages }: { languages: Array<string> }) => {
+  const { t } = useTranslation();
   return (
     <>
-      <StyledText variant="h3">Puhun näitä kieliä</StyledText>
+      <StyledText variant="h3">{t('mentorPage.card.languages')}</StyledText>
       <SkillChips>
         {languages.map(item => (
           <SimpleChip key={item} text={item} />

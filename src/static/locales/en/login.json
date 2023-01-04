@@ -1,7 +1,9 @@
 {
   "pageTitle": "Ylitse MentorApp - SOS Children's Village",
   "longTitle": "Ylitse MentorApp",
-  "shortTitle": "YLITSE",
+  "shortTitle": "Ylitse",
+  "inEnglish": "In English",
+  "inFinnish": "Suomeksi",
   "loginTitle": "Login",
   "usernameLabel": "Username",
   "passwordLabel": "Password",

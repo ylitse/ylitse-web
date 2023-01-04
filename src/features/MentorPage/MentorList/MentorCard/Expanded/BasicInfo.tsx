@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-import { Text } from '../../../../../components/Text/Text';
+import { Text } from '@/components/Text/Text';
 import { Languages } from './Languages';
-import { Mentor } from '../../../mentorPageApi';
-import { breakpoints, palette } from '../../../../../components/variables';
+import { Mentor } from '@/features/MentorPage/mentorPageApi';
+import { breakpoints, palette } from '@/components/variables';
 import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   mentor: Mentor;
@@ -13,6 +14,7 @@ export const BasicInfo = ({
   mentor: { name, age, region, isVacationing, statusMessage, languages },
 }: Props) => {
   const isMobile = useMobileMode();
+  const { t } = useTranslation();
 
   return (
     <Container>
@@ -21,7 +23,8 @@ export const BasicInfo = ({
       </Text>
       {!isMobile && <NameDivider />}
       <WrappedText color="white" variant="p">
-        {age} v. <StyledDivider>|</StyledDivider> {region}
+        {age} {t('mentorPage.card.age')} <StyledDivider>|</StyledDivider>
+        {region}
       </WrappedText>
       <Text color="white" variant="p">
         {!isVacationing}

@@ -1,4 +1,4 @@
-import { renderWithProviders } from '../../../../test/testStore';
+import { renderWithProviders } from '@/test/testStore';
 import { SkillChips } from './SkillChips';
 
 describe('<MentorChips />', () => {

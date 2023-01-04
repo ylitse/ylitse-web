@@ -1,23 +1,24 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
+import { useTranslation } from 'react-i18next';
 
-import { palette } from '@/components/variables';
-import styled from 'styled-components';
 import Text from '@/components/Text';
+import { LangItem } from './LangItem';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 import { Anchor, Button, Menu } from './InfoDropdown';
 
-export const languages = [
-  { code: 'fi', label: 'FI - Suomeksi' },
-  { code: 'en', label: 'EN - In English' },
-];
+export type LangCode = 'en' | 'fi';
 
 export const LangDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
+  const { t, i18n } = useTranslation();
 
-  const handleLangChange = () => {
-    console.log('change the language');
+  const isSelected = (langCode: LangCode): boolean =>
+    i18n.language === langCode;
+
+  const changeLanguage = (langCode: LangCode): void => {
+    i18n.changeLanguage(langCode);
     setIsComponentVisible(false);
   };
 
@@ -31,7 +32,9 @@ export const LangDropdown = () => {
           variant={'link'}
           color={isComponentVisible ? 'darkblue' : 'white'}
         >
-          FI
+          {i18n.language === 'en'
+            ? t(`navigation.language.en.short`)
+            : t(`navigation.language.fi.short`)}
         </Text>
         {isComponentVisible ? (
           <ChevronUp size={8} color="purple" />
@@ -42,32 +45,18 @@ export const LangDropdown = () => {
 
       {isComponentVisible && (
         <Menu>
-          {languages.map(lang => (
-            <Item key={lang.code} onClick={handleLangChange}>
-              <Text color="purple" variant="linkBold">
-                {lang.label}
-              </Text>
-            </Item>
-          ))}
+          <LangItem
+            changeLang={() => changeLanguage('en')}
+            isSelected={isSelected('en')}
+            text={t(`navigation.language.en.long`)}
+          />
+          <LangItem
+            changeLang={() => changeLanguage('fi')}
+            isSelected={isSelected('fi')}
+            text={t(`navigation.language.fi.long`)}
+          />
         </Menu>
       )}
     </Anchor>
   );
 };
-
-export const Item = styled.button`
-  background: transparent;
-  border: none;
-  gap: 0.5rem;
-  display: flex;
-  background-color: ${palette.white};
-  height: 58px;
-  padding: 0 1rem;
-  cursor: pointer;
-  border-left: 2px solid ${palette.purple};
-  border-right: 2px solid ${palette.purple};
-
-  &:hover {
-    background-color: ${palette.lightblue};
-  }
-`;

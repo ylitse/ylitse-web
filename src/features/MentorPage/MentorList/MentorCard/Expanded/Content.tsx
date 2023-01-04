@@ -1,11 +1,13 @@
 import styled from 'styled-components';
-import { Text } from '../../../../../components/Text/Text';
+import { Text } from '@/components/Text/Text';
 import { Skills } from './Skills';
-import { TextButton } from '../../../../../components/Buttons';
-import { Mentor } from '../../../mentorPageApi';
+import { TextButton } from '@/components/Buttons';
+import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { Languages } from './Languages';
-import { useMobileMode } from '@/hooks/useMobileMode';
 import { breakpoints } from '@/components/variables';
+
+import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   mentor: Mentor;
@@ -13,6 +15,7 @@ type Props = {
 
 export const Content = ({ mentor: { skills, story, languages } }: Props) => {
   const isMobile = useMobileMode();
+  const { t } = useTranslation();
 
   const handleClick = () => {
     console.log('open conversation');
@@ -20,12 +23,12 @@ export const Content = ({ mentor: { skills, story, languages } }: Props) => {
 
   return (
     <Container>
-      <Text variant="h3">Tarinani</Text>
+      <Text variant="h3">{t('mentorPage.card.bio')}</Text>
       <Text variant="p">{story}</Text>
       {isMobile && <Languages languages={languages} isMobile={isMobile} />}
       <Skills skills={skills} />
       <OpenConversationButton onClick={handleClick}>
-        Avaa keskustelu
+        {t('mentorPage.card.chat')}
       </OpenConversationButton>
     </Container>
   );

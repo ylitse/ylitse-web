@@ -1,4 +1,3 @@
-/* eslint-disable */
 (function (document) {
   const page = window.location.toString().includes('login')
     ? 'login'
