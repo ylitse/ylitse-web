@@ -1,6 +1,6 @@
 describe('logout', () => {
   const clickLogout = (): void => {
-    cy.get('a[id="logout-link"]').click();
+    cy.get('a[href="/logout"]').click();
   };
 
   before(() => {
