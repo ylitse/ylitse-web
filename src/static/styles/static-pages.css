@@ -33,6 +33,7 @@
   width: 562px;
   height: 94px;
   position: fixed;
+  z-index: 1;
   bottom: 50%;
   box-sizing: border-box;
   background-color: #ffffff;
