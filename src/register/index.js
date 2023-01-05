@@ -59,6 +59,7 @@
         window.location.replace('/login');
       }
     } catch (error) {
+      console.log(error.message);
       document.getElementById('submit-error-snackbar').className = 'show';
     }
   });

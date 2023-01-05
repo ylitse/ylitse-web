@@ -10,6 +10,7 @@
   "retrievePasswordLink": "Forgot your password?",
   "loginError": "Your username or password is invalid. Check the information you provided.",
   "loginButton": "Login",
+  "submitError": "Login failed. Please try again in a moment.",
   "appDescription": "New here? Using this application, you can chat with a mentor trained by SOS Children's Village about any topic that is on your mind. Using the application is confidential and completely free.",
   "registrationLink": "Register",
   "footer": "Provided by SOS Children's Village"

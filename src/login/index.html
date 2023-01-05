@@ -70,6 +70,23 @@
                 placeholder="" />
               <a href="#"
                 localization-key="retrievePasswordLink"></a>
+              <div id="submit-error-snackbar">
+                <img id="notification-icon"
+                  src="/static/icons/notification.svg" />
+                <p>
+                  <span localization-key="submitError"></span>
+                  <button id="snackbar-button"
+                    type="button"
+                    onclick="closeSnackbar()">
+                    <img class="fi-alt-text"
+                      src="/static/icons/close.svg"
+                      alt="Sulje ilmoitus." />
+                    <img class="en-alt-text"
+                      src="/static/icons/close.svg"
+                      alt="Close notification." />
+                  </button>
+                </p>
+              </div>
               <button id="submit"
                 type="submit"
                 localization-key="loginButton"></button>
