@@ -60,7 +60,6 @@
       }
     } catch (error) {
       document.getElementById('submit-error-snackbar').className = 'show';
-      // document.getElementById('submit-error-snackbar').className.replace('show', '');
     }
   });
 })(window, document);
@@ -225,4 +224,10 @@ const checkInput = async id => {
     if (input.id === 'password' && passwordConfirmationHasBeenAccessed)
       validatePasswordConfirmation();
   }
+};
+
+const closeSnackbar = () => {
+  document
+    .getElementById('submit-error-snackbar')
+    .className.replace('show', '');
 };

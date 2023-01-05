@@ -29,21 +29,20 @@
 }
 
 #submit-error-snackbar {
-  visibility: hidden; /* Hidden by default. Visible on click */
-  min-width: 250px; /* Set a default minimum width */
-  margin-left: -125px; /* Divide value of min-width by 2 */
-  background-color: #333; /* Black background color */
-  color: #fff; /* White text color */
-  text-align: center; /* Centered text */
-  border-radius: 2px; /* Rounded borders */
-  padding: 16px; /* Padding */
-  position: fixed; /* Sit on top of the screen */
-  z-index: 1; /* Add a z-index if needed */
-  left: 50%; /* Center the snackbar */
-  bottom: 30px; /* 30px from the bottom */
+  visibility: hidden;
+  width: 562px;
+  height: 94px;
+  position: fixed;
+  bottom: 50%;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border: 2px solid #eb727c;
+  border-left: 51px solid #eb727c;
+  color: #1c325d;
+  padding: 20px 26px;
 }
 
-/* Show the snackbar when clicking on a button (class added with JavaScript) */
+/* Show the snackbar when clicking on the button */
 #submit-error-snackbar.show {
   visibility: visible; /* Show the snackbar */
   /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
@@ -95,6 +94,21 @@
     bottom: 0;
     opacity: 0;
   }
+}
+
+#notification-icon {
+  position: absolute;
+  top: 21px;
+  left: -38px;
+}
+
+#snackbar-button {
+  position: absolute;
+  top: 16px;
+  right: 19px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: none;
 }
 
 footer {

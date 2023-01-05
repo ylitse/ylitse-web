@@ -34,6 +34,6 @@
   "requiredAgeSwitch": "Olen vähintään 15-vuotias",
   "privacyConsentSwitch": "Hyväksyn tietojeni käsittelyn",
   "registerButton": "Rekisteröidy",
-  "submitError": "Lomakkeen lähettäminen epäonnistui. Yritä hetken kuluttua uudelleen",
+  "submitError": "Lomakkeen lähettäminen epäonnistui. Yritä hetken kuluttua uudelleen.",
   "footer": "Palvelun tarjoaa SOS-Lapsikylä"
 }
