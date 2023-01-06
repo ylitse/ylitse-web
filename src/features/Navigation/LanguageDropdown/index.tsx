@@ -1,11 +1,9 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 
-import Text from '@/components/Text';
 import { LangItem } from './LangItem';
-import { ChevronUp } from '@/components/Icons/ChevronUp';
-import { ChevronDown } from '@/components/Icons/ChevronDown';
-import { Anchor, Button, Menu } from '../InfoDropdown/index';
+import { Anchor, Menu } from '../InfoDropdown/index';
+import { DropdownButton } from '../InfoDropdown/DropdownButton';
 
 export type LangCode = 'en' | 'fi';
 
@@ -24,24 +22,15 @@ const LangDropdown = () => {
 
   return (
     <Anchor ref={ref}>
-      <Button
-        isExpanded={isComponentVisible}
-        onClick={() => setIsComponentVisible(!isComponentVisible)}
-      >
-        <Text
-          variant={'link'}
-          color={isComponentVisible ? 'darkblue' : 'white'}
-        >
-          {i18n.language === 'en'
+      <DropdownButton
+        isComponentVisible={isComponentVisible}
+        setIsComponentVisible={setIsComponentVisible}
+        text={
+          i18n.language === 'en'
             ? t(`navigation.language.en.short`)
-            : t(`navigation.language.fi.short`)}
-        </Text>
-        {isComponentVisible ? (
-          <ChevronUp size={8} color="purple" />
-        ) : (
-          <ChevronDown size={8} color="white" />
-        )}
-      </Button>
+            : t(`navigation.language.fi.short`)
+        }
+      />
 
       {isComponentVisible && (
         <Menu>
