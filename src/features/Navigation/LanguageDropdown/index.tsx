@@ -5,11 +5,11 @@ import Text from '@/components/Text';
 import { LangItem } from './LangItem';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
-import { Anchor, Button, Menu } from './InfoDropdown';
+import { Anchor, Button, Menu } from '../InfoDropdown/index';
 
 export type LangCode = 'en' | 'fi';
 
-export const LangDropdown = () => {
+const LangDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
   const { t, i18n } = useTranslation();
@@ -60,3 +60,5 @@ export const LangDropdown = () => {
     </Anchor>
   );
 };
+
+export default LangDropdown;

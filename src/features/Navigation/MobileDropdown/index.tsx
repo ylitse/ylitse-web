@@ -1,8 +1,8 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 
-import type { LangCode } from './LangDropdown';
-import type { NavigationItem } from './NavigationItems';
+import type { LangCode } from '../LanguageDropdown';
+import type { NavigationItem } from '../NavigationItems';
 
 import { palette } from '@/components/variables';
 import styled from 'styled-components';
@@ -11,13 +11,14 @@ import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import { growDownAnimation } from './InfoDropdown';
+import { growDownAnimation } from '../InfoDropdown';
 import { MobileLangItem } from './MobileLangItem';
 
 type Props = {
   items: Array<NavigationItem>;
 };
-export const MobileDropdown: React.FC<Props> = ({ items }) => {
+
+const MobileDropdown: React.FC<Props> = ({ items }) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLButtonElement>(true);
   const { t, i18n } = useTranslation();
@@ -54,6 +55,7 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
           ))}
 
           <Divider />
+
           <UnstyledLink
             href={t(`navigation.info.link.feedback.url`)}
             target="_blank"
@@ -74,6 +76,7 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
           </UnstyledLink>
 
           <Divider />
+
           <MobileLangItem
             changeLang={() => changeLanguage('en')}
             isSelected={isSelected('en')}
@@ -85,6 +88,7 @@ export const MobileDropdown: React.FC<Props> = ({ items }) => {
             text={t(`navigation.language.fi.long`)}
           />
           <Divider />
+
           <UnstyledRouteLink to="/logout">
             <Text variant="linkMobile" color="purple">
               {t('navigation.logout')}
@@ -135,3 +139,5 @@ const UnstyledRouteLink = styled(RouterNavLink)`
 const Divider = styled.div`
   border-bottom: 2px solid ${palette.blue2};
 `;
+
+export default MobileDropdown;

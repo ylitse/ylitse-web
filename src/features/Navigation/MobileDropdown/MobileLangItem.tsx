@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import Text from '@/components/Text';
-import type { LangItemProps } from './LangItem';
+
+import type { Props } from '../LanguageDropdown/LangItem';
 
 const Link = styled.a<{ isSelected: boolean }>`
   padding: 0 2rem;
   cursor: ${({ isSelected }) => (isSelected ? 'default' : 'pointer')};
 `;
 
-export const MobileLangItem: React.FC<LangItemProps> = ({
+export const MobileLangItem: React.FC<Props> = ({
   changeLang,
   isSelected,
   text,

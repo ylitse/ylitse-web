@@ -8,7 +8,7 @@ import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
 
-export const InfoDropdown = () => {
+const InfoDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
   const { t } = useTranslation();
@@ -102,7 +102,7 @@ export const Menu = styled.div`
   flex-direction: column;
   width: max-content;
   top: 60px;
-  left: -1px;
+  left: -2px;
   animation: ${growDownAnimation} 400ms ease-in-out forwards;
   transform-origin: top center;
 
@@ -115,3 +115,5 @@ export const Menu = styled.div`
     border-bottom: 2px solid ${palette.purple};
   }
 `;
+
+export default InfoDropdown;

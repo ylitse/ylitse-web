@@ -6,9 +6,9 @@ import styled, { css } from 'styled-components';
 
 import { Items, Item } from './NavigationItems';
 import { LogoContainer } from './LogoContainer';
-import { InfoDropdown } from './InfoDropdown';
-import { MobileDropdown } from './MobileDropdown';
-import { LangDropdown } from './LangDropdown';
+import InfoDropdown from './InfoDropdown';
+import MobileDropdown from './MobileDropdown';
+import LangDropdown from './LanguageDropdown';
 
 export const Navbar = () => {
   const isMobile = useMobileMode();
