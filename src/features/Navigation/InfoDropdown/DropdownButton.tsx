@@ -1,6 +1,8 @@
 import React from 'react';
-import { palette } from '@/components/variables';
 
+import { useHover } from '@/hooks/useHover';
+
+import { palette } from '@/components/variables';
 import styled, { css } from 'styled-components';
 import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
@@ -17,18 +19,22 @@ export const DropdownButton: React.FC<Props> = ({
   setIsComponentVisible,
   text,
 }) => {
+  const { ref, isHovering } = useHover();
+  const color = isHovering || isComponentVisible ? 'darkblue' : 'white';
+
   return (
     <Button
       isExpanded={isComponentVisible}
       onClick={() => setIsComponentVisible(!isComponentVisible)}
+      ref={ref}
     >
-      <Text variant={'link'} color={isComponentVisible ? 'darkblue' : 'white'}>
+      <Text variant={'link'} color={color}>
         {text}
       </Text>
       {isComponentVisible ? (
-        <ChevronUp size={8} color="purple" />
+        <ChevronUp size={8} color={color} />
       ) : (
-        <ChevronDown size={8} color="white" />
+        <ChevronDown size={8} color={color} />
       )}
     </Button>
   );
