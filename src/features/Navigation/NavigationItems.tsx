@@ -40,4 +40,8 @@ export const Link = styled(RouterNavLink)`
     background-color: ${palette.blue2};
     color: ${palette.darkblue};
   }
+
+  &.active {
+    cursor: default;
+  }
 `;

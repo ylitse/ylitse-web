@@ -2,7 +2,7 @@ import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 
 import type { LangCode } from '../LanguageDropdown';
-import type { NavigationItem } from '../NavigationItems';
+import type { NavigationItem as NavItemType } from '../NavigationItems';
 
 import { palette } from '@/components/variables';
 import styled from 'styled-components';
@@ -10,18 +10,22 @@ import styled from 'styled-components';
 import Text from '@/components/Text';
 import { ChevronUp } from '@/components/Icons/ChevronUp';
 import { ChevronDown } from '@/components/Icons/ChevronDown';
-import { NavLink as RouterNavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { growDownAnimation } from '../InfoDropdown';
-import { MobileLangItem } from './MobileLangItem';
+import { LanguageItem } from './MobileLangItem';
+import { NavigationItem } from './MobileNavItem';
 
 type Props = {
-  items: Array<NavigationItem>;
+  items: Array<NavItemType>;
 };
 
 const MobileDropdown: React.FC<Props> = ({ items }) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLButtonElement>(true);
+
   const { t, i18n } = useTranslation();
+
+  const { pathname } = useLocation();
 
   const isSelected = (langCode: LangCode): boolean =>
     i18n.language === langCode;
@@ -47,11 +51,12 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
       {isComponentVisible && (
         <Menu>
           {items.map(item => (
-            <UnstyledRouteLink key={item.text} to={item.url}>
-              <Text variant="linkMobile" color="purple">
-                {item.text}
-              </Text>
-            </UnstyledRouteLink>
+            <NavigationItem
+              key={item.url}
+              text={item.text}
+              url={item.url}
+              currentLocation={pathname}
+            />
           ))}
 
           <Divider />
@@ -77,23 +82,23 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
 
           <Divider />
 
-          <MobileLangItem
+          <LanguageItem
             changeLang={() => changeLanguage('en')}
             isSelected={isSelected('en')}
             text={t(`navigation.language.en.long`)}
           />
-          <MobileLangItem
+          <LanguageItem
             changeLang={() => changeLanguage('fi')}
             isSelected={isSelected('fi')}
             text={t(`navigation.language.fi.long`)}
           />
           <Divider />
 
-          <UnstyledRouteLink to="/logout">
-            <Text variant="linkMobile" color="purple">
-              {t('navigation.logout')}
-            </Text>
-          </UnstyledRouteLink>
+          <NavigationItem
+            text={t('navigation.logout')}
+            url={'/logout'}
+            currentLocation={pathname}
+          />
         </Menu>
       )}
     </Dropdown>
@@ -108,7 +113,7 @@ const Dropdown = styled.button`
   align-items: center;
   gap: 4px;
   text-align: center;
-  padding: 0 1rem;
+  padding: 0 3rem;
 `;
 
 const Menu = styled.div`
@@ -116,7 +121,8 @@ const Menu = styled.div`
   left: 0;
   right: 0;
   top: 40px;
-  margin-top: 2rem;
+  text-align: left;
+  margin-top: 2.5rem;
   background-color: ${palette.white};
   display: flex;
   flex-direction: column;
@@ -128,16 +134,13 @@ const Menu = styled.div`
 
 const UnstyledLink = styled.a`
   padding: 0 2rem;
-  text-decoration: none;
-`;
-
-const UnstyledRouteLink = styled(RouterNavLink)`
-  padding: 0 2rem;
+  line-height: 56px;
   text-decoration: none;
 `;
 
 const Divider = styled.div`
-  border-bottom: 2px solid ${palette.blue2};
+  border-bottom: 1px solid ${palette.blue2};
+  margin-bottom: 0.5rem;
 `;
 
 export default MobileDropdown;

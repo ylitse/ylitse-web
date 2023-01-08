@@ -23,7 +23,6 @@ const Logo = styled.div`
   background-repeat: no-repeat;
   height: 40px;
   width: 40px;
-  margin-left: 12%;
   margin-right: 1rem;
   background-color: transparent;
 `;
@@ -33,6 +32,10 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   color: white;
-  flex: 1;
   max-width: fit-content;
+  margin-left: 10%;
+
+  @media screen and (max-width: 730px) {
+    margin-left: 0;
+  }
 `;

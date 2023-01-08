@@ -28,7 +28,7 @@ export const DropdownButton: React.FC<Props> = ({
       onClick={() => setIsComponentVisible(!isComponentVisible)}
       ref={ref}
     >
-      <Text variant={'link'} color={color}>
+      <Text variant={isHovering ? 'linkDisabled' : 'link'} color={color}>
         {text}
       </Text>
       {isComponentVisible ? (

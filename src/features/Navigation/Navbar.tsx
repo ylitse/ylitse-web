@@ -66,12 +66,15 @@ export const Container = styled.div<{ isMobile?: boolean }>`
     isMobile &&
     css`
       border-bottom: solid 0.5rem ${palette.blue2};
+      padding: 0 1.5rem;
     `}
 `;
 
 export const RightContainer = styled.div`
-  flex: 1;
-  margin-right: 12%;
   display: flex;
-  justify-content: flex-end;
+  margin-right: 10%;
+
+  @media screen and (max-width: 730px) {
+    margin-right: 0;
+  }
 `;
