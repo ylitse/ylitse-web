@@ -60,5 +60,6 @@ export const Button = styled.button<{ isExpanded?: boolean }>`
 
   &:hover {
     background-color: ${palette.blue2};
+    border-bottom: 2px solid ${palette.blue2};
   }
 `;

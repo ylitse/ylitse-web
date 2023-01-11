@@ -74,7 +74,11 @@ export const RightContainer = styled.div`
   display: flex;
   margin-right: 10%;
 
-  @media screen and (max-width: 730px) {
+  @media screen and (max-width: 830px) {
     margin-right: 0;
+  }
+
+  @media screen and (max-width: 650px) {
+    margin-right: 4%;
   }
 `;

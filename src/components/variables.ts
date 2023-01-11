@@ -10,7 +10,7 @@ export const palette = {
   bluegrey: '#4C6282',
   blue2: '#43BFFF',
   darkblue: '#1C325D',
-  lightblue: '#CDE8F8',
+  lightblue: '#D3EFFF',
   whiteblue: '#E4F3FB',
   footerblue: '#01A5EC',
   orange: '#F0BA8C',

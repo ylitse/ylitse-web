@@ -71,10 +71,6 @@ export const Menu = styled.div`
   animation: ${growDownAnimation} 400ms ease-in-out forwards;
   transform-origin: top center;
 
-  div:first-of-type {
-    border-top: 0.1rem solid ${palette.midgray};
-  }
-
   button:last-of-type {
     border-radius: 0 0 16px 16px;
     border-bottom: 2px solid ${palette.purple};

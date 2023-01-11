@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SvgLogo from '@/static/img/logo.svg';
 import Text from '@/components/Text';
 import { useTranslation } from 'react-i18next';
+import { MOBILE_TRESHOLD } from '@/components/variables';
 
 export const LogoContainer = () => {
   const { t } = useTranslation();
@@ -10,12 +11,19 @@ export const LogoContainer = () => {
   return (
     <Container>
       <Logo />
-      <Text variant="logo" color="white">
+      <YlitseText variant="logo" color="white">
         {t('navigation.logo')}
-      </Text>
+      </YlitseText>
     </Container>
   );
 };
+
+const YlitseText = styled(Text)`
+  @media screen and (max-width: 650px) and (min-width: ${MOBILE_TRESHOLD}px) {
+    display: none;
+    margin-left: 4%;
+  }
+`;
 
 const Logo = styled.div`
   background-image: url(${SvgLogo});
@@ -35,7 +43,11 @@ const Container = styled.div`
   max-width: fit-content;
   margin-left: 10%;
 
-  @media screen and (max-width: 730px) {
+  @media screen and (max-width: 830px) {
+    margin-left: 4%;
+  }
+
+  @media screen and (max-width: ${MOBILE_TRESHOLD}px) {
     margin-left: 0;
   }
 `;
