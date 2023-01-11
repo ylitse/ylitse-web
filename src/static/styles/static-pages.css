@@ -28,45 +28,6 @@
   height: 25px;
 }
 
-#submit-error-snackbar {
-  visibility: hidden;
-  width: 562px;
-  height: 94px;
-  position: fixed;
-  z-index: 1;
-  bottom: 50%;
-  box-sizing: border-box;
-  background-color: #ffffff;
-  border: 2px solid #eb727c;
-  border-left: 51px solid #eb727c;
-  color: #1c325d;
-  padding: 20px 26px;
-}
-
-/* Show the snackbar when clicking on the button */
-#submit-error-snackbar.show {
-  visibility: visible; /* Show the snackbar */
-  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-  However, delay the fade out process for 2.5 seconds */
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-#notification-icon {
-  position: absolute;
-  top: 21px;
-  left: -38px;
-}
-
-#snackbar-button {
-  position: absolute;
-  top: 16px;
-  right: 19px;
-  cursor: pointer;
-  background-color: #ffffff;
-  border: none;
-}
-
 footer {
   font-family: 'Source Sans Pro';
   font-style: normal;

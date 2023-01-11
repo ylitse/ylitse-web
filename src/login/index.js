@@ -25,7 +25,6 @@
         })
         .catch(function (error) {
           console.log(error.message);
-          document.getElementById('submit-error-snackbar').className = 'show';
         });
 
       event.preventDefault();
@@ -33,9 +32,3 @@
     false,
   );
 })(window, document);
-
-const closeSnackbar = () => {
-  document
-    .getElementById('submit-error-snackbar')
-    .className.replace('show', '');
-};
