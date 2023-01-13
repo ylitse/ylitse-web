@@ -5,7 +5,7 @@ body {
       rgba(1, 165, 236, 0.58) 0%,
       rgba(89, 58, 214, 0.58) 100%
     ),
-    url(/static/img/milad-fakurian-E8Ufcyxz514-unsplash.jpg) no-repeat fixed
+    url(/static/img/splash-background.jpg) no-repeat fixed
       right top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -134,7 +134,7 @@ button[type='submit'] {
   margin-left: -4%;
 }
 
-.right svg {
+.right img {
   margin-top: -60px;
 }
 
@@ -197,7 +197,7 @@ label {
   padding: 0.5rem;
 }
 
-#login-error svg {
+#login-error img {
   margin-right: 21px;
   margin-left: 21px;
 }
@@ -270,12 +270,12 @@ button:visited {
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
   border-radius: 0px 0px 19px 19px;
   min-height: 101px;
-  height: 101px;
+  align-items: start;
   color: #fff;
   z-index: 2;
 }
 
-#mobile-header svg {
+#mobile-header img {
   margin: 27px 32px 0 auto;
   text-align: center;
 }

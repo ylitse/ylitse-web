@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SearchIconImg from '@/static/img/search.svg';
+import SearchIconImg from '@/static/icons/search.svg';
 import { basicSourceSansText, palette } from '../variables';
 
 type SearchProps = {
