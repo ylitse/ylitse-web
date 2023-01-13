@@ -34,7 +34,8 @@
           "{}": false
         }
       }
-    ]
+    ],
+    "semi": ["error", "always"]
   },
   "settings": {
     "react": {
