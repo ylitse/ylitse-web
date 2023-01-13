@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import background from './background.svg';
+import Background from '@/static/img/loading-background.svg';
 
 const rotate = keyframes`
   from {
@@ -45,7 +45,7 @@ export const Page = styled.div`
       rgba(74, 54, 201, 0.87),
       rgba(74, 54, 201, 0.87)
     ),
-    url(${background});
+    url(${Background});
   background-position: center;
   display: flex;
   justify-content: center;
