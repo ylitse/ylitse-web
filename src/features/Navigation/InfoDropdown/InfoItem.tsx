@@ -1,4 +1,4 @@
-import type { NavigationItem } from './NavigationItems';
+import type { NavigationItem } from '../NavigationItems';
 
 import styled from 'styled-components';
 import { palette } from '@/components/variables';

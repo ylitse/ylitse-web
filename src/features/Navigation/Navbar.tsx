@@ -6,9 +6,9 @@ import styled, { css } from 'styled-components';
 
 import { Items, Item } from './NavigationItems';
 import { LogoContainer } from './LogoContainer';
-import { InfoDropdown } from './InfoDropdown';
-import { MobileDropdown } from './MobileDropdown';
-import { LangDropdown } from './LangDropdown';
+import InfoDropdown from './InfoDropdown';
+import MobileDropdown from './MobileDropdown';
+import LangDropdown from './LanguageDropdown';
 
 export const Navbar = () => {
   const isMobile = useMobileMode();
@@ -66,12 +66,19 @@ export const Container = styled.div<{ isMobile?: boolean }>`
     isMobile &&
     css`
       border-bottom: solid 0.5rem ${palette.blue2};
+      padding: 0 1.5rem;
     `}
 `;
 
 export const RightContainer = styled.div`
-  flex: 1;
-  margin-right: 12%;
   display: flex;
-  justify-content: flex-end;
+  margin-right: 10%;
+
+  @media screen and (max-width: 830px) {
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 650px) {
+    margin-right: 4%;
+  }
 `;

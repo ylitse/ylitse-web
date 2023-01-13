@@ -79,6 +79,7 @@ export const variants: Record<TextVariant, TextProp> = {
       fontSize: '2.0rem',
       letterSpacing: '0.1em',
       textTransform: 'uppercase',
+      lineHeight: 'initial',
     },
   },
   link: {
@@ -117,6 +118,7 @@ export const variants: Record<TextVariant, TextProp> = {
       fontWeight: '400',
       lineHeight: '58px',
       textDecoration: 'underline',
+      textUnderlineOffset: '4px',
     },
   },
   linkDisabledMobile: {
@@ -128,6 +130,7 @@ export const variants: Record<TextVariant, TextProp> = {
       lineHeight: '40px',
       fontSize: 'larger',
       textDecoration: 'underline',
+      textUnderlineOffset: '4px',
     },
   },
 };
