@@ -10,6 +10,7 @@
   "retrievePasswordLink": "Unohditko salasanasi?",
   "loginError": "Käyttäjätunnus tai salasanasi on virheellinen. Tarkista syöttämäsi tiedot.",
   "loginButton": "Kirjaudu",
+  "submitError": "Kirjautuminen epäonnistui. Yritä hetken kuluttua uudelleen.",
   "appDescription": "Uusi täällä? Palvelussa voit jutella SOS-Lapsikylän valmentamien vertaismentoreiden kanssa mistä tahansa mieltäsi painavasta asiasta. Palvelun käyttö on luottamuksellista ja täysin maksutonta.",
   "registrationLink": "Rekisteröidy",
   "footer": "Palvelun tarjoaa SOS-Lapsikylä"

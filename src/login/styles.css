@@ -81,14 +81,14 @@ a {
   padding-right: 4%;
 }
 
-.right {
-  background: #4c2ec6;
-  z-index: 1;
-  margin-left: -4%;
-}
-
-.right svg {
-  margin-top: -60px;
+form[name='login'] {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  margin-bottom: 15vh;
+  margin-top: 15vh;
+  width: 80%;
 }
 
 input[type='text'],
@@ -102,15 +102,40 @@ input[type='password'] {
   background: #ffffff;
   border: 1px solid #4a2acb;
   border-radius: 5px;
+  height: 38px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
+
+  /* Removes awkward default styles on some inputs for iOS */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
-/* Rekisteröidy */
+input[type='text']:focus,
+input[type='password']:focus {
+  border: solid 2px #4a2acb;
+  background-color: #e4f3fb;
+  outline: 0;
+}
 
-.button,
-button,
-input[type='button'] {
-  border: 3px solid #f0ba8c !important;
+button[type='submit'] {
+  background-color: #4a2acb;
+  left: 46%;
   color: #f0ba8c;
+  border: none !important;
+}
+
+.right {
+  background: #4c2ec6;
+  z-index: 1;
+  margin-left: -4%;
+}
+
+.right svg {
+  margin-top: -60px;
 }
 
 .right h1 {
@@ -135,9 +160,12 @@ input[type='button'] {
   color: #ffffff;
 }
 
-form input {
-  width: 100%;
-  font-size: 1rem;
+#right-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
 }
 
 label {
@@ -150,16 +178,6 @@ label {
   width: 80% !important;
   margin: 20px auto 0 0;
   color: #1c325d;
-}
-
-form[name='login'] {
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: space-between;
-  margin-bottom: 15vh;
-  margin-top: 15vh;
-  width: 80%;
 }
 
 #login-error {
@@ -184,13 +202,8 @@ form[name='login'] {
   margin-left: 21px;
 }
 
-/* Skeleton css */
-
 .button,
-button,
-button[type='submit'] input[type='submit'],
-input[type='reset'],
-input[type='button'] {
+button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -221,145 +234,30 @@ input[type='button'] {
   transition: background-color 300ms forwards, color 300ms forwards;
 }
 .button:hover,
-button:hover,
-button[type='submit']:hover,
-input[type='submit']:hover,
-input[type='reset']:hover,
-input[type='button']:hover {
+button:hover {
   background-color: #37119d;
   outline: 0;
 }
 
 .button:focus,
 button:focus,
-button[type='submit']:focus,
-input[type='submit']:focus,
-input[type='reset']:focus,
-input[type='button']:focus,
 .button:active,
 button:active,
-input[type='submit']:active,
-input[type='reset']:active,
-input[type='button']:active,
 .button:target,
-button:target,
-input[type='submit']:target,
-input[type='reset']:target,
-input[type='button']:target {
+button:target {
   background-color: #4a2acb;
   outline: #4a2acb solid 3px;
   outline-offset: 4px;
 }
 
-.button:visited button:visited,
-button[type='submit']:visited,
-input[type='submit']:visited,
-input[type='reset']:visited,
-input[type='button']:visited {
+.button:visited,
+button:visited {
   background-color: #5c33ff;
 }
 
-.button.button-primary,
-button.button-primary,
-button[type='submit'].button-primary,
-input[type='submit'].button-primary,
-input[type='reset'].button-primary,
-input[type='button'].button-primary {
-  color: #fff;
-  background-color: #33c3f0;
-  border-color: #33c3f0;
-}
-.button.button-primary:hover,
-button.button-primary:hover,
-button[type='submit'].button.button-primary:hover,
-input[type='submit'].button-primary:hover,
-input[type='reset'].button-primary:hover,
-input[type='button'].button-primary:hover,
-.button.button-primary:focus,
-button.button-primary:focus,
-button[type='submit'].button.button-primary:focus,
-input[type='submit'].button-primary:focus,
-input[type='reset'].button-primary:focus,
-input[type='button'].button-primary:focus {
-  color: #fff;
-  background-color: #1eaedb;
-  border-color: #1eaedb;
-}
-
-/* Forms
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-input[type='email'],
-input[type='number'],
-input[type='search'],
-input[type='text'],
-input[type='tel'],
-input[type='url'],
-input[type='password'],
-textarea,
-select {
-  height: 38px;
-  padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
-  border-radius: 4px;
-  box-shadow: none;
-  box-sizing: border-box;
-}
-/* Removes awkward default styles on some inputs for iOS */
-input[type='email'],
-input[type='number'],
-input[type='search'],
-input[type='text'],
-input[type='tel'],
-input[type='url'],
-input[type='password'],
-textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-textarea {
-  min-height: 65px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-input[type='email']:focus,
-input[type='number']:focus,
-input[type='search']:focus,
-input[type='text']:focus,
-input[type='tel']:focus,
-input[type='url']:focus,
-input[type='password']:focus,
-textarea:focus,
-select:focus {
-  border: solid 2px #4a2acb;
-  background-color: #e4f3fb;
-  outline: 0;
-}
-label,
-legend {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-fieldset {
-  padding: 0;
-  border-width: 0;
-}
-
-input[type='submit'],
-button[type='submit'] {
-  flex: 1;
-  background: #4a2acb;
-  left: 46%;
+#register-button {
+  border: 3px solid #f0ba8c !important;
   color: #f0ba8c;
-  border: none !important;
-}
-
-.right-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
 }
 
 #mobile-header {
@@ -418,7 +316,6 @@ button[type='submit'] {
     margin-top: -40px;
     z-index: 1;
   }
-
   form[name='login'] {
     margin-top: 30px;
   }
