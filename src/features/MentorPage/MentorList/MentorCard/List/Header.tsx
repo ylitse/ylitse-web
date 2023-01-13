@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { palette, basicSourceSansText } from '@/components/variables';
-import ProfilePicPlaceholder from '@/static/img/icon-chat-profilepic.svg';
+import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 import { WrappedText, TruncateText } from '../Expanded/BasicInfo';
 import { Text } from '@/components/Text/Text';
 

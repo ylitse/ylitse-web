@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ProfilePicPlaceholder from '@/static/img/icon-chat-profilepic.svg';
+import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 import {
   breakpoints,
   palette,

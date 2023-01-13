@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import SvgLogo from '@/static/img/logo.svg';
+import SvgLogo from '@/static/img/ylitse-logo.svg';
 import Text from '@/components/Text';
 import { useTranslation } from 'react-i18next';
 import { MOBILE_TRESHOLD } from '@/components/variables';
