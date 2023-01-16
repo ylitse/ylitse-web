@@ -1,4 +1,3 @@
-/* eslint-disable */
 (function (window, document) {
   const form = document.forms.namedItem('register');
 
