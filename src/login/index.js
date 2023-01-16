@@ -19,7 +19,7 @@
           form.elements[0].focus();
           throw new TypeError("Couldn't log in.");
         })
-        .then(function (data) {
+        .then(function () {
           window.location.href = '/';
         })
         .catch(function (error) {
