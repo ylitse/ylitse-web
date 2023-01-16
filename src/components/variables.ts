@@ -29,7 +29,6 @@ export const breakpoints = {
   mobile: `${MOBILE_TRESHOLD}px`,
 };
 
-//spacing
 export const spacing = {
   layout_spacing: '2rem',
   button_padding: '0.75rem 1.25rem',
