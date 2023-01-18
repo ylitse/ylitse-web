@@ -39,6 +39,7 @@ const Filters: React.FC<Props> = ({
 };
 
 const Container = styled.div`
+  background-color: ${palette.white};
   flex: 0 0 auto;
   width: 100%;
   border-radius: 10px;

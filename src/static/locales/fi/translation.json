@@ -20,6 +20,12 @@
       "chat": "Avaa keskustelu"
     }
   },
+  "chatPage": {
+    "menu": {
+      "title": "Chat",
+      "empty": "Sinulla ei ole vielä keskusteluja. Ei hätää, aloittamasi keskustelut mentoreiden kanssa tulevat tähän automaattisesti."
+    }
+  },
   "navigation": {
     "logo": "Ylitse",
     "mobile": { "menu": "Valikko" },

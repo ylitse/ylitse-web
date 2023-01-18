@@ -20,6 +20,12 @@
       "chat": "Open conversation"
     }
   },
+  "chatPage": {
+    "menu": {
+      "title": "Chat",
+      "empty": "You don't have any conversations yet. Don't worry, the conversations you start with mentors will appear here automatically."
+    }
+  },
   "navigation": {
     "logo": "Ylitse",
     "mobile": { "menu": "Menu" },

@@ -18,7 +18,11 @@ export const MentorCard = ({ mentor, onDismiss }: Props) => {
     <Container>
       <Card isMobile={isMobile}>
         <Header mentor={mentor} />
-        <CloseButton variant="close" onClick={onDismiss}></CloseButton>
+        <CloseButton
+          variant="close"
+          sizeInPx={38}
+          onClick={onDismiss}
+        ></CloseButton>
         <Content mentor={mentor} />
       </Card>
     </Container>
