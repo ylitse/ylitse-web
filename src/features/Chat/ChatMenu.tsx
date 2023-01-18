@@ -37,6 +37,7 @@ const ChatMenu = () => {
 const Container = styled.div`
   background-color: ${palette.white};
   border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
   width: 407px;
   height: 780px;
 `;
@@ -64,7 +65,7 @@ const Header = styled.h1`
 
 const Chats = styled.div``;
 
-const EmptyMenuText = styled.div`
+const EmptyMenuText = styled.p`
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
