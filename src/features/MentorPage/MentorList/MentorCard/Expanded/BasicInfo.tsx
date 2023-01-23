@@ -14,7 +14,7 @@ export const BasicInfo = ({
   mentor: { name, age, region, isVacationing, statusMessage, languages },
 }: Props) => {
   const isMobile = useMobileMode();
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
 
   return (
     <Container>
@@ -23,7 +23,7 @@ export const BasicInfo = ({
       </Text>
       {!isMobile && <NameDivider />}
       <WrappedText color="white" variant="p">
-        {age} {t('mentorPage.card.age')} <StyledDivider>|</StyledDivider>
+        {age} {t('card.age')} <StyledDivider>|</StyledDivider>
         {region}
       </WrappedText>
       <Text color="white" variant="p">

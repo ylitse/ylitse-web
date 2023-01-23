@@ -10,11 +10,11 @@ type Props = {
 };
 
 export const ExpandButton = ({ setVisibleCard, mentor }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
   return (
     <Container>
       <TextButton onClick={() => setVisibleCard(mentor)}>
-        {t('mentorPage.card.open')}
+        {t('card.open')}
       </TextButton>
     </Container>
   );

@@ -46,7 +46,7 @@ describe('<Navigation/>', () => {
     user.click(link);
 
     // the mentors should be received
-    const heading = await findByRole('heading', { name: 'mentorPage.title' });
+    const heading = await findByRole('heading', { name: 'title' });
     expect(heading).toBeInTheDocument();
   });
 });

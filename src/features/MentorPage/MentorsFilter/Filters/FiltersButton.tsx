@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const FiltersButton: React.FC<Props> = ({ onFiltersClose }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
 
   const selectedSkills = useAppSelector(selectSelectedSkills);
   const searchString = useAppSelector(selectSearchString);
@@ -24,9 +24,9 @@ export const FiltersButton: React.FC<Props> = ({ onFiltersClose }) => {
 
   const skillsSelectedString =
     selectedSkills.length >= 2
-      ? `${selectedSkills.length} ${t('mentorPage.filters.multipleSelected')}`
+      ? `${selectedSkills.length} ${t('filters.multipleSelected')}`
       : selectedSkills.length === 1
-      ? `${selectedSkills.length} ${t('mentorPage.filters.oneSelected')}`
+      ? `${selectedSkills.length} ${t('filters.oneSelected')}`
       : '';
 
   const searchAppliedString = searchString.length ? `"${searchString}"` : '';
@@ -44,7 +44,7 @@ export const FiltersButton: React.FC<Props> = ({ onFiltersClose }) => {
       <Text color={isFiltersApplied ? 'white' : 'purple'}>
         {isFiltersApplied
           ? `${searchAppliedString}${twoFiltersDelimiter}${skillsSelectedString}`
-          : `${t('mentorPage.filters.title')}`}
+          : `${t('filters.title')}`}
       </Text>
     </SearchButton>
   );

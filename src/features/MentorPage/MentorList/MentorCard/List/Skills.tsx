@@ -6,10 +6,10 @@ import { palette } from '@/components/variables';
 import { useTranslation } from 'react-i18next';
 
 export const Skills = ({ skills }: { skills: Array<string> }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
   return (
     <Container>
-      <StyledText variant="h3">{t('mentorPage.card.skills')}</StyledText>
+      <StyledText variant="h3">{t('card.skills')}</StyledText>
       <SkillChips>
         {skills.map(item => (
           <SimpleChip key={item} text={item} />

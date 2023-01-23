@@ -6,14 +6,14 @@ import IconButton from '@/components/Buttons/IconButton';
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
 
 const ChatMenu = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('chat');
   const [chatTypeMenuOpen, setChatTypeMenuOpen] = useState(false);
   const [chats, setChats] = useState([]);
 
   return (
     <Container>
       <ChatMenuRow>
-        <Header>{t('chatPage.menu.title')}</Header>
+        <Header>{t('menu.title')}</Header>
         <Buttons>
           {!!chats.length && (
             <IconButton
@@ -34,20 +34,20 @@ const ChatMenu = () => {
           <ChatMenuRow>
             <MenuBackLink onClick={() => setChatTypeMenuOpen(false)}>
               <MenuBackIcon />
-              {t('chatPage.menu.back')}
+              {t('menu.back')}
             </MenuBackLink>
           </ChatMenuRow>
           <ChatMenuRow>
-            <ChatTypeLink>{t('chatPage.menu.archived')}</ChatTypeLink>
+            <ChatTypeLink>{t('menu.archived')}</ChatTypeLink>
           </ChatMenuRow>
           <ChatMenuRow>
-            <ChatTypeLink>{t('chatPage.menu.blocked')}</ChatTypeLink>
+            <ChatTypeLink>{t('menu.blocked')}</ChatTypeLink>
           </ChatMenuRow>
         </>
       ) : chats.length ? (
         <ChatList></ChatList>
       ) : (
-        <EmptyMenuText>{t('chatPage.menu.empty')}</EmptyMenuText>
+        <EmptyMenuText>{t('menu.empty')}</EmptyMenuText>
       )}
     </Container>
   );

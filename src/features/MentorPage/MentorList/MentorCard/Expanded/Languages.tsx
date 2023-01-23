@@ -12,11 +12,11 @@ export const Languages = ({
   languages: Array<string>;
   isMobile: boolean;
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
   return (
     <>
       <StyledText variant="h3" color={isMobile ? 'darkpurple' : 'white'}>
-        {t('mentorPage.card.languages')}
+        {t('card.languages')}
       </StyledText>
       <SkillChips>
         {languages.map(item => (

@@ -9,10 +9,10 @@ type Props = {
 };
 
 export const Skills = ({ skills }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
   return (
     <Container>
-      <Header variant="h3">{t('mentorPage.card.skills')}</Header>
+      <Header variant="h3">{t('card.skills')}</Header>
       <SkillChips>
         {skills.map(skill => (
           <SimpleChip key={skill} text={skill} />

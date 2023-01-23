@@ -5,10 +5,10 @@ import { basicSourceSansText, palette } from '@/components/variables';
 import { useTranslation } from 'react-i18next';
 
 export const Story = ({ story }: { story: string }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
   return (
     <>
-      <Text variant="h3">{t('mentorPage.card.bio')}</Text>
+      <Text variant="h3">{t('card.bio')}</Text>
       <TruncatedMultiline>{story}</TruncatedMultiline>
     </>
   );

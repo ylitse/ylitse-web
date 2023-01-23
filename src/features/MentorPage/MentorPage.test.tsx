@@ -57,9 +57,7 @@ describe('<MentorPage />', () => {
     expect(await findByRole('progressbar')).toBeInTheDocument();
 
     // after some time, the mentors should be received
-    expect(
-      await findByRole('heading', { name: 'mentorPage.title' }),
-    ).toBeInTheDocument();
+    expect(await findByRole('heading', { name: 'title' })).toBeInTheDocument();
 
     // see that mentorResponse-mentor is found from list
     const mentorText = getByText(mentorsResponse.resources[0].display_name);
@@ -67,10 +65,10 @@ describe('<MentorPage />', () => {
 
     // open the card for more information
     const openMentorCardButtons = getAllByRole('button', {
-      name: 'mentorPage.card.open',
+      name: 'card.open',
     });
     await user.click(openMentorCardButtons[0]);
-    const openChatButton = getByText('mentorPage.card.chat');
+    const openChatButton = getByText('card.chat');
     expect(openChatButton).toBeInTheDocument();
 
     // close the mentorcard again
@@ -88,9 +86,7 @@ describe('<MentorPage />', () => {
     expect(await findByRole('progressbar')).toBeInTheDocument();
 
     // after some time, the mentors should be received
-    expect(
-      await findByRole('heading', { name: 'mentorPage.title' }),
-    ).toBeInTheDocument();
+    expect(await findByRole('heading', { name: 'title' })).toBeInTheDocument();
 
     // show the filters
     const showFiltersButton = getByRole('button', { name: /show-filters/i });
@@ -126,9 +122,7 @@ describe('<MentorPage />', () => {
     expect(await findByRole('progressbar')).toBeInTheDocument();
 
     // after some time, the mentors should be received
-    expect(
-      await findByRole('heading', { name: 'mentorPage.title' }),
-    ).toBeInTheDocument();
+    expect(await findByRole('heading', { name: 'title' })).toBeInTheDocument();
 
     // show the filters
     const showFiltersButton = getByRole('button', { name: /show-filters/i });
@@ -165,13 +159,11 @@ describe('<MentorPage />', () => {
     expect(await findByRole('progressbar')).toBeInTheDocument();
 
     // after some time, the response should be received
-    expect(
-      await findByRole('heading', { name: 'mentorPage.title' }),
-    ).toBeInTheDocument();
+    expect(await findByRole('heading', { name: 'title' })).toBeInTheDocument();
 
     // no cards are rendered
     const openMentorCardButtons = queryAllByRole('button', {
-      name: 'mentorPage.card.open',
+      name: 'card.open',
     });
 
     expect(openMentorCardButtons.length).toBe(0);

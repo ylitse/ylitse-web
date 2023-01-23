@@ -1,0 +1,20 @@
+{
+  "menu": {
+    "title": "Chat",
+    "back": "Back to chats",
+    "archived": "Archived chats",
+    "blocked": "Blocked chats",
+    "empty": "You don't have any conversations yet. Don't worry, the conversations you start with mentors will appear here automatically."
+  },
+  "welcome": {
+    "upper": {
+      "title": "Welcome to chat!",
+      "description": "Using the chat, you can have confidential conversations with peer mentors educated by SOS Children's Village about anything that's on your mind. The conversations with new messages will appear on top."
+    },
+    "lower": {
+      "title": "Looking for a conversation?",
+      "description": "You decide who you start a conversation with. Please browse the mentors' profiles and choose one for you. When you find a match, you can start a conversation with them by pressing the ”Start conversation” button in the mentor card.",
+      "button": "Find mentors"
+    }
+  }
+}

@@ -5,7 +5,7 @@ import { TextButton } from '@/components/Buttons';
 import { useTranslation } from 'react-i18next';
 
 const ChatWindow = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('chat');
   const [chats, setChats] = useState([]);
 
   return chats.length ? (
@@ -13,13 +13,13 @@ const ChatWindow = () => {
   ) : (
     <Container>
       <UpperWelcomeContainer>
-        <Header>{t('chatPage.chat.welcome.upper.title')}</Header>
-        <Text>{t('chatPage.chat.welcome.upper.description')}</Text>
+        <Header>{t('welcome.upper.title')}</Header>
+        <Text>{t('welcome.upper.description')}</Text>
       </UpperWelcomeContainer>
       <LowerWelcomeContainer>
-        <Header>{t('chatPage.chat.welcome.lower.title')}</Header>
-        <Text>{t('chatPage.chat.welcome.lower.description')}</Text>
-        <SearchButton>{t('chatPage.chat.welcome.lower.button')}</SearchButton>
+        <Header>{t('welcome.lower.title')}</Header>
+        <Text>{t('welcome.lower.description')}</Text>
+        <SearchButton>{t('welcome.lower.button')}</SearchButton>
       </LowerWelcomeContainer>
     </Container>
   );

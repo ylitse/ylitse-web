@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { MOBILE_TRESHOLD } from '@/components/variables';
 
 export const LogoContainer = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
 
   return (
     <Container>

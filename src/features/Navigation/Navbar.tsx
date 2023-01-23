@@ -12,7 +12,7 @@ import LangDropdown from './LanguageDropdown';
 
 export const Navbar = () => {
   const isMobile = useMobileMode();
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
 
   const navigationItems = [
     {

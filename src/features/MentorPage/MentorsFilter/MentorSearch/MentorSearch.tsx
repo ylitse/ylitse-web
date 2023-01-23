@@ -9,16 +9,16 @@ export const MentorSearch = () => {
   const searchString = useAppSelector(selectSearchString);
 
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
 
   const handleSearchStringChange = (value: string) =>
     dispatch(changeSearchString(value));
 
   return (
     <Container>
-      <InfoText>{t('mentorPage.filters.description')}</InfoText>
+      <InfoText>{t('filters.description')}</InfoText>
       <SearchBar
-        placeholder={t('mentorPage.filters.search')}
+        placeholder={t('filters.search')}
         value={searchString}
         onChange={handleSearchStringChange}
       />

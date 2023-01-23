@@ -29,7 +29,7 @@ export const Pagination = ({
     pageSize: SKILL_AMOUNT_ON_PAGE,
   });
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
 
   const handleReset = () => {
     dispatch(resetFilters());
@@ -42,7 +42,7 @@ export const Pagination = ({
         variant="light"
         onClick={handleReset}
       >
-        <ButtonText>{t('mentorPage.filters.clear')}</ButtonText>
+        <ButtonText>{t('filters.clear')}</ButtonText>
       </TextButton>
       <PaginationContainer>
         {paginationRange?.map((page, index) => (
@@ -59,7 +59,7 @@ export const Pagination = ({
         variant="light"
         onClick={onFiltersClose}
       >
-        <ButtonText>{t('mentorPage.filters.close')}</ButtonText>
+        <ButtonText>{t('filters.close')}</ButtonText>
       </TextButton>
     </Container>
   );

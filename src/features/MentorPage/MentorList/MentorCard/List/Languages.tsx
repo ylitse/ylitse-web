@@ -4,10 +4,10 @@ import { Text } from '@/components/Text/Text';
 import { useTranslation } from 'react-i18next';
 
 export const Languages = ({ languages }: { languages: Array<string> }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
   return (
     <>
-      <StyledText variant="h3">{t('mentorPage.card.languages')}</StyledText>
+      <StyledText variant="h3">{t('card.languages')}</StyledText>
       <SkillChips>
         {languages.map(item => (
           <SimpleChip key={item} text={item} />

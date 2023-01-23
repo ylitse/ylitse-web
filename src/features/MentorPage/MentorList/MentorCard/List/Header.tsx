@@ -21,11 +21,9 @@ export const Header: React.FC<Props> = ({
   isAvailable,
   message,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
 
-  const availabilityMessage = isAvailable
-    ? ''
-    : t('mentorPage.card.unavailable');
+  const availabilityMessage = isAvailable ? '' : t('card.unavailable');
 
   return (
     <StyledHeader isAvailable={isAvailable}>
@@ -38,7 +36,7 @@ export const Header: React.FC<Props> = ({
           {name}
         </NameText>
         <WrappedText color="white" variant="p">
-          {age} {t('mentorPage.card.age')} <StyledDivider>|</StyledDivider>
+          {age} {t('card.age')} <StyledDivider>|</StyledDivider>
           {region}
         </WrappedText>
         <TruncateText color="white">{message}</TruncateText>

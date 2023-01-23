@@ -9,12 +9,12 @@ import { useTranslation } from 'react-i18next';
 
 const MentorsFilter = () => {
   const skills = useAppSelector(selectSkills());
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
   return (
     <Filters
-      headLine={t('mentorPage.title')}
+      headLine={t('title')}
       onFiltersClose={() => setIsFiltersVisible(true)}
       isFiltersVisible={isFiltersVisible}
     >

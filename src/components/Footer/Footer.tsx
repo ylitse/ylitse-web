@@ -5,7 +5,7 @@ import FooterLogo from '@/static/img/footer-logo.svg';
 import { palette, basicSourceSansText, breakpoints } from '../variables';
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
 
   return (
     <StyledFooter>

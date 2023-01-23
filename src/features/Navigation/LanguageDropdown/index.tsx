@@ -10,7 +10,7 @@ export type LangCode = 'en' | 'fi';
 const LangDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('common');
 
   const isSelected = (langCode: LangCode): boolean =>
     i18n.language === langCode;

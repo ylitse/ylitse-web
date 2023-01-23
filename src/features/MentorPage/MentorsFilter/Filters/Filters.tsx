@@ -20,12 +20,12 @@ const Filters: React.FC<Props> = ({
   children,
 }) => {
   const isMobile = useMobileMode();
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
 
   return isMobile ? (
     <MobileContainer>
       <MobileHeader variant="h1">{headLine}</MobileHeader>
-      <Text variant="p">{t('mentorPage.filters.description')}</Text>
+      <Text variant="p">{t('filters.description')}</Text>
     </MobileContainer>
   ) : (
     <Container>
