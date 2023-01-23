@@ -32,8 +32,8 @@ const ChatMenu = () => {
       {chatTypeMenuOpen ? (
         <>
           <ChatMenuRow>
-            <MenuBackLink>
-              <BackArrowIcon />
+            <MenuBackLink onClick={() => setChatTypeMenuOpen(false)}>
+              <MenuBackIcon />
               {t('chatPage.menu.back')}
             </MenuBackLink>
           </ChatMenuRow>
@@ -62,7 +62,7 @@ const Container = styled.div`
 `;
 
 const ChatMenuRow = styled.div`
-  height: 10%;
+  height: 80px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -79,6 +79,14 @@ const MenuBackLink = styled.a`
   align-items: center;
   color: ${palette.purple};
   padding-left: 40px;
+  cursor: pointer;
+`;
+
+const MenuBackIcon = styled.div`
+  background-image: url(${BackArrowIcon});
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
 `;
 
 const ChatTypeLink = styled.a`
@@ -89,6 +97,7 @@ const ChatTypeLink = styled.a`
   line-height: 29px;
   color: ${palette.purple};
   padding-left: 40px;
+  cursor: pointer;
 `;
 
 const Header = styled.h1`
