@@ -23,6 +23,9 @@
   "chatPage": {
     "menu": {
       "title": "Chat",
+      "back": "Takaisin keskusteluihin",
+      "archived": "Arkistoidut keskustelut",
+      "blocked": "Estetyt keskustelut",
       "empty": "Sinulla ei ole vielä keskusteluja. Ei hätää, aloittamasi keskustelut mentoreiden kanssa tulevat tähän automaattisesti."
     },
     "chat": {

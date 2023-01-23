@@ -23,6 +23,9 @@
   "chatPage": {
     "menu": {
       "title": "Chat",
+      "back": "Back to chats",
+      "archived": "Archived chats",
+      "blocked": "Blocked chats",
       "empty": "You don't have any conversations yet. Don't worry, the conversations you start with mentors will appear here automatically."
     },
     "chat": {

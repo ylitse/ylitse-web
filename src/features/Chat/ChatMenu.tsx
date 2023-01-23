@@ -3,14 +3,16 @@ import { palette } from '@/components/variables';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import IconButton from '@/components/Buttons/IconButton';
+import BackArrowIcon from '@/static/icons/back-arrow.svg';
 
 const ChatMenu = () => {
   const { t } = useTranslation();
+  const [chatTypeMenuOpen, setChatTypeMenuOpen] = useState(false);
   const [chats, setChats] = useState([]);
 
   return (
     <Container>
-      <Toolbar>
+      <ChatMenuRow>
         <Header>{t('chatPage.menu.title')}</Header>
         <Buttons>
           {!!chats.length && (
@@ -23,12 +25,27 @@ const ChatMenu = () => {
           <IconButton
             variant="menuLines"
             sizeInPx={40}
-            onClick={() => console.log('opening...')}
+            onClick={() => setChatTypeMenuOpen(true)}
           />
         </Buttons>
-      </Toolbar>
-      {chats.length ? (
-        <Chats></Chats>
+      </ChatMenuRow>
+      {chatTypeMenuOpen ? (
+        <>
+          <ChatMenuRow>
+            <MenuBackLink>
+              <BackArrowIcon />
+              {t('chatPage.menu.back')}
+            </MenuBackLink>
+          </ChatMenuRow>
+          <ChatMenuRow>
+            <ChatTypeLink>{t('chatPage.menu.archived')}</ChatTypeLink>
+          </ChatMenuRow>
+          <ChatMenuRow>
+            <ChatTypeLink>{t('chatPage.menu.blocked')}</ChatTypeLink>
+          </ChatMenuRow>
+        </>
+      ) : chats.length ? (
+        <ChatList></ChatList>
       ) : (
         <EmptyMenuText>{t('chatPage.menu.empty')}</EmptyMenuText>
       )}
@@ -44,12 +61,34 @@ const Container = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
 `;
 
-const Toolbar = styled.div`
-  height: 77px;
+const ChatMenuRow = styled.div`
+  height: 10%;
   display: flex;
   flex-direction: row;
   align-items: center;
   border-bottom: 1px solid ${palette.lightgrey};
+`;
+
+const MenuBackLink = styled.a`
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  color: ${palette.purple};
+  padding-left: 40px;
+`;
+
+const ChatTypeLink = styled.a`
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 29px;
+  color: ${palette.purple};
+  padding-left: 40px;
 `;
 
 const Header = styled.h1`
@@ -60,7 +99,7 @@ const Header = styled.h1`
   font-size: 30px;
   line-height: 48px;
   color: ${palette.darkblue};
-  padding-left: 39px;
+  padding-left: 40px;
 `;
 
 const Buttons = styled.div`
@@ -69,7 +108,7 @@ const Buttons = styled.div`
   padding-right: 31px;
 `;
 
-const Chats = styled.div``;
+const ChatList = styled.div``;
 
 const EmptyMenuText = styled.div`
   font-family: 'Source Sans Pro';
