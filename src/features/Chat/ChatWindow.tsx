@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { palette } from '@/components/variables';
+import { basicSourceSansText, palette } from '@/components/variables';
 import { useState } from 'react';
 import { TextButton } from '@/components/Buttons';
 import { useTranslation } from 'react-i18next';
@@ -67,13 +67,10 @@ const Header = styled.h2`
 `;
 
 const Text = styled.p`
+  ${basicSourceSansText}
   padding-left: 10%;
   padding-right: 10%;
   margin: 0;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
   line-height: 30px;
   color: ${palette.darkblue};
 `;

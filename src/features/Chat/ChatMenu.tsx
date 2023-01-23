@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { palette } from '@/components/variables';
+import { basicSourceSansText, palette } from '@/components/variables';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import IconButton from '@/components/Buttons/IconButton';
@@ -111,10 +111,7 @@ const Buttons = styled.div`
 const ChatList = styled.div``;
 
 const EmptyMenuText = styled.div`
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
+  ${basicSourceSansText}
   line-height: 27px;
   color: ${palette.darkblue};
   padding-top: 23px;
