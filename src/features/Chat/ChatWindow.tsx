@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { palette } from '@/components/variables';
 import { useState } from 'react';
 import { TextButton } from '@/components/Buttons';
@@ -6,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import Text from '@/components/Text';
 
 const ChatWindow = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation('chat');
   const [chats, setChats] = useState([]);
 
@@ -20,7 +22,9 @@ const ChatWindow = () => {
       <LowerWelcomeContainer>
         <Header variant="h2">{t('welcome.lower.title')}</Header>
         <Description variant="p">{t('welcome.lower.description')}</Description>
-        <SearchButton>{t('welcome.lower.button')}</SearchButton>
+        <SearchButton onClick={() => navigate('/mentors')}>
+          {t('welcome.lower.button')}
+        </SearchButton>
       </LowerWelcomeContainer>
     </Container>
   );
