@@ -1,14 +1,18 @@
 {
   "menu": {
     "title": {
-      "chat": "Chat",
+      "chats": "Chat",
       "archived": "Arkistoidut",
       "blocked": "Estetyt"
     },
     "back": "Takaisin keskusteluihin",
     "archived": "Arkistoidut keskustelut",
     "blocked": "Estetyt keskustelut",
-    "empty": "Sinulla ei ole vielä keskusteluja. Ei hätää, aloittamasi keskustelut mentoreiden kanssa tulevat tähän automaattisesti."
+    "empty": {
+      "chats": "Sinulla ei ole vielä keskusteluja. Ei hätää, aloittamasi keskustelut mentoreiden kanssa tulevat tähän automaattisesti.",
+      "archived": "Sinulla ei ole arkistoituja keskusteluja.",
+      "blocked": "Sinulla ei ole estettyjä keskusteluja."
+    }
   },
   "welcome": {
     "upper": {

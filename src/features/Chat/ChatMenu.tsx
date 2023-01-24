@@ -18,7 +18,7 @@ const ChatMenu = () => {
       <ChatMenuRow>
         <Header variant="h1">
           {chatType === 'chat'
-            ? t('menu.title.chat')
+            ? t('menu.title.chats')
             : chatType === 'archived'
             ? t('menu.title.archived')
             : t('menu.title.blocked')}
@@ -85,7 +85,13 @@ const ChatMenu = () => {
       ) : chats.length ? (
         <ChatList></ChatList>
       ) : (
-        <EmptyMenuText variant="p">{t('menu.empty')}</EmptyMenuText>
+        <EmptyMenuText variant="p">
+          {chatType === 'chat'
+            ? t('menu.empty.chats')
+            : chatType === 'archived'
+            ? t('menu.empty.archived')
+            : t('menu.empty.blocked')}
+        </EmptyMenuText>
       )}
     </Container>
   );
@@ -142,10 +148,11 @@ const Buttons = styled.div`
 const ChatList = styled.div``;
 
 const EmptyMenuText = styled(Text)`
+  margin: 0;
   color: ${palette.darkblue};
-  padding-top: 23px;
-  padding-left: 38px;
-  padding-right: 53px;
+  padding-top: 1.25rem;
+  padding-left: 40px;
+  padding-right: 40px;
 `;
 
 export default ChatMenu;

@@ -1,14 +1,18 @@
 {
   "menu": {
     "title": {
-      "chat": "Chat",
+      "chats": "Chat",
       "archived": "Arkistoidut",
       "blocked": "Estetyt"
     },
     "back": "Back to chats",
     "archived": "Archived chats",
     "blocked": "Blocked chats",
-    "empty": "You don't have any conversations yet. Don't worry, the conversations you start with mentors will appear here automatically."
+    "empty": {
+      "chats": "You don't have any conversations yet. Don't worry, the conversations you start with mentors will appear here automatically.",
+      "archived": "You don't have any archived conversations.",
+      "blocked": "You don't have any blocked conversations."
+    }
   },
   "welcome": {
     "upper": {
