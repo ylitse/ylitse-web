@@ -6,11 +6,11 @@ export type TextVariant =
   | 'h3'
   | 'p'
   | 'a'
+  | 'menuLink'
   | 'logo'
   | 'link'
   | 'linkBold'
   | 'linkMobile'
-  | 'chatMenuLink'
   | 'linkDisabled'
   | 'linkDisabledMobile';
 export type TextElement = 'h1' | 'h2' | 'h3' | 'p' | 'a' | 'span';
@@ -71,6 +71,16 @@ export const variants: Record<TextVariant, TextProp> = {
       lineHeight: '1.5rem',
     },
   },
+  menuLink: {
+    element: 'a',
+    styles: {
+      fontFamily: '"Baloo 2"',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
+    },
+  },
   logo: {
     element: 'p',
     styles: {
@@ -109,16 +119,6 @@ export const variants: Record<TextVariant, TextProp> = {
       fontWeight: '700',
       lineHeight: '40px',
       fontSize: 'larger',
-    },
-  },
-  chatMenuLink: {
-    element: 'a',
-    styles: {
-      fontFamily: '"Baloo 2"',
-      fontStyle: 'normal',
-      fontWeight: '700',
-      fontSize: '1rem',
-      lineHeight: '1.5rem',
     },
   },
   linkDisabled: {

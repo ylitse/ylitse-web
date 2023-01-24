@@ -1,27 +1,29 @@
 import styled from 'styled-components';
-import { palette } from '@/components/variables';
-import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import IconButton from '@/components/Buttons/IconButton';
+import { useTranslation } from 'react-i18next';
+
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
+
+import IconButton from '@/components/Buttons/IconButton';
+import { palette } from '@/components/variables';
 import Text from '@/components/Text';
+
+type ChatCategory = 'active' | 'archived' | 'blocked';
 
 const ChatMenu = () => {
   const { t } = useTranslation('chat');
-  const [chatTypeMenuOpen, setChatTypeMenuOpen] = useState(false);
-  type ChatType = 'chat' | 'archived' | 'blocked';
-  const [chatType, setChatType] = useState<ChatType>('chat');
+  const [showCategories, setShowCategories] = useState(false);
+  const [currentCategory, setCurrentCategory] =
+    useState<ChatCategory>('active');
   const [chats, setChats] = useState([]);
 
   return (
     <Container>
-      <ChatMenuRow>
+      <Row>
         <Header variant="h1">
-          {chatType === 'chat'
-            ? t('menu.title.chats')
-            : chatType === 'archived'
-            ? t('menu.title.archived')
-            : t('menu.title.blocked')}
+          {currentCategory === 'active' && t('menu.title.chats')}
+          {currentCategory === 'archived' && t('menu.title.archived')}
+          {currentCategory === 'blocked' && t('menu.title.blocked')}
         </Header>
         <Buttons>
           {!!chats.length && (
@@ -34,108 +36,106 @@ const ChatMenu = () => {
           <IconButton
             variant="menuLines"
             sizeInPx={40}
-            onClick={() => setChatTypeMenuOpen(!chatTypeMenuOpen)}
+            onClick={() => setShowCategories(!showCategories)}
           />
         </Buttons>
-      </ChatMenuRow>
-      {(chatTypeMenuOpen ||
-        chatType === 'archived' ||
-        chatType === 'blocked') && (
-        <ChatMenuRow>
-          <MenuBackLink
+      </Row>
+
+      {(showCategories ||
+        currentCategory === 'archived' ||
+        currentCategory === 'blocked') && (
+        <Row>
+          <GoBackLink
             onClick={() => {
-              setChatType('chat');
-              setChatTypeMenuOpen(false);
+              setCurrentCategory('active');
+              setShowCategories(false);
             }}
           >
-            <MenuBackIcon src={BackArrowIcon} />
-            <MenuBackLinkText color="purple" variant="chatMenuLink">
+            <GoBackIcon src={BackArrowIcon} />
+            <Text color="purple" variant="menuLink">
               {t('menu.back')}
-            </MenuBackLinkText>
-          </MenuBackLink>
-        </ChatMenuRow>
+            </Text>
+          </GoBackLink>
+        </Row>
       )}
-      {chatTypeMenuOpen ? (
+
+      {showCategories ? (
         <>
-          <ChatMenuRow>
-            <ChatTypeLink
+          <Row>
+            <CategoryLink
               onClick={() => {
-                setChatType('archived');
-                setChatTypeMenuOpen(false);
+                setCurrentCategory('archived');
+                setShowCategories(false);
               }}
             >
-              <MenuBackLinkText color="purple" variant="chatMenuLink">
+              <Text color="purple" variant="menuLink">
                 {t('menu.archived')}
-              </MenuBackLinkText>
-            </ChatTypeLink>
-          </ChatMenuRow>
-          <ChatMenuRow>
-            <ChatTypeLink
+              </Text>
+            </CategoryLink>
+          </Row>
+          <Row>
+            <CategoryLink
               onClick={() => {
-                setChatType('blocked');
-                setChatTypeMenuOpen(false);
+                setCurrentCategory('blocked');
+                setShowCategories(false);
               }}
             >
-              <MenuBackLinkText color="purple" variant="chatMenuLink">
+              <Text color="purple" variant="menuLink">
                 {t('menu.blocked')}
-              </MenuBackLinkText>
-            </ChatTypeLink>
-          </ChatMenuRow>
+              </Text>
+            </CategoryLink>
+          </Row>
         </>
       ) : chats.length ? (
         <ChatList></ChatList>
       ) : (
-        <EmptyMenuText variant="p">
-          {chatType === 'chat'
-            ? t('menu.empty.chats')
-            : chatType === 'archived'
-            ? t('menu.empty.archived')
-            : t('menu.empty.blocked')}
-        </EmptyMenuText>
+        <CategoryEmptyText variant="p">
+          {currentCategory === 'active' && t('menu.empty.chats')}
+          {currentCategory === 'archived' && t('menu.empty.archived')}
+          {currentCategory === 'blocked' && t('menu.empty.blocked')}
+        </CategoryEmptyText>
       )}
     </Container>
   );
 };
 
 const Container = styled.div`
-  width: 407px;
-  height: 780px;
   background-color: ${palette.white};
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
+  height: 780px;
+  width: 407px;
 `;
 
-const ChatMenuRow = styled.div`
-  height: 80px;
-  display: flex;
-  flex-direction: row;
+const Row = styled.div`
   align-items: center;
   border-bottom: 1px solid ${palette.lightgrey};
+  display: flex;
+  flex-direction: row;
+  height: 80px;
 `;
 
-const MenuBackLink = styled.a`
-  display: flex;
+const GoBackLink = styled.a`
   align-items: center;
+  cursor: pointer;
+  display: flex;
   padding-left: 40px;
   padding-right: 40px;
-  cursor: pointer;
 `;
 
-const MenuBackLinkText = styled(Text)``;
-
-const MenuBackIcon = styled.img`
+const GoBackIcon = styled.img`
+  cursor: pointer;
   padding-right: 20px;
-  cursor: pointer;
 `;
 
-const ChatTypeLink = styled.a`
-  padding-left: 40px;
+const CategoryLink = styled.a`
   cursor: pointer;
+  padding-left: 40px;
 `;
 
 const Header = styled(Text)`
-  flex: 1;
   color: ${palette.darkblue};
+  flex: 1;
   padding-left: 40px;
 `;
 
@@ -147,12 +147,12 @@ const Buttons = styled.div`
 
 const ChatList = styled.div``;
 
-const EmptyMenuText = styled(Text)`
-  margin: 0;
+const CategoryEmptyText = styled(Text)`
   color: ${palette.darkblue};
-  padding-top: 1.25rem;
+  margin: 0;
   padding-left: 40px;
   padding-right: 40px;
+  padding-top: 1.25rem;
 `;
 
 export default ChatMenu;

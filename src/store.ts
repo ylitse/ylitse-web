@@ -4,8 +4,8 @@ import {
   PreloadedState,
 } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
-import { mentorsApi } from './features/MentorPage/mentorPageApi';
-import { mentorsFilter } from './features/MentorPage/MentorsFilter/mentorsFilterSlice';
+import { mentorsApi } from '@/features/MentorPage/mentorPageApi';
+import { mentorsFilter } from '@/features/MentorPage/MentorsFilter/mentorsFilterSlice';
 
 const rootReducer = combineReducers({
   [mentorsApi.reducerPath]: mentorsApi.reducer,

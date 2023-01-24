@@ -21,12 +21,12 @@ i18n
   .use(initReactI18next)
   .init({
     debug: true,
+    defaultNS,
     fallbackLng: 'fi',
     interpolation: {
       escapeValue: false,
     },
     ns: ['chat', 'common', 'mentors'],
-    defaultNS,
     resources,
   });
 

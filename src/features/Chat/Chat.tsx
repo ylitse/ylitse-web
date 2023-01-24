@@ -1,14 +1,16 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useState } from 'react';
-import PageWithTransition from '@/components/PageWithTransition';
-import Spinner from '@/components/Spinner';
+
 import ChatMenu from './ChatMenu';
 import ChatWindow from './ChatWindow';
+import PageWithTransition from '@/components/PageWithTransition';
+import Spinner from '@/components/Spinner';
+
 import { useMobileMode } from '@/hooks/useMobileMode';
 
 const ChatPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const isMobile = useMobileMode();
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <PageWithTransition>
@@ -29,7 +31,14 @@ const ChatPage = () => {
 const ChatContainer = styled.div<{ isMobile: boolean }>`
   display: flex;
   flex-direction: row;
-  gap: 22px;
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          width: 100vw;
+        `
+      : css`
+          gap: 22px;
+        `};
 `;
 
 export default ChatPage;

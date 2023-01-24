@@ -15,13 +15,12 @@ export const palette = {
   footerblue: '#01A5EC',
   orange: '#F0BA8C',
   orange2: '#FFD79B',
-  warningred: '#972232',
-  white: '#FFF',
+  white: '#FFFFFF',
   lightgrey: '#E9E9E9',
   midgray: '#DBDBDB',
   spinnerBackgrond: '#DDEBE9',
   fadedgray: '#616161',
-  blurbackground: 'rgba(57, 57, 57, 0.75)',
+  blurbackground: '#2596BE',
 };
 
 //breakpoints

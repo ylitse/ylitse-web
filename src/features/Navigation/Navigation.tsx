@@ -1,9 +1,9 @@
-import { Navbar } from './Navbar';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import ChatPage from '@/features/Chat';
-import MentorPage from '@/features/MentorPage';
 import Logout from '@/features/Logout';
+import MentorPage from '@/features/MentorPage';
+import { Navbar } from './Navbar';
 
 const Navigation = () => (
   <>
