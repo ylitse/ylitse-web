@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
-import {
-  breakpoints,
-  palette,
-  basicSourceSansText,
-} from '@/components/variables';
+import { breakpoints, palette } from '@/components/variables';
 import { BasicInfo } from './BasicInfo';
 import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { useMobileMode } from '@/hooks/useMobileMode';
+import Text from '@/components/Text';
 
 type Props = {
   mentor: Mentor;
@@ -21,7 +18,10 @@ export const Header = ({ mentor }: Props) => {
     <Container isLoggedIn={!mentor.isVacationing}>
       <HeaderWrapper>
         <AvatarWrapper>
-          <Availability isShowing={availabilityMessage.length > 0}>
+          <Availability
+            variant="pSpan"
+            isShowing={availabilityMessage.length > 0}
+          >
             {availabilityMessage}
           </Availability>
           <ProfilePicture isMobile />
@@ -31,7 +31,7 @@ export const Header = ({ mentor }: Props) => {
     </Container>
   ) : (
     <Container isLoggedIn={!mentor.isVacationing}>
-      <Availability isShowing={availabilityMessage.length > 0}>
+      <Availability variant="pSpan" isShowing={availabilityMessage.length > 0}>
         {availabilityMessage}
       </Availability>
       <ProfilePicture isMobile={false} />
@@ -64,14 +64,10 @@ const ProfilePicture = styled.div<{ isMobile: boolean }>`
   }
 `;
 
-const Availability = styled.div<{ isShowing: boolean }>`
+const Availability = styled(Text)<{ isShowing: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
   background-color: ${palette.whiteblue};
   color: ${palette.darkblue};
-  ${basicSourceSansText};
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 150%;
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
   width: fit-content;

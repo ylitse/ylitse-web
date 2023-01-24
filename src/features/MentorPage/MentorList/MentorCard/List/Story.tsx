@@ -1,24 +1,20 @@
 import styled from 'styled-components';
-import { Text } from '@/components/Text/Text';
-import { basicSourceSansText, palette } from '@/components/variables';
-
 import { useTranslation } from 'react-i18next';
+
+import { palette } from '@/components/variables';
+import { Text } from '@/components/Text/Text';
 
 export const Story = ({ story }: { story: string }) => {
   const { t } = useTranslation('mentors');
   return (
     <>
       <Text variant="h3">{t('card.bio')}</Text>
-      <TruncatedMultiline>{story}</TruncatedMultiline>
+      <TruncatedMultiline variant="p">{story}</TruncatedMultiline>
     </>
   );
 };
 
-const TruncatedMultiline = styled.p`
-  ${basicSourceSansText};
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 150%;
+const TruncatedMultiline = styled(Text)`
   color: ${palette.darkblue};
   width: 100%;
   height: 6rem;

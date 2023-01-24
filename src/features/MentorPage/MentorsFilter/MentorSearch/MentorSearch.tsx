@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import { palette, basicSourceSansText } from '@/components/variables';
-import SearchBar from '@/components/SearchBar';
-import { selectSearchString, changeSearchString } from '../mentorsFilterSlice';
-import { useAppDispatch, useAppSelector } from '@/store';
 import { useTranslation } from 'react-i18next';
+
+import { useAppDispatch, useAppSelector } from '@/store';
+
+import { changeSearchString, selectSearchString } from '../mentorsFilterSlice';
+import { palette } from '@/components/variables';
+import SearchBar from '@/components/SearchBar';
+import Text from '@/components/Text';
 
 export const MentorSearch = () => {
   const searchString = useAppSelector(selectSearchString);
@@ -16,7 +19,7 @@ export const MentorSearch = () => {
 
   return (
     <Container>
-      <InfoText>{t('filters.description')}</InfoText>
+      <InfoText variant="p">{t('filters.description')}</InfoText>
       <SearchBar
         placeholder={t('filters.search')}
         value={searchString}
@@ -26,12 +29,9 @@ export const MentorSearch = () => {
   );
 };
 
-const InfoText = styled.div`
+const InfoText = styled(Text)`
   flex: 0 0 auto;
   color: ${palette.darkblue};
-  ${basicSourceSansText};
-  font-weight: 400;
-  font-size: 1.25rem;
   width: 47%;
   padding-right: 5%;
 `;

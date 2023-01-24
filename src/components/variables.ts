@@ -20,7 +20,7 @@ export const palette = {
   midgray: '#DBDBDB',
   spinnerBackgrond: '#DDEBE9',
   fadedgray: '#616161',
-  blurbackground: '#2596BE',
+  blurbackground: 'rgba(57, 57, 57, 0.75)',
 };
 
 //breakpoints
@@ -35,18 +35,4 @@ export const spacing = {
   small_button_padding: '.5rem 2rem',
   layout_outer_spacing: '6vw',
   content_width: '76vw',
-};
-
-export const basicBalooText = {
-  fontFamily: "'Baloo 2', cursive",
-  fontStyle: 'normal',
-  fontWeight: '700',
-  fontSize: '1rem',
-};
-
-export const basicSourceSansText = {
-  fontFamily: "'Source Sans Pro', cursive",
-  fontStyle: 'normal',
-  fontWeight: '400',
-  fontSize: '1.25rem',
 };

@@ -5,9 +5,12 @@ export type TextVariant =
   | 'h2'
   | 'h3'
   | 'p'
+  | 'pSpan'
+  | 'bold'
   | 'a'
   | 'menuLink'
   | 'logo'
+  | 'footer'
   | 'link'
   | 'linkBold'
   | 'linkMobile'
@@ -61,6 +64,16 @@ export const variants: Record<TextVariant, TextProp> = {
       lineHeight: '1.5rem',
     },
   },
+  pSpan: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Source Sans Pro"',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
+    },
+  },
   a: {
     element: 'a',
     styles: {
@@ -71,8 +84,8 @@ export const variants: Record<TextVariant, TextProp> = {
       lineHeight: '1.5rem',
     },
   },
-  menuLink: {
-    element: 'a',
+  bold: {
+    element: 'span',
     styles: {
       fontFamily: '"Baloo 2"',
       fontStyle: 'normal',
@@ -87,10 +100,20 @@ export const variants: Record<TextVariant, TextProp> = {
       fontFamily: '"Baloo 2", cursive',
       fontStyle: 'normal',
       fontWeight: '600',
-      fontSize: '2.0rem',
+      fontSize: '2rem',
       letterSpacing: '0.1em',
       textTransform: 'uppercase',
       lineHeight: 'initial',
+    },
+  },
+  footer: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Source Sans Pro"',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      fontSize: '1rem',
+      lineHeight: '3.5rem',
     },
   },
   link: {
@@ -100,6 +123,16 @@ export const variants: Record<TextVariant, TextProp> = {
       fontStyle: 'normal',
       fontWeight: '400',
       lineHeight: '60px',
+    },
+  },
+  menuLink: {
+    element: 'a',
+    styles: {
+      fontFamily: '"Baloo 2"',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
     },
   },
   linkBold: {

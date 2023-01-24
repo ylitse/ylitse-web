@@ -1,5 +1,7 @@
 import styled, { keyframes } from 'styled-components';
+
 import Background from '@/static/img/loading-background.svg';
+import Text from '@/components/Text';
 
 const rotate = keyframes`
   from {
@@ -11,9 +13,7 @@ const rotate = keyframes`
   }
 `;
 
-export const Text = styled.h1`
-  font-family: 'Baloo 2', cursive;
-  font-weight: 700;
+export const LoadingText = styled(Text)`
   color: white;
   width: 100%;
   text-align: center;

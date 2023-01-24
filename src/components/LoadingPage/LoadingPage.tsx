@@ -1,11 +1,13 @@
-import { Page, Loader, Text, Wrapper } from './LoadingPage.styles';
+import { Page, Loader, LoadingText, Wrapper } from './LoadingPage.styles';
 
 const LoadingPage = () => {
   return (
     <Page>
       <Wrapper>
         <Loader />
-        <Text>Ladataan Ylitse MentorApp -palvelua</Text>
+        <LoadingText variant="bold">
+          Ladataan Ylitse MentorApp -palvelua
+        </LoadingText>
       </Wrapper>
     </Page>
   );

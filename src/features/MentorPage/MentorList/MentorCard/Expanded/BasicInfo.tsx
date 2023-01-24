@@ -75,11 +75,6 @@ export const TruncateText = styled(Text)`
   overflow: hidden;
   margin: 0px;
   width: 100%;
-  fontfamily: 'Source Sans Pro';
-  fontstyle: normal;
-  fontweight: 400;
-  fontsize: 1rem;
-  lineheight: 1.5rem;
   color: ${palette.white};
   textalign: center;
 `;

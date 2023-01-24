@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { palette, basicSourceSansText } from '@/components/variables';
-import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
-import { WrappedText, TruncateText } from '../Expanded/BasicInfo';
+import { useTranslation } from 'react-i18next';
+
+import { TruncateText, WrappedText } from '../Expanded/BasicInfo';
+import { palette } from '@/components/variables';
 import { Text } from '@/components/Text/Text';
 
-import { useTranslation } from 'react-i18next';
+import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 
 type Props = {
   name: string;
@@ -27,7 +28,7 @@ export const Header: React.FC<Props> = ({
 
   return (
     <StyledHeader isAvailable={isAvailable}>
-      <Availability isShowing={!isAvailable}>
+      <Availability variant="pSpan" isShowing={!isAvailable}>
         {availabilityMessage}
       </Availability>
       <ProfilePicture />
@@ -91,17 +92,13 @@ const StyledDivider = styled.span`
   padding-right: 1rem;
 `;
 
-const Availability = styled.div<{ isShowing: boolean }>`
+const Availability = styled(Text)<{ isShowing: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
   background-color: ${palette.whiteblue};
   color: ${palette.darkblue};
   position: absolute;
   top: 0;
   right: 0;
-  ${basicSourceSansText};
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 150%;
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
   transform: translate(-1rem, -50%);

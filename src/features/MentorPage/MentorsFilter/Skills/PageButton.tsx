@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
-import { basicBalooText, palette } from '@/components/variables';
 import { THREE_DOTS } from './usePagination';
+
+import { palette } from '@/components/variables';
+import Text from '@/components/Text';
 
 type Props = {
   isSelected: boolean;
@@ -21,7 +23,7 @@ export const PageButton = ({ isSelected, onClick, page }: Props) => {
       onClick={handleOnClick}
       isClickable={page !== THREE_DOTS}
     >
-      {page}
+      <Text variant="bold">{page}</Text>
     </PageNumber>
   );
 };
@@ -29,8 +31,6 @@ export const PageButton = ({ isSelected, onClick, page }: Props) => {
 const PageNumber = styled.span<{ isSelected: boolean; isClickable: boolean }>`
   padding: 0.2rem 1rem;
   border-radius: 16%;
-
-  ${basicBalooText}
 
   ${({ isSelected }) =>
     isSelected

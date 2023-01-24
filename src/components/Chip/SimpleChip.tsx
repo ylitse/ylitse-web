@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { palette, basicSourceSansText } from '../variables';
+import { palette } from '../variables';
 
 /**
  * Creates a non-selectable chip
@@ -22,7 +22,9 @@ const StyledSimpleChip = styled.button`
   flex: 0 0 auto;
   background-color: ${palette.lightblue};
   padding: 0.5rem 1rem;
-  ${basicSourceSansText};
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
   font-size: 1rem;
   line-height: 1rem;
   color: ${palette.darkblue};
