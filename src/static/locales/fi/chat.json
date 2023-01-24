@@ -1,6 +1,10 @@
 {
   "menu": {
-    "title": "Chat",
+    "title": {
+      "chat": "Chat",
+      "archived": "Arkistoidut",
+      "blocked": "Estetyt"
+    },
     "back": "Takaisin keskusteluihin",
     "archived": "Arkistoidut keskustelut",
     "blocked": "Estetyt keskustelut",

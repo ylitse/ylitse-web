@@ -1,19 +1,28 @@
 import styled from 'styled-components';
-import { basicSourceSansText, palette } from '@/components/variables';
+import { palette } from '@/components/variables';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import IconButton from '@/components/Buttons/IconButton';
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
+import Text from '@/components/Text';
 
 const ChatMenu = () => {
   const { t } = useTranslation('chat');
   const [chatTypeMenuOpen, setChatTypeMenuOpen] = useState(false);
+  type ChatType = 'chat' | 'archived' | 'blocked';
+  const [chatType, setChatType] = useState<ChatType>('chat');
   const [chats, setChats] = useState([]);
 
   return (
     <Container>
       <ChatMenuRow>
-        <Header>{t('menu.title')}</Header>
+        <Header variant="h1">
+          {chatType === 'chat'
+            ? t('menu.title.chat')
+            : chatType === 'archived'
+            ? t('menu.title.archived')
+            : t('menu.title.blocked')}
+        </Header>
         <Buttons>
           {!!chats.length && (
             <IconButton
@@ -25,29 +34,58 @@ const ChatMenu = () => {
           <IconButton
             variant="menuLines"
             sizeInPx={40}
-            onClick={() => setChatTypeMenuOpen(true)}
+            onClick={() => setChatTypeMenuOpen(!chatTypeMenuOpen)}
           />
         </Buttons>
       </ChatMenuRow>
+      {(chatTypeMenuOpen ||
+        chatType === 'archived' ||
+        chatType === 'blocked') && (
+        <ChatMenuRow>
+          <MenuBackLink
+            onClick={() => {
+              setChatType('chat');
+              setChatTypeMenuOpen(false);
+            }}
+          >
+            <MenuBackIcon src={BackArrowIcon} />
+            <MenuBackLinkText color="purple" variant="chatMenuLink">
+              {t('menu.back')}
+            </MenuBackLinkText>
+          </MenuBackLink>
+        </ChatMenuRow>
+      )}
       {chatTypeMenuOpen ? (
         <>
           <ChatMenuRow>
-            <MenuBackLink onClick={() => setChatTypeMenuOpen(false)}>
-              <MenuBackIcon />
-              {t('menu.back')}
-            </MenuBackLink>
+            <ChatTypeLink
+              onClick={() => {
+                setChatType('archived');
+                setChatTypeMenuOpen(false);
+              }}
+            >
+              <MenuBackLinkText color="purple" variant="chatMenuLink">
+                {t('menu.archived')}
+              </MenuBackLinkText>
+            </ChatTypeLink>
           </ChatMenuRow>
           <ChatMenuRow>
-            <ChatTypeLink>{t('menu.archived')}</ChatTypeLink>
-          </ChatMenuRow>
-          <ChatMenuRow>
-            <ChatTypeLink>{t('menu.blocked')}</ChatTypeLink>
+            <ChatTypeLink
+              onClick={() => {
+                setChatType('blocked');
+                setChatTypeMenuOpen(false);
+              }}
+            >
+              <MenuBackLinkText color="purple" variant="chatMenuLink">
+                {t('menu.blocked')}
+              </MenuBackLinkText>
+            </ChatTypeLink>
           </ChatMenuRow>
         </>
       ) : chats.length ? (
         <ChatList></ChatList>
       ) : (
-        <EmptyMenuText>{t('menu.empty')}</EmptyMenuText>
+        <EmptyMenuText variant="p">{t('menu.empty')}</EmptyMenuText>
       )}
     </Container>
   );
@@ -70,43 +108,27 @@ const ChatMenuRow = styled.div`
 `;
 
 const MenuBackLink = styled.a`
-  font-family: 'Baloo 2';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 29px;
   display: flex;
   align-items: center;
-  color: ${palette.purple};
   padding-left: 40px;
+  padding-right: 40px;
   cursor: pointer;
 `;
 
-const MenuBackIcon = styled.div`
-  background-image: url(${BackArrowIcon});
-  background-size: contain;
-  background-repeat: no-repeat;
+const MenuBackLinkText = styled(Text)``;
+
+const MenuBackIcon = styled.img`
+  padding-right: 20px;
   cursor: pointer;
 `;
 
 const ChatTypeLink = styled.a`
-  font-family: 'Baloo 2';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 29px;
-  color: ${palette.purple};
   padding-left: 40px;
   cursor: pointer;
 `;
 
-const Header = styled.h1`
+const Header = styled(Text)`
   flex: 1;
-  font-family: 'Baloo 2';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 48px;
   color: ${palette.darkblue};
   padding-left: 40px;
 `;
@@ -114,14 +136,12 @@ const Header = styled.h1`
 const Buttons = styled.div`
   display: flex;
   gap: 25px;
-  padding-right: 31px;
+  padding-right: 30px;
 `;
 
 const ChatList = styled.div``;
 
-const EmptyMenuText = styled.div`
-  ${basicSourceSansText}
-  line-height: 27px;
+const EmptyMenuText = styled(Text)`
   color: ${palette.darkblue};
   padding-top: 23px;
   padding-left: 38px;
