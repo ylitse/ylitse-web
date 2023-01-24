@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { basicSourceSansText, palette } from '@/components/variables';
+import { palette } from '@/components/variables';
 import { useState } from 'react';
 import { TextButton } from '@/components/Buttons';
 import { useTranslation } from 'react-i18next';
+import Text from '@/components/Text';
 
 const ChatWindow = () => {
   const { t } = useTranslation('chat');
@@ -13,12 +14,12 @@ const ChatWindow = () => {
   ) : (
     <Container>
       <UpperWelcomeContainer>
-        <Header>{t('welcome.upper.title')}</Header>
-        <Text>{t('welcome.upper.description')}</Text>
+        <Header variant="h2">{t('welcome.upper.title')}</Header>
+        <Description variant="p">{t('welcome.upper.description')}</Description>
       </UpperWelcomeContainer>
       <LowerWelcomeContainer>
-        <Header>{t('welcome.lower.title')}</Header>
-        <Text>{t('welcome.lower.description')}</Text>
+        <Header variant="h2">{t('welcome.lower.title')}</Header>
+        <Description variant="p">{t('welcome.lower.description')}</Description>
         <SearchButton>{t('welcome.lower.button')}</SearchButton>
       </LowerWelcomeContainer>
     </Container>
@@ -53,21 +54,15 @@ const LowerWelcomeContainer = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
 `;
 
-const Header = styled.h2`
+const Header = styled(Text)`
   padding-left: 10%;
   padding-right: 10%;
   padding-bottom: 1rem;
   margin: 0;
-  font-family: 'Baloo 2';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 26px;
-  line-height: 42px;
   color: ${palette.darkblue};
 `;
 
-const Text = styled.p`
-  ${basicSourceSansText}
+const Description = styled(Text)`
   padding-left: 10%;
   padding-right: 10%;
   margin: 0;
