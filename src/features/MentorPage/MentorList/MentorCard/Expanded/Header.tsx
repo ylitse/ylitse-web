@@ -19,7 +19,7 @@ export const Header = ({ mentor }: Props) => {
       <HeaderWrapper>
         <AvatarWrapper>
           <Availability
-            variant="pSpan"
+            variant="label"
             isShowing={availabilityMessage.length > 0}
           >
             {availabilityMessage}
@@ -31,7 +31,7 @@ export const Header = ({ mentor }: Props) => {
     </Container>
   ) : (
     <Container isLoggedIn={!mentor.isVacationing}>
-      <Availability variant="pSpan" isShowing={availabilityMessage.length > 0}>
+      <Availability variant="label" isShowing={availabilityMessage.length > 0}>
         {availabilityMessage}
       </Availability>
       <ProfilePicture isMobile={false} />

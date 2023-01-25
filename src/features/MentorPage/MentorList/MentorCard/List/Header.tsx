@@ -28,7 +28,7 @@ export const Header: React.FC<Props> = ({
 
   return (
     <StyledHeader isAvailable={isAvailable}>
-      <Availability variant="pSpan" isShowing={!isAvailable}>
+      <Availability variant="label" isShowing={!isAvailable}>
         {availabilityMessage}
       </Availability>
       <ProfilePicture />
