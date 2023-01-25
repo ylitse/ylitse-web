@@ -1,0 +1,21 @@
+{
+  "title": "Mentors",
+  "filters": {
+    "title": "Filter mentors",
+    "oneSelected": "filter selected",
+    "multipleSelected": "filters selected",
+    "description": "Welcome to browse mentor profiles! You will find the newest mentors at the top of the list. By searching, you're able to filter mentors based on your problem.",
+    "search": "Search mentors",
+    "clear": "Clear filters",
+    "close": "Close"
+  },
+  "card": {
+    "unavailable": "Unavailable",
+    "age": "y.",
+    "bio": "Bio",
+    "languages": "I speak",
+    "skills": "I can also help with",
+    "open": "Open card",
+    "chat": "Start conversation"
+  }
+}

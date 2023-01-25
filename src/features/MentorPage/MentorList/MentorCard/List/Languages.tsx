@@ -4,10 +4,10 @@ import { Text } from '@/components/Text/Text';
 import { useTranslation } from 'react-i18next';
 
 export const Languages = ({ languages }: { languages: Array<string> }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
   return (
     <>
-      <StyledText variant="h3">{t('mentorPage.card.languages')}</StyledText>
+      <Header variant="h3">{t('card.languages')}</Header>
       <SkillChips>
         {languages.map(item => (
           <SimpleChip key={item} text={item} />
@@ -16,6 +16,11 @@ export const Languages = ({ languages }: { languages: Array<string> }) => {
     </>
   );
 };
+
+const Header = styled(Text)`
+  margin: 1.5rem 0 0 0;
+  text-align: center;
+`;
 
 const SkillChips = styled.div`
   flex: 0 0 auto;
@@ -27,9 +32,4 @@ const SkillChips = styled.div`
   position: relative;
   height: fit-content;
   max-height: 7rem;
-`;
-
-export const StyledText = styled(Text)`
-  margin: 1.5rem 0 0 0;
-  textalign: center;
 `;

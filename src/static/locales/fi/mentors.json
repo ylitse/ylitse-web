@@ -1,0 +1,21 @@
+{
+  "title": "Mentorit",
+  "filters": {
+    "title": "Suodata mentoreita",
+    "oneSelected": "aihe valittu",
+    "multipleSelected": "aihetta valittu",
+    "description": "Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita ongelmasi perusteella.",
+    "search": "Etsi mentoria",
+    "clear": "Poista suodattimet",
+    "close": "Sulje"
+  },
+  "card": {
+    "unavailable": "Ei käytettävissä",
+    "age": "v.",
+    "bio": "Tarinani",
+    "languages": "Puhun näitä kieliä",
+    "skills": "Voin auttaa myös näissä",
+    "open": "Avaa kortti",
+    "chat": "Aloita keskustelu"
+  }
+}

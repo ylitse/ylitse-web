@@ -15,7 +15,7 @@ type Props = {
 
 export const Content = ({ mentor: { skills, story, languages } }: Props) => {
   const isMobile = useMobileMode();
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
 
   const handleClick = () => {
     console.log('open conversation');
@@ -23,12 +23,12 @@ export const Content = ({ mentor: { skills, story, languages } }: Props) => {
 
   return (
     <Container>
-      <Text variant="h3">{t('mentorPage.card.bio')}</Text>
+      <Text variant="h3">{t('card.bio')}</Text>
       <Text variant="p">{story}</Text>
       {isMobile && <Languages languages={languages} isMobile={isMobile} />}
       <Skills skills={skills} />
       <OpenConversationButton onClick={handleClick}>
-        {t('mentorPage.card.chat')}
+        {t('card.chat')}
       </OpenConversationButton>
     </Container>
   );

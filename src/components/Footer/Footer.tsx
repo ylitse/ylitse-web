@@ -1,20 +1,21 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
+import { breakpoints, palette } from '../variables';
 import FooterLogo from '@/static/img/footer-logo.svg';
-import { palette, basicSourceSansText, breakpoints } from '../variables';
+import Text from '../Text';
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
 
   return (
-    <StyledFooter>
-      <StyledFooterText>{t('footer')}</StyledFooterText>
-    </StyledFooter>
+    <Container>
+      <FooterText variant="footer">{t('footer')}</FooterText>
+    </Container>
   );
 };
 
-const StyledFooter = styled.div`
+const Container = styled.div`
   position: relative;
   bottom: 0;
   left: 0;
@@ -26,11 +27,8 @@ const StyledFooter = styled.div`
   align-items: center;
 `;
 
-const StyledFooterText = styled.div`
-  ${basicSourceSansText};
-  font-size: 1rem;
+const FooterText = styled(Text)`
   color: ${palette.darkblue};
-  line-height: 3.5rem;
   &:after {
     position: relative;
     content: '';
@@ -47,7 +45,6 @@ const StyledFooterText = styled.div`
     @media screen and (max-width: ${breakpoints.mobile}) {
       background-image: none;
       content: 'SOS-lapsikylä';
-      ${basicSourceSansText};
       font-size: 1rem;
       color: ${palette.darkblue};
       width: 6rem;

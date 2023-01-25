@@ -23,7 +23,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLButtonElement>(true);
 
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('common');
 
   const { pathname } = useLocation();
 

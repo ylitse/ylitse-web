@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import SearchIconImg from '@/static/icons/search.svg';
-import { basicSourceSansText, palette } from '../variables';
+import { palette } from '../variables';
 
 type SearchProps = {
   placeholder: string;
@@ -24,9 +24,10 @@ const SearchInput = styled.input`
   display: flex;
   border: ${palette.purple} solid 1px;
   width: 100%;
-  ${basicSourceSansText};
+  font-family: 'Source Sans Pro';
+  font-style: normal;
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   padding: 1rem 4.5rem;
   border-radius: 1.75rem;
   box-sizing: border-box;

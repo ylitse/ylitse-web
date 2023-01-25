@@ -1,28 +1,32 @@
 import i18n from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
-import enTranslation from '@/static/locales/en/translation.json';
-import fiTranslation from '@/static/locales/fi/translation.json';
+import chatEn from '@/static/locales/en/chat.json';
+import chatFi from '@/static/locales/fi/chat.json';
+import commonEn from '@/static/locales/en/common.json';
+import commonFi from '@/static/locales/fi/common.json';
+import mentorsEn from '@/static/locales/en/mentors.json';
+import mentorsFi from '@/static/locales/fi/mentors.json';
 
-export const defaultNS = 'translation';
+export const defaultNS = 'common';
 
 export const resources = {
-  en: { translation: enTranslation },
-  fi: { translation: fiTranslation },
+  en: { chat: chatEn, common: commonEn, mentors: mentorsEn },
+  fi: { chat: chatFi, common: commonFi, mentors: mentorsFi },
 } as const;
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'fi',
     debug: true,
+    defaultNS,
+    fallbackLng: 'fi',
     interpolation: {
       escapeValue: false,
     },
-    ns: ['translation'],
-    defaultNS,
+    ns: ['chat', 'common', 'mentors'],
     resources,
   });
 

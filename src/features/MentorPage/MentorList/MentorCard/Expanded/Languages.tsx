@@ -12,12 +12,12 @@ export const Languages = ({
   languages: Array<string>;
   isMobile: boolean;
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
   return (
     <>
-      <StyledText variant="h3" color={isMobile ? 'darkpurple' : 'white'}>
-        {t('mentorPage.card.languages')}
-      </StyledText>
+      <Header variant="h3" color={isMobile ? 'darkpurple' : 'white'}>
+        {t('card.languages')}
+      </Header>
       <SkillChips>
         {languages.map(item => (
           <SimpleChip key={item} text={item} />
@@ -26,6 +26,11 @@ export const Languages = ({
     </>
   );
 };
+
+const Header = styled(Text)`
+  margin: 3rem 0 0 0;
+  textalign: center;
+`;
 
 const SkillChips = styled.div`
   flex: 0 0 auto;
@@ -42,9 +47,4 @@ const SkillChips = styled.div`
   @media screen and (max-width: ${breakpoints.mobile}) {
     justify-content: flex-start;
   }
-`;
-
-const StyledText = styled(Text)`
-  margin: 3rem 0 0 0;
-  textalign: center;
 `;

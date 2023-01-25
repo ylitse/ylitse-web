@@ -10,7 +10,7 @@ import Text from '@/components/Text';
 const InfoDropdown = () => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
 
   return (
     <Anchor ref={ref}>

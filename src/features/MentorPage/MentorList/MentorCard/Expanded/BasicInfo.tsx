@@ -14,7 +14,7 @@ export const BasicInfo = ({
   mentor: { name, age, region, isVacationing, statusMessage, languages },
 }: Props) => {
   const isMobile = useMobileMode();
-  const { t } = useTranslation();
+  const { t } = useTranslation('mentors');
 
   return (
     <Container>
@@ -23,7 +23,7 @@ export const BasicInfo = ({
       </Text>
       {!isMobile && <NameDivider />}
       <WrappedText color="white" variant="p">
-        {age} {t('mentorPage.card.age')} <StyledDivider>|</StyledDivider>
+        {age} {t('card.age')} <Divider>|</Divider>
         {region}
       </WrappedText>
       <Text color="white" variant="p">
@@ -58,7 +58,7 @@ const NameDivider = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-const StyledDivider = styled.span`
+const Divider = styled.span`
   padding-left: 1rem;
   padding-right: 1rem;
 `;
@@ -75,11 +75,6 @@ export const TruncateText = styled(Text)`
   overflow: hidden;
   margin: 0px;
   width: 100%;
-  fontfamily: 'Source Sans Pro';
-  fontstyle: normal;
-  fontweight: 400;
-  fontsize: 1rem;
-  lineheight: 1.5rem;
   color: ${palette.white};
   textalign: center;
 `;

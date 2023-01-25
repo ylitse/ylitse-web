@@ -6,7 +6,7 @@ export const palette = {
   midpurple: '#5C33FF',
   darkpurple: '#37119D',
   palepurple: '#E5E4FF',
-  hoverpurple: '#cdcbff',
+  hoverpurple: '#CDCBFF',
   bluegrey: '#4C6282',
   blue2: '#43BFFF',
   darkblue: '#1C325D',
@@ -15,8 +15,8 @@ export const palette = {
   footerblue: '#01A5EC',
   orange: '#F0BA8C',
   orange2: '#FFD79B',
-  warningred: '#972232',
-  white: '#fff',
+  white: '#FFFFFF',
+  lightgrey: '#E9E9E9',
   midgray: '#DBDBDB',
   spinnerBackgrond: '#DDEBE9',
   fadedgray: '#616161',
@@ -29,25 +29,10 @@ export const breakpoints = {
   mobile: `${MOBILE_TRESHOLD}px`,
 };
 
-//spacing
 export const spacing = {
   layout_spacing: '2rem',
   button_padding: '0.75rem 1.25rem',
   small_button_padding: '.5rem 2rem',
   layout_outer_spacing: '6vw',
   content_width: '76vw',
-};
-
-export const basicBalooText = {
-  fontFamily: "'Baloo 2', cursive",
-  fontStyle: 'normal',
-  fontWeight: '700',
-  fontSize: '1rem',
-};
-
-export const basicSourceSansText = {
-  fontFamily: "'Source Sans Pro', cursive",
-  fontStyle: 'normal',
-  fontWeight: '400',
-  fontSize: '1.25rem',
 };

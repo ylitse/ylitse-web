@@ -1,0 +1,28 @@
+{
+  "menu": {
+    "title": {
+      "chats": "Chat",
+      "archived": "Arkistoidut",
+      "blocked": "Estetyt"
+    },
+    "back": "Takaisin keskusteluihin",
+    "archived": "Arkistoidut keskustelut",
+    "blocked": "Estetyt keskustelut",
+    "empty": {
+      "chats": "Sinulla ei ole vielä keskusteluja. Ei hätää, aloittamasi keskustelut mentoreiden kanssa tulevat tähän automaattisesti.",
+      "archived": "Sinulla ei ole arkistoituja keskusteluja.",
+      "blocked": "Sinulla ei ole estettyjä keskusteluja."
+    }
+  },
+  "welcome": {
+    "upper": {
+      "title": "Tervetuloa chattailemaan!",
+      "description": "Chatissa voit keskustella SOS-Lapsikylän kouluttamien vertaismentorien kanssa täysin luottamuksellisesti mistä tahansa mieltäsi askarruttavasta asiasta. Keskustelut, joissa on uusia viestejä, tulevat näkyviin ensimmäisenä."
+    },
+    "lower": {
+      "title": "Oletko vailla keskusteluja?",
+      "description": "Sinä valitset, kenen kanssa aloitat keskustelun. Käythän siis selaamassa mentoreiden profiileja ja valitsemassa mentorin. Kun sopiva mentori löytyy, voit aloittaa keskustelun hänen kanssaan mentorikortin “Aloita keskustelu” -painikkeesta.",
+      "button": "Etsi mentoreita"
+    }
+  }
+}
