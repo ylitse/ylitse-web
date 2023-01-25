@@ -19,25 +19,42 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "jest", "@typescript-eslint"],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "jest",
+    "@typescript-eslint",
+    "better-styled-components"
+  ],
   "rules": {
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": ["off"],
-    "react-hooks/rules-of-hooks": "error",
+    // Rules disabled on purpose
     "react-hooks/exhaustive-deps": ["off"],
-    // only apply to React components
+    "react/prop-types": ["off"],
+    "react/react-in-jsx-scope": "off",
+    // Rules enabled
+    "react-hooks/rules-of-hooks": "error",
     "@typescript-eslint/ban-types": [
       "error",
       {
         "extendDefaults": true,
         "types": {
-          "{}": false
+          "{}": true
         }
       }
     ],
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-unused-vars": "error",
-    "semi": ["error", "always"]
+    "better-styled-components/sort-declarations-alphabetically": "error",
+    "semi": ["error", "always"],
+    "sort-keys": [
+      "error",
+      "asc",
+      {
+        "caseSensitive": true,
+        "natural": true,
+        "allowLineSeparatedGroups": true
+      }
+    ]
   },
   "settings": {
     "react": {
