@@ -52,7 +52,7 @@ const ChatMenu = () => {
             }}
           >
             <GoBackIcon src={BackArrowIcon} />
-            <Text color="purple" variant="menuLink">
+            <Text color="purple" variant="bold">
               {t('menu.back')}
             </Text>
           </GoBackLink>
@@ -68,7 +68,7 @@ const ChatMenu = () => {
                 setShowCategories(false);
               }}
             >
-              <Text color="purple" variant="menuLink">
+              <Text color="purple" variant="bold">
                 {t('menu.archived')}
               </Text>
             </CategoryLink>
@@ -80,7 +80,7 @@ const ChatMenu = () => {
                 setShowCategories(false);
               }}
             >
-              <Text color="purple" variant="menuLink">
+              <Text color="purple" variant="bold">
                 {t('menu.blocked')}
               </Text>
             </CategoryLink>
