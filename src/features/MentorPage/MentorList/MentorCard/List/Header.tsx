@@ -37,7 +37,7 @@ export const Header: React.FC<Props> = ({
           {name}
         </NameText>
         <WrappedText color="white" variant="p">
-          {age} {t('card.age')} <StyledDivider>|</StyledDivider>
+          {age} {t('card.age')} <Divider>|</Divider>
           {region}
         </WrappedText>
         <TruncateText color="white">{message}</TruncateText>
@@ -87,7 +87,7 @@ const BasicInfo = styled.div`
   box-sizing: border-box;
 `;
 
-const StyledDivider = styled.span`
+const Divider = styled.span`
   padding-left: 1rem;
   padding-right: 1rem;
 `;

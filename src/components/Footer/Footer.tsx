@@ -9,13 +9,13 @@ const Footer = () => {
   const { t } = useTranslation('common');
 
   return (
-    <StyledFooter>
-      <StyledFooterText variant="footer">{t('footer')}</StyledFooterText>
-    </StyledFooter>
+    <Container>
+      <FooterText variant="footer">{t('footer')}</FooterText>
+    </Container>
   );
 };
 
-const StyledFooter = styled.div`
+const Container = styled.div`
   position: relative;
   bottom: 0;
   left: 0;
@@ -27,7 +27,7 @@ const StyledFooter = styled.div`
   align-items: center;
 `;
 
-const StyledFooterText = styled(Text)`
+const FooterText = styled(Text)`
   color: ${palette.darkblue};
   &:after {
     position: relative;

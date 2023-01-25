@@ -23,7 +23,7 @@ export const BasicInfo = ({
       </Text>
       {!isMobile && <NameDivider />}
       <WrappedText color="white" variant="p">
-        {age} {t('card.age')} <StyledDivider>|</StyledDivider>
+        {age} {t('card.age')} <Divider>|</Divider>
         {region}
       </WrappedText>
       <Text color="white" variant="p">
@@ -58,7 +58,7 @@ const NameDivider = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-const StyledDivider = styled.span`
+const Divider = styled.span`
   padding-left: 1rem;
   padding-right: 1rem;
 `;
