@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { useState } from 'react';
 
 import ChatMenu from './ChatMenu';
 import ChatWindow from './ChatWindow';
@@ -10,7 +9,7 @@ import { useMobileMode } from '@/hooks/useMobileMode';
 
 const ChatPage = () => {
   const isMobile = useMobileMode();
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = false;
 
   return (
     <PageWithTransition>

@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/variables';
@@ -10,7 +9,7 @@ import { TextButton } from '@/components/Buttons';
 const ChatWindow = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('chat');
-  const [chats, setChats] = useState([]);
+  const chats = [];
 
   return chats.length ? (
     <ActiveChatContainer></ActiveChatContainer>

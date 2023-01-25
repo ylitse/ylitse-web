@@ -15,7 +15,7 @@ const ChatMenu = () => {
   const [showCategories, setShowCategories] = useState(false);
   const [currentCategory, setCurrentCategory] =
     useState<ChatCategory>('active');
-  const [chats, setChats] = useState([]);
+  const chats = [];
 
   return (
     <Container>
