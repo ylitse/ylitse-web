@@ -16,32 +16,32 @@ const Footer = () => {
 };
 
 const Container = styled.div`
-  position: relative;
-  bottom: 0;
-  left: 0;
-  background-color: ${palette.footerblue};
-  width: 100vw;
-  height: 3.5rem;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  background-color: ${palette.footerblue};
+  bottom: 0;
+  display: flex;
+  height: 3.5rem;
+  justify-content: center;
+  left: 0;
+  position: relative;
+  width: 100vw;
 `;
 
 const FooterText = styled(Text)`
   color: ${palette.darkblue};
   &:after {
-    position: relative;
+    background-color: transparent;
+    background-image: url(${FooterLogo});
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: contain;
     content: '';
     display: block;
     float: right;
-    background-image: url(${FooterLogo});
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center left;
     height: 3.5rem;
-    width: 11rem;
-    background-color: transparent;
     margin-left: 1rem;
+    position: relative;
+    width: 11rem;
     @media screen and (max-width: ${breakpoints.mobile}) {
       background-image: none;
       content: 'SOS-lapsikylä';

@@ -27,16 +27,16 @@ const Container = styled.div`
 `;
 
 const SkillChips = styled.div`
-  flex: 0 0 auto;
-  width: 100%;
-  overflow: hidden;
   display: flex;
+  flex: 0 0 auto;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  position: relative;
   height: fit-content;
+  justify-content: flex-start;
   margin-bottom: 5vw;
   margin-top: 1em;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 `;
 
 const Header = styled(Text)`

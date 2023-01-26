@@ -33,16 +33,16 @@ const Header = styled(Text)`
 `;
 
 const SkillChips = styled.div`
-  flex: 0 0 auto;
-  width: 100%;
-  overflow: hidden;
   display: flex;
+  flex: 0 0 auto;
   flex-wrap: wrap;
-  position: relative;
   height: fit-content;
-  max-height: 7rem;
-  margin-top: 0.5rem;
   justify-content: center;
+  margin-top: 0.5rem;
+  max-height: 7rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 
   @media screen and (max-width: ${breakpoints.mobile}) {
     justify-content: flex-start;

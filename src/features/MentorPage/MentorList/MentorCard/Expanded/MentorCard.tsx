@@ -31,8 +31,8 @@ export const MentorCard = ({ mentor, onDismiss }: Props) => {
 
 const Card = styled.div<{ isMobile: boolean }>`
   background-color: ${palette.white};
-  opacity: 1;
   border-radius: 10px;
+  opacity: 1;
   z-index: 100;
 
   ${({ isMobile }) =>
@@ -44,27 +44,27 @@ const Card = styled.div<{ isMobile: boolean }>`
           margin: 2rem;
         `
       : css`
-          position: fixed;
           display: flex;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          margin: auto;
-          width: 65vw;
-          min-height: 57vh;
           height: fit-content;
+          left: 50%;
+          margin: auto;
           max-height: 80vh;
+          min-height: 57vh;
+          position: fixed;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 65vw;
         `}
 `;
 
 const Container = styled.div`
   background-color: ${palette.blurbackground};
-  z-index: 10;
+  height: 100vh;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100vw;
-  height: 100vh;
+  z-index: 10;
 
   @media screen and (max-width: ${breakpoints.mobile}) {
     display: flex;
@@ -77,8 +77,8 @@ const Container = styled.div`
 
 const CloseButton = styled(IconButton)`
   position: absolute;
-  top: 1rem;
   right: 1rem;
+  top: 1rem;
 
   @media screen and (max-width: ${breakpoints.mobile}) {
     top: 3rem;

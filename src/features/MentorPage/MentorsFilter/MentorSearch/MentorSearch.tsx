@@ -30,19 +30,19 @@ export const MentorSearch = () => {
 };
 
 const InfoText = styled(Text)`
-  flex: 0 0 auto;
   color: ${palette.darkblue};
-  width: 47%;
+  flex: 0 0 auto;
   padding-right: 5%;
+  width: 47%;
 `;
 
 const Container = styled.div`
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
   align-items: flex-start;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  margin: auto;
+  max-width: 90%;
   padding: 2rem 0;
   width: 90%;
-  max-width: 90%;
-  margin: auto;
 `;

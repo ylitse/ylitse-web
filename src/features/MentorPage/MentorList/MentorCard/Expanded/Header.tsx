@@ -41,20 +41,20 @@ export const Header = ({ mentor }: Props) => {
 };
 
 const Container = styled.div<{ isLoggedIn: boolean }>`
-  flex: 0 0 21vw;
-  border-radius: 10px;
   background-color: ${props =>
     props.isLoggedIn ? palette.purple : palette.bluegrey};
+  border-radius: 10px;
+  flex: 0 0 21vw;
 `;
 
 const ProfilePicture = styled.div<{ isMobile: boolean }>`
   background-image: url(${ProfilePicPlaceholder});
-  background-size: contain;
   background-repeat: no-repeat;
-  width: 10vw;
-  height: 10vw;
+  background-size: contain;
   flex: 0 0 10vw;
+  height: 10vw;
   margin: 2rem auto;
+  width: 10vw;
 
   @media screen and (max-width: ${breakpoints.mobile}) {
     width: 20vw;

@@ -52,15 +52,15 @@ export const Navbar = () => {
 };
 
 export const Container = styled.div<{ isMobile?: boolean }>`
-  width: 100%;
-  height: 60px;
-  z-index: 10;
+  align-items: center;
   background-color: ${palette.purple};
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
+  height: 60px;
+  justify-content: space-between;
   position: relative;
+  width: 100%;
+  z-index: 10;
 
   ${({ isMobile }) =>
     isMobile &&

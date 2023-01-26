@@ -20,41 +20,41 @@ const SearchBar: React.FC<SearchProps> = ({ onChange, ...props }) => (
 );
 
 const SearchInput = styled.input`
-  flex: 1;
-  display: flex;
   border: ${palette.purple} solid 1px;
-  width: 100%;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.1rem;
-  padding: 1rem 4.5rem;
   border-radius: 1.75rem;
   box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  font-family: 'Source Sans Pro';
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 400;
+  padding: 1rem 4.5rem;
+  width: 100%;
   &:focus {
     outline: ${palette.purple} solid 2px;
   }
 `;
 
 const SearchBox = styled.div`
-  flex: 0 0 auto;
-  width: 47%;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
   position: relative;
+  width: 47%;
 `;
 
 const SearchIcon = styled.div`
   background-image: url(${SearchIconImg});
-  background-size: contain;
   background-repeat: no-repeat;
-  height: 2rem;
-  width: 2rem;
-  flex: 0 0 auto;
+  background-size: contain;
   display: flex;
-  position: absolute;
+  flex: 0 0 auto;
+  height: 2rem;
   left: 1.5rem;
+  position: absolute;
+  width: 2rem;
 `;
 
 export default SearchBar;

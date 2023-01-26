@@ -15,18 +15,18 @@ import RewindIcon from '@/static/icons/rewind.svg';
 import TooltipIcon from '@/static/icons/tooltip.svg';
 
 export type ButtonIcon =
-  | 'search'
   | 'back'
-  | 'edit'
-  | 'send'
   | 'close'
+  | 'delete'
+  | 'edit'
+  | 'forward'
   | 'menuDots'
   | 'menuLines'
-  | 'delete'
-  | 'prev'
   | 'next'
+  | 'prev'
   | 'rewind'
-  | 'forward'
+  | 'search'
+  | 'send'
   | 'tooltip';
 
 type ButtonProps<T extends ElementType> = {
@@ -50,20 +50,20 @@ const IconButton = <T extends ElementType = 'button'>({
 };
 
 const variantOptions = {
+  back: {
+    backgroundImage: `url(${BackIcon})`,
+  },
   close: {
     backgroundImage: `url(${CloseIcon})`,
   },
-  search: {
-    backgroundImage: `url(${SearchIcon})`,
-  },
-  back: {
-    backgroundImage: `url(${BackIcon})`,
+  delete: {
+    backgroundImage: `url(${DeleteIcon})`,
   },
   edit: {
     backgroundImage: `url(${EditIcon})`,
   },
-  send: {
-    backgroundImage: `url(${SendIcon})`,
+  forward: {
+    backgroundImage: `url(${ForwardIcon})`,
   },
   menuDots: {
     backgroundImage: `url(${MenuDotsIcon})`,
@@ -71,20 +71,20 @@ const variantOptions = {
   menuLines: {
     backgroundImage: `url(${MenuLinesIcon})`,
   },
-  delete: {
-    backgroundImage: `url(${DeleteIcon})`,
+  next: {
+    backgroundImage: `url(${NextIcon})`,
   },
   prev: {
     backgroundImage: `url(${PrevIcon})`,
   },
-  next: {
-    backgroundImage: `url(${NextIcon})`,
-  },
   rewind: {
     backgroundImage: `url(${RewindIcon})`,
   },
-  forward: {
-    backgroundImage: `url(${ForwardIcon})`,
+  search: {
+    backgroundImage: `url(${SearchIcon})`,
+  },
+  send: {
+    backgroundImage: `url(${SendIcon})`,
   },
   tooltip: {
     backgroundImage: `url(${TooltipIcon})`,
@@ -95,17 +95,17 @@ const StyledIconButton = styled.button<{
   variant: ButtonIcon;
   size: number;
 }>`
-  background-size: contain;
+  appearance: none;
+  background-color: transparent;
   background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
   ${({ size }) => css`
     height: ${size}px;
     width: ${size}px;
   `}
-  background-color: transparent;
-  border: none;
-  appearance: none;
-  z-index: 10;
-  cursor: pointer;
   ${({ variant }) => variant && variantOptions[variant]}
 `;
 

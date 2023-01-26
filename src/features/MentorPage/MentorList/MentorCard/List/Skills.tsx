@@ -30,21 +30,21 @@ export const Header = styled(Text)`
 `;
 
 const SkillChips = styled.div`
-  flex: 0 0 auto;
-  width: 100%;
-  overflow: hidden;
   display: flex;
+  flex: 0 0 auto;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  position: relative;
   height: 6rem;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
   &:after {
-    width: 100%;
-    height: 2.5rem;
+    background: linear-gradient(transparent, ${palette.white});
     content: '';
     display: block;
+    height: 2.5rem;
     position: absolute;
     top: 3.5rem;
-    background: linear-gradient(transparent, ${palette.white});
+    width: 100%;
   }
 `;

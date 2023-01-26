@@ -30,8 +30,8 @@ export const NavigationItem: React.FC<Props> = ({
 };
 
 const UnstyledRouteLink = styled(RouterNavLink)<{ isCurrent: boolean }>`
-  padding: 0 2rem;
   line-height: 56px;
+  padding: 0 2rem;
   text-decoration: none;
 
   ${({ isCurrent }) =>

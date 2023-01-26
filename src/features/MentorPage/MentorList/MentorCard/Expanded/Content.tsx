@@ -35,16 +35,16 @@ export const Content = ({ mentor: { skills, story, languages } }: Props) => {
 };
 
 const Container = styled.div`
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   padding: 2rem;
 `;
 
 const OpenConversationButton = styled(TextButton)`
+  align-self: center;
   bottom: 0;
   margin-top: auto;
-  align-self: center;
 
   @media screen and (max-width: ${breakpoints.mobile}) {
     padding: 0.75rem 3rem;

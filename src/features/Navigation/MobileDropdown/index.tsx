@@ -106,35 +106,35 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
 };
 
 const Dropdown = styled.button`
+  align-items: center;
   all: unset;
   cursor: pointer;
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 4px;
-  text-align: center;
+  justify-content: center;
   padding: 0 3rem;
+  text-align: center;
 `;
 
 const Menu = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 40px;
-  text-align: left;
-  margin-top: 2.5rem;
+  animation: ${growDownAnimation} 400ms ease-in-out forwards;
   background-color: ${palette.white};
+  box-shadow: 1px 0.5px ${palette.midgray};
   display: flex;
   flex-direction: column;
-  box-shadow: 1px 0.5px ${palette.midgray};
+  left: 0;
+  margin-top: 2.5rem;
+  position: absolute;
+  right: 0;
+  text-align: left;
 
-  animation: ${growDownAnimation} 400ms ease-in-out forwards;
+  top: 40px;
   transform-origin: top center;
 `;
 
 const UnstyledLink = styled.a`
-  padding: 0 2rem;
   line-height: 56px;
+  padding: 0 2rem;
   text-decoration: none;
 `;
 

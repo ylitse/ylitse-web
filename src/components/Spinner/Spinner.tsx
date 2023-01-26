@@ -35,15 +35,15 @@ const LoadingCircle = styled.div<{ variant: Variant }>`
       margin-bottom: ${diameter / 2}rem;
       `;
   }}
-  margin-right: auto;
-  margin-left: auto;
-  border-radius: 50%;
-  border-left-color: ${palette.spinnerBackgrond};
-  border-bottom-color: ${palette.spinnerBackgrond};
-  border-right-color: ${palette.spinnerBackgrond};
-  animation-name: ${spinAnimation};
   animation-duration: 1.5s;
-  transition: all 0.5s ease-in;
   animation-iteration-count: infinite;
+  animation-name: ${spinAnimation};
   animation-timing-function: linear;
+  border-bottom-color: ${palette.spinnerBackgrond};
+  border-left-color: ${palette.spinnerBackgrond};
+  border-radius: 50%;
+  border-right-color: ${palette.spinnerBackgrond};
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.5s ease-in;
 `;

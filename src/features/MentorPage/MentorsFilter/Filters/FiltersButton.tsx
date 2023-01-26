@@ -51,19 +51,19 @@ export const FiltersButton: React.FC<Props> = ({ onFiltersClose }) => {
 };
 
 const SearchButton = styled.button<{ isFiltersApplied: boolean }>`
-  cursor: pointer;
-  display: flex;
   align-items: center;
-  position: absolute;
-  right: 1rem;
-  border: none;
   background-color: ${({ isFiltersApplied }) =>
     isFiltersApplied ? palette.darkpurple : palette.whiteblue};
-
+  border: none;
   border-radius: 16px;
+  box-shadow: 0.1rem 0.1rem ${palette.blurbackground};
+  cursor: pointer;
+  display: flex;
+
   height: 3rem;
   padding: 0.6rem;
-  box-shadow: 0.1rem 0.1rem ${palette.blurbackground};
+  position: absolute;
+  right: 1rem;
 
   &:hover {
     opacity: 0.7;

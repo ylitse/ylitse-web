@@ -31,19 +31,19 @@ const shakeAnimation = keyframes`
 `;
 
 const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
-  flex: 0 0 auto;
-  padding: 0.75rem 1.25rem;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.1rem;
-  line-height: 1.1rem;
-  border-radius: 1.75rem;
-  margin: 0.5rem;
-  height: 2.75rem;
   appearance: none;
   border: none;
+  border-radius: 1.75rem;
   cursor: pointer;
+  flex: 0 0 auto;
+  font-family: 'Source Sans Pro';
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 400;
+  height: 2.75rem;
+  line-height: 1.1rem;
+  margin: 0.5rem;
+  padding: 0.75rem 1.25rem;
 
   ${({ isSelected }) =>
     isSelected
@@ -67,9 +67,9 @@ const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
     css`
       animation: ${shakeAnimation} 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97)
         both;
-      transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
       perspective: 1000px;
+      transform: translate3d(0, 0, 0);
     `}
 `;
 

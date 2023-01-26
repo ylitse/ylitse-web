@@ -36,13 +36,13 @@ export const BasicInfo = ({
 };
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 100%;
-  max-width: 70%;
-  box-sizing: border-box;
-  margin: 0 auto;
   align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 70%;
 
   @media screen and (max-width: ${breakpoints.mobile}) {
     align-items: flex-start;
@@ -51,11 +51,11 @@ const Container = styled.div`
 `;
 
 const NameDivider = styled.div`
-  width: 16vw;
-  height: 2px;
   border-bottom: 1px solid ${palette.white};
-  margin-top: 0.25rem;
+  height: 2px;
   margin-bottom: 0.5rem;
+  margin-top: 0.25rem;
+  width: 16vw;
 `;
 
 const Divider = styled.span`
@@ -64,17 +64,17 @@ const Divider = styled.span`
 `;
 
 export const WrappedText = styled(Text)`
-  margin: 0px;
   display: flex;
   flexwrap: wrap;
+  margin: 0px;
 `;
 
 export const TruncateText = styled(Text)`
+  color: ${palette.white};
+  margin: 0px;
+  overflow: hidden;
+  textalign: center;
   textoverflow: ellipsis;
   whitespace: nowrap;
-  overflow: hidden;
-  margin: 0px;
   width: 100%;
-  color: ${palette.white};
-  textalign: center;
 `;

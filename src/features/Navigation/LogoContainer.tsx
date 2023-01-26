@@ -26,22 +26,22 @@ const YlitseText = styled(Text)`
 `;
 
 const Logo = styled.div`
-  background-image: url(${SvgLogo});
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 40px;
-  width: 40px;
-  margin-right: 1rem;
   background-color: transparent;
+  background-image: url(${SvgLogo});
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 40px;
+  margin-right: 1rem;
+  width: 40px;
 `;
 
 const Container = styled.div`
-  height: 50px;
-  display: flex;
   align-items: center;
   color: white;
-  max-width: fit-content;
+  display: flex;
+  height: 50px;
   margin-left: 10%;
+  max-width: fit-content;
 
   @media screen and (max-width: 830px) {
     margin-left: 4%;

@@ -23,14 +23,14 @@ export const LanguageItem: React.FC<Props> = ({
 );
 
 const Link = styled.a<{ isSelected: boolean }>`
-  padding: 0 2rem;
   line-height: 56px;
+  padding: 0 2rem;
 
   ${({ isSelected }) =>
     isSelected
       ? css`
-          cursor: default;
           background-color: ${palette.blue2};
+          cursor: default;
         `
       : css`
           cursor: pointer;

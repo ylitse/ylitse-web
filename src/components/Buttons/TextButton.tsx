@@ -24,18 +24,18 @@ const TextButton = <T extends ElementType = 'button'>({
 };
 
 const StyledTextButton = styled.button<{ variant: ButtonColorVariant }>`
-  font-family: 'Baloo 2';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.5rem;
   border: none;
-  padding: ${spacing.small_button_padding};
-  margin-bottom: 4px;
   border-radius: 1.25rem;
   bottom: ${spacing.layout_spacing};
-  width: fit-content;
   cursor: pointer;
+  font-family: 'Baloo 2';
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+  margin-bottom: 4px;
+  padding: ${spacing.small_button_padding};
+  width: fit-content;
   &:hover {
     opacity: 0.7;
   }

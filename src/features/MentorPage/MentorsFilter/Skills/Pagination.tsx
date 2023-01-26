@@ -25,8 +25,8 @@ export const Pagination = ({
 }: Props) => {
   const paginationRange = usePagination({
     currentPage,
-    totalCount: skillTotalAmount,
     pageSize: SKILL_AMOUNT_ON_PAGE,
+    totalCount: skillTotalAmount,
   });
   const dispatch = useAppDispatch();
   const { t } = useTranslation('mentors');
@@ -66,12 +66,12 @@ export const Pagination = ({
 };
 
 const Container = styled.div`
-  flex: 1;
-  display: flex;
   align-items: center;
-  width: 100%;
+  display: flex;
+  flex: 1;
   justify-content: space-between;
   margin-top: 2rem;
+  width: 100%;
 `;
 
 const PaginationContainer = styled.div`
@@ -80,8 +80,8 @@ const PaginationContainer = styled.div`
 `;
 
 const ButtonText = styled(Text)`
-  padding: 0;
   margin: 0;
+  padding: 0;
   &:hover {
     opacity: 0.7;
   }

@@ -41,16 +41,16 @@ export const DropdownButton: React.FC<Props> = ({
 };
 
 export const Button = styled.button<{ isExpanded?: boolean }>`
-  position: relative;
-  cursor: pointer;
+  align-items: center;
   background: transparent;
   border: none;
+  cursor: pointer;
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 4px;
-  text-align: center;
+  justify-content: center;
   padding: 0 1rem;
+  position: relative;
+  text-align: center;
 
   ${({ isExpanded }) =>
     isExpanded &&

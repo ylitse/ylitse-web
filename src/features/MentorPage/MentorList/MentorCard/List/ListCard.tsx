@@ -36,17 +36,17 @@ export const ListCard: React.FC<Props> = ({ setVisibleCard, mentor }) => {
 };
 
 const Container = styled.div<{ isMobile: boolean }>`
-  display: flex;
-  flex-direction: column;
   background-color: ${palette.white};
   border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
 
   ${({ isMobile }) =>
     isMobile
       ? css`
           margin: 1rem 0;
-          min-width: 80%;
           max-height: 40%;
+          min-width: 80%;
           scroll-behavior: smooth;
           scroll-snap-align: center;
 
@@ -98,9 +98,9 @@ const Container = styled.div<{ isMobile: boolean }>`
 `;
 
 const CardContent = styled.div`
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  padding: 1.9rem;
   justify-content: space-between;
+  padding: 1.9rem;
 `;
