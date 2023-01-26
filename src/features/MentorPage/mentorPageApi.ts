@@ -11,18 +11,18 @@ import { capitalize } from '@/utils/utils';
 type ApiMentor = D.TypeOf<typeof apiMentorType>;
 
 const apiMentorType = D.struct({
-  user_id: D.string,
-  id: D.string,
   birth_year: D.number,
+  communication_channels: D.array(D.string),
   display_name: D.string,
-  story: D.string,
+  gender: D.string,
+  id: D.string,
+  is_vacationing: D.boolean,
+  languages: D.array(D.string),
   region: D.string,
   skills: D.array(D.string),
-  languages: D.array(D.string),
-  is_vacationing: D.boolean,
   status_message: D.string,
-  gender: D.string,
-  communication_channels: D.array(D.string),
+  story: D.string,
+  user_id: D.string,
 });
 
 const mentorListResponseType = D.struct({ resources: D.array(apiMentorType) });
@@ -32,24 +32,24 @@ export type Mentor = ReturnType<typeof toMentor>;
 
 const toMentor = ({
   birth_year,
-  display_name,
-  user_id,
-  id,
-  skills,
   communication_channels,
+  display_name,
+  id,
   is_vacationing,
+  skills,
   status_message,
+  user_id,
   ...props
 }: ApiMentor) => ({
   ...props,
-  mentorId: id,
-  buddyId: user_id,
   age: new Date().getFullYear() - birth_year,
+  buddyId: user_id,
+  communicationChannels: communication_channels,
+  isVacationing: is_vacationing,
+  mentorId: id,
   name: display_name,
   skills: skills.map(skill => capitalize(skill)),
   statusMessage: status_message,
-  isVacationing: is_vacationing,
-  communicationChannels: communication_channels,
 });
 
 export type Mentors = Record<string, Mentor>;
@@ -61,8 +61,9 @@ const toMentorRecord = ({ resources }: MentorsResponse) =>
   }, {});
 
 export const mentorsApi = createApi({
-  reducerPath: 'mentors',
   baseQuery: fetchBaseQuery({ baseUrl: 'api/' }),
+  reducerPath: 'mentors',
+
   endpoints: builder => ({
     getMentors: builder.query<Mentors, void>({
       query: () => 'mentors',
