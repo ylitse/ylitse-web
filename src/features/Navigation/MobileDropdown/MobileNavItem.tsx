@@ -21,7 +21,7 @@ export const NavigationItem: React.FC<Props> = ({
     <UnstyledRouteLink to={url} isCurrent={isCurrent}>
       <Text
         variant={isCurrent ? 'linkDisabledMobile' : 'linkMobile'}
-        color={isCurrent ? 'darkblue' : 'purple'}
+        color={isCurrent ? 'blueDark' : 'purple'}
       >
         {text}
       </Text>
@@ -37,6 +37,6 @@ const UnstyledRouteLink = styled(RouterNavLink)<{ isCurrent: boolean }>`
   ${({ isCurrent }) =>
     isCurrent &&
     css`
-      background-color: ${palette.blue2};
+      background-color: ${palette.blue};
     `}
 `;

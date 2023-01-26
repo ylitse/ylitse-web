@@ -119,7 +119,7 @@ const Dropdown = styled.button`
 const Menu = styled.div`
   animation: ${growDownAnimation} 400ms ease-in-out forwards;
   background-color: ${palette.white};
-  box-shadow: 1px 0.5px ${palette.midgray};
+  box-shadow: 1px 0.5px ${palette.greyMid};
   display: flex;
   flex-direction: column;
   left: 0;
@@ -139,7 +139,7 @@ const UnstyledLink = styled.a`
 `;
 
 const Divider = styled.div`
-  border-bottom: 1px solid ${palette.blue2};
+  border-bottom: 1px solid ${palette.blue};
   margin-bottom: 0.5rem;
 `;
 

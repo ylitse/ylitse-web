@@ -11,7 +11,7 @@ export type Props = {
 export const LangItem: React.FC<Props> = ({ changeLang, isSelected, text }) => (
   <Button isSelected={isSelected} onClick={changeLang}>
     <Text
-      color={isSelected ? 'darkblue' : 'purple'}
+      color={isSelected ? 'blueDark' : 'purple'}
       variant={isSelected ? 'linkDisabled' : 'linkBold'}
     >
       {text}
@@ -34,11 +34,11 @@ const Button = styled.button<{ isSelected: boolean }>`
   ${({ isSelected }) =>
     isSelected &&
     css`
-      background: ${palette.blue2};
+      background: ${palette.blue};
       pointer-events: none;
     `}
 
   &:hover {
-    background-color: ${palette.lightblue};
+    background-color: ${palette.blueLight};
   }
 `;

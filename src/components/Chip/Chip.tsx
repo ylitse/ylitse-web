@@ -55,10 +55,10 @@ const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
           }
         `
       : css`
-          background-color: ${palette.palepurple};
-          color: ${palette.darkblue};
+          background-color: ${palette.purplePale};
+          color: ${palette.blueDark};
           &:hover {
-            background-color: ${palette.hoverpurple};
+            background-color: ${palette.purpleHover};
           }
         `}
 

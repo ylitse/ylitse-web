@@ -15,7 +15,7 @@ export const Languages = ({
   const { t } = useTranslation('mentors');
   return (
     <>
-      <Header variant="h3" color={isMobile ? 'darkpurple' : 'white'}>
+      <Header variant="h3" color={isMobile ? 'purpleDark' : 'white'}>
         {t('card.languages')}
       </Header>
       <SkillChips>

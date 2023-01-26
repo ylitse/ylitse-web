@@ -30,7 +30,7 @@ export const MentorSearch = () => {
 };
 
 const InfoText = styled(Text)`
-  color: ${palette.darkblue};
+  color: ${palette.blueDark};
   flex: 0 0 auto;
   padding-right: 5%;
   width: 47%;

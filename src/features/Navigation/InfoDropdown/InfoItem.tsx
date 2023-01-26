@@ -48,6 +48,6 @@ export const Container = styled.button`
   padding-left: 1rem;
 
   &:hover {
-    background-color: ${palette.lightblue};
+    background-color: ${palette.blueLight};
   }
 `;

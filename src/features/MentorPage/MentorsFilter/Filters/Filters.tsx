@@ -50,7 +50,7 @@ const Container = styled.div`
 
 const PageHeader = styled.div`
   align-items: center;
-  background-color: ${palette.blue2};
+  background-color: ${palette.blue};
   border-radius: 10px;
   display: flex;
   height: 80px;

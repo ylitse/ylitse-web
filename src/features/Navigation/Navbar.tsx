@@ -65,7 +65,7 @@ export const Container = styled.div<{ isMobile?: boolean }>`
   ${({ isMobile }) =>
     isMobile &&
     css`
-      border-bottom: solid 0.5rem ${palette.blue2};
+      border-bottom: solid 0.5rem ${palette.blue};
       padding: 0 1.5rem;
     `}
 `;

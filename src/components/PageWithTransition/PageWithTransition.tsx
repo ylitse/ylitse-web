@@ -31,7 +31,7 @@ const PageWithTransition: React.FC<Props> = ({ children }) => {
       <Layer
         role="transition"
         isTransition={isTransition}
-        color="blue2"
+        color="blue"
         delay={0}
       />
       <Layer
@@ -57,7 +57,7 @@ const PageWithTransition: React.FC<Props> = ({ children }) => {
 };
 
 const Container = styled.div`
-  background-color: ${palette.lightblue};
+  background-color: ${palette.blueLight};
   display: flex;
   flex-direction: column;
   height: auto;

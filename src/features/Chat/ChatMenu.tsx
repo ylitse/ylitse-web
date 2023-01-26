@@ -109,7 +109,7 @@ const Container = styled.div`
 
 const Row = styled.div`
   align-items: center;
-  border-bottom: 1px solid ${palette.lightgrey};
+  border-bottom: 1px solid ${palette.greyLight};
   display: flex;
   flex-direction: row;
   height: 80px;
@@ -134,7 +134,7 @@ const CategoryLink = styled.a`
 `;
 
 const Header = styled(Text)`
-  color: ${palette.darkblue};
+  color: ${palette.blueDark};
   flex: 1;
   padding-left: 40px;
 `;
@@ -148,7 +148,7 @@ const Buttons = styled.div`
 const ChatList = styled.div``;
 
 const CategoryEmptyText = styled(Text)`
-  color: ${palette.darkblue};
+  color: ${palette.blueDark};
   margin: 0;
   padding-left: 40px;
   padding-right: 40px;

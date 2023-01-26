@@ -14,7 +14,7 @@ export const LanguageItem: React.FC<Props> = ({
     onClick={isSelected ? e => e.stopPropagation() : changeLang}
   >
     <Text
-      color={isSelected ? 'darkblue' : 'purple'}
+      color={isSelected ? 'blueDark' : 'purple'}
       variant={isSelected ? 'linkDisabledMobile' : 'linkMobile'}
     >
       {text}
@@ -29,7 +29,7 @@ const Link = styled.a<{ isSelected: boolean }>`
   ${({ isSelected }) =>
     isSelected
       ? css`
-          background-color: ${palette.blue2};
+          background-color: ${palette.blue};
           cursor: default;
         `
       : css`

@@ -20,7 +20,7 @@ export const DropdownButton: React.FC<Props> = ({
   text,
 }) => {
   const { ref, isHovering } = useHover();
-  const color = isHovering || isComponentVisible ? 'darkblue' : 'white';
+  const color = isHovering || isComponentVisible ? 'blueDark' : 'white';
 
   return (
     <Button
@@ -59,7 +59,7 @@ export const Button = styled.button<{ isExpanded?: boolean }>`
     `}
 
   &:hover {
-    background-color: ${palette.blue2};
-    border-bottom: 2px solid ${palette.blue2};
+    background-color: ${palette.blue};
+    border-bottom: 2px solid ${palette.blue};
   }
 `;

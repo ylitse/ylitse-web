@@ -35,8 +35,8 @@ export const Link = styled(RouterNavLink)`
 
   &.active,
   &:hover {
-    background-color: ${palette.blue2};
-    color: ${palette.darkblue};
+    background-color: ${palette.blue};
+    color: ${palette.blueDark};
     text-decoration: underline;
     text-underline-offset: 4px;
   }

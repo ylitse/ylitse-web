@@ -13,7 +13,7 @@ type Props = {
 
 export const Text: React.FC<Props> = ({
   variant = 'p',
-  color = 'darkblue',
+  color = 'blueDark',
   className,
   children,
 }) => {

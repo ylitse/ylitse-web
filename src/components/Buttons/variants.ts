@@ -6,7 +6,7 @@ export const variants = {
     color: palette.orange,
 
     ['&: active, &: visited']: {
-      backgroundColor: palette.midpurple,
+      backgroundColor: palette.purpleMid,
       color: palette.orange2,
       outline: 'none',
     },
@@ -19,8 +19,8 @@ export const variants = {
     },
   },
   disabled: {
-    backgroundColor: palette.midgray,
-    color: palette.fadedgray,
+    backgroundColor: palette.greyMid,
+    color: palette.greyFaded,
 
     ['&: active, &: visited']: {
       outline: 'none',
@@ -44,8 +44,8 @@ export const variants = {
       outline: 'none',
     },
     ['&: hover']: {
-      border: `2px solid ${palette.darkpurple}`,
-      color: palette.darkpurple,
+      border: `2px solid ${palette.purpleDark}`,
+      color: palette.purpleDark,
       outline: `none`,
     },
   },

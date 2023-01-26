@@ -20,10 +20,10 @@ const SimpleChip: React.FC<Props> = ({ text }) => {
 
 const StyledSimpleChip = styled.button`
   appearance: none;
-  background-color: ${palette.lightblue};
+  background-color: ${palette.blueLight};
   border: none;
   border-radius: 1.75rem;
-  color: ${palette.darkblue};
+  color: ${palette.blueDark};
   flex: 0 0 auto;
   font-family: 'Source Sans Pro';
   font-size: 1rem;

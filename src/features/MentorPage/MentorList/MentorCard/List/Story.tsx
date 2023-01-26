@@ -17,7 +17,7 @@ export const Story = ({ story }: { story: string }) => {
 const TruncatedMultiline = styled(Text)`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
-  color: ${palette.darkblue};
+  color: ${palette.blueDark};
   display: -webkit-box;
   height: 6rem;
   overflow: hidden;
