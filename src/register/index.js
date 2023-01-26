@@ -8,49 +8,49 @@
     try {
       // Create a new account
       const createAccountResponse = await fetch('/api/accounts', {
-        method: 'POST',
         body: JSON.stringify({
-          password: formData.get('password'),
           account: {
-            role: 'mentee',
-            login_name: formData.get('username'),
             email: formData.get('email'),
+            login_name: formData.get('username'),
+            role: 'mentee',
           },
+          password: formData.get('password'),
         }),
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
+        method: 'POST',
       });
       const accountData = await createAccountResponse.json();
       const createdUser = accountData.user;
 
       // Log in using the created account
       const loginResponse = await fetch('/api/login', {
-        method: 'POST',
         body: JSON.stringify({
           login_name: formData.get('username'),
           password: formData.get('password'),
         }),
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
       });
       const loginData = await loginResponse.json();
 
       // Update the user by adding the display name
       const updateUserResponse = await fetch(`/api/users/${createdUser.id}`, {
-        method: 'PUT',
         body: JSON.stringify({
-          display_name: formData.get('display-name'),
-          role: createdUser.role,
           account_id: createdUser.account_id,
+          display_name: formData.get('display-name'),
           id: createdUser.id,
+          role: createdUser.role,
         }),
         credentials: 'include',
         headers: {
           Authorization: `Bearer ${loginData.tokens.access_token}`,
           'Content-Type': 'application/json',
         },
+        method: 'PUT',
       });
 
       // Redirect to login page

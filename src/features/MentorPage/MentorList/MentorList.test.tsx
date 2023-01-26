@@ -3,15 +3,15 @@ import MentorList from './MentorList';
 
 const mentorListCards = [
   {
-    mentorId: 'asdf908asdf',
-    buddyId: 'asdf908asdf',
-    gender: 'muusu',
-    communicationChannels: [],
-    name: 'Matti Meikäläinen',
     age: 21,
+    buddyId: 'asdf908asdf',
+    communicationChannels: [],
+    gender: 'muusu',
+    isVacationing: true,
+    languages: ['Suomi', 'Englanti'],
+    mentorId: 'asdf908asdf',
+    name: 'Matti Meikäläinen',
     region: 'Pirkanmaa',
-    story:
-      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
     skills: [
       'Lastensuojelu',
       'Itsenäistyminen',
@@ -21,20 +21,20 @@ const mentorListCards = [
       'Raskausaika',
       'Päihdeongelmat',
     ],
-    languages: ['Suomi', 'Englanti'],
-    isVacationing: true,
     statusMessage: 'Voit ottaa yhteyttä!',
+    story:
+      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
   },
   {
-    mentorId: 'asdfasdertsdf',
-    buddyId: 'asdfasdertsdf',
-    gender: 'muusu',
-    communicationChannels: [],
-    name: 'Matti Meikäläinen',
     age: 21,
+    buddyId: 'asdfasdertsdf',
+    communicationChannels: [],
+    gender: 'muusu',
+    isVacationing: false,
+    languages: ['Suomi', 'Englanti'],
+    mentorId: 'asdfasdertsdf',
+    name: 'Matti Meikäläinen',
     region: 'Pirkanmaa',
-    story:
-      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
     skills: [
       'Lastensuojelu',
       'Itsenäistyminen',
@@ -44,9 +44,9 @@ const mentorListCards = [
       'Raskausaika',
       'Päihdeongelmat',
     ],
-    languages: ['Suomi', 'Englanti'],
-    isVacationing: false,
     statusMessage: 'Voit ottaa yhteyttä!',
+    story:
+      'Olen nuorisokodista itsenäistynyt teini-ikäisen pojan äiti. Voin olla sinulle tukena opintoihin, itsenäistymiseen, jälkihuoltoon ja vanhem- muuteen liittyvissä asioissa. Minulta voi kysyä näihin asioihin liittyen tai mistä tahansa muusta mieltä painavasta asiasta. Toivon, että otat rohkeasti yhteyttä. Yhdessä varmasti keksimme keinoja, millä ongelmaasi voisi löytää ratkaisun. Tulehan sanomaan moikka!',
   },
 ];
 

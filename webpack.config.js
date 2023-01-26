@@ -19,34 +19,33 @@ const DEV_API = process.env.DEV_API
   : 'http://localhost:8080';
 
 module.exports = {
-  mode: 'development',
-  entry: {
-    app: path.join(__dirname, 'src', 'index.tsx'),
-  },
-  devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
     proxy: {
       '/api/**': {
-        target: DEV_API,
-        pathRewrite: { '^/api': '' },
-        cookieDomainRewrite: JSON.stringify(DEV_API),
         changeOrigin: true,
+        cookieDomainRewrite: JSON.stringify(DEV_API),
         logLevel: 'debug',
         onProxyRes: checkAuth,
+        pathRewrite: { '^/api': '' },
+        target: DEV_API,
       },
     },
     static: {
       directory: './src',
     },
   },
-  target: 'web',
+  devtool: 'inline-source-map',
+  entry: {
+    app: path.join(__dirname, 'src', 'index.tsx'),
+  },
+  mode: 'development',
   module: {
     rules: [
       {
+        exclude: /node_modules/,
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
@@ -66,12 +65,6 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
-    extensions: ['.tsx', '.ts', '.js'],
-  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -81,4 +74,11 @@ module.exports = {
       template: path.join(__dirname, 'src', 'index.html'),
     }),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  target: 'web',
 };
