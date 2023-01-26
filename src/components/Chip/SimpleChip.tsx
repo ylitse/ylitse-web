@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { palette } from '../variables';
+import Text from '../Text';
 
 /**
  * Creates a non-selectable chip
@@ -13,7 +14,7 @@ type Props = {
 const SimpleChip: React.FC<Props> = ({ text }) => {
   return (
     <StyledSimpleChip key={text} value={text}>
-      {text}
+      <Text variant="chip">{text}</Text>
     </StyledSimpleChip>
   );
 };
@@ -23,12 +24,7 @@ const StyledSimpleChip = styled.button`
   background-color: ${palette.blueLight};
   border: none;
   border-radius: 1.75rem;
-  color: ${palette.blueDark};
   flex: 0 0 auto;
-  font-family: 'Source Sans Pro';
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
   height: 2rem;
   line-height: 1rem;
   margin: 0.5rem;

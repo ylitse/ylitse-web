@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '@/store';
 
 import { changeSearchString, selectSearchString } from '../mentorsFilterSlice';
-import { palette } from '@/components/variables';
 import SearchBar from '@/components/SearchBar';
 import Text from '@/components/Text';
 
@@ -19,7 +18,7 @@ export const MentorSearch = () => {
 
   return (
     <Container>
-      <InfoText variant="p">{t('filters.description')}</InfoText>
+      <InfoText>{t('filters.description')}</InfoText>
       <SearchBar
         placeholder={t('filters.search')}
         value={searchString}
@@ -30,7 +29,6 @@ export const MentorSearch = () => {
 };
 
 const InfoText = styled(Text)`
-  color: ${palette.blueDark};
   flex: 0 0 auto;
   padding-right: 5%;
   width: 47%;

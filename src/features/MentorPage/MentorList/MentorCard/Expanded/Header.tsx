@@ -67,7 +67,6 @@ const ProfilePicture = styled.div<{ isMobile: boolean }>`
 const Availability = styled(Text)<{ isShowing: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
   background-color: ${palette.whiteBluish};
-  color: ${palette.blueDark};
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
   width: fit-content;

@@ -24,7 +24,7 @@ export const Content = ({ mentor: { skills, story, languages } }: Props) => {
   return (
     <Container>
       <Text variant="h3">{t('card.bio')}</Text>
-      <Text variant="p">{story}</Text>
+      <Text>{story}</Text>
       {isMobile && <Languages languages={languages} isMobile={isMobile} />}
       <Skills skills={skills} />
       <OpenConversationButton onClick={handleClick}>

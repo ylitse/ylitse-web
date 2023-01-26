@@ -39,7 +39,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
       ref={ref}
       onClick={() => setIsComponentVisible(!isComponentVisible)}
     >
-      <Text variant={'linkMobile'} color={'white'}>
+      <Text variant="link" color="white">
         {t('navigation.mobile.menu')}
       </Text>
       {isComponentVisible ? (
@@ -66,7 +66,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
             target="_blank"
             rel="noreferrer"
           >
-            <Text variant="linkMobile" color="purple">
+            <Text variant="link" color="purple">
               {t('navigation.info.link.feedback.text')}
             </Text>
           </UnstyledLink>
@@ -75,7 +75,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
             target="_blank"
             rel="noreferrer"
           >
-            <Text variant="linkMobile" color="purple">
+            <Text variant="link" color="purple">
               {t('navigation.info.link.termsAndPrivacy.text')}
             </Text>
           </UnstyledLink>
@@ -127,13 +127,12 @@ const Menu = styled.div`
   position: absolute;
   right: 0;
   text-align: left;
-
   top: 40px;
   transform-origin: top center;
 `;
 
 const UnstyledLink = styled.a`
-  line-height: 56px;
+  height: 60px;
   padding: 0 2rem;
   text-decoration: none;
 `;

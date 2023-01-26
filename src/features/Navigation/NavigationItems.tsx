@@ -24,11 +24,10 @@ export const Items = ({ items }: { items: Array<NavigationItem> }) => (
 
 export const Link = styled(RouterNavLink)`
   color: ${palette.white};
-  font-family: 'Baloo 2', cursive;
+  font-family: 'Baloo 2';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   height: 60px;
-  line-height: 60px;
   line-height: 60px;
   padding: 0 1rem;
   text-decoration: none;

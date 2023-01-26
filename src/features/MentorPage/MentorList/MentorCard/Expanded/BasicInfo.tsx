@@ -18,18 +18,16 @@ export const BasicInfo = ({
 
   return (
     <Container>
-      <Text color="white" variant={isMobile ? 'h1' : 'h2'}>
+      <Text variant={isMobile ? 'h1' : 'h2'} color="white">
         {name}
       </Text>
       {!isMobile && <NameDivider />}
-      <WrappedText color="white" variant="p">
+      <WrappedText color="white">
         {age} {t('card.age')} <Divider>|</Divider>
         {region}
       </WrappedText>
-      <Text color="white" variant="p">
-        {!isVacationing}
-      </Text>
-      <TruncateText>{statusMessage}</TruncateText>
+      <Text color="white">{!isVacationing}</Text>
+      <TruncateText color="white">{statusMessage}</TruncateText>
       {!isMobile && <Languages languages={languages} isMobile={isMobile} />}
     </Container>
   );
@@ -70,7 +68,6 @@ export const WrappedText = styled(Text)`
 `;
 
 export const TruncateText = styled(Text)`
-  color: ${palette.white};
   margin: 0px;
   overflow: hidden;
   textalign: center;

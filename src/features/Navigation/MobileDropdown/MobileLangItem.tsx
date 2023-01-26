@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import Text from '@/components/Text';
 
 import type { Props } from '../LanguageDropdown/LangItem';
+import { ButtonText } from '../LanguageDropdown/LangItem';
 import { palette } from '@/components/variables';
 
 export const LanguageItem: React.FC<Props> = ({
@@ -13,17 +13,17 @@ export const LanguageItem: React.FC<Props> = ({
     isSelected={isSelected}
     onClick={isSelected ? e => e.stopPropagation() : changeLang}
   >
-    <Text
+    <ButtonText
       color={isSelected ? 'blueDark' : 'purple'}
-      variant={isSelected ? 'linkDisabledMobile' : 'linkMobile'}
+      variant="link"
+      isSelected={isSelected}
     >
       {text}
-    </Text>
+    </ButtonText>
   </Link>
 );
 
 const Link = styled.a<{ isSelected: boolean }>`
-  line-height: 56px;
   padding: 0 2rem;
 
   ${({ isSelected }) =>

@@ -9,7 +9,7 @@ const LoadingPage = () => {
     <Page>
       <Wrapper>
         <Loader />
-        <LoadingText variant="bold">
+        <LoadingText variant="bold" color="white">
           Ladataan Ylitse MentorApp -palvelua
         </LoadingText>
       </Wrapper>
@@ -62,7 +62,6 @@ const Loader = styled.div`
 `;
 
 const LoadingText = styled(Text)`
-  color: white;
   text-align: center;
   width: 100%;
 `;

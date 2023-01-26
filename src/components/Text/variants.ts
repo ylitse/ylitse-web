@@ -2,16 +2,13 @@ import CSS from 'csstype';
 
 export type TextVariant =
   | 'bold'
+  | 'chip'
   | 'footer'
   | 'h1'
   | 'h2'
   | 'h3'
   | 'label'
   | 'link'
-  | 'linkBold'
-  | 'linkDisabled'
-  | 'linkDisabledMobile'
-  | 'linkMobile'
   | 'logo'
   | 'p';
 export type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'p' | 'span';
@@ -30,6 +27,16 @@ export const variants: Record<TextVariant, TextProp> = {
       fontStyle: 'normal',
       fontWeight: '700',
       lineHeight: '1.5rem',
+    },
+  },
+  chip: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      lineHeight: '1rem',
     },
   },
   footer: {
@@ -85,59 +92,17 @@ export const variants: Record<TextVariant, TextProp> = {
   link: {
     element: 'span',
     styles: {
-      fontFamily: '"Baloo 2", cursive',
+      fontFamily: '"Baloo 2"',
       fontSize: '1rem',
       fontStyle: 'normal',
-      fontWeight: '400',
+      fontWeight: '700',
       lineHeight: '60px',
-    },
-  },
-  linkBold: {
-    element: 'span',
-    styles: {
-      fontFamily: '"Baloo 2", cursive',
-      fontStyle: 'normal',
-      fontWeight: '700',
-      lineHeight: '58px',
-    },
-  },
-  linkDisabled: {
-    element: 'span',
-    styles: {
-      fontFamily: '"Baloo 2", cursive',
-      fontStyle: 'normal',
-      fontWeight: '400',
-      lineHeight: '58px',
-      textDecoration: 'underline',
-      textUnderlineOffset: '4px',
-    },
-  },
-  linkDisabledMobile: {
-    element: 'span',
-    styles: {
-      fontFamily: '"Baloo 2", cursive',
-      fontSize: 'larger',
-      fontStyle: 'normal',
-      fontWeight: '400',
-      lineHeight: '40px',
-      textDecoration: 'underline',
-      textUnderlineOffset: '4px',
-    },
-  },
-  linkMobile: {
-    element: 'span',
-    styles: {
-      fontFamily: '"Baloo 2", cursive',
-      fontSize: 'larger',
-      fontStyle: 'normal',
-      fontWeight: '700',
-      lineHeight: '40px',
     },
   },
   logo: {
     element: 'p',
     styles: {
-      fontFamily: '"Baloo 2", cursive',
+      fontFamily: '"Baloo 2"',
       fontSize: '2rem',
       fontStyle: 'normal',
       fontWeight: '600',

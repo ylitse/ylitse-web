@@ -33,10 +33,10 @@ export const Header: React.FC<Props> = ({
       </Availability>
       <ProfilePicture />
       <BasicInfo>
-        <NameText color="white" variant="h2">
+        <NameText variant="h2" color="white">
           {name}
         </NameText>
-        <WrappedText color="white" variant="p">
+        <WrappedText color="white">
           {age} {t('card.age')} <Divider>|</Divider>
           {region}
         </WrappedText>
@@ -95,7 +95,6 @@ const Divider = styled.span`
 const Availability = styled(Text)<{ isShowing: boolean }>`
   background-color: ${palette.whiteBluish};
   border-radius: 0.25rem;
-  color: ${palette.blueDark};
   display: ${props => (props.isShowing ? `flex` : `none`)};
   padding: 0.25rem 1rem;
   position: absolute;

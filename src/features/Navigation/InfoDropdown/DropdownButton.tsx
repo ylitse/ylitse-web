@@ -28,9 +28,9 @@ export const DropdownButton: React.FC<Props> = ({
       onClick={() => setIsComponentVisible(!isComponentVisible)}
       ref={ref}
     >
-      <Text variant={isHovering ? 'linkDisabled' : 'link'} color={color}>
+      <ButtonText variant="link" color={color}>
         {text}
-      </Text>
+      </ButtonText>
       {isComponentVisible ? (
         <ChevronUp size={8} color={color} />
       ) : (
@@ -40,13 +40,14 @@ export const DropdownButton: React.FC<Props> = ({
   );
 };
 
-export const Button = styled.button<{ isExpanded?: boolean }>`
+const Button = styled.button<{ isExpanded?: boolean }>`
   align-items: center;
   background: transparent;
   border: none;
   cursor: pointer;
   display: flex;
   gap: 4px;
+  height: 60px;
   justify-content: center;
   padding: 0 1rem;
   position: relative;
@@ -61,5 +62,12 @@ export const Button = styled.button<{ isExpanded?: boolean }>`
   &:hover {
     background-color: ${palette.blue};
     border-bottom: 2px solid ${palette.blue};
+  }
+`;
+
+const ButtonText = styled(Text)`
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 `;

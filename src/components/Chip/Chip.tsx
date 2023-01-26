@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
+import Text from '../Text';
 import { palette } from '../variables';
 
 type Props = {
@@ -18,7 +19,9 @@ const Chip: React.FC<Props> = ({ text, isSelected, shouldShake, onToggle }) => {
       isSelected={isSelected}
       shouldShake={shouldShake}
     >
-      {text}
+      <Text variant="chip" color={isSelected ? 'white' : 'blueDark'}>
+        {text}
+      </Text>
     </StyledChip>
   );
 };
@@ -36,12 +39,7 @@ const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
   border-radius: 1.75rem;
   cursor: pointer;
   flex: 0 0 auto;
-  font-family: 'Source Sans Pro';
-  font-size: 1.1rem;
-  font-style: normal;
-  font-weight: 400;
   height: 2.75rem;
-  line-height: 1.1rem;
   margin: 0.5rem;
   padding: 0.75rem 1.25rem;
 
@@ -49,14 +47,12 @@ const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
     isSelected
       ? css`
           background-color: ${palette.purple};
-          color: ${palette.white};
           &:hover {
             background-color: ${palette.purple};
           }
         `
       : css`
           background-color: ${palette.purplePale};
-          color: ${palette.blueDark};
           &:hover {
             background-color: ${palette.purpleHover};
           }

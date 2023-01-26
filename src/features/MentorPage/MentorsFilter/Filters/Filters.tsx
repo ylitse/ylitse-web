@@ -25,7 +25,7 @@ const Filters: React.FC<Props> = ({
   return isMobile ? (
     <MobileContainer>
       <MobileHeader variant="h1">{headLine}</MobileHeader>
-      <Text variant="p">{t('filters.description')}</Text>
+      <Text>{t('filters.description')}</Text>
     </MobileContainer>
   ) : (
     <Container>

@@ -28,7 +28,6 @@ const Container = styled.div`
 `;
 
 const FooterText = styled(Text)`
-  color: ${palette.blueDark};
   &:after {
     background-color: transparent;
     background-image: url(${FooterLogo});
@@ -46,7 +45,6 @@ const FooterText = styled(Text)`
       background-image: none;
       content: 'SOS-lapsikylä';
       font-size: 1rem;
-      color: ${palette.blueDark};
       width: 6rem;
     }
   }

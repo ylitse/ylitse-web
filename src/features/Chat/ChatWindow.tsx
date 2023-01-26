@@ -19,13 +19,13 @@ const ChatWindow = () => {
         <WelcomeText isHeader variant="h2">
           {t('welcome.upper.title')}
         </WelcomeText>
-        <WelcomeText variant="p">{t('welcome.upper.description')}</WelcomeText>
+        <WelcomeText>{t('welcome.upper.description')}</WelcomeText>
       </UpperWelcomeContainer>
       <LowerWelcomeContainer>
         <WelcomeText isHeader variant="h2">
           {t('welcome.lower.title')}
         </WelcomeText>
-        <WelcomeText variant="p">{t('welcome.lower.description')}</WelcomeText>
+        <WelcomeText>{t('welcome.lower.description')}</WelcomeText>
         <SearchButton onClick={() => navigate('/mentors')}>
           {t('welcome.lower.button')}
         </SearchButton>
@@ -63,7 +63,6 @@ const LowerWelcomeContainer = styled.div`
 `;
 
 const WelcomeText = styled(Text)<{ isHeader?: boolean }>`
-  color: ${palette.blueDark};
   margin: 0;
   ${({ isHeader }) =>
     isHeader &&

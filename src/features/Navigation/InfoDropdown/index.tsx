@@ -35,7 +35,7 @@ const InfoDropdown = () => {
             }}
           />
           <Container onClick={() => console.log('TODO: show modal')}>
-            <Text variant="linkBold" color="purple">
+            <Text variant="link" color="purple">
               {t('navigation.info.applicationInfo')}
             </Text>
           </Container>
