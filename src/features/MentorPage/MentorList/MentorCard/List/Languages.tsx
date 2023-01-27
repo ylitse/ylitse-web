@@ -6,26 +6,32 @@ import { useTranslation } from 'react-i18next';
 export const Languages = ({ languages }: { languages: Array<string> }) => {
   const { t } = useTranslation('mentors');
   return (
-    <>
+    <Container>
       <Header variant="h3">{t('card.languages')}</Header>
-      <SkillChips>
+      <Chips>
         {languages.map(item => (
           <SimpleChip key={item} text={item} />
         ))}
-      </SkillChips>
-    </>
+      </Chips>
+    </Container>
   );
 };
 
-const Header = styled(Text)`
-  margin: 1.5rem 0 0 0;
-  text-align: center;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
-const SkillChips = styled.div`
+const Header = styled(Text)`
+  margin: 0;
+`;
+
+const Chips = styled.div`
   display: flex;
   flex: 0 0 auto;
   flex-wrap: wrap;
+  gap: 0.5rem;
   height: fit-content;
   justify-content: flex-start;
   max-height: 7rem;

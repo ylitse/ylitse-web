@@ -1,19 +1,24 @@
-import styled from 'styled-components';
+import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTranslation } from 'react-i18next';
+
+import styled, { css } from 'styled-components';
 import { Text } from '@/components/Text/Text';
 import { Skills } from './Skills';
 import { TextButton } from '@/components/Buttons';
 import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { Languages } from './Languages';
+import { IconButton } from '@/components/Buttons';
 import { breakpoints } from '@/components/variables';
-
-import { useMobileMode } from '@/hooks/useMobileMode';
-import { useTranslation } from 'react-i18next';
 
 type Props = {
   mentor: Mentor;
+  onDismiss: () => void;
 };
 
-export const Content = ({ mentor: { skills, story, languages } }: Props) => {
+export const Content = ({
+  mentor: { skills, story, languages },
+  onDismiss,
+}: Props) => {
   const isMobile = useMobileMode();
   const { t } = useTranslation('mentors');
 
@@ -23,7 +28,14 @@ export const Content = ({ mentor: { skills, story, languages } }: Props) => {
 
   return (
     <Container>
-      <Text variant="h3">{t('card.bio')}</Text>
+      <HeaderContainer>
+        <StoryHeader isMobile={isMobile} variant="h3">
+          {t('card.bio')}
+        </StoryHeader>
+        {!isMobile && (
+          <IconButton onClick={onDismiss} variant="close" sizeInPx={38} />
+        )}
+      </HeaderContainer>
       <Text>{story}</Text>
       {isMobile && <Languages languages={languages} isMobile={isMobile} />}
       <Skills skills={skills} />
@@ -38,7 +50,20 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  overflow-y: auto;
   padding: 2rem;
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+`;
+
+const StoryHeader = styled(Text)<{ isMobile: boolean }>`
+  ${({ isMobile }) =>
+    !isMobile &&
+    css`
+      flex-grow: 1;
+    `};
 `;
 
 const OpenConversationButton = styled(TextButton)`

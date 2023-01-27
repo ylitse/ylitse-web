@@ -1,11 +1,11 @@
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { useMobileMode } from '@/hooks/useMobileMode';
 
-import { TruncateText, WrappedText } from '../Expanded/BasicInfo';
 import { palette } from '@/components/variables';
-import { Text } from '@/components/Text/Text';
-
+import styled from 'styled-components';
+import { TruncateText, WrappedText } from '../Expanded/BasicInfo';
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
+import { Text } from '@/components/Text/Text';
 
 type Props = {
   name: string;
@@ -23,11 +23,12 @@ export const Header: React.FC<Props> = ({
   message,
 }) => {
   const { t } = useTranslation('mentors');
+  const isMobile = useMobileMode();
 
   const availabilityMessage = isAvailable ? '' : t('card.unavailable');
 
   return (
-    <StyledHeader isAvailable={isAvailable}>
+    <Container isAvailable={isAvailable} isMobile={isMobile}>
       <Availability variant="label" isShowing={!isAvailable}>
         {availabilityMessage}
       </Availability>
@@ -42,22 +43,14 @@ export const Header: React.FC<Props> = ({
         </WrappedText>
         <TruncateText color="white">{message}</TruncateText>
       </BasicInfo>
-    </StyledHeader>
+    </Container>
   );
 };
 
-const NameText = styled(Text)`
-  margin-bottom: 0;
-  margin-top: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-const StyledHeader = styled.div<{ isAvailable: boolean }>`
+const Container = styled.div<{ isAvailable: boolean; isMobile: boolean }>`
   align-items: center;
-  background-color: ${props =>
-    props.isAvailable ? palette.purple : palette.blueGrey};
+  background-color: ${({ isAvailable }) =>
+    isAvailable ? palette.purple : palette.blueGrey};
   border-radius: 0.75rem;
   box-sizing: border-box;
   color: ${palette.white};
@@ -65,8 +58,9 @@ const StyledHeader = styled.div<{ isAvailable: boolean }>`
   flex: 0 0 auto;
   height: 7.5rem;
   max-height: 7.5rem;
-  padding: 1.9rem;
+  padding: ${({ isMobile }) => (isMobile ? '1rem' : '1.9rem')};
   position: relative;
+  width: 100%;
 `;
 
 const ProfilePicture = styled.div`
@@ -76,6 +70,14 @@ const ProfilePicture = styled.div`
   flex: 0 0 4rem;
   height: 4rem;
   width: 4rem;
+`;
+
+const NameText = styled(Text)`
+  margin-bottom: 0;
+  margin-top: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const BasicInfo = styled.div`

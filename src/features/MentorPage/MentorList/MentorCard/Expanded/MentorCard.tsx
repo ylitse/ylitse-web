@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Header } from './Header';
 import { Content } from './Content';
-import { IconButton } from '@/components/Buttons';
 import { palette, breakpoints } from '@/components/variables';
 import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { useMobileMode } from '@/hooks/useMobileMode';
@@ -17,13 +16,8 @@ export const MentorCard = ({ mentor, onDismiss }: Props) => {
   return (
     <Container>
       <Card isMobile={isMobile}>
-        <Header mentor={mentor} />
-        <CloseButton
-          variant="close"
-          sizeInPx={38}
-          onClick={onDismiss}
-        ></CloseButton>
-        <Content mentor={mentor} />
+        <Header mentor={mentor} onDismiss={onDismiss} />
+        <Content mentor={mentor} onDismiss={onDismiss} />
       </Card>
     </Container>
   );
@@ -41,7 +35,7 @@ const Card = styled.div<{ isMobile: boolean }>`
           display: flex;
           flex: 1;
           flex-direction: column;
-          margin: 2rem;
+          margin: 0.5rem;
         `
       : css`
           display: flex;
@@ -72,18 +66,5 @@ const Container = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-  }
-`;
-
-const CloseButton = styled(IconButton)`
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-
-  @media screen and (max-width: ${breakpoints.mobile}) {
-    top: 3rem;
-    right: 3rem;
-    height: 3rem;
-    width: 3rem;
   }
 `;

@@ -25,7 +25,7 @@ export const ListCard: React.FC<Props> = ({ setVisibleCard, mentor }) => {
         isAvailable={!mentor.isVacationing}
         message={mentor.statusMessage}
       />
-      <CardContent>
+      <CardContent isMobile={isMobile}>
         <Story story={mentor.story} />
         <Languages languages={mentor.languages} />
         <Skills skills={mentor.skills} />
@@ -66,17 +66,17 @@ const Container = styled.div<{ isMobile: boolean }>`
             ((76vw + ${spacing.layout_spacing} * 2) / 3) -
               (${spacing.layout_spacing} * 2)
           );
-          @media screen and (min-width: 2100px) {
-            flex: 0 0 25%;
-            max-width: calc(
-              ((76vw + ${spacing.layout_spacing} * 2) / 4) -
-                (${spacing.layout_spacing} * 2)
-            );
-          }
           @media screen and (min-width: 2550px) {
             flex: 0 0 20%;
             max-width: calc(
               ((76vw + ${spacing.layout_spacing} * 2) / 5) -
+                (${spacing.layout_spacing} * 2)
+            );
+          }
+          @media screen and (min-width: 1950px) {
+            flex: 0 0 25%;
+            max-width: calc(
+              ((76vw + ${spacing.layout_spacing} * 2) / 4) -
                 (${spacing.layout_spacing} * 2)
             );
           }
@@ -87,20 +87,18 @@ const Container = styled.div<{ isMobile: boolean }>`
                 (${spacing.layout_spacing} * 2)
             );
           }
-          @media screen and (max-width: 1186px) {
-            max-width: calc((100vw / 3) - (${spacing.layout_spacing} * 2));
-          }
-          @media screen and (max-width: 900px) {
+          @media screen and (max-width: 1200px) {
             flex: 0 0 50%;
             max-width: calc((100vw / 2) - (${spacing.layout_spacing} * 2));
           }
         `}
 `;
 
-const CardContent = styled.div`
+const CardContent = styled.div<{ isMobile: boolean }>`
   display: flex;
   flex: 1;
   flex-direction: column;
+  gap: ${({ isMobile }) => (isMobile ? '0.5rem' : '1.5rem')};
   justify-content: space-between;
-  padding: 1.9rem;
+  padding: 1.5rem;
 `;

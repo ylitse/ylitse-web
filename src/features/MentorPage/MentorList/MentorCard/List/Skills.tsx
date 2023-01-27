@@ -10,29 +10,32 @@ export const Skills = ({ skills }: { skills: Array<string> }) => {
   return (
     <Container>
       <Header variant="h3">{t('card.skills')}</Header>
-      <SkillChips>
+      <Chips>
         {skills.map(item => (
           <SimpleChip key={item} text={item} />
         ))}
-      </SkillChips>
+      </Chips>
     </Container>
   );
 };
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   height: fit-content;
   max-height: 8.6rem;
 `;
 
-export const Header = styled(Text)`
-  margin: 1.5rem 0 0 0;
-  text-align: center;
+const Header = styled(Text)`
+  margin: 0;
 `;
 
-const SkillChips = styled.div`
+const Chips = styled.div`
   display: flex;
   flex: 0 0 auto;
   flex-wrap: wrap;
+  gap: 0.5rem;
   height: 6rem;
   justify-content: flex-start;
   overflow: hidden;

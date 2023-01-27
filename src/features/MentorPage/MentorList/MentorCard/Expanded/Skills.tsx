@@ -13,11 +13,11 @@ export const Skills = ({ skills }: Props) => {
   return (
     <Container>
       <Header variant="h3">{t('card.skills')}</Header>
-      <SkillChips>
+      <Chips>
         {skills.map(skill => (
           <SimpleChip key={skill} text={skill} />
         ))}
-      </SkillChips>
+      </Chips>
     </Container>
   );
 };
@@ -26,10 +26,11 @@ const Container = styled.div`
   height: fit-content;
 `;
 
-const SkillChips = styled.div`
+const Chips = styled.div`
   display: flex;
   flex: 0 0 auto;
   flex-wrap: wrap;
+  gap: 0.5rem;
   height: fit-content;
   justify-content: flex-start;
   margin-bottom: 5vw;

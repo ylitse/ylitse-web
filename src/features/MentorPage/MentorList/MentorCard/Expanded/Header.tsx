@@ -1,16 +1,20 @@
-import styled from 'styled-components';
+import type { Mentor } from '@/features/MentorPage/mentorPageApi';
+
+import { useMobileMode } from '@/hooks/useMobileMode';
+
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 import { breakpoints, palette } from '@/components/variables';
+import { IconButton } from '@/components/Buttons';
 import { BasicInfo } from './BasicInfo';
-import { Mentor } from '@/features/MentorPage/mentorPageApi';
-import { useMobileMode } from '@/hooks/useMobileMode';
 import Text from '@/components/Text';
+import styled from 'styled-components';
 
 type Props = {
   mentor: Mentor;
+  onDismiss: () => void;
 };
 
-export const Header = ({ mentor }: Props) => {
+export const Header = ({ mentor, onDismiss }: Props) => {
   const availabilityMessage = mentor.isVacationing ? 'Ei tavoitettavissa' : '';
   const isMobile = useMobileMode();
 
@@ -27,6 +31,7 @@ export const Header = ({ mentor }: Props) => {
           <ProfilePicture isMobile />
         </AvatarWrapper>
         <BasicInfo mentor={mentor} />
+        <IconButton onClick={onDismiss} variant="close" sizeInPx={38} />
       </HeaderWrapper>
     </Container>
   ) : (
@@ -59,7 +64,7 @@ const ProfilePicture = styled.div<{ isMobile: boolean }>`
   @media screen and (max-width: ${breakpoints.mobile}) {
     width: 20vw;
     height: 20vw;
-    margin: 2rem 1rem;
+    margin: 1rem 0.5rem;
     flex: 1;
   }
 `;
@@ -73,12 +78,13 @@ const Availability = styled(Text)<{ isShowing: boolean }>`
           margin: -1rem auto;
 
   @media screen and (max-width: ${breakpoints.mobile}) {
-margin -1rem 1rem;
+    margin -1rem 1rem;
   }
 `;
 
 const HeaderWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 const AvatarWrapper = styled.div`

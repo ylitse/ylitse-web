@@ -18,11 +18,11 @@ export const Languages = ({
       <Header variant="h3" color={isMobile ? 'purpleDark' : 'white'}>
         {t('card.languages')}
       </Header>
-      <SkillChips>
+      <Chips>
         {languages.map(item => (
           <SimpleChip key={item} text={item} />
         ))}
-      </SkillChips>
+      </Chips>
     </>
   );
 };
@@ -32,10 +32,11 @@ const Header = styled(Text)`
   textalign: center;
 `;
 
-const SkillChips = styled.div`
+const Chips = styled.div`
   display: flex;
   flex: 0 0 auto;
   flex-wrap: wrap;
+  gap: 0.5rem;
   height: fit-content;
   justify-content: center;
   margin-top: 0.5rem;

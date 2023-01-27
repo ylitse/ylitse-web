@@ -1,32 +1,32 @@
+import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTranslation } from 'react-i18next';
+
 import styled from 'styled-components';
 import { Text } from '@/components/Text/Text';
 import { Languages } from './Languages';
 import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { breakpoints, palette } from '@/components/variables';
-import { useMobileMode } from '@/hooks/useMobileMode';
-import { useTranslation } from 'react-i18next';
 
 type Props = {
   mentor: Mentor;
 };
 
 export const BasicInfo = ({
-  mentor: { name, age, region, isVacationing, statusMessage, languages },
+  mentor: { name, age, region, statusMessage, languages },
 }: Props) => {
   const isMobile = useMobileMode();
   const { t } = useTranslation('mentors');
 
   return (
     <Container>
-      <Text variant={isMobile ? 'h1' : 'h2'} color="white">
+      <NameText variant={isMobile ? 'h1' : 'h2'} color="white">
         {name}
-      </Text>
+      </NameText>
       {!isMobile && <NameDivider />}
       <WrappedText color="white">
         {age} {t('card.age')} <Divider>|</Divider>
         {region}
       </WrappedText>
-      <Text color="white">{!isVacationing}</Text>
       <TruncateText color="white">{statusMessage}</TruncateText>
       {!isMobile && <Languages languages={languages} isMobile={isMobile} />}
     </Container>
@@ -37,7 +37,7 @@ const Container = styled.div`
   align-items: center;
   box-sizing: border-box;
   display: flex;
-  flex: 0 0 100%;
+  flex: 1;
   flex-direction: column;
   margin: 0 auto;
   max-width: 70%;
@@ -46,6 +46,10 @@ const Container = styled.div`
     align-items: flex-start;
     justify-content: center;
   }
+`;
+
+const NameText = styled(Text)`
+  overflow-wrap: anywhere;
 `;
 
 const NameDivider = styled.div`
@@ -68,7 +72,7 @@ export const WrappedText = styled(Text)`
 `;
 
 export const TruncateText = styled(Text)`
-  margin: 0px;
+  margin: 0 0 0.5rem 0;
   overflow: hidden;
   textalign: center;
   textoverflow: ellipsis;
