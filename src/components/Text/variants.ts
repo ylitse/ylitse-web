@@ -9,6 +9,7 @@ export type TextVariant =
   | 'h3'
   | 'label'
   | 'link'
+  | 'linkHeader'
   | 'logo'
   | 'p';
 export type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'p' | 'span';
@@ -94,6 +95,16 @@ export const variants: Record<TextVariant, TextProp> = {
     styles: {
       fontFamily: '"Baloo 2"',
       fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      lineHeight: '60px',
+    },
+  },
+  linkHeader: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Baloo 2"',
+      fontSize: '1.1rem',
       fontStyle: 'normal',
       fontWeight: '700',
       lineHeight: '60px',
