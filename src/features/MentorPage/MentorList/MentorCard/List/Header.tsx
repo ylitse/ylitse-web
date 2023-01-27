@@ -57,7 +57,7 @@ const NameText = styled(Text)`
 const StyledHeader = styled.div<{ isAvailable: boolean }>`
   align-items: center;
   background-color: ${props =>
-    props.isAvailable ? palette.purple : palette.greyBluish};
+    props.isAvailable ? palette.purple : palette.blueGrey};
   border-radius: 0.75rem;
   box-sizing: border-box;
   color: ${palette.white};
@@ -93,7 +93,7 @@ const Divider = styled.span`
 `;
 
 const Availability = styled(Text)<{ isShowing: boolean }>`
-  background-color: ${palette.whiteBluish};
+  background-color: ${palette.blueWhite};
   border-radius: 0.25rem;
   display: ${props => (props.isShowing ? `flex` : `none`)};
   padding: 0.25rem 1rem;

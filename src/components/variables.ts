@@ -1,16 +1,16 @@
 export type Color = keyof typeof palette;
 
 export const palette = {
-  backgroundBlur: 'rgba(57, 57, 57, 0.75)',
-  backgroundSpinner: '#DDEBE9',
-  blue: '#43BFFF',
+  blue: '#01A5EC',
+  blue2: '#43BFFF',
   blueDark: '#1C325D',
-  blueFooter: '#01A5EC',
+  blueGrey: '#4C6282',
   blueLight: '#D3EFFF',
-  greyBluish: '#4C6282',
+  blueWhite: '#E4F3FB ',
   greyFaded: '#616161',
   greyLight: '#E9E9E9',
   greyMid: '#DBDBDB',
+  greyOverlay: 'rgba(57, 57, 57, 0.75)',
   orange: '#F0BA8C',
   orange2: '#FFD79B',
   purple: '#4A2ACB',
@@ -19,10 +19,8 @@ export const palette = {
   purpleMid: '#5C33FF',
   purplePale: '#E5E4FF',
   white: '#FFFFFF',
-  whiteBluish: '#E4F3FB ',
 };
 
-//breakpoints
 export const MOBILE_TRESHOLD = 600;
 export const breakpoints = {
   mobile: `${MOBILE_TRESHOLD}px`,

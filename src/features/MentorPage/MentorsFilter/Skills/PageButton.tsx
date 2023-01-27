@@ -35,7 +35,7 @@ const PageNumber = styled.span<{ isSelected: boolean; isClickable: boolean }>`
   ${({ isSelected }) =>
     isSelected
       ? css`
-          background-color: ${palette.blue};
+          background-color: ${palette.blue2};
         `
       : css`
           color: ${palette.purpleDark};

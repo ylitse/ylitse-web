@@ -58,7 +58,7 @@ const Card = styled.div<{ isMobile: boolean }>`
 `;
 
 const Container = styled.div`
-  background-color: ${palette.backgroundBlur};
+  background-color: ${palette.greyOverlay};
   height: 100vh;
   left: 0;
   position: fixed;

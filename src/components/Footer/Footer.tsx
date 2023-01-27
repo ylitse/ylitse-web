@@ -17,7 +17,7 @@ const Footer = () => {
 
 const Container = styled.div`
   align-items: center;
-  background-color: ${palette.blueFooter};
+  background-color: ${palette.blue};
   bottom: 0;
   display: flex;
   height: 3.5rem;

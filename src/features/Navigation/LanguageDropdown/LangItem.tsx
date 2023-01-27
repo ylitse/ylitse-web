@@ -35,7 +35,7 @@ const Button = styled.button<{ isSelected: boolean }>`
   ${({ isSelected }) =>
     isSelected &&
     css`
-      background: ${palette.blue};
+      background: ${palette.blue2};
       pointer-events: none;
     `}
 

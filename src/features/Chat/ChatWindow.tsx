@@ -52,7 +52,7 @@ const UpperWelcomeContainer = styled.div`
 `;
 
 const LowerWelcomeContainer = styled.div`
-  background-color: ${palette.blue};
+  background-color: ${palette.blue2};
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);

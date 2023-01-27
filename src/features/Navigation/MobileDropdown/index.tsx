@@ -145,7 +145,7 @@ const UnstyledLink = styled.a`
 `;
 
 const Divider = styled.div`
-  border-bottom: 1px solid ${palette.blue};
+  border-bottom: 1px solid ${palette.blue2};
   margin-bottom: 0.5rem;
 `;
 

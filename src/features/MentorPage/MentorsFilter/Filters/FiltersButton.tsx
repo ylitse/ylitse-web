@@ -53,10 +53,10 @@ export const FiltersButton: React.FC<Props> = ({ onFiltersClose }) => {
 const SearchButton = styled.button<{ isFiltersApplied: boolean }>`
   align-items: center;
   background-color: ${({ isFiltersApplied }) =>
-    isFiltersApplied ? palette.purpleDark : palette.whiteBluish};
+    isFiltersApplied ? palette.purpleDark : palette.blueWhite};
   border: none;
   border-radius: 16px;
-  box-shadow: 0.1rem 0.1rem ${palette.backgroundBlur};
+  box-shadow: 0.1rem 0.1rem ${palette.greyOverlay};
   cursor: pointer;
   display: flex;
 

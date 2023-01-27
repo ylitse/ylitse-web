@@ -39,10 +39,10 @@ const LoadingCircle = styled.div<{ variant: Variant }>`
   animation-iteration-count: infinite;
   animation-name: ${spinAnimation};
   animation-timing-function: linear;
-  border-bottom-color: ${palette.backgroundSpinner};
-  border-left-color: ${palette.backgroundSpinner};
+  border-bottom-color: ${palette.white};
+  border-left-color: ${palette.white};
   border-radius: 50%;
-  border-right-color: ${palette.backgroundSpinner};
+  border-right-color: ${palette.white};
   margin-left: auto;
   margin-right: auto;
   transition: all 0.5s ease-in;

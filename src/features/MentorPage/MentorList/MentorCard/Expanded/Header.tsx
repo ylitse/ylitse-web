@@ -42,7 +42,7 @@ export const Header = ({ mentor }: Props) => {
 
 const Container = styled.div<{ isLoggedIn: boolean }>`
   background-color: ${props =>
-    props.isLoggedIn ? palette.purple : palette.greyBluish};
+    props.isLoggedIn ? palette.purple : palette.blueGrey};
   border-radius: 10px;
   flex: 0 0 21vw;
 `;
@@ -66,7 +66,7 @@ const ProfilePicture = styled.div<{ isMobile: boolean }>`
 
 const Availability = styled(Text)<{ isShowing: boolean }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
-  background-color: ${palette.whiteBluish};
+  background-color: ${palette.blueWhite};
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
   width: fit-content;

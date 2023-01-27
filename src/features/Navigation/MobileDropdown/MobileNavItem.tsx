@@ -37,7 +37,7 @@ const UnstyledRouteLink = styled(RouterNavLink)<{ isCurrent: boolean }>`
   ${({ isCurrent }) =>
     isCurrent &&
     css`
-      background-color: ${palette.blue};
+      background-color: ${palette.blue2};
     `}
 `;
 

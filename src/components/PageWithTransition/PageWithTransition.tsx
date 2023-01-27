@@ -31,7 +31,7 @@ const PageWithTransition: React.FC<Props> = ({ children }) => {
       <Layer
         role="transition"
         isTransition={isTransition}
-        color="blue"
+        color="blue2"
         delay={0}
       />
       <Layer

@@ -29,7 +29,7 @@ const Link = styled.a<{ isSelected: boolean }>`
   ${({ isSelected }) =>
     isSelected
       ? css`
-          background-color: ${palette.blue};
+          background-color: ${palette.blue2};
           cursor: default;
         `
       : css`
