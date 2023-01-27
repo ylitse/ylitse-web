@@ -52,7 +52,7 @@ const ChatMenu = () => {
             }}
           >
             <GoBackIcon src={BackArrowIcon} />
-            <Text color="purple" variant="bold">
+            <Text variant="bold" color="purple">
               {t('menu.back')}
             </Text>
           </GoBackLink>
@@ -68,7 +68,7 @@ const ChatMenu = () => {
                 setShowCategories(false);
               }}
             >
-              <Text color="purple" variant="bold">
+              <Text variant="bold" color="purple">
                 {t('menu.archived')}
               </Text>
             </CategoryLink>
@@ -80,7 +80,7 @@ const ChatMenu = () => {
                 setShowCategories(false);
               }}
             >
-              <Text color="purple" variant="bold">
+              <Text variant="bold" color="purple">
                 {t('menu.blocked')}
               </Text>
             </CategoryLink>
@@ -89,7 +89,7 @@ const ChatMenu = () => {
       ) : chats.length ? (
         <ChatList></ChatList>
       ) : (
-        <CategoryEmptyText variant="p">
+        <CategoryEmptyText>
           {currentCategory === 'active' && t('menu.empty.chats')}
           {currentCategory === 'archived' && t('menu.empty.archived')}
           {currentCategory === 'blocked' && t('menu.empty.blocked')}
@@ -109,7 +109,7 @@ const Container = styled.div`
 
 const Row = styled.div`
   align-items: center;
-  border-bottom: 1px solid ${palette.lightgrey};
+  border-bottom: 1px solid ${palette.greyLight};
   display: flex;
   flex-direction: row;
   height: 80px;
@@ -134,7 +134,6 @@ const CategoryLink = styled.a`
 `;
 
 const Header = styled(Text)`
-  color: ${palette.darkblue};
   flex: 1;
   padding-left: 40px;
 `;
@@ -148,7 +147,6 @@ const Buttons = styled.div`
 const ChatList = styled.div``;
 
 const CategoryEmptyText = styled(Text)`
-  color: ${palette.darkblue};
   margin: 0;
   padding-left: 40px;
   padding-right: 40px;

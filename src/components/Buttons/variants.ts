@@ -4,46 +4,49 @@ export const variants = {
   dark: {
     backgroundColor: palette.purple,
     color: palette.orange,
-    ['&: hover']: {
-      backgroundColor: palette.darkpurple,
+
+    ['&: active, &: visited']: {
+      backgroundColor: palette.purpleMid,
+      color: palette.orange2,
+      outline: 'none',
     },
     ['&: focus']: {
       outline: `1px solid ${palette.purple}`,
       outlineOffset: '3px',
     },
-    ['&: active, &: visited']: {
-      backgroundColor: palette.midpurple,
-      color: palette.orange2,
-      outline: 'none',
-    },
-  },
-  light: {
-    border: `2px solid ${palette.purple}`,
-    backgroundColor: palette.white,
-    color: palette.purple,
     ['&: hover']: {
-      border: `2px solid ${palette.darkpurple}`,
-      color: palette.darkpurple,
-      outline: `none`,
-    },
-    ['&: focus']: {
-      outline: 'none',
-    },
-    ['&: active, &: visited']: {
-      outline: 'none',
+      backgroundColor: palette.purpleDark,
     },
   },
   disabled: {
-    backgroundColor: palette.midgray,
-    color: palette.fadedgray,
-    ['&: hover']: {
-      outline: `none`,
+    backgroundColor: palette.greyMid,
+    color: palette.greyFaded,
+
+    ['&: active, &: visited']: {
+      outline: 'none',
     },
     ['&: focus']: {
       outline: 'none',
     },
+    ['&: hover']: {
+      outline: `none`,
+    },
+  },
+  light: {
+    backgroundColor: palette.white,
+    border: `2px solid ${palette.purple}`,
+    color: palette.purple,
+
     ['&: active, &: visited']: {
       outline: 'none',
+    },
+    ['&: focus']: {
+      outline: 'none',
+    },
+    ['&: hover']: {
+      border: `2px solid ${palette.purpleDark}`,
+      color: palette.purpleDark,
+      outline: `none`,
     },
   },
 };

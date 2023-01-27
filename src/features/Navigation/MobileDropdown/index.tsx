@@ -8,8 +8,7 @@ import { palette } from '@/components/variables';
 import styled from 'styled-components';
 
 import Text from '@/components/Text';
-import { ChevronUp } from '@/components/Icons/ChevronUp';
-import { ChevronDown } from '@/components/Icons/ChevronDown';
+import { Chevron } from '@/components/Icons/Chevron';
 import { useLocation } from 'react-router-dom';
 import { growDownAnimation } from '../InfoDropdown';
 import { LanguageItem } from './MobileLangItem';
@@ -39,14 +38,16 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
       ref={ref}
       onClick={() => setIsComponentVisible(!isComponentVisible)}
     >
-      <Text variant={'linkMobile'} color={'white'}>
-        {t('navigation.mobile.menu')}
-      </Text>
-      {isComponentVisible ? (
-        <ChevronUp size={8} color="white" />
-      ) : (
-        <ChevronDown size={8} color="white" />
-      )}
+      <Row>
+        <Text variant="linkHeader" color="white">
+          {t('navigation.mobile.menu')}
+        </Text>
+        {isComponentVisible ? (
+          <Chevron variant="up" color="white" isLarge />
+        ) : (
+          <Chevron variant="down" color="white" isLarge />
+        )}
+      </Row>
 
       {isComponentVisible && (
         <Menu>
@@ -66,7 +67,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
             target="_blank"
             rel="noreferrer"
           >
-            <Text variant="linkMobile" color="purple">
+            <Text variant="link" color="purple">
               {t('navigation.info.link.feedback.text')}
             </Text>
           </UnstyledLink>
@@ -75,7 +76,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
             target="_blank"
             rel="noreferrer"
           >
-            <Text variant="linkMobile" color="purple">
+            <Text variant="link" color="purple">
               {t('navigation.info.link.termsAndPrivacy.text')}
             </Text>
           </UnstyledLink>
@@ -106,35 +107,40 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
 };
 
 const Dropdown = styled.button`
+  align-items: center;
   all: unset;
   cursor: pointer;
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 4px;
-  text-align: center;
+  justify-content: center;
   padding: 0 3rem;
+  text-align: center;
+`;
+
+const Row = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 6px;
 `;
 
 const Menu = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 40px;
-  text-align: left;
-  margin-top: 2.5rem;
+  animation: ${growDownAnimation} 400ms ease-in-out forwards;
   background-color: ${palette.white};
+  box-shadow: 1px 0.5px ${palette.greyMid};
   display: flex;
   flex-direction: column;
-  box-shadow: 1px 0.5px ${palette.midgray};
-
-  animation: ${growDownAnimation} 400ms ease-in-out forwards;
+  left: 0;
+  margin-top: 2.5rem;
+  position: absolute;
+  right: 0;
+  text-align: left;
+  top: 40px;
   transform-origin: top center;
 `;
 
 const UnstyledLink = styled.a`
+  height: 60px;
   padding: 0 2rem;
-  line-height: 56px;
   text-decoration: none;
 `;
 

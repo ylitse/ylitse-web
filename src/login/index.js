@@ -5,9 +5,9 @@
     'submit',
     function (event) {
       fetch('/api/weblogin', {
-        method: 'POST',
         body: new FormData(form),
         credentials: 'include',
+        method: 'POST',
       })
         .then(function (response) {
           if (response.ok) {

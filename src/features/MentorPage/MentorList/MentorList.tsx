@@ -28,26 +28,26 @@ const MentorList: React.FC<Props> = ({ setVisibleCard, mentors }) => {
 };
 
 const CardsList = styled.div<{ isMobile: boolean }>`
-  flex: 1;
   display: flex;
+  flex: 1;
   ${({ isMobile }) =>
     isMobile
       ? css`
-          scroll-snap-type: x mandatory;
-          overflow: auto;
-          white-space: nowrap;
           gap: 1.5rem;
+          overflow: auto;
+          scroll-snap-type: x mandatory;
+          white-space: nowrap;
           &::-webkit-scrollbar {
             display: none;
           }
         `
       : css`
           flex-wrap: wrap;
-          justify-content: stretch;
           height: auto;
-          width: calc(76vw + (${spacing.layout_spacing} * 2));
-          margin-top: ${spacing.layout_spacing};
+          justify-content: stretch;
           margin-left: calc(${spacing.layout_spacing} * -1);
+          margin-top: ${spacing.layout_spacing};
+          width: calc(76vw + (${spacing.layout_spacing} * 2));
         `}
 
   @media screen and (max-width: 1500px) {

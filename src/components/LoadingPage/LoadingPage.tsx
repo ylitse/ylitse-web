@@ -9,7 +9,7 @@ const LoadingPage = () => {
     <Page>
       <Wrapper>
         <Loader />
-        <LoadingText variant="bold">
+        <LoadingText variant="bold" color="white">
           Ladataan Ylitse MentorApp -palvelua
         </LoadingText>
       </Wrapper>
@@ -28,10 +28,7 @@ const rotate = keyframes`
 `;
 
 const Page = styled.div`
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  z-index: 10;
+  align-items: center;
   background: linear-gradient(
       0deg,
       rgba(74, 54, 201, 0.87),
@@ -40,31 +37,33 @@ const Page = styled.div`
     url(${Background});
   background-position: center;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  z-index: 10;
 `;
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const Loader = styled.div`
-  width: 55px;
-  height: 55px;
-  border: 10px solid rgba(255, 255, 255, 0.5);
-  border-top: 10px solid white;
-  border-radius: 50%;
   animation: ${rotate} 1.5s linear infinite;
+  border: 10px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  border-top: 10px solid white;
+  height: 55px;
+  width: 55px;
 `;
 
 const LoadingText = styled(Text)`
-  color: white;
-  width: 100%;
   text-align: center;
+  width: 100%;
 `;
 
 export default LoadingPage;

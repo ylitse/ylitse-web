@@ -1,20 +1,18 @@
 import CSS from 'csstype';
 
 export type TextVariant =
+  | 'bold'
+  | 'chip'
+  | 'footer'
   | 'h1'
   | 'h2'
   | 'h3'
-  | 'p'
-  | 'logo'
   | 'label'
-  | 'bold'
-  | 'footer'
   | 'link'
-  | 'linkBold'
-  | 'linkMobile'
-  | 'linkDisabled'
-  | 'linkDisabledMobile';
-export type TextElement = 'h1' | 'h2' | 'h3' | 'p' | 'a' | 'span';
+  | 'linkHeader'
+  | 'logo'
+  | 'p';
+export type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'p' | 'span';
 
 type TextProp = {
   element: TextElement;
@@ -22,13 +20,43 @@ type TextProp = {
 };
 
 export const variants: Record<TextVariant, TextProp> = {
+  bold: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Baloo 2"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      lineHeight: '1.5rem',
+    },
+  },
+  chip: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      lineHeight: '1rem',
+    },
+  },
+  footer: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      lineHeight: '3.5rem',
+    },
+  },
   h1: {
     element: 'h1',
     styles: {
       fontFamily: '"Baloo 2"',
+      fontSize: '1.5rem',
       fontStyle: 'normal',
       fontWeight: '700',
-      fontSize: '1.5rem',
       lineHeight: '2.2rem',
     },
   },
@@ -36,9 +64,9 @@ export const variants: Record<TextVariant, TextProp> = {
     element: 'h2',
     styles: {
       fontFamily: '"Baloo 2"',
+      fontSize: '1.25rem',
       fontStyle: 'normal',
       fontWeight: '600',
-      fontSize: '1.25rem',
       lineHeight: '2rem',
     },
   },
@@ -46,114 +74,62 @@ export const variants: Record<TextVariant, TextProp> = {
     element: 'h3',
     styles: {
       fontFamily: '"Baloo 2"',
-      fontStyle: 'normal',
-      fontWeight: '600',
       fontSize: '1.1rem',
-      lineHeight: '1.6rem',
-    },
-  },
-  p: {
-    element: 'p',
-    styles: {
-      fontFamily: '"Source Sans Pro"',
-      fontStyle: 'normal',
-      fontWeight: '400',
-      fontSize: '1rem',
-      lineHeight: '1.5rem',
-    },
-  },
-  logo: {
-    element: 'p',
-    styles: {
-      fontFamily: '"Baloo 2", cursive',
       fontStyle: 'normal',
       fontWeight: '600',
-      fontSize: '2rem',
-      letterSpacing: '0.1em',
-      textTransform: 'uppercase',
-      lineHeight: 'initial',
+      lineHeight: '1.6rem',
     },
   },
   label: {
     element: 'span',
     styles: {
       fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
       fontStyle: 'normal',
       fontWeight: '400',
-      fontSize: '1rem',
       lineHeight: '1.5rem',
-    },
-  },
-  bold: {
-    element: 'span',
-    styles: {
-      fontFamily: '"Baloo 2"',
-      fontStyle: 'normal',
-      fontWeight: '700',
-      fontSize: '1rem',
-      lineHeight: '1.5rem',
-    },
-  },
-  footer: {
-    element: 'span',
-    styles: {
-      fontFamily: '"Source Sans Pro"',
-      fontStyle: 'normal',
-      fontWeight: '400',
-      fontSize: '1rem',
-      lineHeight: '3.5rem',
     },
   },
   link: {
     element: 'span',
     styles: {
-      fontFamily: '"Baloo 2", cursive',
-      fontStyle: 'normal',
-      fontWeight: '400',
+      fontFamily: '"Baloo 2"',
       fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '700',
       lineHeight: '60px',
     },
   },
-  linkBold: {
+  linkHeader: {
     element: 'span',
     styles: {
-      fontFamily: '"Baloo 2", cursive',
+      fontFamily: '"Baloo 2"',
+      fontSize: '1.1rem',
       fontStyle: 'normal',
       fontWeight: '700',
-      lineHeight: '58px',
+      lineHeight: '60px',
     },
   },
-  linkMobile: {
-    element: 'span',
+  logo: {
+    element: 'p',
     styles: {
-      fontFamily: '"Baloo 2", cursive',
+      fontFamily: '"Baloo 2"',
+      fontSize: '2rem',
       fontStyle: 'normal',
-      fontWeight: '700',
-      lineHeight: '40px',
-      fontSize: 'larger',
+      fontWeight: '600',
+      letterSpacing: '0.1em',
+      lineHeight: 'initial',
+      textTransform: 'uppercase',
     },
   },
-  linkDisabled: {
-    element: 'span',
+  p: {
+    element: 'p',
     styles: {
-      fontFamily: '"Baloo 2", cursive',
-      fontStyle: 'normal',
-      fontWeight: '400',
-      lineHeight: '58px',
-      textDecoration: 'underline',
-      textUnderlineOffset: '4px',
-    },
-  },
-  linkDisabledMobile: {
-    element: 'span',
-    styles: {
-      fontFamily: '"Baloo 2", cursive',
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
       fontStyle: 'normal',
       fontWeight: '400',
-      lineHeight: '40px',
-      fontSize: 'larger',
-      textDecoration: 'underline',
-      textUnderlineOffset: '4px',
+      lineHeight: '1.5rem',
     },
   },
 };

@@ -19,24 +19,33 @@ export const NavigationItem: React.FC<Props> = ({
 
   return (
     <UnstyledRouteLink to={url} isCurrent={isCurrent}>
-      <Text
-        variant={isCurrent ? 'linkDisabledMobile' : 'linkMobile'}
-        color={isCurrent ? 'darkblue' : 'purple'}
+      <LinkText
+        variant="link"
+        color={isCurrent ? 'blueDark' : 'purple'}
+        isCurrent={isCurrent}
       >
         {text}
-      </Text>
+      </LinkText>
     </UnstyledRouteLink>
   );
 };
 
 const UnstyledRouteLink = styled(RouterNavLink)<{ isCurrent: boolean }>`
   padding: 0 2rem;
-  line-height: 56px;
   text-decoration: none;
 
   ${({ isCurrent }) =>
     isCurrent &&
     css`
       background-color: ${palette.blue2};
+    `}
+`;
+
+const LinkText = styled(Text)<{ isCurrent: boolean }>`
+  ${({ isCurrent }) =>
+    isCurrent &&
+    css`
+      text-decoration: underline;
+      text-underline-offset: 4px;
     `}
 `;

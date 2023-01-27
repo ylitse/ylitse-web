@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
+import Text from '../Text';
 import { palette } from '../variables';
 
 type Props = {
@@ -18,7 +19,9 @@ const Chip: React.FC<Props> = ({ text, isSelected, shouldShake, onToggle }) => {
       isSelected={isSelected}
       shouldShake={shouldShake}
     >
-      {text}
+      <Text variant="chip" color={isSelected ? 'white' : 'blueDark'}>
+        {text}
+      </Text>
     </StyledChip>
   );
 };
@@ -31,34 +34,27 @@ const shakeAnimation = keyframes`
 `;
 
 const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
-  flex: 0 0 auto;
-  padding: 0.75rem 1.25rem;
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.1rem;
-  line-height: 1.1rem;
-  border-radius: 1.75rem;
-  margin: 0.5rem;
-  height: 2.75rem;
   appearance: none;
   border: none;
+  border-radius: 1.75rem;
   cursor: pointer;
+  flex: 0 0 auto;
+  height: 2.75rem;
+  margin: 0.5rem;
+  padding: 0.75rem 1.25rem;
 
   ${({ isSelected }) =>
     isSelected
       ? css`
           background-color: ${palette.purple};
-          color: ${palette.white};
           &:hover {
             background-color: ${palette.purple};
           }
         `
       : css`
-          background-color: ${palette.palepurple};
-          color: ${palette.darkblue};
+          background-color: ${palette.purplePale};
           &:hover {
-            background-color: ${palette.hoverpurple};
+            background-color: ${palette.purpleHover};
           }
         `}
 
@@ -67,9 +63,9 @@ const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
     css`
       animation: ${shakeAnimation} 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97)
         both;
-      transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
       perspective: 1000px;
+      transform: translate3d(0, 0, 0);
     `}
 `;
 

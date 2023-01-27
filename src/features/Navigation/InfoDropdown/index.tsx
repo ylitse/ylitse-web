@@ -35,7 +35,7 @@ const InfoDropdown = () => {
             }}
           />
           <Container onClick={() => console.log('TODO: show modal')}>
-            <Text variant="linkBold" color="purple">
+            <Text variant="link" color="purple">
               {t('navigation.info.applicationInfo')}
             </Text>
           </Container>
@@ -62,18 +62,18 @@ export const growDownAnimation = keyframes`
 `;
 
 export const Menu = styled.div`
-  position: absolute;
+  animation: ${growDownAnimation} 400ms ease-in-out forwards;
   display: flex;
   flex-direction: column;
-  width: max-content;
-  top: 60px;
   left: -2px;
-  animation: ${growDownAnimation} 400ms ease-in-out forwards;
+  position: absolute;
+  top: 60px;
   transform-origin: top center;
+  width: max-content;
 
   button:last-of-type {
-    border-radius: 0 0 16px 16px;
     border-bottom: 2px solid ${palette.purple};
+    border-radius: 0 0 16px 16px;
   }
 `;
 

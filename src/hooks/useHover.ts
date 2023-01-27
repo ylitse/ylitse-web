@@ -20,5 +20,5 @@ export const useHover = () => {
       };
     }
   }, [ref.current]);
-  return { ref, isHovering };
+  return { isHovering, ref };
 };

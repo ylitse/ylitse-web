@@ -33,10 +33,10 @@ export const Header: React.FC<Props> = ({
       </Availability>
       <ProfilePicture />
       <BasicInfo>
-        <NameText color="white" variant="h2">
+        <NameText variant="h2" color="white">
           {name}
         </NameText>
-        <WrappedText color="white" variant="p">
+        <WrappedText color="white">
           {age} {t('card.age')} <Divider>|</Divider>
           {region}
         </WrappedText>
@@ -47,44 +47,44 @@ export const Header: React.FC<Props> = ({
 };
 
 const NameText = styled(Text)`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-top: 0;
   margin-bottom: 0;
+  margin-top: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const StyledHeader = styled.div<{ isAvailable: boolean }>`
-  position: relative;
-  flex: 0 0 auto;
-  display: flex;
   align-items: center;
+  background-color: ${props =>
+    props.isAvailable ? palette.purple : palette.blueGrey};
+  border-radius: 0.75rem;
+  box-sizing: border-box;
+  color: ${palette.white};
+  display: flex;
+  flex: 0 0 auto;
   height: 7.5rem;
   max-height: 7.5rem;
-  background-color: ${props =>
-    props.isAvailable ? palette.purple : palette.bluegrey};
-  color: ${palette.white};
-  border-radius: 0.75rem;
   padding: 1.9rem;
-  box-sizing: border-box;
+  position: relative;
 `;
 
 const ProfilePicture = styled.div`
   background-image: url(${ProfilePicPlaceholder});
-  width: 4rem;
-  height: 4rem;
-  background-size: contain;
   background-repeat: no-repeat;
+  background-size: contain;
   flex: 0 0 4rem;
+  height: 4rem;
+  width: 4rem;
 `;
 
 const BasicInfo = styled.div`
-  padding-left: 1.9rem;
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 100%;
-  max-width: calc(100% - 3.8rem);
   box-sizing: border-box;
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: column;
+  max-width: calc(100% - 3.8rem);
+  padding-left: 1.9rem;
 `;
 
 const Divider = styled.span`
@@ -93,13 +93,12 @@ const Divider = styled.span`
 `;
 
 const Availability = styled(Text)<{ isShowing: boolean }>`
-  display: ${props => (props.isShowing ? `flex` : `none`)};
-  background-color: ${palette.whiteblue};
-  color: ${palette.darkblue};
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.25rem 1rem;
+  background-color: ${palette.blueWhite};
   border-radius: 0.25rem;
+  display: ${props => (props.isShowing ? `flex` : `none`)};
+  padding: 0.25rem 1rem;
+  position: absolute;
+  right: 0;
+  top: 0;
   transform: translate(-1rem, -50%);
 `;

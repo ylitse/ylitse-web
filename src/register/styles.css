@@ -5,8 +5,7 @@ body {
       rgba(1, 165, 236, 0.58) 0%,
       rgba(89, 58, 214, 0.58) 100%
     ),
-    url(/static/img/splash-background.jpg) no-repeat fixed
-      right top;
+    url(/static/img/splash-background.jpg) no-repeat fixed right top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -152,7 +151,7 @@ input:focus {
 
 .field-info {
   padding: 10px 20px;
-  margin-top: 13px; /* blue/dark blue */
+  margin-top: 13px;
   position: relative;
   left: 10px; /* to adjust for the box shadow  */
   box-shadow: -10px 0px #01a5ec;

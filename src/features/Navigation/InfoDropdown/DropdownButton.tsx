@@ -1,12 +1,10 @@
-import React from 'react';
+import styled, { css } from 'styled-components';
 
 import { useHover } from '@/hooks/useHover';
 
+import { Chevron } from '@/components/Icons/Chevron';
 import { palette } from '@/components/variables';
-import styled, { css } from 'styled-components';
 import Text from '@/components/Text';
-import { ChevronUp } from '@/components/Icons/ChevronUp';
-import { ChevronDown } from '@/components/Icons/ChevronDown';
 
 type Props = {
   isComponentVisible: boolean;
@@ -20,7 +18,7 @@ export const DropdownButton: React.FC<Props> = ({
   text,
 }) => {
   const { ref, isHovering } = useHover();
-  const color = isHovering || isComponentVisible ? 'darkblue' : 'white';
+  const color = isHovering || isComponentVisible ? 'blueDark' : 'white';
 
   return (
     <Button
@@ -28,29 +26,30 @@ export const DropdownButton: React.FC<Props> = ({
       onClick={() => setIsComponentVisible(!isComponentVisible)}
       ref={ref}
     >
-      <Text variant={isHovering ? 'linkDisabled' : 'link'} color={color}>
+      <Text variant="link" color={color}>
         {text}
       </Text>
       {isComponentVisible ? (
-        <ChevronUp size={8} color={color} />
+        <Chevron variant="up" color={color} />
       ) : (
-        <ChevronDown size={8} color={color} />
+        <Chevron variant="down" color={color} />
       )}
     </Button>
   );
 };
 
-export const Button = styled.button<{ isExpanded?: boolean }>`
-  position: relative;
-  cursor: pointer;
+const Button = styled.button<{ isExpanded?: boolean }>`
+  align-items: center;
   background: transparent;
   border: none;
+  cursor: pointer;
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 4px;
-  text-align: center;
+  height: 60px;
+  justify-content: center;
   padding: 0 1rem;
+  position: relative;
+  text-align: center;
 
   ${({ isExpanded }) =>
     isExpanded &&
@@ -61,5 +60,7 @@ export const Button = styled.button<{ isExpanded?: boolean }>`
   &:hover {
     background-color: ${palette.blue2};
     border-bottom: 2px solid ${palette.blue2};
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 `;

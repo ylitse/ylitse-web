@@ -29,8 +29,8 @@ export const PageButton = ({ isSelected, onClick, page }: Props) => {
 };
 
 const PageNumber = styled.span<{ isSelected: boolean; isClickable: boolean }>`
-  padding: 0.2rem 1rem;
   border-radius: 16%;
+  padding: 0.2rem 1rem;
 
   ${({ isSelected }) =>
     isSelected
@@ -38,7 +38,7 @@ const PageNumber = styled.span<{ isSelected: boolean; isClickable: boolean }>`
           background-color: ${palette.blue2};
         `
       : css`
-          color: ${palette.darkpurple};
+          color: ${palette.purpleDark};
         `}
 
   ${({ isClickable }) =>

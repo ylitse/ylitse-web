@@ -23,22 +23,21 @@ export const Items = ({ items }: { items: Array<NavigationItem> }) => (
 );
 
 export const Link = styled(RouterNavLink)`
-  text-decoration: none;
+  color: ${palette.white};
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
   height: 60px;
   line-height: 60px;
   padding: 0 1rem;
-  font-family: 'Baloo 2', cursive;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 60px;
-  color: ${palette.white};
+  text-decoration: none;
 
   &.active,
   &:hover {
+    background-color: ${palette.blue};
+    color: ${palette.blueDark};
     text-decoration: underline;
     text-underline-offset: 4px;
-    background-color: ${palette.blue2};
-    color: ${palette.darkblue};
   }
 
   &.active {

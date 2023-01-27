@@ -57,25 +57,25 @@ const PageWithTransition: React.FC<Props> = ({ children }) => {
 };
 
 const Container = styled.div`
-  background-color: ${palette.lightblue};
-  position: relative;
-  width: 100vw;
-  height: auto;
-  min-height: calc(100vh - 60px - 3.5rem);
-  top: 0;
-  left: 0;
+  background-color: ${palette.blueLight};
   display: flex;
   flex-direction: column;
+  height: auto;
+  left: 0;
+  min-height: calc(100vh - 60px - 3.5rem);
+  position: relative;
+  top: 0;
+  width: 100vw;
 `;
 
 const Content = styled.div`
-  max-width: 76vw;
-  height: auto;
-  margin: auto;
-  margin-top: ${spacing.layout_outer_spacing};
-  margin-bottom: ${spacing.layout_outer_spacing};
   display: flex;
   flex-direction: column;
+  height: auto;
+  margin: auto;
+  margin-bottom: ${spacing.layout_outer_spacing};
+  margin-top: ${spacing.layout_outer_spacing};
+  max-width: 76vw;
   @media screen and (max-width: 1500px) {
     width: 1130px;
     max-width: calc(100vw - (${spacing.layout_spacing} * 2));
@@ -91,18 +91,16 @@ const Layer = styled.div<{
   color: Color;
   delay: number;
 }>`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: auto;
-  left: -100%;
-  bottom: auto;
-  right: auto;
-  transition: all ${TRANSITION_LENGTH}s cubic-bezier(0.645, 0.045, 0.355, 1);
-
   background: ${({ color }) => palette[color]};
-
+  bottom: auto;
+  height: 100%;
+  left: -100%;
+  position: absolute;
+  right: auto;
+  top: auto;
+  transition: all ${TRANSITION_LENGTH}s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-delay: ${({ delay }) => delay}s;
+  width: 100%;
 
   ${({ isTransition }) =>
     isTransition &&

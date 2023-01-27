@@ -25,7 +25,7 @@ const Filters: React.FC<Props> = ({
   return isMobile ? (
     <MobileContainer>
       <MobileHeader variant="h1">{headLine}</MobileHeader>
-      <Text variant="p">{t('filters.description')}</Text>
+      <Text>{t('filters.description')}</Text>
     </MobileContainer>
   ) : (
     <Container>
@@ -40,30 +40,30 @@ const Filters: React.FC<Props> = ({
 
 const Container = styled.div`
   background-color: ${palette.white};
-  flex: 0 0 auto;
-  width: 100%;
   border-radius: 10px;
-  margin: 0;
+  flex: 0 0 auto;
   height: auto;
+  margin: 0;
   position: relative;
+  width: 100%;
 `;
 
 const PageHeader = styled.div`
+  align-items: center;
   background-color: ${palette.blue2};
   border-radius: 10px;
-  max-height: 80px;
-  height: 80px;
   display: flex;
+  height: 80px;
   justify-content: center;
-  align-items: center;
+  max-height: 80px;
 `;
 
 const MobileContainer = styled.div`
+  align-items: center;
   background-color: ${palette.white};
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   padding: 1.5rem;
 `;
 

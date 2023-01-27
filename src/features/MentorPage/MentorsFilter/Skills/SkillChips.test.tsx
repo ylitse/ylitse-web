@@ -15,7 +15,7 @@ describe('<MentorChips />', () => {
     'Fax machinge repairing',
   ];
 
-  const props = { skills: items, onFiltersClose: jest.fn() };
+  const props = { onFiltersClose: jest.fn(), skills: items };
 
   it('Mentor chips are rendered correctly', () => {
     const { getAllByRole } = renderWithProviders(<SkillChips {...props} />);
@@ -40,7 +40,7 @@ describe('<MentorChips />', () => {
   it('Selected chips have different bg', () => {
     const { getByText } = renderWithProviders(<SkillChips {...props} />, {
       preloadedState: {
-        mentorsFilter: { selectedSkills: [items[0]], searchString: '' },
+        mentorsFilter: { searchString: '', selectedSkills: [items[0]] },
       },
     });
 

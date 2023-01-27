@@ -59,27 +59,27 @@ export const SkillChips = ({ skills, onFiltersClose }: Props) => {
 };
 
 const Skills = styled.div`
-  flex: 0 0 auto;
-  width: 100%;
-  overflow: hidden;
   display: flex;
+  flex: 0 0 auto;
   flex-wrap: wrap;
-  justify-content: center;
-  position: relative;
   height: '11rem';
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 `;
 
 const Container = styled.div`
+  display: flex;
   flex: 0 0 auto;
+  flex-wrap: wrap;
+  height: fit-content;
+  justify-content: center;
+  margin-top: 0;
+  overflow: hidden;
+  padding-bottom: 6rem;
   padding-left: 10%;
   padding-right: 10%;
-  height: fit-content;
-  width: 80%;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 0;
-  justify-content: center;
   position: relative;
-  padding-bottom: 6rem;
+  width: 80%;
 `;

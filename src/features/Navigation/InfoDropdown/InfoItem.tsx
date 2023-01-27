@@ -14,7 +14,7 @@ export const InfoItem = ({ text, url }: NavigationItem) => (
       rel="noreferrer"
       style={{ textDecoration: 'none' }}
     >
-      <Text variant="linkBold" color="purple">
+      <Text variant="link" color="purple">
         {text}
       </Text>
     </a>
@@ -22,32 +22,32 @@ export const InfoItem = ({ text, url }: NavigationItem) => (
   </Container>
 );
 
-export const OutsideLinkLogo = styled.span`
-  flex: 0 0 auto;
-  align-self: center;
-  justify-self: flex-start;
-  margin-right: 1rem;
-  background-image: url(${Outsidelink});
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 1rem;
-  width: 1rem;
-  background-color: transparent;
-`;
-
 export const Container = styled.button`
   background: transparent;
-  border: none;
-  gap: 0.5rem;
-  display: flex;
   background-color: ${palette.white};
-  height: 58px;
-  padding-left: 1rem;
-  cursor: pointer;
+  border: none;
   border-left: 2px solid ${palette.purple};
   border-right: 2px solid ${palette.purple};
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  height: 60px;
+  padding-left: 1rem;
 
   &:hover {
-    background-color: ${palette.lightblue};
+    background-color: ${palette.blueLight};
   }
+`;
+
+const OutsideLinkLogo = styled.span`
+  align-self: center;
+  background-color: transparent;
+  background-image: url(${Outsidelink});
+  background-repeat: no-repeat;
+  background-size: contain;
+  flex: 0 0 auto;
+  height: 1rem;
+  justify-self: flex-start;
+  margin-right: 1rem;
+  width: 1rem;
 `;
