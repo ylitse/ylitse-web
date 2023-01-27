@@ -8,8 +8,7 @@ import { palette } from '@/components/variables';
 import styled from 'styled-components';
 
 import Text from '@/components/Text';
-import { ChevronUp } from '@/components/Icons/ChevronUp';
-import { ChevronDown } from '@/components/Icons/ChevronDown';
+import { Chevron } from '@/components/Icons/Chevron';
 import { useLocation } from 'react-router-dom';
 import { growDownAnimation } from '../InfoDropdown';
 import { LanguageItem } from './MobileLangItem';
@@ -39,14 +38,16 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
       ref={ref}
       onClick={() => setIsComponentVisible(!isComponentVisible)}
     >
-      <Text variant="link" color="white">
-        {t('navigation.mobile.menu')}
-      </Text>
-      {isComponentVisible ? (
-        <ChevronUp size={8} color="white" />
-      ) : (
-        <ChevronDown size={8} color="white" />
-      )}
+      <Row>
+        <Text variant="link" color="white">
+          {t('navigation.mobile.menu')}
+        </Text>
+        {isComponentVisible ? (
+          <Chevron variant="up" color="white" isLarge />
+        ) : (
+          <Chevron variant="down" color="white" isLarge />
+        )}
+      </Row>
 
       {isComponentVisible && (
         <Menu>
@@ -114,6 +115,12 @@ const Dropdown = styled.button`
   justify-content: center;
   padding: 0 3rem;
   text-align: center;
+`;
+
+const Row = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 6px;
 `;
 
 const Menu = styled.div`

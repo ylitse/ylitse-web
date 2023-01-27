@@ -1,12 +1,10 @@
-import React from 'react';
+import styled, { css } from 'styled-components';
 
 import { useHover } from '@/hooks/useHover';
 
+import { Chevron } from '@/components/Icons/Chevron';
 import { palette } from '@/components/variables';
-import styled, { css } from 'styled-components';
 import Text from '@/components/Text';
-import { ChevronUp } from '@/components/Icons/ChevronUp';
-import { ChevronDown } from '@/components/Icons/ChevronDown';
 
 type Props = {
   isComponentVisible: boolean;
@@ -32,9 +30,9 @@ export const DropdownButton: React.FC<Props> = ({
         {text}
       </ButtonText>
       {isComponentVisible ? (
-        <ChevronUp size={8} color={color} />
+        <Chevron variant="up" color={color} />
       ) : (
-        <ChevronDown size={8} color={color} />
+        <Chevron variant="down" color={color} />
       )}
     </Button>
   );
