@@ -8,42 +8,51 @@ import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
 import SearchBar from '@/components/SearchBar';
-import Text from '@/components/Text';
+import { IconButton } from '@/components/Buttons';
 
-export const MentorSearch = () => {
-  const searchString = useAppSelector(selectSearchString);
+type Props = {
+  isSkillFilterExpanded: boolean;
+};
 
-  const dispatch = useAppDispatch();
+const MentorSearch = ({ isSkillFilterExpanded }: Props) => {
   const { t } = useTranslation('mentors');
+  const buttonText = isSkillFilterExpanded ? 'filters.close' : 'filters.show';
+
+  const searchString = useAppSelector(selectSearchString);
+  const dispatch = useAppDispatch();
 
   const handleSearchStringChange = (value: string) =>
     dispatch(changeSearchString(value));
 
   return (
     <Container>
-      <InfoText>{t('filters.description')}</InfoText>
       <SearchBar
         placeholder={t('filters.search')}
         value={searchString}
         onChange={handleSearchStringChange}
       />
+      <IconButton
+        variant="filter"
+        sizeInPx={20}
+        text={{
+          color: 'purple',
+          text: t(buttonText),
+          variant: 'bold',
+        }}
+      />
     </Container>
   );
 };
 
-const InfoText = styled(Text)`
-  flex: 0 0 auto;
-  padding-right: 5%;
-  width: 47%;
-`;
-
 const Container = styled.div`
-  align-items: flex-start;
   display: flex;
   flex: 1;
   flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
   margin: auto;
   max-width: 90%;
-  padding: 2rem 0;
   width: 90%;
 `;
+
+export default MentorSearch;

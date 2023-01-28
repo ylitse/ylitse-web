@@ -42,11 +42,11 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
         <Text variant="linkHeader" color="white">
           {t('navigation.mobile.menu')}
         </Text>
-        {isComponentVisible ? (
-          <Chevron variant="up" color="white" isLarge />
-        ) : (
-          <Chevron variant="down" color="white" isLarge />
-        )}
+        <Chevron
+          variant={isComponentVisible ? 'up' : 'down'}
+          color="white"
+          isLarge
+        />
       </Row>
 
       {isComponentVisible && (
@@ -93,6 +93,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
             isSelected={isSelected('fi')}
             text={t(`navigation.language.fi.long`)}
           />
+
           <Divider />
 
           <NavigationItem

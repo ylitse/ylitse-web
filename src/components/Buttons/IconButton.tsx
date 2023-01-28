@@ -10,15 +10,23 @@ import MenuLinesIcon from '@/static/icons/menu-lines.svg';
 import DeleteIcon from '@/static/icons/delete.svg';
 import PrevIcon from '@/static/icons/prev.svg';
 import NextIcon from '@/static/icons/next.svg';
+import FilterIcon from '@/static/icons/icon-filter.svg';
 import ForwardIcon from '@/static/icons/forward.svg';
 import RewindIcon from '@/static/icons/rewind.svg';
 import TooltipIcon from '@/static/icons/tooltip.svg';
+import DeleteOutlined from '@/static/icons/icon-delete.svg';
+
+import { TextVariant } from '../Text/variants';
+import Text from '../Text';
+import { Color } from '../variables';
 
 export type ButtonIcon =
   | 'back'
   | 'close'
   | 'delete'
+  | 'deleteOutlined'
   | 'edit'
+  | 'filter'
   | 'forward'
   | 'menuDots'
   | 'menuLines'
@@ -32,20 +40,29 @@ export type ButtonIcon =
 type ButtonProps<T extends ElementType> = {
   variant: ButtonIcon;
   sizeInPx: number;
+  text?: { variant: TextVariant; color: Color; text: string };
 } & ComponentPropsWithoutRef<T>;
 
 const IconButton = <T extends ElementType = 'button'>({
   variant,
   sizeInPx,
+  text,
   ...rest
 }: ButtonProps<T>): JSX.Element => {
   return (
-    <StyledIconButton
-      variant={variant}
-      size={sizeInPx}
-      {...rest}
-      aria-label={variant}
-    />
+    <Container>
+      <StyledIconButton
+        variant={variant}
+        size={sizeInPx}
+        {...rest}
+        aria-label={variant}
+      ></StyledIconButton>
+      {text && (
+        <Text variant={text.variant} color={text.color}>
+          {text.text}
+        </Text>
+      )}
+    </Container>
   );
 };
 
@@ -59,8 +76,14 @@ const variantOptions = {
   delete: {
     backgroundImage: `url(${DeleteIcon})`,
   },
+  deleteOutlined: {
+    backgroundImage: `url(${DeleteOutlined})`,
+  },
   edit: {
     backgroundImage: `url(${EditIcon})`,
+  },
+  filter: {
+    backgroundImage: `url(${FilterIcon})`,
   },
   forward: {
     backgroundImage: `url(${ForwardIcon})`,
@@ -107,6 +130,17 @@ const StyledIconButton = styled.button<{
     width: ${size}px;
   `}
   ${({ variant }) => variant && variantOptions[variant]}
+`;
+
+const Container = styled.div`
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 export default IconButton;

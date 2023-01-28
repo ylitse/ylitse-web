@@ -18,7 +18,9 @@ export const palette = {
   purpleHover: '#CDCBFF',
   purpleMid: '#5C33FF',
   purplePale: '#E5E4FF',
+  redDark: '#972232',
   white: '#FFFFFF',
+  whiteOpacity: 'rgba(255, 255, 255, 0.5)',
 };
 
 export const MOBILE_TRESHOLD = 600;

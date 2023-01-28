@@ -1,5 +1,5 @@
 import { renderWithProviders } from '@/test/testStore';
-import { SkillChips } from './SkillChips';
+import SkillChips from './index;
 
 describe('<MentorChips />', () => {
   const items: Array<string> = [

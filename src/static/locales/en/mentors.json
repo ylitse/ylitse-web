@@ -1,13 +1,13 @@
 {
   "title": "Mentors",
   "filters": {
-    "title": "Filter mentors",
+    "title": "Search",
     "oneSelected": "filter selected",
     "multipleSelected": "filters selected",
-    "description": "Welcome to browse mentor profiles! You will find the newest mentors at the top of the list. By searching, you're able to filter mentors based on your problem.",
-    "search": "Search mentors",
+    "search": "Search mentors by keyword",
     "clear": "Clear filters",
-    "close": "Close"
+    "close": "Close filters",
+    "show": "Filter by tag"
   },
   "card": {
     "unavailable": "Unavailable",

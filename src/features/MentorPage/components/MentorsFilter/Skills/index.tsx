@@ -7,10 +7,11 @@ import { usePillShakeChecker } from './usePillShakeChecker';
 
 import styled from 'styled-components';
 import { Chip } from '@/components/Chip';
-import { Pagination, SKILL_AMOUNT_ON_PAGE } from './Pagination';
+import { BottomBar, SKILL_AMOUNT_ON_PAGE } from './BottomBar';
 
-type Props = { skills: Array<string>; onFiltersClose: () => void };
-export const SkillChips = ({ skills, onFiltersClose }: Props) => {
+type Props = { skills: Array<string> };
+
+const SkillChips = ({ skills }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const selectedSkills = useAppSelector(selectSelectedSkills);
   const { existingSelected: shouldNotAnimate, syncExisting } =
@@ -51,11 +52,10 @@ export const SkillChips = ({ skills, onFiltersClose }: Props) => {
           );
         })}
       </Skills>
-      <Pagination
+      <BottomBar
         skillTotalAmount={skills.length}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        onFiltersClose={onFiltersClose}
       />
     </Container>
   );
@@ -65,10 +65,8 @@ const Skills = styled.div`
   display: flex;
   flex: 0 0 auto;
   flex-wrap: wrap;
-  height: '11rem';
   justify-content: center;
   overflow: hidden;
-  position: relative;
   width: 100%;
 `;
 
@@ -78,11 +76,9 @@ const Container = styled.div`
   flex-wrap: wrap;
   height: fit-content;
   justify-content: center;
-  margin-top: 0;
   overflow: hidden;
-  padding-bottom: 6rem;
   padding-left: 10%;
   padding-right: 10%;
-  position: relative;
-  width: 80%;
 `;
+
+export default SkillChips;

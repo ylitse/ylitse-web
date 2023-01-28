@@ -1,10 +1,10 @@
 import { renderWithProviders } from '@/test/testStore';
-import { MentorSearch } from './MentorSearch';
+import MentorSearch from './index';
 
 describe('<MentorSearch />', () => {
   it('Can change the searchString', async () => {
     const { getByRole, user, store, getByDisplayValue } = renderWithProviders(
-      <MentorSearch />,
+      <MentorSearch isSkillFilterExpanded={false} />,
     );
 
     const inputField = getByRole('textbox');
