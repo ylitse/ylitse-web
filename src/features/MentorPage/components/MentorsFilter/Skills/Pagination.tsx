@@ -1,12 +1,13 @@
-import styled from 'styled-components';
-import { usePagination } from './usePagination';
+import { resetFilters } from '../../../mentorsFilterSlice';
 import { useAppDispatch } from '@/store';
+
+import { usePagination } from './usePagination';
 import { useTranslation } from 'react-i18next';
 
+import styled from 'styled-components';
 import { PageButton } from './PageButton';
 import { Text } from '@/components/Text/Text';
 import TextButton from '@/components/Buttons/TextButton';
-import { resetFilters } from '../mentorsFilterSlice';
 
 type Props = {
   skillTotalAmount: number;

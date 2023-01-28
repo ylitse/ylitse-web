@@ -1,15 +1,17 @@
-import styled from 'styled-components';
-import { SimpleChip } from '@/components/Chip';
-import { Text } from '@/components/Text/Text';
 import { useTranslation } from 'react-i18next';
 
-export const Languages = ({ languages }: { languages: Array<string> }) => {
+import styled from 'styled-components';
+import { SimpleChip } from '@/components/Chip';
+import { palette } from '@/components/variables';
+import Text from '@/components/Text';
+
+export const Skills = ({ skills }: { skills: Array<string> }) => {
   const { t } = useTranslation('mentors');
   return (
     <Container>
-      <Header variant="h3">{t('card.languages')}</Header>
+      <Header variant="h3">{t('card.skills')}</Header>
       <Chips>
-        {languages.map(item => (
+        {skills.map(item => (
           <SimpleChip key={item} text={item} />
         ))}
       </Chips>
@@ -20,7 +22,9 @@ export const Languages = ({ languages }: { languages: Array<string> }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
+  height: fit-content;
+  max-height: 8.6rem;
 `;
 
 const Header = styled(Text)`
@@ -32,10 +36,18 @@ const Chips = styled.div`
   flex: 0 0 auto;
   flex-wrap: wrap;
   gap: 0.5rem;
-  height: fit-content;
+  height: 6rem;
   justify-content: flex-start;
-  max-height: 7rem;
   overflow: hidden;
   position: relative;
   width: 100%;
+  &:after {
+    background: linear-gradient(transparent, ${palette.white});
+    content: '';
+    display: block;
+    height: 2.5rem;
+    position: absolute;
+    top: 3.5rem;
+    width: 100%;
+  }
 `;

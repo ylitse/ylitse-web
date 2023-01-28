@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { spacing } from '@/components/variables';
 import ListCard from './MentorCard/List';
-import { Mentor } from '../mentorPageApi';
+import { Mentor } from '../../mentorPageApi';
 import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {

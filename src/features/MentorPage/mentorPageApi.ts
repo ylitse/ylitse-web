@@ -2,10 +2,7 @@ import { createSelector } from 'reselect';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import * as D from 'io-ts/Decoder';
 import { validateAndTransformTo } from '@/utils/http';
-import {
-  selectSelectedSkills,
-  selectSearchString,
-} from './MentorsFilter/mentorsFilterSlice';
+import { selectSelectedSkills, selectSearchString } from './mentorsFilterSlice';
 import { capitalize } from '@/utils/utils';
 
 type ApiMentor = D.TypeOf<typeof apiMentorType>;

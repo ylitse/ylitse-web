@@ -1,10 +1,13 @@
 import { useMemo, useState } from 'react';
+
+import { selectSelectedSkills, toggleSkill } from '../../../mentorsFilterSlice';
+import { useAppDispatch, useAppSelector } from '@/store';
+
+import { usePillShakeChecker } from './usePillShakeChecker';
+
 import styled from 'styled-components';
 import { Chip } from '@/components/Chip';
 import { Pagination, SKILL_AMOUNT_ON_PAGE } from './Pagination';
-import { selectSelectedSkills, toggleSkill } from '../mentorsFilterSlice';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { usePillShakeChecker } from './usePillShakeChecker';
 
 type Props = { skills: Array<string>; onFiltersClose: () => void };
 export const SkillChips = ({ skills, onFiltersClose }: Props) => {

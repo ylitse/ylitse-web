@@ -1,9 +1,11 @@
+import type { Mentor } from '@/features/MentorPage/mentorPageApi';
+
+import { useMobileMode } from '@/hooks/useMobileMode';
+
 import styled, { css } from 'styled-components';
 import { Header } from './Header';
 import { Content } from './Content';
 import { palette, breakpoints } from '@/components/variables';
-import { Mentor } from '@/features/MentorPage/mentorPageApi';
-import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {
   onDismiss: () => void;
@@ -68,3 +70,5 @@ const Container = styled.div`
     height: 100%;
   }
 `;
+
+export default MentorCard;

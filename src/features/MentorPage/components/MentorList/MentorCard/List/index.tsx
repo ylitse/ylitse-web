@@ -1,3 +1,7 @@
+import type { Mentor } from '@/features/MentorPage/mentorPageApi';
+
+import { useMobileMode } from '@/hooks/useMobileMode';
+
 import styled, { css } from 'styled-components';
 import { Header } from './Header';
 import { Languages } from './Languages';
@@ -5,8 +9,6 @@ import { Skills } from './Skills';
 import { Story } from './Story';
 import { ExpandButton } from './ExpandButton';
 import { spacing, palette } from '@/components/variables';
-import { Mentor } from '@/features/MentorPage/mentorPageApi';
-import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {
   setVisibleCard: (mentor: Mentor) => void;
@@ -102,3 +104,5 @@ const CardContent = styled.div<{ isMobile: boolean }>`
   justify-content: space-between;
   padding: 1.5rem;
 `;
+
+export default ListCard;

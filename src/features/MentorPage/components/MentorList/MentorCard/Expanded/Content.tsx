@@ -1,3 +1,5 @@
+import type { Mentor } from '@/features/MentorPage/mentorPageApi';
+
 import { useMobileMode } from '@/hooks/useMobileMode';
 import { useTranslation } from 'react-i18next';
 
@@ -5,7 +7,6 @@ import styled, { css } from 'styled-components';
 import { Text } from '@/components/Text/Text';
 import { Skills } from './Skills';
 import { TextButton } from '@/components/Buttons';
-import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { Languages } from './Languages';
 import { IconButton } from '@/components/Buttons';
 import { breakpoints } from '@/components/variables';

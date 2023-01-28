@@ -1,6 +1,6 @@
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
+import styled from 'styled-components';
 import { Text } from '@/components/Text/Text';
 
 export const Story = ({ story }: { story: string }) => {

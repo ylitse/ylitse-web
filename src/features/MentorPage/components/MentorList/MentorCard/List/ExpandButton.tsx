@@ -1,8 +1,9 @@
-import styled from 'styled-components';
-import { TextButton } from '@/components/Buttons';
-import { Mentor } from '@/features/MentorPage/mentorPageApi';
+import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 
 import { useTranslation } from 'react-i18next';
+
+import styled from 'styled-components';
+import { TextButton } from '@/components/Buttons';
 
 type Props = {
   setVisibleCard: (mentor: Mentor) => void;

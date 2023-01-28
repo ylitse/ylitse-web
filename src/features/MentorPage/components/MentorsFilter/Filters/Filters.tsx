@@ -1,10 +1,10 @@
+import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTranslation } from 'react-i18next';
+
 import styled from 'styled-components';
-import React from 'react';
 import { palette } from '@/components/variables';
 import { Text } from '@/components/Text/Text';
 import { FiltersButton } from './FiltersButton';
-import { useMobileMode } from '@/hooks/useMobileMode';
-import { useTranslation } from 'react-i18next';
 
 type Props = {
   headLine: string;

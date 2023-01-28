@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { MentorCard } from './MentorCard';
+import { MentorCard } from '.';
 
 const mentors = [
   {

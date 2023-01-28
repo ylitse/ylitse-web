@@ -1,9 +1,5 @@
-import React from 'react';
-import MentorsFilter from './MentorsFilter';
-import MentorList from './MentorList';
-import PageWithTransition from '../../components/PageWithTransition';
-import MentorCard from './MentorList/MentorCard/Expanded';
-import Spinner from '@/components/Spinner';
+import { useState } from 'react';
+
 import {
   Mentor,
   selectFilteredMentors,
@@ -11,10 +7,14 @@ import {
 } from './mentorPageApi';
 import { useAppSelector } from '@/store';
 
+import MentorsFilter from './components/MentorsFilter';
+import MentorList from './components/MentorList';
+import PageWithTransition from '../../components/PageWithTransition';
+import MentorCard from './components/MentorList/MentorCard/Expanded';
+import Spinner from '@/components/Spinner';
+
 const MentorPage = () => {
-  const [selectedMentor, setSelectedMentor] = React.useState<Mentor | null>(
-    null,
-  );
+  const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
 
   const { isLoading } = useGetMentorsQuery();
   const mentors = useAppSelector(selectFilteredMentors());

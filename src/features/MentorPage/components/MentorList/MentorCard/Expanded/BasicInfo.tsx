@@ -1,10 +1,11 @@
+import type { Mentor } from '@/features/MentorPage/mentorPageApi';
+
 import { useMobileMode } from '@/hooks/useMobileMode';
 import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
 import { Text } from '@/components/Text/Text';
 import { Languages } from './Languages';
-import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { breakpoints, palette } from '@/components/variables';
 
 type Props = {

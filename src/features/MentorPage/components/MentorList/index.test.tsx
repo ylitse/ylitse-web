@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import MentorList from './MentorList';
+import MentorList from '.';
 
 const mentorListCards = [
   {

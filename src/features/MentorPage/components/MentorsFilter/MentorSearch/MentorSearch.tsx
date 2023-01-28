@@ -1,9 +1,12 @@
-import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '@/store';
+import {
+  changeSearchString,
+  selectSearchString,
+} from '@/features/MentorPage/mentorsFilterSlice';
+
 import { useTranslation } from 'react-i18next';
 
-import { useAppDispatch, useAppSelector } from '@/store';
-
-import { changeSearchString, selectSearchString } from '../mentorsFilterSlice';
+import styled from 'styled-components';
 import SearchBar from '@/components/SearchBar';
 import Text from '@/components/Text';
 

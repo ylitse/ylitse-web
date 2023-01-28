@@ -1,8 +1,7 @@
-import React from 'react';
 import {
   selectSearchString,
   selectSelectedSkills,
-} from '../mentorsFilterSlice';
+} from '../../../mentorsFilterSlice';
 import { useAppSelector } from '@/store';
 import { useTranslation } from 'react-i18next';
 

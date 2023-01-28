@@ -1,4 +1,4 @@
-import MentorPage from './MentorPage';
+import MentorPage from '.';
 import { server } from '@/test/server';
 import { renderWithProviders } from '@/test/testStore';
 import { rest } from 'msw';

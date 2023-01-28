@@ -1,9 +1,9 @@
+import { useTranslation } from 'react-i18next';
+
 import styled from 'styled-components';
 import { SimpleChip } from '@/components/Chip';
 import { Text } from '@/components/Text/Text';
 import { breakpoints } from '@/components/variables';
-
-import { useTranslation } from 'react-i18next';
 
 export const Languages = ({
   languages,
