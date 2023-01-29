@@ -53,7 +53,8 @@ const Menu = styled.div`
   flex-direction: column;
   position: absolute;
   transform-origin: top center;
-  width: 60px;
+  width: 62px;
+  z-index: 10;
 
   button:last-of-type {
     border-bottom: 2px solid ${palette.purple};
