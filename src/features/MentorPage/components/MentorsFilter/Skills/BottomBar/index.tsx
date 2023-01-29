@@ -1,4 +1,4 @@
-import { resetFilters } from '../../../mentorsFilterSlice';
+import { resetFilters } from '../../../../mentorsFilterSlice';
 import { useAppDispatch } from '@/store';
 
 import { usePagination } from './usePagination';
@@ -48,6 +48,7 @@ export const BottomBar = ({
           variant: 'bold',
         }}
       />
+
       <PaginationContainer>
         {paginationRange?.map((page, index) => (
           <PageButton
@@ -57,7 +58,14 @@ export const BottomBar = ({
             onClick={() => setCurrentPage(Number(page))}
           />
         ))}
+        <Next
+          variant="next"
+          sizeInPx={28}
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={currentPage === paginationRange?.slice(1)[0]}
+        />
       </PaginationContainer>
+
       <PageSizeDropdown
         skillsInPage={skillsInPage}
         setSkillsInPage={setSkillsInPage}
@@ -71,6 +79,7 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-between;
+  padding-top: 1rem;
   width: 100%;
 `;
 
@@ -78,3 +87,9 @@ const PaginationContainer = styled.div`
   display: flex;
   width: fit-content;
 `;
+
+const Next = styled(IconButton)`
+  margin-left: 0.5rem;
+`;
+
+export default BottomBar;

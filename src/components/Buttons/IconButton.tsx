@@ -15,6 +15,7 @@ import ForwardIcon from '@/static/icons/forward.svg';
 import RewindIcon from '@/static/icons/rewind.svg';
 import TooltipIcon from '@/static/icons/tooltip.svg';
 import DeleteOutlined from '@/static/icons/icon-delete.svg';
+import CloseOutlined from '@/static/icons/icon-close.svg';
 
 import { TextVariant } from '../Text/variants';
 import Text from '../Text';
@@ -23,6 +24,7 @@ import { Color } from '../variables';
 export type ButtonIcon =
   | 'back'
   | 'close'
+  | 'closeOutlined'
   | 'delete'
   | 'deleteOutlined'
   | 'edit'
@@ -47,10 +49,11 @@ const IconButton = <T extends ElementType = 'button'>({
   variant,
   sizeInPx,
   text,
+  onClick,
   ...rest
 }: ButtonProps<T>): JSX.Element => {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <StyledIconButton
         variant={variant}
         size={sizeInPx}
@@ -72,6 +75,9 @@ const variantOptions = {
   },
   close: {
     backgroundImage: `url(${CloseIcon})`,
+  },
+  closeOutlined: {
+    backgroundImage: `url(${CloseOutlined})`,
   },
   delete: {
     backgroundImage: `url(${DeleteIcon})`,

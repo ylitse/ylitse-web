@@ -9,9 +9,12 @@ import { palette } from '@/components/variables';
 import { Text } from '@/components/Text/Text';
 import KeywordSearch from './MentorSearch';
 import Skills from './Skills';
+import { useState } from 'react';
 
 const MentorsFilter = () => {
+  const [isSkillFilterExpanded, setIsSKillFilterExpanded] = useState(false);
   const skills = useAppSelector(selectSkills());
+
   const { t } = useTranslation('mentors');
   const isMobile = useMobileMode();
 
@@ -22,9 +25,16 @@ const MentorsFilter = () => {
   ) : (
     <Container>
       <DesktopHeader variant="h1">{t('filters.title')}</DesktopHeader>
-      <KeywordSearch isSkillFilterExpanded={false} />
-      <Divider />
-      <Skills skills={skills} />
+      <KeywordSearch
+        isExpanded={isSkillFilterExpanded}
+        toggleExpanded={setIsSKillFilterExpanded}
+      />
+      {isSkillFilterExpanded && (
+        <>
+          <Divider />
+          <Skills skills={skills} />
+        </>
+      )}
     </Container>
   );
 };
@@ -38,7 +48,7 @@ const Container = styled.div`
   gap: 1.5rem;
   height: auto;
   margin: 0;
-  padding: 1.5rem 0;
+  padding: 2.5rem 0;
   position: relative;
   width: 100%;
 `;
@@ -64,6 +74,7 @@ const DesktopHeader = styled(Text)`
 const Divider = styled.div`
   border-bottom: solid 1px ${palette.blueDark};
   margin: 0 6%;
+  padding-top: 1rem;
 `;
 
 export default MentorsFilter;
