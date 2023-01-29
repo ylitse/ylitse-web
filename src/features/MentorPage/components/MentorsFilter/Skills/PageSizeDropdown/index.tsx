@@ -1,11 +1,18 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
 
+import { pageSizes } from './const';
+
 import { animations, palette } from '@/components/variables';
 import styled from 'styled-components';
 import Text from '@/components/Text';
-import { Chevron } from '@/components/Icons/Chevron';
+import { OpenButton } from './OpenButton';
+import { PageOption } from './PageOption';
 
-export const PageSizeDropdown = () => {
+type Props = {
+  skillsInPage: number;
+  setSkillsInPage: (nextSize: number) => void;
+};
+const PageSizeDropdown = ({ skillsInPage, setSkillsInPage }: Props) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
 
@@ -13,20 +20,22 @@ export const PageSizeDropdown = () => {
     <Container>
       <Text>Aihetta sivulla</Text>
       <Anchor ref={ref}>
-        <Button onClick={() => setIsComponentVisible(true)}>
-          10
-          <Chevron
-            variant={isComponentVisible ? 'up' : 'down'}
-            color="white"
-            isLarge
-          />
-        </Button>
+        <OpenButton
+          isComponentVisible={isComponentVisible}
+          onClick={setIsComponentVisible}
+          selected={skillsInPage}
+        />
 
         {isComponentVisible && (
           <Menu>
-            <button>50</button>
-            <button>70</button>
-            <button>1000</button>
+            {pageSizes.map(size => (
+              <PageOption
+                key={size}
+                onClick={setSkillsInPage}
+                isSelected={size === skillsInPage}
+                size={size}
+              />
+            ))}
           </Menu>
         )}
       </Anchor>
@@ -44,17 +53,18 @@ const Menu = styled.div`
   flex-direction: column;
   position: absolute;
   transform-origin: top center;
-  width: max-content;
+  width: 60px;
 
   button:last-of-type {
     border-bottom: 2px solid ${palette.purple};
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 8px 8px;
   }
 `;
 
-const Button = styled.button``;
-
 const Container = styled.div`
+  align-items: baseline;
   display: flex;
   gap: 1rem;
 `;
+
+export default PageSizeDropdown;

@@ -7,24 +7,26 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { PageButton } from './PageButton';
 import { IconButton } from '@/components/Buttons';
-import { PageSizeDropdown } from './PageDropdown';
+import PageSizeDropdown from './PageSizeDropdown';
 
 type Props = {
   skillTotalAmount: number;
   currentPage: number;
   setCurrentPage: (next: number) => void;
+  skillsInPage: number;
+  setSkillsInPage: (next: number) => void;
 };
-
-export const SKILL_AMOUNT_ON_PAGE = 15;
 
 export const BottomBar = ({
   skillTotalAmount,
   setCurrentPage,
   currentPage,
+  skillsInPage,
+  setSkillsInPage,
 }: Props) => {
   const paginationRange = usePagination({
     currentPage,
-    pageSize: SKILL_AMOUNT_ON_PAGE,
+    pageSize: skillsInPage,
     totalCount: skillTotalAmount,
   });
   const dispatch = useAppDispatch();
@@ -56,7 +58,10 @@ export const BottomBar = ({
           />
         ))}
       </PaginationContainer>
-      <PageSizeDropdown />
+      <PageSizeDropdown
+        skillsInPage={skillsInPage}
+        setSkillsInPage={setSkillsInPage}
+      />
     </Container>
   );
 };

@@ -33,7 +33,6 @@ const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
   cursor: pointer;
   flex: 0 0 auto;
   height: 2.75rem;
-  margin: 0.5rem;
   padding: 0.75rem 1.25rem;
 
   ${({ isSelected }) =>
