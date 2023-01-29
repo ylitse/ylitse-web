@@ -1,7 +1,7 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
 
-import { palette } from '@/components/variables';
-import styled, { keyframes } from 'styled-components';
+import { animations, palette } from '@/components/variables';
+import styled from 'styled-components';
 import Text from '@/components/Text';
 import { Chevron } from '@/components/Icons/Chevron';
 
@@ -38,20 +38,8 @@ const Anchor = styled.div`
   overflow: hidden;
 `;
 
-const growDownAnimation = keyframes`
-    0% {
-        transform: scaleY(0)
-    }
-    80% {
-        transform: scaleY(1.1)
-    }
-    100% {
-        transform: scaleY(1)
-    }
-`;
-
 const Menu = styled.div`
-  animation: ${growDownAnimation} 400ms ease-in-out forwards;
+  animation: ${animations.growDown};
   display: flex;
   flex-direction: column;
   position: absolute;

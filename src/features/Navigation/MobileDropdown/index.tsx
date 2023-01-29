@@ -4,13 +4,12 @@ import { useTranslation } from 'react-i18next';
 import type { LangCode } from '../LanguageDropdown';
 import type { NavigationItem as NavItemType } from '../NavigationItems';
 
-import { palette } from '@/components/variables';
+import { animations, palette } from '@/components/variables';
 import styled from 'styled-components';
 
 import Text from '@/components/Text';
 import { Chevron } from '@/components/Icons/Chevron';
 import { useLocation } from 'react-router-dom';
-import { growDownAnimation } from '../InfoDropdown';
 import { LanguageItem } from './MobileLangItem';
 import { NavigationItem } from './MobileNavItem';
 
@@ -125,7 +124,7 @@ const Row = styled.div`
 `;
 
 const Menu = styled.div`
-  animation: ${growDownAnimation} 400ms ease-in-out forwards;
+  animation: ${animations.growDown};
   background-color: ${palette.white};
   box-shadow: 1px 0.5px ${palette.greyMid};
   display: flex;
