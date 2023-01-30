@@ -30,33 +30,41 @@ const MentorSearch = ({
   const shouldShowFilterBall = !isExpanded && selectedSkills.length > 0;
 
   return (
-    <Container>
-      <NarrowSearchBar
-        placeholder={t('filters.search')}
-        value={searchString}
-        onChange={onSearchStringChange}
-        variant="normal"
-      />
-      <Anchor>
-        <IconButton
-          onClick={() => toggleExpanded(!isExpanded)}
-          variant={isExpanded ? 'closeOutlined' : 'filter'}
-          sizeInPx={isExpanded ? 16 : 20}
-          text={{
-            color: 'purple',
-            text: t(buttonText),
-            variant: 'bold',
-          }}
+    <>
+      <SearchHeader variant="h1">{t('filters.title')}</SearchHeader>
+      <Container>
+        <NarrowSearchBar
+          placeholder={t('filters.search')}
+          value={searchString}
+          onChange={onSearchStringChange}
+          variant="normal"
         />
-        {shouldShowFilterBall && (
-          <Ball>
-            <Text variant="bold">{selectedSkills.length}</Text>
-          </Ball>
-        )}
-      </Anchor>
-    </Container>
+        <Anchor>
+          <IconButton
+            onClick={() => toggleExpanded(!isExpanded)}
+            variant={isExpanded ? 'closeOutlined' : 'filter'}
+            sizeInPx={isExpanded ? 16 : 20}
+            text={{
+              color: 'purple',
+              text: t(buttonText),
+              variant: 'bold',
+            }}
+          />
+          {shouldShowFilterBall && (
+            <Ball>
+              <Text variant="bold">{selectedSkills.length}</Text>
+            </Ball>
+          )}
+        </Anchor>
+      </Container>
+    </>
   );
 };
+
+const SearchHeader = styled(Text)`
+  margin: 0;
+  text-align: center;
+`;
 
 const Container = styled.div`
   display: flex;

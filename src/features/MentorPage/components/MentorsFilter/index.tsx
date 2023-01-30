@@ -36,25 +36,29 @@ const MentorsFilter = () => {
       onSearchStringChange={handleSearchStringChange}
     />
   ) : (
-    <Container>
-      <DesktopHeader variant="h1">{t('filters.title')}</DesktopHeader>
-      <DesktopSearch
-        isExpanded={isSkillFilterExpanded}
-        toggleExpanded={setIsSKillFilterExpanded}
-        searchString={searchString}
-        onSearchStringChange={handleSearchStringChange}
-      />
-      {isSkillFilterExpanded && (
-        <>
-          <Divider />
-          <Skills skills={skills} />
-        </>
-      )}
-    </Container>
+    <>
+      <PageHeader>
+        <Text variant="h1">{t('title')}</Text>
+      </PageHeader>
+      <Filters>
+        <DesktopSearch
+          isExpanded={isSkillFilterExpanded}
+          toggleExpanded={setIsSKillFilterExpanded}
+          searchString={searchString}
+          onSearchStringChange={handleSearchStringChange}
+        />
+        {isSkillFilterExpanded && (
+          <>
+            <Divider />
+            <Skills skills={skills} />
+          </>
+        )}
+      </Filters>
+    </>
   );
 };
 
-const Container = styled.div`
+const Filters = styled.div`
   background-color: ${palette.white};
   border-radius: 10px;
   display: flex;
@@ -68,14 +72,20 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const DesktopHeader = styled(Text)`
-  margin: 0;
-  text-align: center;
-`;
-
 const Divider = styled.div`
   border-bottom: solid 1px ${palette.blueDark};
   margin: 0 6%;
+`;
+
+const PageHeader = styled.div`
+  align-items: center;
+  background-color: ${palette.blue2};
+  border-radius: 10px;
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  margin-bottom: 1rem;
+  max-height: 80px;
 `;
 
 export default MentorsFilter;
