@@ -1,6 +1,7 @@
 import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 
 import { useMobileMode } from '@/hooks/useMobileMode';
+import { useEscape } from '@/hooks/useEscape';
 
 import styled, { css } from 'styled-components';
 import { Header } from './Header';
@@ -14,6 +15,8 @@ type Props = {
 
 export const MentorCard = ({ mentor, onDismiss }: Props) => {
   const isMobile = useMobileMode();
+
+  useEscape(() => onDismiss());
 
   return (
     <Container>

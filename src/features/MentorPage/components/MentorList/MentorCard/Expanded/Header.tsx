@@ -7,7 +7,7 @@ import { breakpoints, palette } from '@/components/variables';
 import { IconButton } from '@/components/Buttons';
 import { BasicInfo } from './BasicInfo';
 import Text from '@/components/Text';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 type Props = {
   mentor: Mentor;
@@ -19,7 +19,7 @@ export const Header = ({ mentor, onDismiss }: Props) => {
   const isMobile = useMobileMode();
 
   return isMobile ? (
-    <Container isLoggedIn={!mentor.isVacationing}>
+    <Container isLoggedIn={!mentor.isVacationing} isMobile>
       <HeaderWrapper>
         <AvatarWrapper>
           <Availability
@@ -31,11 +31,11 @@ export const Header = ({ mentor, onDismiss }: Props) => {
           <ProfilePicture isMobile />
         </AvatarWrapper>
         <BasicInfo mentor={mentor} />
-        <IconButton onClick={onDismiss} variant="close" sizeInPx={38} />
+        <CloseButton onClick={onDismiss} variant="close" sizeInPx={38} />
       </HeaderWrapper>
     </Container>
   ) : (
-    <Container isLoggedIn={!mentor.isVacationing}>
+    <Container isLoggedIn={!mentor.isVacationing} isMobile={false}>
       <Availability variant="label" isShowing={availabilityMessage.length > 0}>
         {availabilityMessage}
       </Availability>
@@ -45,11 +45,12 @@ export const Header = ({ mentor, onDismiss }: Props) => {
   );
 };
 
-const Container = styled.div<{ isLoggedIn: boolean }>`
+const Container = styled.div<{ isLoggedIn: boolean; isMobile: boolean }>`
   background-color: ${props =>
     props.isLoggedIn ? palette.purple : palette.blueGrey};
   border-radius: 10px;
   flex: 0 0 21vw;
+  ${({ isMobile }) => !isMobile && css`padding: 2rem;'`}
 `;
 
 const ProfilePicture = styled.div<{ isMobile: boolean }>`
@@ -90,4 +91,9 @@ const HeaderWrapper = styled.div`
 const AvatarWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const CloseButton = styled(IconButton)`
+  align-self: flex-start;
+  margin: 0.5rem;
 `;

@@ -28,15 +28,15 @@ export const Content = ({
   };
 
   return (
-    <Container>
-      <HeaderContainer>
-        <StoryHeader isMobile={isMobile} variant="h3">
-          {t('card.bio')}
-        </StoryHeader>
-        {!isMobile && (
+    <Container isMobile={isMobile}>
+      {!isMobile && (
+        <CloseContainer>
           <IconButton onClick={onDismiss} variant="close" sizeInPx={38} />
-        )}
-      </HeaderContainer>
+        </CloseContainer>
+      )}
+      <StoryHeader isMobile={isMobile} variant="h3">
+        {t('card.bio')}
+      </StoryHeader>
       <Text>{story}</Text>
       {isMobile && <Languages languages={languages} isMobile={isMobile} />}
       <Skills skills={skills} />
@@ -47,16 +47,16 @@ export const Content = ({
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ isMobile: boolean }>`
   display: flex;
   flex: 1;
   flex-direction: column;
   overflow-y: auto;
-  padding: 2rem;
+  padding: ${({ isMobile }) => (isMobile ? '1rem' : '1rem 1rem 2rem 2rem')};
 `;
 
-const HeaderContainer = styled.div`
-  display: flex;
+const CloseContainer = styled.div`
+  align-self: flex-end;
 `;
 
 const StoryHeader = styled(Text)<{ isMobile: boolean }>`
@@ -64,6 +64,7 @@ const StoryHeader = styled(Text)<{ isMobile: boolean }>`
     !isMobile &&
     css`
       flex-grow: 1;
+      margin: 0;
     `};
 `;
 
