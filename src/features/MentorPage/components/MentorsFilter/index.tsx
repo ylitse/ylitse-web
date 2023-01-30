@@ -1,33 +1,48 @@
+import { useState } from 'react';
+
 import { selectSkills } from '../../mentorPageApi';
-import { useAppSelector } from '@/store';
-import { useTranslation } from 'react-i18next';
+import {
+  changeSearchString,
+  selectSearchString,
+} from '@/features/MentorPage/mentorsFilterSlice';
+import { useAppSelector, useAppDispatch } from '@/store';
 
 import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
 import { palette } from '@/components/variables';
 import { Text } from '@/components/Text/Text';
-import KeywordSearch from './MentorSearch';
+import DesktopSearch from './MentorSearch';
+import MobileSearch from './MobileSearch';
 import Skills from './Skills';
-import { useState } from 'react';
 
 const MentorsFilter = () => {
   const [isSkillFilterExpanded, setIsSKillFilterExpanded] = useState(false);
   const skills = useAppSelector(selectSkills());
+  const searchString = useAppSelector(selectSearchString);
+
+  const dispatch = useAppDispatch();
+
+  const handleSearchStringChange = (value: string) =>
+    dispatch(changeSearchString(value));
 
   const { t } = useTranslation('mentors');
   const isMobile = useMobileMode();
 
   return isMobile ? (
-    <MobileContainer>
-      <MobileHeader variant="h1">{t('filters.title')}</MobileHeader>
-    </MobileContainer>
+    <MobileSearch
+      searchString={searchString}
+      onSearchStringChange={handleSearchStringChange}
+    />
   ) : (
     <Container>
       <DesktopHeader variant="h1">{t('filters.title')}</DesktopHeader>
-      <KeywordSearch
+      <DesktopSearch
         isExpanded={isSkillFilterExpanded}
         toggleExpanded={setIsSKillFilterExpanded}
+        searchString={searchString}
+        onSearchStringChange={handleSearchStringChange}
       />
       {isSkillFilterExpanded && (
         <>
@@ -51,19 +66,6 @@ const Container = styled.div`
   padding: 2.5rem 0;
   position: relative;
   width: 100%;
-`;
-
-const MobileContainer = styled.div`
-  align-items: center;
-  background-color: ${palette.white};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1.5rem;
-`;
-
-const MobileHeader = styled(Text)`
-  align-self: flex-start;
 `;
 
 const DesktopHeader = styled(Text)`

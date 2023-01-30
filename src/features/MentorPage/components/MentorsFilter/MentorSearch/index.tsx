@@ -1,9 +1,5 @@
-import { useAppDispatch, useAppSelector } from '@/store';
-import {
-  changeSearchString,
-  selectSelectedSkills,
-  selectSearchString,
-} from '@/features/MentorPage/mentorsFilterSlice';
+import { useAppSelector } from '@/store';
+import { selectSelectedSkills } from '@/features/MentorPage/mentorsFilterSlice';
 
 import { useTranslation } from 'react-i18next';
 
@@ -16,27 +12,30 @@ import Text from '@/components/Text';
 type Props = {
   isExpanded: boolean;
   toggleExpanded: (next: boolean) => void;
+  searchString: string;
+  onSearchStringChange: (value: string) => void;
 };
 
-const MentorSearch = ({ isExpanded, toggleExpanded }: Props) => {
+const MentorSearch = ({
+  isExpanded,
+  toggleExpanded,
+  searchString,
+  onSearchStringChange,
+}: Props) => {
   const { t } = useTranslation('mentors');
   const buttonText = isExpanded ? 'filters.close' : 'filters.show';
 
-  const searchString = useAppSelector(selectSearchString);
   const selectedSkills = useAppSelector(selectSelectedSkills);
-  const dispatch = useAppDispatch();
-
-  const handleSearchStringChange = (value: string) =>
-    dispatch(changeSearchString(value));
 
   const shouldShowFilterBall = !isExpanded && selectedSkills.length > 0;
 
   return (
     <Container>
-      <SearchBar
+      <NarrowSearchBar
         placeholder={t('filters.search')}
         value={searchString}
-        onChange={handleSearchStringChange}
+        onChange={onSearchStringChange}
+        variant="normal"
       />
       <Anchor>
         <IconButton
@@ -89,6 +88,10 @@ const Ball = styled.div`
   top: 0.25rem;
   width: 20px;
   z-index: 20;
+`;
+
+const NarrowSearchBar = styled(SearchBar)`
+  width: 50%;
 `;
 
 export default MentorSearch;
