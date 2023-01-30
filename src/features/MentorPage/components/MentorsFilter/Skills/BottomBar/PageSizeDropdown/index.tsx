@@ -16,6 +16,11 @@ const PageSizeDropdown = ({ skillsInPage, setSkillsInPage }: Props) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
 
+  const handlePageSizeChange = (next: number) => {
+    setSkillsInPage(next);
+    setIsComponentVisible(false);
+  };
+
   return (
     <Container>
       <Text>Aihetta sivulla</Text>
@@ -31,7 +36,7 @@ const PageSizeDropdown = ({ skillsInPage, setSkillsInPage }: Props) => {
             {pageSizes.map(size => (
               <PageOption
                 key={size}
-                onClick={setSkillsInPage}
+                onClick={handlePageSizeChange}
                 isSelected={size === skillsInPage}
                 size={size}
               />
