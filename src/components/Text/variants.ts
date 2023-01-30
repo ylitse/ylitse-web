@@ -57,7 +57,6 @@ export const variants: Record<TextVariant, TextProp> = {
       fontSize: '1.5rem',
       fontStyle: 'normal',
       fontWeight: '700',
-      lineHeight: '2.2rem',
     },
   },
   h2: {

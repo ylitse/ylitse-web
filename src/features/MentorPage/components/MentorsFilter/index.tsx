@@ -45,7 +45,7 @@ const Container = styled.div`
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2.5rem;
   height: auto;
   margin: 0;
   padding: 2.5rem 0;
@@ -74,7 +74,6 @@ const DesktopHeader = styled(Text)`
 const Divider = styled.div`
   border-bottom: solid 1px ${palette.blueDark};
   margin: 0 6%;
-  padding-top: 1rem;
 `;
 
 export default MentorsFilter;

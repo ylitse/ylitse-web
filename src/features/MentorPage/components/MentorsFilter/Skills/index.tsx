@@ -83,7 +83,8 @@ const Container = styled.div`
 `;
 
 const DesktopHeader = styled(Text)`
-  padding-bottom: 1rem;
+  margin: 0;
+  margin-bottom: 2.5rem;
   text-align: center;
 `;
 

@@ -63,7 +63,7 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 2.5rem;
   justify-content: center;
   margin: auto;
   max-width: 90%;
