@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/variables';
+import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 
@@ -13,7 +14,11 @@ const ChatWindow = () => {
 
   return chats.length ? (
     <ActiveChatContainer>
-      <HeaderBar></HeaderBar>
+      <HeaderBar>
+        <ProfileIcon color="purpleDark" />
+        <Text variant="h2">Eveliina_96</Text>
+        <Text variant="p">Jutellaanko? </Text>
+      </HeaderBar>
       <ChatHistory></ChatHistory>
       <MessageField></MessageField>
     </ActiveChatContainer>
@@ -49,8 +54,12 @@ const ActiveChatContainer = styled.div`
 `;
 
 const HeaderBar = styled.div`
+  align-items: center;
   border-bottom: 1px solid ${palette.greyLight};
+  display: flex;
+  gap: 30px;
   height: 80px;
+  padding-left: 30px;
 `;
 
 const ChatHistory = styled.div`
