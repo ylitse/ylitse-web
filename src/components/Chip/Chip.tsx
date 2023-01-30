@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { IconButton } from '../Buttons';
 import Text from '../Text';
 import { animations, palette } from '../variables';
 
@@ -22,16 +23,21 @@ const Chip: React.FC<Props> = ({ text, isSelected, shouldShake, onToggle }) => {
       <Text variant="chip" color={isSelected ? 'white' : 'blueDark'}>
         {text}
       </Text>
+
+      {isSelected && <IconButton sizeInPx={20} variant="close" />}
     </StyledChip>
   );
 };
 
 const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
+  align-items: center;
   appearance: none;
   border: none;
   border-radius: 1.75rem;
   cursor: pointer;
+  display: flex;
   flex: 0 0 auto;
+  gap: 0.5rem;
   height: 2.75rem;
   padding: 0.75rem 1.25rem;
 
