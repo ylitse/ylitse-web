@@ -89,9 +89,9 @@ describe('<MentorPage />', () => {
     expect(await findByRole('heading', { name: 'title' })).toBeInTheDocument();
 
     // show the filters
-    const showFiltersButton = getByRole('button', { name: /show-filters/i });
+    const showFiltersButton = getByRole('button', { name: /filter/i });
     user.click(showFiltersButton);
-    await findByRole('textbox');
+    await findByRole('button', { name: /next/i });
 
     // click the skill
     // There is one pill in the skill-list, and one in the mentor-card
@@ -114,7 +114,7 @@ describe('<MentorPage />', () => {
   });
 
   it('displays fetched mentors in list and can filter by searchString', async () => {
-    const { user, getByRole, findByRole, queryByText } = renderWithProviders(
+    const { user, findByRole, queryByText } = renderWithProviders(
       <MentorPage />,
     );
 
@@ -123,10 +123,6 @@ describe('<MentorPage />', () => {
 
     // after some time, the mentors should be received
     expect(await findByRole('heading', { name: 'title' })).toBeInTheDocument();
-
-    // show the filters
-    const showFiltersButton = getByRole('button', { name: /show-filters/i });
-    user.click(showFiltersButton);
 
     // write a search-string
     const searchInput = await findByRole('textbox');

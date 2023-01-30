@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { IconButton } from '../Buttons';
 import Text from '../Text';
 import { animations, palette } from '../variables';
+import CloseIcon from '@/static/icons/close.svg';
 
 type Props = {
   text: string;
@@ -24,7 +24,7 @@ const Chip: React.FC<Props> = ({ text, isSelected, shouldShake, onToggle }) => {
         {text}
       </Text>
 
-      {isSelected && <IconButton sizeInPx={20} variant="close" />}
+      {isSelected && <Close />}
     </StyledChip>
   );
 };
@@ -64,6 +64,21 @@ const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
       perspective: 1000px;
       transform: translate3d(0, 0, 0);
     `}
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+const Close = styled.span`
+  background-color: transparent;
+  background-image: url(${CloseIcon});
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  z-index: 10;
 `;
 
 export default Chip;
