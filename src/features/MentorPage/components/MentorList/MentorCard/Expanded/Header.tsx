@@ -22,10 +22,7 @@ export const Header = ({ mentor, onDismiss }: Props) => {
     <Container isAvailable={!mentor.isVacationing} isMobile>
       <HeaderWrapper>
         <AvatarWrapper>
-          <Availability
-            variant="label"
-            isShowing={availabilityMessage.length > 0}
-          >
+          <Availability variant="p" isShowing={availabilityMessage.length > 0}>
             {availabilityMessage}
           </Availability>
           <ProfilePicture isMobile />
@@ -36,7 +33,7 @@ export const Header = ({ mentor, onDismiss }: Props) => {
     </Container>
   ) : (
     <Container isAvailable={!mentor.isVacationing} isMobile={false}>
-      <Availability variant="label" isShowing={availabilityMessage.length > 0}>
+      <Availability variant="p" isShowing={availabilityMessage.length > 0}>
         {availabilityMessage}
       </Availability>
       <ProfilePicture isMobile={false} />
