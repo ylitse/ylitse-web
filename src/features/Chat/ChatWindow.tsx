@@ -9,10 +9,14 @@ import { TextButton } from '@/components/Buttons';
 const ChatWindow = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('chat');
-  const chats = [];
+  const chats = [{}];
 
   return chats.length ? (
-    <ActiveChatContainer></ActiveChatContainer>
+    <ActiveChatContainer>
+      <HeaderBar></HeaderBar>
+      <ChatHistory></ChatHistory>
+      <MessageField></MessageField>
+    </ActiveChatContainer>
   ) : (
     <Container>
       <UpperWelcomeContainer>
@@ -34,12 +38,34 @@ const ChatWindow = () => {
   );
 };
 
-const Container = styled.div`
+const ActiveChatContainer = styled.div`
+  background-color: ${palette.white};
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   height: 780px;
   width: 1021px;
 `;
 
-const ActiveChatContainer = styled.div``;
+const HeaderBar = styled.div`
+  border-bottom: 1px solid ${palette.greyLight};
+  height: 80px;
+`;
+
+const ChatHistory = styled.div`
+  border-bottom: 1px solid ${palette.greyLight};
+  height: 580px;
+`;
+
+const MessageField = styled.div`
+  height: 120px;
+`;
+
+const Container = styled.div`
+  height: 780px;
+  width: 1021px;
+`;
 
 const UpperWelcomeContainer = styled.div`
   background-color: ${palette.white};
