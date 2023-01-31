@@ -20,7 +20,7 @@ describe('<MentorChips />', () => {
   it('Mentor chips are rendered correctly', () => {
     const { getAllByRole } = renderWithProviders(<SkillChips {...props} />);
 
-    expect(getAllByRole('button').length).toBe(13);
+    expect(getAllByRole('button').length).toBe(12);
   });
 
   it('Selecting skill will change the state', async () => {

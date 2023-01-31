@@ -1,5 +1,5 @@
 import { palette } from '@/components/variables';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Text from '@/components/Text';
 import { Chevron } from '@/components/Icons/Chevron';
 import { Button } from './PageOption';
@@ -15,7 +15,10 @@ export const OpenButton = ({
   onClick,
   selected,
 }: Props) => (
-  <SelectButton onClick={() => onClick(!isComponentVisible)}>
+  <SelectButton
+    onClick={() => onClick(!isComponentVisible)}
+    isExpanded={isComponentVisible}
+  >
     <Text variant="bold" color="purple">
       {selected}
     </Text>
@@ -27,10 +30,15 @@ export const OpenButton = ({
   </SelectButton>
 );
 
-const SelectButton = styled(Button)`
+const SelectButton = styled(Button)<{ isExpanded: boolean }>`
   align-items: center;
-  border-bottom: 2px solid ${palette.purple};
-  border-radius: 8px 8px 0 0;
-  border-top: 2px solid ${palette.purple};
+  border: none;
   display: flex;
+
+  ${({ isExpanded }) =>
+    isExpanded &&
+    css`
+      border: 2px solid ${palette.purple};
+      border-radius: 8px 8px 0 0;
+    `}
 `;

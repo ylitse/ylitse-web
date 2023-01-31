@@ -79,8 +79,14 @@ describe('<MentorPage />', () => {
   });
 
   it('displays fetched mentors in list and can filter by skills', async () => {
-    const { user, getByRole, findByRole, queryByText, findAllByRole } =
-      renderWithProviders(<MentorPage />);
+    const {
+      user,
+      getByRole,
+      findByRole,
+      findByText,
+      queryByText,
+      findAllByRole,
+    } = renderWithProviders(<MentorPage />);
 
     // should be loading initially
     expect(await findByRole('progressbar')).toBeInTheDocument();
@@ -91,7 +97,7 @@ describe('<MentorPage />', () => {
     // show the filters
     const showFiltersButton = getByRole('button', { name: /filter/i });
     user.click(showFiltersButton);
-    await findByRole('button', { name: /next/i });
+    await findByText(/filters.clear/i);
 
     // click the skill
     // There is one pill in the skill-list, and one in the mentor-card

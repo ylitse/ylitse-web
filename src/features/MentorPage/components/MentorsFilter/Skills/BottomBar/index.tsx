@@ -36,6 +36,15 @@ export const BottomBar = ({
     dispatch(resetFilters());
   };
 
+  const handleSetPageSize = (nextSize: number) => {
+    // when changing page-size, we reset the page
+    setSkillsInPage(nextSize);
+    setCurrentPage(1);
+  };
+
+  const isLastPage = currentPage === paginationRange?.slice(-1)[0];
+  const isFirstPage = currentPage === paginationRange?.[0];
+
   return (
     <Container>
       <IconButton
@@ -50,6 +59,14 @@ export const BottomBar = ({
       />
 
       <PaginationContainer>
+        {!isFirstPage && (
+          <Prev
+            variant="prev"
+            sizeInPx={28}
+            onClick={() => setCurrentPage(currentPage - 1)}
+          />
+        )}
+
         {paginationRange?.map((page, index) => (
           <PageButton
             key={`${page}_${index}`}
@@ -58,17 +75,18 @@ export const BottomBar = ({
             onClick={() => setCurrentPage(Number(page))}
           />
         ))}
-        <Next
-          variant="next"
-          sizeInPx={28}
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === paginationRange?.slice(1)[0]}
-        />
+        {!isLastPage && (
+          <Next
+            variant="next"
+            sizeInPx={28}
+            onClick={() => setCurrentPage(currentPage + 1)}
+          />
+        )}
       </PaginationContainer>
 
       <PageSizeDropdown
         skillsInPage={skillsInPage}
-        setSkillsInPage={setSkillsInPage}
+        setSkillsInPage={handleSetPageSize}
       />
     </Container>
   );
@@ -90,6 +108,10 @@ const PaginationContainer = styled.div`
 
 const Next = styled(IconButton)`
   margin-left: 0.5rem;
+`;
+
+const Prev = styled(IconButton)`
+  margin-right: 0.5rem;
 `;
 
 export default BottomBar;
