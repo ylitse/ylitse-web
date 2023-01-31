@@ -73,7 +73,7 @@ const Filters = styled.div`
 `;
 
 const Divider = styled.div`
-  border-bottom: solid 1px ${palette.blueDark};
+  border-bottom: solid 1px ${palette.purplePale};
   margin: 0 6%;
 `;
 

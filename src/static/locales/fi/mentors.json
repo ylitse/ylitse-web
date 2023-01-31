@@ -8,7 +8,8 @@
     "search": "Etsi mentoria",
     "clear": "Poista suodattimet",
     "close": "Sulje suodatus",
-    "show": "Suodata aiheella"
+    "show": "Suodata aiheella",
+    "pageSizeLabel": "Aihetta sivulla:"
   },
   "card": {
     "unavailable": "Ei käytettävissä",

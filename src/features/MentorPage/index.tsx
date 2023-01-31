@@ -7,11 +7,11 @@ import {
 } from './mentorPageApi';
 import { useAppSelector } from '@/store';
 
+import PageWithTransition from '@/components/PageWithTransition';
+import Spinner from '@/components/Spinner';
 import MentorsFilter from './components/MentorsFilter';
 import MentorList from './components/MentorList';
-import PageWithTransition from '../../components/PageWithTransition';
 import MentorCard from './components/MentorList/MentorCard/Expanded';
-import Spinner from '@/components/Spinner';
 
 const MentorPage = () => {
   const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);

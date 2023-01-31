@@ -8,7 +8,8 @@
     "search": "Search mentors by keyword",
     "clear": "Clear filters",
     "close": "Close filters",
-    "show": "Filter by tag"
+    "show": "Filter by tag",
+    "pageSizeLabel": "Tags on page:"
   },
   "card": {
     "unavailable": "Unavailable",

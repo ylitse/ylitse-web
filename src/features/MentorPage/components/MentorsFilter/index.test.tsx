@@ -1,5 +1,5 @@
 import { renderWithProviders } from '@/test/testStore';
-import MentorsFilter from './index';
+import MentorsFilter from '.';
 
 describe('<MentorsFilter />', () => {
   it('Can change the searchString', async () => {

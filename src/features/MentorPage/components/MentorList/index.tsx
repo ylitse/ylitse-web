@@ -1,8 +1,10 @@
+import type { Mentor } from '@/features/MentorPage/mentorPageApi';
+
+import { useMobileMode } from '@/hooks/useMobileMode';
+
 import styled, { css } from 'styled-components';
 import { spacing } from '@/components/variables';
 import ListCard from './MentorCard/List';
-import { Mentor } from '../../mentorPageApi';
-import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {
   mentors: Array<Mentor>;

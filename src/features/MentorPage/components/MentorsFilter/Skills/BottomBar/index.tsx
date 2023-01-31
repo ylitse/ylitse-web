@@ -1,4 +1,4 @@
-import { resetFilters } from '../../../../mentorsFilterSlice';
+import { resetFilters } from '@/features/MentorPage/mentorsFilterSlice';
 import { useAppDispatch } from '@/store';
 
 import { usePagination } from './usePagination';

@@ -1,11 +1,14 @@
 import { useMemo, useState } from 'react';
 
-import { selectSelectedSkills, toggleSkill } from '../../../mentorsFilterSlice';
+import {
+  selectSelectedSkills,
+  toggleSkill,
+} from '@/features/MentorPage/mentorsFilterSlice';
 import { useAppDispatch, useAppSelector } from '@/store';
 
 import { usePillShakeChecker } from './usePillShakeChecker';
 import { useTranslation } from 'react-i18next';
-import { defaultPageSize } from './BottomBar/PageSizeDropdown/const';
+import { defaultPageSize } from './BottomBar/PageSizeDropdown/constants';
 
 import styled from 'styled-components';
 import { Text } from '@/components/Text/Text';

@@ -19,7 +19,7 @@ export const Header = ({ mentor, onDismiss }: Props) => {
   const isMobile = useMobileMode();
 
   return isMobile ? (
-    <Container isLoggedIn={!mentor.isVacationing} isMobile>
+    <Container isAvailable={!mentor.isVacationing} isMobile>
       <HeaderWrapper>
         <AvatarWrapper>
           <Availability
@@ -35,7 +35,7 @@ export const Header = ({ mentor, onDismiss }: Props) => {
       </HeaderWrapper>
     </Container>
   ) : (
-    <Container isLoggedIn={!mentor.isVacationing} isMobile={false}>
+    <Container isAvailable={!mentor.isVacationing} isMobile={false}>
       <Availability variant="label" isShowing={availabilityMessage.length > 0}>
         {availabilityMessage}
       </Availability>
@@ -45,9 +45,9 @@ export const Header = ({ mentor, onDismiss }: Props) => {
   );
 };
 
-const Container = styled.div<{ isLoggedIn: boolean; isMobile: boolean }>`
-  background-color: ${props =>
-    props.isLoggedIn ? palette.purple : palette.blueGrey};
+const Container = styled.div<{ isAvailable: boolean; isMobile: boolean }>`
+  background-color: ${({ isAvailable }) =>
+    isAvailable ? palette.purple : palette.blueGrey};
   border-radius: 10px;
   flex: 0 0 21vw;
   ${({ isMobile }) => !isMobile && css`padding: 2rem;'`}

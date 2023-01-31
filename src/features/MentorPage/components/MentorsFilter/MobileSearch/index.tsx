@@ -19,7 +19,7 @@ const MobileSearch = ({ searchString, onSearchStringChange }: Props) => {
       <Text>{t('filters.description')}</Text>
       <SearchBar
         variant="small"
-        placeholder="Etsi mentoria"
+        placeholder={t('filters.search')}
         value={searchString}
         onChange={onSearchStringChange}
       />

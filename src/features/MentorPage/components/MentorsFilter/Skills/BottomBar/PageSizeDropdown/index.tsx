@@ -1,6 +1,7 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
+import { useTranslation } from 'react-i18next';
 
-import { pageSizes } from './const';
+import { pageSizes } from './constants';
 
 import { animations, palette } from '@/components/variables';
 import styled from 'styled-components';
@@ -16,6 +17,8 @@ const PageSizeDropdown = ({ skillsInPage, setSkillsInPage }: Props) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLDivElement>(false);
 
+  const { t } = useTranslation('mentors');
+
   const handlePageSizeChange = (next: number) => {
     setSkillsInPage(next);
     setIsComponentVisible(false);
@@ -23,7 +26,7 @@ const PageSizeDropdown = ({ skillsInPage, setSkillsInPage }: Props) => {
 
   return (
     <Container>
-      <Text>Aihetta sivulla</Text>
+      <Text>{t('filters.pageSizeLabel')}</Text>
       <Anchor ref={ref}>
         <OpenButton
           isComponentVisible={isComponentVisible}
