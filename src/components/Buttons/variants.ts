@@ -1,6 +1,9 @@
 import { palette } from '../variables';
+import ArchiveIcon from '@/static/icons/archive.svg';
+import BlockIcon from '@/static/icons/block.svg';
 import CloseIcon from '@/static/icons/close.svg';
-import SearchIcon from '@/static/icons/search-with-background.svg';
+import SearchIcon from '@/static/icons/search.svg';
+import SearchWithBackgroundIcon from '@/static/icons/search-with-background.svg';
 import BackIcon from '@/static/icons/back.svg';
 import EditIcon from '@/static/icons/edit.svg';
 import SendIcon from '@/static/icons/send.svg';
@@ -86,8 +89,14 @@ export type ButtonIcon =
   | 'tooltip';
 
 export const iconVariants = {
+  archive: {
+    backgroundImage: `url(${ArchiveIcon})`,
+  },
   back: {
     backgroundImage: `url(${BackIcon})`,
+  },
+  block: {
+    backgroundImage: `url(${BlockIcon})`,
   },
   close: {
     backgroundImage: `url(${CloseIcon})`,
@@ -127,6 +136,9 @@ export const iconVariants = {
   },
   search: {
     backgroundImage: `url(${SearchIcon})`,
+  },
+  searchWithBackground: {
+    backgroundImage: `url(${SearchWithBackgroundIcon})`,
   },
   send: {
     backgroundImage: `url(${SendIcon})`,

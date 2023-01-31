@@ -28,7 +28,7 @@ const ChatMenu = () => {
         <Buttons>
           {!!chats.length && (
             <IconButton
-              variant="search"
+              variant="searchWithBackground"
               sizeInPx={40}
               onClick={() => console.log('searching...')}
             />

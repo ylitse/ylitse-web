@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
-import { TextButton } from '@/components/Buttons';
+import { IconButton, TextButton } from '@/components/Buttons';
 
 const ChatWindow = () => {
   const navigate = useNavigate();
@@ -15,12 +15,48 @@ const ChatWindow = () => {
   return chats.length ? (
     <ActiveChatContainer>
       <HeaderBar>
-        <ProfileIcon color="purpleDark" />
-        <Text variant="h2">Eveliina_96</Text>
-        <Text variant="p">Jutellaanko? </Text>
+        <LeftBar>
+          <ProfileIcon color="purpleDark" />
+          <Text variant="h2">Eveliina_96</Text>
+          <Text variant="p">Jutellaanko? </Text>
+        </LeftBar>
+        <RightBar>
+          <IconButton
+            variant="search"
+            sizeInPx={20}
+            onClick={() => console.log('searching...')}
+          />
+          <div>
+            <IconButton
+              variant="archive"
+              sizeInPx={20}
+              onClick={() => console.log('archiving...')}
+            />
+            <Text variant="link" color="purple">
+              Arkistoi
+            </Text>
+          </div>
+          <div>
+            <IconButton
+              variant="block"
+              sizeInPx={20}
+              onClick={() => console.log('blocking...')}
+            />
+            <Text variant="link" color="purple">
+              Estä käyttäjä
+            </Text>
+          </div>
+        </RightBar>
       </HeaderBar>
       <ChatHistory></ChatHistory>
-      <MessageField></MessageField>
+      <MessageField>
+        <TextInput placeholder="Kirjoita viestisi tähän" />
+        <IconButton
+          variant="send"
+          sizeInPx={46}
+          onClick={() => console.log('sending...')}
+        />
+      </MessageField>
     </ActiveChatContainer>
   ) : (
     <Container>
@@ -54,12 +90,24 @@ const ActiveChatContainer = styled.div`
 `;
 
 const HeaderBar = styled.div`
-  align-items: center;
   border-bottom: 1px solid ${palette.greyLight};
   display: flex;
-  gap: 30px;
   height: 80px;
-  padding-left: 30px;
+  justify-content: space-between;
+  padding-left: 40px;
+  padding-right: 40px;
+`;
+
+const LeftBar = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 30px;
+`;
+
+const RightBar = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 30px;
 `;
 
 const ChatHistory = styled.div`
@@ -68,7 +116,26 @@ const ChatHistory = styled.div`
 `;
 
 const MessageField = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 30px;
   height: 120px;
+  padding-left: 40px;
+  padding-right: 20px;
+`;
+
+const TextInput = styled.input`
+  border: 1px solid ${palette.purple};
+  border-radius: 10px;
+  color: ${palette.greyFaded};
+  display: flex;
+  font-family: 'Source Sans Pro';
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  height: 80px;
+  line-height: 1.5rem;
+  width: 883px;
 `;
 
 const Container = styled.div`
