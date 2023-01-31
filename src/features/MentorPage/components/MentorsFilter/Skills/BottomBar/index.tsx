@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
 import { PageButton } from './PageButton';
-import { IconButton } from '@/components/Buttons';
+import { Button, IconButton } from '@/components/Buttons';
 import PageSizeDropdown from './PageSizeDropdown';
 
 type Props = {
@@ -47,8 +47,8 @@ export const BottomBar = ({
 
   return (
     <Container>
-      <IconButton
-        variant="deleteOutlined"
+      <Button
+        leftIcon="deleteOutlined"
         onClick={handleReset}
         sizeInPx={20}
         text={{

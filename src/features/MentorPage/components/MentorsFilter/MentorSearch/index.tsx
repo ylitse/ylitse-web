@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
 import SearchBar from '@/components/SearchBar';
-import { IconButton } from '@/components/Buttons';
+import { Button } from '@/components/Buttons';
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
@@ -40,9 +40,9 @@ const MentorSearch = ({
           variant="normal"
         />
         <Anchor>
-          <IconButton
+          <Button
             onClick={() => toggleExpanded(!isExpanded)}
-            variant={isExpanded ? 'closeOutlined' : 'filter'}
+            leftIcon={isExpanded ? 'closeOutlined' : 'filter'}
             sizeInPx={isExpanded ? 16 : 20}
             text={{
               color: 'purple',
