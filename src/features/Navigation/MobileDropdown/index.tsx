@@ -4,13 +4,12 @@ import { useTranslation } from 'react-i18next';
 import type { LangCode } from '../LanguageDropdown';
 import type { NavigationItem as NavItemType } from '../NavigationItems';
 
-import { palette } from '@/components/variables';
+import { animations, palette } from '@/components/variables';
 import styled from 'styled-components';
 
 import Text from '@/components/Text';
 import { Chevron } from '@/components/Icons/Chevron';
 import { useLocation } from 'react-router-dom';
-import { growDownAnimation } from '../InfoDropdown';
 import { LanguageItem } from './MobileLangItem';
 import { NavigationItem } from './MobileNavItem';
 
@@ -42,11 +41,11 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
         <Text variant="linkHeader" color="white">
           {t('navigation.mobile.menu')}
         </Text>
-        {isComponentVisible ? (
-          <Chevron variant="up" color="white" isLarge />
-        ) : (
-          <Chevron variant="down" color="white" isLarge />
-        )}
+        <Chevron
+          variant={isComponentVisible ? 'up' : 'down'}
+          color="white"
+          isLarge
+        />
       </Row>
 
       {isComponentVisible && (
@@ -93,6 +92,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
             isSelected={isSelected('fi')}
             text={t(`navigation.language.fi.long`)}
           />
+
           <Divider />
 
           <NavigationItem
@@ -124,7 +124,7 @@ const Row = styled.div`
 `;
 
 const Menu = styled.div`
-  animation: ${growDownAnimation} 400ms ease-in-out forwards;
+  animation: ${animations.growDown};
   background-color: ${palette.white};
   box-shadow: 1px 0.5px ${palette.greyMid};
   display: flex;

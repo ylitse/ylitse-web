@@ -1,40 +1,48 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react';
 import styled, { css } from 'styled-components';
 
+import { TextVariant } from '../Text/variants';
+import Text from '../Text';
+import { Color } from '../variables';
 import { ButtonIcon, iconVariants } from './variants';
 
 type ButtonProps<T extends ElementType> = {
-  variant: ButtonIcon;
+  leftIcon?: ButtonIcon;
+  rightIcon?: ButtonIcon;
   sizeInPx: number;
+  text?: { variant: TextVariant; color: Color; text: string };
 } & ComponentPropsWithoutRef<T>;
 
 const IconButton = <T extends ElementType = 'button'>({
   variant,
   sizeInPx,
+  text,
+  leftIcon,
+  rightIcon,
   onClick,
   ...rest
 }: ButtonProps<T>): JSX.Element => {
   return (
-    <Container onClick={onClick}>
-      <StyledIconButton
-        variant={variant}
-        size={sizeInPx}
-        {...rest}
-        aria-label={variant}
-      />
-    </Container>
+    <Button onClick={onClick} {...rest} aria-label={variant}>
+      {leftIcon && <Icon variant={leftIcon} size={sizeInPx} />}
+
+      {text && (
+        <Text variant={text.variant} color={text.color}>
+          {text.text}
+        </Text>
+      )}
+
+      {rightIcon && <Icon variant={rightIcon} size={sizeInPx} />}
+    </Button>
   );
 };
 
-const StyledIconButton = styled.button<{
+const Icon = styled.span<{
   variant: ButtonIcon;
   size: number;
 }>`
-  appearance: none;
-  background-color: transparent;
   background-repeat: no-repeat;
   background-size: contain;
-  border: none;
   cursor: pointer;
   z-index: 10;
   ${({ size }) => css`
@@ -44,8 +52,11 @@ const StyledIconButton = styled.button<{
   ${({ variant }) => variant && iconVariants[variant]}
 `;
 
-const Container = styled.div`
+const Button = styled.button`
   align-items: center;
+  appearance: none;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
   display: flex;
   gap: 0.5rem;

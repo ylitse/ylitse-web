@@ -27,7 +27,6 @@ const StyledSimpleChip = styled.button`
   flex: 0 0 auto;
   height: 2rem;
   line-height: 1rem;
-  margin: 0.5rem;
   padding: 0.5rem 1rem;
 `;
 

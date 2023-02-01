@@ -1,8 +1,8 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 
-import { palette } from '@/components/variables';
-import styled, { keyframes } from 'styled-components';
+import { animations, palette } from '@/components/variables';
+import styled from 'styled-components';
 import { InfoItem, Container } from './InfoItem';
 import { DropdownButton } from './DropdownButton';
 import Text from '@/components/Text';
@@ -49,20 +49,8 @@ export const Anchor = styled.div`
   position: relative;
 `;
 
-export const growDownAnimation = keyframes`
-    0% {
-        transform: scaleY(0)
-    }
-    80% {
-        transform: scaleY(1.1)
-    }
-    100% {
-        transform: scaleY(1)
-    }
-`;
-
 export const Menu = styled.div`
-  animation: ${growDownAnimation} 400ms ease-in-out forwards;
+  animation: ${animations.growDown};
   display: flex;
   flex-direction: column;
   left: -2px;

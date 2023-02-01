@@ -1,13 +1,15 @@
 {
   "title": "Mentorit",
   "filters": {
-    "title": "Suodata mentoreita",
+    "title": "Haku",
     "oneSelected": "aihe valittu",
     "multipleSelected": "aihetta valittu",
-    "description": "Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita ongelmasi perusteella.",
+     "description": "Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita ongelmasi perusteella.",
     "search": "Etsi mentoria",
     "clear": "Poista suodattimet",
-    "close": "Sulje"
+    "close": "Sulje suodatus",
+    "show": "Suodata aiheella",
+    "pageSizeLabel": "Aihetta sivulla:"
   },
   "card": {
     "unavailable": "Ei käytettävissä",

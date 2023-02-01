@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import { animations } from '../variables';
 
 import Background from '@/static/img/loading-background.svg';
 
@@ -16,16 +17,6 @@ const LoadingPage = () => {
     </Page>
   );
 };
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`;
 
 const Page = styled.div`
   align-items: center;
@@ -53,7 +44,7 @@ const Wrapper = styled.div`
 `;
 
 const Loader = styled.div`
-  animation: ${rotate} 1.5s linear infinite;
+  animation: ${animations.spin};
   border: 10px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   border-top: 10px solid white;

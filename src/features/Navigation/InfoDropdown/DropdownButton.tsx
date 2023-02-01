@@ -29,11 +29,7 @@ export const DropdownButton: React.FC<Props> = ({
       <Text variant="link" color={color}>
         {text}
       </Text>
-      {isComponentVisible ? (
-        <Chevron variant="up" color={color} />
-      ) : (
-        <Chevron variant="down" color={color} />
-      )}
+      <Chevron variant={isComponentVisible ? 'up' : 'down'} color={color} />
     </Button>
   );
 };
