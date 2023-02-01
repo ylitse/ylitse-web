@@ -28,7 +28,11 @@ export const Header = ({ mentor, onDismiss }: Props) => {
           <ProfilePicture isMobile />
         </AvatarWrapper>
         <BasicInfo mentor={mentor} />
-        <CloseButton onClick={onDismiss} variant="close" sizeInPx={38} />
+        <CloseButton
+          onClick={onDismiss}
+          variant="closeWithBackground"
+          sizeInPx={38}
+        />
       </HeaderWrapper>
     </Container>
   ) : (

@@ -42,7 +42,7 @@ const MentorSearch = ({
         <Anchor>
           <Button
             onClick={() => toggleExpanded(!isExpanded)}
-            leftIcon={isExpanded ? 'closeOutlined' : 'filter'}
+            leftIcon={isExpanded ? 'close' : 'filter'}
             sizeInPx={isExpanded ? 16 : 20}
             text={{
               color: 'purple',

@@ -48,7 +48,7 @@ export const BottomBar = ({
   return (
     <Container>
       <Button
-        leftIcon="deleteOutlined"
+        leftIcon="delete"
         onClick={handleReset}
         sizeInPx={20}
         text={{
