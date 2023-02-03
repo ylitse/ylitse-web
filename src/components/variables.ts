@@ -26,8 +26,8 @@ export const palette = {
 };
 
 export const CONTENT_WIDTH = '76vw';
-export const NAVIGATION_HEIGHT = '60px';
-export const FOOTER_HEIGHT = '60px';
+export const NAVIGATION_HEIGHT = '3rem';
+export const FOOTER_HEIGHT = '3rem';
 export const MOBILE_TRESHOLD = 600;
 export const breakpoints = {
   mobile: `${MOBILE_TRESHOLD}px`,
