@@ -1,7 +1,7 @@
 import { useMobileMode } from '@/hooks/useMobileMode';
 import { useTranslation } from 'react-i18next';
 
-import { palette } from '@/components/variables';
+import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
 import styled, { css } from 'styled-components';
 
 import { Items, Item } from './NavigationItems';
@@ -56,7 +56,7 @@ export const Container = styled.div<{ isMobile?: boolean }>`
   background-color: ${palette.purple};
   display: flex;
   flex-wrap: wrap;
-  height: 60px;
+  height: ${NAVIGATION_HEIGHT};
   justify-content: space-between;
   position: relative;
   width: 100%;

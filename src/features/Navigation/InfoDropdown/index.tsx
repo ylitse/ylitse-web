@@ -1,7 +1,7 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 
-import { animations, palette } from '@/components/variables';
+import { animations, NAVIGATION_HEIGHT, palette } from '@/components/variables';
 import styled from 'styled-components';
 import { InfoItem, Container } from './InfoItem';
 import { DropdownButton } from './DropdownButton';
@@ -55,7 +55,7 @@ export const Menu = styled.div`
   flex-direction: column;
   left: -2px;
   position: absolute;
-  top: 60px;
+  top: ${NAVIGATION_HEIGHT};
   transform-origin: top center;
   width: max-content;
 

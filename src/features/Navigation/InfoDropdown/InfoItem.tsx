@@ -1,7 +1,7 @@
 import type { NavigationItem } from '../NavigationItems';
 
 import styled from 'styled-components';
-import { palette } from '@/components/variables';
+import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
 
 import Outsidelink from '@/static/icons/outsidelink.svg';
 import Text from '@/components/Text';
@@ -31,7 +31,7 @@ export const Container = styled.button`
   cursor: pointer;
   display: flex;
   gap: 0.5rem;
-  height: 60px;
+  height: ${NAVIGATION_HEIGHT};
   padding-left: 1rem;
 
   &:hover {

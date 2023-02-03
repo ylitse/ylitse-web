@@ -25,6 +25,9 @@ export const palette = {
   whiteOpacity: 'rgba(255, 255, 255, 0.5)',
 };
 
+export const CONTENT_WIDTH = '76vw';
+export const NAVIGATION_HEIGHT = '60px';
+export const FOOTER_HEIGHT = '60px';
 export const MOBILE_TRESHOLD = 600;
 export const breakpoints = {
   mobile: `${MOBILE_TRESHOLD}px`,
@@ -32,7 +35,6 @@ export const breakpoints = {
 
 export const spacing = {
   button_padding: '0.75rem 1.25rem',
-  content_width: '76vw',
   layout_outer_spacing: '6vw',
   layout_spacing: '2rem',
   small_button_padding: '.5rem 2rem',

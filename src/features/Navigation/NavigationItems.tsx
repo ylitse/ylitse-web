@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { palette } from '@/components/variables';
+import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
 
 import { NavLink as RouterNavLink } from 'react-router-dom';
 
@@ -27,8 +27,8 @@ export const Link = styled(RouterNavLink)`
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 700;
-  height: 60px;
-  line-height: 60px;
+  height: ${NAVIGATION_HEIGHT};
+  line-height: ${NAVIGATION_HEIGHT};
   padding: 0 1rem;
   text-decoration: none;
 

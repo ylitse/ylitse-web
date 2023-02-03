@@ -1,4 +1,5 @@
 import CSS from 'csstype';
+import { FOOTER_HEIGHT } from '../variables';
 
 export type TextVariant =
   | 'bold'
@@ -46,7 +47,7 @@ export const variants: Record<TextVariant, TextProp> = {
       fontSize: '1rem',
       fontStyle: 'normal',
       fontWeight: '400',
-      lineHeight: '3.5rem',
+      lineHeight: FOOTER_HEIGHT,
     },
   },
   h1: {

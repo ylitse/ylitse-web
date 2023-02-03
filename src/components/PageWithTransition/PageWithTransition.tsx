@@ -1,6 +1,14 @@
 import styled, { css } from 'styled-components';
 import React, { useEffect, useState } from 'react';
-import { breakpoints, spacing, palette, Color } from '../variables';
+import {
+  breakpoints,
+  spacing,
+  palette,
+  Color,
+  CONTENT_WIDTH,
+  NAVIGATION_HEIGHT,
+  FOOTER_HEIGHT,
+} from '../variables';
 import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {
@@ -62,7 +70,7 @@ const Container = styled.div`
   flex-direction: column;
   height: auto;
   left: 0;
-  min-height: calc(100vh - 60px - 3.5rem);
+  min-height: calc(100vh - ${NAVIGATION_HEIGHT} - ${FOOTER_HEIGHT});
   position: relative;
   top: 0;
   width: 100vw;
@@ -71,15 +79,12 @@ const Container = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 76vh;
   margin: auto;
   margin-bottom: ${spacing.layout_outer_spacing};
   margin-top: ${spacing.layout_outer_spacing};
-  max-width: 76vw;
-  @media screen and (max-width: 1500px) {
-    width: 1130px;
-    max-width: calc(100vw - (${spacing.layout_spacing} * 2));
-  }
+  max-width: ${CONTENT_WIDTH};
+  width: ${CONTENT_WIDTH};
 
   @media screen and (max-width: ${breakpoints.mobile}) {
     flex: 1;

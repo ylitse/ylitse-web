@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { breakpoints, palette } from '../variables';
+import { breakpoints, FOOTER_HEIGHT, palette } from '../variables';
 import FooterLogo from '@/static/img/footer-logo.svg';
 import Text from '../Text';
 
@@ -20,7 +20,7 @@ const Container = styled.div`
   background-color: ${palette.blue};
   bottom: 0;
   display: flex;
-  height: 3.5rem;
+  height: ${FOOTER_HEIGHT};
   justify-content: center;
   left: 0;
   position: relative;
@@ -37,7 +37,7 @@ const FooterText = styled(Text)`
     content: '';
     display: block;
     float: right;
-    height: 3.5rem;
+    height: ${FOOTER_HEIGHT};
     margin-left: 1rem;
     position: relative;
     width: 11rem;

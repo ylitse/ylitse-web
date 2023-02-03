@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { useHover } from '@/hooks/useHover';
 
 import { Chevron } from '@/components/Icons/Chevron';
-import { palette } from '@/components/variables';
+import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
 import Text from '@/components/Text';
 
 type Props = {
@@ -41,7 +41,7 @@ const Button = styled.button<{ isExpanded?: boolean }>`
   cursor: pointer;
   display: flex;
   gap: 4px;
-  height: 60px;
+  height: ${NAVIGATION_HEIGHT};
   justify-content: center;
   padding: 0 1rem;
   position: relative;
