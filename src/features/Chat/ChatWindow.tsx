@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
-import { IconButton, TextButton } from '@/components/Buttons';
+import { Button, IconButton, TextButton } from '@/components/Buttons';
 
 const ChatWindow = () => {
   const navigate = useNavigate();
@@ -26,26 +26,26 @@ const ChatWindow = () => {
             sizeInPx={20}
             onClick={() => console.log('searching...')}
           />
-          <div>
-            <IconButton
-              variant="archive"
-              sizeInPx={20}
-              onClick={() => console.log('archiving...')}
-            />
-            <Text variant="link" color="purple">
-              Arkistoi
-            </Text>
-          </div>
-          <div>
-            <IconButton
-              variant="block"
-              sizeInPx={20}
-              onClick={() => console.log('blocking...')}
-            />
-            <Text variant="link" color="purple">
-              Estä käyttäjä
-            </Text>
-          </div>
+          <Button
+            onClick={() => console.log('archiving')}
+            leftIcon="archive"
+            sizeInPx={20}
+            text={{
+              color: 'purple',
+              text: 'Arkistoi',
+              variant: 'link',
+            }}
+          />
+          <Button
+            onClick={() => console.log('blocking')}
+            leftIcon="block"
+            sizeInPx={20}
+            text={{
+              color: 'purple',
+              text: 'Estä käyttäjä',
+              variant: 'bold',
+            }}
+          />
         </RightBar>
       </HeaderBar>
       <ChatHistory></ChatHistory>
