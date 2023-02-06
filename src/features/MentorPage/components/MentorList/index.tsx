@@ -3,7 +3,7 @@ import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { useMobileMode } from '@/hooks/useMobileMode';
 
 import styled, { css } from 'styled-components';
-import { spacing } from '@/components/variables';
+import { CONTENT_WIDTH, spacing } from '@/components/variables';
 import ListCard from './MentorCard/List';
 
 type Props = {
@@ -49,7 +49,7 @@ const CardsList = styled.div<{ isMobile: boolean }>`
           justify-content: stretch;
           margin-left: calc(${spacing.layout_spacing} * -1);
           margin-top: ${spacing.layout_spacing};
-          width: calc(76vw + (${spacing.layout_spacing} * 2));
+          width: calc(${CONTENT_WIDTH} + (${spacing.layout_spacing} * 2));
         `}
 
   @media screen and (max-width: 1500px) {

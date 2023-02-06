@@ -8,7 +8,7 @@ import { Languages } from './Languages';
 import { Skills } from './Skills';
 import { Story } from './Story';
 import { ExpandButton } from './ExpandButton';
-import { spacing, palette } from '@/components/variables';
+import { spacing, palette, CONTENT_WIDTH } from '@/components/variables';
 
 type Props = {
   setVisibleCard: (mentor: Mentor) => void;
@@ -65,20 +65,20 @@ const Container = styled.div<{ isMobile: boolean }>`
           flex-wrap: wrap;
           margin: ${spacing.layout_spacing};
           max-width: calc(
-            ((76vw + ${spacing.layout_spacing} * 2) / 3) -
+            ((${CONTENT_WIDTH} + ${spacing.layout_spacing} * 2) / 3) -
               (${spacing.layout_spacing} * 2)
           );
           @media screen and (min-width: 2550px) {
             flex: 0 0 20%;
             max-width: calc(
-              ((76vw + ${spacing.layout_spacing} * 2) / 5) -
+              ((${CONTENT_WIDTH} + ${spacing.layout_spacing} * 2) / 5) -
                 (${spacing.layout_spacing} * 2)
             );
           }
           @media screen and (min-width: 1950px) {
             flex: 0 0 25%;
             max-width: calc(
-              ((76vw + ${spacing.layout_spacing} * 2) / 4) -
+              ((${CONTENT_WIDTH} + ${spacing.layout_spacing} * 2) / 4) -
                 (${spacing.layout_spacing} * 2)
             );
           }

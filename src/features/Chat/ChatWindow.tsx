@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
+import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
 
 const ChatWindow = () => {
@@ -17,7 +18,7 @@ const ChatWindow = () => {
       <HeaderBar>
         <LeftBar>
           <ProfileIcon color="purpleDark" />
-          <Text variant="h2">Eveliina_96</Text>
+          <MentorName variant="h2">Eveliina_96</MentorName>
           <Text variant="p">Jutellaanko? </Text>
         </LeftBar>
         <RightBar>
@@ -43,15 +44,19 @@ const ChatWindow = () => {
             text={{
               color: 'purple',
               text: 'Estä käyttäjä',
-              variant: 'bold',
+              variant: 'link',
             }}
           />
         </RightBar>
       </HeaderBar>
       <ChatHistory></ChatHistory>
       <MessageField>
-        <TextInput placeholder="Kirjoita viestisi tähän" />
-        <IconButton
+        <Input
+          variant="textarea"
+          color="greyFaded"
+          placeholder="Kirjoita viestisi tähän"
+        />
+        <SendButton
           variant="send"
           sizeInPx={46}
           onClick={() => console.log('sending...')}
@@ -59,7 +64,7 @@ const ChatWindow = () => {
       </MessageField>
     </ActiveChatContainer>
   ) : (
-    <Container>
+    <div>
       <UpperWelcomeContainer>
         <WelcomeText isHeader variant="h2">
           {t('welcome.upper.title')}
@@ -75,33 +80,36 @@ const ChatWindow = () => {
           {t('welcome.lower.button')}
         </SearchButton>
       </LowerWelcomeContainer>
-    </Container>
+    </div>
   );
 };
 
 const ActiveChatContainer = styled.div`
   background-color: ${palette.white};
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  height: 780px;
-  width: 1021px;
+  border-radius: 10px;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  height: 100%;
 `;
 
 const HeaderBar = styled.div`
   border-bottom: 1px solid ${palette.greyLight};
   display: flex;
+  gap: 30px;
   height: 80px;
   justify-content: space-between;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding: 0 40px;
 `;
 
 const LeftBar = styled.div`
   align-items: center;
   display: flex;
-  gap: 30px;
+`;
+
+const MentorName = styled(Text)`
+  padding-left: 20px;
+  padding-right: 30px;
 `;
 
 const RightBar = styled.div`
@@ -112,41 +120,32 @@ const RightBar = styled.div`
 
 const ChatHistory = styled.div`
   border-bottom: 1px solid ${palette.greyLight};
-  height: 580px;
+  flex: 1;
 `;
 
 const MessageField = styled.div`
   align-items: center;
   display: flex;
-  gap: 30px;
-  height: 120px;
-  padding-left: 40px;
-  padding-right: 20px;
 `;
 
-const TextInput = styled.input`
-  border: 1px solid ${palette.purple};
-  border-radius: 10px;
-  color: ${palette.greyFaded};
-  display: flex;
-  font-family: 'Source Sans Pro';
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
+const Input = styled(TextInput)`
+  box-sizing: border-box;
+  flex: 1;
   height: 80px;
-  line-height: 1.5rem;
-  width: 883px;
+  margin: 20px 1.25rem 20px 40px;
+
+  &:focus {
+    outline: 1px solid ${palette.purple};
+  }
 `;
 
-const Container = styled.div`
-  height: 780px;
-  width: 1021px;
+const SendButton = styled(IconButton)`
+  margin-right: 1.25rem;
 `;
 
 const UpperWelcomeContainer = styled.div`
   background-color: ${palette.white};
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-radius: 10px 10px 0 0;
   display: flex;
   flex-direction: column;
   height: 50%;
@@ -155,8 +154,7 @@ const UpperWelcomeContainer = styled.div`
 
 const LowerWelcomeContainer = styled.div`
   background-color: ${palette.blue2};
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 0 0 10px 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;

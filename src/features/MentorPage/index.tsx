@@ -20,7 +20,7 @@ const MentorPage = () => {
   const mentors = useAppSelector(selectFilteredMentors());
 
   return (
-    <PageWithTransition>
+    <PageWithTransition isMentorPage>
       {isLoading ? (
         <Spinner variant="large" />
       ) : (

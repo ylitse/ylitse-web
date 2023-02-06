@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
 
+import { useMobileMode } from '@/hooks/useMobileMode';
+
 import ChatMenu from './ChatMenu';
 import ChatWindow from './ChatWindow';
+import { CONTENT_HEIGHT } from '@/components/variables';
 import PageWithTransition from '@/components/PageWithTransition';
 import Spinner from '@/components/Spinner';
-
-import { useMobileMode } from '@/hooks/useMobileMode';
 
 const ChatPage = () => {
   const isMobile = useMobileMode();
@@ -28,15 +29,16 @@ const ChatPage = () => {
 };
 
 const ChatContainer = styled.div<{ isMobile: boolean }>`
-  display: flex;
-  flex-direction: row;
   ${({ isMobile }) =>
     isMobile
       ? css`
           width: 100vw;
         `
       : css`
+          display: flex;
           gap: 22px;
+          height: ${CONTENT_HEIGHT};
+          justify-content: center;
         `};
 `;
 

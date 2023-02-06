@@ -103,8 +103,7 @@ const Container = styled.div`
   background-color: ${palette.white};
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
-  height: 780px;
-  width: 407px;
+  flex: 0 0 400px;
 `;
 
 const Row = styled.div`
@@ -148,9 +147,7 @@ const ChatList = styled.div``;
 
 const CategoryEmptyText = styled(Text)`
   margin: 0;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 1.25rem;
+  padding: 1.25rem 2rem;
 `;
 
 export default ChatMenu;

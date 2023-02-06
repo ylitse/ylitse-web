@@ -8,16 +8,21 @@ import {
   CONTENT_WIDTH,
   NAVIGATION_HEIGHT,
   FOOTER_HEIGHT,
+  OUTER_VERTICAL_MARGIN,
 } from '../variables';
 import { useMobileMode } from '@/hooks/useMobileMode';
 
 type Props = {
+  isMentorPage?: boolean;
   children: React.ReactNode;
 };
 
 const TRANSITION_LENGTH = 0.7;
 
-const PageWithTransition: React.FC<Props> = ({ children }) => {
+const PageWithTransition: React.FC<Props> = ({
+  isMentorPage = false,
+  children,
+}) => {
   const [isTransition, setIsTransition] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const isMobile = useMobileMode();
@@ -34,7 +39,7 @@ const PageWithTransition: React.FC<Props> = ({ children }) => {
       {!showContent ? null : isMobile ? (
         children
       ) : (
-        <Content>{children}</Content>
+        <Content isMentorPage={isMentorPage}>{children}</Content>
       )}
       <Layer
         role="transition"
@@ -76,15 +81,23 @@ const Container = styled.div`
   width: 100vw;
 `;
 
-const Content = styled.div`
+const Content = styled.div<{
+  isMentorPage: boolean;
+}>`
   display: flex;
   flex-direction: column;
-  height: 76vh;
-  margin: auto;
-  margin-bottom: ${spacing.layout_outer_spacing};
-  margin-top: ${spacing.layout_outer_spacing};
+  margin: ${OUTER_VERTICAL_MARGIN} auto;
   max-width: ${CONTENT_WIDTH};
   width: ${CONTENT_WIDTH};
+
+  ${({ isMentorPage }) =>
+    isMentorPage &&
+    css`
+      @media screen and (max-width: 1500px) {
+        max-width: calc(100vw - (${spacing.layout_spacing} * 2));
+        width: 1130px;
+      }
+    `};
 
   @media screen and (max-width: ${breakpoints.mobile}) {
     flex: 1;

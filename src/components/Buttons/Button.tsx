@@ -60,6 +60,8 @@ const Button = styled.button`
   cursor: pointer;
   display: flex;
   gap: 0.5rem;
+  padding: 0;
+  white-space: nowrap;
 
   &:hover {
     opacity: 0.7;
