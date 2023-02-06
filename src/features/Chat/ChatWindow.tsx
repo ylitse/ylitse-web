@@ -7,11 +7,13 @@ import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
+import { useState } from 'react';
 
 const ChatWindow = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('chat');
   const chats = [{}];
+  const [inputValue, setInputValue] = useState('');
 
   return chats.length ? (
     <ActiveChatContainer>
@@ -53,8 +55,10 @@ const ChatWindow = () => {
       <MessageField>
         <Input
           variant="textarea"
-          color="greyFaded"
+          color={inputValue ? 'blueDark' : 'greyFaded'}
+          onChange={setInputValue}
           placeholder="Kirjoita viestisi tähän"
+          value={inputValue}
         />
         <SendButton
           variant="send"
