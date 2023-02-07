@@ -109,6 +109,7 @@ const Container = styled.div`
 const Row = styled.div`
   align-items: center;
   border-bottom: 1px solid ${palette.greyLight};
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   height: 80px;

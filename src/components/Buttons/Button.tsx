@@ -13,7 +13,7 @@ type ButtonProps<T extends ElementType> = {
   text?: { variant: TextVariant; color: Color; text: string };
 } & ComponentPropsWithoutRef<T>;
 
-const IconButton = <T extends ElementType = 'button'>({
+const Button = <T extends ElementType = 'button'>({
   variant,
   sizeInPx,
   text,
@@ -23,7 +23,7 @@ const IconButton = <T extends ElementType = 'button'>({
   ...rest
 }: ButtonProps<T>): JSX.Element => {
   return (
-    <Button onClick={onClick} {...rest} aria-label={variant}>
+    <StyledButton onClick={onClick} {...rest} aria-label={variant}>
       {leftIcon && <Icon variant={leftIcon} size={sizeInPx} />}
 
       {text && (
@@ -33,7 +33,7 @@ const IconButton = <T extends ElementType = 'button'>({
       )}
 
       {rightIcon && <Icon variant={rightIcon} size={sizeInPx} />}
-    </Button>
+    </StyledButton>
   );
 };
 
@@ -52,7 +52,7 @@ const Icon = styled.span<{
   ${({ variant }) => variant && iconVariants[variant]}
 `;
 
-const Button = styled.button`
+const StyledButton = styled.button`
   align-items: center;
   appearance: none;
   background-color: transparent;
@@ -68,4 +68,4 @@ const Button = styled.button`
   }
 `;
 
-export default IconButton;
+export default Button;

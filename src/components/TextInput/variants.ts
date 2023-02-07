@@ -1,7 +1,7 @@
 import CSS from 'csstype';
 import { palette } from '../variables';
 
-export type TextInputVariant = 'input' | 'textarea';
+export type TextInputVariant = 'iconInput' | 'input' | 'textarea';
 export type TextInputElement = 'input' | 'textarea';
 
 type TextInputProp = {
@@ -10,9 +10,31 @@ type TextInputProp = {
 };
 
 export const variants: Record<TextInputVariant, TextInputProp> = {
+  iconInput: {
+    element: 'input',
+    styles: {
+      border: `1px solid ${palette.purple}`,
+      borderRadius: '20px',
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      lineHeight: '1.5rem',
+      padding: '0.5rem 60px',
+    },
+  },
   input: {
     element: 'input',
-    styles: {},
+    styles: {
+      border: `1px solid ${palette.purple}`,
+      borderRadius: '20px',
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      lineHeight: '1.5rem',
+      padding: '0.5rem 1rem',
+    },
   },
   textarea: {
     element: 'textarea',

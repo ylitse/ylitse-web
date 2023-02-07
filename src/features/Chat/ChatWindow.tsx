@@ -9,47 +9,73 @@ import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
 import { useState } from 'react';
 
+const searchInputIconSize = 24;
+const closeInputIconSize = 34;
+
 const ChatWindow = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('chat');
   const chats = [{}];
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
   const [inputValue, setInputValue] = useState('');
 
   return chats.length ? (
     <ActiveChatContainer>
       <HeaderBar>
-        <LeftBar>
+        <ProfileInfo>
           <ProfileIcon color="purpleDark" />
           <MentorName variant="h2">Eveliina_96</MentorName>
           <Text variant="p">Jutellaanko? </Text>
-        </LeftBar>
-        <RightBar>
-          <IconButton
-            variant="search"
-            sizeInPx={20}
-            onClick={() => console.log('searching...')}
-          />
-          <Button
-            onClick={() => console.log('archiving')}
-            leftIcon="archive"
-            sizeInPx={20}
-            text={{
-              color: 'purple',
-              text: 'Arkistoi',
-              variant: 'link',
-            }}
-          />
-          <Button
-            onClick={() => console.log('blocking')}
-            leftIcon="block"
-            sizeInPx={20}
-            text={{
-              color: 'purple',
-              text: 'Estä käyttäjä',
-              variant: 'link',
-            }}
-          />
-        </RightBar>
+        </ProfileInfo>
+        {showSearch ? (
+          <SearchBar>
+            <SearchInput
+              variant="iconInput"
+              color={searchValue ? 'blueDark' : 'greyFaded'}
+              leftIcon={{
+                sizeInPx: searchInputIconSize,
+                variant: 'search',
+              }}
+              rightButton={{
+                onClick: () => setShowSearch(false),
+                sizeInPx: closeInputIconSize,
+                variant: 'closeWithBackground',
+              }}
+              onChange={setSearchValue}
+              placeholder="Etsi keskustelusta"
+              value={searchValue}
+            />
+          </SearchBar>
+        ) : (
+          <Buttons>
+            <IconButton
+              variant="search"
+              sizeInPx={24}
+              onClick={() => setShowSearch(true)}
+            />
+            <Button
+              onClick={() => console.log('archiving')}
+              leftIcon="archive"
+              sizeInPx={24}
+              text={{
+                color: 'purple',
+                text: 'Arkistoi',
+                variant: 'link',
+              }}
+            />
+            <Button
+              onClick={() => console.log('blocking')}
+              leftIcon="block"
+              sizeInPx={24}
+              text={{
+                color: 'purple',
+                text: 'Estä käyttäjä',
+                variant: 'link',
+              }}
+            />
+          </Buttons>
+        )}
       </HeaderBar>
       <ChatHistory></ChatHistory>
       <MessageField>
@@ -99,14 +125,16 @@ const ActiveChatContainer = styled.div`
 
 const HeaderBar = styled.div`
   border-bottom: 1px solid ${palette.greyLight};
+  box-sizing: border-box;
   display: flex;
   gap: 30px;
   height: 80px;
   justify-content: space-between;
-  padding: 0 40px;
+  min-width: 800px;
+  padding: 14px 40px;
 `;
 
-const LeftBar = styled.div`
+const ProfileInfo = styled.div`
   align-items: center;
   display: flex;
 `;
@@ -116,7 +144,24 @@ const MentorName = styled(Text)`
   padding-right: 30px;
 `;
 
-const RightBar = styled.div`
+const SearchBar = styled.div`
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  margin-left: -${searchInputIconSize}px;
+  margin-right: -${closeInputIconSize}px;
+`;
+
+const SearchInput = styled(TextInput)`
+  flex: 1;
+  max-width: 400px;
+  &:focus {
+    outline: 1px solid ${palette.purple};
+  }
+`;
+
+const Buttons = styled.div`
   align-items: center;
   display: flex;
   gap: 30px;
