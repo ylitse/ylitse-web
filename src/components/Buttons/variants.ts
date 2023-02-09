@@ -1,7 +1,9 @@
 import { palette } from '../variables';
+import ArchivedChatsIcon from '@/static/icons/archived-chats.svg';
 import ArchiveIcon from '@/static/icons/archive.svg';
 import BackIcon from '@/static/icons/back.svg';
 import BlockIcon from '@/static/icons/block.svg';
+import BlockedChatsIcon from '@/static/icons/blocked-chats.svg';
 import CloseIcon from '@/static/icons/close.svg';
 import CloseWithBackgroundIcon from '@/static/icons/close-with-background.svg';
 import DeleteIcon from '@/static/icons/delete.svg';
@@ -12,6 +14,7 @@ import MenuDotsIcon from '@/static/icons/menu-dots.svg';
 import MenuLinesIcon from '@/static/icons/menu-lines.svg';
 import NextIcon from '@/static/icons/next.svg';
 import PrevIcon from '@/static/icons/prev.svg';
+import ReturnIcon from '@/static/icons/return.svg';
 import RewindIcon from '@/static/icons/rewind.svg';
 import SearchIcon from '@/static/icons/search.svg';
 import SearchWithBackgroundIcon from '@/static/icons/search-with-background.svg';
@@ -71,8 +74,10 @@ export const variants = {
 
 export type ButtonIcon =
   | 'archive'
+  | 'archivedChats'
   | 'back'
   | 'block'
+  | 'blockedChats'
   | 'close'
   | 'closeWithBackground'
   | 'delete'
@@ -83,6 +88,7 @@ export type ButtonIcon =
   | 'menuLines'
   | 'next'
   | 'prev'
+  | 'return'
   | 'rewind'
   | 'search'
   | 'searchWithBackground'
@@ -93,11 +99,17 @@ export const iconVariants = {
   archive: {
     backgroundImage: `url(${ArchiveIcon})`,
   },
+  archivedChats: {
+    backgroundImage: `url(${ArchivedChatsIcon})`,
+  },
   back: {
     backgroundImage: `url(${BackIcon})`,
   },
   block: {
     backgroundImage: `url(${BlockIcon})`,
+  },
+  blockedChats: {
+    backgroundImage: `url(${BlockedChatsIcon})`,
   },
   close: {
     backgroundImage: `url(${CloseIcon})`,
@@ -128,6 +140,9 @@ export const iconVariants = {
   },
   prev: {
     backgroundImage: `url(${PrevIcon})`,
+  },
+  return: {
+    backgroundImage: `url(${ReturnIcon})`,
   },
   rewind: {
     backgroundImage: `url(${RewindIcon})`,
