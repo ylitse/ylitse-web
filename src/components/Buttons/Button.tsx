@@ -44,7 +44,6 @@ const Icon = styled.span<{
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
-  z-index: 10;
   ${({ size }) => css`
     height: ${size}px;
     width: ${size}px;
