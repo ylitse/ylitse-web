@@ -20,11 +20,7 @@ const ChatMenu = () => {
   return (
     <Container>
       <Row>
-        <Header variant="h1">
-          {currentCategory === 'active' && t('menu.title.chats')}
-          {currentCategory === 'archived' && t('menu.title.archived')}
-          {currentCategory === 'blocked' && t('menu.title.blocked')}
-        </Header>
+        <Header variant="h1">{t(`menu.title.${currentCategory}`)}</Header>
         <Buttons>
           {!!chats.length && (
             <IconButton
@@ -90,9 +86,7 @@ const ChatMenu = () => {
         <ChatList></ChatList>
       ) : (
         <CategoryEmptyText>
-          {currentCategory === 'active' && t('menu.empty.chats')}
-          {currentCategory === 'archived' && t('menu.empty.archived')}
-          {currentCategory === 'blocked' && t('menu.empty.blocked')}
+          {t(`menu.empty.${currentCategory}`)}
         </CategoryEmptyText>
       )}
     </Container>

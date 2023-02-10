@@ -1,15 +1,24 @@
 {
+  "header": {
+    "archive": "Archive",
+    "block": "Block user",
+    "restore": "Restore conversation",
+    "search": "Search conversation"
+  },
+  "input": {
+    "placeholder": "Write your message here"
+  },
   "menu": {
     "title": {
-      "chats": "Chat",
-      "archived": "Arkistoidut",
-      "blocked": "Estetyt"
+      "active": "Chat",
+      "archived": "Archived",
+      "blocked": "Blocked"
     },
     "back": "Back to chats",
     "archived": "Archived chats",
     "blocked": "Blocked chats",
     "empty": {
-      "chats": "You don't have any conversations yet. Don't worry, the conversations you start with mentors will appear here automatically.",
+      "active": "You don't have any conversations yet. Don't worry, the conversations you start with mentors will appear here automatically.",
       "archived": "You don't have any archived conversations.",
       "blocked": "You don't have any blocked conversations."
     }

@@ -25,8 +25,8 @@ const ChatWindow = () => {
       <HeaderBar>
         <ProfileInfo>
           <ProfileIcon color="purpleDark" />
-          <MentorName variant="h2">Eveliina_96</MentorName>
-          <Text variant="p">Jutellaanko? </Text>
+          <MentorName variant="h2">{'Essi Esimerkki'}</MentorName>
+          <Text variant="p">{'Käyttäjän kuvaus'}</Text>
         </ProfileInfo>
         {showSearch ? (
           <SearchBar>
@@ -43,7 +43,7 @@ const ChatWindow = () => {
                 variant: 'closeWithBackground',
               }}
               onChange={setSearchValue}
-              placeholder="Etsi keskustelusta"
+              placeholder={t('header.search')}
               value={searchValue}
             />
           </SearchBar>
@@ -60,7 +60,7 @@ const ChatWindow = () => {
               sizeInPx={24}
               text={{
                 color: 'purple',
-                text: 'Arkistoi',
+                text: t('header.archive'),
                 variant: 'link',
               }}
             />
@@ -70,7 +70,7 @@ const ChatWindow = () => {
               sizeInPx={24}
               text={{
                 color: 'purple',
-                text: 'Estä käyttäjä',
+                text: t('header.block'),
                 variant: 'link',
               }}
             />
@@ -83,7 +83,7 @@ const ChatWindow = () => {
           variant="textarea"
           color={inputValue ? 'blueDark' : 'greyFaded'}
           onChange={setInputValue}
-          placeholder="Kirjoita viestisi tähän"
+          placeholder={t('input.placeholder')}
           value={inputValue}
         />
         <SendButton
