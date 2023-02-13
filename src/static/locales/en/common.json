@@ -1,12 +1,10 @@
 {
+  "footer": "Provided by",
   "navigation": {
-    "logo": "Ylitse",
-    "mobile": { "menu": "Menu" },
-    "home": "Home",
-    "mentors": "Mentors",
     "chat": "Chat",
+    "home": "Home",
     "info": {
-      "title": "Info",
+      "applicationInfo": "Application info",
       "link": {
         "feedback": {
           "text": "Give feedback",
@@ -17,19 +15,21 @@
           "url": "https://www.sos-lapsikyla.fi/tietosuojaselosteet"
         }
       },
-      "applicationInfo": "Application info"
+      "title": "Info"
     },
     "language": {
       "en": {
-        "short": "En",
-        "long": "EN - In English"
+        "long": "EN - In English",
+        "short": "En"
       },
       "fi": {
-        "short": "Fi",
-        "long": "Fi - Suomeksi"
+        "long": "Fi - Suomeksi",
+        "short": "Fi"
       }
     },
-    "logout": "Logout"
-  },
-  "footer": "Provided by"
+    "logo": "Ylitse",
+    "logout": "Logout",
+    "mentors": "Mentors",
+    "mobile": { "menu": "Menu" }
+  }
 }

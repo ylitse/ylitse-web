@@ -1,22 +1,22 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "experimentalDecorators": true,
+    "jsx": "react-jsx",
     "module": "es6",
     "moduleResolution": "node",
-    "target": "es5",
-    "jsx": "react-jsx",
-    "strict": true,
-    "allowJs": true,
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "experimentalDecorators": true,
-    "types": ["node", "jest", "@testing-library/jest-dom"],
-    "baseUrl": "./",
+    "noImplicitAny": true,
+    "outDir": "./dist/",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es5",
+    "types": ["node", "jest", "@testing-library/jest-dom"]
   },
   "include": ["src/*", "@types/*"]
 }

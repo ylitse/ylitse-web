@@ -1,23 +1,23 @@
 {
-  "title": "Mentors",
-  "filters": {
-    "title": "Search",
-    "oneSelected": "filter selected",
-    "multipleSelected": "filters selected",
-    "description": "Welcome to browse mentor profiles! You will find the newest mentors at the top of the list. By searching, you're able to filter mentors based on your problem.",
-    "search": "Search mentors by keyword",
-    "clear": "Clear filters",
-    "close": "Close filters",
-    "show": "Filter by tag",
-    "pageSizeLabel": "Tags on page:"
-  },
   "card": {
-    "unavailable": "Unavailable",
     "age": "y.",
     "bio": "Bio",
+    "chat": "Start conversation",
     "languages": "I speak",
-    "skills": "I can also help with",
     "open": "Open card",
-    "chat": "Start conversation"
-  }
+    "skills": "I can also help with",
+    "unavailable": "Unavailable"
+  },
+  "filters": {
+    "clear": "Clear filters",
+    "close": "Close filters",
+    "description": "Welcome to browse mentor profiles! You will find the newest mentors at the top of the list. By searching, you're able to filter mentors based on your problem.",
+    "multipleSelected": "filters selected",
+    "oneSelected": "filter selected",
+    "pageSizeLabel": "Tags on page:",
+    "search": "Search mentors by keyword",
+    "show": "Filter by tag",
+    "title": "Search"
+  },
+  "title": "Mentors"
 }
