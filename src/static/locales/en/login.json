@@ -1,17 +1,17 @@
 {
-  "pageTitle": "Ylitse MentorApp - SOS Children's Village",
-  "longTitle": "Ylitse MentorApp",
-  "shortTitle": "Ylitse",
+  "appDescription": "New here? Using this application, you can chat with a mentor trained by SOS Children's Village about any topic that is on your mind. Using the application is confidential and completely free.",
+  "footer": "Provided by SOS Children's Village",
   "inEnglish": "In English",
   "inFinnish": "Suomeksi",
-  "loginTitle": "Login",
-  "usernameLabel": "Username",
-  "passwordLabel": "Password",
-  "retrievePasswordLink": "Forgot your password?",
-  "loginError": "Your username or password is invalid. Check the information you provided.",
   "loginButton": "Login",
-  "submitError": "Login failed. Please try again in a moment.",
-  "appDescription": "New here? Using this application, you can chat with a mentor trained by SOS Children's Village about any topic that is on your mind. Using the application is confidential and completely free.",
+  "loginError": "Your username or password is invalid. Check the information you provided.",
+  "loginTitle": "Login",
+  "longTitle": "Ylitse MentorApp",
+  "pageTitle": "Ylitse MentorApp - SOS Children's Village",
+  "passwordLabel": "Password",
   "registrationLink": "Register",
-  "footer": "Provided by SOS Children's Village"
+  "retrievePasswordLink": "Forgot your password?",
+  "shortTitle": "Ylitse",
+  "submitError": "Login failed. Please try again in a moment.",
+  "usernameLabel": "Username"
 }

@@ -1,12 +1,12 @@
 {
-    "extends": "../tsconfig.json",
     "compilerOptions": {
       "isolatedModules": false
     },
-    "include": [
-      "../node_modules/cypress"
-    ],
     "exclude": [
         "src/**/*.test.tsx"
+    ],
+    "extends": "../tsconfig.json",
+    "include": [
+      "../node_modules/cypress"
     ]
   }

@@ -1,23 +1,23 @@
 {
-  "title": "Mentorit",
-  "filters": {
-    "title": "Haku",
-    "oneSelected": "aihe valittu",
-    "multipleSelected": "aihetta valittu",
-     "description": "Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita ongelmasi perusteella.",
-    "search": "Etsi mentoria",
-    "clear": "Poista suodattimet",
-    "close": "Sulje suodatus",
-    "show": "Suodata aiheella",
-    "pageSizeLabel": "Aihetta sivulla:"
-  },
   "card": {
-    "unavailable": "Ei käytettävissä",
     "age": "v.",
     "bio": "Tarinani",
+    "chat": "Aloita keskustelu",
     "languages": "Puhun näitä kieliä",
-    "skills": "Voin auttaa myös näissä",
     "open": "Avaa kortti",
-    "chat": "Aloita keskustelu"
-  }
+    "skills": "Voin auttaa myös näissä",
+    "unavailable": "Ei käytettävissä"
+  },
+  "filters": {
+    "clear": "Poista suodattimet",
+    "close": "Sulje suodatus",
+     "description": "Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita ongelmasi perusteella.",
+    "multipleSelected": "aihetta valittu",
+    "oneSelected": "aihe valittu",
+    "pageSizeLabel": "Aihetta sivulla:",
+    "search": "Etsi mentoria",
+    "show": "Suodata aiheella",
+    "title": "Haku"
+  },
+  "title": "Mentorit"
 }

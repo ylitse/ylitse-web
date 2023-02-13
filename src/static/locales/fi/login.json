@@ -1,17 +1,17 @@
 {
-  "pageTitle": "Ylitse MentorApp - SOS-Lapsikylä",
-  "longTitle": "Ylitse MentorApp",
-  "shortTitle": "Ylitse",
+  "appDescription": "Uusi täällä? Palvelussa voit jutella SOS-Lapsikylän valmentamien vertaismentoreiden kanssa mistä tahansa mieltäsi painavasta asiasta. Palvelun käyttö on luottamuksellista ja täysin maksutonta.",
+  "footer": "Palvelun tarjoaa SOS-Lapsikylä",
   "inEnglish": "In English",
   "inFinnish": "Suomeksi",
-  "loginTitle": "Kirjaudu sisään",
-  "usernameLabel": "Käyttäjätunnus",
-  "passwordLabel": "Salasana",
-  "retrievePasswordLink": "Unohditko salasanasi?",
-  "loginError": "Käyttäjätunnus tai salasanasi on virheellinen. Tarkista syöttämäsi tiedot.",
   "loginButton": "Kirjaudu",
-  "submitError": "Kirjautuminen epäonnistui. Yritä hetken kuluttua uudelleen.",
-  "appDescription": "Uusi täällä? Palvelussa voit jutella SOS-Lapsikylän valmentamien vertaismentoreiden kanssa mistä tahansa mieltäsi painavasta asiasta. Palvelun käyttö on luottamuksellista ja täysin maksutonta.",
+  "loginError": "Käyttäjätunnus tai salasanasi on virheellinen. Tarkista syöttämäsi tiedot.",
+  "loginTitle": "Kirjaudu sisään",
+  "longTitle": "Ylitse MentorApp",
+  "pageTitle": "Ylitse MentorApp - SOS-Lapsikylä",
+  "passwordLabel": "Salasana",
   "registrationLink": "Rekisteröidy",
-  "footer": "Palvelun tarjoaa SOS-Lapsikylä"
+  "retrievePasswordLink": "Unohditko salasanasi?",
+  "shortTitle": "Ylitse",
+  "submitError": "Kirjautuminen epäonnistui. Yritä hetken kuluttua uudelleen.",
+  "usernameLabel": "Käyttäjätunnus"
 }
