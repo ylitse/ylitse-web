@@ -26,7 +26,7 @@ const ChatWindow = () => {
         <ProfileInfo>
           <ProfileIcon color="purpleDark" />
           <MentorName variant="h2">{'Essi Esimerkki'}</MentorName>
-          <Text variant="p">{'Käyttäjän kuvaus'}</Text>
+          <MentorBio variant="p">{'Kuvaus'}</MentorBio>
         </ProfileInfo>
         {showSearch ? (
           <SearchBar>
@@ -140,8 +140,15 @@ const ProfileInfo = styled.div`
 `;
 
 const MentorName = styled(Text)`
+  display: block;
   padding-left: 20px;
   padding-right: 30px;
+  white-space: nowrap;
+`;
+
+const MentorBio = styled(Text)`
+  display: block;
+  white-space: nowrap;
 `;
 
 const SearchBar = styled.div`
