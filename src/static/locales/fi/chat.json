@@ -1,7 +1,16 @@
 {
+  "header": {
+    "archive": "Arkistoi",
+    "block": "Estä käyttäjä",
+    "restore": "Palauta keskustelu",
+    "search": "Etsi keskustelusta"
+  },
+  "input": {
+    "placeholder": "Kirjoita viestisi tähän"
+  },
   "menu": {
     "title": {
-      "chats": "Chat",
+      "active": "Chat",
       "archived": "Arkistoidut",
       "blocked": "Estetyt"
     },
@@ -9,7 +18,7 @@
     "archived": "Arkistoidut keskustelut",
     "blocked": "Estetyt keskustelut",
     "empty": {
-      "chats": "Sinulla ei ole vielä keskusteluja. Ei hätää, aloittamasi keskustelut mentoreiden kanssa tulevat tähän automaattisesti.",
+      "active": "Sinulla ei ole vielä keskusteluja. Ei hätää, aloittamasi keskustelut mentoreiden kanssa tulevat tähän automaattisesti.",
       "archived": "Sinulla ei ole arkistoituja keskusteluja.",
       "blocked": "Sinulla ei ole estettyjä keskusteluja."
     }

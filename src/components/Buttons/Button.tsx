@@ -13,7 +13,7 @@ type ButtonProps<T extends ElementType> = {
   text?: { variant: TextVariant; color: Color; text: string };
 } & ComponentPropsWithoutRef<T>;
 
-const IconButton = <T extends ElementType = 'button'>({
+const Button = <T extends ElementType = 'button'>({
   variant,
   sizeInPx,
   text,
@@ -23,7 +23,7 @@ const IconButton = <T extends ElementType = 'button'>({
   ...rest
 }: ButtonProps<T>): JSX.Element => {
   return (
-    <Button onClick={onClick} {...rest} aria-label={variant}>
+    <StyledButton onClick={onClick} {...rest} aria-label={variant}>
       {leftIcon && <Icon variant={leftIcon} size={sizeInPx} />}
 
       {text && (
@@ -33,7 +33,7 @@ const IconButton = <T extends ElementType = 'button'>({
       )}
 
       {rightIcon && <Icon variant={rightIcon} size={sizeInPx} />}
-    </Button>
+    </StyledButton>
   );
 };
 
@@ -44,7 +44,6 @@ const Icon = styled.span<{
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
-  z-index: 10;
   ${({ size }) => css`
     height: ${size}px;
     width: ${size}px;
@@ -52,7 +51,7 @@ const Icon = styled.span<{
   ${({ variant }) => variant && iconVariants[variant]}
 `;
 
-const Button = styled.button`
+const StyledButton = styled.button`
   align-items: center;
   appearance: none;
   background-color: transparent;
@@ -60,10 +59,12 @@ const Button = styled.button`
   cursor: pointer;
   display: flex;
   gap: 0.5rem;
+  padding: 0;
+  white-space: nowrap;
 
   &:hover {
     opacity: 0.7;
   }
 `;
 
-export default IconButton;
+export default Button;

@@ -31,7 +31,11 @@ export const Content = ({
     <Container isMobile={isMobile}>
       {!isMobile && (
         <CloseContainer>
-          <IconButton onClick={onDismiss} variant="close" sizeInPx={38} />
+          <IconButton
+            onClick={onDismiss}
+            variant="closeWithBackground"
+            sizeInPx={38}
+          />
         </CloseContainer>
       )}
       <StoryHeader isMobile={isMobile} variant="h3">

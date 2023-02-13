@@ -36,7 +36,6 @@ const StyledIconButton = styled.button<{
   background-size: contain;
   border: none;
   cursor: pointer;
-  z-index: 10;
   ${({ size }) => css`
     height: ${size}px;
     width: ${size}px;

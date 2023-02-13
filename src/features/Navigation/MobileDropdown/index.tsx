@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import type { LangCode } from '../LanguageDropdown';
 import type { NavigationItem as NavItemType } from '../NavigationItems';
 
-import { animations, palette } from '@/components/variables';
+import { animations, NAVIGATION_HEIGHT, palette } from '@/components/variables';
 import styled from 'styled-components';
 
 import Text from '@/components/Text';
@@ -139,7 +139,7 @@ const Menu = styled.div`
 `;
 
 const UnstyledLink = styled.a`
-  height: 60px;
+  height: ${NAVIGATION_HEIGHT};
   padding: 0 2rem;
   text-decoration: none;
 `;

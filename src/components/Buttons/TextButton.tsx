@@ -34,7 +34,7 @@ const StyledTextButton = styled.button<{ variant: ButtonColorVariant }>`
   font-weight: 700;
   line-height: 1.5rem;
   margin-bottom: 4px;
-  padding: ${spacing.small_button_padding};
+  padding: 0.5rem 2rem;
   width: fit-content;
   &:hover {
     opacity: 0.7;

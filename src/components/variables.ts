@@ -25,17 +25,19 @@ export const palette = {
   whiteOpacity: 'rgba(255, 255, 255, 0.5)',
 };
 
+export const OUTER_VERTICAL_MARGIN = '6vh';
+export const NAVIGATION_HEIGHT = '3rem';
+export const FOOTER_HEIGHT = '3rem';
+export const CONTENT_HEIGHT = `calc(100vh - (2 * ${OUTER_VERTICAL_MARGIN} + ${NAVIGATION_HEIGHT} + ${FOOTER_HEIGHT}))`;
+export const CONTENT_WIDTH = '76vw';
+
 export const MOBILE_TRESHOLD = 600;
 export const breakpoints = {
   mobile: `${MOBILE_TRESHOLD}px`,
 };
 
 export const spacing = {
-  button_padding: '0.75rem 1.25rem',
-  content_width: '76vw',
-  layout_outer_spacing: '6vw',
   layout_spacing: '2rem',
-  small_button_padding: '.5rem 2rem',
 };
 
 const growDown = keyframes`

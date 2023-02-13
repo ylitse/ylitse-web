@@ -29,7 +29,7 @@ export const Header: React.FC<Props> = ({
 
   return (
     <Container isAvailable={isAvailable} isMobile={isMobile}>
-      <Availability variant="label" isShowing={!isAvailable}>
+      <Availability variant="p" isShowing={!isAvailable}>
         {availabilityMessage}
       </Availability>
       <ProfilePicture />
@@ -98,6 +98,7 @@ const Availability = styled(Text)<{ isShowing: boolean }>`
   background-color: ${palette.blueWhite};
   border-radius: 0.25rem;
   display: ${props => (props.isShowing ? `flex` : `none`)};
+  margin: 0;
   padding: 0.25rem 1rem;
   position: absolute;
   right: 0;

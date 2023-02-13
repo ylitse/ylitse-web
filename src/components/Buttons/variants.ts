@@ -1,20 +1,25 @@
 import { palette } from '../variables';
-import CloseIcon from '@/static/icons/close.svg';
-import SearchIcon from '@/static/icons/search-with-background.svg';
+import ArchivedChatsIcon from '@/static/icons/archived-chats.svg';
+import ArchiveIcon from '@/static/icons/archive.svg';
 import BackIcon from '@/static/icons/back.svg';
+import BlockIcon from '@/static/icons/block.svg';
+import BlockedChatsIcon from '@/static/icons/blocked-chats.svg';
+import CloseIcon from '@/static/icons/close.svg';
+import CloseWithBackgroundIcon from '@/static/icons/close-with-background.svg';
+import DeleteIcon from '@/static/icons/delete.svg';
 import EditIcon from '@/static/icons/edit.svg';
-import SendIcon from '@/static/icons/send.svg';
+import FilterIcon from '@/static/icons/filter.svg';
+import ForwardIcon from '@/static/icons/forward.svg';
 import MenuDotsIcon from '@/static/icons/menu-dots.svg';
 import MenuLinesIcon from '@/static/icons/menu-lines.svg';
-import DeleteIcon from '@/static/icons/delete.svg';
-import PrevIcon from '@/static/icons/prev.svg';
 import NextIcon from '@/static/icons/next.svg';
-import FilterIcon from '@/static/icons/icon-filter.svg';
-import ForwardIcon from '@/static/icons/forward.svg';
+import PrevIcon from '@/static/icons/prev.svg';
+import ReturnIcon from '@/static/icons/return.svg';
 import RewindIcon from '@/static/icons/rewind.svg';
+import SearchIcon from '@/static/icons/search.svg';
+import SearchWithBackgroundIcon from '@/static/icons/search-with-background.svg';
+import SendIcon from '@/static/icons/send.svg';
 import TooltipIcon from '@/static/icons/tooltip.svg';
-import DeleteOutlined from '@/static/icons/icon-delete.svg';
-import CloseOutlined from '@/static/icons/icon-close.svg';
 
 export const variants = {
   dark: {
@@ -68,11 +73,14 @@ export const variants = {
 };
 
 export type ButtonIcon =
+  | 'archive'
+  | 'archivedChats'
   | 'back'
+  | 'block'
+  | 'blockedChats'
   | 'close'
-  | 'closeOutlined'
+  | 'closeWithBackground'
   | 'delete'
-  | 'deleteOutlined'
   | 'edit'
   | 'filter'
   | 'forward'
@@ -80,26 +88,37 @@ export type ButtonIcon =
   | 'menuLines'
   | 'next'
   | 'prev'
+  | 'return'
   | 'rewind'
   | 'search'
+  | 'searchWithBackground'
   | 'send'
   | 'tooltip';
 
 export const iconVariants = {
+  archive: {
+    backgroundImage: `url(${ArchiveIcon})`,
+  },
+  archivedChats: {
+    backgroundImage: `url(${ArchivedChatsIcon})`,
+  },
   back: {
     backgroundImage: `url(${BackIcon})`,
+  },
+  block: {
+    backgroundImage: `url(${BlockIcon})`,
+  },
+  blockedChats: {
+    backgroundImage: `url(${BlockedChatsIcon})`,
   },
   close: {
     backgroundImage: `url(${CloseIcon})`,
   },
-  closeOutlined: {
-    backgroundImage: `url(${CloseOutlined})`,
+  closeWithBackground: {
+    backgroundImage: `url(${CloseWithBackgroundIcon})`,
   },
   delete: {
     backgroundImage: `url(${DeleteIcon})`,
-  },
-  deleteOutlined: {
-    backgroundImage: `url(${DeleteOutlined})`,
   },
   edit: {
     backgroundImage: `url(${EditIcon})`,
@@ -122,11 +141,17 @@ export const iconVariants = {
   prev: {
     backgroundImage: `url(${PrevIcon})`,
   },
+  return: {
+    backgroundImage: `url(${ReturnIcon})`,
+  },
   rewind: {
     backgroundImage: `url(${RewindIcon})`,
   },
   search: {
     backgroundImage: `url(${SearchIcon})`,
+  },
+  searchWithBackground: {
+    backgroundImage: `url(${SearchWithBackgroundIcon})`,
   },
   send: {
     backgroundImage: `url(${SendIcon})`,

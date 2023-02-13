@@ -3,18 +3,98 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/variables';
+import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
-import { TextButton } from '@/components/Buttons';
+import TextInput from '@/components/TextInput';
+import { Button, IconButton, TextButton } from '@/components/Buttons';
+import { useState } from 'react';
+
+const searchInputIconSize = 24;
+const closeInputIconSize = 34;
 
 const ChatWindow = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('chat');
-  const chats = [];
+  const chats = [{}];
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   return chats.length ? (
-    <ActiveChatContainer></ActiveChatContainer>
+    <ActiveChatContainer>
+      <HeaderBar>
+        <ProfileInfo>
+          <ProfileIcon color="purpleDark" />
+          <MentorName variant="h2">{'Essi Esimerkki'}</MentorName>
+          <MentorBio variant="p">{'Kuvaus'}</MentorBio>
+        </ProfileInfo>
+        {showSearch ? (
+          <SearchBar>
+            <SearchInput
+              variant="iconInput"
+              color={searchValue ? 'blueDark' : 'greyFaded'}
+              leftIcon={{
+                sizeInPx: searchInputIconSize,
+                variant: 'search',
+              }}
+              rightButton={{
+                onClick: () => setShowSearch(false),
+                sizeInPx: closeInputIconSize,
+                variant: 'closeWithBackground',
+              }}
+              onChange={setSearchValue}
+              placeholder={t('header.search')}
+              value={searchValue}
+            />
+          </SearchBar>
+        ) : (
+          <Buttons>
+            <IconButton
+              variant="search"
+              sizeInPx={24}
+              onClick={() => setShowSearch(true)}
+            />
+            <Button
+              onClick={() => console.log('archiving')}
+              leftIcon="archive"
+              sizeInPx={24}
+              text={{
+                color: 'purple',
+                text: t('header.archive'),
+                variant: 'link',
+              }}
+            />
+            <Button
+              onClick={() => console.log('blocking')}
+              leftIcon="block"
+              sizeInPx={24}
+              text={{
+                color: 'purple',
+                text: t('header.block'),
+                variant: 'link',
+              }}
+            />
+          </Buttons>
+        )}
+      </HeaderBar>
+      <ChatHistory></ChatHistory>
+      <MessageField>
+        <Input
+          variant="textarea"
+          color={inputValue ? 'blueDark' : 'greyFaded'}
+          onChange={setInputValue}
+          placeholder={t('input.placeholder')}
+          value={inputValue}
+        />
+        <SendButton
+          variant="send"
+          sizeInPx={46}
+          onClick={() => console.log('sending...')}
+        />
+      </MessageField>
+    </ActiveChatContainer>
   ) : (
-    <Container>
+    <div>
       <UpperWelcomeContainer>
         <WelcomeText isHeader variant="h2">
           {t('welcome.upper.title')}
@@ -30,21 +110,98 @@ const ChatWindow = () => {
           {t('welcome.lower.button')}
         </SearchButton>
       </LowerWelcomeContainer>
-    </Container>
+    </div>
   );
 };
 
-const Container = styled.div`
-  height: 780px;
-  width: 1021px;
+const ActiveChatContainer = styled.div`
+  background-color: ${palette.white};
+  border-radius: 10px;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  height: 100%;
 `;
 
-const ActiveChatContainer = styled.div``;
+const HeaderBar = styled.div`
+  border-bottom: 1px solid ${palette.greyLight};
+  box-sizing: border-box;
+  display: flex;
+  gap: 30px;
+  height: 80px;
+  justify-content: space-between;
+  min-width: 800px;
+  padding: 14px 40px;
+`;
+
+const ProfileInfo = styled.div`
+  align-items: center;
+  display: flex;
+`;
+
+const MentorName = styled(Text)`
+  display: block;
+  padding-left: 20px;
+  padding-right: 30px;
+  white-space: nowrap;
+`;
+
+const MentorBio = styled(Text)`
+  display: block;
+  white-space: nowrap;
+`;
+
+const SearchBar = styled.div`
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  margin-left: -${searchInputIconSize}px;
+  margin-right: -${closeInputIconSize}px;
+`;
+
+const SearchInput = styled(TextInput)`
+  flex: 1;
+  max-width: 400px;
+  &:focus {
+    outline: 1px solid ${palette.purple};
+  }
+`;
+
+const Buttons = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 30px;
+`;
+
+const ChatHistory = styled.div`
+  border-bottom: 1px solid ${palette.greyLight};
+  flex: 1;
+`;
+
+const MessageField = styled.div`
+  align-items: center;
+  display: flex;
+`;
+
+const Input = styled(TextInput)`
+  box-sizing: border-box;
+  flex: 1;
+  height: 80px;
+  margin: 20px 1.25rem 20px 40px;
+
+  &:focus {
+    outline: 1px solid ${palette.purple};
+  }
+`;
+
+const SendButton = styled(IconButton)`
+  margin-right: 1.25rem;
+`;
 
 const UpperWelcomeContainer = styled.div`
   background-color: ${palette.white};
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-radius: 10px 10px 0 0;
   display: flex;
   flex-direction: column;
   height: 50%;
@@ -53,8 +210,7 @@ const UpperWelcomeContainer = styled.div`
 
 const LowerWelcomeContainer = styled.div`
   background-color: ${palette.blue2};
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 0 0 10px 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;

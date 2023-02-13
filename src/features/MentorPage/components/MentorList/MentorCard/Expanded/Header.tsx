@@ -22,21 +22,22 @@ export const Header = ({ mentor, onDismiss }: Props) => {
     <Container isAvailable={!mentor.isVacationing} isMobile>
       <HeaderWrapper>
         <AvatarWrapper>
-          <Availability
-            variant="label"
-            isShowing={availabilityMessage.length > 0}
-          >
+          <Availability variant="p" isShowing={availabilityMessage.length > 0}>
             {availabilityMessage}
           </Availability>
           <ProfilePicture isMobile />
         </AvatarWrapper>
         <BasicInfo mentor={mentor} />
-        <CloseButton onClick={onDismiss} variant="close" sizeInPx={38} />
+        <CloseButton
+          onClick={onDismiss}
+          variant="closeWithBackground"
+          sizeInPx={38}
+        />
       </HeaderWrapper>
     </Container>
   ) : (
     <Container isAvailable={!mentor.isVacationing} isMobile={false}>
-      <Availability variant="label" isShowing={availabilityMessage.length > 0}>
+      <Availability variant="p" isShowing={availabilityMessage.length > 0}>
         {availabilityMessage}
       </Availability>
       <ProfilePicture isMobile={false} />

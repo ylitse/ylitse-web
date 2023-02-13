@@ -1,4 +1,5 @@
 import CSS from 'csstype';
+import { FOOTER_HEIGHT } from '../variables';
 
 export type TextVariant =
   | 'bold'
@@ -7,7 +8,6 @@ export type TextVariant =
   | 'h1'
   | 'h2'
   | 'h3'
-  | 'label'
   | 'link'
   | 'linkHeader'
   | 'logo'
@@ -47,7 +47,7 @@ export const variants: Record<TextVariant, TextProp> = {
       fontSize: '1rem',
       fontStyle: 'normal',
       fontWeight: '400',
-      lineHeight: '3.5rem',
+      lineHeight: FOOTER_HEIGHT,
     },
   },
   h1: {
@@ -63,10 +63,10 @@ export const variants: Record<TextVariant, TextProp> = {
     element: 'h2',
     styles: {
       fontFamily: '"Baloo 2"',
-      fontSize: '1.25rem',
+      fontSize: '1.5rem',
       fontStyle: 'normal',
       fontWeight: '600',
-      lineHeight: '2rem',
+      lineHeight: '2.2rem',
     },
   },
   h3: {
@@ -77,16 +77,6 @@ export const variants: Record<TextVariant, TextProp> = {
       fontStyle: 'normal',
       fontWeight: '600',
       lineHeight: '1.6rem',
-    },
-  },
-  label: {
-    element: 'span',
-    styles: {
-      fontFamily: '"Source Sans Pro"',
-      fontSize: '1rem',
-      fontStyle: 'normal',
-      fontWeight: '400',
-      lineHeight: '1.5rem',
     },
   },
   link: {

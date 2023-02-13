@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import React, { useEffect, useState } from 'react';
-import { breakpoints, spacing, palette, Color } from '../variables';
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { palette, Color, NAVIGATION_HEIGHT, FOOTER_HEIGHT } from '../variables';
 
 type Props = {
   children: React.ReactNode;
@@ -12,7 +11,6 @@ const TRANSITION_LENGTH = 0.7;
 const PageWithTransition: React.FC<Props> = ({ children }) => {
   const [isTransition, setIsTransition] = useState(false);
   const [showContent, setShowContent] = useState(false);
-  const isMobile = useMobileMode();
 
   useEffect(() => {
     setIsTransition(true);
@@ -23,11 +21,7 @@ const PageWithTransition: React.FC<Props> = ({ children }) => {
 
   return (
     <Container>
-      {!showContent ? null : isMobile ? (
-        children
-      ) : (
-        <Content>{children}</Content>
-      )}
+      {showContent && children}
       <Layer
         role="transition"
         isTransition={isTransition}
@@ -62,28 +56,10 @@ const Container = styled.div`
   flex-direction: column;
   height: auto;
   left: 0;
-  min-height: calc(100vh - 60px - 3.5rem);
+  min-height: calc(100vh - ${NAVIGATION_HEIGHT} - ${FOOTER_HEIGHT});
   position: relative;
   top: 0;
   width: 100vw;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  margin: auto;
-  margin-bottom: ${spacing.layout_outer_spacing};
-  margin-top: ${spacing.layout_outer_spacing};
-  max-width: 76vw;
-  @media screen and (max-width: 1500px) {
-    width: 1130px;
-    max-width: calc(100vw - (${spacing.layout_spacing} * 2));
-  }
-
-  @media screen and (max-width: ${breakpoints.mobile}) {
-    flex: 1;
-  }
 `;
 
 const Layer = styled.div<{

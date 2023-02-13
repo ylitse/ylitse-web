@@ -20,15 +20,11 @@ const ChatMenu = () => {
   return (
     <Container>
       <Row>
-        <Header variant="h1">
-          {currentCategory === 'active' && t('menu.title.chats')}
-          {currentCategory === 'archived' && t('menu.title.archived')}
-          {currentCategory === 'blocked' && t('menu.title.blocked')}
-        </Header>
+        <Header variant="h1">{t(`menu.title.${currentCategory}`)}</Header>
         <Buttons>
           {!!chats.length && (
             <IconButton
-              variant="search"
+              variant="searchWithBackground"
               sizeInPx={40}
               onClick={() => console.log('searching...')}
             />
@@ -90,9 +86,7 @@ const ChatMenu = () => {
         <ChatList></ChatList>
       ) : (
         <CategoryEmptyText>
-          {currentCategory === 'active' && t('menu.empty.chats')}
-          {currentCategory === 'archived' && t('menu.empty.archived')}
-          {currentCategory === 'blocked' && t('menu.empty.blocked')}
+          {t(`menu.empty.${currentCategory}`)}
         </CategoryEmptyText>
       )}
     </Container>
@@ -103,13 +97,13 @@ const Container = styled.div`
   background-color: ${palette.white};
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
-  height: 780px;
-  width: 407px;
+  flex: 0 0 400px;
 `;
 
 const Row = styled.div`
   align-items: center;
   border-bottom: 1px solid ${palette.greyLight};
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   height: 80px;
@@ -148,9 +142,7 @@ const ChatList = styled.div``;
 
 const CategoryEmptyText = styled(Text)`
   margin: 0;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 1.25rem;
+  padding: 1.25rem 2rem;
 `;
 
 export default ChatMenu;

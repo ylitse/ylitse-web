@@ -10,7 +10,7 @@ type Props = {
 
 export const PageOption = ({ onClick, isSelected, size }: Props) => (
   <Button onClick={() => onClick(size)} isSelected={isSelected}>
-    <Text color="blueDark" variant="label">
+    <Text color="blueDark" variant="p">
       {size}
     </Text>
   </Button>

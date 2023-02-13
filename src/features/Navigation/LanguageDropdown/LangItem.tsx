@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { palette } from '@/components/variables';
+import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
 import Text from '@/components/Text';
 
 export type Props = {
@@ -29,7 +29,7 @@ const Button = styled.button<{ isSelected: boolean }>`
   cursor: pointer;
   display: flex;
   gap: 0.5rem;
-  height: 60px;
+  height: ${NAVIGATION_HEIGHT};
   padding: 0 1rem;
 
   ${({ isSelected }) =>

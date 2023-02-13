@@ -72,7 +72,7 @@ describe('<MentorPage />', () => {
     expect(openChatButton).toBeInTheDocument();
 
     // close the mentorcard again
-    const closeButton = getByRole('button', { name: 'close' });
+    const closeButton = getByRole('button', { name: 'closeWithBackground' });
     expect(closeButton).toBeInTheDocument();
     await user.click(closeButton);
     expect(closeButton).not.toBeInTheDocument();
