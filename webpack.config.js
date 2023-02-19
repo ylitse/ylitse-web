@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const redirect = (res, loc) => {
   res.statusCode = 302;
@@ -70,6 +70,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: 'auto',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -80,6 +81,14 @@ module.exports = {
       {
         from: '**/*',
         context: path.resolve(__dirname, 'src', 'static'),
+      },
+      {
+        from: 'login/**/*',
+        context: path.resolve(__dirname, 'src'),
+      },
+      {
+        from: 'register/**/*',
+        context: path.resolve(__dirname, 'src'),
       },
     ]}),
   ],
