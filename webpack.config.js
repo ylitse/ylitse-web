@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const redirect = (res, loc) => {
   res.statusCode = 302;
@@ -71,9 +72,16 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
-    new HtmlWebPackPlugin({
+    new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
     }),
+
+    new CopyWebpackPlugin({ patterns: [
+      {
+        from: '**/*',
+        context: path.resolve(__dirname, 'src', 'static'),
+      },
+    ]}),
   ],
   resolve: {
     alias: {

@@ -17,15 +17,15 @@ export const Navbar = () => {
   const navigationItems = [
     {
       text: t('navigation.home'),
-      url: '/',
+      url: '',
     },
     {
       text: t('navigation.mentors'),
-      url: '/mentors',
+      url: 'mentors',
     },
     {
       text: t('navigation.chat'),
-      url: '/chat',
+      url: 'chat',
     },
   ];
 
@@ -43,7 +43,7 @@ export const Navbar = () => {
             <Items items={navigationItems} />
             <InfoDropdown />
             <LangDropdown />
-            <Item text={t('navigation.logout')} url="/logout" />
+            <Item text={t('navigation.logout')} url="logout" />
           </RightContainer>
         </Container>
       )}

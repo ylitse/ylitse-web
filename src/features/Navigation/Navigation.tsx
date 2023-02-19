@@ -10,10 +10,10 @@ const Navigation = () => (
     <Navbar />
 
     <Routes>
-      <Route path="/*" element={<div>KOTISIVU</div>} />
-      <Route path="/chat" element={<ChatPage />} />
-      <Route path="/mentors" element={<MentorPage />} />
-      <Route path="/logout" element={<Logout />} />
+      <Route path="*" element={<div>KOTISIVU</div>} />
+      <Route path="chat" element={<ChatPage />} />
+      <Route path="mentors" element={<MentorPage />} />
+      <Route path="logout" element={<Logout />} />
     </Routes>
   </>
 );
