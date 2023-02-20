@@ -1,0 +1,16 @@
+name: Deploy master
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy
+        run: |
+          curl -X POST -F token=${{ secrets.DEPLOYMENT_TOKEN }} -F ref=master \
+            -F "variables[SERVICE]=webui2" ${{ secrets.DEPLOYMENT_URL }}
