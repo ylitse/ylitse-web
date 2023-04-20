@@ -10,7 +10,7 @@ const LoadingPage = () => {
     <Page>
       <Wrapper>
         <Loader />
-        <LoadingText variant="bold" color="white">
+        <LoadingText variant="boldBaloo" color="white">
           Ladataan Ylitse MentorApp -palvelua
         </LoadingText>
       </Wrapper>

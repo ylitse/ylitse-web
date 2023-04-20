@@ -54,7 +54,7 @@ export const BottomBar = ({
         text={{
           color: 'redDark',
           text: t('filters.clear'),
-          variant: 'bold',
+          variant: 'boldBaloo',
         }}
       />
 

@@ -47,12 +47,12 @@ const MentorSearch = ({
             text={{
               color: 'purple',
               text: t(buttonText),
-              variant: 'bold',
+              variant: 'boldBaloo',
             }}
           />
           {shouldShowFilterBall && (
             <Ball>
-              <Text variant="bold">{selectedSkills.length}</Text>
+              <Text variant="boldBaloo">{selectedSkills.length}</Text>
             </Ball>
           )}
         </Anchor>

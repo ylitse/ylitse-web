@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
 
 import IconButton from '@/components/Buttons/IconButton';
 import { palette } from '@/components/variables';
+import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
 
 type ChatCategory = 'active' | 'archived' | 'blocked';
@@ -15,7 +16,48 @@ const ChatMenu = () => {
   const [showCategories, setShowCategories] = useState(false);
   const [currentCategory, setCurrentCategory] =
     useState<ChatCategory>('active');
-  const chats = [];
+  const [chats, setChats] = useState([]);
+
+  // Fetch chats from API
+  useEffect(() => {
+    // This function calls the API to get a list of chats (contacts and messages)
+    // The function is called when the user first logs in, and whenever they would like to refresh their chat list
+    // It gets a list of contacts for the user, and then gets a list of messages between the user and each contact
+    // It then combines the contact and message lists to create a list of chats
+    const fetchChats = async () => {
+      const maxMessagesAtOnce = 10;
+
+      const response = await fetch('/api/myuser');
+      if (response.ok) {
+        const user = await response.json();
+        const userId = user['user']['id'];
+        const contactData = await fetch(`api/users/${userId}/contacts`);
+        const contactsDataJson = await contactData.json();
+        const contacts = contactsDataJson['resources'];
+        const contactIds = contacts.map(c => c.id).join(',');
+
+        const messagesData = await fetch(
+          `api/users/${userId}/messages?contact_user_ids=${contactIds}&max=${maxMessagesAtOnce}&desc=true`,
+        );
+        const messagesDataJson = await messagesData.json();
+        const messages = messagesDataJson['resources'];
+
+        const chats = contacts.map(contact => {
+          const messageList = messages.filter(
+            message =>
+              message['recipient_id'] === contact.id ||
+              message['sender_id'] === contact.id,
+          );
+          return {
+            contact,
+            messages: messageList,
+          };
+        });
+        setChats(chats);
+      }
+    };
+    fetchChats();
+  }, []);
 
   return (
     <Container>
@@ -48,7 +90,7 @@ const ChatMenu = () => {
             }}
           >
             <GoBackIcon src={BackArrowIcon} />
-            <Text variant="bold" color="purple">
+            <Text variant="boldBaloo" color="purple">
               {t('menu.back')}
             </Text>
           </GoBackLink>
@@ -64,7 +106,7 @@ const ChatMenu = () => {
                 setShowCategories(false);
               }}
             >
-              <Text variant="bold" color="purple">
+              <Text variant="boldBaloo" color="purple">
                 {t('menu.archived')}
               </Text>
             </CategoryLink>
@@ -76,14 +118,36 @@ const ChatMenu = () => {
                 setShowCategories(false);
               }}
             >
-              <Text variant="bold" color="purple">
+              <Text variant="boldBaloo" color="purple">
                 {t('menu.blocked')}
               </Text>
             </CategoryLink>
           </Row>
         </>
       ) : chats.length ? (
-        <ChatList></ChatList>
+        <ChatList>
+          {chats.map(chat => {
+            const unreadMessages = chat.messages.filter(
+              message => !message.opened,
+            );
+            return (
+              <Row key={chat.contact.id}>
+                <ProfileIcon color="purpleDark" />
+                <MentorInfo>
+                  <BuddyName>
+                    <Text variant="boldSource">
+                      {chat.contact.display_name}
+                    </Text>
+                    {unreadMessages && <Badge>{unreadMessages.length}</Badge>}
+                  </BuddyName>
+                  <Text variant="simpleSource">
+                    {chat.messages[0]?.content}
+                  </Text>
+                </MentorInfo>
+              </Row>
+            );
+          })}
+        </ChatList>
       ) : (
         <CategoryEmptyText>
           {t(`menu.empty.${currentCategory}`)}
@@ -107,6 +171,7 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   height: 80px;
+  padding-left: 40px;
 `;
 
 const GoBackLink = styled.a`
@@ -129,7 +194,6 @@ const CategoryLink = styled.a`
 
 const Header = styled(Text)`
   flex: 1;
-  padding-left: 40px;
 `;
 
 const Buttons = styled.div`
@@ -139,6 +203,33 @@ const Buttons = styled.div`
 `;
 
 const ChatList = styled.div``;
+
+const MentorInfo = styled.div`
+  color: ${palette.blueDark};
+  margin-left: 20px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+`;
+
+const BuddyName = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Badge = styled.div`
+  align-items: center;
+  background-color: ${palette.blue2};
+  border-radius: 50%;
+  color: ${palette.blueDark};
+  display: flex;
+  font-family: 'Source Sans Pro';
+  font-size: '1rem',
+  font-weight: 600;
+  height: 27px;
+  justify-content: center;
+  margin-left: 10px;
+  width: 27px;
+`;
 
 const CategoryEmptyText = styled(Text)`
   margin: 0;

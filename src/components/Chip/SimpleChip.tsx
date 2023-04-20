@@ -14,7 +14,7 @@ type Props = {
 const SimpleChip: React.FC<Props> = ({ text }) => {
   return (
     <StyledSimpleChip key={text} value={text}>
-      <Text variant="chip">{text}</Text>
+      <Text variant="simpleSource">{text}</Text>
     </StyledSimpleChip>
   );
 };
