@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -7,10 +8,19 @@ import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
-import { useState } from 'react';
+import Message from './Message';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
+
+export type MessageType = {
+  buddyId: string;
+  content: string;
+  isSeen: boolean;
+  messageId: string;
+  sentTime: number; // Unix timestamp
+  type: 'Sent' | 'Received';
+};
 
 const ChatWindow = () => {
   const navigate = useNavigate();
@@ -18,7 +28,35 @@ const ChatWindow = () => {
   const chats = [{}];
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+
+  const [chatHistory, setChatHistory] = useState<MessageType[]>([]);
   const [inputValue, setInputValue] = useState('');
+
+  useEffect(() => {
+    const fetchChatHistory = async () => {
+      // const response = await fetch('/api/chat');
+      // const data = await response.json();
+    };
+    fetchChatHistory();
+  }, []);
+
+  // Adds the input value to the chat history with the current time as sentTime and messageId is a random number
+  const sendMessage = () => {
+    if (inputValue) {
+      setChatHistory([
+        ...chatHistory,
+        {
+          buddyId: '1',
+          content: inputValue,
+          isSeen: true,
+          messageId: Math.random().toString(),
+          sentTime: Math.floor(Date.now() / 1000),
+          type: 'Sent',
+        },
+      ]);
+      setInputValue('');
+    }
+  };
 
   return chats.length ? (
     <ActiveChatContainer>
@@ -77,7 +115,17 @@ const ChatWindow = () => {
           </Buttons>
         )}
       </HeaderBar>
-      <ChatHistory></ChatHistory>
+      <ChatHistory>
+        {chatHistory.map((message: MessageType) => (
+          <Message
+            key={message.messageId}
+            isSeen={message.isSeen}
+            isSent={message.type === 'Sent'}
+            message={message.content}
+            sentTime={message.sentTime}
+          />
+        ))}
+      </ChatHistory>
       <MessageField>
         <Input
           variant="textarea"
@@ -86,11 +134,7 @@ const ChatWindow = () => {
           placeholder={t('input.placeholder')}
           value={inputValue}
         />
-        <SendButton
-          variant="send"
-          sizeInPx={46}
-          onClick={() => console.log('sending...')}
-        />
+        <SendButton variant="send" sizeInPx={46} onClick={sendMessage} />
       </MessageField>
     </ActiveChatContainer>
   ) : (
@@ -177,6 +221,7 @@ const Buttons = styled.div`
 const ChatHistory = styled.div`
   border-bottom: 1px solid ${palette.greyLight};
   flex: 1;
+  padding: 0px 40px;
 `;
 
 const MessageField = styled.div`

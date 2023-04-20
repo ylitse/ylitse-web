@@ -37,7 +37,7 @@ export const variants: Record<TextVariant, TextProp> = {
       fontFamily: '"Source Sans Pro"',
       fontSize: '1rem',
       fontStyle: 'normal',
-      fontWeight: '600',
+      fontWeight: '700',
       lineHeight: '1.5rem',
     },
   },
