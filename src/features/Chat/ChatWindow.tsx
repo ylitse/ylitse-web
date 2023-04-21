@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -9,6 +9,8 @@ import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
 import Message from './Message';
+import { ChatMessage, getActiveChat } from './chatSlice';
+import { useSelector } from 'react-redux';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
@@ -29,42 +31,34 @@ const ChatWindow = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
-  const [chatHistory, setChatHistory] = useState<MessageType[]>([]);
   const [inputValue, setInputValue] = useState('');
 
-  useEffect(() => {
-    const fetchChatHistory = async () => {
-      // const response = await fetch('/api/chat');
-      // const data = await response.json();
-    };
-    fetchChatHistory();
-  }, []);
-
-  // Adds the input value to the chat history with the current time as sentTime and messageId is a random number
   const sendMessage = () => {
-    if (inputValue) {
-      setChatHistory([
-        ...chatHistory,
-        {
-          buddyId: '1',
-          content: inputValue,
-          isSeen: true,
-          messageId: Math.random().toString(),
-          sentTime: Math.floor(Date.now() / 1000),
-          type: 'Sent',
-        },
-      ]);
-      setInputValue('');
-    }
+    //   if (inputValue) {
+    //     setChatHistory([
+    //       ...chatHistory,
+    //       {
+    //         buddyId: '1',
+    //         content: inputValue,
+    //         isSeen: true,
+    //         messageId: Math.random().toString(),
+    //         sentTime: Math.floor(Date.now() / 1000),
+    //         type: 'Sent',
+    //       },
+    //     ]);
+    //     setInputValue('');
+    //   }
   };
+
+  const chat = useSelector(getActiveChat);
 
   return chats.length ? (
     <ActiveChatContainer>
       <HeaderBar>
         <ProfileInfo>
           <ProfileIcon color="purpleDark" />
-          <MentorName variant="h2">{'Essi Esimerkki'}</MentorName>
-          <MentorBio variant="p">{'Kuvaus'}</MentorBio>
+          <MentorName variant="h2">{chat?.displayName}</MentorName>
+          <MentorBio variant="p">{chat?.role}</MentorBio>
         </ProfileInfo>
         {showSearch ? (
           <SearchBar>
@@ -116,13 +110,13 @@ const ChatWindow = () => {
         )}
       </HeaderBar>
       <ChatHistory>
-        {chatHistory.map((message: MessageType) => (
+        {chat?.messages.map((message: ChatMessage) => (
           <Message
-            key={message.messageId}
-            isSeen={message.isSeen}
-            isSent={message.type === 'Sent'}
+            key={message.id}
+            opened={message.opened}
+            isSent={message.recipientId === chat.id}
             message={message.content}
-            sentTime={message.sentTime}
+            sentTime={message.created}
           />
         ))}
       </ChatHistory>

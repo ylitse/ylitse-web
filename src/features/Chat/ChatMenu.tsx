@@ -47,7 +47,7 @@ const ChatMenu = () => {
     // It gets a list of contacts for the user, and then gets a list of messages between the user and each contact
     // It then combines the contact and message lists to create a list of chats
     const fetchChats = async () => {
-      const maxMessagesAtOnce = 10;
+      const maxMessagesAtOnce = 20;
 
       const response = await fetch('/api/myuser');
       if (response.ok) {

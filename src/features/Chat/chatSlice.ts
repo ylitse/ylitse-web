@@ -117,6 +117,12 @@ export const {
 } = chats.actions;
 export type { ChatState, ChatContact, ChatMessage };
 
+export const getActiveChat = (state: RootState) => {
+  const activeChatId = state.chats.activeChatId;
+  const chats = state.chats.chats;
+  return chats.find(chat => chat.id === activeChatId);
+};
+
 export const getChatsByActiveCategory = (state: RootState) => {
   const chats = state.chats.chats;
   const activeCategory = state.chats.activeCategory;

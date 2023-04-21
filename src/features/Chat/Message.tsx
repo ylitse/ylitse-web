@@ -4,20 +4,20 @@ import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
 type Props = {
-  isSeen: boolean;
+  opened: boolean;
   isSent: boolean;
   message: string;
-  sentTime: number;
+  sentTime: string;
 };
 
-// Convert unix timestamp to time string hh:mm
-const getSentTime = (timestamp: number) => {
-  const date = new Date(timestamp * 1000);
+// Convert unix timestamp string to time string hh:mm
+const getSentTime = (sentTime: string) => {
+  const date = new Date(parseInt(sentTime, 10) * 1000);
   const hours = date.getHours();
   const minutes = date.getMinutes();
-  return `${hours < 10 ? '0' : ''}${hours}:${
-    minutes < 10 ? '0' : ''
-  }${minutes}`;
+  const hoursString = hours < 10 ? `0${hours}` : `${hours}`;
+  const minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  return `${hoursString}:${minutesString}`;
 };
 
 const Message = ({ isSent, message, sentTime }: Props) => {
