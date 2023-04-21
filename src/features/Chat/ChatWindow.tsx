@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -26,6 +26,14 @@ const ChatWindow = () => {
 
   const dispatch = useDispatch();
   const chat = useSelector(getActiveChat);
+
+  const historyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    historyRef.current?.lastElementChild?.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }, [chat]);
 
   // Add new message to state and empty input
   const sendMessage = () => {
@@ -102,7 +110,7 @@ const ChatWindow = () => {
           </Buttons>
         )}
       </HeaderBar>
-      <ChatHistory>
+      <ChatHistory ref={historyRef}>
         {chat?.messages.map((message: ChatMessage) => (
           <Message
             key={message.id}
@@ -208,6 +216,7 @@ const Buttons = styled.div`
 const ChatHistory = styled.div`
   border-bottom: 1px solid ${palette.greyLight};
   flex: 1;
+  overflow: auto;
   padding: 0px 40px;
 `;
 
