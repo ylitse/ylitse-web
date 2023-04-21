@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  ChatContact,
+  addChat,
+  getChatsByActiveCategory,
+  setActiveCategory,
+} from './chatSlice';
 
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
 
@@ -8,15 +15,25 @@ import IconButton from '@/components/Buttons/IconButton';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
+import { RootState } from '@/store';
 
 type ChatCategory = 'active' | 'archived' | 'blocked';
 
 const ChatMenu = () => {
   const { t } = useTranslation('chat');
   const [showCategories, setShowCategories] = useState(false);
-  const [currentCategory, setCurrentCategory] =
-    useState<ChatCategory>('active');
-  const [chats, setChats] = useState([]);
+
+  const activeCategory = useSelector(
+    (state: RootState) => state.chats.activeCategory,
+  );
+
+  const chats = useSelector(getChatsByActiveCategory);
+
+  const dispatch = useDispatch();
+
+  const changeActiveCategory = (category: ChatCategory) => {
+    dispatch(setActiveCategory(category));
+  };
 
   // Fetch chats from API
   useEffect(() => {
@@ -42,18 +59,28 @@ const ChatMenu = () => {
         const messagesDataJson = await messagesData.json();
         const messages = messagesDataJson['resources'];
 
-        const chats = contacts.map(contact => {
+        const chats: ChatContact[] = contacts.map(contact => {
           const messageList = messages.filter(
             message =>
               message['recipient_id'] === contact.id ||
               message['sender_id'] === contact.id,
           );
           return {
-            contact,
+            active: contact.active,
+            category:
+              contact.status === 'banned'
+                ? 'blocked'
+                : contact.status === 'archived'
+                ? 'archived'
+                : 'active',
+            displayName: contact.display_name,
+            id: contact.id,
             messages: messageList,
+            name: contact.name,
+            role: contact.role,
           };
         });
-        setChats(chats);
+        chats.forEach((chat: ChatContact) => dispatch(addChat(chat)));
       }
     };
     fetchChats();
@@ -62,7 +89,7 @@ const ChatMenu = () => {
   return (
     <Container>
       <Row>
-        <Header variant="h1">{t(`menu.title.${currentCategory}`)}</Header>
+        <Header variant="h1">{t(`menu.title.${activeCategory}`)}</Header>
         <Buttons>
           {!!chats.length && (
             <IconButton
@@ -80,12 +107,12 @@ const ChatMenu = () => {
       </Row>
 
       {(showCategories ||
-        currentCategory === 'archived' ||
-        currentCategory === 'blocked') && (
+        activeCategory === 'archived' ||
+        activeCategory === 'blocked') && (
         <Row>
           <GoBackLink
             onClick={() => {
-              setCurrentCategory('active');
+              changeActiveCategory('active');
               setShowCategories(false);
             }}
           >
@@ -102,7 +129,7 @@ const ChatMenu = () => {
           <Row>
             <CategoryLink
               onClick={() => {
-                setCurrentCategory('archived');
+                changeActiveCategory('archived');
                 setShowCategories(false);
               }}
             >
@@ -114,7 +141,7 @@ const ChatMenu = () => {
           <Row>
             <CategoryLink
               onClick={() => {
-                setCurrentCategory('blocked');
+                changeActiveCategory('blocked');
                 setShowCategories(false);
               }}
             >
@@ -126,22 +153,20 @@ const ChatMenu = () => {
         </>
       ) : chats.length ? (
         <ChatList>
-          {chats.map(chat => {
-            const unreadMessages = chat.messages.filter(
+          {chats.map(chatContact => {
+            const unreadMessages = chatContact.messages.filter(
               message => !message.opened,
             );
             return (
-              <Row key={chat.contact.id}>
+              <Row key={chatContact.id}>
                 <ProfileIcon color="purpleDark" />
                 <MentorInfo>
                   <BuddyName>
-                    <Text variant="boldSource">
-                      {chat.contact.display_name}
-                    </Text>
+                    <Text variant="boldSource">{chatContact.displayName}</Text>
                     {unreadMessages && <Badge>{unreadMessages.length}</Badge>}
                   </BuddyName>
                   <Text variant="simpleSource">
-                    {chat.messages[0]?.content}
+                    {chatContact.messages[0]?.content}
                   </Text>
                 </MentorInfo>
               </Row>
@@ -150,7 +175,7 @@ const ChatMenu = () => {
         </ChatList>
       ) : (
         <CategoryEmptyText>
-          {t(`menu.empty.${currentCategory}`)}
+          {t(`menu.empty.${activeCategory}`)}
         </CategoryEmptyText>
       )}
     </Container>
