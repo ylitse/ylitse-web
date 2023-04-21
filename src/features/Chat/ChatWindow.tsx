@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -9,20 +10,10 @@ import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
 import Message from './Message';
-import { ChatMessage, getActiveChat } from './chatSlice';
-import { useSelector } from 'react-redux';
+import { addMessage, ChatMessage, getActiveChat } from './chatSlice';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
-
-export type MessageType = {
-  buddyId: string;
-  content: string;
-  isSeen: boolean;
-  messageId: string;
-  sentTime: number; // Unix timestamp
-  type: 'Sent' | 'Received';
-};
 
 const ChatWindow = () => {
   const navigate = useNavigate();
@@ -33,24 +24,26 @@ const ChatWindow = () => {
 
   const [inputValue, setInputValue] = useState('');
 
-  const sendMessage = () => {
-    //   if (inputValue) {
-    //     setChatHistory([
-    //       ...chatHistory,
-    //       {
-    //         buddyId: '1',
-    //         content: inputValue,
-    //         isSeen: true,
-    //         messageId: Math.random().toString(),
-    //         sentTime: Math.floor(Date.now() / 1000),
-    //         type: 'Sent',
-    //       },
-    //     ]);
-    //     setInputValue('');
-    //   }
-  };
-
+  const dispatch = useDispatch();
   const chat = useSelector(getActiveChat);
+
+  // Add new message to state and empty input
+  const sendMessage = () => {
+    if (chat && inputValue) {
+      const now = String(Math.floor(Date.now() / 1000));
+      const chatId = chat.id || '';
+      const message: ChatMessage = {
+        content: inputValue,
+        created: now,
+        id: '1',
+        opened: true,
+        recipientId: chat.id,
+        senderId: '2',
+      };
+      dispatch(addMessage({ chatId, message }));
+      setInputValue('');
+    }
+  };
 
   return chats.length ? (
     <ActiveChatContainer>
