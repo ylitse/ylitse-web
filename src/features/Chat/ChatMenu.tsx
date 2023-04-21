@@ -7,6 +7,7 @@ import {
   addChat,
   getChatsByActiveCategory,
   setActiveCategory,
+  setActiveChat,
 } from './chatSlice';
 
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
@@ -28,6 +29,10 @@ const ChatMenu = () => {
   );
 
   const chats = useSelector(getChatsByActiveCategory);
+
+  const activeChatId = useSelector(
+    (state: RootState) => state.chats.activeChatId,
+  );
 
   const dispatch = useDispatch();
 
@@ -81,10 +86,21 @@ const ChatMenu = () => {
           };
         });
         chats.forEach((chat: ChatContact) => dispatch(addChat(chat)));
+        // Set the active chat to the first chat in the list
+        if (chats.length) {
+          dispatch(setActiveChat(chats[0].id));
+        }
       }
     };
     fetchChats();
   }, []);
+
+  // The chooseChat function is called when the user clicks on a chat in the chat menu
+  // It sets the active chat to the chat that was clicked on
+  const chooseChat = (chatId: string) => {
+    // Update the chat in the store to be opened
+    dispatch(setActiveChat(chatId));
+  };
 
   return (
     <Container>
@@ -162,15 +178,18 @@ const ChatMenu = () => {
             );
             return (
               <Row
+                active={chatContact.id === activeChatId}
                 clickable
                 key={chatContact.id}
-                onClick={() => console.log('Hello')}
+                onClick={() => chooseChat(chatContact.id)}
               >
                 <ProfileIcon color="purpleDark" />
                 <MentorInfo>
                   <BuddyName>
                     <Text variant="boldSource">{chatContact.displayName}</Text>
-                    {unreadMessages && <Badge>{unreadMessages.length}</Badge>}
+                    {!!unreadMessages.length && (
+                      <Badge>{unreadMessages.length}</Badge>
+                    )}
                   </BuddyName>
                   <Text variant="simpleSource">
                     {chatContact.messages[0]?.content}
@@ -196,10 +215,9 @@ const Container = styled.div`
   flex: 0 0 400px;
 `;
 
-const Row = styled.div<{
-  clickable?: boolean;
-}>`
+const Row = styled.div<{ clickable?: boolean; active?: boolean }>`
   align-items: center;
+  background-color: ${({ active }) => (active ? palette.blue2 : palette.white)};
   border-bottom: 1px solid ${palette.greyLight};
   box-sizing: border-box;
   cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};

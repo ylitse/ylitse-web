@@ -22,10 +22,12 @@ interface ChatContact {
 interface ChatState {
   activeCategory: 'active' | 'archived' | 'blocked';
   chats: ChatContact[];
+  activeChatId: string | null;
 }
 
 const initialState: ChatState = {
   activeCategory: 'active',
+  activeChatId: null,
   chats: [],
 };
 
@@ -57,6 +59,19 @@ export const chats = createSlice({
       action: PayloadAction<'active' | 'archived' | 'blocked'>,
     ) => {
       state.activeCategory = action.payload;
+    },
+    setActiveChat: (state, action: PayloadAction<string>) => {
+      state.activeChatId = action.payload;
+
+      // Mark all messages as opened
+      const chatIndex = state.chats.findIndex(
+        chat => chat.id === action.payload,
+      );
+      if (chatIndex !== -1) {
+        state.chats[chatIndex].messages = state.chats[chatIndex].messages.map(
+          message => ({ ...message, opened: true }),
+        );
+      }
     },
     updateChat: (
       state,
@@ -93,7 +108,13 @@ export const chats = createSlice({
   },
 });
 
-export const { addChat, addMessage, setActiveCategory } = chats.actions;
+export const {
+  addChat,
+  addMessage,
+  setActiveCategory,
+  setActiveChat,
+  updateChat,
+} = chats.actions;
 export type { ChatState, ChatContact, ChatMessage };
 
 export const getChatsByActiveCategory = (state: RootState) => {
