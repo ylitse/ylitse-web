@@ -109,13 +109,14 @@ const ChatMenu = () => {
       {(showCategories ||
         activeCategory === 'archived' ||
         activeCategory === 'blocked') && (
-        <Row>
-          <GoBackLink
-            onClick={() => {
-              changeActiveCategory('active');
-              setShowCategories(false);
-            }}
-          >
+        <Row
+          clickable
+          onClick={() => {
+            changeActiveCategory('active');
+            setShowCategories(false);
+          }}
+        >
+          <GoBackLink>
             <GoBackIcon src={BackArrowIcon} />
             <Text variant="boldBaloo" color="purple">
               {t('menu.back')}
@@ -126,25 +127,27 @@ const ChatMenu = () => {
 
       {showCategories ? (
         <>
-          <Row>
-            <CategoryLink
-              onClick={() => {
-                changeActiveCategory('archived');
-                setShowCategories(false);
-              }}
-            >
+          <Row
+            clickable
+            onClick={() => {
+              changeActiveCategory('archived');
+              setShowCategories(false);
+            }}
+          >
+            <CategoryLink>
               <Text variant="boldBaloo" color="purple">
                 {t('menu.archived')}
               </Text>
             </CategoryLink>
           </Row>
-          <Row>
-            <CategoryLink
-              onClick={() => {
-                changeActiveCategory('blocked');
-                setShowCategories(false);
-              }}
-            >
+          <Row
+            clickable
+            onClick={() => {
+              changeActiveCategory('blocked');
+              setShowCategories(false);
+            }}
+          >
+            <CategoryLink>
               <Text variant="boldBaloo" color="purple">
                 {t('menu.blocked')}
               </Text>
@@ -158,7 +161,11 @@ const ChatMenu = () => {
               message => !message.opened,
             );
             return (
-              <Row key={chatContact.id}>
+              <Row
+                clickable
+                key={chatContact.id}
+                onClick={() => console.log('Hello')}
+              >
                 <ProfileIcon color="purpleDark" />
                 <MentorInfo>
                   <BuddyName>
@@ -189,10 +196,13 @@ const Container = styled.div`
   flex: 0 0 400px;
 `;
 
-const Row = styled.div`
+const Row = styled.div<{
+  clickable?: boolean;
+}>`
   align-items: center;
   border-bottom: 1px solid ${palette.greyLight};
   box-sizing: border-box;
+  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
   display: flex;
   flex-direction: row;
   height: 80px;
@@ -201,19 +211,16 @@ const Row = styled.div`
 
 const GoBackLink = styled.a`
   align-items: center;
-  cursor: pointer;
   display: flex;
   padding-left: 40px;
   padding-right: 40px;
 `;
 
 const GoBackIcon = styled.img`
-  cursor: pointer;
   padding-right: 20px;
 `;
 
 const CategoryLink = styled.a`
-  cursor: pointer;
   padding-left: 40px;
 `;
 
