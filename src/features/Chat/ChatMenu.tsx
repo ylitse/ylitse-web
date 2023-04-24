@@ -72,17 +72,13 @@ const ChatMenu = () => {
           );
           return {
             active: contact.active,
-            category:
-              contact.status === 'banned'
-                ? 'blocked'
-                : contact.status === 'archived'
-                ? 'archived'
-                : 'active',
+            category: 'active',
             displayName: contact.display_name,
             id: contact.id,
             messages: messageList,
             name: contact.name,
             role: contact.role,
+            status: contact.status,
           };
         });
         chats.forEach((chat: ChatContact) => dispatch(addChat(chat)));

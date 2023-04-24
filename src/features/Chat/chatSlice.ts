@@ -17,6 +17,7 @@ interface ChatContact {
   displayName: string;
   category: 'active' | 'archived' | 'blocked';
   messages: ChatMessage[];
+  status: string;
 }
 
 interface ChatState {

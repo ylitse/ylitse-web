@@ -59,7 +59,7 @@ const ChatWindow = () => {
         <ProfileInfo>
           <ProfileIcon color="purpleDark" />
           <MentorName variant="h2">{chat?.displayName}</MentorName>
-          <MentorBio variant="p">{chat?.role}</MentorBio>
+          <MentorBio variant="p">{chat?.status}</MentorBio>
         </ProfileInfo>
         {showSearch ? (
           <SearchBar>
