@@ -187,9 +187,9 @@ const ChatMenu = () => {
                       <Badge>{unreadMessages.length}</Badge>
                     )}
                   </BuddyName>
-                  <Text variant="simpleSource">
+                  <MessagePreview>
                     {chatContact.messages[0]?.content}
-                  </Text>
+                  </MessagePreview>
                 </MentorInfo>
               </Row>
             );
@@ -260,6 +260,10 @@ const MentorInfo = styled.div`
 const BuddyName = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+const MessagePreview = styled(Text)`
+  margin: 0;
 `;
 
 const Badge = styled.div`

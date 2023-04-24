@@ -20,7 +20,7 @@ const Chip: React.FC<Props> = ({ text, isSelected, shouldShake, onToggle }) => {
       isSelected={isSelected}
       shouldShake={shouldShake}
     >
-      <Text variant="simpleSource" color={isSelected ? 'white' : 'blueDark'}>
+      <Text variant="chip" color={isSelected ? 'white' : 'blueDark'}>
         {text}
       </Text>
 

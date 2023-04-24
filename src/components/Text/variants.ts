@@ -4,6 +4,7 @@ import { FOOTER_HEIGHT } from '../variables';
 export type TextVariant =
   | 'boldBaloo'
   | 'boldSource'
+  | 'chip'
   | 'footer'
   | 'h1'
   | 'h2'
@@ -11,8 +12,7 @@ export type TextVariant =
   | 'link'
   | 'linkHeader'
   | 'logo'
-  | 'p'
-  | 'simpleSource';
+  | 'p';
 export type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'p' | 'span';
 
 type TextProp = {
@@ -37,8 +37,18 @@ export const variants: Record<TextVariant, TextProp> = {
       fontFamily: '"Source Sans Pro"',
       fontSize: '1rem',
       fontStyle: 'normal',
-      fontWeight: '700',
+      fontWeight: '600',
       lineHeight: '1.5rem',
+    },
+  },
+  chip: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '400',
+      lineHeight: '1rem',
     },
   },
   footer: {
@@ -120,16 +130,6 @@ export const variants: Record<TextVariant, TextProp> = {
       fontStyle: 'normal',
       fontWeight: '400',
       lineHeight: '1.5rem',
-    },
-  },
-  simpleSource: {
-    element: 'span',
-    styles: {
-      fontFamily: '"Source Sans Pro"',
-      fontSize: '1rem',
-      fontStyle: 'normal',
-      fontWeight: '400',
-      lineHeight: '1rem',
     },
   },
 };

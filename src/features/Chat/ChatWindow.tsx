@@ -11,6 +11,7 @@ import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
 import Message from './Message';
 import { addMessage, ChatMessage, getActiveChat } from './chatSlice';
+import React from 'react';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
@@ -52,6 +53,31 @@ const ChatWindow = () => {
       setInputValue('');
     }
   };
+
+  interface GroupedMessages {
+    date: string;
+    messages: ChatMessage[];
+  }
+
+  // Group messages by date
+  const groupedMessages: GroupedMessages[] = !chat
+    ? []
+    : chat.messages.reduce((acc: GroupedMessages[], curr: ChatMessage) => {
+        const messageDate = new Date(curr.created).toLocaleDateString('fi-FI', {
+          day: 'numeric',
+          month: 'numeric',
+          year: 'numeric',
+        });
+        const groupIndex = acc.findIndex(group => group.date === messageDate);
+
+        if (groupIndex === -1) {
+          acc.push({ date: messageDate, messages: [curr] });
+        } else {
+          acc[groupIndex].messages.push(curr);
+        }
+
+        return acc;
+      }, []);
 
   return chats.length ? (
     <ActiveChatContainer>
@@ -111,14 +137,19 @@ const ChatWindow = () => {
         )}
       </HeaderBar>
       <ChatHistory ref={historyRef}>
-        {chat?.messages.map((message: ChatMessage) => (
-          <Message
-            key={message.id}
-            opened={message.opened}
-            isSent={message.recipientId === chat.id}
-            message={message.content}
-            sentTime={message.created}
-          />
+        {groupedMessages.map(group => (
+          <React.Fragment key={group.date}>
+            <DateDivider>{group.date}</DateDivider>
+            {group.messages.map(message => (
+              <Message
+                key={message.id}
+                opened={message.opened}
+                isSent={message.recipientId === chat?.id}
+                message={message.content}
+                sentTime={message.created}
+              />
+            ))}
+          </React.Fragment>
         ))}
       </ChatHistory>
       <MessageField>
@@ -217,7 +248,30 @@ const ChatHistory = styled.div`
   border-bottom: 1px solid ${palette.greyLight};
   flex: 1;
   overflow: auto;
-  padding: 0px 40px;
+  padding: 0px 40px 10px;
+`;
+
+const DateDivider = styled(Text)`
+  position: relative;
+  text-align: center;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background-color: ${palette.purple}};
+  }
+
+  &:before {
+    left: 0;
+  }
+
+  &:after {
+    right: 0;
+  }
 `;
 
 const MessageField = styled.div`
