@@ -19,7 +19,6 @@ const closeInputIconSize = 34;
 const ChatWindow = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('chat');
-  const chats = [{}];
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
@@ -80,7 +79,7 @@ const ChatWindow = () => {
         return acc;
       }, []);
 
-  return chats.length ? (
+  return chat ? (
     <ActiveChatContainer>
       <HeaderBar>
         <ProfileInfo>
