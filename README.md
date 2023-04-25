@@ -73,7 +73,7 @@ Project uses [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hook
 
 1. Install node packages `npm i`
 1. Run tests `npm run test`
-1. Start the development server `npm run start`
+1. Start the development server `npm run start` or use the dev API `DEV_API="https://dev.ylitse.fi/api" npm run start`
 
 ## e2e tests
 
