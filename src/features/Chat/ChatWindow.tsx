@@ -36,10 +36,11 @@ const ChatWindow = () => {
     });
   }, [chat]);
 
-  // Add new message to state and empty input
+  // Add new message to state and empty the input field
   const sendMessage = () => {
     if (chat && inputValue) {
-      const now = String(Math.floor(Date.now() / 1000));
+      // Get current time as ISO 8601 string
+      const now = new Date().toISOString();
       const chatId = chat.id || '';
       const message: ChatMessage = {
         content: inputValue,
