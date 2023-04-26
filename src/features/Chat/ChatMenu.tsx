@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,7 +24,7 @@ const ChatMenu = () => {
   const { t } = useTranslation('chat');
   const [showCategories, setShowCategories] = useState(false);
 
-  const activeCategory = useSelector(
+  const activeCategory: ChatCategory = useSelector(
     (state: RootState) => state.chats.activeCategory,
   );
 
@@ -175,6 +175,7 @@ const ChatMenu = () => {
             return (
               <Row
                 active={chatContact.id === activeChatId}
+                category={activeCategory}
                 clickable
                 key={chatContact.id}
                 onClick={() => chooseChat(chatContact.id)}
@@ -211,16 +212,41 @@ const Container = styled.div`
   flex: 0 0 400px;
 `;
 
-const Row = styled.div<{ clickable?: boolean; active?: boolean }>`
+const Row = styled.div<{
+  clickable?: boolean;
+  active?: boolean;
+  category?: string;
+}>`
   align-items: center;
-  background-color: ${({ active }) => (active ? palette.blue2 : palette.white)};
+  background-color: ${({ active, category }) =>
+    active && category
+      ? category === 'active'
+        ? palette.blue2
+        : category === 'archived'
+        ? palette.orange
+        : palette.redSalmon
+      : palette.white}}
   border-bottom: 1px solid ${palette.greyLight};
   box-sizing: border-box;
   cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
   display: flex;
-  flex-direction: row;
+  flex-direction: 7 row;
   height: 80px;
   padding-left: 40px;
+
+  ${({ active, clickable, category }) =>
+    !active &&
+    clickable &&
+    category &&
+    css`
+      &:hover {
+        background-color: ${category === 'active'
+          ? palette.blueWhite
+          : category === 'archived'
+          ? palette.orangeWhite
+          : palette.redWhite};
+      }
+    `}
 `;
 
 const GoBackLink = styled.a`
