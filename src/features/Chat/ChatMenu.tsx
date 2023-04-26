@@ -100,7 +100,7 @@ const ChatMenu = () => {
 
   return (
     <Container>
-      <Row>
+      <HeaderRow>
         <Header variant="h1">{t(`menu.title.${activeCategory}`)}</Header>
         <Buttons>
           {!!chats.length && (
@@ -116,7 +116,7 @@ const ChatMenu = () => {
             onClick={() => setShowCategories(!showCategories)}
           />
         </Buttons>
-      </Row>
+      </HeaderRow>
 
       {(showCategories ||
         activeCategory === 'archived' ||
@@ -230,7 +230,7 @@ const Row = styled.div<{
   box-sizing: border-box;
   cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
   display: flex;
-  flex-direction: 7 row;
+  flex-direction: row;
   height: 80px;
   padding-left: 40px;
 
@@ -247,6 +247,10 @@ const Row = styled.div<{
           : palette.redWhite};
       }
     `}
+`;
+
+const HeaderRow = styled(Row)`
+  border-radius: 10px 10px 0 0;
 `;
 
 const GoBackLink = styled.a`
