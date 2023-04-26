@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
+import type { ChatCategory } from './ChatMenu';
+
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
 type Props = {
+  category: ChatCategory;
   opened: boolean;
   isSent: boolean;
   message: string;
@@ -20,9 +23,9 @@ const getSentTime = (timestamp: string) => {
   return `${hoursString}:${minutesString}`;
 };
 
-const Message = ({ isSent, message, sentTime }: Props) => (
+const Message = ({ category, isSent, message, sentTime }: Props) => (
   <MessageContainer isSent={isSent}>
-    <MessageBubble isSent={isSent}>
+    <MessageBubble category={category} isSent={isSent}>
       <Content>{message}</Content>
     </MessageBubble>
     <MessageTime isSent={isSent}>{getSentTime(sentTime)}</MessageTime>
@@ -35,8 +38,14 @@ const MessageContainer = styled.div<{ isSent: boolean }>`
   flex-direction: column;
 `;
 
-const MessageBubble = styled.div<{ isSent: boolean }>`
-  background-color: ${({ isSent }) =>
+const MessageBubble = styled.div<{ category: ChatCategory; isSent: boolean }>`
+  background-color: ${({ category, isSent }) => {
+    if (category === 'active')
+      return isSent ? palette.blueLight : palette.blueWhite;
+    if (category === 'archived')
+      return isSent ? palette.orangeLight : palette.orangeWhite;
+    return isSent ? palette.redSalmon : palette.redWhite;
+  }};
     isSent ? palette.blueLight : palette.blueWhite};
   border-radius: 10px;
   box-sizing: border-box;

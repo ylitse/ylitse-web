@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
+import ArchivedIcon from '@/static/icons/archived-chats.svg';
+import BlockedIcon from '@/static/icons/blocked-chats.svg';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
@@ -16,7 +18,9 @@ import {
   getActiveChat,
   updateChat,
 } from './chatSlice';
-import React from 'react';
+import { RootState } from '@/store';
+import { Fragment } from 'react';
+import { ChatCategory } from './ChatMenu';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
@@ -31,6 +35,9 @@ const ChatWindow = () => {
 
   const dispatch = useDispatch();
   const chat = useSelector(getActiveChat);
+  const activeCategory: ChatCategory = useSelector(
+    (state: RootState) => state.chats.activeCategory,
+  );
 
   const historyRef = useRef<HTMLDivElement>(null);
 
@@ -106,7 +113,13 @@ const ChatWindow = () => {
     <ActiveChatContainer>
       <HeaderBar>
         <ProfileInfo>
-          <ProfileIcon color="purpleDark" />
+          {activeCategory === 'active' ? (
+            <ProfileIcon color="purpleDark" />
+          ) : (
+            <img
+              src={activeCategory === 'archived' ? ArchivedIcon : BlockedIcon}
+            />
+          )}
           <MentorName variant="h2">{chat?.displayName}</MentorName>
           <MentorBio variant="p">{chat?.status}</MentorBio>
         </ProfileInfo>
@@ -161,18 +174,19 @@ const ChatWindow = () => {
       </HeaderBar>
       <ChatHistory ref={historyRef}>
         {groupedMessages.map(group => (
-          <React.Fragment key={group.date}>
+          <Fragment key={group.date}>
             <DateDivider>{group.date}</DateDivider>
             {group.messages.map(message => (
               <Message
                 key={message.id}
+                category={chat.category}
                 opened={message.opened}
                 isSent={message.recipientId === chat?.id}
                 message={message.content}
                 sentTime={message.created}
               />
             ))}
-          </React.Fragment>
+          </Fragment>
         ))}
       </ChatHistory>
       <MessageField>

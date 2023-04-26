@@ -15,6 +15,8 @@ export const palette = {
   greyOverlay: 'rgba(57, 57, 57, 0.75)',
   orange: '#F0BA8C',
   orange2: '#FFD79B',
+  orangeDark: '#B36200',
+  orangeLight: '#F8E0CA',
   orangeWhite: '#FCEEE2',
   purple: '#4A2ACB',
   purpleDark: '#37119D',

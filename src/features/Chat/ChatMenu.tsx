@@ -18,7 +18,7 @@ import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
 import { RootState } from '@/store';
 
-type ChatCategory = 'active' | 'archived' | 'blocked';
+export type ChatCategory = 'active' | 'archived' | 'blocked';
 
 const ChatMenu = () => {
   const { t } = useTranslation('chat');
@@ -180,7 +180,17 @@ const ChatMenu = () => {
                 key={chatContact.id}
                 onClick={() => chooseChat(chatContact.id)}
               >
-                <ProfileIcon color="purpleDark" />
+                <ProfileIcon
+                  color={
+                    chatContact.id === activeChatId
+                      ? 'blueDark'
+                      : activeCategory === 'active'
+                      ? 'purpleDark'
+                      : activeCategory === 'archived'
+                      ? 'orangeDark'
+                      : 'redDark'
+                  }
+                />
                 <MentorInfo>
                   <BuddyName>
                     <Text variant="boldSource">{chatContact.displayName}</Text>
