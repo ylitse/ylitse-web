@@ -65,6 +65,15 @@ const ChatWindow = () => {
     }
   };
 
+  // Restore chat
+  const restoreChat = () => {
+    if (chat) {
+      dispatch(
+        updateChat({ chatData: { category: 'active' }, chatId: chat.id }),
+      );
+    }
+  };
+
   // Add new message to state and empty the input field
   const sendMessage = () => {
     if (chat && inputValue) {
@@ -149,26 +158,41 @@ const ChatWindow = () => {
               sizeInPx={24}
               onClick={() => setShowSearch(true)}
             />
-            <Button
-              onClick={archiveChat}
-              leftIcon="archive"
-              sizeInPx={24}
-              text={{
-                color: 'purple',
-                text: t('header.archive'),
-                variant: 'link',
-              }}
-            />
-            <Button
-              onClick={blockChat}
-              leftIcon="block"
-              sizeInPx={24}
-              text={{
-                color: 'purple',
-                text: t('header.block'),
-                variant: 'link',
-              }}
-            />
+            {activeCategory === 'active' ? (
+              <>
+                <Button
+                  onClick={archiveChat}
+                  leftIcon="archive"
+                  sizeInPx={24}
+                  text={{
+                    color: 'purple',
+                    text: t('header.archive'),
+                    variant: 'link',
+                  }}
+                />
+                <Button
+                  onClick={blockChat}
+                  leftIcon="block"
+                  sizeInPx={24}
+                  text={{
+                    color: 'purple',
+                    text: t('header.block'),
+                    variant: 'link',
+                  }}
+                />
+              </>
+            ) : (
+              <Button
+                onClick={restoreChat}
+                leftIcon="return"
+                sizeInPx={24}
+                text={{
+                  color: 'purple',
+                  text: t('header.restore'),
+                  variant: 'link',
+                }}
+              />
+            )}
           </Buttons>
         )}
       </HeaderBar>
