@@ -40,6 +40,17 @@ const ChatMenu = () => {
     dispatch(setActiveCategory(category));
   };
 
+  const getLatestMessage = (chatId: string) => {
+    const chat = chats.find(chat => chat.id === chatId);
+    if (chat) {
+      const latestMessage = chat.messages[chat.messages.length - 1];
+      if (latestMessage) {
+        return latestMessage.content;
+      }
+    }
+    return '';
+  };
+
   // Fetch chats from API
   useEffect(() => {
     // This function calls the API to get a list of chats (contacts and messages)
@@ -199,7 +210,7 @@ const ChatMenu = () => {
                     )}
                   </BuddyName>
                   <MessagePreview>
-                    {chatContact.messages[0]?.content}
+                    {getLatestMessage(chatContact.id)}
                   </MessagePreview>
                 </MentorInfo>
               </Row>
@@ -295,6 +306,7 @@ const MentorInfo = styled.div`
   margin-left: 20px;
   padding-bottom: 15px;
   padding-top: 15px;
+  width: 240px;
 `;
 
 const BuddyName = styled.div`
@@ -304,6 +316,9 @@ const BuddyName = styled.div`
 
 const MessagePreview = styled(Text)`
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Badge = styled.div`
