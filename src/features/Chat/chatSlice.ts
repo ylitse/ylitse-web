@@ -82,6 +82,16 @@ export const chats = createSlice({
       const chatIndex = state.chats.findIndex(chat => chat.id === chatId);
       if (chatIndex !== -1) {
         state.chats[chatIndex] = { ...state.chats[chatIndex], ...chatData };
+        const chats = state.chats;
+        const activeCategory = state.activeCategory;
+        const activeChats = chats.filter(
+          chat => chat.category === activeCategory,
+        );
+        if (activeChats.length === 0) {
+          state.activeChatId = null;
+        } else {
+          state.activeChatId = activeChats[0].id;
+        }
       }
     },
     updateMessage: (

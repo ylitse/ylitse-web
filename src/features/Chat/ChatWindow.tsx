@@ -10,7 +10,12 @@ import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
 import Message from './Message';
-import { addMessage, ChatMessage, getActiveChat } from './chatSlice';
+import {
+  addMessage,
+  ChatMessage,
+  getActiveChat,
+  updateChat,
+} from './chatSlice';
 import React from 'react';
 
 const searchInputIconSize = 24;
@@ -34,6 +39,24 @@ const ChatWindow = () => {
       behavior: 'smooth',
     });
   }, [chat]);
+
+  // Archive Chat
+  const archiveChat = () => {
+    if (chat) {
+      dispatch(
+        updateChat({ chatData: { category: 'archived' }, chatId: chat.id }),
+      );
+    }
+  };
+
+  // Block chat
+  const blockChat = () => {
+    if (chat) {
+      dispatch(
+        updateChat({ chatData: { category: 'blocked' }, chatId: chat.id }),
+      );
+    }
+  };
 
   // Add new message to state and empty the input field
   const sendMessage = () => {
@@ -114,7 +137,7 @@ const ChatWindow = () => {
               onClick={() => setShowSearch(true)}
             />
             <Button
-              onClick={() => console.log('archiving')}
+              onClick={archiveChat}
               leftIcon="archive"
               sizeInPx={24}
               text={{
@@ -124,7 +147,7 @@ const ChatWindow = () => {
               }}
             />
             <Button
-              onClick={() => console.log('blocking')}
+              onClick={blockChat}
               leftIcon="block"
               sizeInPx={24}
               text={{
