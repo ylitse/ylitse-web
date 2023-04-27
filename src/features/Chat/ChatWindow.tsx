@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,13 +15,11 @@ import { Button, IconButton, TextButton } from '@/components/Buttons';
 import Message from './Message';
 import {
   addMessage,
+  ChatContact,
   ChatMessage,
   getActiveChat,
   updateChat,
 } from './chatSlice';
-import { RootState } from '@/store';
-import { Fragment } from 'react';
-import { ChatCategory } from './ChatMenu';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
@@ -30,16 +29,52 @@ const ChatWindow = () => {
   const { t } = useTranslation('chat');
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-
   const [inputValue, setInputValue] = useState('');
 
   const dispatch = useDispatch();
-  const chat = useSelector(getActiveChat);
-  const activeCategory: ChatCategory = useSelector(
-    (state: RootState) => state.chats.activeCategory,
-  );
+  const chat: ChatContact | undefined = useSelector(getActiveChat);
 
+  interface GroupedMessages {
+    date: string;
+    messages: ChatMessage[];
+  }
+
+  const groupMessagesByDate = (messages: ChatMessage[]): GroupedMessages[] => {
+    const groupedMessages: GroupedMessages[] = [];
+
+    messages.forEach(message => {
+      const messageDate = new Date(message.created).toLocaleDateString(
+        'fi-FI',
+        {
+          day: 'numeric',
+          month: 'numeric',
+          year: 'numeric',
+        },
+      );
+
+      const existingGroup = groupedMessages.find(
+        group => group.date === messageDate,
+      );
+
+      if (!existingGroup) {
+        groupedMessages.push({ date: messageDate, messages: [message] });
+      } else {
+        existingGroup.messages.push(message);
+      }
+    });
+
+    return groupedMessages;
+  };
+
+  const groupedMessages = !chat ? [] : groupMessagesByDate(chat.messages);
+
+  // Scroll to the bottom of the chat when a new message is sent
   const historyRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    historyRef.current?.lastElementChild?.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }, [chat]);
 
   useEffect(() => {
     historyRef.current?.lastElementChild?.scrollIntoView({
@@ -47,90 +82,58 @@ const ChatWindow = () => {
     });
   }, [chat]);
 
-  // Archive Chat
   const archiveChat = () => {
-    if (chat) {
+    if (chat)
       dispatch(
         updateChat({ chatData: { category: 'archived' }, chatId: chat.id }),
       );
-    }
   };
 
-  // Block chat
   const blockChat = () => {
-    if (chat) {
+    if (chat)
       dispatch(
         updateChat({ chatData: { category: 'blocked' }, chatId: chat.id }),
       );
-    }
   };
 
-  // Restore chat
   const restoreChat = () => {
-    if (chat) {
+    if (chat)
       dispatch(
         updateChat({ chatData: { category: 'active' }, chatId: chat.id }),
       );
-    }
   };
 
-  // Add new message to state and empty the input field
   const sendMessage = () => {
     if (chat && inputValue) {
       // Get current time as ISO 8601 string
       const now = new Date().toISOString();
-      const chatId = chat.id || '';
+      const chatId = chat.id;
       const message: ChatMessage = {
         content: inputValue,
         created: now,
-        id: '1',
+        id: '123',
         opened: true,
         recipientId: chat.id,
-        senderId: '2',
+        senderId: 'userId',
       };
       dispatch(addMessage({ chatId, message }));
       setInputValue('');
     }
   };
 
-  interface GroupedMessages {
-    date: string;
-    messages: ChatMessage[];
-  }
-
-  // Group messages by date
-  const groupedMessages: GroupedMessages[] = !chat
-    ? []
-    : chat.messages.reduce((acc: GroupedMessages[], curr: ChatMessage) => {
-        const messageDate = new Date(curr.created).toLocaleDateString('fi-FI', {
-          day: 'numeric',
-          month: 'numeric',
-          year: 'numeric',
-        });
-        const groupIndex = acc.findIndex(group => group.date === messageDate);
-
-        if (groupIndex === -1) {
-          acc.push({ date: messageDate, messages: [curr] });
-        } else {
-          acc[groupIndex].messages.push(curr);
-        }
-
-        return acc;
-      }, []);
-
   return chat ? (
     <ActiveChatContainer>
       <HeaderBar>
         <ProfileInfo>
-          {activeCategory === 'active' ? (
+          {chat.category === 'active' ? (
             <ProfileIcon color="purpleDark" />
           ) : (
             <img
-              src={activeCategory === 'archived' ? ArchivedIcon : BlockedIcon}
+              src={chat.category === 'archived' ? ArchivedIcon : BlockedIcon}
             />
           )}
-          <MentorName variant="h2">{chat?.displayName}</MentorName>
-          <MentorBio variant="p">{chat?.status}</MentorBio>
+          <MentorName variant="h2">{chat.displayName}</MentorName>
+          <MentorBio variant="p">{chat.status}</MentorBio>
         </ProfileInfo>
         {showSearch ? (
           <SearchBar>
@@ -158,7 +161,7 @@ const ChatWindow = () => {
               sizeInPx={24}
               onClick={() => setShowSearch(true)}
             />
-            {activeCategory === 'active' ? (
+            {chat.category === 'active' ? (
               <>
                 <Button
                   onClick={archiveChat}
@@ -204,10 +207,9 @@ const ChatWindow = () => {
               <Message
                 key={message.id}
                 category={chat.category}
-                opened={message.opened}
+                content={message.content}
                 isSent={message.recipientId === chat?.id}
-                message={message.content}
-                sentTime={message.created}
+                time={message.created}
               />
             ))}
           </Fragment>

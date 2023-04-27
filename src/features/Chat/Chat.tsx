@@ -17,6 +17,7 @@ import {
 import PageWithTransition from '@/components/PageWithTransition';
 import Spinner from '@/components/Spinner';
 
+// TODO: Replace this dummy with real implementation
 const fetchChats = async (dispatch, setIsLoading) => {
   try {
     const contacts = await fetchContacts();

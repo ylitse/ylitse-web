@@ -1,34 +1,32 @@
 import styled from 'styled-components';
 
-import type { ChatCategory } from './ChatMenu';
+import type { ChatCategory } from './chatSlice';
 
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
+// This function takes an ISO 8601 timestamp and returns a string in the format hh:mm
+const formatTime = (timestamp: string) => {
+  const date = new Date(timestamp);
+  const formattedTime = date.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+  return formattedTime;
+};
+
 type Props = {
   category: ChatCategory;
-  opened: boolean;
+  content: string;
   isSent: boolean;
-  message: string;
-  sentTime: string;
+  time: string;
 };
-
-// This function takes an ISO 8601 timestamp and returns a string in the format hh:mm
-const getSentTime = (timestamp: string) => {
-  const date = new Date(timestamp);
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const hoursString = hours < 10 ? `0${hours}` : `${hours}`;
-  const minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;
-  return `${hoursString}:${minutesString}`;
-};
-
-const Message = ({ category, isSent, message, sentTime }: Props) => (
+const Message = ({ category, content, isSent, time }: Props) => (
   <MessageContainer isSent={isSent}>
     <MessageBubble category={category} isSent={isSent}>
-      <Content>{message}</Content>
+      <Content>{content}</Content>
     </MessageBubble>
-    <MessageTime isSent={isSent}>{getSentTime(sentTime)}</MessageTime>
+    <MessageTime isSent={isSent}>{formatTime(time)}</MessageTime>
   </MessageContainer>
 );
 

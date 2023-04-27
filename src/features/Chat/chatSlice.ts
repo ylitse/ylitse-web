@@ -1,6 +1,8 @@
 import { RootState } from '@/store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export type ChatCategory = 'active' | 'archived' | 'blocked';
+
 interface ChatMessage {
   opened: boolean;
   content: string;
@@ -15,13 +17,13 @@ interface ChatContact {
   id: string;
   role: string;
   displayName: string;
-  category: 'active' | 'archived' | 'blocked';
+  category: ChatCategory;
   messages: ChatMessage[];
   status: string;
 }
 
 interface ChatState {
-  activeCategory: 'active' | 'archived' | 'blocked';
+  activeCategory: ChatCategory;
   chats: ChatContact[];
   activeChatId: string | null;
 }
@@ -55,10 +57,7 @@ export const chats = createSlice({
         state.chats[chatIndex].messages.push(message);
       }
     },
-    setActiveCategory: (
-      state,
-      action: PayloadAction<'active' | 'archived' | 'blocked'>,
-    ) => {
+    setActiveCategory: (state, action: PayloadAction<ChatCategory>) => {
       state.activeCategory = action.payload;
     },
     setActiveChat: (state, action: PayloadAction<string>) => {
