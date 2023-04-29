@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { Fragment } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -202,7 +201,7 @@ const ChatWindow = () => {
       </HeaderBar>
       <ChatHistory ref={historyRef}>
         {groupedMessages.map(group => (
-          <Fragment key={group.date}>
+          <>
             <DateDivider>{group.date}</DateDivider>
             {group.messages.map(message => (
               <Message
@@ -213,7 +212,7 @@ const ChatWindow = () => {
                 time={message.created}
               />
             ))}
-          </Fragment>
+          </>
         ))}
       </ChatHistory>
       <MessageField>
