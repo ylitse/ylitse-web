@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '@/store';
+import { RootState, useAppDispatch, useAppSelector } from '@/store';
 import {
   ChatContact,
   getChatsByActiveCategory,
@@ -22,12 +21,12 @@ const ChatMenu = () => {
   const { t } = useTranslation('chat');
   const [showCategories, setShowCategories] = useState(false);
 
-  const activeCategory: ChatCategory = useSelector(
+  const activeCategory: ChatCategory = useAppSelector(
     (state: RootState) => state.chats.activeCategory,
   );
-  const chats: ChatContact[] = useSelector(getChatsByActiveCategory);
+  const chats: ChatContact[] = useAppSelector(getChatsByActiveCategory);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const changeActiveCategory = (category: ChatCategory) => {
     dispatch(setActiveCategory(category));
   };

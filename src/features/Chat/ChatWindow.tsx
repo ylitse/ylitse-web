@@ -1,9 +1,17 @@
 import styled, { css } from 'styled-components';
 import { Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
+import { useAppDispatch, useAppSelector } from '@/store';
+import {
+  addMessage,
+  ChatContact,
+  ChatMessage,
+  getActiveChat,
+  updateChat,
+} from './chatSlice';
 
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
@@ -13,13 +21,6 @@ import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
 import Message from './Message';
-import {
-  addMessage,
-  ChatContact,
-  ChatMessage,
-  getActiveChat,
-  updateChat,
-} from './chatSlice';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
@@ -31,8 +32,8 @@ const ChatWindow = () => {
   const [searchValue, setSearchValue] = useState('');
   const [inputValue, setInputValue] = useState('');
 
-  const dispatch = useDispatch();
-  const chat: ChatContact | undefined = useSelector(getActiveChat);
+  const dispatch = useAppDispatch();
+  const chat: ChatContact | undefined = useAppSelector(getActiveChat);
 
   interface GroupedMessages {
     date: string;

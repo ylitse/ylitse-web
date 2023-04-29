@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useMobileMode } from '@/hooks/useMobileMode';
 
 import { fetchContacts, fetchMessages } from './chatApi';
@@ -16,6 +15,7 @@ import {
 } from '@/components/variables';
 import PageWithTransition from '@/components/PageWithTransition';
 import Spinner from '@/components/Spinner';
+import { useAppDispatch } from '@/store';
 
 // TODO: Replace this dummy with real implementation
 const fetchChats = async (dispatch, setIsLoading) => {
@@ -66,7 +66,7 @@ const fetchChats = async (dispatch, setIsLoading) => {
 };
 
 const ChatPage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isMobile = useMobileMode();
   const [isLoading, setIsLoading] = useState(true);
 

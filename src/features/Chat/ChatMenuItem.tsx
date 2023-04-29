@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '@/store';
+import { RootState, useAppDispatch, useAppSelector } from '@/store';
 import { ChatContact, setActiveChat } from './chatSlice';
 
 import { palette } from '@/components/variables';
@@ -12,10 +11,10 @@ import type { ChatCategory } from './chatSlice';
 const ChatMenuItem = ({ chat }: { chat: ChatContact }) => {
   const unreadMessages = chat.messages.filter(message => !message.opened);
 
-  const activeCategory: ChatCategory = useSelector(
+  const activeCategory: ChatCategory = useAppSelector(
     (state: RootState) => state.chats.activeCategory,
   );
-  const activeChatId = useSelector(
+  const activeChatId = useAppSelector(
     (state: RootState) => state.chats.activeChatId,
   );
 
@@ -26,7 +25,7 @@ const ChatMenuItem = ({ chat }: { chat: ChatContact }) => {
     return latestMessage.content;
   };
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const chooseChat = () => {
     dispatch(setActiveChat(chat.id));
   };
