@@ -24,16 +24,25 @@ export type ChatContact = {
   status: string;
 };
 
+export type PollingParam =
+  | {
+      type: 'New';
+      previousMsgId: string;
+    }
+  | { type: 'InitialMessages'; buddyIds: Array<string> };
+
 export type ChatState = {
   activeCategory: ChatCategory;
   chats: Record<string, ChatContact>;
   activeChatId: string | null;
+  pollingParams: Array<PollingParam> | null;
 };
 
 const initialState: ChatState = {
   activeCategory: 'active',
   activeChatId: null,
   chats: {},
+  pollingParams: null,
 };
 
 export const chats = createSlice({
@@ -44,10 +53,16 @@ export const chats = createSlice({
     builder.addMatcher(
       chatApi.endpoints.getContacts.matchFulfilled,
       (state, { payload }) => {
+        const buddyIds = payload.map(buddy => buddy.id);
         const chats = payload.reduce((acc, curr) => {
           return { ...acc, [curr.id]: [] };
         }, {});
-        return { ...state, chats };
+
+        return {
+          ...state,
+          chats,
+          pollingParams: [{ type: 'InitialMessages', buddyIds }],
+        };
       },
     );
   },
@@ -67,5 +82,19 @@ export const selectChats = createSelector(
       .map(buddyId => chats[buddyId])
       .filter(chat => chat.status === activeCategory);
     return filtered;
+  },
+);
+
+const defaultParams: PollingParam = { type: 'New', previousMsgId: '' };
+export const selectCurrentPollingParams = createSelector(
+  selectChatState,
+  ({ pollingParams }) => {
+    const nextParams = !pollingParams
+      ? null
+      : pollingParams.length === 0
+      ? defaultParams
+      : pollingParams[0];
+
+    return nextParams;
   },
 );

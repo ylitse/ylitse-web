@@ -5,7 +5,6 @@ import type { ChatCategory } from './chatSlice';
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
-// This function takes an ISO 8601 timestamp and returns a string in the format hh:mm
 const formatTime = (timestamp: string) => {
   const date = new Date(timestamp);
   const formattedTime = date.toLocaleTimeString([], {

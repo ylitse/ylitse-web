@@ -10,17 +10,20 @@ import {
   OUTER_VERTICAL_MARGIN,
 } from '@/components/variables';
 import PageWithTransition from '@/components/PageWithTransition';
-import { useGetContactsQuery } from './chatPageApi';
+import { useGetContactsQuery, useGetMessagesQuery } from './chatPageApi';
 import { useAppSelector } from '@/store';
 import { selectUserId } from '../Authentication/userSlice';
+import { selectCurrentPollingParams } from './chatSlice';
 
 const ChatPage = () => {
   const isMobile = useMobileMode();
 
   const userId = useAppSelector(selectUserId);
+  const params = useAppSelector(selectCurrentPollingParams);
 
   // Improve
   useGetContactsQuery(userId!, { skip: !userId });
+  useGetMessagesQuery({ userId: userId!, params: params! }, { skip: !params });
 
   return (
     <PageWithTransition>
