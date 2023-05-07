@@ -2,12 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { RootState, useAppDispatch, useAppSelector } from '@/store';
-import {
-  ChatContact,
-  getChatsByActiveCategory,
-  setActiveCategory,
-} from './chatSlice';
+import { RootState, useAppSelector } from '@/store';
 
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
 
@@ -15,7 +10,7 @@ import { palette } from '@/components/variables';
 import IconButton from '@/components/Buttons/IconButton';
 import Text from '@/components/Text';
 import ChatMenuItem from './ChatMenuItem';
-import type { ChatCategory } from './chatSlice';
+import { ChatCategory, selectChats } from './chatSlice';
 
 const ChatMenu = () => {
   const { t } = useTranslation('chat');
@@ -24,11 +19,10 @@ const ChatMenu = () => {
   const activeCategory: ChatCategory = useAppSelector(
     (state: RootState) => state.chats.activeCategory,
   );
-  const chats: ChatContact[] = useAppSelector(getChatsByActiveCategory);
+  const chats = useAppSelector(selectChats);
 
-  const dispatch = useAppDispatch();
   const changeActiveCategory = (category: ChatCategory) => {
-    dispatch(setActiveCategory(category));
+    console.log('asd', category);
   };
 
   return (
@@ -52,7 +46,7 @@ const ChatMenu = () => {
       </HeaderRow>
 
       {showCategories ||
-        (['archived', 'blocked'].includes(activeCategory) && (
+        (['archived', 'banned'].includes(activeCategory) && (
           <CategoryRow
             onClick={() => {
               changeActiveCategory('active');
@@ -84,13 +78,13 @@ const ChatMenu = () => {
           </CategoryRow>
           <CategoryRow
             onClick={() => {
-              changeActiveCategory('blocked');
+              changeActiveCategory('banned');
               setShowCategories(false);
             }}
           >
             <CategoryLink>
               <Text variant="boldBaloo" color="purple">
-                {t('menu.blocked')}
+                {t('menu.banned')}
               </Text>
             </CategoryLink>
           </CategoryRow>

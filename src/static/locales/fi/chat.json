@@ -11,16 +11,16 @@
   "menu": {
     "archived": "Arkistoidut keskustelut",
     "back": "Takaisin keskusteluihin",
-    "blocked": "Estetyt keskustelut",
+    "banned": "Estetyt keskustelut",
     "empty": {
       "active": "Sinulla ei ole vielä keskusteluja. Ei hätää, aloittamasi keskustelut mentoreiden kanssa tulevat tähän automaattisesti.",
       "archived": "Sinulla ei ole arkistoituja keskusteluja.",
-      "blocked": "Sinulla ei ole estettyjä keskusteluja."
+      "banned": "Sinulla ei ole estettyjä keskusteluja."
     },
     "title": {
       "active": "Chat",
       "archived": "Arkistoidut",
-      "blocked": "Estetyt"
+      "banned": "Estetyt"
     }
   },
   "welcome": {

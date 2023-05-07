@@ -3,14 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { useAppDispatch, useAppSelector } from '@/store';
-import {
-  addMessage,
-  ChatContact,
-  ChatMessage,
-  getActiveChat,
-  updateChat,
-} from './chatSlice';
+import { useAppSelector } from '@/store';
+import { ChatMessage, selectActiveChat } from './chatSlice';
 
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
@@ -24,6 +18,11 @@ import Message from './Message';
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
 
+type GroupedMessages = {
+  date: string;
+  messages: ChatMessage[];
+};
+
 const ChatWindow = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('chat');
@@ -31,13 +30,7 @@ const ChatWindow = () => {
   const [searchValue, setSearchValue] = useState('');
   const [inputValue, setInputValue] = useState('');
 
-  const dispatch = useAppDispatch();
-  const chat: ChatContact | undefined = useAppSelector(getActiveChat);
-
-  interface GroupedMessages {
-    date: string;
-    messages: ChatMessage[];
-  }
+  const chat = useAppSelector(selectActiveChat);
 
   const groupMessagesByDate = (messages: ChatMessage[]): GroupedMessages[] => {
     const groupedMessages: GroupedMessages[] = [];
@@ -83,24 +76,15 @@ const ChatWindow = () => {
   }, [chat]);
 
   const archiveChat = () => {
-    if (chat)
-      dispatch(
-        updateChat({ chatData: { category: 'archived' }, chatId: chat.id }),
-      );
+    // this is fine
   };
 
   const blockChat = () => {
-    if (chat)
-      dispatch(
-        updateChat({ chatData: { category: 'blocked' }, chatId: chat.id }),
-      );
+    // this is fine
   };
 
   const restoreChat = () => {
-    if (chat)
-      dispatch(
-        updateChat({ chatData: { category: 'active' }, chatId: chat.id }),
-      );
+    // this is fine
   };
 
   const sendMessage = () => {
@@ -116,8 +100,8 @@ const ChatWindow = () => {
         recipientId: chat.id,
         senderId: 'userId',
       };
-      dispatch(addMessage({ chatId, message }));
       setInputValue('');
+      console.log(`sending id:${chatId}`, message);
     }
   };
 

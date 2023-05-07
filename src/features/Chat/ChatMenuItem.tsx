@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { RootState, useAppDispatch, useAppSelector } from '@/store';
-import { ChatContact, setActiveChat } from './chatSlice';
+import { RootState, useAppSelector } from '@/store';
+import { ChatContact } from './chatSlice';
 
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
@@ -25,9 +25,8 @@ const ChatMenuItem = ({ chat }: { chat: ChatContact }) => {
     return latestMessage.content;
   };
 
-  const dispatch = useAppDispatch();
   const chooseChat = () => {
-    dispatch(setActiveChat(chat.id));
+    // this is fine
   };
 
   return (
