@@ -10,6 +10,9 @@ import {
   OUTER_VERTICAL_MARGIN,
 } from '@/components/variables';
 import PageWithTransition from '@/components/PageWithTransition';
+import { useGetContactsQuery } from './chatPageApi';
+import { useAppSelector } from '@/store';
+import { selectUserId } from '../Authentication/userSlice';
 
 // // TODO: Replace this dummy with real implementation
 // const fetchChats = async (dispatch, setIsLoading) => {
@@ -61,6 +64,11 @@ import PageWithTransition from '@/components/PageWithTransition';
 
 const ChatPage = () => {
   const isMobile = useMobileMode();
+
+  const userId = useAppSelector(selectUserId);
+
+  // Improve
+  useGetContactsQuery(userId!, { skip: !userId });
 
   return (
     <PageWithTransition>

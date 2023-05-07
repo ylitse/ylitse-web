@@ -1,4 +1,5 @@
 import { RootState } from '@/store';
+import { createSelector } from 'reselect';
 import { createSlice } from '@reduxjs/toolkit';
 import { isRight } from 'fp-ts/lib/Either';
 import { fetchMyUser } from './myuserApi';
@@ -27,4 +28,13 @@ export const user = createSlice({
   },
 });
 
-export const selectIsLoggedIn = ({ user }: RootState) => Boolean(user.userId);
+const selectUserState = ({ user }: RootState) => user;
+
+export const selectIsLoggedIn = createSelector(selectUserState, ({ userId }) =>
+  Boolean(userId),
+);
+
+export const selectUserId = createSelector(
+  selectUserState,
+  ({ userId }) => userId,
+);

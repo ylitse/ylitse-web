@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as D from 'io-ts/Decoder';
 
-const role = D.literal('mentee', 'mentor', 'admin');
+export const role = D.literal('mentee', 'mentor', 'admin');
 
 const userCodec = D.struct({
   account_id: D.string,

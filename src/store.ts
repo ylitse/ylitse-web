@@ -8,9 +8,11 @@ import { mentorsApi } from '@/features/MentorPage/mentorPageApi';
 import { mentorsFilter } from '@/features/MentorPage/mentorsFilterSlice';
 import { chats } from './features/Chat/chatSlice';
 import { user } from './features/Authentication/userSlice';
+import { chatApi } from '@/features/Chat/chatPageApi';
 
 const rootReducer = combineReducers({
   [mentorsApi.reducerPath]: mentorsApi.reducer,
+  [chatApi.reducerPath]: chatApi.reducer,
   [mentorsFilter.name]: mentorsFilter.reducer,
   [chats.name]: chats.reducer,
   [user.name]: user.reducer,
@@ -19,9 +21,9 @@ const rootReducer = combineReducers({
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware({ immutableCheck: true }).concat(
-        mentorsApi.middleware,
-      ),
+      getDefaultMiddleware({ immutableCheck: true })
+        .concat(mentorsApi.middleware)
+        .concat(chatApi.middleware),
     preloadedState,
     reducer: rootReducer,
   });
