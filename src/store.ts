@@ -7,11 +7,13 @@ import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 import { mentorsApi } from '@/features/MentorPage/mentorPageApi';
 import { mentorsFilter } from '@/features/MentorPage/mentorsFilterSlice';
 import { chats } from './features/Chat/chatSlice';
+import { user } from './features/Authentication/userSlice';
 
 const rootReducer = combineReducers({
   [mentorsApi.reducerPath]: mentorsApi.reducer,
   [mentorsFilter.name]: mentorsFilter.reducer,
   [chats.name]: chats.reducer,
+  [user.name]: user.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
