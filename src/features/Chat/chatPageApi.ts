@@ -22,21 +22,19 @@ const contactCodec = pipe(mandatoryProperties, D.intersect(optionalProperties));
 const contactsResponseCodec = D.struct({ resources: D.array(contactCodec) });
 
 const messageCodec = D.struct({
-  active: D.boolean,
   content: D.string,
   created: D.string,
   id: D.string,
   opened: D.boolean,
   recipient_id: D.string,
   sender_id: D.string,
-  updated: D.string,
 });
 
 const messagesResponseCodec = D.struct({
   resources: D.array(messageCodec),
 });
 
-type Message = D.TypeOf<typeof messageCodec>;
+export type Message = D.TypeOf<typeof messageCodec>;
 
 export type Contact = D.TypeOf<typeof contactCodec>;
 

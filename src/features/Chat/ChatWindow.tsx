@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from '@/store';
-import { ChatMessage, selectActiveChat } from './chatSlice';
+import { selectActiveChat } from './chatSlice';
 
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
@@ -14,6 +14,7 @@ import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
 import Message from './Message';
+import { Message as ChatMessage } from './chatPageApi';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
@@ -97,8 +98,8 @@ const ChatWindow = () => {
         created: now,
         id: '123',
         opened: true,
-        recipientId: chat.id,
-        senderId: 'userId',
+        recipient_id: chat.id,
+        sender_id: 'userId',
       };
       setInputValue('');
       console.log(`sending id:${chatId}`, message);
@@ -109,14 +110,14 @@ const ChatWindow = () => {
     <ActiveChatContainer>
       <HeaderBar>
         <ProfileInfo>
-          {chat.category === 'active' ? (
+          {chat.status === 'active' ? (
             <ProfileIcon color="purpleDark" />
           ) : (
             <img
-              src={chat.category === 'archived' ? ArchivedIcon : BlockedIcon}
+              src={chat.status === 'archived' ? ArchivedIcon : BlockedIcon}
             />
           )}
-          <MentorName variant="h2">{chat.displayName}</MentorName>
+          <MentorName variant="h2">{chat.display_name}</MentorName>
           <MentorBio variant="p">{chat.status}</MentorBio>
         </ProfileInfo>
         {showSearch ? (
@@ -145,7 +146,7 @@ const ChatWindow = () => {
               sizeInPx={24}
               onClick={() => setShowSearch(true)}
             />
-            {chat.category === 'active' ? (
+            {chat.status === 'active' ? (
               <>
                 <Button
                   onClick={archiveChat}
@@ -190,9 +191,9 @@ const ChatWindow = () => {
             {group.messages.map(message => (
               <Message
                 key={message.id}
-                category={chat.category}
+                category={chat.status ?? 'active'}
                 content={message.content}
-                isSent={message.recipientId === chat?.id}
+                isSent={message.recipient_id === chat?.id}
                 time={message.created}
               />
             ))}

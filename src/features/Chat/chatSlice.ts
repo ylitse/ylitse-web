@@ -1,27 +1,17 @@
 import { RootState } from '@/store';
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
-import { chatApi } from './chatPageApi';
+import { chatApi, Message } from './chatPageApi';
 
 export type ChatCategory = 'active' | 'archived' | 'banned';
-
-export type ChatMessage = {
-  opened: boolean;
-  content: string;
-  id: string;
-  recipientId: string;
-  senderId: string;
-  created: string;
-};
 
 export type ChatContact = {
   active: boolean;
   id: string;
   role: string;
-  displayName: string;
-  category: ChatCategory;
-  messages: ChatMessage[];
-  status: string;
+  display_name: string;
+  status?: ChatCategory;
+  messages: Message[];
 };
 
 export type PollingParam =
@@ -50,23 +40,52 @@ export const chats = createSlice({
   name: 'chats',
   reducers: {},
   extraReducers: builder => {
-    builder.addMatcher(
-      chatApi.endpoints.getContacts.matchFulfilled,
-      (state, { payload }) => {
-        const buddyIds = payload.map(buddy => buddy.id);
-        const chats = payload.reduce((acc, curr) => {
-          return { ...acc, [curr.id]: [] };
-        }, {});
+    builder
+      .addMatcher(
+        chatApi.endpoints.getContacts.matchFulfilled,
+        (state, { payload }) => {
+          const buddyIds = payload.map(buddy => buddy.id);
+          const chats: Record<string, ChatContact> = payload.reduce(
+            (acc, curr) => {
+              return { ...acc, [curr.id]: { ...curr, messages: [] } };
+            },
+            {},
+          );
 
-        return {
-          ...state,
-          chats,
-          pollingParams: [{ type: 'InitialMessages', buddyIds }],
-        };
-      },
-    );
+          return {
+            ...state,
+            chats,
+            pollingParams: [{ type: 'InitialMessages', buddyIds }],
+          };
+        },
+      )
+      .addMatcher(
+        chatApi.endpoints.getMessages.matchFulfilled,
+        ({ chats, ...rest }, { payload: newMessages }) => {
+          const updatedMessages = mergeMessages(chats, newMessages);
+          return { ...rest, chats: updatedMessages };
+        },
+      );
   },
 });
+
+const mergeMessages = (
+  originalChats: Record<string, ChatContact>,
+  messages: Array<Message>,
+) =>
+  Object.keys(originalChats).reduce((chats, buddyId) => {
+    const newMessages = messages.filter(
+      msg => msg.recipient_id === buddyId || msg.sender_id === buddyId,
+    );
+
+    return {
+      ...chats,
+      [buddyId]: {
+        ...originalChats[buddyId],
+        messages: originalChats[buddyId].messages.concat(newMessages),
+      },
+    };
+  }, {});
 
 const selectChatState = ({ chats }: RootState) => chats;
 

@@ -48,7 +48,7 @@ const ChatMenuItem = ({ chat }: { chat: ChatContact }) => {
       />
       <MentorInfo>
         <BuddyName>
-          <Text variant="boldSource">{chat.displayName}</Text>
+          <Text variant="boldSource">{chat.display_name}</Text>
           {!!unreadMessages.length && <Badge>{unreadMessages.length}</Badge>}
         </BuddyName>
         <MessagePreview>{getLatestMessage()}</MessagePreview>

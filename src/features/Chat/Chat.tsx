@@ -23,7 +23,10 @@ const ChatPage = () => {
 
   // Improve
   useGetContactsQuery(userId!, { skip: !userId });
-  useGetMessagesQuery({ userId: userId!, params: params! }, { skip: !params });
+  useGetMessagesQuery(
+    { userId: userId!, params: params! },
+    { skip: !userId || !params },
+  );
 
   return (
     <PageWithTransition>
