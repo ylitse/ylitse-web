@@ -45,6 +45,7 @@ export const chats = createSlice({
         chatApi.endpoints.getContacts.matchFulfilled,
         (state, { payload }) => {
           const buddyIds = payload.map(buddy => buddy.id);
+          const initialBuddyMessages = createBuddyChunks(buddyIds);
           const chats: Record<string, ChatContact> = payload.reduce(
             (acc, curr) => {
               return { ...acc, [curr.id]: { ...curr, messages: [] } };
@@ -55,7 +56,7 @@ export const chats = createSlice({
           return {
             ...state,
             chats,
-            pollingParams: [{ type: 'InitialMessages', buddyIds }],
+            pollingParams: initialBuddyMessages,
           };
         },
       )
@@ -78,6 +79,15 @@ export const chats = createSlice({
       );
   },
 });
+
+const createBuddyChunks = (buddyIds: Array<string>): Array<PollingParam> => {
+  const chunkSize = 40;
+  const amountOfBatches = Math.ceil(buddyIds.length / chunkSize);
+
+  return [...Array(amountOfBatches).keys()]
+    .map(index => buddyIds.slice(index * chunkSize, (index + 1) * chunkSize))
+    .map(chunk => ({ type: 'InitialMessages', buddyIds: chunk }));
+};
 
 const mergeMessages = (
   originalChats: Record<string, ChatContact>,
@@ -103,6 +113,7 @@ const getNextParams = (
 ): Array<PollingParam> => {
   const normalPoll = { type: 'New', previousMsgId } as const;
   const nextParams = pollingQueue.slice(1);
+  // If params exist, resolve those - when no params, then do the 'normalPoll'
   return nextParams.length > 0 ? nextParams : [normalPoll];
 };
 
@@ -123,14 +134,14 @@ export const selectChats = createSelector(
   },
 );
 
-const defaultParams: PollingParam = { type: 'New', previousMsgId: '' };
+const defaultParam: PollingParam = { type: 'New', previousMsgId: '' };
 export const selectCurrentPollingParams = createSelector(
   selectChatState,
   ({ pollingParams }) => {
     const nextParams = !pollingParams
       ? null
       : pollingParams.length === 0
-      ? defaultParams
+      ? defaultParam
       : pollingParams[0];
 
     return nextParams;
