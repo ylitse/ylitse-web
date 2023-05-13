@@ -3,7 +3,7 @@ import * as D from 'io-ts/Decoder';
 import { validateAndTransformTo } from '@/utils/http';
 import { role } from '../Authentication/myuserApi';
 import { pipe } from 'fp-ts/lib/function';
-import { PollingParam } from './chatSlice';
+import { ChatContact, PollingParam } from './chatSlice';
 
 const status = D.literal('banned', 'archived', 'ok', 'deleted');
 
@@ -86,5 +86,28 @@ export const chatApi = createApi({
     }),
   }),
 });
+
+const sortByCreated = (a: Message, b: Message) => {
+  return a.created < b.created ? -1 : 1;
+};
+
+export const extractMostRecentId = (
+  existingChats: Record<string, ChatContact>,
+  newMessages: Array<Message>,
+) => {
+  const fromExisting = Object.keys(existingChats).reduce<Array<Message>>(
+    (messages, buddyId) => {
+      return messages.concat(existingChats[buddyId].messages);
+    },
+    [],
+  );
+
+  const allMessages = fromExisting
+    .concat(newMessages)
+    .sort(sortByCreated)
+    .reverse();
+
+  return allMessages[0].id ?? '';
+};
 
 export const { useGetContactsQuery, useGetMessagesQuery } = chatApi;

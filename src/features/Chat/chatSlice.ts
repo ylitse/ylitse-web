@@ -1,7 +1,7 @@
 import { RootState } from '@/store';
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
-import { chatApi, Message } from './chatPageApi';
+import { chatApi, extractMostRecentId, Message } from './chatPageApi';
 
 export type ChatCategory = 'active' | 'archived' | 'banned';
 
@@ -63,7 +63,17 @@ export const chats = createSlice({
         chatApi.endpoints.getMessages.matchFulfilled,
         ({ chats, ...rest }, { payload: newMessages }) => {
           const updatedMessages = mergeMessages(chats, newMessages);
-          return { ...rest, chats: updatedMessages };
+          const mostRecentMessageId = extractMostRecentId(chats, newMessages);
+          const nextPollingParams = getNextParams(
+            rest.pollingParams ?? [],
+            mostRecentMessageId,
+          );
+
+          return {
+            ...rest,
+            chats: updatedMessages,
+            pollingParams: nextPollingParams,
+          };
         },
       );
   },
@@ -86,6 +96,15 @@ const mergeMessages = (
       },
     };
   }, {});
+
+const getNextParams = (
+  pollingQueue: Array<PollingParam>,
+  previousMsgId: string,
+): Array<PollingParam> => {
+  const normalPoll = { type: 'New', previousMsgId } as const;
+  const nextParams = pollingQueue.slice(1);
+  return nextParams.length > 0 ? nextParams : [normalPoll];
+};
 
 const selectChatState = ({ chats }: RootState) => chats;
 
