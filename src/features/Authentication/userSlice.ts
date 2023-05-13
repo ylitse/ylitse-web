@@ -21,10 +21,14 @@ export const user = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchMyUser.fulfilled, ({ userId }, { payload }) => {
-      const nextUserId = isRight(payload) ? payload.right.user.id : userId;
-      return { userId: nextUserId };
-    });
+    builder
+      .addCase(fetchMyUser.fulfilled, ({ userId }, { payload }) => {
+        const nextUserId = isRight(payload) ? payload.right.user.id : userId;
+        return { userId: nextUserId };
+      })
+      .addCase(fetchMyUser.rejected, () => {
+        window.location.href = '/login';
+      });
   },
 });
 
