@@ -89,21 +89,7 @@ const ChatWindow = () => {
   };
 
   const sendMessage = () => {
-    if (chat && inputValue) {
-      // Get current time as ISO 8601 string
-      const now = new Date().toISOString();
-      const chatId = chat.id;
-      const message: ChatMessage = {
-        content: inputValue,
-        created: now,
-        id: '123',
-        opened: true,
-        recipient_id: chat.id,
-        sender_id: 'userId',
-      };
-      setInputValue('');
-      console.log(`sending id:${chatId}`, message);
-    }
+    // this is fine
   };
 
   return chat ? (
