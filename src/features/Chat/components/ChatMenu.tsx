@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
 import { useAppSelector, useAppDispatch } from '@/store';
-import { ChatFolder, selectChats, setActiveFolder } from '../chatSlice';
+import { selectChats, setActiveFolder } from '../chatSlice';
 
+import type { ChatFolder } from '../chatPageApi';
 import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';

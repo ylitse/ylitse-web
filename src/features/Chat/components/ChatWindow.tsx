@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
 import { useAppSelector } from '@/store';
-import { selectActiveChat } from '../chatSlice';
+import {
+  selectActiveChat,
+  selectIsActiveChatLoadingMessages,
+} from '../chatSlice';
 
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -27,6 +30,7 @@ const ChatWindow = () => {
   const [inputValue, setInputValue] = useState('');
 
   const chat = useAppSelector(selectActiveChat);
+  const isLoadingMessages = useAppSelector(selectIsActiveChatLoadingMessages);
 
   const archiveChat = () => {
     // this is fine
@@ -124,9 +128,9 @@ const ChatWindow = () => {
       </HeaderBar>
       <MemoizedMessageList
         messageList={chat.messages}
+        buddyId={chat.buddyId}
         status={chat.status}
-        id={chat.buddyId}
-        isLoading={false}
+        isLoading={isLoadingMessages}
       />
       <MessageField>
         <Input

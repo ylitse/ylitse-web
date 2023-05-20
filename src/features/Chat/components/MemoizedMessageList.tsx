@@ -1,26 +1,28 @@
-import { memo, useEffect, useRef } from 'react';
+import { memo, useEffect, useRef, Fragment } from 'react';
 
-import type { Message as MessageType } from '../chatPageApi';
-import type { ChatFolder } from '../chatSlice';
+import { useAppDispatch } from '@/store';
+
+import type { AppMessage, ChatFolder } from '../chatPageApi';
+import { useScrollCompleteCallback } from '@/hooks/useScrollCompleteCallback';
 
 import styled from 'styled-components';
 import { palette } from '@/components/variables';
-
 import Message from './Message';
 import Text from '@/components/Text';
+import { addPollParam } from '../chatSlice';
 
 type Props = {
-  messageList: Array<MessageType>;
+  messageList: Array<AppMessage>;
   status: ChatFolder;
-  id: string;
+  buddyId: string;
   isLoading: boolean;
 };
 
-type GroupedMessages = Record<string, MessageType[]>;
+type GroupedMessages = Record<string, AppMessage[]>;
 
-const toGroupedMessages = (messages: Array<MessageType>) =>
+const toGroupedMessages = (messages: Array<AppMessage>) =>
   messages.reduce<GroupedMessages>(
-    (grouped: GroupedMessages, current: MessageType) => {
+    (grouped: GroupedMessages, current: AppMessage) => {
       const messageDate = new Date(current.created).toLocaleDateString(
         'fi-FI',
         {
@@ -38,38 +40,58 @@ const toGroupedMessages = (messages: Array<MessageType>) =>
     {},
   );
 
-const MessageList = ({ messageList, status, id }: Props) => {
+export const MessageList = ({
+  messageList,
+  status,
+  buddyId,
+  isLoading,
+}: Props) => {
   const groupedMessages = toGroupedMessages(messageList);
+
+  const dispatch = useAppDispatch();
+  const oldestMessage = messageList.length > 0 ? messageList[0].id : '0';
+  const newestMessage =
+    messageList.length > 0 ? messageList[messageList.length - 1].id : '0';
+
+  const handleFetchOlderMessages = () => {
+    if (isLoading) {
+      return;
+    }
+
+    dispatch(
+      addPollParam({ type: 'OlderThan', buddyId, messageId: oldestMessage }),
+    );
+  };
 
   // Scroll to the bottom of the chat when a new message is sent
   const historyRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    historyRef.current?.lastElementChild?.scrollIntoView({
-      behavior: 'smooth',
-    });
-  }, [messageList]);
+
+  useScrollCompleteCallback({
+    ref: historyRef,
+    callback: handleFetchOlderMessages,
+  });
 
   useEffect(() => {
     historyRef.current?.lastElementChild?.scrollIntoView({
       behavior: 'smooth',
     });
-  }, [messageList]);
+  }, [newestMessage]);
 
   return (
     <ChatHistory ref={historyRef}>
       {Object.keys(groupedMessages).map(date => (
-        <>
+        <Fragment key={date}>
           <DateDivider>{date}</DateDivider>
           {groupedMessages[date].map(message => (
             <Message
               key={message.id}
               folder={status}
               content={message.content}
-              isSent={message.recipient_id === id}
+              isSent={message.isSent}
               time={message.created}
             />
           ))}
-        </>
+        </Fragment>
       ))}
     </ChatHistory>
   );

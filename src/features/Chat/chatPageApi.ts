@@ -35,15 +35,25 @@ const messagesResponseCodec = D.struct({
   contacts: D.array(contactCodec),
 });
 
-export type Message = D.TypeOf<typeof messageCodec>;
+type Message = D.TypeOf<typeof messageCodec>;
+export type AppMessage = {
+  isSent: boolean;
+  id: string;
+  content: string;
+  opened: boolean;
+  created: string;
+  buddyId: string;
+};
 
-export type ChatStatus = D.TypeOf<typeof status>;
+type ChatStatus = D.TypeOf<typeof status>;
+export type ChatFolder = Exclude<ChatStatus, 'deleted'>;
 export type Role = D.TypeOf<typeof role>;
+
 type Contact = D.TypeOf<typeof contactCodec>;
-type Buddy = Omit<Contact, 'display_name' | 'id' | 'status'> & {
+export type Buddy = Omit<Contact, 'display_name' | 'id' | 'status'> & {
   buddyId: string;
   displayName: string;
-  status: ChatStatus;
+  status: ChatFolder;
 };
 
 type MessageQuery = {
@@ -51,13 +61,20 @@ type MessageQuery = {
   params: PollingParam;
 };
 
-export type MessageResponse = D.TypeOf<typeof messagesResponseCodec>;
+export type MessageResponse = {
+  messages: Array<AppMessage>;
+  buddies: Array<Buddy>;
+};
 
 const toQueryString = (params: PollingParam) => {
   const maxMessagesAtOnce = 10;
 
   if (params.type === 'New' && params.previousMsgId.length > 0) {
     return `from_message_id=${params.previousMsgId}&desc=false&max=${maxMessagesAtOnce}`;
+  }
+
+  if (params.type === 'OlderThan') {
+    return `contact_user_ids=${params.buddyId}&from_message_id=${params.messageId}&max=${maxMessagesAtOnce}&desc=true`;
   }
 
   if (params.type === 'InitialMessages') {
@@ -80,42 +97,62 @@ export const chatApi = createApi({
           response,
           contactsResponseCodec,
           { resources: [] },
-          ({ resources }) => resources.filter(notDeleted).map(toBuddy),
+          ({ resources }) => toAppBuddies(resources),
         ),
     }),
     getMessages: builder.query<MessageResponse, MessageQuery>({
       query: ({ userId, params }) =>
         `users/${userId}/messages?${toQueryString(params)}`,
-      transformResponse: (response: unknown) =>
+      transformResponse: (response: unknown, _meta, { userId }) =>
         validateAndTransformTo(
           response,
           messagesResponseCodec,
           { resources: [], contacts: [] },
-          response => response,
+          ({ resources, contacts }) => ({
+            messages: resources.map(toMessage(userId)),
+            buddies: toAppBuddies(contacts),
+          }),
         ),
     }),
   }),
 });
 
-const notDeleted = ({ status }: Contact) =>
-  status ? status !== 'deleted' : true;
+const toAppBuddies = (contacts: Array<Contact>): Array<Buddy> =>
+  contacts.flatMap(toBuddy);
 
-const toBuddy = ({ display_name, id, ...rest }: Contact): Buddy => ({
-  displayName: display_name,
-  buddyId: id,
-  status: rest?.status ?? 'ok',
-  ...rest,
-});
+const toBuddy = ({ display_name, id, ...rest }: Contact) => {
+  if (rest?.status === 'deleted') {
+    return [];
+  }
 
-const sortByCreated = (a: Message, b: Message) => {
+  return {
+    displayName: display_name,
+    buddyId: id,
+    status: rest?.status ?? 'ok',
+    ...rest,
+  } as Buddy;
+};
+
+const toMessage =
+  (userId: string) =>
+  ({ sender_id, recipient_id, ...rest }: Message): AppMessage => {
+    const isSent = userId === sender_id;
+    return {
+      buddyId: isSent ? recipient_id : sender_id,
+      isSent,
+      ...rest,
+    };
+  };
+
+export const sortByCreated = (a: AppMessage, b: AppMessage) => {
   return a.created < b.created ? -1 : 1;
 };
 
 export const extractMostRecentId = (
   existingChats: Record<string, ChatBuddy>,
-  newMessages: Array<Message>,
+  newMessages: Array<AppMessage>,
 ) => {
-  const fromExisting = Object.keys(existingChats).reduce<Array<Message>>(
+  const fromExisting = Object.keys(existingChats).reduce<Array<AppMessage>>(
     (messages, buddyId) => {
       return messages.concat(existingChats[buddyId].messages);
     },

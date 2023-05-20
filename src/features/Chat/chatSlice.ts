@@ -3,19 +3,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
 import {
   chatApi,
-  ChatStatus,
+  ChatFolder,
   extractMostRecentId,
-  Message,
+  AppMessage,
+  Buddy,
   MessageResponse,
-  Role,
+  sortByCreated,
 } from './chatPageApi';
 
-export type ChatBuddy = {
-  buddyId: string;
-  displayName: string;
-  role: Role;
-  status: ChatFolder;
-  messages: Message[];
+export type ChatBuddy = Buddy & {
+  messages: AppMessage[];
 };
 
 export type PollingParam =
@@ -23,9 +20,8 @@ export type PollingParam =
       type: 'New';
       previousMsgId: string;
     }
+  | { type: 'OlderThan'; buddyId: string; messageId: string }
   | { type: 'InitialMessages'; buddyIds: Array<string> };
-
-export type ChatFolder = Exclude<ChatStatus, 'deleted'>;
 
 export type ChatState = {
   activeFolder: ChatFolder;
@@ -50,6 +46,10 @@ export const chats = createSlice({
     },
     setActiveChat: (state, action: PayloadAction<string>) => {
       state.activeChatId = action.payload;
+    },
+    addPollParam: (state, action: PayloadAction<PollingParam>) => {
+      const currentParams = state.pollingParams ?? [];
+      state.pollingParams = [action.payload, ...currentParams];
     },
   },
   extraReducers: builder => {
@@ -79,7 +79,7 @@ export const chats = createSlice({
           const updatedMessages = mergeMessages(chats, response);
           const mostRecentMessageId = extractMostRecentId(
             chats,
-            response.resources,
+            response.messages,
           );
           const nextPollingParams = getNextParams(
             rest.pollingParams ?? [],
@@ -109,16 +109,17 @@ const mergeMessages = (
   originalChats: Record<string, ChatBuddy>,
   response: MessageResponse,
 ) =>
-  response.contacts.reduce((chats, contact) => {
-    const newMessages = response.resources.filter(
-      msg => msg.recipient_id === contact.id || msg.sender_id === contact.id,
+  response.buddies.reduce((chats, contact) => {
+    const newMessages = response.messages.filter(
+      ({ buddyId }) => buddyId === contact.buddyId,
     );
+    const existingMessages = originalChats[contact.buddyId].messages ?? [];
 
     return {
       ...chats,
-      [contact.id]: {
-        ...originalChats[contact.id],
-        messages: originalChats[contact.id].messages.concat(newMessages),
+      [contact.buddyId]: {
+        ...contact,
+        messages: existingMessages.concat(newMessages).sort(sortByCreated),
       },
     };
   }, originalChats);
@@ -177,4 +178,29 @@ export const selectCurrentPollingParams = createSelector(
   },
 );
 
-export const { setActiveFolder, setActiveChat } = chats.actions;
+const isLoadingOlderMessages = (pollingParams: PollingParam, buddyId: string) =>
+  pollingParams.type === 'OlderThan' && pollingParams.buddyId === buddyId;
+
+const isLoadingInitialMessages = (
+  pollingParams: PollingParam,
+  buddyId: string,
+) =>
+  pollingParams.type === 'InitialMessages' &&
+  pollingParams.buddyIds.includes(buddyId);
+
+export const selectIsActiveChatLoadingMessages = createSelector(
+  selectChatState,
+  ({ activeChatId, pollingParams }) => {
+    if (!pollingParams || !activeChatId) {
+      return false;
+    }
+
+    return pollingParams.some(
+      param =>
+        isLoadingOlderMessages(param, activeChatId) ||
+        isLoadingInitialMessages(param, activeChatId),
+    );
+  },
+);
+
+export const { setActiveFolder, setActiveChat, addPollParam } = chats.actions;
