@@ -13,12 +13,12 @@
     "back": "Takaisin keskusteluihin",
     "banned": "Estetyt keskustelut",
     "empty": {
-      "active": "Sinulla ei ole vielä keskusteluja. Ei hätää, aloittamasi keskustelut mentoreiden kanssa tulevat tähän automaattisesti.",
+      "ok": "Sinulla ei ole vielä keskusteluja. Ei hätää, aloittamasi keskustelut mentoreiden kanssa tulevat tähän automaattisesti.",
       "archived": "Sinulla ei ole arkistoituja keskusteluja.",
       "banned": "Sinulla ei ole estettyjä keskusteluja."
     },
     "title": {
-      "active": "Chat",
+      "ok": "Chat",
       "archived": "Arkistoidut",
       "banned": "Estetyt"
     }

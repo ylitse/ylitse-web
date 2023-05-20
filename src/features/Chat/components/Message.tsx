@@ -1,28 +1,26 @@
 import styled from 'styled-components';
 
-import type { ChatCategory } from './chatSlice';
+import type { ChatFolder } from '../chatSlice';
 
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
-const formatTime = (timestamp: string) => {
-  const date = new Date(timestamp);
-  const formattedTime = date.toLocaleTimeString([], {
+const formatTime = (timestamp: string) =>
+  new Date(timestamp).toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
   });
-  return formattedTime;
-};
 
 type Props = {
-  category: ChatCategory;
+  folder: ChatFolder;
   content: string;
   isSent: boolean;
   time: string;
 };
-const Message = ({ category, content, isSent, time }: Props) => (
+
+const Message = ({ folder, content, isSent, time }: Props) => (
   <MessageContainer isSent={isSent}>
-    <MessageBubble category={category} isSent={isSent}>
+    <MessageBubble folder={folder} isSent={isSent}>
       <Content>{content}</Content>
     </MessageBubble>
     <MessageTime isSent={isSent}>{formatTime(time)}</MessageTime>
@@ -35,11 +33,10 @@ const MessageContainer = styled.div<{ isSent: boolean }>`
   flex-direction: column;
 `;
 
-const MessageBubble = styled.div<{ category: ChatCategory; isSent: boolean }>`
-  background-color: ${({ category, isSent }) => {
-    if (category === 'active')
-      return isSent ? palette.blueLight : palette.blueWhite;
-    if (category === 'archived')
+const MessageBubble = styled.div<{ folder: ChatFolder; isSent: boolean }>`
+  background-color: ${({ folder, isSent }) => {
+    if (folder === 'ok') return isSent ? palette.blueLight : palette.blueWhite;
+    if (folder === 'archived')
       return isSent ? palette.orangeLight : palette.orangeWhite;
     return isSent ? palette.redSalmon : palette.redWhite;
   }};

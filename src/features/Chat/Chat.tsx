@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import { useMobileMode } from '@/hooks/useMobileMode';
 
-import ChatMenu from './ChatMenu';
-import ChatWindow from './ChatWindow';
+import ChatMenu from './components/ChatMenu';
+import ChatWindow from './components/ChatWindow';
 import {
   breakpoints,
   CONTENT_HEIGHT,

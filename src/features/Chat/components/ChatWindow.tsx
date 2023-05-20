@@ -1,11 +1,12 @@
-import styled, { css } from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+
+import { useAppSelector } from '@/store';
+import { selectActiveChat } from '../chatSlice';
+
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { useAppSelector } from '@/store';
-import { selectActiveChat } from './chatSlice';
-
+import styled, { css } from 'styled-components';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import ArchivedIcon from '@/static/icons/archived-chats.svg';
@@ -13,16 +14,10 @@ import BlockedIcon from '@/static/icons/blocked-chats.svg';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
-import Message from './Message';
-import { Message as ChatMessage } from './chatPageApi';
+import { MemoizedMessageList } from './MemoizedMessageList';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
-
-type GroupedMessages = {
-  date: string;
-  messages: ChatMessage[];
-};
 
 const ChatWindow = () => {
   const navigate = useNavigate();
@@ -32,49 +27,6 @@ const ChatWindow = () => {
   const [inputValue, setInputValue] = useState('');
 
   const chat = useAppSelector(selectActiveChat);
-
-  const groupMessagesByDate = (messages: ChatMessage[]): GroupedMessages[] => {
-    const groupedMessages: GroupedMessages[] = [];
-
-    messages.forEach(message => {
-      const messageDate = new Date(message.created).toLocaleDateString(
-        'fi-FI',
-        {
-          day: 'numeric',
-          month: 'numeric',
-          year: 'numeric',
-        },
-      );
-
-      const existingGroup = groupedMessages.find(
-        group => group.date === messageDate,
-      );
-
-      if (!existingGroup) {
-        groupedMessages.push({ date: messageDate, messages: [message] });
-      } else {
-        existingGroup.messages.push(message);
-      }
-    });
-
-    return groupedMessages;
-  };
-
-  const groupedMessages = !chat ? [] : groupMessagesByDate(chat.messages);
-
-  // Scroll to the bottom of the chat when a new message is sent
-  const historyRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    historyRef.current?.lastElementChild?.scrollIntoView({
-      behavior: 'smooth',
-    });
-  }, [chat]);
-
-  useEffect(() => {
-    historyRef.current?.lastElementChild?.scrollIntoView({
-      behavior: 'smooth',
-    });
-  }, [chat]);
 
   const archiveChat = () => {
     // this is fine
@@ -96,14 +48,14 @@ const ChatWindow = () => {
     <ActiveChatContainer>
       <HeaderBar>
         <ProfileInfo>
-          {chat.status === 'active' ? (
+          {chat.status === 'ok' ? (
             <ProfileIcon color="purpleDark" />
           ) : (
             <img
               src={chat.status === 'archived' ? ArchivedIcon : BlockedIcon}
             />
           )}
-          <MentorName variant="h2">{chat.display_name}</MentorName>
+          <MentorName variant="h2">{chat.displayName}</MentorName>
           <MentorBio variant="p">{chat.status}</MentorBio>
         </ProfileInfo>
         {showSearch ? (
@@ -132,7 +84,7 @@ const ChatWindow = () => {
               sizeInPx={24}
               onClick={() => setShowSearch(true)}
             />
-            {chat.status === 'active' ? (
+            {chat.status === 'ok' ? (
               <>
                 <Button
                   onClick={archiveChat}
@@ -170,22 +122,12 @@ const ChatWindow = () => {
           </Buttons>
         )}
       </HeaderBar>
-      <ChatHistory ref={historyRef}>
-        {groupedMessages.map(group => (
-          <>
-            <DateDivider>{group.date}</DateDivider>
-            {group.messages.map(message => (
-              <Message
-                key={message.id}
-                category={chat.status ?? 'active'}
-                content={message.content}
-                isSent={message.recipient_id === chat?.id}
-                time={message.created}
-              />
-            ))}
-          </>
-        ))}
-      </ChatHistory>
+      <MemoizedMessageList
+        messageList={chat.messages}
+        status={chat.status}
+        id={chat.buddyId}
+        isLoading={false}
+      />
       <MessageField>
         <Input
           variant="textarea"
@@ -276,36 +218,6 @@ const Buttons = styled.div`
   align-items: center;
   display: flex;
   gap: 30px;
-`;
-
-const ChatHistory = styled.div`
-  border-bottom: 1px solid ${palette.greyLight};
-  flex: 1;
-  overflow: auto;
-  padding: 0px 40px 10px;
-`;
-
-const DateDivider = styled(Text)`
-  position: relative;
-  text-align: center;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background-color: ${palette.purple}};
-  }
-
-  &:before {
-    left: 0;
-  }
-
-  &:after {
-    right: 0;
-  }
 `;
 
 const MessageField = styled.div`

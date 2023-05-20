@@ -1,34 +1,32 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+
+import { useAppSelector } from '@/store';
+import { ChatFolder, selectChats } from '../chatSlice';
+
 import { useTranslation } from 'react-i18next';
 
-import { RootState, useAppSelector } from '@/store';
-
+import styled from 'styled-components';
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
-
 import { palette } from '@/components/variables';
 import IconButton from '@/components/Buttons/IconButton';
 import Text from '@/components/Text';
 import ChatMenuItem from './ChatMenuItem';
-import { ChatCategory, selectChats } from './chatSlice';
 
 const ChatMenu = () => {
   const { t } = useTranslation('chat');
   const [showCategories, setShowCategories] = useState(false);
 
-  const activeCategory: ChatCategory = useAppSelector(
-    (state: RootState) => state.chats.activeCategory,
-  );
+  const activeFolder = useAppSelector(state => state.chats.activeFolder);
   const chats = useAppSelector(selectChats);
 
-  const changeActiveCategory = (category: ChatCategory) => {
+  const changeActiveCategory = (category: ChatFolder) => {
     console.log('asd', category);
   };
 
   return (
     <Container>
       <HeaderRow>
-        <Header variant="h1">{t(`menu.title.${activeCategory}`)}</Header>
+        <Header variant="h1">{t(`menu.title.${activeFolder}`)}</Header>
         <Buttons>
           {!!chats.length && (
             <IconButton
@@ -46,10 +44,10 @@ const ChatMenu = () => {
       </HeaderRow>
 
       {showCategories ||
-        (['archived', 'banned'].includes(activeCategory) && (
+        (['archived', 'banned'].includes(activeFolder) && (
           <CategoryRow
             onClick={() => {
-              changeActiveCategory('active');
+              changeActiveCategory('ok');
               setShowCategories(false);
             }}
           >
@@ -91,14 +89,12 @@ const ChatMenu = () => {
         </>
       ) : chats.length ? (
         <>
-          {chats.map(chatContact => {
-            return <ChatMenuItem chat={chatContact} key={chatContact.id} />;
+          {chats.map(buddy => {
+            return <ChatMenuItem buddy={buddy} key={buddy.buddyId} />;
           })}
         </>
       ) : (
-        <CategoryEmptyText>
-          {t(`menu.empty.${activeCategory}`)}
-        </CategoryEmptyText>
+        <CategoryEmptyText>{t(`menu.empty.${activeFolder}`)}</CategoryEmptyText>
       )}
     </Container>
   );

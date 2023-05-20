@@ -1,25 +1,24 @@
 import styled, { css } from 'styled-components';
 
-import { RootState, useAppSelector } from '@/store';
-import { ChatContact } from './chatSlice';
+import { useAppSelector } from '@/store';
 
+import type { ChatBuddy } from '../chatSlice';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
-import type { ChatCategory } from './chatSlice';
 
-const ChatMenuItem = ({ chat }: { chat: ChatContact }) => {
-  const unreadMessages = chat.messages.filter(message => !message.opened);
+type Props = {
+  buddy: ChatBuddy;
+};
 
-  const activeCategory: ChatCategory = useAppSelector(
-    (state: RootState) => state.chats.activeCategory,
-  );
-  const activeChatId = useAppSelector(
-    (state: RootState) => state.chats.activeChatId,
-  );
+const ChatMenuItem = ({ buddy }: Props) => {
+  const unreadMessages = buddy.messages.filter(message => !message.opened);
+
+  const activeFolder = useAppSelector(state => state.chats.activeFolder);
+  const activeChatId = useAppSelector(state => state.chats.activeChatId);
 
   const getLatestMessage = () => {
-    const latestMessage = chat.messages[chat.messages.length - 1];
+    const latestMessage = buddy.messages[buddy.messages.length - 1];
     if (!latestMessage) return '';
 
     return latestMessage.content;
@@ -31,24 +30,24 @@ const ChatMenuItem = ({ chat }: { chat: ChatContact }) => {
 
   return (
     <Row
-      active={chat.id === activeChatId}
-      category={activeCategory}
+      active={buddy.buddyId === activeChatId}
+      category={activeFolder}
       onClick={chooseChat}
     >
       <ProfileIcon
         color={
-          chat.id === activeChatId
+          buddy.buddyId === activeChatId
             ? 'blueDark'
-            : activeCategory === 'active'
+            : activeFolder === 'ok'
             ? 'purpleDark'
-            : activeCategory === 'archived'
+            : activeFolder === 'archived'
             ? 'orangeDark'
             : 'redDark'
         }
       />
       <MentorInfo>
         <BuddyName>
-          <Text variant="boldSource">{chat.display_name}</Text>
+          <Text variant="boldSource">{buddy.displayName}</Text>
           {!!unreadMessages.length && <Badge>{unreadMessages.length}</Badge>}
         </BuddyName>
         <MessagePreview>{getLatestMessage()}</MessagePreview>

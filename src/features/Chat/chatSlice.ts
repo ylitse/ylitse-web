@@ -1,16 +1,19 @@
 import { RootState } from '@/store';
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
-import { chatApi, extractMostRecentId, Message } from './chatPageApi';
+import {
+  chatApi,
+  ChatStatus,
+  extractMostRecentId,
+  Message,
+  Role,
+} from './chatPageApi';
 
-export type ChatCategory = 'active' | 'archived' | 'banned';
-
-export type ChatContact = {
-  active: boolean;
-  id: string;
-  role: string;
-  display_name: string;
-  status?: ChatCategory;
+export type ChatBuddy = {
+  buddyId: string;
+  displayName: string;
+  role: Role;
+  status: ChatFolder;
   messages: Message[];
 };
 
@@ -21,15 +24,17 @@ export type PollingParam =
     }
   | { type: 'InitialMessages'; buddyIds: Array<string> };
 
+export type ChatFolder = Exclude<ChatStatus, 'deleted'>;
+
 export type ChatState = {
-  activeCategory: ChatCategory;
-  chats: Record<string, ChatContact>;
+  activeFolder: ChatFolder;
+  chats: Record<string, ChatBuddy>;
   activeChatId: string | null;
   pollingParams: Array<PollingParam> | null;
 };
 
 const initialState: ChatState = {
-  activeCategory: 'active',
+  activeFolder: 'ok',
   activeChatId: null,
   chats: {},
   pollingParams: null,
@@ -44,11 +49,11 @@ export const chats = createSlice({
       .addMatcher(
         chatApi.endpoints.getContacts.matchFulfilled,
         (state, { payload }) => {
-          const buddyIds = payload.map(buddy => buddy.id);
+          const buddyIds = payload.map(({ buddyId }) => buddyId);
           const initialBuddyMessages = createBuddyChunks(buddyIds);
-          const chats: Record<string, ChatContact> = payload.reduce(
+          const chats: Record<string, ChatBuddy> = payload.reduce(
             (acc, curr) => {
-              return { ...acc, [curr.id]: { ...curr, messages: [] } };
+              return { ...acc, [curr.buddyId]: { ...curr, messages: [] } };
             },
             {},
           );
@@ -90,7 +95,7 @@ const createBuddyChunks = (buddyIds: Array<string>): Array<PollingParam> => {
 };
 
 const mergeMessages = (
-  originalChats: Record<string, ChatContact>,
+  originalChats: Record<string, ChatBuddy>,
   messages: Array<Message>,
 ) =>
   Object.keys(originalChats).reduce((chats, buddyId) => {
@@ -126,10 +131,10 @@ export const selectActiveChat = createSelector(
 
 export const selectChats = createSelector(
   selectChatState,
-  ({ activeCategory, chats }) => {
+  ({ activeFolder, chats }) => {
     const filtered = Object.keys(chats)
       .map(buddyId => chats[buddyId])
-      .filter(chat => chat.status === activeCategory);
+      .filter(chat => chat.status === activeFolder);
     return filtered;
   },
 );

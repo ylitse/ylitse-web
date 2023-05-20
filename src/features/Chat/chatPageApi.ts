@@ -3,7 +3,7 @@ import * as D from 'io-ts/Decoder';
 import { validateAndTransformTo } from '@/utils/http';
 import { role } from '../Authentication/myuserApi';
 import { pipe } from 'fp-ts/lib/function';
-import { ChatContact, PollingParam } from './chatSlice';
+import { ChatBuddy, PollingParam } from './chatSlice';
 
 const status = D.literal('banned', 'archived', 'ok', 'deleted');
 
@@ -36,7 +36,14 @@ const messagesResponseCodec = D.struct({
 
 export type Message = D.TypeOf<typeof messageCodec>;
 
-export type Contact = D.TypeOf<typeof contactCodec>;
+export type ChatStatus = D.TypeOf<typeof status>;
+export type Role = D.TypeOf<typeof role>;
+type Contact = D.TypeOf<typeof contactCodec>;
+type Buddy = Omit<Contact, 'display_name' | 'id' | 'status'> & {
+  buddyId: string;
+  displayName: string;
+  status: ChatStatus;
+};
 
 type MessageQuery = {
   userId: string;
@@ -63,14 +70,14 @@ export const chatApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'api/' }),
   reducerPath: 'chatsApi',
   endpoints: builder => ({
-    getContacts: builder.query<Array<Contact>, string>({
+    getContacts: builder.query<Array<Buddy>, string>({
       query: userId => `users/${userId}/contacts`,
       transformResponse: (response: unknown) =>
         validateAndTransformTo(
           response,
           contactsResponseCodec,
           { resources: [] },
-          ({ resources }) => resources,
+          ({ resources }) => resources.filter(notDeleted).map(toBuddy),
         ),
     }),
     getMessages: builder.query<Array<Message>, MessageQuery>({
@@ -87,12 +94,22 @@ export const chatApi = createApi({
   }),
 });
 
+const notDeleted = ({ status }: Contact) =>
+  status ? status !== 'deleted' : true;
+
+const toBuddy = ({ display_name, id, ...rest }: Contact): Buddy => ({
+  displayName: display_name,
+  buddyId: id,
+  status: rest?.status ?? 'ok',
+  ...rest,
+});
+
 const sortByCreated = (a: Message, b: Message) => {
   return a.created < b.created ? -1 : 1;
 };
 
 export const extractMostRecentId = (
-  existingChats: Record<string, ChatContact>,
+  existingChats: Record<string, ChatBuddy>,
   newMessages: Array<Message>,
 ) => {
   const fromExisting = Object.keys(existingChats).reduce<Array<Message>>(
