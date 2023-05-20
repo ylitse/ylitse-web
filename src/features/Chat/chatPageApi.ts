@@ -32,6 +32,7 @@ const messageCodec = D.struct({
 
 const messagesResponseCodec = D.struct({
   resources: D.array(messageCodec),
+  contacts: D.array(contactCodec),
 });
 
 export type Message = D.TypeOf<typeof messageCodec>;
@@ -49,6 +50,8 @@ type MessageQuery = {
   userId: string;
   params: PollingParam;
 };
+
+export type MessageResponse = D.TypeOf<typeof messagesResponseCodec>;
 
 const toQueryString = (params: PollingParam) => {
   const maxMessagesAtOnce = 10;
@@ -80,15 +83,15 @@ export const chatApi = createApi({
           ({ resources }) => resources.filter(notDeleted).map(toBuddy),
         ),
     }),
-    getMessages: builder.query<Array<Message>, MessageQuery>({
+    getMessages: builder.query<MessageResponse, MessageQuery>({
       query: ({ userId, params }) =>
         `users/${userId}/messages?${toQueryString(params)}`,
       transformResponse: (response: unknown) =>
         validateAndTransformTo(
           response,
           messagesResponseCodec,
-          { resources: [] },
-          ({ resources }) => resources,
+          { resources: [], contacts: [] },
+          response => response,
         ),
     }),
   }),

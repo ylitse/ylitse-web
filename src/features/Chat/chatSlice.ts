@@ -6,6 +6,7 @@ import {
   ChatStatus,
   extractMostRecentId,
   Message,
+  MessageResponse,
   Role,
 } from './chatPageApi';
 
@@ -74,9 +75,12 @@ export const chats = createSlice({
       )
       .addMatcher(
         chatApi.endpoints.getMessages.matchFulfilled,
-        ({ chats, ...rest }, { payload: newMessages }) => {
-          const updatedMessages = mergeMessages(chats, newMessages);
-          const mostRecentMessageId = extractMostRecentId(chats, newMessages);
+        ({ chats, ...rest }, { payload: response }) => {
+          const updatedMessages = mergeMessages(chats, response);
+          const mostRecentMessageId = extractMostRecentId(
+            chats,
+            response.resources,
+          );
           const nextPollingParams = getNextParams(
             rest.pollingParams ?? [],
             mostRecentMessageId,
@@ -103,21 +107,21 @@ const createBuddyChunks = (buddyIds: Array<string>): Array<PollingParam> => {
 
 const mergeMessages = (
   originalChats: Record<string, ChatBuddy>,
-  messages: Array<Message>,
+  response: MessageResponse,
 ) =>
-  Object.keys(originalChats).reduce((chats, buddyId) => {
-    const newMessages = messages.filter(
-      msg => msg.recipient_id === buddyId || msg.sender_id === buddyId,
+  response.contacts.reduce((chats, contact) => {
+    const newMessages = response.resources.filter(
+      msg => msg.recipient_id === contact.id || msg.sender_id === contact.id,
     );
 
     return {
       ...chats,
-      [buddyId]: {
-        ...originalChats[buddyId],
-        messages: originalChats[buddyId].messages.concat(newMessages),
+      [contact.id]: {
+        ...originalChats[contact.id],
+        messages: originalChats[contact.id].messages.concat(newMessages),
       },
     };
-  }, {});
+  }, originalChats);
 
 const getNextParams = (
   pollingQueue: Array<PollingParam>,
