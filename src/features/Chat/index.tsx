@@ -16,7 +16,7 @@ import ChatMenu from './components/ChatMenu';
 import ChatWindow from './components/ChatWindow';
 import PageWithTransition from '@/components/PageWithTransition';
 
-const ChatPage = () => {
+const Chat = () => {
   const isMobile = useMobileMode();
 
   const userId = useAppSelector(selectUserId);
@@ -26,7 +26,7 @@ const ChatPage = () => {
   useGetContactsQuery(userId!, { skip: !userId });
   useGetMessagesQuery(
     { userId: userId!, params: params! },
-    { skip: !userId || !params },
+    { skip: !userId || !params, pollingInterval: 5000 },
   );
 
   return (
@@ -67,4 +67,4 @@ const ChatContainer = styled.div`
   min-height: 400px;
 `;
 
-export default ChatPage;
+export default Chat;
