@@ -1,19 +1,20 @@
-import styled, { css } from 'styled-components';
+import { useGetContactsQuery, useGetMessagesQuery } from './chatPageApi';
+import { useAppSelector } from '@/store';
+import { selectUserId } from '../Authentication/userSlice';
+import { selectCurrentPollingParams } from './chatSlice';
+
 import { useMobileMode } from '@/hooks/useMobileMode';
 
-import ChatMenu from './components/ChatMenu';
-import ChatWindow from './components/ChatWindow';
+import styled, { css } from 'styled-components';
 import {
   breakpoints,
   CONTENT_HEIGHT,
   CONTENT_WIDTH,
   OUTER_VERTICAL_MARGIN,
 } from '@/components/variables';
+import ChatMenu from './components/ChatMenu';
+import ChatWindow from './components/ChatWindow';
 import PageWithTransition from '@/components/PageWithTransition';
-import { useGetContactsQuery, useGetMessagesQuery } from './chatPageApi';
-import { useAppSelector } from '@/store';
-import { selectUserId } from '../Authentication/userSlice';
-import { selectCurrentPollingParams } from './chatSlice';
 
 const ChatPage = () => {
   const isMobile = useMobileMode();

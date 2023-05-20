@@ -1,8 +1,11 @@
+import { useAppSelector, useAppDispatch } from '@/store';
+import {
+  ChatBuddy,
+  selectLatestAndUnreadMessages,
+  setActiveChat,
+} from '../chatSlice';
+
 import styled, { css } from 'styled-components';
-
-import { useAppSelector } from '@/store';
-
-import type { ChatBuddy } from '../chatSlice';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
@@ -12,27 +15,24 @@ type Props = {
 };
 
 const ChatMenuItem = ({ buddy }: Props) => {
-  const unreadMessages = buddy.messages.filter(message => !message.opened);
-
+  const {
+    unread: { hasUnread, count },
+    latest,
+  } = useAppSelector(selectLatestAndUnreadMessages(buddy.buddyId));
   const activeFolder = useAppSelector(state => state.chats.activeFolder);
   const activeChatId = useAppSelector(state => state.chats.activeChatId);
 
-  const getLatestMessage = () => {
-    const latestMessage = buddy.messages[buddy.messages.length - 1];
-    if (!latestMessage) return '';
+  const dispatch = useAppDispatch();
 
-    return latestMessage.content;
-  };
-
-  const chooseChat = () => {
-    // this is fine
+  const openChat = () => {
+    dispatch(setActiveChat(buddy.buddyId));
   };
 
   return (
     <Row
       active={buddy.buddyId === activeChatId}
-      category={activeFolder}
-      onClick={chooseChat}
+      folder={activeFolder}
+      onClick={openChat}
     >
       <ProfileIcon
         color={
@@ -48,9 +48,9 @@ const ChatMenuItem = ({ buddy }: Props) => {
       <MentorInfo>
         <BuddyName>
           <Text variant="boldSource">{buddy.displayName}</Text>
-          {!!unreadMessages.length && <Badge>{unreadMessages.length}</Badge>}
+          {hasUnread && <Badge>{count}</Badge>}
         </BuddyName>
-        <MessagePreview>{getLatestMessage()}</MessagePreview>
+        <MessagePreview>{latest}</MessagePreview>
       </MentorInfo>
     </Row>
   );
@@ -58,7 +58,7 @@ const ChatMenuItem = ({ buddy }: Props) => {
 
 const Row = styled.div<{
   active?: boolean;
-  category?: string;
+  folder?: string;
 }>`
   align-items: center;
   border-bottom: 1px solid ${palette.greyLight};
@@ -69,20 +69,20 @@ const Row = styled.div<{
   height: 80px;
   padding-left: 40px;
 
-  ${({ active, category }) =>
+  ${({ active, folder }) =>
     active
       ? css`
-          background-color: ${category === 'active'
+          background-color: ${folder === 'active'
             ? palette.blue2
-            : category === 'archived'
+            : folder === 'archived'
             ? palette.orange
             : palette.redSalmon};
         `
       : css`
           &:hover {
-            background-color: ${category === 'active'
+            background-color: ${folder === 'active'
               ? palette.blueWhite
-              : category === 'archived'
+              : folder === 'archived'
               ? palette.orangeWhite
               : palette.redWhite};
           }

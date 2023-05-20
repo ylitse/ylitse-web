@@ -1,5 +1,5 @@
 import { RootState } from '@/store';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
 import {
   chatApi,
@@ -43,7 +43,14 @@ const initialState: ChatState = {
 export const chats = createSlice({
   initialState,
   name: 'chats',
-  reducers: {},
+  reducers: {
+    setActiveFolder: (state, action: PayloadAction<ChatFolder>) => {
+      state.activeFolder = action.payload;
+    },
+    setActiveChat: (state, action: PayloadAction<string>) => {
+      state.activeChatId = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addMatcher(
@@ -129,6 +136,19 @@ export const selectActiveChat = createSelector(
   ({ activeChatId, chats }) => (activeChatId ? chats[activeChatId] : null),
 );
 
+export const selectLatestAndUnreadMessages = (buddyId: string) =>
+  createSelector(selectChatState, ({ chats }) => {
+    const buddy = chats[buddyId];
+    const hasMessages = buddy.messages.length > 0;
+    const unread = buddy.messages.filter(message => !message.opened);
+    return {
+      latest: hasMessages
+        ? buddy.messages[buddy.messages.length - 1].content
+        : '',
+      unread: { hasUnread: unread.length > 0, count: unread.length },
+    };
+  });
+
 export const selectChats = createSelector(
   selectChatState,
   ({ activeFolder, chats }) => {
@@ -152,3 +172,5 @@ export const selectCurrentPollingParams = createSelector(
     return nextParams;
   },
 );
+
+export const { setActiveFolder, setActiveChat } = chats.actions;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { useAppSelector } from '@/store';
-import { ChatFolder, selectChats } from '../chatSlice';
+import { useAppSelector, useAppDispatch } from '@/store';
+import { ChatFolder, selectChats, setActiveFolder } from '../chatSlice';
 
 import { useTranslation } from 'react-i18next';
 
@@ -18,9 +18,10 @@ const ChatMenu = () => {
 
   const activeFolder = useAppSelector(state => state.chats.activeFolder);
   const chats = useAppSelector(selectChats);
+  const dispatch = useAppDispatch();
 
-  const changeActiveCategory = (category: ChatFolder) => {
-    console.log('asd', category);
+  const changeActiveFolder = (folder: ChatFolder) => {
+    dispatch(setActiveFolder(folder));
   };
 
   return (
@@ -45,9 +46,9 @@ const ChatMenu = () => {
 
       {showCategories ||
         (['archived', 'banned'].includes(activeFolder) && (
-          <CategoryRow
+          <Row
             onClick={() => {
-              changeActiveCategory('ok');
+              changeActiveFolder('ok');
               setShowCategories(false);
             }}
           >
@@ -57,35 +58,35 @@ const ChatMenu = () => {
                 {t('menu.back')}
               </Text>
             </GoBackLink>
-          </CategoryRow>
+          </Row>
         ))}
 
       {showCategories ? (
         <>
-          <CategoryRow
+          <Row
             onClick={() => {
-              changeActiveCategory('archived');
+              changeActiveFolder('archived');
               setShowCategories(false);
             }}
           >
-            <CategoryLink>
+            <FolderLink>
               <Text variant="boldBaloo" color="purple">
                 {t('menu.archived')}
               </Text>
-            </CategoryLink>
-          </CategoryRow>
-          <CategoryRow
+            </FolderLink>
+          </Row>
+          <Row
             onClick={() => {
-              changeActiveCategory('banned');
+              changeActiveFolder('banned');
               setShowCategories(false);
             }}
           >
-            <CategoryLink>
+            <FolderLink>
               <Text variant="boldBaloo" color="purple">
                 {t('menu.banned')}
               </Text>
-            </CategoryLink>
-          </CategoryRow>
+            </FolderLink>
+          </Row>
         </>
       ) : chats.length ? (
         <>
@@ -94,7 +95,7 @@ const ChatMenu = () => {
           })}
         </>
       ) : (
-        <CategoryEmptyText>{t(`menu.empty.${activeFolder}`)}</CategoryEmptyText>
+        <EmptyText>{t(`menu.empty.${activeFolder}`)}</EmptyText>
       )}
     </Container>
   );
@@ -105,6 +106,7 @@ const Container = styled.div`
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
   flex: 0 0 400px;
+  overflow: auto;
 `;
 
 const HeaderRow = styled.div`
@@ -118,7 +120,7 @@ const HeaderRow = styled.div`
   padding-left: 40px;
 `;
 
-const CategoryRow = styled.div`
+const Row = styled.div`
   align-items: center;
   border-bottom: 1px solid ${palette.greyLight};
   box-sizing: border-box;
@@ -144,7 +146,7 @@ const GoBackIcon = styled.img`
   padding-right: 20px;
 `;
 
-const CategoryLink = styled.a`
+const FolderLink = styled.a`
   padding-left: 40px;
 `;
 
@@ -158,7 +160,7 @@ const Buttons = styled.div`
   padding-right: 30px;
 `;
 
-const CategoryEmptyText = styled(Text)`
+const EmptyText = styled(Text)`
   margin: 0;
   padding: 1.25rem 2rem;
 `;
