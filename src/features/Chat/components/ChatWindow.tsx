@@ -17,7 +17,7 @@ import BlockedIcon from '@/static/icons/blocked-chats.svg';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
-import { MemoizedMessageList } from './MemoizedMessageList';
+import { MessageList } from './MessageList';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
@@ -126,7 +126,7 @@ const ChatWindow = () => {
           </Buttons>
         )}
       </HeaderBar>
-      <MemoizedMessageList
+      <MessageList
         messageList={chat.messages}
         buddyId={chat.buddyId}
         status={chat.status}

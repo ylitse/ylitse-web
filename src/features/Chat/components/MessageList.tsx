@@ -1,9 +1,9 @@
-import { memo, useEffect, useRef, Fragment } from 'react';
+import { useEffect, useRef, Fragment } from 'react';
 
 import { useAppDispatch } from '@/store';
 
 import type { AppMessage, ChatFolder } from '../chatPageApi';
-import { useScrollCompleteCallback } from '@/hooks/useScrollCompleteCallback';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 import styled from 'styled-components';
 import { palette } from '@/components/variables';
@@ -53,22 +53,19 @@ export const MessageList = ({
   const newestMessage =
     messageList.length > 0 ? messageList[messageList.length - 1].id : '0';
 
-  const handleFetchOlderMessages = () => {
+  const handleFetchOlderMessages = (messageId: string, buddyId: string) => {
     if (isLoading) {
       return;
     }
 
-    dispatch(
-      addPollParam({ type: 'OlderThan', buddyId, messageId: oldestMessage }),
-    );
+    dispatch(addPollParam({ type: 'OlderThan', buddyId, messageId }));
   };
 
   // Scroll to the bottom of the chat when a new message is sent
   const historyRef = useRef<HTMLDivElement>(null);
 
-  useScrollCompleteCallback({
+  const { isScrolledToTop } = useScrollToTop({
     ref: historyRef,
-    callback: handleFetchOlderMessages,
   });
 
   useEffect(() => {
@@ -76,6 +73,12 @@ export const MessageList = ({
       behavior: 'smooth',
     });
   }, [newestMessage]);
+
+  useEffect(() => {
+    if (isScrolledToTop) {
+      handleFetchOlderMessages(oldestMessage, buddyId);
+    }
+  }, [isScrolledToTop]);
 
   return (
     <ChatHistory ref={historyRef}>
@@ -96,15 +99,6 @@ export const MessageList = ({
     </ChatHistory>
   );
 };
-
-const equalProps = (
-  prevProps: React.ComponentProps<typeof MessageList>,
-  nextProps: React.ComponentProps<typeof MessageList>,
-) =>
-  prevProps.messageList.length === nextProps.messageList.length &&
-  prevProps.isLoading === nextProps.isLoading;
-
-export const MemoizedMessageList = memo(MessageList, equalProps);
 
 const ChatHistory = styled.div`
   border-bottom: 1px solid ${palette.greyLight};
