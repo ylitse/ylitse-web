@@ -1,4 +1,5 @@
 import { useGetContactsQuery, useGetMessagesQuery } from './chatPageApi';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useAppSelector } from '@/store';
 import { selectUserId } from '../Authentication/userSlice';
 import { selectCurrentPollingParams } from './chatSlice';
@@ -15,7 +16,6 @@ import {
 import ChatMenu from './components/Menu';
 import ChatWindow from './components/Window';
 import PageWithTransition from '@/components/PageWithTransition';
-import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 const Chat = () => {
   const isMobile = useMobileMode();

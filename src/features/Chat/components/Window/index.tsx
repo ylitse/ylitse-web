@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
+import { useSendMessageMutation, toSendMessage } from '../../chatPageApi';
 import { useAppSelector } from '@/store';
 import {
   selectActiveChat,
   selectIsActiveChatLoadingMessages,
 } from '../../chatSlice';
+import { selectUserId } from '@/features/Authentication/userSlice';
 
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -27,7 +29,10 @@ const ChatWindow = () => {
   const { t } = useTranslation('chat');
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const [inputValue, setInputValue] = useState('');
+  const [text, setText] = useState('');
+  const [sendMessage, { isLoading: isMessageSendLoading }] =
+    useSendMessageMutation();
+  const userId = useAppSelector(selectUserId);
 
   const chat = useAppSelector(selectActiveChat);
   const isLoadingMessages = useAppSelector(selectIsActiveChatLoadingMessages);
@@ -44,9 +49,15 @@ const ChatWindow = () => {
     // this is fine
   };
 
-  const sendMessage = () => {
-    // this is fine
+  const handleMessageSend = (buddyId: string, text: string) => {
+    if (!userId || isMessageSendLoading) return;
+
+    const message = toSendMessage(buddyId, userId, text);
+    sendMessage({ userId, message });
+    setText('');
   };
+
+  const isLoading = isLoadingMessages || isMessageSendLoading;
 
   return chat ? (
     <ActiveChatContainer>
@@ -130,17 +141,21 @@ const ChatWindow = () => {
         messageList={chat.messages}
         buddyId={chat.buddyId}
         status={chat.status}
-        isLoading={isLoadingMessages}
+        isLoading={isLoading}
       />
       <MessageField>
         <Input
           variant="textarea"
-          color={inputValue ? 'blueDark' : 'greyFaded'}
-          onChange={setInputValue}
+          color={text ? 'blueDark' : 'greyFaded'}
+          onChange={setText}
           placeholder={t('input.placeholder')}
-          value={inputValue}
+          value={text}
         />
-        <SendButton variant="send" sizeInPx={46} onClick={sendMessage} />
+        <SendButton
+          variant="send"
+          sizeInPx={46}
+          onClick={() => handleMessageSend(chat.buddyId, text)}
+        />
       </MessageField>
     </ActiveChatContainer>
   ) : (

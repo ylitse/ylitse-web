@@ -21,20 +21,26 @@ const contactCodec = pipe(mandatoryProperties, D.intersect(optionalProperties));
 
 const contactsResponseCodec = D.struct({ resources: D.array(contactCodec) });
 
-const messageCodec = D.struct({
+const messageData = D.struct({
   content: D.string,
-  created: D.string,
-  id: D.string,
   opened: D.boolean,
   recipient_id: D.string,
   sender_id: D.string,
 });
+
+const messageDetails = D.struct({
+  id: D.string,
+  created: D.string,
+});
+
+const messageCodec = pipe(messageData, D.intersect(messageDetails));
 
 const messagesResponseCodec = D.struct({
   resources: D.array(messageCodec),
   contacts: D.array(contactCodec),
 });
 
+type MessageData = D.TypeOf<typeof messageData>;
 type Message = D.TypeOf<typeof messageCodec>;
 export type AppMessage = {
   isSent: boolean;
@@ -64,6 +70,11 @@ type MessageQuery = {
 export type MessageResponse = {
   messages: Array<AppMessage>;
   buddies: Array<Buddy>;
+};
+
+type SendMessage = {
+  message: MessageData;
+  userId: string;
 };
 
 const toQueryString = (params: PollingParam) => {
@@ -113,6 +124,13 @@ export const chatApi = createApi({
             buddies: toAppBuddies(contacts),
           }),
         ),
+    }),
+    sendMessage: builder.mutation<unknown, SendMessage>({
+      query: ({ userId, message }) => ({
+        url: `users/${userId}/messages`,
+        method: 'post',
+        body: message,
+      }),
     }),
   }),
 });
@@ -167,4 +185,19 @@ export const extractMostRecentId = (
   return allMessages[0].id ?? '';
 };
 
-export const { useGetContactsQuery, useGetMessagesQuery } = chatApi;
+export const toSendMessage = (
+  buddyId: string,
+  userId: string,
+  text: string,
+) => ({
+  recipient_id: buddyId,
+  sender_id: userId,
+  content: text,
+  opened: false,
+});
+
+export const {
+  useGetContactsQuery,
+  useGetMessagesQuery,
+  useSendMessageMutation,
+} = chatApi;
