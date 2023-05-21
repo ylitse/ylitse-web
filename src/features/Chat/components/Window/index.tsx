@@ -4,7 +4,7 @@ import { useSendMessageMutation, toSendMessage } from '../../chatPageApi';
 import { useAppSelector } from '@/store';
 import {
   selectActiveChat,
-  selectIsActiveChatLoadingMessages,
+  selectIsLoadingBuddyMessages,
 } from '../../chatSlice';
 import { selectUserId } from '@/features/Authentication/userSlice';
 
@@ -35,7 +35,9 @@ const ChatWindow = () => {
   const userId = useAppSelector(selectUserId);
 
   const chat = useAppSelector(selectActiveChat);
-  const isLoadingMessages = useAppSelector(selectIsActiveChatLoadingMessages);
+  const isLoadingMessages = useAppSelector(
+    selectIsLoadingBuddyMessages(chat?.buddyId),
+  );
 
   const archiveChat = () => {
     // this is fine

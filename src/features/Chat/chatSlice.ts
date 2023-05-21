@@ -141,18 +141,24 @@ export const selectActiveChat = createSelector(
   ({ activeChatId, chats }) => (activeChatId ? chats[activeChatId] : null),
 );
 
-export const selectLatestAndUnreadMessages = (buddyId: string) =>
-  createSelector(selectChatState, ({ chats }) => {
-    const buddy = chats[buddyId];
-    const hasMessages = buddy.messages.length > 0;
-    const unread = buddy.messages.filter(message => !message.opened);
-    return {
-      latest: hasMessages
-        ? buddy.messages[buddy.messages.length - 1].content
-        : '',
-      unread: { hasUnread: unread.length > 0, count: unread.length },
-    };
-  });
+export const selectBuddyMessages = (buddyId: string) =>
+  createSelector(
+    selectChatState,
+    selectIsLoadingBuddyMessages(buddyId),
+    ({ chats }, isLoading) => {
+      const buddy = chats[buddyId];
+      const hasMessages = buddy.messages.length > 0;
+      const unread = buddy.messages.filter(message => !message.opened);
+
+      return {
+        latest: hasMessages
+          ? buddy.messages[buddy.messages.length - 1].content
+          : '',
+        unread: { hasUnread: unread.length > 0, count: unread.length },
+        isLoading,
+      };
+    },
+  );
 
 export const selectChats = createSelector(
   selectChatState,
@@ -188,19 +194,17 @@ const isLoadingInitialMessages = (
   pollingParams.type === 'InitialMessages' &&
   pollingParams.buddyIds.includes(buddyId);
 
-export const selectIsActiveChatLoadingMessages = createSelector(
-  selectChatState,
-  ({ activeChatId, pollingParams }) => {
-    if (!pollingParams || !activeChatId) {
+export const selectIsLoadingBuddyMessages = (buddyId?: string) =>
+  createSelector(selectChatState, ({ pollingParams }) => {
+    if (!pollingParams || !buddyId) {
       return false;
     }
 
     return pollingParams.some(
       param =>
-        isLoadingOlderMessages(param, activeChatId) ||
-        isLoadingInitialMessages(param, activeChatId),
+        isLoadingOlderMessages(param, buddyId) ||
+        isLoadingInitialMessages(param, buddyId),
     );
-  },
-);
+  });
 
 export const { setActiveFolder, setActiveChat, addPollParam } = chats.actions;

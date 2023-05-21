@@ -1,7 +1,6 @@
-import styled from 'styled-components';
-
 import type { ChatFolder } from '../../chatPageApi';
 
+import styled from 'styled-components';
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 

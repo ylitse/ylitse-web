@@ -1,14 +1,13 @@
 import { useAppSelector, useAppDispatch } from '@/store';
-import {
-  ChatBuddy,
-  selectLatestAndUnreadMessages,
-  setActiveChat,
-} from '../../chatSlice';
+import { selectBuddyMessages, setActiveChat } from '../../chatSlice';
+
+import type { ChatBuddy } from '../../chatSlice';
 
 import styled, { css } from 'styled-components';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
+import Spinner from '@/components/Spinner';
 
 type Props = {
   buddy: ChatBuddy;
@@ -18,7 +17,8 @@ export const MenuItem = ({ buddy }: Props) => {
   const {
     unread: { hasUnread, count },
     latest,
-  } = useAppSelector(selectLatestAndUnreadMessages(buddy.buddyId));
+    isLoading,
+  } = useAppSelector(selectBuddyMessages(buddy.buddyId));
   const activeFolder = useAppSelector(state => state.chats.activeFolder);
   const activeChatId = useAppSelector(state => state.chats.activeChatId);
 
@@ -50,7 +50,11 @@ export const MenuItem = ({ buddy }: Props) => {
           <Text variant="boldSource">{buddy.displayName}</Text>
           {hasUnread && <Badge>{count}</Badge>}
         </BuddyName>
-        <MessagePreview>{latest}</MessagePreview>
+        {isLoading ? (
+          <Spinner variant="tiny" isDark centered={false} />
+        ) : (
+          <Message>{latest}</Message>
+        )}
       </MentorInfo>
     </Row>
   );
@@ -102,7 +106,7 @@ const BuddyName = styled.div`
   flex-direction: row;
 `;
 
-const MessagePreview = styled(Text)`
+const Message = styled(Text)`
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;

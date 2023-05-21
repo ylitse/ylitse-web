@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import { palette } from '@/components/variables';
 import { Message } from './Message';
 import Text from '@/components/Text';
+import Spinner from '@/components/Spinner';
 
 type Props = {
   messageList: Array<AppMessage>;
@@ -82,6 +83,7 @@ export const MessageList = ({
 
   return (
     <ChatHistory ref={historyRef}>
+      {isLoading && <Spinner variant="small" isDark />}
       {Object.keys(groupedMessages).map(date => (
         <Fragment key={date}>
           <DateDivider>{date}</DateDivider>
