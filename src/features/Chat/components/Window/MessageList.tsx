@@ -1,15 +1,15 @@
 import { useEffect, useRef, Fragment } from 'react';
 
 import { useAppDispatch } from '@/store';
+import { addPollParam } from '../../chatSlice';
 
-import type { AppMessage, ChatFolder } from '../chatPageApi';
+import type { AppMessage, ChatFolder } from '../../chatPageApi';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 import styled from 'styled-components';
 import { palette } from '@/components/variables';
-import Message from './Message';
+import { Message } from './Message';
 import Text from '@/components/Text';
-import { addPollParam } from '../chatSlice';
 
 type Props = {
   messageList: Array<AppMessage>;

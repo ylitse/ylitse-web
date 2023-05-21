@@ -12,22 +12,22 @@ import {
   CONTENT_WIDTH,
   OUTER_VERTICAL_MARGIN,
 } from '@/components/variables';
-import ChatMenu from './components/ChatMenu';
-import ChatWindow from './components/ChatWindow';
+import ChatMenu from './components/Menu';
+import ChatWindow from './components/Window';
 import PageWithTransition from '@/components/PageWithTransition';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 const Chat = () => {
   const isMobile = useMobileMode();
 
   const userId = useAppSelector(selectUserId);
   const params = useAppSelector(selectCurrentPollingParams);
+  const messageParams = !!params && !!userId ? { params, userId } : skipToken;
 
-  // Improve
-  useGetContactsQuery(userId!, { skip: !userId });
-  useGetMessagesQuery(
-    { userId: userId!, params: params! },
-    { skip: !userId || !params, pollingInterval: 5000 },
-  );
+  useGetContactsQuery(userId ?? skipToken);
+  useGetMessagesQuery(messageParams, {
+    pollingInterval: 5000,
+  });
 
   return (
     <PageWithTransition>

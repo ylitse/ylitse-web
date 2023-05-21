@@ -4,7 +4,7 @@ import { useAppSelector } from '@/store';
 import {
   selectActiveChat,
   selectIsActiveChatLoadingMessages,
-} from '../chatSlice';
+} from '../../chatSlice';
 
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

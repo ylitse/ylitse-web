@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import type { ChatFolder } from '../chatPageApi';
+import type { ChatFolder } from '../../chatPageApi';
 
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
@@ -18,7 +18,7 @@ type Props = {
   time: string;
 };
 
-const Message = ({ folder, content, isSent, time }: Props) => (
+export const Message = ({ folder, content, isSent, time }: Props) => (
   <MessageContainer isSent={isSent}>
     <MessageBubble folder={folder} isSent={isSent}>
       <Content>{content}</Content>
@@ -58,5 +58,3 @@ const MessageTime = styled(Text)<{ isSent: boolean }>`
   margin-top: 0;
   text-align: right;
 `;
-
-export default Message;

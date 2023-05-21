@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { useAppSelector, useAppDispatch } from '@/store';
-import { selectChats, setActiveFolder } from '../chatSlice';
+import { selectChats, setActiveFolder } from '../../chatSlice';
 
-import type { ChatFolder } from '../chatPageApi';
+import type { ChatFolder } from '../../chatPageApi';
 import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
@@ -11,9 +11,9 @@ import BackArrowIcon from '@/static/icons/back-arrow.svg';
 import { palette } from '@/components/variables';
 import IconButton from '@/components/Buttons/IconButton';
 import Text from '@/components/Text';
-import ChatMenuItem from './ChatMenuItem';
+import { MenuItem } from './Item';
 
-const ChatMenu = () => {
+const Menu = () => {
   const { t } = useTranslation('chat');
   const [showCategories, setShowCategories] = useState(false);
 
@@ -92,7 +92,7 @@ const ChatMenu = () => {
       ) : chats.length ? (
         <>
           {chats.map(buddy => {
-            return <ChatMenuItem buddy={buddy} key={buddy.buddyId} />;
+            return <MenuItem buddy={buddy} key={buddy.buddyId} />;
           })}
         </>
       ) : (
@@ -166,4 +166,4 @@ const EmptyText = styled(Text)`
   padding: 1.25rem 2rem;
 `;
 
-export default ChatMenu;
+export default Menu;

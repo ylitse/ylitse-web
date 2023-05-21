@@ -3,7 +3,7 @@ import {
   ChatBuddy,
   selectLatestAndUnreadMessages,
   setActiveChat,
-} from '../chatSlice';
+} from '../../chatSlice';
 
 import styled, { css } from 'styled-components';
 import { palette } from '@/components/variables';
@@ -14,7 +14,7 @@ type Props = {
   buddy: ChatBuddy;
 };
 
-const ChatMenuItem = ({ buddy }: Props) => {
+export const MenuItem = ({ buddy }: Props) => {
   const {
     unread: { hasUnread, count },
     latest,
@@ -123,5 +123,3 @@ const Badge = styled.div`
   margin-left: 10px;
   width: 27px;
 `;
-
-export default ChatMenuItem;
