@@ -1,22 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { fetchMyUser } from '@/features/Authentication/myuserApi';
+import { selectIsLoggedIn } from '@/features/Authentication/userSlice';
 
 const useAuthenticated = (): boolean => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isAuthenticated = useAppSelector(selectIsLoggedIn);
 
-  const authenticateUser = async () => {
-    const response = await fetch('/api/myuser');
-    if (response.redirected) {
-      // If there is no active session, the user is redirected to the login page
-      window.location.href = response.url;
-    } else if (response.ok) {
-      setIsAuthenticated(true);
-    } else {
-      window.location.href = '/login';
-    }
-  };
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    authenticateUser();
+    dispatch(fetchMyUser());
   }, []);
 
   return isAuthenticated;

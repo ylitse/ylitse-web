@@ -15,7 +15,7 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es5",
+    "target": "es2015",
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
   "include": ["src/*", "@types/*"]

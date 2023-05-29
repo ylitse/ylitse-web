@@ -1,33 +1,26 @@
-import styled, { css } from 'styled-components';
-
 import { useMobileMode } from '@/hooks/useMobileMode';
 
-import ChatMenu from './ChatMenu';
-import ChatWindow from './ChatWindow';
+import styled, { css } from 'styled-components';
 import {
   breakpoints,
   CONTENT_HEIGHT,
   CONTENT_WIDTH,
   OUTER_VERTICAL_MARGIN,
 } from '@/components/variables';
+import Menu from './components/Menu';
+import Window from './components/Window';
 import PageWithTransition from '@/components/PageWithTransition';
-import Spinner from '@/components/Spinner';
 
-const ChatPage = () => {
+const Chat = () => {
   const isMobile = useMobileMode();
-  const isLoading = false;
 
   return (
     <PageWithTransition>
       <PageContainer isMobile={isMobile}>
-        {isLoading ? (
-          <Spinner variant="large" />
-        ) : (
-          <ChatContainer>
-            <ChatMenu />
-            <ChatWindow />
-          </ChatContainer>
-        )}
+        <Container>
+          <Menu />
+          <Window />
+        </Container>
       </PageContainer>
     </PageWithTransition>
   );
@@ -51,7 +44,7 @@ const PageContainer = styled.div<{ isMobile: boolean }>`
   }
 `;
 
-const ChatContainer = styled.div`
+const Container = styled.div`
   display: flex;
   gap: 22px;
   height: ${CONTENT_HEIGHT};
@@ -59,4 +52,4 @@ const ChatContainer = styled.div`
   min-height: 400px;
 `;
 
-export default ChatPage;
+export default Chat;

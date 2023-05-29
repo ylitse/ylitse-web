@@ -11,16 +11,16 @@
   "menu": {
     "archived": "Archived chats",
     "back": "Back to chats",
-    "blocked": "Blocked chats",
+    "banned": "Blocked chats",
     "empty": {
       "active": "You don't have any conversations yet. Don't worry, the conversations you start with mentors will appear here automatically.",
       "archived": "You don't have any archived conversations.",
-      "blocked": "You don't have any blocked conversations."
+      "banned": "You don't have any blocked conversations."
     },
     "title": {
       "active": "Chat",
       "archived": "Archived",
-      "blocked": "Blocked"
+      "banned": "Blocked"
     }
   },
   "welcome": {

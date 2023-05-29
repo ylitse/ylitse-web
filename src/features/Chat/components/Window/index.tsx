@@ -1,13 +1,25 @@
-import styled, { css } from 'styled-components';
+import { useState } from 'react';
+
+import { useSendMessageMutation, toSendMessage } from '../../chatPageApi';
+import { useAppSelector } from '@/store';
+import {
+  selectActiveChat,
+  selectIsLoadingBuddyMessages,
+} from '../../chatSlice';
+import { selectUserId } from '@/features/Authentication/userSlice';
+
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import styled, { css } from 'styled-components';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
+import ArchivedIcon from '@/static/icons/archived-chats.svg';
+import BlockedIcon from '@/static/icons/blocked-chats.svg';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 import { Button, IconButton, TextButton } from '@/components/Buttons';
-import { useState } from 'react';
+import { MessageList } from './MessageList';
 
 const searchInputIconSize = 24;
 const closeInputIconSize = 34;
@@ -15,18 +27,53 @@ const closeInputIconSize = 34;
 const ChatWindow = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('chat');
-  const chats = [{}];
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const [inputValue, setInputValue] = useState('');
+  const [text, setText] = useState('');
+  const [sendMessage, { isLoading: isMessageSendLoading }] =
+    useSendMessageMutation();
+  const userId = useAppSelector(selectUserId);
 
-  return chats.length ? (
+  const chat = useAppSelector(selectActiveChat);
+  const isLoadingMessages = useAppSelector(
+    selectIsLoadingBuddyMessages(chat?.buddyId),
+  );
+
+  const archiveChat = () => {
+    // this is fine
+  };
+
+  const blockChat = () => {
+    // this is fine
+  };
+
+  const restoreChat = () => {
+    // this is fine
+  };
+
+  const handleMessageSend = (buddyId: string, text: string) => {
+    if (!userId || isMessageSendLoading) return;
+
+    const message = toSendMessage(buddyId, userId, text);
+    sendMessage({ userId, message });
+    setText('');
+  };
+
+  const isLoading = isLoadingMessages || isMessageSendLoading;
+
+  return chat ? (
     <ActiveChatContainer>
       <HeaderBar>
         <ProfileInfo>
-          <ProfileIcon color="purpleDark" />
-          <MentorName variant="h2">{'Essi Esimerkki'}</MentorName>
-          <MentorBio variant="p">{'Kuvaus'}</MentorBio>
+          {chat.status === 'ok' ? (
+            <ProfileIcon color="purpleDark" />
+          ) : (
+            <img
+              src={chat.status === 'archived' ? ArchivedIcon : BlockedIcon}
+            />
+          )}
+          <MentorName variant="h2">{chat.displayName}</MentorName>
+          <MentorBio variant="p">{chat.status}</MentorBio>
         </ProfileInfo>
         {showSearch ? (
           <SearchBar>
@@ -54,42 +101,62 @@ const ChatWindow = () => {
               sizeInPx={24}
               onClick={() => setShowSearch(true)}
             />
-            <Button
-              onClick={() => console.log('archiving')}
-              leftIcon="archive"
-              sizeInPx={24}
-              text={{
-                color: 'purple',
-                text: t('header.archive'),
-                variant: 'link',
-              }}
-            />
-            <Button
-              onClick={() => console.log('blocking')}
-              leftIcon="block"
-              sizeInPx={24}
-              text={{
-                color: 'purple',
-                text: t('header.block'),
-                variant: 'link',
-              }}
-            />
+            {chat.status === 'ok' ? (
+              <>
+                <Button
+                  onClick={archiveChat}
+                  leftIcon="archive"
+                  sizeInPx={24}
+                  text={{
+                    color: 'purple',
+                    text: t('header.archive'),
+                    variant: 'link',
+                  }}
+                />
+                <Button
+                  onClick={blockChat}
+                  leftIcon="block"
+                  sizeInPx={24}
+                  text={{
+                    color: 'purple',
+                    text: t('header.block'),
+                    variant: 'link',
+                  }}
+                />
+              </>
+            ) : (
+              <Button
+                onClick={restoreChat}
+                leftIcon="return"
+                sizeInPx={24}
+                text={{
+                  color: 'purple',
+                  text: t('header.restore'),
+                  variant: 'link',
+                }}
+              />
+            )}
           </Buttons>
         )}
       </HeaderBar>
-      <ChatHistory></ChatHistory>
+      <MessageList
+        messageList={chat.messages}
+        buddyId={chat.buddyId}
+        status={chat.status}
+        isLoading={isLoading}
+      />
       <MessageField>
         <Input
           variant="textarea"
-          color={inputValue ? 'blueDark' : 'greyFaded'}
-          onChange={setInputValue}
+          color={text ? 'blueDark' : 'greyFaded'}
+          onChange={setText}
           placeholder={t('input.placeholder')}
-          value={inputValue}
+          value={text}
         />
         <SendButton
           variant="send"
           sizeInPx={46}
-          onClick={() => console.log('sending...')}
+          onClick={() => handleMessageSend(chat.buddyId, text)}
         />
       </MessageField>
     </ActiveChatContainer>
@@ -172,11 +239,6 @@ const Buttons = styled.div`
   align-items: center;
   display: flex;
   gap: 30px;
-`;
-
-const ChatHistory = styled.div`
-  border-bottom: 1px solid ${palette.greyLight};
-  flex: 1;
 `;
 
 const MessageField = styled.div`

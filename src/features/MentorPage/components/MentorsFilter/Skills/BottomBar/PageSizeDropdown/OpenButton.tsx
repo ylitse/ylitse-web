@@ -19,7 +19,7 @@ export const OpenButton = ({
     onClick={() => onClick(!isComponentVisible)}
     isExpanded={isComponentVisible}
   >
-    <Text variant="bold" color="purple">
+    <Text variant="boldBaloo" color="purple">
       {selected}
     </Text>
     <Chevron

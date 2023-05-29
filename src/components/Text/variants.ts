@@ -2,7 +2,8 @@ import CSS from 'csstype';
 import { FOOTER_HEIGHT } from '../variables';
 
 export type TextVariant =
-  | 'bold'
+  | 'boldBaloo'
+  | 'boldSource'
   | 'chip'
   | 'footer'
   | 'h1'
@@ -20,13 +21,23 @@ type TextProp = {
 };
 
 export const variants: Record<TextVariant, TextProp> = {
-  bold: {
+  boldBaloo: {
     element: 'span',
     styles: {
       fontFamily: '"Baloo 2"',
       fontSize: '1rem',
       fontStyle: 'normal',
       fontWeight: '700',
+      lineHeight: '1.5rem',
+    },
+  },
+  boldSource: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '600',
       lineHeight: '1.5rem',
     },
   },
