@@ -107,6 +107,26 @@ export const chats = createSlice({
             pollingParams: nextPollingParams,
           };
         },
+      )
+      .addMatcher(
+        chatApi.endpoints.markSeen.matchFulfilled,
+        ({ chats, ...state }, { meta }) => {
+          const {
+            message: { id, recipient_id },
+          } = meta.arg.originalArgs;
+          const updatedMessages = chats[recipient_id].messages.map(msg =>
+            msg.id === id ? { ...msg, opened: true } : msg,
+          );
+          const updatedRecord = {
+            ...chats,
+            [recipient_id]: {
+              ...chats[recipient_id],
+              messages: updatedMessages,
+            },
+          };
+
+          return { ...state, chats: updatedRecord };
+        },
       );
   },
 });
@@ -136,7 +156,8 @@ const mergeMessages = (
     const newMessages = response.messages.filter(
       ({ buddyId }) => buddyId === contact.buddyId,
     );
-    const existingMessages = originalChats[contact.buddyId].messages ?? [];
+    const existingBuddy = originalChats[contact.buddyId];
+    const existingMessages = existingBuddy ? existingBuddy.messages : [];
 
     return {
       ...chats,

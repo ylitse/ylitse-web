@@ -90,9 +90,8 @@ export const MessageList = ({
             <Message
               key={message.id}
               folder={status}
-              content={message.content}
-              isSent={message.isSent}
-              time={message.created}
+              buddyId={buddyId}
+              message={message}
             />
           ))}
         </Fragment>

@@ -1,4 +1,14 @@
-import type { ChatFolder } from '../../chatPageApi';
+import { useEffect } from 'react';
+
+import { useAppSelector } from '@/store';
+import { selectUserId } from '@/features/Authentication/userSlice';
+
+import {
+  AppMessage,
+  ChatFolder,
+  toPutMessage,
+  useMarkSeenMutation,
+} from '../../chatPageApi';
 
 import styled from 'styled-components';
 import { palette } from '@/components/variables';
@@ -12,19 +22,37 @@ const toReadable = (timestamp: string) =>
 
 type Props = {
   folder: ChatFolder;
-  content: string;
-  isSent: boolean;
-  time: string;
+  buddyId: string;
+  message: AppMessage;
 };
 
-export const Message = ({ folder, content, isSent, time }: Props) => (
-  <Container isSent={isSent}>
-    <Bubble folder={folder} isSent={isSent}>
-      <Content>{content}</Content>
-    </Bubble>
-    <Timestamp isSent={isSent}>{toReadable(time)}</Timestamp>
-  </Container>
-);
+export const Message = ({ folder, buddyId, message }: Props) => {
+  const [markSeen] = useMarkSeenMutation();
+  const userId = useAppSelector(selectUserId);
+
+  const handleMarkSeen = () => {
+    if (!userId) return;
+
+    markSeen({ userId, message: toPutMessage(message, buddyId, userId) });
+  };
+
+  useEffect(() => {
+    if (!message.opened) {
+      handleMarkSeen();
+    }
+  }, []);
+
+  return (
+    <Container isSent={message.isSent}>
+      <Bubble folder={folder} isSent={message.isSent}>
+        <Content>{message.content}</Content>
+      </Bubble>
+      <Timestamp isSent={message.isSent}>
+        {toReadable(message.created)}
+      </Timestamp>
+    </Container>
+  );
+};
 
 const Container = styled.div<{ isSent: boolean }>`
   align-items: ${({ isSent }) => (isSent ? 'flex-end' : 'flex-start')};

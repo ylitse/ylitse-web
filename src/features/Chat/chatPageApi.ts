@@ -70,8 +70,13 @@ export type MessageResponse = {
   buddies: Array<Buddy>;
 };
 
-type SendMessage = {
+type NewMessage = {
   message: MessageData;
+  userId: string;
+};
+
+type PutMessage = {
+  message: Message;
   userId: string;
 };
 
@@ -118,16 +123,23 @@ export const chatApi = createApi({
           messagesResponseCodec,
           { resources: [], contacts: [] },
           ({ resources, contacts }) => ({
-            messages: resources.map(toMessage(userId)),
+            messages: resources.map(toAppMessage(userId)),
             buddies: toAppBuddies(contacts),
           }),
         ),
     }),
-    sendMessage: builder.mutation<unknown, SendMessage>({
+    sendMessage: builder.mutation<unknown, NewMessage>({
       query: ({ userId, message }) => ({
         url: `users/${userId}/messages`,
         method: 'post',
         body: message,
+      }),
+    }),
+    markSeen: builder.mutation<unknown, PutMessage>({
+      query: ({ userId, message }) => ({
+        url: `users/${userId}/messages/${message.id}`,
+        method: 'put',
+        body: { ...toSeen(message), active: true },
       }),
     }),
   }),
@@ -149,12 +161,13 @@ const toBuddy = ({ display_name, id, role, ...rest }: Contact) => {
   } as Buddy;
 };
 
-const toMessage =
+const toAppMessage =
   (userId: string) =>
-  ({ sender_id, recipient_id, ...rest }: Message): AppMessage => {
+  ({ sender_id, recipient_id, opened, ...rest }: Message): AppMessage => {
     const isSent = userId === sender_id;
     return {
       buddyId: isSent ? recipient_id : sender_id,
+      opened: isSent ? true : opened,
       isSent,
       ...rest,
     };
@@ -183,6 +196,21 @@ export const extractMostRecentId = (
   return allMessages[0].id ?? '';
 };
 
+const toSeen = (msg: Message) => ({ ...msg, opened: true });
+
+export const toPutMessage = (
+  msg: AppMessage,
+  buddyId: string,
+  userId: string,
+): Message => ({
+  sender_id: userId,
+  recipient_id: buddyId,
+  content: msg.content,
+  created: msg.created,
+  id: msg.id,
+  opened: msg.opened,
+});
+
 export const toSendMessage = (
   buddyId: string,
   userId: string,
@@ -198,4 +226,5 @@ export const {
   useGetContactsQuery,
   useGetMessagesQuery,
   useSendMessageMutation,
+  useMarkSeenMutation,
 } = chatApi;
