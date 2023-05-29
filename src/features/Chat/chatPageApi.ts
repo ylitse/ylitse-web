@@ -137,7 +137,7 @@ export const chatApi = createApi({
 const toAppBuddies = (contacts: Array<Contact>): Array<Buddy> =>
   contacts.flatMap(toBuddy);
 
-const toBuddy = ({ display_name, id, ...rest }: Contact) => {
+const toBuddy = ({ display_name, id, role, ...rest }: Contact) => {
   if (rest?.status === 'deleted') {
     return [];
   }
@@ -146,7 +146,7 @@ const toBuddy = ({ display_name, id, ...rest }: Contact) => {
     displayName: display_name,
     buddyId: id,
     status: rest?.status ?? 'ok',
-    ...rest,
+    role,
   } as Buddy;
 };
 
