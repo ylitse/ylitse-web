@@ -30,6 +30,11 @@ export type ChatState = {
   pollingParams: Array<PollingParam> | null;
 };
 
+type Conversation = {
+  name: string;
+  buddyId: string;
+};
+
 const initialState: ChatState = {
   activeFolder: 'ok',
   activeChatId: null,
@@ -50,6 +55,16 @@ export const chats = createSlice({
     addPollParam: (state, action: PayloadAction<PollingParam>) => {
       const currentParams = state.pollingParams ?? [];
       state.pollingParams = [action.payload, ...currentParams];
+    },
+    setConversation: (state, action: PayloadAction<Conversation>) => {
+      const buddyId = action.payload.buddyId;
+      const isConversationExisting = Boolean(state.chats[buddyId]);
+
+      state.activeChatId = buddyId;
+
+      if (!isConversationExisting) {
+        state.chats = { ...state.chats, [buddyId]: toNewBuddy(action.payload) };
+      }
     },
   },
   extraReducers: builder => {
@@ -94,6 +109,14 @@ export const chats = createSlice({
         },
       );
   },
+});
+
+const toNewBuddy = ({ name, buddyId }: Conversation): ChatBuddy => ({
+  displayName: name,
+  buddyId,
+  role: 'mentor',
+  status: 'ok',
+  messages: [],
 });
 
 const createBuddyChunks = (buddyIds: Array<string>): Array<PollingParam> => {
@@ -207,4 +230,5 @@ export const selectIsLoadingBuddyMessages = (buddyId?: string) =>
     );
   });
 
-export const { setActiveFolder, setActiveChat, addPollParam } = chats.actions;
+export const { setActiveFolder, setActiveChat, addPollParam, setConversation } =
+  chats.actions;

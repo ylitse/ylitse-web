@@ -11,7 +11,6 @@ const optionalProperties = D.partial({
   status: status,
 });
 const mandatoryProperties = D.struct({
-  active: D.boolean,
   display_name: D.string,
   id: D.string,
   role: role,
