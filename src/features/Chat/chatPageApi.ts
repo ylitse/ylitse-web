@@ -53,7 +53,6 @@ export type AppMessage = {
 
 type ChatStatus = D.TypeOf<typeof status>;
 export type ChatFolder = Exclude<ChatStatus, 'deleted'>;
-export type Role = D.TypeOf<typeof role>;
 
 type Contact = D.TypeOf<typeof contactCodec>;
 export type Buddy = Omit<Contact, 'display_name' | 'id' | 'status'> & {

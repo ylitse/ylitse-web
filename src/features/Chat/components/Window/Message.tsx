@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
-const formatTime = (timestamp: string) =>
+const toReadable = (timestamp: string) =>
   new Date(timestamp).toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -18,21 +18,21 @@ type Props = {
 };
 
 export const Message = ({ folder, content, isSent, time }: Props) => (
-  <MessageContainer isSent={isSent}>
-    <MessageBubble folder={folder} isSent={isSent}>
+  <Container isSent={isSent}>
+    <Bubble folder={folder} isSent={isSent}>
       <Content>{content}</Content>
-    </MessageBubble>
-    <MessageTime isSent={isSent}>{formatTime(time)}</MessageTime>
-  </MessageContainer>
+    </Bubble>
+    <Timestamp isSent={isSent}>{toReadable(time)}</Timestamp>
+  </Container>
 );
 
-const MessageContainer = styled.div<{ isSent: boolean }>`
+const Container = styled.div<{ isSent: boolean }>`
   align-items: ${({ isSent }) => (isSent ? 'flex-end' : 'flex-start')};
   display: flex;
   flex-direction: column;
 `;
 
-const MessageBubble = styled.div<{ folder: ChatFolder; isSent: boolean }>`
+const Bubble = styled.div<{ folder: ChatFolder; isSent: boolean }>`
   background-color: ${({ folder, isSent }) => {
     if (folder === 'ok') return isSent ? palette.blueLight : palette.blueWhite;
     if (folder === 'archived')
@@ -51,7 +51,7 @@ const Content = styled(Text)`
   margin: 0;
 `;
 
-const MessageTime = styled(Text)<{ isSent: boolean }>`
+const Timestamp = styled(Text)<{ isSent: boolean }>`
   ${({ isSent }) => (isSent ? 'margin-right: 14px;' : 'margin-left: 14px;')}
   margin-bottom: 0;
   margin-top: 0;

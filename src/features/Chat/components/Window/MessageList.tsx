@@ -62,7 +62,6 @@ export const MessageList = ({
     dispatch(addPollParam({ type: 'OlderThan', buddyId, messageId }));
   };
 
-  // Scroll to the bottom of the chat when a new message is sent
   const historyRef = useRef<HTMLDivElement>(null);
 
   const { isScrolledToTop } = useScrollToTop({
