@@ -30,6 +30,11 @@ export type ChatState = {
   pollingParams: Array<PollingParam> | null;
 };
 
+type Conversation = {
+  name: string;
+  buddyId: string;
+};
+
 const initialState: ChatState = {
   activeFolder: 'ok',
   activeChatId: null,
@@ -50,6 +55,16 @@ export const chats = createSlice({
     addPollParam: (state, action: PayloadAction<PollingParam>) => {
       const currentParams = state.pollingParams ?? [];
       state.pollingParams = [action.payload, ...currentParams];
+    },
+    setConversation: (state, action: PayloadAction<Conversation>) => {
+      const buddyId = action.payload.buddyId;
+      const isConversationExisting = Boolean(state.chats[buddyId]);
+
+      state.activeChatId = buddyId;
+
+      if (!isConversationExisting) {
+        state.chats = { ...state.chats, [buddyId]: toNewBuddy(action.payload) };
+      }
     },
   },
   extraReducers: builder => {
@@ -92,8 +107,36 @@ export const chats = createSlice({
             pollingParams: nextPollingParams,
           };
         },
+      )
+      .addMatcher(
+        chatApi.endpoints.markSeen.matchFulfilled,
+        ({ chats, ...state }, { meta }) => {
+          const {
+            message: { id, recipient_id },
+          } = meta.arg.originalArgs;
+          const updatedMessages = chats[recipient_id].messages.map(msg =>
+            msg.id === id ? { ...msg, opened: true } : msg,
+          );
+          const updatedRecord = {
+            ...chats,
+            [recipient_id]: {
+              ...chats[recipient_id],
+              messages: updatedMessages,
+            },
+          };
+
+          return { ...state, chats: updatedRecord };
+        },
       );
   },
+});
+
+const toNewBuddy = ({ name, buddyId }: Conversation): ChatBuddy => ({
+  displayName: name,
+  buddyId,
+  role: 'mentor',
+  status: 'ok',
+  messages: [],
 });
 
 const createBuddyChunks = (buddyIds: Array<string>): Array<PollingParam> => {
@@ -113,7 +156,8 @@ const mergeMessages = (
     const newMessages = response.messages.filter(
       ({ buddyId }) => buddyId === contact.buddyId,
     );
-    const existingMessages = originalChats[contact.buddyId].messages ?? [];
+    const existingBuddy = originalChats[contact.buddyId];
+    const existingMessages = existingBuddy ? existingBuddy.messages : [];
 
     return {
       ...chats,
@@ -207,4 +251,5 @@ export const selectIsLoadingBuddyMessages = (buddyId?: string) =>
     );
   });
 
-export const { setActiveFolder, setActiveChat, addPollParam } = chats.actions;
+export const { setActiveFolder, setActiveChat, addPollParam, setConversation } =
+  chats.actions;
