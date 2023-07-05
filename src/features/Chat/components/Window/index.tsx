@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-import { useSendMessageMutation, toSendMessage } from '../../chatPageApi';
+import {
+  ChatFolder,
+  useSendMessageMutation,
+  toSendMessage,
+} from '@/features/Chat/chatPageApi';
 import { useAppSelector } from '@/store';
 import {
   selectActiveChat,
@@ -39,16 +43,12 @@ const ChatWindow = () => {
     selectIsLoadingBuddyMessages(chat?.buddyId),
   );
 
-  const archiveChat = () => {
-    // this is fine
-  };
-
-  const blockChat = () => {
-    // this is fine
-  };
-
-  const restoreChat = () => {
-    // this is fine
+  const updateStatus = (status: ChatFolder) => {
+    if (!userId || !chat) return;
+    console.log(status);
+    // PUT-kutsu backendiin
+    // '/users/{userId}/contacts/{buddyId}' status: status
+    // Päivitä store
   };
 
   const handleMessageSend = (buddyId: string, text: string) => {
@@ -104,7 +104,7 @@ const ChatWindow = () => {
             {chat.status === 'ok' ? (
               <>
                 <Button
-                  onClick={archiveChat}
+                  onClick={() => updateStatus('archived')}
                   leftIcon="archive"
                   sizeInPx={24}
                   text={{
@@ -114,7 +114,7 @@ const ChatWindow = () => {
                   }}
                 />
                 <Button
-                  onClick={blockChat}
+                  onClick={() => updateStatus('banned')}
                   leftIcon="block"
                   sizeInPx={24}
                   text={{
@@ -126,7 +126,7 @@ const ChatWindow = () => {
               </>
             ) : (
               <Button
-                onClick={restoreChat}
+                onClick={() => updateStatus('ok')}
                 leftIcon="return"
                 sizeInPx={24}
                 text={{
