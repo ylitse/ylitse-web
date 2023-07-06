@@ -76,7 +76,7 @@ const Row = styled.div<{
   ${({ active, folder }) =>
     active
       ? css`
-          background-color: ${folder === 'active'
+          background-color: ${folder === 'ok'
             ? palette.blue2
             : folder === 'archived'
             ? palette.orange
@@ -84,7 +84,7 @@ const Row = styled.div<{
         `
       : css`
           &:hover {
-            background-color: ${folder === 'active'
+            background-color: ${folder === 'ok'
               ? palette.blueWhite
               : folder === 'archived'
               ? palette.orangeWhite
