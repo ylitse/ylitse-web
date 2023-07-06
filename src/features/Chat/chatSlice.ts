@@ -127,6 +127,22 @@ export const chats = createSlice({
 
           return { ...state, chats: updatedRecord };
         },
+      )
+      .addMatcher(
+        chatApi.endpoints.updateStatus.matchFulfilled,
+        ({ chats, ...state }, { meta }) => {
+          const { buddyId, status } = meta.arg.originalArgs;
+
+          const updatedRecord = {
+            ...chats,
+            [buddyId]: {
+              ...chats[buddyId],
+              status,
+            },
+          };
+
+          return { ...state, chats: updatedRecord };
+        },
       );
   },
 });

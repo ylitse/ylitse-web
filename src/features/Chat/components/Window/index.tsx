@@ -4,6 +4,7 @@ import {
   ChatFolder,
   useSendMessageMutation,
   toSendMessage,
+  useUpdateStatusMutation,
 } from '@/features/Chat/chatPageApi';
 import { useAppSelector } from '@/store';
 import {
@@ -36,6 +37,7 @@ const ChatWindow = () => {
   const [text, setText] = useState('');
   const [sendMessage, { isLoading: isMessageSendLoading }] =
     useSendMessageMutation();
+  const [updateChatStatus] = useUpdateStatusMutation();
   const userId = useAppSelector(selectUserId);
 
   const chat = useAppSelector(selectActiveChat);
@@ -45,10 +47,7 @@ const ChatWindow = () => {
 
   const updateStatus = (status: ChatFolder) => {
     if (!userId || !chat) return;
-    console.log(status);
-    // PUT-kutsu backendiin
-    // '/users/{userId}/contacts/{buddyId}' status: status
-    // Päivitä store
+    updateChatStatus({ userId, buddyId: chat.buddyId, status });
   };
 
   const handleMessageSend = (buddyId: string, text: string) => {
