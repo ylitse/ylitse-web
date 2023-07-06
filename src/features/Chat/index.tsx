@@ -1,4 +1,6 @@
 import { useMobileMode } from '@/hooks/useMobileMode';
+import { selectActiveChat } from './chatSlice';
+import { useAppSelector } from '@/store';
 
 import styled, { css } from 'styled-components';
 import {
@@ -7,19 +9,21 @@ import {
   CONTENT_WIDTH,
   OUTER_VERTICAL_MARGIN,
 } from '@/components/variables';
+import ActiveWindow from './components/ActiveWindow';
+import WelcomeWindow from './components/WelcomeWindow';
 import Menu from './components/Menu';
-import Window from './components/Window';
 import PageWithTransition from '@/components/PageWithTransition';
 
 const Chat = () => {
   const isMobile = useMobileMode();
+  const chat = useAppSelector(selectActiveChat);
 
   return (
     <PageWithTransition>
       <PageContainer isMobile={isMobile}>
         <Container>
           <Menu />
-          <Window />
+          {chat ? <ActiveWindow /> : <WelcomeWindow />}
         </Container>
       </PageContainer>
     </PageWithTransition>
