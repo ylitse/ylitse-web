@@ -58,14 +58,10 @@ const ActiveWindow = () => {
 
   const isLoading = isLoadingMessages || isMessageSendLoading;
 
-  const getProfileIcon = (status: ChatFolder) => {
-    const icons = {
-      ok: <ProfileIcon color="purpleDark" />,
-      archived: <img src={ArchivedIcon} />,
-      banned: <img src={BlockedIcon} />,
-    };
-
-    return icons[status];
+  const icons = {
+    ok: <ProfileIcon color="purpleDark" />,
+    archived: <img src={ArchivedIcon} />,
+    banned: <img src={BlockedIcon} />,
   };
 
   return (
@@ -73,7 +69,7 @@ const ActiveWindow = () => {
       <Container>
         <HeaderBar>
           <ProfileInfo>
-            {getProfileIcon(chat.status)}
+            {icons[chat.status]}
             <MentorName variant="h2">{chat.displayName}</MentorName>
             <MentorBio variant="p">{chat.status}</MentorBio>
           </ProfileInfo>
