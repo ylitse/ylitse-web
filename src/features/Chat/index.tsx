@@ -10,9 +10,9 @@ import {
   OUTER_VERTICAL_MARGIN,
 } from '@/components/variables';
 import ActiveWindow from './components/ActiveWindow';
+import WelcomeWindow from './components/WelcomeWindow';
 import Menu from './components/Menu';
 import PageWithTransition from '@/components/PageWithTransition';
-import WelcomeWindow from './components/WelcomeWindow';
 
 const Chat = () => {
   const isMobile = useMobileMode();
@@ -32,14 +32,17 @@ const Chat = () => {
 
 const PageContainer = styled.div<{ isMobile: boolean }>`
   ${({ isMobile }) =>
-    isMobile &&
-    css`
-      display: flex;
-      flex-direction: column;
-      margin: ${OUTER_VERTICAL_MARGIN} auto;
-      max-width: ${CONTENT_WIDTH};
-    `}
-  width: ${({ isMobile }) => (isMobile ? '100vw' : `${CONTENT_WIDTH}`)};
+    isMobile
+      ? css`
+          width: 100vw;
+        `
+      : css`
+          display: flex;
+          flex-direction: column;
+          margin: ${OUTER_VERTICAL_MARGIN} auto;
+          max-width: ${CONTENT_WIDTH};
+          width: ${CONTENT_WIDTH};
+        `}
   @media screen and (max-width: ${breakpoints.mobile}) {
     flex: 1;
   }
