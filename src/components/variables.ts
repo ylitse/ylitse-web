@@ -30,6 +30,18 @@ export const palette = {
   whiteOpacity: 'rgba(255, 255, 255, 0.5)',
 };
 
+export const folderBackgroundColors = {
+  ok: { active: palette.blue2, hover: palette.blueWhite },
+  archived: { active: palette.orange, hover: palette.orangeWhite },
+  banned: { active: palette.redSalmon, hover: palette.redWhite },
+};
+
+export const messageBackgroundColors = {
+  ok: { received: palette.blueWhite, sent: palette.blueLight },
+  archived: { received: palette.orangeWhite, sent: palette.orangeLight },
+  banned: { received: palette.redWhite, sent: palette.redSalmon },
+};
+
 export const OUTER_VERTICAL_MARGIN = '6vh';
 export const NAVIGATION_HEIGHT = '3rem';
 export const FOOTER_HEIGHT = '3rem';

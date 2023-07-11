@@ -8,10 +8,10 @@ import {
   ChatFolder,
   toPutMessage,
   useMarkSeenMutation,
-} from '../../chatPageApi';
+} from '@/features/Chat/chatPageApi';
 
 import styled from 'styled-components';
-import { palette } from '@/components/variables';
+import { messageBackgroundColors } from '@/components/variables';
 import Text from '@/components/Text';
 
 const toReadable = (timestamp: string) =>
@@ -42,9 +42,12 @@ export const Message = ({ folder, buddyId, message }: Props) => {
     }
   }, []);
 
+  const background =
+    messageBackgroundColors[folder][message.isSent ? 'sent' : 'received'];
+
   return (
     <Container isSent={message.isSent}>
-      <Bubble folder={folder} isSent={message.isSent}>
+      <Bubble background={background}>
         <Content>{message.content}</Content>
       </Bubble>
       <Timestamp isSent={message.isSent}>
@@ -60,14 +63,10 @@ const Container = styled.div<{ isSent: boolean }>`
   flex-direction: column;
 `;
 
-const Bubble = styled.div<{ folder: ChatFolder; isSent: boolean }>`
-  background-color: ${({ folder, isSent }) => {
-    if (folder === 'ok') return isSent ? palette.blueLight : palette.blueWhite;
-    if (folder === 'archived')
-      return isSent ? palette.orangeLight : palette.orangeWhite;
-    return isSent ? palette.redSalmon : palette.redWhite;
-  }};
-    isSent ? palette.blueLight : palette.blueWhite};
+const Bubble = styled.div<{
+  background: string;
+}>`
+  background-color: ${({ background }) => background};
   border-radius: 10px;
   box-sizing: border-box;
   padding: 14px 22px;
