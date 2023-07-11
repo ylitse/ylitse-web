@@ -24,6 +24,7 @@ export type PollingParam =
   | { type: 'InitialMessages'; buddyIds: Array<string> };
 
 export type ChatState = {
+  showFolders: boolean;
   activeFolder: ChatFolder;
   chats: Record<string, ChatBuddy>;
   activeChatId: string | null;
@@ -36,6 +37,7 @@ type Conversation = {
 };
 
 const initialState: ChatState = {
+  showFolders: false,
   activeFolder: 'ok',
   activeChatId: null,
   chats: {},
@@ -46,6 +48,9 @@ export const chats = createSlice({
   initialState,
   name: 'chats',
   reducers: {
+    setShowFolders: (state, action: PayloadAction<boolean>) => {
+      state.showFolders = action.payload;
+    },
     setActiveFolder: (state, action: PayloadAction<ChatFolder>) => {
       state.activeFolder = action.payload;
     },
@@ -267,5 +272,10 @@ export const selectIsLoadingBuddyMessages = (buddyId?: string) =>
     );
   });
 
-export const { setActiveFolder, setActiveChat, addPollParam, setConversation } =
-  chats.actions;
+export const {
+  setShowFolders,
+  setActiveFolder,
+  setActiveChat,
+  addPollParam,
+  setConversation,
+} = chats.actions;
