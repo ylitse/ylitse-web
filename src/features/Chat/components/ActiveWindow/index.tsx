@@ -70,7 +70,7 @@ const ActiveWindow = () => {
 
   return (
     chat && (
-      <ActiveChatContainer>
+      <Container>
         <HeaderBar>
           <ProfileInfo>
             {getProfileIcon(chat.status)}
@@ -146,12 +146,12 @@ const ActiveWindow = () => {
             onClick={() => handleMessageSend(chat.buddyId, text)}
           />
         </MessageField>
-      </ActiveChatContainer>
+      </Container>
     )
   );
 };
 
-const ActiveChatContainer = styled.div`
+const Container = styled.div`
   background-color: ${palette.white};
   border-radius: 10px;
   display: flex;
