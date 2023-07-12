@@ -16,9 +16,9 @@ type Props = {
 };
 
 const Header = ({ chat }: Props) => {
-  const [showSearch, setShowSearch] = useState(false);
-  const showSearchBar = () => setShowSearch(true);
-  const hideSearchBar = () => setShowSearch(false);
+  const [isSearchShown, setIsSearchShown] = useState(false);
+  const showSearch = () => setIsSearchShown(true);
+  const hideSearch = () => setIsSearchShown(false);
 
   const icons = {
     ok: <ProfileIcon color="purpleDark" />,
@@ -33,10 +33,10 @@ const Header = ({ chat }: Props) => {
         <MentorName variant="h2">{chat.displayName}</MentorName>
         <MentorBio variant="p">{chat.status}</MentorBio>
       </ProfileInfo>
-      {showSearch ? (
-        <Search hideSearch={hideSearchBar} />
+      {isSearchShown ? (
+        <Search hideSearch={hideSearch} />
       ) : (
-        <Buttons chat={chat} showSearch={showSearchBar} />
+        <Buttons chat={chat} showSearch={showSearch} />
       )}
     </Container>
   );
