@@ -1,4 +1,6 @@
 import { useMobileMode } from '@/hooks/useMobileMode';
+import { selectActiveChat } from './chatSlice';
+import { useAppSelector } from '@/store';
 
 import styled, { css } from 'styled-components';
 import {
@@ -7,20 +9,22 @@ import {
   CONTENT_WIDTH,
   OUTER_VERTICAL_MARGIN,
 } from '@/components/variables';
+import ActiveWindow from './components/ActiveWindow';
+import WelcomeWindow from './components/WelcomeWindow';
 import Menu from './components/Menu';
-import Window from './components/Window';
 import PageWithTransition from '@/components/PageWithTransition';
 
 const Chat = () => {
   const isMobile = useMobileMode();
+  const chat = useAppSelector(selectActiveChat);
 
   return (
     <PageWithTransition>
       <PageContainer isMobile={isMobile}>
-        <Container>
+        <InnerContainer>
           <Menu />
-          <Window />
-        </Container>
+          {chat ? <ActiveWindow /> : <WelcomeWindow />}
+        </InnerContainer>
       </PageContainer>
     </PageWithTransition>
   );
@@ -44,7 +48,7 @@ const PageContainer = styled.div<{ isMobile: boolean }>`
   }
 `;
 
-const Container = styled.div`
+const InnerContainer = styled.div`
   display: flex;
   gap: 22px;
   height: ${CONTENT_HEIGHT};

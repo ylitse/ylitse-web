@@ -1,9 +1,9 @@
 import { useEffect, useRef, Fragment } from 'react';
 
 import { useAppDispatch } from '@/store';
-import { addPollParam } from '../../chatSlice';
+import { addPollParam } from '@/features/Chat/chatSlice';
 
-import type { AppMessage, ChatFolder } from '../../chatPageApi';
+import type { AppMessage, ChatFolder } from '@/features/Chat/chatPageApi';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 import styled from 'styled-components';
@@ -41,12 +41,7 @@ const toGroupedMessages = (messages: Array<AppMessage>) =>
     {},
   );
 
-export const MessageList = ({
-  messageList,
-  status,
-  buddyId,
-  isLoading,
-}: Props) => {
+const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
   const groupedMessages = toGroupedMessages(messageList);
 
   const dispatch = useAppDispatch();
@@ -129,3 +124,5 @@ const DateDivider = styled(Text)`
     right: 0;
   }
 `;
+
+export default MessageList;

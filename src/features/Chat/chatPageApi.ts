@@ -80,6 +80,12 @@ type PutMessage = {
   userId: string;
 };
 
+type PutStatus = {
+  buddyId: string;
+  status: ChatFolder;
+  userId: string;
+};
+
 const toQueryString = (params: PollingParam) => {
   const maxMessagesAtOnce = 10;
 
@@ -140,6 +146,13 @@ export const chatApi = createApi({
         url: `users/${userId}/messages/${message.id}`,
         method: 'put',
         body: { ...toSeen(message), active: true },
+      }),
+    }),
+    updateStatus: builder.mutation<unknown, PutStatus>({
+      query: ({ userId, buddyId, status }) => ({
+        url: `users/${userId}/contacts/${buddyId}`,
+        method: 'put',
+        body: { status },
       }),
     }),
   }),
@@ -227,4 +240,5 @@ export const {
   useGetMessagesQuery,
   useSendMessageMutation,
   useMarkSeenMutation,
+  useUpdateStatusMutation,
 } = chatApi;

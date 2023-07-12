@@ -1,10 +1,10 @@
 import { useAppSelector, useAppDispatch } from '@/store';
-import { selectBuddyMessages, setActiveChat } from '../../chatSlice';
+import { selectBuddyMessages, setActiveChat } from '@/features/Chat/chatSlice';
 
-import type { ChatBuddy } from '../../chatSlice';
+import type { ChatBuddy } from '@/features/Chat/chatSlice';
 
 import styled, { css } from 'styled-components';
-import { palette } from '@/components/variables';
+import { folderBackgroundColors, palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
 import Spinner from '@/components/Spinner';
@@ -31,7 +31,7 @@ export const MenuItem = ({ buddy }: Props) => {
   return (
     <Row
       active={buddy.buddyId === activeChatId}
-      folder={activeFolder}
+      background={folderBackgroundColors[activeFolder]}
       onClick={openChat}
     >
       <ProfileIcon
@@ -61,8 +61,8 @@ export const MenuItem = ({ buddy }: Props) => {
 };
 
 const Row = styled.div<{
-  active?: boolean;
-  folder?: string;
+  active: boolean;
+  background: { active: string; hover: string };
 }>`
   align-items: center;
   border-bottom: 1px solid ${palette.greyLight};
@@ -73,22 +73,14 @@ const Row = styled.div<{
   height: 80px;
   padding-left: 40px;
 
-  ${({ active, folder }) =>
+  ${({ active, background }) =>
     active
       ? css`
-          background-color: ${folder === 'active'
-            ? palette.blue2
-            : folder === 'archived'
-            ? palette.orange
-            : palette.redSalmon};
+          background-color: ${background.active};
         `
       : css`
           &:hover {
-            background-color: ${folder === 'active'
-              ? palette.blueWhite
-              : folder === 'archived'
-              ? palette.orangeWhite
-              : palette.redWhite};
+            background-color: ${background.hover};
           }
         `}
 `;
