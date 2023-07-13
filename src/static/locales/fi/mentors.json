@@ -11,7 +11,7 @@
   "filters": {
     "clear": "Poista suodattimet",
     "close": "Sulje suodatus",
-     "description": "Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita ongelmasi perusteella.",
+    "description": "Tervetuloa selaamaan mentoreiden profiileja! Löydät uusimmat mentorit listassa ensimmäisenä. Hakutoimintoa käyttämällä voit rajata mentoreita ongelmasi perusteella.",
     "multipleSelected": "aihetta valittu",
     "oneSelected": "aihe valittu",
     "pageSizeLabel": "Aihetta sivulla:",

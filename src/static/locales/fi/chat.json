@@ -1,4 +1,17 @@
 {
+  "dialog": {
+    "archive": {
+      "title": "Keskustelun arkistoiminen",
+      "description": "Haluatko arkistoida keskustelun käyttäjän x kanssa?",
+      "confirm": "Arkistoi keskustelu"
+    },
+    "block": {
+      "title": "Käyttäjän estäminen",
+      "description": "Haluatko estää käyttäjän x?",
+      "confirm": "Estä käyttäjä"
+    },
+    "cancel": "Peruuta"
+  },
   "header": {
     "archive": "Arkistoi",
     "block": "Estä käyttäjä",

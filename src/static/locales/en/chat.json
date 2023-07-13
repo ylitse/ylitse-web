@@ -1,4 +1,17 @@
 {
+  "dialog": {
+    "archive": {
+      "title": "Archiving conversation",
+      "description": "Do you want to archive the conversation with x?",
+      "confirm": "Archive conversation"
+    },
+    "block": {
+      "title": "Blocking user",
+      "description": "Do you want to block user x?",
+      "confirm": "Block user"
+    },
+    "cancel": "Cancel"
+  },
   "header": {
     "archive": "Archive",
     "block": "Block user",
