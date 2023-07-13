@@ -46,6 +46,7 @@ const Buttons = ({ chat, showSearch }: Props) => {
       {isDialogOpen && (
         <ConfirmationDialog
           variant={dialogVariant}
+          buddyName={chat.displayName}
           close={closeDialog}
           confirm={() =>
             updateStatus(dialogVariant === 'archive' ? 'archived' : 'banned')

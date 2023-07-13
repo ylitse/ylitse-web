@@ -2,12 +2,12 @@
   "dialog": {
     "archive": {
       "title": "Keskustelun arkistoiminen",
-      "description": "Haluatko arkistoida keskustelun käyttäjän x kanssa?",
+      "description": "Haluatko arkistoida keskustelun käyttäjän {{buddyName}} kanssa?",
       "confirm": "Arkistoi keskustelu"
     },
     "block": {
       "title": "Käyttäjän estäminen",
-      "description": "Haluatko estää käyttäjän x?",
+      "description": "Haluatko estää käyttäjän {{buddyName}}?",
       "confirm": "Estä käyttäjä"
     },
     "cancel": "Peruuta"

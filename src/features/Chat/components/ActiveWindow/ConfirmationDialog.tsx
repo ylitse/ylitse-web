@@ -8,17 +8,18 @@ export type DialogVariant = 'archive' | 'block';
 
 type Props = {
   variant: DialogVariant;
+  buddyName: string;
   close: () => void;
   confirm: () => void;
 };
 
-const ConfirmationDialog = ({ variant, close, confirm }: Props) => {
+const ConfirmationDialog = ({ variant, buddyName, close, confirm }: Props) => {
   const { t } = useTranslation('chat');
 
   return (
     <Container>
       <Text variant="h3">{t(`dialog.${variant}.title`)}</Text>
-      <Text>{t(`dialog.${variant}.description`)}</Text>
+      <Text>{t(`dialog.${variant}.description`, { buddyName })}</Text>
       <TextButton onClick={close} variant="light">
         {t('dialog.cancel')}
       </TextButton>

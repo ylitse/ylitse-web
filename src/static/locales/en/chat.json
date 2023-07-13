@@ -2,12 +2,12 @@
   "dialog": {
     "archive": {
       "title": "Archiving conversation",
-      "description": "Do you want to archive the conversation with x?",
+      "description": "Do you want to archive the conversation with {{buddyName}}?",
       "confirm": "Archive conversation"
     },
     "block": {
       "title": "Blocking user",
-      "description": "Do you want to block user x?",
+      "description": "Do you want to block user {{buddyName}}?",
       "confirm": "Block user"
     },
     "cancel": "Cancel"
