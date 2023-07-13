@@ -1,7 +1,7 @@
 {
   "dialog": {
     "archive": {
-      "title": "Keskustelun arkistoiminen",
+      "title": "Keskustelun arkistointi",
       "description": "Haluatko arkistoida keskustelun käyttäjän {{buddyName}} kanssa?",
       "confirm": "Arkistoi keskustelu"
     },

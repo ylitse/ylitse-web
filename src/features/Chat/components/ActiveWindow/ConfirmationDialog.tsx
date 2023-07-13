@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
+import { IconButton, TextButton } from '@/components/Buttons';
+import { palette } from '@/components/variables';
 import Text from '@/components/Text';
-import { TextButton } from '@/components/Buttons';
+import IconWarning from '@/static/icons/warning.svg';
 
 export type DialogVariant = 'archive' | 'block';
 
@@ -18,6 +20,8 @@ const ConfirmationDialog = ({ variant, buddyName, close, confirm }: Props) => {
 
   return (
     <Container>
+      <WarningIcon src={IconWarning} />
+      <IconButton variant="closeWithBackground" sizeInPx={34} onClick={close} />
       <Text variant="h3">{t(`dialog.${variant}.title`)}</Text>
       <Text>{t(`dialog.${variant}.description`, { buddyName })}</Text>
       <TextButton onClick={close} variant="light">
@@ -31,17 +35,15 @@ const ConfirmationDialog = ({ variant, buddyName, close, confirm }: Props) => {
 };
 
 const Container = styled.div`
-  align-items: center;
-  background-color: white;
+  background-color: ${palette.white};
+  border-left: 110px solid ${palette.orange};
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   height: 223px;
-  justify-content: center;
-  padding: 20px;
+  padding: 1rem;
   width: 687px;
-  z-index: 1000000;
+  z-index: 10;
 `;
+
+const WarningIcon = styled.img``;
 
 export default ConfirmationDialog;
