@@ -1,17 +1,9 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-  ChatFolder,
-  useUpdateStatusMutation,
-} from '@/features/Chat/chatPageApi';
-import { useAppSelector } from '@/store';
-import { selectUserId } from '@/features/Authentication/userSlice';
-
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
 
 import styled from 'styled-components';
-
 import ConfirmationDialog, { DialogVariant } from '../ConfirmationDialog';
 import { IconButton, StatusButton } from '@/components/Buttons';
 
@@ -32,25 +24,13 @@ const Buttons = ({ chat, showSearch }: Props) => {
     setIsDialogOpen(true);
   };
 
-  const [updateChatStatus] = useUpdateStatusMutation();
-  const userId = useAppSelector(selectUserId);
-
-  const updateStatus = (status: ChatFolder) => {
-    if (isDialogOpen) closeDialog();
-    if (!userId) return;
-    updateChatStatus({ userId, buddyId: chat.buddyId, status });
-  };
-
   return (
     <>
       {isDialogOpen && (
         <ConfirmationDialog
           variant={dialogVariant}
-          buddyName={chat.displayName}
+          chat={chat}
           close={closeDialog}
-          confirm={() =>
-            updateStatus(dialogVariant === 'archive' ? 'archived' : 'banned')
-          }
         />
       )}
       <Container>
@@ -70,7 +50,7 @@ const Buttons = ({ chat, showSearch }: Props) => {
           </>
         ) : (
           <StatusButton
-            onClick={() => updateStatus('ok')}
+            onClick={() => openDialog('restore')}
             icon="return"
             text={t('header.restore')}
           />

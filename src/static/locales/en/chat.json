@@ -10,6 +10,11 @@
       "description": "Do you want to block user {{buddyName}}?",
       "confirm": "Block user"
     },
+    "restore": {
+      "title": "Restoring conversation",
+      "description": "Do you want to restore the conversation with {{buddyName}}?",
+      "confirm": "Restore conversation"
+    },
     "cancel": "Cancel"
   },
   "header": {

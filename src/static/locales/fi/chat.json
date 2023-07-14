@@ -10,6 +10,11 @@
       "description": "Haluatko estää käyttäjän {{buddyName}}?",
       "confirm": "Estä käyttäjä"
     },
+    "restore": {
+      "title": "Keskustelun palauttaminen",
+      "description": "Haluatko palauttaa keskustelun käyttäjän {{buddyName}} kanssa?",
+      "confirm": "Palauta keskustelu"
+    },
     "cancel": "Peruuta"
   },
   "header": {
