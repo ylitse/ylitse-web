@@ -5,36 +5,42 @@ import { variants } from './variants';
 
 export type ButtonColorVariant = 'light' | 'dark' | 'disabled';
 
+type Size = 'normal' | 'large';
+
 type ButtonProps<T extends ElementType> = {
   children: ReactNode;
-  variant?: ButtonColorVariant;
   className?: string;
+  size?: Size;
+  variant?: ButtonColorVariant;
 } & ComponentPropsWithoutRef<T>;
 
 const TextButton = <T extends ElementType = 'button'>({
   children,
+  size = 'normal',
   variant = 'dark',
   ...rest
 }: ButtonProps<T>): JSX.Element => {
   return (
-    <StyledTextButton variant={variant} {...rest}>
+    <StyledTextButton size={size} variant={variant} {...rest}>
       {children}
     </StyledTextButton>
   );
 };
 
-const StyledTextButton = styled.button<{ variant: ButtonColorVariant }>`
+const StyledTextButton = styled.button<{
+  size: Size;
+  variant: ButtonColorVariant;
+}>`
   border: none;
-  border-radius: 1.25rem;
+  border-radius: 50px;
   bottom: ${spacing.layout_spacing};
   cursor: pointer;
   font-family: 'Baloo 2';
-  font-size: 1rem;
+  font-size: ${({ size }) => (size === 'large' ? '1.2rem' : '1rem')};
   font-style: normal;
   font-weight: 700;
   line-height: 1.5rem;
-  margin-bottom: 4px;
-  padding: 0.5rem 2rem;
+  padding: 10px 24px;
   width: fit-content;
   &:hover {
     opacity: 0.7;

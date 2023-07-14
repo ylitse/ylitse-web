@@ -19,31 +19,78 @@ const ConfirmationDialog = ({ variant, buddyName, close, confirm }: Props) => {
   const { t } = useTranslation('chat');
 
   return (
-    <Container>
-      <WarningIcon src={IconWarning} />
-      <IconButton variant="closeWithBackground" sizeInPx={34} onClick={close} />
-      <Text variant="h3">{t(`dialog.${variant}.title`)}</Text>
-      <Text>{t(`dialog.${variant}.description`, { buddyName })}</Text>
-      <TextButton onClick={close} variant="light">
-        {t('dialog.cancel')}
-      </TextButton>
-      <TextButton onClick={confirm} variant="dark">
-        {t(`dialog.${variant}.confirm`)}
-      </TextButton>
-    </Container>
+    <>
+      <Overlay />
+      <Container variant={variant}>
+        <WarningIcon src={IconWarning} />
+        <CloseButton
+          variant="closeWithBackground"
+          sizeInPx={46}
+          onClick={close}
+        />
+        <Title variant="h3">{t(`dialog.${variant}.title`)}</Title>
+        <Text>{t(`dialog.${variant}.description`, { buddyName })}</Text>
+        <ButtonContainer>
+          <TextButton onClick={close} variant="light">
+            {t('dialog.cancel')}
+          </TextButton>
+          <TextButton onClick={confirm} variant="dark">
+            {t(`dialog.${variant}.confirm`)}
+          </TextButton>
+        </ButtonContainer>
+      </Container>
+    </>
   );
 };
 
-const Container = styled.div`
-  background-color: ${palette.white};
-  border-left: 110px solid ${palette.orange};
-  border-radius: 10px;
-  height: 223px;
-  padding: 1rem;
-  width: 687px;
-  z-index: 10;
+const Overlay = styled.div`
+  background: var(--greyscale-overlay, rgba(57, 57, 57, 0.75));
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
 `;
 
-const WarningIcon = styled.img``;
+const Container = styled.div<{ variant: DialogVariant }>`
+  background-color: ${palette.white};
+  border-left: ${({ variant }) =>
+    `110px solid ${
+      variant === 'archive' ? palette.orange : palette.redSalmon
+    }`};
+  border-radius: 10px;
+  box-sizing: border-box;
+  height: 223px;
+  left: 50%;
+  padding: 1rem 3rem;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 687px;
+  z-index: 200;
+`;
+
+const WarningIcon = styled.img`
+  left: -79px;
+  position: absolute;
+  top: 56px;
+`;
+
+const CloseButton = styled(IconButton)`
+  position: absolute;
+  right: 13px;
+  top: 13px;
+`;
+
+const Title = styled(Text)`
+  margin-bottom: 0;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1.75rem;
+  justify-content: center;
+`;
 
 export default ConfirmationDialog;
