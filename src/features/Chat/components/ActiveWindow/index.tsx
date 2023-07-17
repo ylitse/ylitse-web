@@ -12,9 +12,9 @@ import MessageList from './MessageList';
 import { palette } from '@/components/variables';
 
 const ActiveWindow = () => {
-  const [isLoading] = useSendMessageMutation();
-
   const chat = useAppSelector(selectActiveChat);
+
+  const [isLoading] = useSendMessageMutation();
   const isLoadingMessages = useAppSelector(
     selectIsLoadingBuddyMessages(chat?.buddyId),
   );
@@ -31,7 +31,7 @@ const ActiveWindow = () => {
           status={chat.status}
           isLoading={loading}
         />
-        <MessageField chat={chat} />
+        {chat.status === 'ok' && <MessageField chat={chat} />}
       </Container>
     )
   );
