@@ -23,7 +23,7 @@ const WelcomeWindow = () => {
           {t('welcome.lower.title')}
         </WelcomeText>
         <WelcomeText>{t('welcome.lower.description')}</WelcomeText>
-        <SearchButton onClick={() => navigate('/mentors')}>
+        <SearchButton onClick={() => navigate('/mentors')} size="large">
           {t('welcome.lower.button')}
         </SearchButton>
       </BottomContainer>
@@ -63,8 +63,6 @@ const WelcomeText = styled(Text)<{ isHeader?: boolean }>`
 
 const SearchButton = styled(TextButton)`
   align-self: center;
-  border-radius: 50px;
-  font-size: 22px;
   height: 48px;
   margin-top: 2rem;
   width: 272px;

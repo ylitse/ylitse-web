@@ -1,4 +1,22 @@
 {
+  "dialog": {
+    "archive": {
+      "title": "Keskustelun arkistointi",
+      "description": "Haluatko arkistoida keskustelun käyttäjän {{buddyName}} kanssa?",
+      "confirm": "Arkistoi keskustelu"
+    },
+    "block": {
+      "title": "Käyttäjän estäminen",
+      "description": "Haluatko estää käyttäjän {{buddyName}}?",
+      "confirm": "Estä käyttäjä"
+    },
+    "restore": {
+      "title": "Keskustelun palauttaminen",
+      "description": "Haluatko palauttaa keskustelun käyttäjän {{buddyName}} kanssa?",
+      "confirm": "Palauta keskustelu"
+    },
+    "cancel": "Peruuta"
+  },
   "header": {
     "archive": "Arkistoi",
     "block": "Estä käyttäjä",
