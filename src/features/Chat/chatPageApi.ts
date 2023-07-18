@@ -58,6 +58,7 @@ export type Buddy = Omit<Contact, 'display_name' | 'id' | 'status'> & {
   buddyId: string;
   displayName: string;
   status: ChatFolder;
+  statusMessage: string;
 };
 
 type MessageQuery = {

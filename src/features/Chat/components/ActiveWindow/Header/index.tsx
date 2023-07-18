@@ -31,7 +31,7 @@ const Header = ({ chat }: Props) => {
       <ProfileInfo>
         {icons[chat.status]}
         <MentorName variant="h2">{chat.displayName}</MentorName>
-        <MentorBio variant="p">{chat.status}</MentorBio>
+        <MentorBio variant="p">{chat.statusMessage}</MentorBio>
       </ProfileInfo>
       {isSearchShown ? (
         <Search hideSearch={hideSearch} />

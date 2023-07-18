@@ -55,7 +55,16 @@ export const chats = createSlice({
       state.activeFolder = action.payload;
     },
     setActiveChat: (state, action: PayloadAction<string>) => {
-      state.activeChatId = action.payload;
+      const activeChatId = action.payload;
+      state.activeChatId = activeChatId;
+
+      // fetch(`/api/users/${activeChatId}`)
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     if (data.status_message) {
+      //       state.chats[activeChatId].statusMessage = data.status_message;
+      //     }
+      //   });
     },
     addPollParam: (state, action: PayloadAction<PollingParam>) => {
       const currentParams = state.pollingParams ?? [];
@@ -157,6 +166,7 @@ const toNewBuddy = ({ name, buddyId }: Conversation): ChatBuddy => ({
   buddyId,
   role: 'mentor',
   status: 'ok',
+  statusMessage: '',
   messages: [],
 });
 
