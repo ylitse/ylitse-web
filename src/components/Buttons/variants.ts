@@ -6,6 +6,7 @@ import BlockIcon from '@/static/icons/block.svg';
 import BlockedChatsIcon from '@/static/icons/blocked-chats.svg';
 import CloseIcon from '@/static/icons/close.svg';
 import CloseWithBackgroundIcon from '@/static/icons/close-with-background.svg';
+import DangerIcon from '@/static/icons/danger.svg';
 import DeleteIcon from '@/static/icons/delete.svg';
 import EditIcon from '@/static/icons/edit.svg';
 import FilterIcon from '@/static/icons/filter.svg';
@@ -80,6 +81,7 @@ export type ButtonIcon =
   | 'blockedChats'
   | 'close'
   | 'closeWithBackground'
+  | 'danger'
   | 'delete'
   | 'edit'
   | 'filter'
@@ -116,6 +118,9 @@ export const iconVariants = {
   },
   closeWithBackground: {
     backgroundImage: `url(${CloseWithBackgroundIcon})`,
+  },
+  danger: {
+    backgroundImage: `url(${DangerIcon})`,
   },
   delete: {
     backgroundImage: `url(${DeleteIcon})`,
