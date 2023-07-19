@@ -70,7 +70,7 @@ export type MessageResponse = {
   buddies: Array<Buddy>;
 };
 
-type NewMessage = {
+export type NewMessage = {
   message: MessageData;
   userId: string;
 };

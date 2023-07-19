@@ -12,14 +12,16 @@ import MessageList from './MessageList';
 import { palette } from '@/components/variables';
 
 const ActiveWindow = () => {
-  const [isLoading] = useSendMessageMutation();
-
   const chat = useAppSelector(selectActiveChat);
+
+  const [sendMessage, { isLoading: isLoadingSendMessage }] =
+    useSendMessageMutation();
+
   const isLoadingMessages = useAppSelector(
     selectIsLoadingBuddyMessages(chat?.buddyId),
   );
 
-  const loading = !!isLoading || isLoadingMessages;
+  const isLoading = isLoadingSendMessage || isLoadingMessages;
 
   return (
     chat && (
@@ -29,9 +31,15 @@ const ActiveWindow = () => {
           messageList={chat.messages}
           buddyId={chat.buddyId}
           status={chat.status}
-          isLoading={loading}
+          isLoading={isLoading}
         />
-        <MessageField chat={chat} />
+        {chat.status === 'ok' && (
+          <MessageField
+            chat={chat}
+            sendMessage={sendMessage}
+            isMessageSendLoading={isLoadingSendMessage}
+          />
+        )}
       </Container>
     )
   );

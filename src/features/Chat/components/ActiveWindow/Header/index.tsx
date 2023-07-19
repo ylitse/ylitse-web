@@ -1,5 +1,11 @@
 import { useState } from 'react';
 
+import {
+  selectMentorById,
+  useGetMentorsQuery,
+} from '@/features/MentorPage/mentorPageApi';
+import { useAppSelector } from '@/store';
+
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
 
 import styled from 'styled-components';
@@ -20,6 +26,10 @@ const Header = ({ chat }: Props) => {
   const showSearch = () => setIsSearchShown(true);
   const hideSearch = () => setIsSearchShown(false);
 
+  useGetMentorsQuery();
+
+  const mentor = useAppSelector(selectMentorById(chat.buddyId));
+
   const icons = {
     ok: <ProfileIcon color="purpleDark" />,
     archived: <img src={ArchivedIcon} />,
@@ -31,7 +41,7 @@ const Header = ({ chat }: Props) => {
       <ProfileInfo>
         {icons[chat.status]}
         <MentorName variant="h2">{chat.displayName}</MentorName>
-        <MentorBio variant="p">{chat.status}</MentorBio>
+        {mentor && <MentorBio variant="p">{mentor.statusMessage}</MentorBio>}
       </ProfileInfo>
       {isSearchShown ? (
         <Search hideSearch={hideSearch} />

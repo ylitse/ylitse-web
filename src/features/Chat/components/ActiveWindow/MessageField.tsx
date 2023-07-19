@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-  useSendMessageMutation,
-  toSendMessage,
-} from '@/features/Chat/chatPageApi';
+import { toSendMessage, NewMessage } from '@/features/Chat/chatPageApi';
 import { useAppSelector } from '@/store';
 import { selectUserId } from '@/features/Authentication/userSlice';
 
@@ -17,13 +14,13 @@ import TextInput from '@/components/TextInput';
 
 type Props = {
   chat: ChatBuddy;
+  sendMessage: (msg: NewMessage) => void;
+  isMessageSendLoading: boolean;
 };
 
-const MessageField = ({ chat }: Props) => {
+const MessageField = ({ chat, sendMessage, isMessageSendLoading }: Props) => {
   const { t } = useTranslation('chat');
   const [text, setText] = useState('');
-  const [sendMessage, { isLoading: isMessageSendLoading }] =
-    useSendMessageMutation();
   const userId = useAppSelector(selectUserId);
 
   const handleMessageSend = (buddyId: string, text: string) => {
