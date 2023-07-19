@@ -33,11 +33,13 @@ const ActiveWindow = () => {
           status={chat.status}
           isLoading={isLoading}
         />
-        <MessageField
-          chat={chat}
-          sendMessage={sendMessage}
-          isMessageSendLoading={isLoadingSendMessage}
-        />
+        {chat.status === 'ok' && (
+          <MessageField
+            chat={chat}
+            sendMessage={sendMessage}
+            isMessageSendLoading={isLoadingSendMessage}
+          />
+        )}
       </Container>
     )
   );
