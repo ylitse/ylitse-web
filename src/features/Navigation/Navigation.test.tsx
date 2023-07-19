@@ -1,5 +1,4 @@
 import Navigation from './Navigation';
-import { BrowserRouter } from 'react-router-dom';
 import { server } from '@/test/server';
 import { rest } from 'msw';
 import { renderWithProviders } from '@/test/testStore';
@@ -31,9 +30,7 @@ server.use(
 describe('<Navigation/>', () => {
   it('Can navigate to other page', async () => {
     const { getByRole, findByRole, user, store } = renderWithProviders(
-      <BrowserRouter>
-        <Navigation />
-      </BrowserRouter>,
+      <Navigation />,
     );
 
     act(() => {
