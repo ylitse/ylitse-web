@@ -149,4 +149,10 @@ export const selectFilteredMentors = () =>
     },
   );
 
+export const selectMentorById = (buddyId: string) =>
+  createSelector(
+    selectMentors,
+    mentors => mentors.data?.[buddyId] ?? undefined,
+  );
+
 export const { useGetMentorsQuery } = mentorsApi;
