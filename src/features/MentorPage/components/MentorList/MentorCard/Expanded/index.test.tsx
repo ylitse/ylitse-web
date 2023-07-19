@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react';
 import { MentorCard } from '.';
+import { renderWithProviders } from '../../../../../../test/testStore';
 
 const mentors = [
   {
@@ -54,35 +54,35 @@ const onDismiss = jest.fn();
 
 describe('<MentorListItem />', () => {
   it('Mentor List Item with mentor data is rendered correctly', () => {
-    const { queryAllByTestId } = render(
+    const { queryAllByTestId } = renderWithProviders(
       <MentorCard onDismiss={onDismiss} mentor={mentors[0]} />,
     );
     expect(queryAllByTestId('mentor-cards-container')).toBeTruthy();
   });
 
   it('Mentor List Item name in header is rendered correctly', () => {
-    const { queryAllByText } = render(
+    const { queryAllByText } = renderWithProviders(
       <MentorCard onDismiss={onDismiss} mentor={mentors[0]} />,
     );
     expect(queryAllByText('Matti Meikäläinen')).toBeTruthy();
   });
 
   it('New mentor is rendered correctly', () => {
-    const { queryAllByText } = render(
+    const { queryAllByText } = renderWithProviders(
       <MentorCard onDismiss={onDismiss} mentor={mentors[0]} />,
     );
     expect(queryAllByText('Uusi')).toBeTruthy();
   });
 
   it('Offline mentor is rendered correctly', () => {
-    const { queryAllByText } = render(
+    const { queryAllByText } = renderWithProviders(
       <MentorCard onDismiss={onDismiss} mentor={mentors[0]} />,
     );
     expect(queryAllByText('Ei tavoitettavissa').length).toBe(1);
   });
 
   it('Online mentor is rendered correctly', () => {
-    const { queryAllByText } = render(
+    const { queryAllByText } = renderWithProviders(
       <MentorCard onDismiss={onDismiss} mentor={mentors[1]} />,
     );
     expect(queryAllByText('Ei tavoitettavissa').length).toBe(0);
