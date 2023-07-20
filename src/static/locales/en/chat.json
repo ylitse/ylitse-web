@@ -1,21 +1,33 @@
 {
   "dialog": {
     "archive": {
-      "title": "Archiving conversation",
+      "confirm": "Archive conversation",
       "description": "Do you want to archive the conversation with {{buddyName}}?",
-      "confirm": "Archive conversation"
+      "title": "Archiving conversation"
     },
     "block": {
-      "title": "Blocking user",
+      "confirm": "Block user",
       "description": "Do you want to block user {{buddyName}}?",
-      "confirm": "Block user"
+      "title": "Blocking user"
+    },
+    "cancel": "Cancel",
+    "report": {
+      "confirm": "Send",
+      "description1": "Ilmianna käyttäjä, jos epäilet tai havaitset mentorin käyttävän palvelua väärin. Tällaisia tilanteita ovat esimerkiksi tilanne X ja tähän siitä lyhyt kuvaus ja tilanne Y ja vastaavasti siitä jokin lyhyt kuvaus.",
+      "description2": "Ilmiantamisen jälkeen SOS-Lapsikylän työntekijä käy keskustelun läpi palvelun väärinkäytön selvittämiseksi. Ehkä tähän olisi hyvä täsmentää myös, että poistuuko tämä keskustelu sitten käyttäjältä näkyvistä vai mitä tapahtuu.",
+      "description3": "Tähän loppuun vielä selvitys, miksi yhteystietoja kysytään ja mitä niillä tehdään, jotta käyttäjälle tulee varmempi olo siitä, että haluaa niitä yhteystietojaan meille antaa.",
+      "description4": "Tähdellä * merkityt kentät tulee täyttää.",
+      "input": {
+        "reason": "Reason for reporting *",
+        "contactInfo": "Contact information"
+      },
+      "title": "Report user"
     },
     "restore": {
-      "title": "Restoring conversation",
+      "confirm": "Restore conversation",
       "description": "Do you want to restore the conversation with {{buddyName}}?",
-      "confirm": "Restore conversation"
-    },
-    "cancel": "Cancel"
+      "title": "Restoring conversation"
+    }
   },
   "header": {
     "archive": "Archive",

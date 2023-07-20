@@ -1,21 +1,33 @@
 {
   "dialog": {
     "archive": {
-      "title": "Keskustelun arkistointi",
+      "confirm": "Arkistoi keskustelu",
       "description": "Haluatko arkistoida keskustelun käyttäjän {{buddyName}} kanssa?",
-      "confirm": "Arkistoi keskustelu"
+      "title": "Keskustelun arkistointi"
     },
     "block": {
-      "title": "Käyttäjän estäminen",
+      "confirm": "Estä käyttäjä",
       "description": "Haluatko estää käyttäjän {{buddyName}}?",
-      "confirm": "Estä käyttäjä"
+      "title": "Käyttäjän estäminen"
+    },
+    "cancel": "Peruuta",
+    "report": {
+      "confirm": "Lähetä",
+      "description1": "Ilmianna käyttäjä, jos epäilet tai havaitset mentorin käyttävän palvelua väärin. Tällaisia tilanteita ovat esimerkiksi tilanne X ja tähän siitä lyhyt kuvaus ja tilanne Y ja vastaavasti siitä jokin lyhyt kuvaus.",
+      "description2": "Ilmiantamisen jälkeen SOS-Lapsikylän työntekijä käy keskustelun läpi palvelun väärinkäytön selvittämiseksi. Ehkä tähän olisi hyvä täsmentää myös, että poistuuko tämä keskustelu sitten käyttäjältä näkyvistä vai mitä tapahtuu.",
+      "description3": "Tähän loppuun vielä selvitys, miksi yhteystietoja kysytään ja mitä niillä tehdään, jotta käyttäjälle tulee varmempi olo siitä, että haluaa niitä yhteystietojaan meille antaa.",
+      "description4": "Tähdellä * merkityt kentät tulee täyttää.",
+      "input": {
+        "reason": "Syy ilmiantoon *",
+        "contactInfo": "Yhteystietosi"
+      },
+      "title": "Ilmianna käyttäjä"
     },
     "restore": {
-      "title": "Keskustelun palauttaminen",
+      "confirm": "Palauta keskustelu",
       "description": "Haluatko palauttaa keskustelun käyttäjän {{buddyName}} kanssa?",
-      "confirm": "Palauta keskustelu"
-    },
-    "cancel": "Peruuta"
+      "title": "Keskustelun palauttaminen"
+    }
   },
   "header": {
     "archive": "Arkistoi",

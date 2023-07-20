@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
 
 import styled from 'styled-components';
+import { Button, IconButton, StatusButton } from '@/components/Buttons';
 import ConfirmationDialog, { DialogVariant } from '../ConfirmationDialog';
-import { IconButton, StatusButton } from '@/components/Buttons';
+import ReportDialog from '../ReportDialog';
 
 type Props = {
   chat: ChatBuddy;
@@ -19,10 +20,17 @@ const Buttons = ({ chat, showSearch }: Props) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const closeDialog = () => setIsDialogOpen(false);
 
-  const openDialog = (variant: DialogVariant) => {
-    setDialogVariant(variant);
-    setIsDialogOpen(true);
+  const openDialog = (variant: DialogVariant | 'report') => {
+    if (variant === 'report') {
+      setIsReportDialogOpen(true);
+    } else {
+      setDialogVariant(variant);
+      setIsDialogOpen(true);
+    }
   };
+
+  const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
+  const closeReportDialog = () => setIsReportDialogOpen(false);
 
   return (
     <>
@@ -33,6 +41,7 @@ const Buttons = ({ chat, showSearch }: Props) => {
           close={closeDialog}
         />
       )}
+      {isReportDialogOpen && <ReportDialog close={closeReportDialog} />}
       <Container>
         <IconButton variant="search" sizeInPx={24} onClick={showSearch} />
         {chat.status === 'ok' ? (
@@ -55,6 +64,16 @@ const Buttons = ({ chat, showSearch }: Props) => {
             text={t('header.restore')}
           />
         )}
+        <Button
+          onClick={() => openDialog('report')}
+          leftIcon={'danger'}
+          sizeInPx={24}
+          text={{
+            color: 'purple',
+            text: t('header.report'),
+            variant: 'link',
+          }}
+        />
       </Container>
     </>
   );
