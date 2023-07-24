@@ -13,13 +13,18 @@
     "cancel": "Cancel",
     "report": {
       "confirm": "Send",
-      "description1": "Ilmianna käyttäjä, jos epäilet tai havaitset mentorin käyttävän palvelua väärin. Tällaisia tilanteita ovat esimerkiksi tilanne X ja tähän siitä lyhyt kuvaus ja tilanne Y ja vastaavasti siitä jokin lyhyt kuvaus.",
-      "description2": "Ilmiantamisen jälkeen SOS-Lapsikylän työntekijä käy keskustelun läpi palvelun väärinkäytön selvittämiseksi. Ehkä tähän olisi hyvä täsmentää myös, että poistuuko tämä keskustelu sitten käyttäjältä näkyvistä vai mitä tapahtuu.",
-      "description3": "Tähän loppuun vielä selvitys, miksi yhteystietoja kysytään ja mitä niillä tehdään, jotta käyttäjälle tulee varmempi olo siitä, että haluaa niitä yhteystietojaan meille antaa.",
-      "description4": "Tähdellä * merkityt kentät tulee täyttää.",
+      "description1": "Report a user if you suspect or notice a mentor misusing the service. Such situations include for example situation X and a brief description of it, and situation Y and similarly a short description of it.",
+      "description2": "After the report, an SOS Children's Village worker goes through the conversation to investigate the misuse of the service. It might be good to specify here also, whether this conversation then disappears from the user's view or what happens.",
+      "description3": "At the end here, an explanation of why we ask for contact information and what is done with it, so that the user feels more confident about wanting to give us their contact details.",
+      "description4": "Fields marked with a star * are required.",
       "input": {
         "reason": "Reason for reporting *",
         "contactInfo": "Contact information"
+      },
+      "success": {
+        "confirm": "Ok",
+        "description": "An SOS Children's Village worker goes through the conversation and this is further explanation of what happens next.",
+        "title": "User reported"
       },
       "title": "Report user"
     },

@@ -21,6 +21,11 @@
         "reason": "Syy ilmiantoon *",
         "contactInfo": "Yhteystietosi"
       },
+      "success": {
+        "confirm": "Ok",
+        "description": "SOS-Lapsikylän työntekijä käy keskustelun läpi ja tähän vielä selitettynä, mitä seuraavaksi tapahtuu.",
+        "title": "Käyttäjä ilmiannettiin"
+      },
       "title": "Ilmianna käyttäjä"
     },
     "restore": {
