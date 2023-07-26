@@ -13,6 +13,7 @@ type TextInputProps<T extends ElementType> = {
   variant?: TextInputVariant;
   color?: Color;
   className?: string;
+  id?: string;
   leftIcon?: {
     variant: ButtonIcon;
     sizeInPx: number;
@@ -30,6 +31,7 @@ export const TextInput = <T extends ElementType = TextInputElement>({
   variant = 'input',
   color = 'blueDark',
   className,
+  id,
   leftIcon,
   rightButton,
   onChange,
@@ -47,6 +49,7 @@ export const TextInput = <T extends ElementType = TextInputElement>({
       )}
       <TextInputElement
         className={className}
+        id={id}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         style={{ ...variantStyles, ...variantColor }}

@@ -11,9 +11,10 @@ export type TextVariant =
   | 'h3'
   | 'link'
   | 'linkHeader'
+  | 'label'
   | 'logo'
   | 'p';
-export type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'p' | 'span';
+export type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'label' | 'p' | 'span';
 
 type TextProp = {
   element: TextElement;
@@ -88,6 +89,16 @@ export const variants: Record<TextVariant, TextProp> = {
       fontStyle: 'normal',
       fontWeight: '600',
       lineHeight: '1.6rem',
+    },
+  },
+  label: {
+    element: 'label',
+    styles: {
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: '600',
+      lineHeight: '1.5rem',
     },
   },
   link: {

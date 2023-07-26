@@ -2,9 +2,9 @@ import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
 import { IconButton, TextButton } from '@/components/Buttons';
-import IconSuccess from '@/static/icons/success.svg';
 import LabeledInput from '@/components/LabeledInput';
 import { palette } from '@/components/variables';
+import ReportSuccessDialog from './ReportSuccessDialog';
 import Text from '@/components/Text';
 import { useState } from 'react';
 
@@ -16,6 +16,7 @@ const ReportDialog = ({ close }: Props) => {
   const { t } = useTranslation('chat');
 
   const sendReportRequest = () => {
+    console.log('Sending report request to server');
     console.log(reportReason);
     console.log(contactInfo);
     setIsReported(true);
@@ -29,23 +30,7 @@ const ReportDialog = ({ close }: Props) => {
     <>
       <Overlay />
       {isReported ? (
-        <SuccessContainer borderColor={palette.blue}>
-          <SuccessIcon src={IconSuccess} />
-          <SuccessCloseButton
-            variant="closeWithBackground"
-            sizeInPx={46}
-            onClick={close}
-          />
-          <SuccessTitle variant="h3">
-            {t(`dialog.report.success.title`)}
-          </SuccessTitle>
-          <Text>{t(`dialog.report.success.description`)}</Text>
-          <ButtonContainer>
-            <OkButton onClick={close} variant="dark">
-              {t(`dialog.report.success.confirm`)}
-            </OkButton>
-          </ButtonContainer>
-        </SuccessContainer>
+        <ReportSuccessDialog close={close} />
       ) : (
         <Container>
           <CloseButton
@@ -56,28 +41,30 @@ const ReportDialog = ({ close }: Props) => {
           <Title color="white" variant="h1">
             {t('dialog.report.title')}
           </Title>
-          <Paragraph>{t('dialog.report.description1')}</Paragraph>
-          <Paragraph>{t('dialog.report.description2')}</Paragraph>
-          <Paragraph>{t('dialog.report.description3')}</Paragraph>
-          <Paragraph>{t('dialog.report.description4')}</Paragraph>
-          <LabeledInput
-            label={t('dialog.report.input.reason')}
-            onChange={setReportReason}
-            value={reportReason}
-          />
-          <LabeledInput
-            label={t('dialog.report.input.contactInfo')}
-            onChange={setContactInfo}
-            value={contactInfo}
-          />
-          <ButtonContainer>
-            <TextButton onClick={close} variant="light">
-              {t('dialog.cancel')}
-            </TextButton>
-            <TextButton onClick={sendReportRequest} variant="dark">
-              {t('dialog.report.confirm')}
-            </TextButton>
-          </ButtonContainer>
+          <Content>
+            <Paragraph>{t('dialog.report.description1')}</Paragraph>
+            <Paragraph>{t('dialog.report.description2')}</Paragraph>
+            <Paragraph>{t('dialog.report.description3')}</Paragraph>
+            <Paragraph>{t('dialog.report.description4')}</Paragraph>
+            <LabeledInput
+              label={t('dialog.report.input.reason')}
+              onChange={setReportReason}
+              value={reportReason}
+            />
+            <LabeledInput
+              label={t('dialog.report.input.contactInfo')}
+              onChange={setContactInfo}
+              value={contactInfo}
+            />
+            <ButtonContainerWithMargin>
+              <ActionButton onClick={close} variant="light">
+                {t('dialog.cancel')}
+              </ActionButton>
+              <ActionButton onClick={sendReportRequest} variant="dark">
+                {t('dialog.report.confirm')}
+              </ActionButton>
+            </ButtonContainerWithMargin>
+          </Content>
         </Container>
       )}
     </>
@@ -94,47 +81,6 @@ const Overlay = styled.div`
   z-index: 100;
 `;
 
-const SuccessContainer = styled.div<{ borderColor: string }>`
-  background-color: ${palette.white};
-  border-left: ${({ borderColor }) => `110px solid ${borderColor}`};
-  border-radius: 10px;
-  box-sizing: border-box;
-  height: 267px;
-  left: 50%;
-  padding: 1rem 3rem;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 687px;
-  z-index: 200;
-`;
-
-const SuccessIcon = styled.img`
-  left: -79px;
-  position: absolute;
-  top: 56px;
-`;
-
-const SuccessCloseButton = styled(IconButton)`
-  position: absolute;
-  right: 13px;
-  top: 13px;
-`;
-
-const SuccessTitle = styled(Text)`
-  margin-bottom: 0;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 1.75rem;
-  justify-content: center;
-`;
-
-const OkButton = styled(TextButton)`
-  width: 113px;
-`;
-
 const Container = styled.div`
   align-items: center;
   background-color: ${palette.white};
@@ -143,13 +89,12 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 905;
+  height: 905px;
   left: 50%;
-  padding: 3rem 5rem;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 667x;
+  width: 667px;
   z-index: 200;
 `;
 
@@ -164,9 +109,23 @@ const Title = styled(Text)`
   top: -100px;
 `;
 
+const Content = styled.div`
+  padding: 1.5rem 5rem;
+`;
+
 const Paragraph = styled(Text)`
   margin-bottom: 1rem;
   margin-top: 0;
+`;
+
+const ButtonContainerWithMargin = styled.div`
+  display: flex;
+  gap: 3rem;
+  margin-top: 2.5rem;
+`;
+
+const ActionButton = styled(TextButton)`
+  flex-grow: 1;
 `;
 
 export default ReportDialog;

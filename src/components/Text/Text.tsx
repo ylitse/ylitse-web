@@ -9,6 +9,7 @@ type Props = {
   color?: Color;
   className?: string;
   children: React.ReactNode;
+  inputId?: string;
 };
 
 export const Text: React.FC<Props> = ({
@@ -16,6 +17,7 @@ export const Text: React.FC<Props> = ({
   color = 'blueDark',
   className,
   children,
+  inputId,
 }) => {
   const TextElement = variants[variant].element;
   const variantStyles = variants[variant].styles;
@@ -23,6 +25,7 @@ export const Text: React.FC<Props> = ({
 
   return (
     <TextElement
+      htmlFor={inputId}
       className={className}
       style={{ ...commonStyles, ...variantStyles, ...variantColor }}
     >
