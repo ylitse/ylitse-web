@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
+import type { ConfirmationDialogVariant } from '../Dialogs';
 
 import styled from 'styled-components';
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
-import ConfirmationDialog, { DialogVariant } from '../ConfirmationDialog';
-import ReportDialog from '../ReportDialog';
+import { ConfirmationDialog, ReportDialog } from '../Dialogs';
 
 type Props = {
   chat: ChatBuddy;
@@ -16,11 +16,12 @@ type Props = {
 const Buttons = ({ chat, showSearch }: Props) => {
   const { t } = useTranslation('chat');
 
-  const [dialogVariant, setDialogVariant] = useState<DialogVariant>('archive');
+  const [dialogVariant, setDialogVariant] =
+    useState<ConfirmationDialogVariant>('archive');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const closeDialog = () => setIsDialogOpen(false);
 
-  const openDialog = (variant: DialogVariant | 'report') => {
+  const openDialog = (variant: ConfirmationDialogVariant | 'report') => {
     if (variant === 'report') {
       setIsReportDialogOpen(true);
     } else {
