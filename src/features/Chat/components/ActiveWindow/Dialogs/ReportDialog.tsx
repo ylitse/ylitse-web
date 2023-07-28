@@ -1,3 +1,6 @@
+import { selectUserId } from '@/features/Authentication/userSlice';
+import { useAppSelector } from '@/store';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
@@ -6,20 +9,33 @@ import LabeledInput from '@/components/LabeledInput';
 import { palette } from '@/components/variables';
 import ReportSuccessDialog from './ReportSuccessDialog';
 import Text from '@/components/Text';
-import { useState } from 'react';
 
 type Props = {
+  buddyId: string;
   close: () => void;
 };
 
-const ReportDialog = ({ close }: Props) => {
+const ReportDialog = ({ buddyId, close }: Props) => {
   const { t } = useTranslation('chat');
 
-  const sendReportRequest = () => {
-    console.log('Sending report request to server');
-    console.log(reportReason);
-    console.log(contactInfo);
-    setIsReported(true);
+  const userId = useAppSelector(selectUserId);
+
+  const sendReportRequest = async () => {
+    fetch('/api/report', {
+      method: 'POST',
+      body: JSON.stringify({
+        contact_field: contactInfo,
+        report_reason: reportReason,
+        reported_user_id: buddyId,
+        reporter_user_id: userId,
+      }),
+    })
+      .then(response => {
+        if (response.status == 200) setIsReported(true);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
 
   const [isReported, setIsReported] = useState(false);

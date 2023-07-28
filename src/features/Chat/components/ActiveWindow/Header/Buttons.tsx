@@ -42,7 +42,9 @@ const Buttons = ({ chat, showSearch }: Props) => {
           close={closeDialog}
         />
       )}
-      {isReportDialogOpen && <ReportDialog close={closeReportDialog} />}
+      {isReportDialogOpen && (
+        <ReportDialog buddyId={chat.buddyId} close={closeReportDialog} />
+      )}
       <Container>
         <IconButton variant="search" sizeInPx={24} onClick={showSearch} />
         {chat.status === 'ok' ? (
