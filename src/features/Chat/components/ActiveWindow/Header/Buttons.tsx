@@ -19,18 +19,15 @@ const Buttons = ({ chat, showSearch }: Props) => {
   const [dialogVariant, setDialogVariant] =
     useState<ConfirmationDialogVariant>('archive');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const openDialog = (variant: ConfirmationDialogVariant) => {
+    setDialogVariant(variant);
+    setIsDialogOpen(true);
+  };
   const closeDialog = () => setIsDialogOpen(false);
 
-  const openDialog = (variant: ConfirmationDialogVariant | 'report') => {
-    if (variant === 'report') {
-      setIsReportDialogOpen(true);
-    } else {
-      setDialogVariant(variant);
-      setIsDialogOpen(true);
-    }
-  };
-
   const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
+  const openReportDialog = () => setIsReportDialogOpen(true);
   const closeReportDialog = () => setIsReportDialogOpen(false);
 
   return (
@@ -68,7 +65,7 @@ const Buttons = ({ chat, showSearch }: Props) => {
           />
         )}
         <Button
-          onClick={() => openDialog('report')}
+          onClick={() => openReportDialog()}
           leftIcon={'danger'}
           sizeInPx={24}
           text={{

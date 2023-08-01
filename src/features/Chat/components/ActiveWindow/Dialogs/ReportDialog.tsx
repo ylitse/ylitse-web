@@ -1,7 +1,8 @@
-import { selectUserId } from '@/features/Authentication/userSlice';
-import { useAppSelector } from '@/store';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { selectUserId } from '@/features/Authentication/userSlice';
+import { useAppSelector } from '@/store';
 
 import styled from 'styled-components';
 import { IconButton, TextButton } from '@/components/Buttons';
