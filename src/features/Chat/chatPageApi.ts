@@ -86,6 +86,13 @@ type PutStatus = {
   userId: string;
 };
 
+type reportMessage = {
+  buddyId: string;
+  contactInfo: string;
+  reportReason: string;
+  userId: string;
+};
+
 const toQueryString = (params: PollingParam) => {
   const maxMessagesAtOnce = 10;
 
@@ -153,6 +160,18 @@ export const chatApi = createApi({
         url: `users/${userId}/contacts/${buddyId}`,
         method: 'put',
         body: { status },
+      }),
+    }),
+    reportMentor: builder.mutation<unknown, reportMessage>({
+      query: ({ buddyId, contactInfo, reportReason, userId }) => ({
+        url: `reports`,
+        method: 'post',
+        body: {
+          contact_field: contactInfo,
+          report_reason: reportReason,
+          reported_user_id: buddyId,
+          reporter_user_id: userId,
+        },
       }),
     }),
   }),
@@ -241,4 +260,5 @@ export const {
   useSendMessageMutation,
   useMarkSeenMutation,
   useUpdateStatusMutation,
+  useReportMentorMutation,
 } = chatApi;

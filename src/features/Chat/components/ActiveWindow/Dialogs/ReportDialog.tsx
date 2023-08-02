@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { selectUserId } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useReportMentorMutation } from '@/features/Chat/chatPageApi';
 
 import styled from 'styled-components';
 import { IconButton, TextButton } from '@/components/Buttons';
@@ -20,23 +21,17 @@ const ReportDialog = ({ buddyId, close }: Props) => {
   const { t } = useTranslation('chat');
 
   const userId = useAppSelector(selectUserId);
+  const [reportMentor, { isSuccess }] = useReportMentorMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsReported(true);
+    }
+  }, [isSuccess]);
 
   const sendReportRequest = async () => {
-    fetch('/api/report', {
-      method: 'POST',
-      body: JSON.stringify({
-        contact_field: contactInfo,
-        report_reason: reportReason,
-        reported_user_id: buddyId,
-        reporter_user_id: userId,
-      }),
-    })
-      .then(response => {
-        if (response.status == 200) setIsReported(true);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    if (!userId) return;
+    reportMentor({ buddyId, contactInfo, reportReason, userId });
   };
 
   const [isReported, setIsReported] = useState(false);
