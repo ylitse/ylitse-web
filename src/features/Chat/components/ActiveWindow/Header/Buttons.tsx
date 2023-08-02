@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
+import type { ConfirmationDialogVariant } from '../Dialogs';
 
 import styled from 'styled-components';
-import ConfirmationDialog, { DialogVariant } from '../ConfirmationDialog';
-import { IconButton, StatusButton } from '@/components/Buttons';
+import { Button, IconButton, StatusButton } from '@/components/Buttons';
+import { ConfirmationDialog, ReportDialog } from '../Dialogs';
 
 type Props = {
   chat: ChatBuddy;
@@ -15,14 +16,19 @@ type Props = {
 const Buttons = ({ chat, showSearch }: Props) => {
   const { t } = useTranslation('chat');
 
-  const [dialogVariant, setDialogVariant] = useState<DialogVariant>('archive');
+  const [dialogVariant, setDialogVariant] =
+    useState<ConfirmationDialogVariant>('archive');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const closeDialog = () => setIsDialogOpen(false);
 
-  const openDialog = (variant: DialogVariant) => {
+  const openDialog = (variant: ConfirmationDialogVariant) => {
     setDialogVariant(variant);
     setIsDialogOpen(true);
   };
+  const closeDialog = () => setIsDialogOpen(false);
+
+  const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
+  const openReportDialog = () => setIsReportDialogOpen(true);
+  const closeReportDialog = () => setIsReportDialogOpen(false);
 
   return (
     <>
@@ -32,6 +38,9 @@ const Buttons = ({ chat, showSearch }: Props) => {
           chat={chat}
           close={closeDialog}
         />
+      )}
+      {isReportDialogOpen && (
+        <ReportDialog buddyId={chat.buddyId} close={closeReportDialog} />
       )}
       <Container>
         <IconButton variant="search" sizeInPx={24} onClick={showSearch} />
@@ -55,6 +64,16 @@ const Buttons = ({ chat, showSearch }: Props) => {
             text={t('header.restore')}
           />
         )}
+        <Button
+          onClick={() => openReportDialog()}
+          leftIcon={'danger'}
+          sizeInPx={24}
+          text={{
+            color: 'purple',
+            text: t('header.report'),
+            variant: 'link',
+          }}
+        />
       </Container>
     </>
   );

@@ -8,16 +8,16 @@ import {
 import { useAppSelector } from '@/store';
 import { selectUserId } from '@/features/Authentication/userSlice';
 
+import type { ConfirmationDialogVariant } from '.';
+
 import styled from 'styled-components';
 import { IconButton, TextButton } from '@/components/Buttons';
 import IconWarning from '@/static/icons/warning.svg';
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
-export type DialogVariant = 'archive' | 'block' | 'restore';
-
 type Props = {
-  variant: DialogVariant;
+  variant: ConfirmationDialogVariant;
   chat: Buddy;
   close: () => void;
 };
@@ -29,7 +29,7 @@ const ConfirmationDialog = ({ variant, chat, close }: Props) => {
   const userId = useAppSelector(selectUserId);
 
   const variants: Record<
-    DialogVariant,
+    ConfirmationDialogVariant,
     { borderColor: string; targetFolder: ChatFolder }
   > = {
     archive: { borderColor: palette.orange, targetFolder: 'archived' },

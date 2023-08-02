@@ -1,9 +1,9 @@
-import { useSendMessageMutation } from '@/features/Chat/chatPageApi';
 import { useAppSelector } from '@/store';
 import {
   selectActiveChat,
   selectIsLoadingBuddyMessages,
 } from '@/features/Chat/chatSlice';
+import { useSendMessageMutation } from '@/features/Chat/chatPageApi';
 
 import styled from 'styled-components';
 import Header from './Header';
