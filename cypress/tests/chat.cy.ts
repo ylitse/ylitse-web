@@ -1,5 +1,6 @@
 describe('chat', () => {
   before(() => {
+    cy.createMentor('chatTestMentor');
     cy.registerUser('chatTestUsername', 'examplePassword');
   });
 
