@@ -2,6 +2,7 @@
 /// <reference types="cypress" />
 
 import { createMentor } from './helpers';
+import type { Mentor } from './helpers';
 
 Cypress.Commands.add('switchLanguage', (language: string): void => {
   if (document.documentElement.lang !== language) {
@@ -43,19 +44,19 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('createMentor', (name: string): void => {
-  const mentor = {
+  const mentor: Mentor = {
     password: 'password',
     role: 'mentor',
     login_name: name,
-    email: `${name}@mentor.mentor`,
-    phone: '555-5678',
+    email: `${name}@mentor.com`,
+    phone: '123-456',
     display_name: name,
     birth_year: 1990,
     gender: 'female',
-    languages: ['se', 'en'],
-    region: 'Tampesteri',
+    languages: ['fi', 'en'],
+    region: 'HEL',
     skills: ['speaking', 'helping', 'empathy'],
-    story: `${name} is passionate about mentoring.`,
+    story: `Passionate about helping people.`,
     communication_channels: ['phone', 'chat'],
   };
 
@@ -68,5 +69,6 @@ declare namespace Cypress {
     fillInput(id: string, value: string): Chainable<void>;
     registerUser(username: string, password: string): Chainable<void>;
     loginUser(username: string, password: string): Chainable<void>;
+    createMentor(name: string): Chainable<void>;
   }
 }

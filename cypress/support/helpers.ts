@@ -1,6 +1,28 @@
-const API_URL = '<YOUR_API_URL_HERE>'; // Please set the correct API URL
-const API_USER = '<YOUR_API_USER_HERE>'; // Replace with your actual value
-const API_PASS = '<YOUR_API_PASSWORD_HERE>'; // Replace with your actual value
+const API_URL = '/api';
+const ADMIN_USER = Cypress.env('ADMIN_USER');
+const ADMIN_PASSWORD = Cypress.env('ADMIN_PASSWORD');
+
+type CommunicationChannels = 'phone' | 'email' | 'chat';
+type Gender = 'female' | 'male' | 'other';
+type Language = 'fi' | 'se' | 'en';
+type Region = 'HEL' | 'Tampesteri' | 'other';
+type Role = 'mentor' | 'mentee';
+
+export type Mentor = {
+  password: string;
+  role: Role;
+  login_name: string;
+  email: string;
+  phone: string;
+  display_name: string;
+  birth_year: number;
+  gender: Gender;
+  languages: Language[];
+  region: Region;
+  skills: string[];
+  story: string;
+  communication_channels: CommunicationChannels[];
+};
 
 const apiAccessToken = async (
   loginName: string,
@@ -28,30 +50,8 @@ const apiAuthHeader = (accessToken: string): Headers => {
 };
 
 const apiAdminAuthHeaders = async (): Promise<Headers> => {
-  const adminAccessToken = await apiAccessToken(API_USER, API_PASS);
+  const adminAccessToken = await apiAccessToken(ADMIN_USER, ADMIN_PASSWORD);
   return apiAuthHeader(adminAccessToken);
-};
-
-type CommunicationChannels = 'phone' | 'email' | 'chat';
-type Language = 'fi' | 'se' | 'en';
-type Gender = 'female' | 'male' | 'other';
-type Region = 'HEL' | 'Tampesteri' | 'other';
-type Role = 'mentor' | 'mentee';
-
-type Mentor = {
-  password: string;
-  role: Role;
-  login_name: string;
-  email: string;
-  phone: string;
-  display_name: string;
-  birth_year: number;
-  gender: Gender;
-  languages: Language[];
-  region: Region;
-  skills: string[];
-  story: string;
-  communication_channels: CommunicationChannels[];
 };
 
 export const createMentor = async (mentor: Mentor) => {
