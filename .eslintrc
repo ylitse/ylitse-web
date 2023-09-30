@@ -9,7 +9,8 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "overrides": [
@@ -33,6 +34,7 @@
     "better-styled-components"
   ],
   "rules": {
+    "prettier/prettier": "error",
     // Rules disabled on purpose
     "react-hooks/exhaustive-deps": ["off"],
     "react/prop-types": ["off"],
@@ -50,8 +52,7 @@
     ],
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-unused-vars": "error",
-    "better-styled-components/sort-declarations-alphabetically": "error",
-    "semi": ["error", "always"]
+    "better-styled-components/sort-declarations-alphabetically": "error"
   },
   "settings": {
     "react": {

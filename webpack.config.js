@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const webpack = require('webpack'); 
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -75,20 +75,22 @@ module.exports = {
       template: path.join(__dirname, 'src', 'index.html'),
     }),
 
-    new CopyWebpackPlugin({ patterns: [
-      {
-        from: '**/*',
-        context: path.resolve(__dirname, 'src', 'static'),
-      },
-      {
-        from: 'login/**/*',
-        context: path.resolve(__dirname, 'src'),
-      },
-      {
-        from: 'register/**/*',
-        context: path.resolve(__dirname, 'src'),
-      },
-    ]}),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: '**/*',
+          context: path.resolve(__dirname, 'src', 'static'),
+        },
+        {
+          from: 'login/**/*',
+          context: path.resolve(__dirname, 'src'),
+        },
+        {
+          from: 'register/**/*',
+          context: path.resolve(__dirname, 'src'),
+        },
+      ],
+    }),
   ],
   resolve: {
     alias: {
