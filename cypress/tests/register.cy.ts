@@ -21,7 +21,7 @@ describe('register', () => {
   };
 
   beforeEach(() => {
-    cy.visit('/register');
+    cy.visit('/register/');
     cy.switchLanguage('fi');
   });
 

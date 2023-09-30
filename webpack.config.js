@@ -13,7 +13,7 @@ const redirect = (res, loc) => {
 const checkAuth = (res, req) => {
   if (req.url !== '/login' && [401].includes(res.statusCode)) {
     // not logged in, redirect to login page
-    redirect(res, '/login');
+    redirect(res, '/login/');
   }
 };
 
@@ -23,7 +23,9 @@ const DEV_API = process.env.DEV_API
 
 module.exports = {
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      verbose: true,
+    },
     proxy: {
       '/api/**': {
         changeOrigin: true,
@@ -52,19 +54,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'css-loader',
-          },
-        ],
+        use: 'css-loader',
       },
       {
         test: /\.(png|jp(e*)g|svg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
+        use: 'file-loader',
       },
     ],
   },

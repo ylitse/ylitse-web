@@ -19,7 +19,7 @@ Cypress.Commands.add(
       cy.get(`input[id="${input}"]`).parent().click();
     };
 
-    cy.visit('/register');
+    cy.visit('/register/');
     cy.fillInput('username', username);
     cy.fillInput('password', password);
     cy.fillInput('password-confirmation', password);
@@ -33,7 +33,7 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   'loginUser',
   (username: string, password: string): void => {
-    cy.visit('/login');
+    cy.visit('/login/');
     cy.fillInput('username', username);
     cy.fillInput('password', password);
     cy.get('button[id="submit"]').click();

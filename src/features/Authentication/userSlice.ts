@@ -27,7 +27,7 @@ export const user = createSlice({
         return { userId: nextUserId };
       })
       .addCase(fetchMyUser.rejected, () => {
-        window.location.href = '/login';
+        window.location.href = '/login/';
       });
   },
 });

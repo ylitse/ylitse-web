@@ -75,13 +75,14 @@ Project uses [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hook
 1. Run tests `npm run test`
 1. Start the development server `npm run start` or use the dev API `DEV_API="https://dev.ylitse.fi/api" npm run start`
 
-## e2e tests
+## End-to-end tests
 
-Locally:
+Run locally:
 
 1. Start Ylitse-API `YLITSE_POSTGRES_DATA= make run-gunicorn`
 1. Start dev server `npm run start`
-1. Run cypress `CYPRESS_BASE_URL=http://localhost:8081 npx cypress open`
+1. Run cypress `npm run e2e` or interactively
+   `CYPRESS_BASE_URL=http://localhost:8082 npx cypress open`
 
 The API needs to be restarted every time the tests are run to clear the database.
 

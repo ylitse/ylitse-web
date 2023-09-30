@@ -12,7 +12,7 @@ describe('login', () => {
   });
 
   beforeEach(() => {
-    cy.visit('/login');
+    cy.visit('/login/');
     cy.switchLanguage('fi');
   });
 
