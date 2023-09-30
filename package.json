@@ -9,10 +9,11 @@
     "eslint": "eslint .",
     "lint": "tsc && npm run eslint:check && npm run eslint",
     "test:unit": "jest",
-    "test:e2e": "CYPRESS_BASE_URL=http://localhost:8082 npx cypress run",
+    "test:e2e": "npm run wait && cypress run",
     "test": "npm run test:unit && npm run test:e2e",
     "build": "webpack",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "wait": "wait-on http://localhost:8080/version && wait-on http://localhost:8082"
   },
   "author": "",
   "license": "AGPL-3.0-or-later",
@@ -67,7 +68,8 @@
     "react-test-renderer": "^18.2.0",
     "ts-loader": "^8.4.0",
     "typescript": "^4.7.4",
-    "webpack": "^5.73.0",
+    "wait-on": "^7.0.1",
+    "webpack": "^5.76.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.2"
   },

@@ -12,9 +12,11 @@ jobs:
 
   deploy:
     runs-on: ubuntu-22.04
+    needs: test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Deploy
-        run: |
-          curl -X POST -F token=${{ secrets.DEPLOYMENT_TOKEN }} -F ref=master \
-            -F "variables[SERVICE]=webui2" ${{ secrets.DEPLOYMENT_URL }}
+        run: >
+          curl --fail-with-body -X POST -F token=${{ secrets.DEPLOYMENT_TOKEN }}
+          -F ref=master -F "variables[SERVICE]=webui2"
+          ${{ secrets.DEPLOYMENT_URL }}

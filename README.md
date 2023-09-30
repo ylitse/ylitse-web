@@ -81,8 +81,7 @@ Run locally:
 
 1. Start Ylitse-API `YLITSE_POSTGRES_DATA= make run-gunicorn`
 1. Start dev server `npm run start`
-1. Run cypress `npm run e2e` or interactively
-   `CYPRESS_BASE_URL=http://localhost:8082 npx cypress open`
+1. Run cypress `npm run test:e2e` or interactively `npx cypress open`
 
 The API needs to be restarted every time the tests are run to clear the database.
 

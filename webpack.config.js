@@ -23,6 +23,7 @@ const DEV_API = process.env.DEV_API
 
 module.exports = {
   devServer: {
+    port: 8082,
     historyApiFallback: {
       verbose: true,
     },
