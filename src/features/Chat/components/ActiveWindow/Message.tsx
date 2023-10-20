@@ -11,7 +11,7 @@ import {
 } from '@/features/Chat/chatPageApi';
 
 import styled from 'styled-components';
-import { messageBackgroundColors } from '@/components/variables';
+import { messageColors } from '@/features/Chat/constants';
 import Text from '@/components/Text';
 
 const toReadable = (timestamp: string) =>
@@ -43,7 +43,7 @@ export const Message = ({ folder, buddyId, message }: Props) => {
   }, []);
 
   const background =
-    messageBackgroundColors[folder][message.isSent ? 'sent' : 'received'];
+    messageColors[folder][message.isSent ? 'sent' : 'received'];
 
   return (
     <Container isSent={message.isSent}>

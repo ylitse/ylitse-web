@@ -4,7 +4,8 @@ import { selectBuddyMessages, setActiveChat } from '@/features/Chat/chatSlice';
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
 
 import styled, { css } from 'styled-components';
-import { folderBackgroundColors, palette } from '@/components/variables';
+import { folderColors } from '@/features/Chat/constants';
+import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import Text from '@/components/Text';
 import Spinner from '@/components/Spinner';
@@ -31,7 +32,7 @@ export const MenuItem = ({ buddy }: Props) => {
   return (
     <Row
       active={buddy.buddyId === activeChatId}
-      background={folderBackgroundColors[activeFolder]}
+      background={folderColors[activeFolder]}
       onClick={openChat}
     >
       <ProfileIcon

@@ -24,22 +24,11 @@ export const palette = {
   purpleMid: '#5C33FF',
   purplePale: '#E5E4FF',
   redDark: '#972232',
+  redLight: '#F1C9C6',
   redSalmon: '#EBA9A9',
   redWhite: '#F9E5E4',
   white: '#FFFFFF',
   whiteOpacity: 'rgba(255, 255, 255, 0.5)',
-};
-
-export const folderBackgroundColors = {
-  ok: { active: palette.blue2, hover: palette.blueWhite },
-  archived: { active: palette.orange, hover: palette.orangeWhite },
-  banned: { active: palette.redSalmon, hover: palette.redWhite },
-};
-
-export const messageBackgroundColors = {
-  ok: { received: palette.blueWhite, sent: palette.blueLight },
-  archived: { received: palette.orangeWhite, sent: palette.orangeLight },
-  banned: { received: palette.redWhite, sent: palette.redSalmon },
 };
 
 export const OUTER_VERTICAL_MARGIN = '6vh';
