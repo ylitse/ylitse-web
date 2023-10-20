@@ -53,7 +53,6 @@ const InnerContainer = styled.div`
   gap: 22px;
   height: ${CONTENT_HEIGHT};
   justify-content: center;
-  min-height: 400px;
 `;
 
 export default Chat;

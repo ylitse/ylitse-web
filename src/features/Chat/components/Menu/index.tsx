@@ -3,6 +3,7 @@ import { selectChats } from '@/features/Chat/chatSlice';
 import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
+import { CHAT_MENU_WIDTH, CHAT_MIN_HEIGHT } from '@/features/Chat/constants';
 import FolderLink from './FolderLink';
 import Header from './Header';
 import { palette } from '@/components/variables';
@@ -42,9 +43,10 @@ const Menu = () => {
 const Container = styled.div`
   background-color: ${palette.white};
   border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
-  flex: 0 0 400px;
+  flex: none;
+  min-height: ${CHAT_MIN_HEIGHT};
   overflow: auto;
+  width: ${CHAT_MENU_WIDTH};
 `;
 
 const EmptyText = styled(Text)`

@@ -6,6 +6,10 @@ import {
 import { useSendMessageMutation } from '@/features/Chat/chatPageApi';
 
 import styled from 'styled-components';
+import {
+  CHAT_MIN_HEIGHT,
+  CHAT_WINDOW_MIN_WIDTH,
+} from '@/features/Chat/constants';
 import Header from './Header';
 import MessageField from './MessageField';
 import MessageList from './MessageList';
@@ -52,6 +56,8 @@ const Container = styled.div`
   flex: 1 1 auto;
   flex-direction: column;
   height: 100%;
+  min-height: ${CHAT_MIN_HEIGHT};
+  min-width: ${CHAT_WINDOW_MIN_WIDTH};
 `;
 
 export default ActiveWindow;

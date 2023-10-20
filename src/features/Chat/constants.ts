@@ -29,3 +29,9 @@ export const messageColors = {
     sent: palette.redSalmon,
   },
 };
+
+export const CHAT_MIN_HEIGHT = '600px';
+export const CHAT_MENU_WIDTH = '400px';
+export const CHAT_WINDOW_MIN_WIDTH = '800px';
+export const DIALOG_WIDTH = '687px';
+export const ROW_HEIGHT = '80px';

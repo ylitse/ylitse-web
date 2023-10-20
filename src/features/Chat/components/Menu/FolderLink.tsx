@@ -7,6 +7,7 @@ import type { ChatFolder } from '@/features/Chat/chatPageApi';
 import styled, { css } from 'styled-components';
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
 import { palette } from '@/components/variables';
+import { ROW_HEIGHT } from '@/features/Chat/constants';
 import Text from '@/components/Text';
 
 type Props = {
@@ -52,7 +53,7 @@ const Row = styled.div`
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  height: 80px;
+  height: ${ROW_HEIGHT};
   padding-left: 40px;
 
   &:hover {

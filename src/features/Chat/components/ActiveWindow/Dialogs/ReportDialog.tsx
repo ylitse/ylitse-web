@@ -6,6 +6,7 @@ import { useAppSelector } from '@/store';
 import { useReportMentorMutation } from '@/features/Chat/chatPageApi';
 
 import styled from 'styled-components';
+import { DIALOG_WIDTH } from '@/features/Chat/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import { palette } from '@/components/variables';
@@ -106,7 +107,7 @@ const Container = styled.div`
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 667px;
+  width: ${DIALOG_WIDTH};
   z-index: 200;
 `;
 

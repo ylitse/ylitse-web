@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import IconButton from '@/components/Buttons/IconButton';
 import { palette } from '@/components/variables';
+import { ROW_HEIGHT } from '@/features/Chat/constants';
 import Text from '@/components/Text';
 
 type Props = {
@@ -44,7 +45,7 @@ const Row = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  height: 80px;
+  height: ${ROW_HEIGHT};
   padding-left: 40px;
 `;
 

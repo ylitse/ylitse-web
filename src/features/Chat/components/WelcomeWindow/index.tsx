@@ -2,6 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import styled, { css } from 'styled-components';
+import {
+  CHAT_MIN_HEIGHT,
+  CHAT_WINDOW_MIN_WIDTH,
+} from '@/features/Chat/constants';
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
@@ -11,14 +15,14 @@ const WelcomeWindow = () => {
   const { t } = useTranslation('chat');
 
   return (
-    <div>
-      <TopContainer>
+    <Container>
+      <UpperPart>
         <WelcomeText isHeader variant="h2">
           {t('welcome.upper.title')}
         </WelcomeText>
         <WelcomeText>{t('welcome.upper.description')}</WelcomeText>
-      </TopContainer>
-      <BottomContainer>
+      </UpperPart>
+      <LowerPart>
         <WelcomeText isHeader variant="h2">
           {t('welcome.lower.title')}
         </WelcomeText>
@@ -26,12 +30,17 @@ const WelcomeWindow = () => {
         <SearchButton onClick={() => navigate('/mentors')} size="large">
           {t('welcome.lower.button')}
         </SearchButton>
-      </BottomContainer>
-    </div>
+      </LowerPart>
+    </Container>
   );
 };
 
-const TopContainer = styled.div`
+const Container = styled.div`
+  min-height: ${CHAT_MIN_HEIGHT};
+  min-width: ${CHAT_WINDOW_MIN_WIDTH};
+`;
+
+const UpperPart = styled.div`
   background-color: ${palette.white};
   border-radius: 10px 10px 0 0;
   display: flex;
@@ -40,7 +49,7 @@ const TopContainer = styled.div`
   justify-content: center;
 `;
 
-const BottomContainer = styled.div`
+const LowerPart = styled.div`
   background-color: ${palette.blue2};
   border-radius: 0 0 10px 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
@@ -56,6 +65,7 @@ const WelcomeText = styled(Text)<{ isHeader?: boolean }>`
     isHeader &&
     css`
       padding-bottom: 1rem;
+      white-space: nowrap;
     `}
   padding-left: 10%;
   padding-right: 10%;

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
+import { DIALOG_WIDTH } from '@/features/Chat/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import IconSuccess from '@/static/icons/success.svg';
 import { palette } from '@/components/variables';
@@ -45,7 +46,7 @@ const Container = styled.div<{ borderColor: string }>`
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 687px;
+  width: ${DIALOG_WIDTH};
   z-index: 200;
 `;
 

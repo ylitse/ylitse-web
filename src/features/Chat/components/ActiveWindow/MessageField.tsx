@@ -10,6 +10,7 @@ import type { ChatBuddy } from '@/features/Chat/chatSlice';
 import styled from 'styled-components';
 import { IconButton } from '@/components/Buttons';
 import { palette } from '@/components/variables';
+import { ROW_HEIGHT } from '@/features/Chat/constants';
 import TextInput from '@/components/TextInput';
 
 type Props = {
@@ -57,7 +58,7 @@ const Container = styled.div`
 const Input = styled(TextInput)`
   box-sizing: border-box;
   flex: 1;
-  height: 80px;
+  height: ${ROW_HEIGHT};
   margin: 20px 1.25rem 20px 40px;
 
   &:focus {

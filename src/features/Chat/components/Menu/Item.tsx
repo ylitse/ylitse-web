@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 import { folderColors } from '@/features/Chat/constants';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
+import { ROW_HEIGHT } from '@/features/Chat/constants';
 import Text from '@/components/Text';
 import Spinner from '@/components/Spinner';
 
@@ -71,7 +72,7 @@ const Row = styled.div<{
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  height: 80px;
+  height: ${ROW_HEIGHT};
   padding-left: 40px;
 
   ${({ active, background }) =>

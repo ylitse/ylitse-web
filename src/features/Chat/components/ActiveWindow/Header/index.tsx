@@ -14,6 +14,7 @@ import Buttons from './Buttons';
 import BlockedIcon from '@/static/icons/blocked-chats.svg';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
+import { ROW_HEIGHT } from '@/features/Chat/constants';
 import Search from './Search';
 import Text from '@/components/Text';
 
@@ -57,9 +58,8 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   gap: 30px;
-  height: 80px;
+  height: ${ROW_HEIGHT};
   justify-content: space-between;
-  min-width: 800px;
   padding: 14px 40px;
 `;
 
