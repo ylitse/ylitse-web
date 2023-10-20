@@ -28,11 +28,11 @@ const Menu = () => {
           <FolderLink targetFolder="banned" />
         </>
       ) : chats.length ? (
-        <>
+        <ChatList>
           {chats.map(buddy => {
             return <MenuItem buddy={buddy} key={buddy.buddyId} />;
           })}
-        </>
+        </ChatList>
       ) : (
         <EmptyText>{t(`menu.empty.${activeFolder}`)}</EmptyText>
       )}
@@ -43,10 +43,16 @@ const Menu = () => {
 const Container = styled.div`
   background-color: ${palette.white};
   border-radius: 10px;
-  flex: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
   min-height: ${CHAT_MIN_HEIGHT};
-  overflow: auto;
+  min-width: ${CHAT_MENU_WIDTH};
   width: ${CHAT_MENU_WIDTH};
+`;
+
+const ChatList = styled.div`
+  overflow: auto;
 `;
 
 const EmptyText = styled(Text)`

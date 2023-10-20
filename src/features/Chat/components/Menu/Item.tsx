@@ -73,6 +73,7 @@ const Row = styled.div<{
   display: flex;
   flex-direction: row;
   height: ${ROW_HEIGHT};
+  overflow: hidden;
   padding-left: 40px;
 
   ${({ active, background }) =>

@@ -54,6 +54,7 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   height: ${ROW_HEIGHT};
+  min-height: ${ROW_HEIGHT};
   padding-left: 40px;
 
   &:hover {
