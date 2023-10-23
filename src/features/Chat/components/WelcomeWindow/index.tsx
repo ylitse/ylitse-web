@@ -6,7 +6,7 @@ import {
   CHAT_MIN_HEIGHT,
   CHAT_WINDOW_MIN_WIDTH,
 } from '@/features/Chat/constants';
-import { palette } from '@/components/variables';
+import { CONTENT_HEIGHT, palette } from '@/components/variables';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 
@@ -36,6 +36,7 @@ const WelcomeWindow = () => {
 };
 
 const Container = styled.div`
+  height: ${CONTENT_HEIGHT};
   min-height: ${CHAT_MIN_HEIGHT};
   min-width: ${CHAT_WINDOW_MIN_WIDTH};
 `;

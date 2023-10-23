@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { CHAT_MENU_WIDTH, CHAT_MIN_HEIGHT } from '@/features/Chat/constants';
 import FolderLink from './FolderLink';
 import Header from './Header';
-import { palette } from '@/components/variables';
+import { CONTENT_HEIGHT, palette } from '@/components/variables';
 import Text from '@/components/Text';
 import { MenuItem } from './Item';
 
@@ -46,6 +46,7 @@ const Container = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
+  height: ${CONTENT_HEIGHT};
   min-height: ${CHAT_MIN_HEIGHT};
   min-width: ${CHAT_MENU_WIDTH};
   width: ${CHAT_MENU_WIDTH};

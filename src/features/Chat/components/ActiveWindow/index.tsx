@@ -13,7 +13,7 @@ import {
 import Header from './Header';
 import MessageField from './MessageField';
 import MessageList from './MessageList';
-import { palette } from '@/components/variables';
+import { CONTENT_HEIGHT, palette } from '@/components/variables';
 
 const ActiveWindow = () => {
   const chat = useAppSelector(selectActiveChat);
@@ -55,7 +55,7 @@ const Container = styled.div`
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  height: 100%;
+  height: ${CONTENT_HEIGHT};
   min-height: ${CHAT_MIN_HEIGHT};
   min-width: ${CHAT_WINDOW_MIN_WIDTH};
 `;

@@ -4,11 +4,7 @@ import { useAppSelector } from '@/store';
 
 import styled, { css } from 'styled-components';
 import { CHAT_GAP_WIDTH } from '@/features/Chat/constants';
-import {
-  CONTENT_HEIGHT,
-  CONTENT_WIDTH,
-  OUTER_VERTICAL_MARGIN,
-} from '@/components/variables';
+import { CONTENT_WIDTH, OUTER_VERTICAL_MARGIN } from '@/components/variables';
 import ActiveWindow from './components/ActiveWindow';
 import WelcomeWindow from './components/WelcomeWindow';
 import Menu from './components/Menu';
@@ -50,7 +46,6 @@ const PageContainer = styled.div<{ isTablet: boolean }>`
 const InnerContainer = styled.div`
   display: flex;
   gap: ${CHAT_GAP_WIDTH};
-  height: ${CONTENT_HEIGHT};
   justify-content: center;
 `;
 
