@@ -37,9 +37,11 @@ export const FOOTER_HEIGHT = '3rem';
 export const CONTENT_HEIGHT = `calc(100vh - (2 * ${OUTER_VERTICAL_MARGIN} + ${NAVIGATION_HEIGHT} + ${FOOTER_HEIGHT}))`;
 export const CONTENT_WIDTH = '76vw';
 
+export const TABLET_TRESHOLD = 1310; // Only used for Chat page (CHAT_MENU_WIDTH + 5 * CHAT_GAP_WIDTH + CHAT_WINDOW_MIN_WIDTH)
 export const MOBILE_TRESHOLD = 600;
 export const breakpoints = {
   mobile: `${MOBILE_TRESHOLD}px`,
+  tablet: `${TABLET_TRESHOLD}px`,
 };
 
 export const spacing = {

@@ -1,10 +1,10 @@
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTabletMode } from '@/hooks/useTabletMode';
 import { selectActiveChat } from './chatSlice';
 import { useAppSelector } from '@/store';
 
 import styled, { css } from 'styled-components';
+import { CHAT_GAP_WIDTH } from '@/features/Chat/constants';
 import {
-  breakpoints,
   CONTENT_HEIGHT,
   CONTENT_WIDTH,
   OUTER_VERTICAL_MARGIN,
@@ -15,26 +15,28 @@ import Menu from './components/Menu';
 import PageWithTransition from '@/components/PageWithTransition';
 
 const Chat = () => {
-  const isMobile = useMobileMode();
+  const isTablet = useTabletMode();
   const chat = useAppSelector(selectActiveChat);
 
   return (
     <PageWithTransition>
-      <PageContainer isMobile={isMobile}>
+      <PageContainer isTablet={isTablet}>
         <InnerContainer>
           <Menu />
-          {chat ? <ActiveWindow /> : <WelcomeWindow />}
+          {!isTablet && <> {chat ? <ActiveWindow /> : <WelcomeWindow />}</>}
         </InnerContainer>
       </PageContainer>
     </PageWithTransition>
   );
 };
 
-const PageContainer = styled.div<{ isMobile: boolean }>`
-  ${({ isMobile }) =>
-    isMobile
+const PageContainer = styled.div<{ isTablet: boolean }>`
+  ${({ isTablet }) =>
+    isTablet
       ? css`
-          width: 100vw;
+          margin: ${OUTER_VERTICAL_MARGIN} auto;
+          max-width: ${CONTENT_WIDTH};
+          width: ${CONTENT_WIDTH};
         `
       : css`
           display: flex;
@@ -43,14 +45,11 @@ const PageContainer = styled.div<{ isMobile: boolean }>`
           max-width: ${CONTENT_WIDTH};
           width: ${CONTENT_WIDTH};
         `}
-  @media screen and (max-width: ${breakpoints.mobile}) {
-    flex: 1;
-  }
 `;
 
 const InnerContainer = styled.div`
   display: flex;
-  gap: 22px;
+  gap: ${CHAT_GAP_WIDTH};
   height: ${CONTENT_HEIGHT};
   justify-content: center;
 `;
