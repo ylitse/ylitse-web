@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components';
 import { folderColors } from '@/features/Chat/constants';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
-import { ROW_HEIGHT } from '@/features/Chat/constants';
+import { Row } from './Row';
 import Text from '@/components/Text';
 import Spinner from '@/components/Spinner';
 
@@ -31,7 +31,7 @@ export const MenuItem = ({ buddy }: Props) => {
   };
 
   return (
-    <Row
+    <ItemRow
       active={buddy.buddyId === activeChatId}
       background={folderColors[activeFolder]}
       onClick={openChat}
@@ -58,23 +58,16 @@ export const MenuItem = ({ buddy }: Props) => {
           <Message>{latest}</Message>
         )}
       </MentorInfo>
-    </Row>
+    </ItemRow>
   );
 };
 
-const Row = styled.div<{
+const ItemRow = styled(Row)<{
   active: boolean;
   background: { active: string; hover: string };
 }>`
-  align-items: center;
-  border-bottom: 1px solid ${palette.greyLight};
-  box-sizing: border-box;
   cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  height: ${ROW_HEIGHT};
   overflow: hidden;
-  padding-left: 40px;
 
   ${({ active, background }) =>
     active

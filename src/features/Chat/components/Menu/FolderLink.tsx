@@ -7,7 +7,7 @@ import type { ChatFolder } from '@/features/Chat/chatPageApi';
 import styled, { css } from 'styled-components';
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
 import { palette } from '@/components/variables';
-import { ROW_HEIGHT } from '@/features/Chat/constants';
+import { Row } from './Row';
 import Text from '@/components/Text';
 
 type Props = {
@@ -30,7 +30,7 @@ const FolderLink = ({ targetFolder }: Props) => {
   const isTargetActiveFolder = targetFolder === 'ok';
 
   return (
-    <Row
+    <LinkRow
       onClick={() => {
         changeActiveFolder(targetFolder);
         hideFolders();
@@ -42,20 +42,12 @@ const FolderLink = ({ targetFolder }: Props) => {
           {isTargetActiveFolder ? t('menu.back') : t(`menu.${targetFolder}`)}
         </Text>
       </Link>
-    </Row>
+    </LinkRow>
   );
 };
 
-const Row = styled.div`
-  align-items: center;
-  border-bottom: 1px solid ${palette.greyLight};
-  box-sizing: border-box;
+const LinkRow = styled(Row)`
   cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  height: ${ROW_HEIGHT};
-  min-height: ${ROW_HEIGHT};
-  padding-left: 40px;
 
   &:hover {
     background-color: ${palette.blueWhite};

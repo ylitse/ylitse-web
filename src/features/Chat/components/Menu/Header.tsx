@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
 import IconButton from '@/components/Buttons/IconButton';
-import { palette } from '@/components/variables';
-import { ROW_HEIGHT } from '@/features/Chat/constants';
+import { Row } from './Row';
 import Text from '@/components/Text';
 
 type Props = {
@@ -22,7 +21,7 @@ const Header = ({ showSearch }: Props) => {
   };
 
   return (
-    <Row>
+    <HeaderRow>
       <Title variant="h1">{t(`menu.title.${activeFolder}`)}</Title>
       <Buttons>
         {showSearch && (
@@ -34,20 +33,12 @@ const Header = ({ showSearch }: Props) => {
         )}
         <IconButton variant="menuLines" sizeInPx={40} onClick={toggleFolders} />
       </Buttons>
-    </Row>
+    </HeaderRow>
   );
 };
 
-const Row = styled.div`
-  align-items: center;
-  border-bottom: 1px solid ${palette.greyLight};
+const HeaderRow = styled(Row)`
   border-radius: 10px 10px 0 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  height: ${ROW_HEIGHT};
-  min-height: ${ROW_HEIGHT};
-  padding-left: 40px;
 `;
 
 const Title = styled(Text)`

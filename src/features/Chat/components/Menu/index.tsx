@@ -1,9 +1,13 @@
-import { useAppSelector } from '@/store';
-import { selectChats } from '@/features/Chat/chatSlice';
-import { useTabletMode } from '@/hooks/useTabletMode';
+// Libraries
+import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import styled, { css } from 'styled-components';
+// Store and hooks
+import { selectChats } from '@/features/Chat/chatSlice';
+import { useAppSelector } from '@/store';
+import { useTabletMode } from '@/hooks/useTabletMode';
+
+// Variables
 import {
   CHAT_MENU_WIDTH,
   CHAT_MIN_HEIGHT,
@@ -15,6 +19,8 @@ import {
   NAVIGATION_HEIGHT,
   palette,
 } from '@/components/variables';
+
+// Components
 import FolderLink from './FolderLink';
 import Header from './Header';
 import Text from '@/components/Text';
@@ -26,7 +32,7 @@ const Menu = () => {
   const { showFolders, activeFolder } = useAppSelector(state => state.chats);
   const chats = useAppSelector(selectChats);
 
-  const children = (
+  const menuContent = (
     <>
       <Header showSearch={chats.length > 0} />
       {(showFolders || ['archived', 'banned'].includes(activeFolder)) && (
@@ -53,22 +59,24 @@ const Menu = () => {
   );
 
   return isTablet ? (
-    <TabletContainer>{children}</TabletContainer>
+    <TabletContainer>{menuContent}</TabletContainer>
   ) : (
-    <Container>{children}</Container>
+    <Container>{menuContent}</Container>
   );
 };
 
-const TabletContainer = styled.div`
+const BaseContainer = styled.div`
   background-color: ${palette.white};
+`;
+
+const TabletContainer = styled(BaseContainer)`
   height: calc(100vh - (${NAVIGATION_HEIGHT} + ${FOOTER_HEIGHT}));
   left: 0;
   position: absolute;
   right: 0;
 `;
 
-const Container = styled.div`
-  background-color: ${palette.white};
+const Container = styled(BaseContainer)`
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
   display: flex;
