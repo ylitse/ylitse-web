@@ -29,10 +29,9 @@ const Menu = () => {
   const children = (
     <>
       <Header showSearch={chats.length > 0} />
-      {showFolders ||
-        (['archived', 'banned'].includes(activeFolder) && (
-          <FolderLink targetFolder="ok" />
-        ))}
+      {(showFolders || ['archived', 'banned'].includes(activeFolder)) && (
+        <FolderLink targetFolder="ok" />
+      )}
       {showFolders ? (
         <>
           <FolderLink targetFolder="archived" />
