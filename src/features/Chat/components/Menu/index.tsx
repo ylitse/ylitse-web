@@ -85,16 +85,19 @@ const ChatList = styled.div<{
   isTablet: boolean;
 }>`
   ${({ folderLinkOnTopOfMenu, isTablet }) =>
-    isTablet &&
-    css`
-      height: calc(
-        100vh -
-          (
-            ${NAVIGATION_HEIGHT} + ${FOOTER_HEIGHT} +
-              ${folderLinkOnTopOfMenu ? 2 : 1} * ${ROW_HEIGHT}
-          )
-      );
-    `}
+    isTablet
+      ? css`
+          height: calc(
+            100vh -
+              (
+                ${NAVIGATION_HEIGHT} + ${FOOTER_HEIGHT} +
+                  ${folderLinkOnTopOfMenu ? 2 : 1} * ${ROW_HEIGHT}
+              )
+          );
+        `
+      : css`
+          padding-bottom: 10px;
+        `}
   overflow: auto;
 `;
 
