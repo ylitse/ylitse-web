@@ -25,11 +25,11 @@ const Chat = () => {
 };
 
 const PageContainer = styled.div<{ isTablet: boolean }>`
+  display: flex;
   ${({ isTablet }) =>
     isTablet
       ? css``
       : css`
-          display: flex;
           gap: ${CHAT_GAP_WIDTH};
           justify-content: center;
           margin: ${OUTER_VERTICAL_MARGIN} auto;
