@@ -17,10 +17,8 @@ const Chat = () => {
   return (
     <PageWithTransition>
       <PageContainer isTablet={isTablet}>
-        <InnerContainer>
-          <Menu />
-          {!isTablet && <> {chat ? <ActiveWindow /> : <WelcomeWindow />}</>}
-        </InnerContainer>
+        <Menu />
+        {!isTablet && <> {chat ? <ActiveWindow /> : <WelcomeWindow />}</>}
       </PageContainer>
     </PageWithTransition>
   );
@@ -29,24 +27,15 @@ const Chat = () => {
 const PageContainer = styled.div<{ isTablet: boolean }>`
   ${({ isTablet }) =>
     isTablet
-      ? css`
-          margin: ${OUTER_VERTICAL_MARGIN} auto;
-          max-width: ${CONTENT_WIDTH};
-          width: ${CONTENT_WIDTH};
-        `
+      ? css``
       : css`
           display: flex;
-          flex-direction: column;
+          gap: ${CHAT_GAP_WIDTH};
+          justify-content: center;
           margin: ${OUTER_VERTICAL_MARGIN} auto;
           max-width: ${CONTENT_WIDTH};
           width: ${CONTENT_WIDTH};
         `}
-`;
-
-const InnerContainer = styled.div`
-  display: flex;
-  gap: ${CHAT_GAP_WIDTH};
-  justify-content: center;
 `;
 
 export default Chat;
