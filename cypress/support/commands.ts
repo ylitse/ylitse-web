@@ -27,6 +27,7 @@ Cypress.Commands.add(
     toggle('required-age');
     toggle('privacy-consent');
     cy.get(`button[id="submit"]`).click();
+    cy.contains('Login').should('be.visible');
   },
 );
 
@@ -34,9 +35,11 @@ Cypress.Commands.add(
   'loginUser',
   (username: string, password: string): void => {
     cy.visit('/login/');
+    cy.contains('Login').should('be.visible');
     cy.fillInput('username', username);
     cy.fillInput('password', password);
     cy.get('button[id="submit"]').click();
+    cy.contains('KOTISIVU').should('be.visible');
   },
 );
 

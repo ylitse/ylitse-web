@@ -34,6 +34,11 @@ jobs:
         working-directory: ylitse-api
         env:
           YLITSE_POSTGRES_URL: ${{ secrets.YLITSE_POSTGRES_URL }}
+      - name: Cache cypress
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
       - name: Run E2E tests
         run: |
           ${{ github.workspace }}/.github/scripts/start-api &

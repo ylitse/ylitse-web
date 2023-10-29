@@ -83,7 +83,13 @@ Run locally:
 1. Start dev server `npm run start`
 1. Run cypress `npm run test:e2e` or interactively `npx cypress open`
 
-The API needs to be restarted every time the tests are run to clear the database.
+Example of cypress command for better debugging of a specific test:
+
+```shell
+cypress run --spec 'cypress/tests/logout.cy.ts' --headed --browser firefox --no-exit"
+```
+
+To target test run to a specific step you can use `it.only()`.
 
 ## Development
 

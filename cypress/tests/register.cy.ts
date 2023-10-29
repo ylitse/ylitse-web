@@ -1,4 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
+
 describe('register', () => {
+  const username = `register-${uuidv4()}`;
+
   const clear = (input: string): void => {
     cy.get(`input[id="${input}"]`).clear().blur();
   };
@@ -23,23 +27,27 @@ describe('register', () => {
   beforeEach(() => {
     cy.visit('/register/');
     cy.switchLanguage('fi');
+    cy.contains('Rekisteröidy').should('be.visible');
   });
 
   it('loads page', () => {
-    cy.contains('Rekisteröidy');
-    cy.contains('Hienoa, että haluat aloittaa palvelun käytön.');
+    cy.contains('Rekisteröidy').should('be.visible');
+    cy.contains('Hienoa, että haluat aloittaa palvelun käytön.').should(
+      'be.visible',
+    );
   });
 
   it('changes language on button press', () => {
     cy.switchLanguage('en');
-    cy.contains('Register');
+    cy.contains('Register').should('be.visible');
     cy.switchLanguage('fi');
-    cy.contains('Rekisteröidy');
+    cy.contains('Rekisteröidy').should('be.visible');
   });
 
   it('registers new user if form is correctly filled', () => {
-    cy.registerUser('registerTestUsername', 'examplePassword');
+    cy.registerUser(username, 'examplePassword');
     cy.location('pathname').should('contain', '/login');
+    cy.contains('Login').should('be.visible');
   });
 
   // Username
@@ -55,7 +63,7 @@ describe('register', () => {
   });
 
   it('shows error message if username is taken', () => {
-    cy.fillInput('username', 'registerTestUsername');
+    cy.fillInput('username', username);
     cy.contains('Käyttäjätunnus on jo käytössä').should('be.visible');
   });
 

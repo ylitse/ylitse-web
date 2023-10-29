@@ -1,4 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
+
 describe('login', () => {
+  const username = `login-${uuidv4()}`;
+
   const testErrorVisible = () => {
     cy.get('[id="login-error"]').should('be.visible');
   };
@@ -8,33 +12,34 @@ describe('login', () => {
   };
 
   before(() => {
-    cy.registerUser('loginTestUsername', 'examplePassword');
+    cy.registerUser(username, 'examplePassword');
   });
 
   beforeEach(() => {
     cy.visit('/login/');
     cy.switchLanguage('fi');
+    cy.contains('Kirjaudu').should('be.visible');
   });
 
   it('contains buttons', () => {
-    cy.contains('Rekisteröidy');
-    cy.contains('Kirjaudu');
+    cy.contains('Rekisteröidy').should('be.visible');
+    cy.contains('Kirjaudu').should('be.visible');
   });
 
   it('has right content', () => {
-    cy.contains('Kirjaudu sisään');
+    cy.contains('Kirjaudu sisään').should('be.visible');
     cy.contains(
       'Uusi täällä? Palvelussa voit jutella SOS-Lapsikylän valmentamien vertaismentoreiden kanssa mistä tahansa mieltäsi painavasta asiasta. Palvelun käyttö on luottamuksellista ja täysin maksutonta.',
-    );
-    cy.contains('Ylitse MentorApp');
-    cy.contains('Unohditko salasanasi?');
+    ).should('be.visible');
+    cy.contains('Ylitse MentorApp').should('be.visible');
+    cy.contains('Unohditko salasanasi?').should('be.visible');
   });
 
   it('changes language on button press', () => {
     cy.switchLanguage('en');
-    cy.contains('Login');
+    cy.contains('Login').should('be.visible');
     cy.switchLanguage('fi');
-    cy.contains('Kirjaudu sisään');
+    cy.contains('Kirjaudu sisään').should('be.visible');
   });
 
   it('shows error if empty username', () => {
@@ -57,9 +62,10 @@ describe('login', () => {
   });
 
   it('can log in and out with registered account', () => {
-    cy.fillInput('username', 'loginTestUsername');
+    cy.fillInput('username', username);
     cy.fillInput('password', 'examplePassword');
     clickLogin();
     cy.location('pathname').should('eq', '/');
+    cy.contains('Logout').should('be.visible');
   });
 });
