@@ -1,7 +1,11 @@
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTabletMode } from '@/hooks/useTabletMode';
 import { useTranslation } from 'react-i18next';
 
-import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
+import {
+  MOBILE_NAVIGATION_BORDER_HEIGHT,
+  NAVIGATION_HEIGHT,
+  palette,
+} from '@/components/variables';
 import styled, { css } from 'styled-components';
 
 import { Items, Item } from './NavigationItems';
@@ -11,7 +15,7 @@ import MobileDropdown from './MobileDropdown';
 import LangDropdown from './LanguageDropdown';
 
 export const Navbar = () => {
-  const isMobile = useMobileMode();
+  const isTablet = useTabletMode();
   const { t } = useTranslation('common');
 
   const navigationItems = [
@@ -31,8 +35,8 @@ export const Navbar = () => {
 
   return (
     <>
-      {isMobile ? (
-        <Container isMobile>
+      {isTablet ? (
+        <Container isTablet={isTablet}>
           <LogoContainer />
           <MobileDropdown items={navigationItems} />
         </Container>
@@ -51,7 +55,7 @@ export const Navbar = () => {
   );
 };
 
-export const Container = styled.div<{ isMobile?: boolean }>`
+export const Container = styled.div<{ isTablet?: boolean }>`
   align-items: center;
   background-color: ${palette.purple};
   display: flex;
@@ -62,10 +66,10 @@ export const Container = styled.div<{ isMobile?: boolean }>`
   width: 100%;
   z-index: 10;
 
-  ${({ isMobile }) =>
-    isMobile &&
+  ${({ isTablet }) =>
+    isTablet &&
     css`
-      border-bottom: solid 0.5rem ${palette.blue2};
+      border-bottom: solid ${MOBILE_NAVIGATION_BORDER_HEIGHT} ${palette.blue2};
       padding: 0 1.5rem;
     `}
 `;

@@ -4,7 +4,12 @@ import { useTranslation } from 'react-i18next';
 import type { LangCode } from '../LanguageDropdown';
 import type { NavigationItem as NavItemType } from '../NavigationItems';
 
-import { animations, NAVIGATION_HEIGHT, palette } from '@/components/variables';
+import {
+  animations,
+  MOBILE_NAVIGATION_BORDER_HEIGHT,
+  NAVIGATION_HEIGHT,
+  palette,
+} from '@/components/variables';
 import styled from 'styled-components';
 
 import Text from '@/components/Text';
@@ -134,7 +139,7 @@ const Menu = styled.div`
   position: absolute;
   right: 0;
   text-align: left;
-  top: 40px;
+  top: ${MOBILE_NAVIGATION_BORDER_HEIGHT};
   transform-origin: top center;
 `;
 

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { toSendMessage, NewMessage } from '@/features/Chat/chatPageApi';
 import { useAppSelector } from '@/store';
+import { useMobileMode } from '@/hooks/useMobileMode';
 import { selectUserId } from '@/features/Authentication/userSlice';
 
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
@@ -10,7 +11,7 @@ import type { ChatBuddy } from '@/features/Chat/chatSlice';
 import styled from 'styled-components';
 import { IconButton } from '@/components/Buttons';
 import { palette } from '@/components/variables';
-import { ROW_HEIGHT } from '@/features/Chat/constants';
+import { ROW_HEIGHT, SMALL_ROW_HEIGHT } from '@/features/Chat/constants';
 import TextInput from '@/components/TextInput';
 
 type Props = {
@@ -21,6 +22,7 @@ type Props = {
 
 const MessageField = ({ chat, sendMessage, isMessageSendLoading }: Props) => {
   const { t } = useTranslation('chat');
+  const isMobile = useMobileMode();
   const [text, setText] = useState('');
   const userId = useAppSelector(selectUserId);
 
@@ -40,11 +42,13 @@ const MessageField = ({ chat, sendMessage, isMessageSendLoading }: Props) => {
         onChange={setText}
         placeholder={t('input.placeholder')}
         value={text}
+        isMobile={isMobile}
       />
       <SendButton
         variant="send"
         sizeInPx={46}
         onClick={() => handleMessageSend(chat.buddyId, text)}
+        isMobile={isMobile}
       />
     </Container>
   );
@@ -55,10 +59,10 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Input = styled(TextInput)`
+const Input = styled(TextInput)<{ isMobile: boolean }>`
   box-sizing: border-box;
   flex: 1;
-  height: ${ROW_HEIGHT};
+  height: ${({ isMobile }) => (isMobile ? SMALL_ROW_HEIGHT : ROW_HEIGHT)};
   margin: 20px 1.25rem 20px 40px;
 
   &:focus {
@@ -66,7 +70,7 @@ const Input = styled(TextInput)`
   }
 `;
 
-const SendButton = styled(IconButton)`
+const SendButton = styled(IconButton)<{ isMobile: boolean }>`
   margin-right: 1.25rem;
 `;
 

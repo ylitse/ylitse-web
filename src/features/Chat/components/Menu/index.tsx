@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 // Store and hooks
 import { selectChats } from '@/features/Chat/chatSlice';
 import { useAppSelector } from '@/store';
+import { useMobileMode } from '@/hooks/useMobileMode';
 import { useTabletMode } from '@/hooks/useTabletMode';
 
 // Variables
@@ -16,8 +17,10 @@ import {
 import {
   CONTENT_HEIGHT,
   FOOTER_HEIGHT,
+  MOBILE_CONTENT_HEIGHT,
   NAVIGATION_HEIGHT,
   palette,
+  TABLET_CONTENT_HEIGHT,
 } from '@/components/variables';
 
 // Components
@@ -28,6 +31,7 @@ import { MenuItem } from './Item';
 
 const Menu = () => {
   const { t } = useTranslation('chat');
+  const isMobile = useMobileMode();
   const isTablet = useTabletMode();
   const { showFolders, activeFolder } = useAppSelector(state => state.chats);
   const chats = useAppSelector(selectChats);
@@ -61,7 +65,9 @@ const Menu = () => {
   return isTablet ? (
     <TabletContainer>{menuContent}</TabletContainer>
   ) : (
-    <Container>{menuContent}</Container>
+    <Container isMobile={isMobile} isTablet={isTablet}>
+      {menuContent}
+    </Container>
   );
 };
 
@@ -76,12 +82,20 @@ const TabletContainer = styled(BaseContainer)`
   right: 0;
 `;
 
-const Container = styled(BaseContainer)`
+const Container = styled(BaseContainer)<{
+  isMobile: boolean;
+  isTablet: boolean;
+}>`
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
-  height: ${CONTENT_HEIGHT};
+  height: ${({ isMobile, isTablet }) =>
+    isMobile
+      ? MOBILE_CONTENT_HEIGHT
+      : isTablet
+      ? TABLET_CONTENT_HEIGHT
+      : CONTENT_HEIGHT};
   min-height: ${CHAT_MIN_HEIGHT};
   min-width: ${CHAT_MENU_WIDTH};
   width: ${CHAT_MENU_WIDTH};

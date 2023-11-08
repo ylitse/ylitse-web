@@ -13,18 +13,25 @@ import PageWithTransition from '@/components/PageWithTransition';
 const Chat = () => {
   const isTablet = useTabletMode();
   const chat = useAppSelector(selectActiveChat);
+  console.log('chat', chat);
 
   return (
     <PageWithTransition>
-      <PageContainer isTablet={isTablet}>
-        <Menu />
-        {!isTablet && <> {chat ? <ActiveWindow /> : <WelcomeWindow />}</>}
-      </PageContainer>
+      {isTablet ? (
+        <PageContainer isTablet={true}>
+          {chat ? <ActiveWindow /> : <Menu />}
+        </PageContainer>
+      ) : (
+        <PageContainer>
+          <Menu />
+          {chat ? <ActiveWindow /> : <WelcomeWindow />}
+        </PageContainer>
+      )}
     </PageWithTransition>
   );
 };
 
-const PageContainer = styled.div<{ isTablet: boolean }>`
+const PageContainer = styled.div<{ isTablet?: boolean }>`
   display: flex;
   ${({ isTablet }) =>
     isTablet

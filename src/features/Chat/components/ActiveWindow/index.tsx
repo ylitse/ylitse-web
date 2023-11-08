@@ -4,18 +4,28 @@ import {
   selectIsLoadingBuddyMessages,
 } from '@/features/Chat/chatSlice';
 import { useSendMessageMutation } from '@/features/Chat/chatPageApi';
+import { useMobileMode } from '@/hooks/useMobileMode';
+import { useTabletMode } from '@/hooks/useTabletMode';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   CHAT_MIN_HEIGHT,
+  CHAT_MIN_HEIGHT_TABLET,
   CHAT_WINDOW_MIN_WIDTH,
 } from '@/features/Chat/constants';
 import Header from './Header';
 import MessageField from './MessageField';
 import MessageList from './MessageList';
-import { CONTENT_HEIGHT, palette } from '@/components/variables';
+import {
+  CONTENT_HEIGHT,
+  MOBILE_CONTENT_HEIGHT,
+  palette,
+  TABLET_CONTENT_HEIGHT,
+} from '@/components/variables';
 
 const ActiveWindow = () => {
+  const isMobile = useMobileMode();
+  const isTablet = useTabletMode();
   const chat = useAppSelector(selectActiveChat);
 
   const [sendMessage, { isLoading: isLoadingSendMessage }] =
@@ -29,7 +39,7 @@ const ActiveWindow = () => {
 
   return (
     chat && (
-      <Container>
+      <Container isMobile={isMobile} isTablet={isTablet}>
         <Header chat={chat} />
         <MessageList
           messageList={chat.messages}
@@ -49,15 +59,28 @@ const ActiveWindow = () => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ isMobile: boolean; isTablet: boolean }>`
   background-color: ${palette.white};
-  border-radius: 10px;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  height: ${CONTENT_HEIGHT};
-  min-height: ${CHAT_MIN_HEIGHT};
-  min-width: ${CHAT_WINDOW_MIN_WIDTH};
+  ${({ isMobile, isTablet }) =>
+    isMobile
+      ? css`
+          height: ${MOBILE_CONTENT_HEIGHT};
+          min-height: ${CHAT_MIN_HEIGHT_TABLET};
+        `
+      : isTablet
+      ? css`
+          height: ${TABLET_CONTENT_HEIGHT};
+          min-height: ${CHAT_MIN_HEIGHT_TABLET};
+        `
+      : css`
+          border-radius: 10px;
+          height: ${CONTENT_HEIGHT};
+          min-height: ${CHAT_MIN_HEIGHT};
+          min-width: ${CHAT_WINDOW_MIN_WIDTH};
+        `}
 `;
 
 export default ActiveWindow;
