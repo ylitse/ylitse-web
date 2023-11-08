@@ -33,7 +33,7 @@ export const palette = {
 
 export const OUTER_VERTICAL_MARGIN = '6vh';
 export const NAVIGATION_HEIGHT = '3rem';
-export const MOBILE_NAVIGATION_BORDER_HEIGHT = '0.5rem';
+export const MOBILE_NAVIGATION_BORDER_HEIGHT = '4px';
 export const FOOTER_HEIGHT = '3rem';
 export const CONTENT_HEIGHT = `calc(100vh - (2 * ${OUTER_VERTICAL_MARGIN} + ${NAVIGATION_HEIGHT} + ${FOOTER_HEIGHT}))`;
 export const TABLET_CONTENT_HEIGHT = `calc(100vh - (${NAVIGATION_HEIGHT} + ${MOBILE_NAVIGATION_BORDER_HEIGHT} + ${FOOTER_HEIGHT}))`;
