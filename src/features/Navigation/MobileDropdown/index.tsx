@@ -24,7 +24,7 @@ type Props = {
 
 const MobileDropdown: React.FC<Props> = ({ items }) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
-    useComponentVisible<HTMLButtonElement>(true);
+    useComponentVisible<HTMLButtonElement>(false);
 
   const { t, i18n } = useTranslation('common');
 
