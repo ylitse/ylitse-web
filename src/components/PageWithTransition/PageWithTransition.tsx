@@ -1,6 +1,12 @@
 import styled, { css } from 'styled-components';
 import React, { useEffect, useState } from 'react';
-import { palette, Color, NAVIGATION_HEIGHT, FOOTER_HEIGHT } from '../variables';
+import {
+  palette,
+  Color,
+  NAVIGATION_HEIGHT,
+  FOOTER_HEIGHT,
+  MOBILE_NAVIGATION_BORDER_HEIGHT,
+} from '../variables';
 
 type Props = {
   children: React.ReactNode;
@@ -50,13 +56,17 @@ const PageWithTransition: React.FC<Props> = ({ children }) => {
   );
 };
 
+// TODO: Fix min-height to be generic
 const Container = styled.div`
   background-color: ${palette.blueLight};
   display: flex;
   flex-direction: column;
   height: auto;
   left: 0;
-  min-height: calc(100vh - ${NAVIGATION_HEIGHT} - ${FOOTER_HEIGHT});
+  min-height: calc(
+    100vh - ${NAVIGATION_HEIGHT} - ${MOBILE_NAVIGATION_BORDER_HEIGHT} -
+      ${FOOTER_HEIGHT}
+  );
   position: relative;
   top: 0;
   width: 100vw;

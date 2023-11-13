@@ -10,7 +10,6 @@ import { useTabletMode } from '@/hooks/useTabletMode';
 import styled, { css } from 'styled-components';
 import {
   CHAT_MIN_HEIGHT,
-  CHAT_MIN_HEIGHT_TABLET,
   CHAT_WINDOW_MIN_WIDTH,
 } from '@/features/Chat/constants';
 import Header from './Header';
@@ -59,6 +58,7 @@ const ActiveWindow = () => {
   );
 };
 
+// Fix heights.
 const Container = styled.div<{ isMobile: boolean; isTablet: boolean }>`
   background-color: ${palette.white};
   display: flex;
@@ -68,12 +68,10 @@ const Container = styled.div<{ isMobile: boolean; isTablet: boolean }>`
     isMobile
       ? css`
           height: ${MOBILE_CONTENT_HEIGHT};
-          min-height: ${CHAT_MIN_HEIGHT_TABLET};
         `
       : isTablet
       ? css`
           height: ${TABLET_CONTENT_HEIGHT};
-          min-height: ${CHAT_MIN_HEIGHT_TABLET};
         `
       : css`
           border-radius: 10px;

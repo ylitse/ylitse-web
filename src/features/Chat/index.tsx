@@ -13,12 +13,11 @@ import PageWithTransition from '@/components/PageWithTransition';
 const Chat = () => {
   const isTablet = useTabletMode();
   const chat = useAppSelector(selectActiveChat);
-  console.log('chat', chat);
 
   return (
     <PageWithTransition>
       {isTablet ? (
-        <PageContainer isTablet={true}>
+        <PageContainer isTablet>
           {chat ? <ActiveWindow /> : <Menu />}
         </PageContainer>
       ) : (
