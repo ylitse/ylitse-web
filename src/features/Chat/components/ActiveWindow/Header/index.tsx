@@ -73,20 +73,16 @@ const Header = ({ chat }: Props) => {
           )}
         </ProfileInfo>
       )}
-      {isTablet ? (
-        <IconButton
-          variant="menuLines"
-          sizeInPx={40}
-          onClick={() => console.log('Opening menu!')}
-        />
-      ) : isSearchShown ? (
+      {!isTablet && isSearchShown ? (
         <Search hideSearch={hideSearch} />
       ) : (
-        <Buttons chat={chat} showSearch={showSearch} />
+        <Buttons chat={chat} showSearch={showSearch} tabletMode={isTablet} />
       )}
     </Container>
   );
 };
+
+// Siirrä haku Buttons-komponenttiin
 
 const Container = styled.div<{ isTablet: boolean }>`
   border-bottom: 1px solid ${palette.greyLight};
