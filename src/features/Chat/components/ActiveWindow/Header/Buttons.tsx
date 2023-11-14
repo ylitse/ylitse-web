@@ -9,18 +9,15 @@ import { Button, IconButton, StatusButton } from '@/components/Buttons';
 import { ConfirmationDialog, ReportDialog } from '../Dialogs';
 import { LARGE_ROW_HEIGHT } from '@/features/Chat/constants';
 import { palette } from '@/components/variables';
+import Search from './Search';
 
 type Props = {
   chat: ChatBuddy;
-  showSearch: () => void;
   tabletMode: boolean;
 };
 
-const Buttons = ({ chat, showSearch, tabletMode }: Props) => {
+const Buttons = ({ chat, tabletMode }: Props) => {
   const { t } = useTranslation('chat');
-
-  const [isTabletDropdownOpen, setIsTabletDropdownOpen] = useState(false);
-  const closeTabletDropdown = () => setIsTabletDropdownOpen(false);
 
   const [dialogVariant, setDialogVariant] =
     useState<ConfirmationDialogVariant>('archive');
@@ -36,6 +33,13 @@ const Buttons = ({ chat, showSearch, tabletMode }: Props) => {
   const openReportDialog = () => setIsReportDialogOpen(true);
   const closeReportDialog = () => setIsReportDialogOpen(false);
 
+  const [isSearchShown, setIsSearchShown] = useState(false);
+  const showSearch = () => setIsSearchShown(true);
+  const hideSearch = () => setIsSearchShown(false);
+
+  const [isTabletDropdownOpen, setIsTabletDropdownOpen] = useState(false);
+  const closeTabletDropdown = () => setIsTabletDropdownOpen(false);
+
   return (
     <>
       {isDialogOpen && (
@@ -45,66 +49,83 @@ const Buttons = ({ chat, showSearch, tabletMode }: Props) => {
           close={closeDialog}
         />
       )}
-
       {isReportDialogOpen && (
         <ReportDialog buddyId={chat.buddyId} close={closeReportDialog} />
       )}
 
       {tabletMode ? (
-        <>
+        <Container>
+          <IconButton
+            variant="search"
+            sizeInPx={24}
+            onClick={() => {
+              if (!isSearchShown) setIsTabletDropdownOpen(false);
+              setIsSearchShown(!isSearchShown);
+            }}
+          />
           <IconButton
             variant="menuLines"
             sizeInPx={40}
-            onClick={() => setIsTabletDropdownOpen(!isTabletDropdownOpen)}
+            onClick={() => {
+              if (!isTabletDropdownOpen) setIsSearchShown(false);
+              setIsTabletDropdownOpen(!isTabletDropdownOpen);
+            }}
           />
-
-          {isTabletDropdownOpen && (
-            <Dropdown>
-              {chat.status === 'ok' ? (
-                <>
+          {isSearchShown ? (
+            <TabletDropdown>
+              <Search hideSearch={hideSearch} />
+            </TabletDropdown>
+          ) : (
+            isTabletDropdownOpen && (
+              <Dropdown>
+                {chat.status === 'ok' ? (
+                  <>
+                    <TabletStatusButton
+                      onClick={() => {
+                        closeTabletDropdown();
+                        openDialog('archive');
+                      }}
+                      icon="archive"
+                      text={t('header.archive')}
+                    />
+                    <TabletStatusButton
+                      onClick={() => {
+                        closeTabletDropdown();
+                        openDialog('block');
+                      }}
+                      icon="block"
+                      text={t('header.block')}
+                    />
+                  </>
+                ) : (
                   <TabletStatusButton
                     onClick={() => {
                       closeTabletDropdown();
-                      openDialog('archive');
+                      openDialog('restore');
                     }}
-                    icon="archive"
-                    text={t('header.archive')}
+                    icon="return"
+                    text={t('header.restore')}
                   />
-                  <TabletStatusButton
-                    onClick={() => {
-                      closeTabletDropdown();
-                      openDialog('block');
-                    }}
-                    icon="block"
-                    text={t('header.block')}
-                  />
-                </>
-              ) : (
-                <TabletStatusButton
+                )}
+                <TabletReportButton
                   onClick={() => {
                     closeTabletDropdown();
-                    openDialog('restore');
+                    openReportDialog();
                   }}
-                  icon="return"
-                  text={t('header.restore')}
+                  leftIcon={'danger'}
+                  sizeInPx={24}
+                  text={{
+                    color: 'purple',
+                    text: t('header.report'),
+                    variant: 'link',
+                  }}
                 />
-              )}
-              <TabletReportButton
-                onClick={() => {
-                  closeTabletDropdown();
-                  openReportDialog();
-                }}
-                leftIcon={'danger'}
-                sizeInPx={24}
-                text={{
-                  color: 'purple',
-                  text: t('header.report'),
-                  variant: 'link',
-                }}
-              />
-            </Dropdown>
+              </Dropdown>
+            )
           )}
-        </>
+        </Container>
+      ) : isSearchShown ? (
+        <Search hideSearch={hideSearch} />
       ) : (
         <Container>
           <IconButton variant="search" sizeInPx={24} onClick={showSearch} />
@@ -155,7 +176,14 @@ const Dropdown = styled.div`
   border-radius: 0px 0px 4px 4px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   position: absolute;
-  right: 0;
+  right: 40px;
+  top: ${LARGE_ROW_HEIGHT};
+  z-index: 5;
+`;
+
+const TabletDropdown = styled.div`
+  position: absolute;
+  right: 40px;
   top: ${LARGE_ROW_HEIGHT};
   z-index: 5;
 `;

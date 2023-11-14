@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import {
   selectMentorById,
   useGetMentorsQuery,
@@ -18,7 +16,6 @@ import { IconButton } from '@/components/Buttons';
 import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import { LARGE_ROW_HEIGHT, ROW_HEIGHT } from '@/features/Chat/constants';
-import Search from './Search';
 import Text from '@/components/Text';
 
 type Props = {
@@ -28,9 +25,6 @@ type Props = {
 const Header = ({ chat }: Props) => {
   const isMobile = useMobileMode();
   const isTablet = useTabletMode();
-  const [isSearchShown, setIsSearchShown] = useState(false);
-  const showSearch = () => setIsSearchShown(true);
-  const hideSearch = () => setIsSearchShown(false);
 
   const dispatch = useAppDispatch();
   // Clearing the active chat will return to the menu in tablet mode
@@ -73,11 +67,7 @@ const Header = ({ chat }: Props) => {
           )}
         </ProfileInfo>
       )}
-      {!isTablet && isSearchShown ? (
-        <Search hideSearch={hideSearch} />
-      ) : (
-        <Buttons chat={chat} showSearch={showSearch} tabletMode={isTablet} />
-      )}
+      <Buttons chat={chat} tabletMode={isTablet} />
     </Container>
   );
 };
