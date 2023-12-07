@@ -1,17 +1,23 @@
+// Libraries
+import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+// Types
+import type { ChatBuddy } from '@/features/Chat/chatSlice';
+
+// Store and hooks
+import { selectUserId } from '@/features/Authentication/userSlice';
 import { toSendMessage, NewMessage } from '@/features/Chat/chatPageApi';
 import { useAppSelector } from '@/store';
 import { useMobileMode } from '@/hooks/useMobileMode';
-import { selectUserId } from '@/features/Authentication/userSlice';
 
-import type { ChatBuddy } from '@/features/Chat/chatSlice';
-
-import styled from 'styled-components';
-import { IconButton } from '@/components/Buttons';
+// Variables
 import { palette } from '@/components/variables';
-import { ROW_HEIGHT, SMALL_ROW_HEIGHT } from '@/features/Chat/constants';
+import { ROW_HEIGHT, SHORT_ROW_HEIGHT } from '@/features/Chat/constants';
+
+// Components
+import { IconButton } from '@/components/Buttons';
 import TextInput from '@/components/TextInput';
 
 type Props = {
@@ -48,7 +54,6 @@ const MessageField = ({ chat, sendMessage, isMessageSendLoading }: Props) => {
         variant="send"
         sizeInPx={46}
         onClick={() => handleMessageSend(chat.buddyId, text)}
-        isMobile={isMobile}
       />
     </Container>
   );
@@ -62,7 +67,7 @@ const Container = styled.div`
 const Input = styled(TextInput)<{ isMobile: boolean }>`
   box-sizing: border-box;
   flex: 1;
-  height: ${({ isMobile }) => (isMobile ? SMALL_ROW_HEIGHT : ROW_HEIGHT)};
+  height: ${({ isMobile }) => (isMobile ? SHORT_ROW_HEIGHT : ROW_HEIGHT)};
   margin: 20px 1.25rem 20px 40px;
 
   &:focus {
@@ -70,7 +75,7 @@ const Input = styled(TextInput)<{ isMobile: boolean }>`
   }
 `;
 
-const SendButton = styled(IconButton)<{ isMobile: boolean }>`
+const SendButton = styled(IconButton)`
   margin-right: 1.25rem;
 `;
 

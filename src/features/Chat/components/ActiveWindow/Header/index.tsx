@@ -1,26 +1,30 @@
+// Libraries
+import styled from 'styled-components';
+
+// Store and hooks
+import { clearActiveChat, type ChatBuddy } from '@/features/Chat/chatSlice';
 import {
   selectMentorById,
   useGetMentorsQuery,
 } from '@/features/MentorPage/mentorPageApi';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { useMobileMode } from '@/hooks/useMobileMode';
 import { useTabletMode } from '@/hooks/useTabletMode';
 
-import { clearActiveChat, type ChatBuddy } from '@/features/Chat/chatSlice';
+// Variables
+import {
+  CHAT_GAP_WIDTH,
+  CHAT_MENU_WIDTH,
+  HIGH_ROW_HEIGHT,
+  ROW_HEIGHT,
+} from '@/features/Chat/constants';
+import { CONTENT_WIDTH, palette } from '@/components/variables';
 
-import styled from 'styled-components';
+// Components
 import ArchivedIcon from '@/static/icons/archived-chats.svg';
 import Buttons from './Buttons';
 import BlockedIcon from '@/static/icons/blocked-chats.svg';
 import { IconButton } from '@/components/Buttons';
-import { CONTENT_WIDTH, palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
-import {
-  CHAT_GAP_WIDTH,
-  CHAT_MENU_WIDTH,
-  LARGE_ROW_HEIGHT,
-  ROW_HEIGHT,
-} from '@/features/Chat/constants';
 import Text from '@/components/Text';
 
 type Props = {
@@ -28,7 +32,6 @@ type Props = {
 };
 
 const Header = ({ chat }: Props) => {
-  const isMobile = useMobileMode();
   const isTablet = useTabletMode();
 
   const dispatch = useAppDispatch();
@@ -46,13 +49,13 @@ const Header = ({ chat }: Props) => {
   };
 
   return (
-    <Container mobile={isMobile} tablet={isTablet}>
+    <Container tablet={isTablet}>
       {isTablet && (
         <IconButton variant="back" sizeInPx={40} onClick={returnToTabletMenu} />
       )}
       <IconContainer>{icons[chat.status]}</IconContainer>
       <MentorName variant="h2">{mentor?.name}</MentorName>
-      <MentorBio isMobile={isMobile} isTablet={isTablet} variant="p">
+      <MentorBio isTablet={isTablet} variant="p">
         {mentor?.statusMessage}
       </MentorBio>
       <ButtonsWrapper>
@@ -62,20 +65,18 @@ const Header = ({ chat }: Props) => {
   );
 };
 
-const Container = styled.div<{ mobile: boolean; tablet: boolean }>`
+const Container = styled.div<{ tablet: boolean }>`
   align-items: center;
   border-bottom: 1px solid ${palette.greyLight};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
   box-sizing: border-box;
   display: flex;
   gap: 30px;
-  height: ${({ tablet }) => (tablet ? LARGE_ROW_HEIGHT : ROW_HEIGHT)};
+  height: ${({ tablet }) => (tablet ? HIGH_ROW_HEIGHT : ROW_HEIGHT)};
   justify-content: flex-start;
   padding: 14px 40px;
-  width: ${({ mobile, tablet }) =>
-    mobile
-      ? '100vw'
-      : tablet
+  width: ${({ tablet }) =>
+    tablet
       ? '100vw'
       : `calc(${CONTENT_WIDTH}-${CHAT_MENU_WIDTH}-${CHAT_GAP_WIDTH}})`};
 `;
@@ -97,10 +98,10 @@ const MentorName = styled(Text)`
   white-space: nowrap;
 `;
 
-const MentorBio = styled(Text)<{ isMobile?: boolean; isTablet?: boolean }>`
+const MentorBio = styled(Text)<{ isTablet: boolean }>`
   margin: 0;
-  max-width: ${({ isMobile, isTablet }) =>
-    isMobile || isTablet
+  max-width: ${({ isTablet }) =>
+    isTablet
       ? 'calc(100vw - 2*40px - 49px - 3*40px - 200px - 4*30px - 20px - 100px)'
       : `calc((${CONTENT_WIDTH}-${CHAT_MENU_WIDTH}-${CHAT_GAP_WIDTH}-(2 * 40px + 49px + 20px + 2*30px + 500px))/2)`};
   overflow: hidden;

@@ -1,14 +1,20 @@
-import { useTabletMode } from '@/hooks/useTabletMode';
+// Libraries
+import styled, { css } from 'styled-components';
+
+// Store and hooks
 import { selectActiveChat } from './chatSlice';
+import { useTabletMode } from '@/hooks/useTabletMode';
 import { useAppSelector } from '@/store';
 
-import styled, { css } from 'styled-components';
+// Variables
 import { CHAT_GAP_WIDTH } from '@/features/Chat/constants';
 import { CONTENT_WIDTH, OUTER_VERTICAL_MARGIN } from '@/components/variables';
+
+// Components
 import ActiveWindow from './components/ActiveWindow';
-import WelcomeWindow from './components/WelcomeWindow';
 import Menu from './components/Menu';
 import PageWithTransition from '@/components/PageWithTransition';
+import WelcomeWindow from './components/WelcomeWindow';
 
 const Chat = () => {
   const isTablet = useTabletMode();
@@ -17,11 +23,9 @@ const Chat = () => {
   return (
     <PageWithTransition>
       {isTablet ? (
-        <PageContainer isTablet>
-          {chat ? <ActiveWindow /> : <Menu />}
-        </PageContainer>
+        <PageContainer>{chat ? <ActiveWindow /> : <Menu />}</PageContainer>
       ) : (
-        <PageContainer>
+        <PageContainer isDesktop>
           <Menu />
           {chat ? <ActiveWindow /> : <WelcomeWindow />}
         </PageContainer>
@@ -30,18 +34,17 @@ const Chat = () => {
   );
 };
 
-const PageContainer = styled.div<{ isTablet?: boolean }>`
+const PageContainer = styled.div<{ isDesktop?: boolean }>`
   display: flex;
-  ${({ isTablet }) =>
-    isTablet
-      ? css``
-      : css`
-          gap: ${CHAT_GAP_WIDTH};
-          justify-content: center;
-          margin: ${OUTER_VERTICAL_MARGIN} auto;
-          max-width: ${CONTENT_WIDTH};
-          width: ${CONTENT_WIDTH};
-        `}
+  ${({ isDesktop }) =>
+    isDesktop &&
+    css`
+      gap: ${CHAT_GAP_WIDTH};
+      justify-content: center;
+      margin: ${OUTER_VERTICAL_MARGIN} auto;
+      max-width: ${CONTENT_WIDTH};
+      width: ${CONTENT_WIDTH};
+    `}
 `;
 
 export default Chat;

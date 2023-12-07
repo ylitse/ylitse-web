@@ -30,12 +30,17 @@ export const messageColors = {
   },
 };
 
-export const CHAT_MIN_HEIGHT = '600px';
-export const CHAT_MIN_HEIGHT_TABLET = '400px';
+// Widths
 export const CHAT_GAP_WIDTH = '22px';
 export const CHAT_MENU_WIDTH = '400px';
 export const CHAT_WINDOW_MIN_WIDTH = '1000px';
 export const DIALOG_WIDTH = '687px';
+
+// Heights
+export const CHAT_MIN_HEIGHT = '600px';
+export const CHAT_MIN_HEIGHT_TABLET = '400px';
+
+// Row heights
 export const ROW_HEIGHT = '80px';
-export const LARGE_ROW_HEIGHT = '100px';
-export const SMALL_ROW_HEIGHT = '60px';
+export const HIGH_ROW_HEIGHT = '100px';
+export const SHORT_ROW_HEIGHT = '60px';

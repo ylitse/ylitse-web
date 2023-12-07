@@ -1,14 +1,19 @@
+// Libraries
+import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+// Types
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
 import type { ConfirmationDialogVariant } from '../Dialogs';
 
-import styled from 'styled-components';
+// Variables
+import { HIGH_ROW_HEIGHT } from '@/features/Chat/constants';
+import { palette } from '@/components/variables';
+
+// Components
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
 import { ConfirmationDialog, ReportDialog } from '../Dialogs';
-import { LARGE_ROW_HEIGHT } from '@/features/Chat/constants';
-import { palette } from '@/components/variables';
 import Search from './Search';
 
 type Props = {
@@ -177,14 +182,14 @@ const Dropdown = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   position: absolute;
   right: 40px;
-  top: ${LARGE_ROW_HEIGHT};
+  top: ${HIGH_ROW_HEIGHT};
   z-index: 5;
 `;
 
 const TabletDropdown = styled.div`
   position: absolute;
   right: 40px;
-  top: ${LARGE_ROW_HEIGHT};
+  top: ${HIGH_ROW_HEIGHT};
   z-index: 5;
 `;
 

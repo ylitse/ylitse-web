@@ -1,12 +1,16 @@
+// Libraries
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
 import styled, { css } from 'styled-components';
+
+// Variables
 import {
   CHAT_MIN_HEIGHT,
   CHAT_WINDOW_MIN_WIDTH,
 } from '@/features/Chat/constants';
-import { CONTENT_HEIGHT, palette } from '@/components/variables';
+import { DESKTOP_CONTENT_HEIGHT, palette } from '@/components/variables';
+
+// Components
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 
@@ -36,7 +40,7 @@ const WelcomeWindow = () => {
 };
 
 const Container = styled.div`
-  height: ${CONTENT_HEIGHT};
+  height: ${DESKTOP_CONTENT_HEIGHT};
   min-height: ${CHAT_MIN_HEIGHT};
   min-width: ${CHAT_WINDOW_MIN_WIDTH};
 `;
