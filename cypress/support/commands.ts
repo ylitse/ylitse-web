@@ -19,7 +19,7 @@ Cypress.Commands.add(
       cy.get(`input[id="${input}"]`).parent().click();
     };
 
-    cy.visit('/register');
+    cy.visit('/register/');
     cy.fillInput('username', username);
     cy.fillInput('password', password);
     cy.fillInput('password-confirmation', password);
@@ -27,16 +27,19 @@ Cypress.Commands.add(
     toggle('required-age');
     toggle('privacy-consent');
     cy.get(`button[id="submit"]`).click();
+    cy.contains(/Login|Kirjaudu sisään/g).should('be.visible');
   },
 );
 
 Cypress.Commands.add(
   'loginUser',
   (username: string, password: string): void => {
-    cy.visit('/login');
+    cy.visit('/login/');
+    cy.contains(/Login|Kirjaudu sisään/g).should('be.visible');
     cy.fillInput('username', username);
     cy.fillInput('password', password);
     cy.get('button[id="submit"]').click();
+    cy.contains('KOTISIVU').should('be.visible');
   },
 );
 

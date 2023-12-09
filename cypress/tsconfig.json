@@ -1,12 +1,8 @@
 {
-    "compilerOptions": {
-      "isolatedModules": false
-    },
-    "exclude": [
-        "src/**/*.test.tsx"
-    ],
-    "extends": "../tsconfig.json",
-    "include": [
-      "../node_modules/cypress"
-    ]
-  }
+  "compilerOptions": {
+    "isolatedModules": false
+  },
+  "exclude": ["src/**/*.test.tsx"],
+  "extends": "../tsconfig.json",
+  "include": ["../node_modules/cypress"]
+}

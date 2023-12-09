@@ -22,7 +22,7 @@
   };
 
   const fetchTranslations = async newLocale => {
-    const response = await fetch(`/static/locales/${newLocale}/${page}.json`);
+    const response = await fetch(`../locales/${newLocale}/${page}.json`);
     if (!response.ok) {
       console.error(`Could not fetch translations for locale ${newLocale}`);
     }

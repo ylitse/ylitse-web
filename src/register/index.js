@@ -55,7 +55,7 @@
 
       // Redirect to login page
       if (updateUserResponse.ok) {
-        window.location.replace('/login');
+        window.location.replace('/login/');
       }
     } catch (error) {
       console.log(error.message);

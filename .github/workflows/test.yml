@@ -1,0 +1,46 @@
+name: Test
+
+on: [workflow_call]
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: npm
+      - name: Install deps
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Run unit tests
+        run: npm run test:unit
+      - name: Clone the back end
+        run: git clone https://gitlab.com/ylitse/ylitse-api
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: pip
+          cache-dependency-path: ylitse-api/requirements.txt
+      - name: Set up the back end
+        run: |
+          make env
+          source env/bin/activate
+          make conf
+        working-directory: ylitse-api
+        env:
+          YLITSE_POSTGRES_URL: ${{ secrets.YLITSE_POSTGRES_URL }}
+      - name: Cache cypress
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Run E2E tests
+        run: |
+          ${{ github.workspace }}/.github/scripts/start-api &
+          npm run start &
+          npm run test:e2e

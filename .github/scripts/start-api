@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+set -eu
+
+exec > >(awk '{ print strftime("\033[0;36mYLITSE-API:\033[0m"), $0 }') 2>&1
+
+cd ylitse-api
+source env/bin/activate
+YLITSE_POSTGRES_DATA= make run-gunicorn

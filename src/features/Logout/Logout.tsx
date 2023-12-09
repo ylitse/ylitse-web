@@ -7,7 +7,7 @@ const Logout = () => {
       try {
         const response = await fetch('/api/logout');
         if (response.ok) {
-          window.location.href = '/login';
+          window.location.href = '/login/';
         }
       } catch (error) {
         console.error(error);

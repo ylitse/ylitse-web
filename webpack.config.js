@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const redirect = (res, loc) => {
   res.statusCode = 302;
@@ -11,7 +13,7 @@ const redirect = (res, loc) => {
 const checkAuth = (res, req) => {
   if (req.url !== '/login' && [401].includes(res.statusCode)) {
     // not logged in, redirect to login page
-    redirect(res, '/login');
+    redirect(res, '/login/');
   }
 };
 
@@ -21,7 +23,10 @@ const DEV_API = process.env.DEV_API
 
 module.exports = {
   devServer: {
-    historyApiFallback: true,
+    port: 8082,
+    historyApiFallback: {
+      verbose: true,
+    },
     proxy: {
       '/api/**': {
         changeOrigin: true,
@@ -50,19 +55,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'css-loader',
-          },
-        ],
+        use: 'css-loader',
       },
       {
         test: /\.(png|jp(e*)g|svg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
+        use: 'file-loader',
       },
     ],
   },
@@ -71,8 +68,29 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
-    new HtmlWebPackPlugin({
+    new webpack.DefinePlugin({
+      BASE_PATH: JSON.stringify(process.env.YLITSE_BASE_PATH),
+    }),
+
+    new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
+    }),
+
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: '**/*',
+          context: path.resolve(__dirname, 'src', 'static'),
+        },
+        {
+          from: 'login/**/*',
+          context: path.resolve(__dirname, 'src'),
+        },
+        {
+          from: 'register/**/*',
+          context: path.resolve(__dirname, 'src'),
+        },
+      ],
     }),
   ],
   resolve: {

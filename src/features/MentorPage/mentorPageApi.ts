@@ -58,7 +58,7 @@ const toMentorRecord = ({ resources }: MentorsResponse) =>
   }, {});
 
 export const mentorsApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: 'api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),
   reducerPath: 'mentors',
 
   endpoints: builder => ({

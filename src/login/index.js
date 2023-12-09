@@ -4,6 +4,8 @@
   form.addEventListener(
     'submit',
     function (event) {
+      document.getElementById('mfa-token').setAttribute('name', 'mfa_token');
+
       fetch('/api/weblogin', {
         body: new FormData(form),
         credentials: 'include',
