@@ -114,7 +114,7 @@ const toQueryString = (params: PollingParam) => {
 };
 
 export const chatApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: 'api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),
   reducerPath: 'chatsApi',
   endpoints: builder => ({
     getContacts: builder.query<Array<Buddy>, string>({
