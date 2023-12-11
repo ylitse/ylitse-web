@@ -79,6 +79,7 @@ Project uses [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hook
 
 Locally:
 
+1. You need the admin username and password for the tests to work. Copy them from the template `cp .env.template .env`
 1. Start Ylitse-API `YLITSE_POSTGRES_DATA= make run-gunicorn`
 1. Start dev server `npm run start`
 1. Run cypress `CYPRESS_BASE_URL=http://localhost:8081 npx cypress open`
