@@ -21,5 +21,3 @@ dist
 *.sw?
 .cypress/screenshots/*
 .cypress/videos/*
-
-.env
