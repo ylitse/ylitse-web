@@ -21,11 +21,14 @@ import { CONTENT_WIDTH, palette } from '@/components/variables';
 
 // Components
 import ArchivedIcon from '@/static/icons/archived-chats.svg';
-import Buttons from './Buttons';
 import BlockedIcon from '@/static/icons/blocked-chats.svg';
+import DesktopButtons from './DesktopButtons';
 import { IconButton } from '@/components/Buttons';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
+import TabletButtons from './TabletButtons';
 import Text from '@/components/Text';
+import { useState } from 'react';
+import { ConfirmationDialog, DialogVariant, ReportDialog } from '../Dialogs';
 
 type Props = {
   chat: ChatBuddy;
@@ -48,6 +51,18 @@ const Header = ({ chat }: Props) => {
     banned: <img src={BlockedIcon} />,
   };
 
+  const [dialogVariant, setDialogVariant] = useState<DialogVariant>('archive');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const isConfirmDialogOpen = isDialogOpen && dialogVariant !== 'report';
+  const isReportDialogOpen = isDialogOpen && dialogVariant === 'report';
+
+  const openDialog = (variant: DialogVariant) => {
+    setDialogVariant(variant);
+    setIsDialogOpen(true);
+  };
+  const closeDialog = () => setIsDialogOpen(false);
+
   return (
     <Container tablet={isTablet}>
       {isTablet && (
@@ -58,8 +73,23 @@ const Header = ({ chat }: Props) => {
       <MentorBio isTablet={isTablet} variant="p">
         {mentor?.statusMessage}
       </MentorBio>
+
       <ButtonsWrapper>
-        <Buttons chat={chat} tabletMode={isTablet} />
+        {isConfirmDialogOpen && (
+          <ConfirmationDialog
+            variant={dialogVariant}
+            chat={chat}
+            close={closeDialog}
+          />
+        )}
+        {isReportDialogOpen && (
+          <ReportDialog buddyId={chat.buddyId} close={closeDialog} />
+        )}
+        {isTablet ? (
+          <TabletButtons chat={chat} openDialog={openDialog} />
+        ) : (
+          <DesktopButtons chat={chat} openDialog={openDialog} />
+        )}
       </ButtonsWrapper>
     </Container>
   );
@@ -87,12 +117,6 @@ const IconContainer = styled.div`
 
 const MentorName = styled(Text)`
   margin: 0;
-  max-width: calc(
-    (
-      ${CONTENT_WIDTH}-${CHAT_MENU_WIDTH}-${CHAT_GAP_WIDTH}-
-        (2 * 40px + 49px + 20px + 2 * 30px + 500px + 30px)
-    )
-  );
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -100,10 +124,6 @@ const MentorName = styled(Text)`
 
 const MentorBio = styled(Text)<{ isTablet: boolean }>`
   margin: 0;
-  max-width: ${({ isTablet }) =>
-    isTablet
-      ? 'calc(100vw - 2*40px - 49px - 3*40px - 200px - 4*30px - 20px - 100px)'
-      : `calc((${CONTENT_WIDTH}-${CHAT_MENU_WIDTH}-${CHAT_GAP_WIDTH}-(2 * 40px + 49px + 20px + 2*30px + 500px))/2)`};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -6,11 +6,14 @@ import { addPollParam } from '@/features/Chat/chatSlice';
 import type { AppMessage, ChatFolder } from '@/features/Chat/chatPageApi';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { palette } from '@/components/variables';
 import { Message } from './Message';
 import Text from '@/components/Text';
 import Spinner from '@/components/Spinner';
+
+// Fix imports
+import { useTabletMode } from '@/hooks/useTabletMode';
 
 type Props = {
   messageList: Array<AppMessage>;
@@ -42,6 +45,7 @@ const toGroupedMessages = (messages: Array<AppMessage>) =>
   );
 
 const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
+  const isTablet = useTabletMode();
   const groupedMessages = toGroupedMessages(messageList);
 
   const dispatch = useAppDispatch();
@@ -80,15 +84,17 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
       {isLoading && <Spinner variant="small" isDark />}
       {Object.keys(groupedMessages).map(date => (
         <Fragment key={date}>
-          <DateDivider>{date}</DateDivider>
-          {groupedMessages[date].map(message => (
-            <Message
-              key={message.id}
-              folder={status}
-              buddyId={buddyId}
-              message={message}
-            />
-          ))}
+          <DateDivider isTablet={isTablet}>{date}</DateDivider>
+          <Messages>
+            {groupedMessages[date].map(message => (
+              <Message
+                key={message.id}
+                folder={status}
+                buddyId={buddyId}
+                message={message}
+              />
+            ))}
+          </Messages>
         </Fragment>
       ))}
     </ChatHistory>
@@ -99,19 +105,25 @@ const ChatHistory = styled.div`
   border-bottom: 1px solid ${palette.greyLight};
   flex: 1;
   overflow: auto;
-  padding: 0px 40px 10px;
+  padding-bottom: 10px;
 `;
 
-const DateDivider = styled(Text)`
+const DateDivider = styled(Text)<{ isTablet: boolean }>`
   position: relative;
   text-align: center;
+  ${({ isTablet }) =>
+    !isTablet &&
+    css`
+      margin-left: 40px;
+      margin-right: 40px;
+    `}
 
   &:before,
   &:after {
     content: '';
     position: absolute;
     top: 50%;
-    width: 40%;
+    width: ${({ isTablet }) => (isTablet ? '30%' : '40%')};
     height: 1px;
     background-color: ${palette.purple}};
   }
@@ -123,6 +135,11 @@ const DateDivider = styled(Text)`
   &:after {
     right: 0;
   }
+`;
+
+const Messages = styled.div`
+  padding-left: 40px;
+  padding-right: 40px;
 `;
 
 export default MessageList;
