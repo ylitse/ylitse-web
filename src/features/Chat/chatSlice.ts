@@ -245,8 +245,8 @@ export const selectCurrentPollingParams = createSelector(
     const nextParams = !pollingParams
       ? null
       : pollingParams.length === 0
-      ? defaultParam
-      : pollingParams[0];
+        ? defaultParam
+        : pollingParams[0];
 
     return nextParams;
   },

@@ -41,10 +41,10 @@ export const MenuItem = ({ buddy }: Props) => {
           buddy.buddyId === activeChatId
             ? 'blueDark'
             : activeFolder === 'ok'
-            ? 'purpleDark'
-            : activeFolder === 'archived'
-            ? 'orangeDark'
-            : 'redDark'
+              ? 'purpleDark'
+              : activeFolder === 'archived'
+                ? 'orangeDark'
+                : 'redDark'
         }
       />
       <MentorInfo>
