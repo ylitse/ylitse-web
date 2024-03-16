@@ -13,6 +13,8 @@ const mentorsResponse = {
 beforeAll(() => {
   server.listen();
   jest.useFakeTimers();
+  //eslint-disable-next-line no-global-assign
+  window = Object.assign(window, { innerWidth: 1600 });
 });
 
 // Disable API mocking after the tests are done.
