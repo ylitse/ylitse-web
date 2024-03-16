@@ -1,6 +1,6 @@
 import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 import { breakpoints, palette } from '@/components/variables';
@@ -16,7 +16,7 @@ type Props = {
 
 export const Header = ({ mentor, onDismiss }: Props) => {
   const availabilityMessage = mentor.isVacationing ? 'Ei tavoitettavissa' : '';
-  const isMobile = useMobileMode();
+  const { isMobile } = useGetLayoutMode();
 
   return isMobile ? (
     <Container isAvailable={!mentor.isVacationing} isMobile>

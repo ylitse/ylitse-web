@@ -1,6 +1,6 @@
 import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
@@ -15,7 +15,7 @@ type Props = {
 export const BasicInfo = ({
   mentor: { name, age, region, statusMessage, languages },
 }: Props) => {
-  const isMobile = useMobileMode();
+  const { isMobile } = useGetLayoutMode();
   const { t } = useTranslation('mentors');
 
   return (

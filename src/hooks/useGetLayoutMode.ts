@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
-import { MOBILE_TRESHOLD } from '@/components/variables';
+import { TABLET_TRESHOLD, MOBILE_TRESHOLD } from '@/components/variables';
 
-export const useMobileMode = () => {
+/**
+ * Checks the width of screen and returns flags for size
+ *
+ * isTablet: if screen is smaller or equal than TABLET_THRESHOLD
+ * isMobile: if screen is smaller or equal than MOBILE_THRESHOLD
+ */
+export const useGetLayoutMode = () => {
   const [width, setWidth] = useState<number>(window.innerWidth);
 
   const handleWindowSizeChange = () => setWidth(window.innerWidth);
@@ -13,7 +19,8 @@ export const useMobileMode = () => {
     };
   }, []);
 
+  const isTablet = width <= TABLET_TRESHOLD;
   const isMobile = width <= MOBILE_TRESHOLD;
 
-  return isMobile;
+  return { isTablet, isMobile };
 };

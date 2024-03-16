@@ -1,22 +1,17 @@
-// Libraries
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-// Types
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
 
-// Store and hooks
 import { selectUserId } from '@/features/Authentication/userSlice';
 import { toSendMessage, NewMessage } from '@/features/Chat/chatPageApi';
 import { useAppSelector } from '@/store';
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
-// Variables
 import { palette } from '@/components/variables';
 import { ROW_HEIGHT, SHORT_ROW_HEIGHT } from '@/features/Chat/constants';
 
-// Components
 import { IconButton } from '@/components/Buttons';
 import TextInput from '@/components/TextInput';
 
@@ -28,7 +23,7 @@ type Props = {
 
 const MessageField = ({ chat, sendMessage, isMessageSendLoading }: Props) => {
   const { t } = useTranslation('chat');
-  const isMobile = useMobileMode();
+  const { isMobile } = useGetLayoutMode();
   const [text, setText] = useState('');
   const userId = useAppSelector(selectUserId);
 

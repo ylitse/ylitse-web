@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 // Store and hooks
-import { useTabletMode } from '@/hooks/useTabletMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 // Variables
 import {
@@ -21,7 +21,7 @@ type Props = {
 const TRANSITION_LENGTH = 0.7;
 
 const PageWithTransition: React.FC<Props> = ({ children }) => {
-  const isTablet = useTabletMode();
+  const { isTablet } = useGetLayoutMode();
   const [isTransition, setIsTransition] = useState(false);
   const [showContent, setShowContent] = useState(false);
 

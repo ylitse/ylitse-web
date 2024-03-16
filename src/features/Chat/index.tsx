@@ -1,23 +1,19 @@
-// Libraries
 import styled, { css } from 'styled-components';
 
-// Store and hooks
 import { selectActiveChat } from './chatSlice';
-import { useTabletMode } from '@/hooks/useTabletMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useAppSelector } from '@/store';
 
-// Variables
 import { CHAT_GAP_WIDTH } from '@/features/Chat/constants';
 import { CONTENT_WIDTH, OUTER_VERTICAL_MARGIN } from '@/components/variables';
 
-// Components
 import ActiveWindow from './components/ActiveWindow';
 import Menu from './components/Menu';
 import PageWithTransition from '@/components/PageWithTransition';
 import WelcomeWindow from './components/WelcomeWindow';
 
 const Chat = () => {
-  const isTablet = useTabletMode();
+  const { isTablet } = useGetLayoutMode();
   const chat = useAppSelector(selectActiveChat);
 
   return (

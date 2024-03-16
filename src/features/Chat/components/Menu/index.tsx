@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 // Store and hooks
 import { selectChats } from '@/features/Chat/chatSlice';
 import { useAppSelector } from '@/store';
-import { useTabletMode } from '@/hooks/useTabletMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 // Variables
 import {
@@ -28,7 +28,7 @@ import { MenuItem } from './Item';
 
 const Menu = () => {
   const { t } = useTranslation('chat');
-  const isTablet = useTabletMode();
+  const { isTablet } = useGetLayoutMode();
   const { showFolders, activeFolder } = useAppSelector(state => state.chats);
   const chats = useAppSelector(selectChats);
 

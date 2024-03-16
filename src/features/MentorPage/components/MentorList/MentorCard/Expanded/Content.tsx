@@ -3,7 +3,7 @@ import { setConversation } from '@/features/Chat/chatSlice';
 
 import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -24,7 +24,7 @@ export const Content = ({
   mentor: { skills, story, languages, buddyId, name },
   onDismiss,
 }: Props) => {
-  const isMobile = useMobileMode();
+  const { isMobile } = useGetLayoutMode();
   const { t } = useTranslation('mentors');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

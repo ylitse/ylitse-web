@@ -5,15 +5,13 @@ import { addPollParam } from '@/features/Chat/chatSlice';
 
 import type { AppMessage, ChatFolder } from '@/features/Chat/chatPageApi';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import styled, { css } from 'styled-components';
 import { palette } from '@/components/variables';
 import { Message } from './Message';
 import Text from '@/components/Text';
 import Spinner from '@/components/Spinner';
-
-// Fix imports
-import { useTabletMode } from '@/hooks/useTabletMode';
 
 type Props = {
   messageList: Array<AppMessage>;
@@ -45,7 +43,7 @@ const toGroupedMessages = (messages: Array<AppMessage>) =>
   );
 
 const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
-  const isTablet = useTabletMode();
+  const { isTablet } = useGetLayoutMode();
   const groupedMessages = toGroupedMessages(messageList);
 
   const dispatch = useAppDispatch();

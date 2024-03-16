@@ -8,7 +8,7 @@ import {
   useGetMentorsQuery,
 } from '@/features/MentorPage/mentorPageApi';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { useTabletMode } from '@/hooks/useTabletMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 // Variables
 import {
@@ -35,7 +35,7 @@ type Props = {
 };
 
 const Header = ({ chat }: Props) => {
-  const isTablet = useTabletMode();
+  const { isTablet } = useGetLayoutMode();
 
   const dispatch = useAppDispatch();
   // Clearing the active chat will return to the menu in tablet mode

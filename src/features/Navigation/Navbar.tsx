@@ -1,4 +1,4 @@
-import { useTabletMode } from '@/hooks/useTabletMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -15,7 +15,7 @@ import MobileDropdown from './MobileDropdown';
 import LangDropdown from './LanguageDropdown';
 
 export const Navbar = () => {
-  const isTablet = useTabletMode();
+  const { isTablet } = useGetLayoutMode();
   const { t } = useTranslation('common');
 
   const navigationItems = [

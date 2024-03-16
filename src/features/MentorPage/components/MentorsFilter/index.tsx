@@ -7,7 +7,7 @@ import {
 } from '@/features/MentorPage/mentorsFilterSlice';
 import { useAppSelector, useAppDispatch } from '@/store';
 
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
@@ -28,7 +28,7 @@ const MentorsFilter = () => {
     dispatch(changeSearchString(value));
 
   const { t } = useTranslation('mentors');
-  const isMobile = useMobileMode();
+  const { isMobile } = useGetLayoutMode();
 
   return isMobile ? (
     <MobileSearch

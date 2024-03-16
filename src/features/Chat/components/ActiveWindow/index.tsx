@@ -8,9 +8,8 @@ import {
 } from '@/features/Chat/chatSlice';
 import { useAppSelector } from '@/store';
 import { useSendMessageMutation } from '@/features/Chat/chatPageApi';
-import { useTabletMode } from '@/hooks/useTabletMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
-// Variables
 import {
   CHAT_MIN_HEIGHT,
   CHAT_WINDOW_MIN_WIDTH,
@@ -21,13 +20,12 @@ import {
   palette,
 } from '@/components/variables';
 
-// Components
 import Header from './Header';
 import MessageField from './MessageField';
 import MessageList from './MessageList';
 
 const ActiveWindow = () => {
-  const isTablet = useTabletMode();
+  const { isTablet } = useGetLayoutMode();
   const chat = useAppSelector(selectActiveChat);
 
   const [sendMessage, { isLoading: isLoadingSendMessage }] =
