@@ -8,7 +8,8 @@ html {
   font-style: normal;
   font-weight: 400;
   src: url('../fonts/baloo-2-v14-latin-regular.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src:
+    local(''),
     url('../fonts/baloo-2-v14-latin-regular.eot?#iefix')
       format('embedded-opentype'),
     /* IE6-IE8 */ url('../fonts/baloo-2-v14-latin-regular.woff2')
@@ -27,7 +28,8 @@ html {
   font-style: normal;
   font-weight: 700;
   src: url('../fonts/baloo-2-v14-latin-700.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src:
+    local(''),
     url('../fonts/baloo-2-v14-latin-700.eot?#iefix') format('embedded-opentype'),
     /* IE6-IE8 */ url('../fonts/baloo-2-v14-latin-700.woff2') format('woff2'),
     /* Super Modern Browsers */ url('../fonts/baloo-2-v14-latin-700.woff')
@@ -44,7 +46,8 @@ html {
   font-style: normal;
   font-weight: 400;
   src: url('../fonts/source-sans-pro-v21-latin-regular.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src:
+    local(''),
     url('../fonts/source-sans-pro-v21-latin-regular.eot?#iefix')
       format('embedded-opentype'),
     /* IE6-IE8 */ url('../fonts/source-sans-pro-v21-latin-regular.woff2')

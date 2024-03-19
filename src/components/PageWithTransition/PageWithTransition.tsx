@@ -1,6 +1,18 @@
-import styled, { css } from 'styled-components';
+// Libraries
 import React, { useEffect, useState } from 'react';
-import { palette, Color, NAVIGATION_HEIGHT, FOOTER_HEIGHT } from '../variables';
+import styled, { css } from 'styled-components';
+
+// Store and hooks
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
+
+// Variables
+import {
+  Color,
+  FOOTER_HEIGHT,
+  MOBILE_AND_TABLET_CONTENT_HEIGHT,
+  NAVIGATION_HEIGHT,
+  palette,
+} from '../variables';
 
 type Props = {
   children: React.ReactNode;
@@ -9,6 +21,7 @@ type Props = {
 const TRANSITION_LENGTH = 0.7;
 
 const PageWithTransition: React.FC<Props> = ({ children }) => {
+  const { isTablet } = useGetLayoutMode();
   const [isTransition, setIsTransition] = useState(false);
   const [showContent, setShowContent] = useState(false);
 
@@ -20,7 +33,7 @@ const PageWithTransition: React.FC<Props> = ({ children }) => {
   }, []);
 
   return (
-    <Container>
+    <Container isTablet={isTablet}>
       {showContent && children}
       <Layer
         role="transition"
@@ -50,13 +63,16 @@ const PageWithTransition: React.FC<Props> = ({ children }) => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ isTablet: boolean }>`
   background-color: ${palette.blueLight};
   display: flex;
   flex-direction: column;
   height: auto;
   left: 0;
-  min-height: calc(100vh - ${NAVIGATION_HEIGHT} - ${FOOTER_HEIGHT});
+  min-height: ${({ isTablet }) =>
+    isTablet
+      ? MOBILE_AND_TABLET_CONTENT_HEIGHT
+      : `calc(100vh - ${NAVIGATION_HEIGHT} - ${FOOTER_HEIGHT})`};
   position: relative;
   top: 0;
   width: 100vw;

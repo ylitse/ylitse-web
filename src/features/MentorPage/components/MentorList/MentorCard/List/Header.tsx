@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import { palette } from '@/components/variables';
 import styled from 'styled-components';
@@ -23,7 +23,7 @@ export const Header: React.FC<Props> = ({
   message,
 }) => {
   const { t } = useTranslation('mentors');
-  const isMobile = useMobileMode();
+  const { isMobile } = useGetLayoutMode();
 
   const availabilityMessage = isAvailable ? '' : t('card.unavailable');
 

@@ -1,41 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fi">
-
   <head>
     <meta charset="utf-8" />
     <title localization-key="pageTitle"></title>
-    <meta name="description"
-      content="Ylitse web login" />
-    <meta name="author"
-      content="SOS Children's Villages Finland" />
-    <meta name="viewport"
-      content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet"
-      href="../styles/normalize.css" />
-    <link rel="stylesheet"
-      href="../styles/static-pages.css" />
-    <link rel="stylesheet"
-      href="./styles.css" />
-    <link rel="stylesheet"
-      type="text/css"
-      href="../styles/fonts.css" />
+    <meta name="description" content="Ylitse web login" />
+    <meta name="author" content="SOS Children's Villages Finland" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/normalize.css" />
+    <link rel="stylesheet" href="../styles/static-pages.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/fonts.css" />
   </head>
 
   <body>
     <main>
       <div class="container">
         <div id="language-buttons">
-          <a id="fi-button"
-            href="#"
-            localization-key="inFinnish"></a>
+          <a id="fi-button" href="#" localization-key="inFinnish"></a>
           <span class="separator"></span>
-          <a id="en-button"
-            href="#"
-            localization-key="inEnglish"></a>
+          <a id="en-button" href="#" localization-key="inEnglish"></a>
         </div>
         <div class="panels">
           <div id="mobile-header">
-            <img src="../img/ylitse-logo-tiny.svg">
+            <img src="../img/ylitse-logo-tiny.svg" />
             <h1 localization-key="shortTitle"></h1>
           </div>
           <div class="left panel">
@@ -45,53 +32,57 @@
                 <img src="../icons/warning-with-background.svg" />
                 <div localization-key="loginError"></div>
               </div>
-              <label for="username"
-                localization-key="usernameLabel"></label>
-              <input id="username"
+              <label for="username" localization-key="usernameLabel"></label>
+              <input
+                id="username"
                 name="username"
                 type="text"
                 maxlength="100"
                 placeholder=""
-                autofocus />
-              <label for="password"
-                localization-key="passwordLabel"></label>
-              <input id="password"
+                autofocus
+              />
+              <label for="password" localization-key="passwordLabel"></label>
+              <input
+                id="password"
                 name="password"
                 type="password"
                 maxlength="100"
-                placeholder="" />
-              <a href="#"
-                localization-key="retrievePasswordLink"></a>
-              <label for="mfa-token"
-                localization-key="mfaLabel"></label>
-              <input id="mfa-token"
+                placeholder=""
+              />
+              <a href="#" localization-key="retrievePasswordLink"></a>
+              <label for="mfa-token" localization-key="mfaLabel"></label>
+              <input
+                id="mfa-token"
                 name="mfa-token"
                 type="text"
                 maxlength="100"
-                placeholder="" />
-              <button id="submit"
+                placeholder=""
+              />
+              <button
+                id="submit"
                 type="submit"
-                localization-key="loginButton"></button>
+                localization-key="loginButton"
+              ></button>
             </form>
           </div>
           <div class="right panel">
             <div id="right-text">
-              <img src="../img/ylitse-logo-small.svg">
+              <img src="../img/ylitse-logo-small.svg" />
               <h1 localization-key="longTitle"></h1>
               <p localization-key="appDescription"></p>
-              <a id="register-button"
+              <a
+                id="register-button"
                 class="button"
                 href="../register/"
-                localization-key="registrationLink"></a>
+                localization-key="registrationLink"
+              ></a>
             </div>
           </div>
         </div>
-        <footer localization-key="footer">
-        </footer>
+        <footer localization-key="footer"></footer>
       </div>
     </main>
     <script src="index.js"></script>
     <script src="../localization.js"></script>
   </body>
-
 </html>

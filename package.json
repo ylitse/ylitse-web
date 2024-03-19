@@ -52,7 +52,7 @@
     "babel-jest": "^28.1.1",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
-    "cypress": "^13.3.0",
+    "cypress": "^13.4.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-better-styled-components": "^1.1.2",
     "eslint-plugin-jest": "^27.2.1",
@@ -73,8 +73,8 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
-  "resolutions": {
-    "react-i18next": ">=11.16.4"
+  "overrides": {
+    "postcss": "^8.4.31"
   },
   "jest": {
     "testPathIgnorePatterns": [

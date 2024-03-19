@@ -1,6 +1,6 @@
 import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import styled, { css } from 'styled-components';
 import { Header } from './Header';
@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const ListCard: React.FC<Props> = ({ setVisibleCard, mentor }) => {
-  const isMobile = useMobileMode();
+  const { isMobile } = useGetLayoutMode();
 
   return (
     <Container isMobile={isMobile}>

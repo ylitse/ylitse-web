@@ -1,17 +1,31 @@
-import { useAppSelector } from '@/store';
+// Libraries
+import styled, { css } from 'styled-components';
+
+// Store and hooks
 import {
   selectActiveChat,
   selectIsLoadingBuddyMessages,
 } from '@/features/Chat/chatSlice';
+import { useAppSelector } from '@/store';
 import { useSendMessageMutation } from '@/features/Chat/chatPageApi';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
-import styled from 'styled-components';
+import {
+  CHAT_MIN_HEIGHT,
+  CHAT_WINDOW_MIN_WIDTH,
+} from '@/features/Chat/constants';
+import {
+  DESKTOP_CONTENT_HEIGHT,
+  MOBILE_AND_TABLET_CONTENT_HEIGHT,
+  palette,
+} from '@/components/variables';
+
 import Header from './Header';
 import MessageField from './MessageField';
 import MessageList from './MessageList';
-import { palette } from '@/components/variables';
 
 const ActiveWindow = () => {
+  const { isTablet } = useGetLayoutMode();
   const chat = useAppSelector(selectActiveChat);
 
   const [sendMessage, { isLoading: isLoadingSendMessage }] =
@@ -25,7 +39,7 @@ const ActiveWindow = () => {
 
   return (
     chat && (
-      <Container>
+      <Container isTablet={isTablet}>
         <Header chat={chat} />
         <MessageList
           messageList={chat.messages}
@@ -45,13 +59,20 @@ const ActiveWindow = () => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ isTablet: boolean }>`
   background-color: ${palette.white};
   border-radius: 10px;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  height: 100%;
+  height: ${({ isTablet }) =>
+    isTablet ? MOBILE_AND_TABLET_CONTENT_HEIGHT : DESKTOP_CONTENT_HEIGHT};
+  min-height: ${CHAT_MIN_HEIGHT};
+  ${({ isTablet }) =>
+    !isTablet &&
+    css`
+      min-width: ${CHAT_WINDOW_MIN_WIDTH};
+    `};
 `;
 
 export default ActiveWindow;

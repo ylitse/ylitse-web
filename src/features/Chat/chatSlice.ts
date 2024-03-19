@@ -57,6 +57,9 @@ export const chats = createSlice({
     setActiveChat: (state, action: PayloadAction<string>) => {
       state.activeChatId = action.payload;
     },
+    clearActiveChat: state => {
+      state.activeChatId = null;
+    },
     addPollParam: (state, action: PayloadAction<PollingParam>) => {
       const currentParams = state.pollingParams ?? [];
       state.pollingParams = [action.payload, ...currentParams];
@@ -242,8 +245,8 @@ export const selectCurrentPollingParams = createSelector(
     const nextParams = !pollingParams
       ? null
       : pollingParams.length === 0
-      ? defaultParam
-      : pollingParams[0];
+        ? defaultParam
+        : pollingParams[0];
 
     return nextParams;
   },
@@ -276,6 +279,7 @@ export const {
   setShowFolders,
   setActiveFolder,
   setActiveChat,
+  clearActiveChat,
   addPollParam,
   setConversation,
 } = chats.actions;

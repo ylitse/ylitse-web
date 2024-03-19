@@ -1,6 +1,6 @@
 import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import styled, { css } from 'styled-components';
 import { CONTENT_WIDTH, spacing } from '@/components/variables';
@@ -12,7 +12,7 @@ type Props = {
 };
 
 const MentorList: React.FC<Props> = ({ setVisibleCard, mentors }) => {
-  const isMobile = useMobileMode();
+  const { isMobile } = useGetLayoutMode();
 
   return (
     <CardsList isMobile={isMobile} data-testid="mentor-cards-container">

@@ -6,7 +6,7 @@ import {
   useGetMentorsQuery,
 } from './mentorPageApi';
 import { useAppSelector } from '@/store';
-import { useMobileMode } from '@/hooks/useMobileMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import PageWithTransition from '@/components/PageWithTransition';
 import Spinner from '@/components/Spinner';
@@ -22,7 +22,7 @@ import {
 } from '@/components/variables';
 
 const MentorPage = () => {
-  const isMobile = useMobileMode();
+  const { isMobile } = useGetLayoutMode();
   const { isLoading } = useGetMentorsQuery();
   const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
   const mentors = useAppSelector(selectFilteredMentors());

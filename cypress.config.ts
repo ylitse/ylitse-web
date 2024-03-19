@@ -8,4 +8,6 @@ export default defineConfig({
     baseUrl: 'http://localhost:8082',
     specPattern: 'cypress/tests/**/*.cy.{js,jsx,ts,tsx}',
   },
+  viewportWidth: 1600,
+  viewPortHeight: 720,
 });

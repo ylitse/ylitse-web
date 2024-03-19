@@ -4,7 +4,12 @@ import { useTranslation } from 'react-i18next';
 import type { LangCode } from '../LanguageDropdown';
 import type { NavigationItem as NavItemType } from '../NavigationItems';
 
-import { animations, NAVIGATION_HEIGHT, palette } from '@/components/variables';
+import {
+  animations,
+  MOBILE_NAVIGATION_BORDER_HEIGHT,
+  NAVIGATION_HEIGHT,
+  palette,
+} from '@/components/variables';
 import styled from 'styled-components';
 
 import Text from '@/components/Text';
@@ -19,7 +24,7 @@ type Props = {
 
 const MobileDropdown: React.FC<Props> = ({ items }) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
-    useComponentVisible<HTMLButtonElement>(true);
+    useComponentVisible<HTMLButtonElement>(false);
 
   const { t, i18n } = useTranslation('common');
 
@@ -126,16 +131,18 @@ const Row = styled.div`
 const Menu = styled.div`
   animation: ${animations.growDown};
   background-color: ${palette.white};
-  box-shadow: 1px 0.5px ${palette.greyMid};
+  border-radius: 0 0 10px 10px;
+  box-shadow: 1px 0.5px 15px ${palette.greyMid};
   display: flex;
   flex-direction: column;
   left: 0;
-  margin-top: 2.5rem;
+  margin-top: ${MOBILE_NAVIGATION_BORDER_HEIGHT};
   position: absolute;
   right: 0;
   text-align: left;
-  top: 40px;
+  top: ${NAVIGATION_HEIGHT};
   transform-origin: top center;
+  width: 100vw;
 `;
 
 const UnstyledLink = styled.a`
@@ -146,7 +153,7 @@ const UnstyledLink = styled.a`
 
 const Divider = styled.div`
   border-bottom: 1px solid ${palette.blue2};
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0;
 `;
 
 export default MobileDropdown;

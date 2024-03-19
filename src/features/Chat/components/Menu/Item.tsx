@@ -4,8 +4,10 @@ import { selectBuddyMessages, setActiveChat } from '@/features/Chat/chatSlice';
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
 
 import styled, { css } from 'styled-components';
-import { folderBackgroundColors, palette } from '@/components/variables';
+import { folderColors } from '@/features/Chat/constants';
+import { palette } from '@/components/variables';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
+import { Row } from './Row';
 import Text from '@/components/Text';
 import Spinner from '@/components/Spinner';
 
@@ -29,9 +31,9 @@ export const MenuItem = ({ buddy }: Props) => {
   };
 
   return (
-    <Row
+    <ItemRow
       active={buddy.buddyId === activeChatId}
-      background={folderBackgroundColors[activeFolder]}
+      background={folderColors[activeFolder]}
       onClick={openChat}
     >
       <ProfileIcon
@@ -39,10 +41,10 @@ export const MenuItem = ({ buddy }: Props) => {
           buddy.buddyId === activeChatId
             ? 'blueDark'
             : activeFolder === 'ok'
-            ? 'purpleDark'
-            : activeFolder === 'archived'
-            ? 'orangeDark'
-            : 'redDark'
+              ? 'purpleDark'
+              : activeFolder === 'archived'
+                ? 'orangeDark'
+                : 'redDark'
         }
       />
       <MentorInfo>
@@ -56,22 +58,16 @@ export const MenuItem = ({ buddy }: Props) => {
           <Message>{latest}</Message>
         )}
       </MentorInfo>
-    </Row>
+    </ItemRow>
   );
 };
 
-const Row = styled.div<{
+const ItemRow = styled(Row)<{
   active: boolean;
   background: { active: string; hover: string };
 }>`
-  align-items: center;
-  border-bottom: 1px solid ${palette.greyLight};
-  box-sizing: border-box;
   cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  height: 80px;
-  padding-left: 40px;
+  overflow: hidden;
 
   ${({ active, background }) =>
     active

@@ -1,59 +1,46 @@
-import { useMobileMode } from '@/hooks/useMobileMode';
+import styled, { css } from 'styled-components';
+
 import { selectActiveChat } from './chatSlice';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useAppSelector } from '@/store';
 
-import styled, { css } from 'styled-components';
-import {
-  breakpoints,
-  CONTENT_HEIGHT,
-  CONTENT_WIDTH,
-  OUTER_VERTICAL_MARGIN,
-} from '@/components/variables';
+import { CHAT_GAP_WIDTH } from '@/features/Chat/constants';
+import { CONTENT_WIDTH, OUTER_VERTICAL_MARGIN } from '@/components/variables';
+
 import ActiveWindow from './components/ActiveWindow';
-import WelcomeWindow from './components/WelcomeWindow';
 import Menu from './components/Menu';
 import PageWithTransition from '@/components/PageWithTransition';
+import WelcomeWindow from './components/WelcomeWindow';
 
 const Chat = () => {
-  const isMobile = useMobileMode();
+  const { isTablet } = useGetLayoutMode();
   const chat = useAppSelector(selectActiveChat);
 
   return (
     <PageWithTransition>
-      <PageContainer isMobile={isMobile}>
-        <InnerContainer>
+      {isTablet ? (
+        <PageContainer>{chat ? <ActiveWindow /> : <Menu />}</PageContainer>
+      ) : (
+        <PageContainer isDesktop>
           <Menu />
           {chat ? <ActiveWindow /> : <WelcomeWindow />}
-        </InnerContainer>
-      </PageContainer>
+        </PageContainer>
+      )}
     </PageWithTransition>
   );
 };
 
-const PageContainer = styled.div<{ isMobile: boolean }>`
-  ${({ isMobile }) =>
-    isMobile
-      ? css`
-          width: 100vw;
-        `
-      : css`
-          display: flex;
-          flex-direction: column;
-          margin: ${OUTER_VERTICAL_MARGIN} auto;
-          max-width: ${CONTENT_WIDTH};
-          width: ${CONTENT_WIDTH};
-        `}
-  @media screen and (max-width: ${breakpoints.mobile}) {
-    flex: 1;
-  }
-`;
-
-const InnerContainer = styled.div`
+const PageContainer = styled.div<{ isDesktop?: boolean }>`
   display: flex;
-  gap: 22px;
-  height: ${CONTENT_HEIGHT};
-  justify-content: center;
-  min-height: 400px;
+  ${({ isDesktop }) =>
+    isDesktop &&
+    css`
+      gap: ${CHAT_GAP_WIDTH};
+      justify-content: center;
+      margin: ${OUTER_VERTICAL_MARGIN} auto;
+      max-width: ${CONTENT_WIDTH};
+      width: ${CONTENT_WIDTH};
+    `}
 `;
 
 export default Chat;
