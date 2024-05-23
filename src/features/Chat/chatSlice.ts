@@ -26,8 +26,8 @@ export type PollingParam =
 export type ChatState = {
   showFolders: boolean;
   activeFolder: ChatFolder;
-  chats: Record<string, ChatBuddy>;
   activeChatId: string | null;
+  chats: Record<string, ChatBuddy>;
   pollingParams: Array<PollingParam> | null;
 };
 

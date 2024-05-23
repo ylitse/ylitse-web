@@ -1,8 +1,9 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 
-import type { LangCode } from '../LanguageDropdown';
-import type { NavigationItem as NavItemType } from '../NavigationItems';
+import { selectChats } from '@/features/Chat/chatSlice';
+import { useAppSelector } from '@/store';
 
 import {
   animations,
@@ -10,13 +11,14 @@ import {
   NAVIGATION_HEIGHT,
   palette,
 } from '@/components/variables';
-import styled from 'styled-components';
-
-import Text from '@/components/Text';
 import { Chevron } from '@/components/Icons/Chevron';
 import { useLocation } from 'react-router-dom';
 import { LanguageItem } from './MobileLangItem';
 import { NavigationItem } from './MobileNavItem';
+import Text from '@/components/Text';
+
+import type { LangCode } from '../LanguageDropdown';
+import type { NavigationItem as NavItemType } from '../NavigationItems';
 
 type Props = {
   items: Array<NavItemType>;
@@ -36,6 +38,12 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
   const changeLanguage = (langCode: LangCode): void => {
     i18n.changeLanguage(langCode);
   };
+
+  const unreadMessagesFound: boolean =
+    useAppSelector(selectChats)
+      .map(chat => chat.messages)
+      .flat()
+      .filter(message => !message.opened).length > 0;
 
   return (
     <Dropdown
@@ -58,6 +66,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
           {items.map(item => (
             <NavigationItem
               key={item.url}
+              hasNotification={item.url === '/chat' && unreadMessagesFound}
               text={item.text}
               url={item.url}
               currentLocation={pathname}
