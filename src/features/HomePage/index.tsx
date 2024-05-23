@@ -11,6 +11,7 @@ import { TextButton } from '@/components/Buttons';
 import Text from '@/components/Text';
 
 import type { AppMessage } from '../Chat/chatPageApi';
+import PageWithTransition from '@/components/PageWithTransition';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -21,27 +22,29 @@ const HomePage = () => {
     .flat()
     .filter(message => !message.opened);
 
-  const unreadMessagesFound = unreadMessages.length > 0;
+  const unreadMessagesFound = unreadMessages.length >= 0;
 
   const navigateToChat = () => navigate('/chat');
 
   return (
-    <Container>
-      {unreadMessagesFound && (
-        <NewMessagesNotification>
-          <TextContainer>
-            <Title variant="h2" color="white">
-              {t('newMessages.title')}
-            </Title>
-            <Text color="white">{t('newMessages.text')}</Text>
-            <Button variant="outline" onClick={navigateToChat}>
-              {t('newMessages.button')}
-            </Button>
-          </TextContainer>
-          <Image src={NewMessagesImage} />
-        </NewMessagesNotification>
-      )}
-    </Container>
+    <PageWithTransition>
+      <Container>
+        {unreadMessagesFound && (
+          <NewMessagesNotification>
+            <TextContainer>
+              <Title variant="h2" color="white">
+                {t('newMessages.title')}
+              </Title>
+              <Text color="white">{t('newMessages.text')}</Text>
+              <Button variant="outline" onClick={navigateToChat}>
+                {t('newMessages.button')}
+              </Button>
+            </TextContainer>
+            <Image src={NewMessagesImage} />
+          </NewMessagesNotification>
+        )}
+      </Container>
+    </PageWithTransition>
   );
 };
 
@@ -49,8 +52,6 @@ const Container = styled.div`
   align-items: center;
   background-color: ${palette.blueLight};
   display: flex;
-  height: 100vh;
-  justify-content: center;
 `;
 
 const NewMessagesNotification = styled.div`
@@ -61,6 +62,8 @@ const NewMessagesNotification = styled.div`
   box-sizing: border-box;
   display: flex;
   height: 300px;
+  margin-left: 6rem;
+  margin-top: 4rem;
   padding: 2rem;
   position: relative;
 `;
