@@ -19,7 +19,6 @@ export const Item = ({ hasNotification, text, url }: NavigationItem) => {
   return (
     <Link
       to={url}
-      className="navbar-link"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

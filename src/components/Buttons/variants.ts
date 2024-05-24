@@ -81,10 +81,6 @@ export const variants = {
       color: palette.orange2,
       outline: 'none',
     },
-    ['&: focus']: {
-      outline: `1px solid ${palette.purple}`,
-      outlineOffset: '3px',
-    },
     ['&: hover']: {
       backgroundColor: palette.purpleDark,
     },

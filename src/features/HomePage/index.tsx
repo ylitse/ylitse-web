@@ -8,8 +8,8 @@ import { useAppSelector } from '@/store';
 import NewMessagesImage from '@/static/img/new-messages.svg';
 import PageWithTransition from '@/components/PageWithTransition';
 import { palette } from '@/components/variables';
-import { TextButton } from '@/components/Buttons';
 import Text from '@/components/Text';
+import { TextButton } from '@/components/Buttons';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -46,7 +46,6 @@ const HomePage = () => {
 };
 
 const Container = styled.div`
-  align-items: center;
   background-color: ${palette.blueLight};
   display: flex;
 `;
