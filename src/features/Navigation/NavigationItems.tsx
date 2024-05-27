@@ -14,7 +14,7 @@ export type NavigationItem = {
 
 export const Item = ({ hasNotification, text, url }: NavigationItem) => {
   const [isHovered, setIsHovered] = useState(false);
-  const isCurrent = useLocation().pathname === url;
+  const isCurrentLocation = useLocation().pathname === url;
 
   return (
     <Link
@@ -24,7 +24,7 @@ export const Item = ({ hasNotification, text, url }: NavigationItem) => {
     >
       {text}
       {hasNotification && (
-        <NotificationCircle withBorder={isHovered || isCurrent} />
+        <NotificationCircle withBorder={isHovered || isCurrentLocation} />
       )}
     </Link>
   );

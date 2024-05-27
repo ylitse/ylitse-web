@@ -17,45 +17,45 @@ export const NavigationItem: React.FC<Props> = ({
   text,
   url,
 }) => {
-  const isCurrent = currentLocation === url;
+  const isCurrentLocation = currentLocation === url;
 
   return (
-    <UnstyledRouteLink to={url} isCurrent={isCurrent}>
+    <UnstyledRouteLink to={url} isCurrentLocation={isCurrentLocation}>
       <LinkText
         variant="link"
-        color={isCurrent ? 'blueDark' : 'purple'}
-        isCurrent={isCurrent}
+        color={isCurrentLocation ? 'blueDark' : 'purple'}
+        isCurrentLocation={isCurrentLocation}
       >
         {text}
       </LinkText>
-      {hasNotification && <NotificationCircle isCurrent={isCurrent} />}
+      {hasNotification && <NotificationCircle withBorder={isCurrentLocation} />}
     </UnstyledRouteLink>
   );
 };
 
-const UnstyledRouteLink = styled(RouterNavLink)<{ isCurrent: boolean }>`
+const UnstyledRouteLink = styled(RouterNavLink)<{ isCurrentLocation: boolean }>`
   padding: 0 2rem;
   text-decoration: none;
 
-  ${({ isCurrent }) =>
-    isCurrent &&
+  ${({ isCurrentLocation }) =>
+    isCurrentLocation &&
     css`
       background-color: ${palette.blue2};
     `}
 `;
 
-const LinkText = styled(Text)<{ isCurrent: boolean }>`
-  ${({ isCurrent }) =>
-    isCurrent &&
+const LinkText = styled(Text)<{ isCurrentLocation: boolean }>`
+  ${({ isCurrentLocation }) =>
+    isCurrentLocation &&
     css`
       text-decoration: underline;
       text-underline-offset: 4px;
     `}
 `;
 
-const NotificationCircle = styled.div<{ isCurrent: boolean }>`
+const NotificationCircle = styled.div<{ withBorder: boolean }>`
   background-color: ${palette.orange};
-  ${({ isCurrent }) => isCurrent && `border: 1px solid ${palette.blueDark};`}
+  ${({ withBorder }) => withBorder && `border: 1px solid ${palette.blueDark};`}
   border-radius: 50%;
   height: 10px;
   left: 2.4rem;
