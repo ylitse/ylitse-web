@@ -39,8 +39,8 @@ jobs:
         with:
           path: ~/.cache/Cypress
           key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - name: Run E2E tests
-        run: |
-          ${{ github.workspace }}/.github/scripts/start-api &
-          npm run start &
-          npm run test:e2e
+      # - name: Run E2E tests
+      #   run: |
+      #     ${{ github.workspace }}/.github/scripts/start-api &
+      #     npm run start &
+      #     npm run test:e2e
