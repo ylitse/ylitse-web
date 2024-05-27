@@ -33,25 +33,21 @@ export const Navbar = () => {
     },
   ];
 
-  return (
-    <>
-      {isTablet ? (
-        <Container isTablet={isTablet}>
-          <LogoContainer />
-          <MobileDropdown items={navigationItems} />
-        </Container>
-      ) : (
-        <Container>
-          <LogoContainer />
-          <RightContainer>
-            <Items items={navigationItems} />
-            <InfoDropdown />
-            <LangDropdown />
-            <Item text={t('navigation.logout')} url="/logout" />
-          </RightContainer>
-        </Container>
-      )}
-    </>
+  return isTablet ? (
+    <Container isTablet={isTablet}>
+      <LogoContainer />
+      <MobileDropdown items={navigationItems} />
+    </Container>
+  ) : (
+    <Container>
+      <LogoContainer />
+      <RightContainer>
+        <Items items={navigationItems} />
+        <InfoDropdown />
+        <LangDropdown />
+        <Item text={t('navigation.logout')} url="/logout" />
+      </RightContainer>
+    </Container>
   );
 };
 

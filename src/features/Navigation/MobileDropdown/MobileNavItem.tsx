@@ -1,51 +1,65 @@
 import { palette } from '@/components/variables';
 import styled, { css } from 'styled-components';
 
-import Text from '@/components/Text';
 import { NavLink as RouterNavLink } from 'react-router-dom';
+import Text from '@/components/Text';
 
 type Props = {
+  currentLocation: string;
+  hasNotification?: boolean;
   text: string;
   url: string;
-  currentLocation: string;
 };
 
 export const NavigationItem: React.FC<Props> = ({
+  currentLocation,
+  hasNotification,
   text,
   url,
-  currentLocation,
 }) => {
-  const isCurrent = currentLocation === url;
+  const isCurrentLocation = currentLocation === url;
 
   return (
-    <UnstyledRouteLink to={url} isCurrent={isCurrent}>
+    <UnstyledRouteLink to={url} isCurrentLocation={isCurrentLocation}>
       <LinkText
         variant="link"
-        color={isCurrent ? 'blueDark' : 'purple'}
-        isCurrent={isCurrent}
+        color={isCurrentLocation ? 'blueDark' : 'purple'}
+        isCurrentLocation={isCurrentLocation}
       >
         {text}
       </LinkText>
+      {hasNotification && <NotificationCircle withBorder={isCurrentLocation} />}
     </UnstyledRouteLink>
   );
 };
 
-const UnstyledRouteLink = styled(RouterNavLink)<{ isCurrent: boolean }>`
+const UnstyledRouteLink = styled(RouterNavLink)<{ isCurrentLocation: boolean }>`
   padding: 0 2rem;
   text-decoration: none;
 
-  ${({ isCurrent }) =>
-    isCurrent &&
+  ${({ isCurrentLocation }) =>
+    isCurrentLocation &&
     css`
       background-color: ${palette.blue2};
     `}
 `;
 
-const LinkText = styled(Text)<{ isCurrent: boolean }>`
-  ${({ isCurrent }) =>
-    isCurrent &&
+const LinkText = styled(Text)<{ isCurrentLocation: boolean }>`
+  ${({ isCurrentLocation }) =>
+    isCurrentLocation &&
     css`
       text-decoration: underline;
       text-underline-offset: 4px;
     `}
+`;
+
+const NotificationCircle = styled.div<{ withBorder: boolean }>`
+  background-color: ${palette.orange};
+  ${({ withBorder }) => withBorder && `border: 1px solid ${palette.blueDark};`}
+  border-radius: 50%;
+  height: 10px;
+  left: 2.4rem;
+  position: relative;
+  top: -2.2rem;
+  width: 10px;
 `;

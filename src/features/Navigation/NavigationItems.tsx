@@ -1,26 +1,51 @@
+import { NavLink as RouterNavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
+import { useState } from 'react';
 
-import { NavLink as RouterNavLink } from 'react-router-dom';
+import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
+import { selectHasUnreadMessages } from '../Chat/chatSlice';
+import { useAppSelector } from '@/store';
 
 export type NavigationItem = {
+  hasNotification?: boolean;
   text: string;
   url: string;
 };
 
-export const Item = ({ text, url }: NavigationItem) => (
-  <Link to={url} className="navbar-link">
-    {text}
-  </Link>
-);
+export const Item = ({ hasNotification, text, url }: NavigationItem) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const isCurrentLocation = useLocation().pathname === url;
 
-export const Items = ({ items }: { items: Array<NavigationItem> }) => (
-  <>
-    {items.map(item => (
-      <Item key={item.text} {...item} />
-    ))}
-  </>
-);
+  return (
+    <Link
+      to={url}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {text}
+      {hasNotification && (
+        <NotificationCircle withBorder={isHovered || isCurrentLocation} />
+      )}
+    </Link>
+  );
+};
+
+export const Items = ({ items }: { items: Array<NavigationItem> }) => {
+  const unreadMessagesFound: boolean = useAppSelector(selectHasUnreadMessages);
+
+  return (
+    <>
+      {items.map(item => (
+        <Item
+          key={item.text}
+          hasNotification={item.url === '/chat' && unreadMessagesFound}
+          text={item.text}
+          url={item.url}
+        />
+      ))}
+    </>
+  );
+};
 
 export const Link = styled(RouterNavLink)`
   color: ${palette.white};
@@ -43,4 +68,15 @@ export const Link = styled(RouterNavLink)`
   &.active {
     cursor: default;
   }
+`;
+
+const NotificationCircle = styled.div<{ withBorder: boolean }>`
+  background-color: ${palette.orange};
+  ${({ withBorder }) => withBorder && `border: 1px solid ${palette.blueDark};`}
+  border-radius: 50%;
+  height: 10px;
+  left: 2.3rem;
+  position: relative;
+  top: -2rem;
+  width: 10px;
 `;

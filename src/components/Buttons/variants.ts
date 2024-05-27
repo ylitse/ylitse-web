@@ -71,6 +71,20 @@ export const variants = {
       outline: `none`,
     },
   },
+  outline: {
+    backgroundColor: palette.purple,
+    border: `2px solid ${palette.orange}`,
+    color: palette.orange,
+
+    ['&: active, &: visited']: {
+      backgroundColor: palette.purpleMid,
+      color: palette.orange2,
+      outline: 'none',
+    },
+    ['&: hover']: {
+      backgroundColor: palette.purpleDark,
+    },
+  },
 };
 
 export type ButtonIcon =

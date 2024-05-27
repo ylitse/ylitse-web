@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { spacing } from '../variables';
 import { variants } from './variants';
 
-export type ButtonColorVariant = 'light' | 'dark' | 'disabled';
+export type ButtonColorVariant = 'dark' | 'disabled' | 'light' | 'outline';
 
 type Size = 'normal' | 'large';
 

@@ -26,8 +26,8 @@ export type PollingParam =
 export type ChatState = {
   showFolders: boolean;
   activeFolder: ChatFolder;
-  chats: Record<string, ChatBuddy>;
   activeChatId: string | null;
+  chats: Record<string, ChatBuddy>;
   pollingParams: Array<PollingParam> | null;
 };
 
@@ -236,6 +236,16 @@ export const selectChats = createSelector(
       .filter(chat => chat.status === activeFolder);
     return filtered;
   },
+);
+
+export const selectHasUnreadMessages = createSelector(
+  selectChatState,
+  ({ chats }) =>
+    Object.values(chats)
+      .filter(chat => chat.status === 'ok')
+      .map(chat => chat.messages)
+      .flat()
+      .some(message => !message.opened),
 );
 
 const defaultParam: PollingParam = { type: 'New', previousMsgId: '' };

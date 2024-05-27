@@ -6,14 +6,16 @@ import chatEn from '@/static/locales/en/chat.json';
 import chatFi from '@/static/locales/fi/chat.json';
 import commonEn from '@/static/locales/en/common.json';
 import commonFi from '@/static/locales/fi/common.json';
+import homeEn from '@/static/locales/en/home.json';
+import homeFi from '@/static/locales/fi/home.json';
 import mentorsEn from '@/static/locales/en/mentors.json';
 import mentorsFi from '@/static/locales/fi/mentors.json';
 
 export const defaultNS = 'common';
 
 export const resources = {
-  en: { chat: chatEn, common: commonEn, mentors: mentorsEn },
-  fi: { chat: chatFi, common: commonFi, mentors: mentorsFi },
+  en: { chat: chatEn, common: commonEn, home: homeEn, mentors: mentorsEn },
+  fi: { chat: chatFi, common: commonFi, home: homeFi, mentors: mentorsFi },
 } as const;
 
 i18n
