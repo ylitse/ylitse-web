@@ -16,8 +16,8 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
-      # - name: Run unit tests
-      #   run: npm run test:unit
+      - name: Run unit tests
+        run: npm run test:unit
       - name: Clone the back end
         run: git clone https://gitlab.com/ylitse/ylitse-api
       - name: Set up python
