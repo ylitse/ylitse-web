@@ -2,7 +2,7 @@ import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import { selectChats } from '@/features/Chat/chatSlice';
+import { selectHasUnreadMessages } from '@/features/Chat/chatSlice';
 import { useAppSelector } from '@/store';
 
 import {
@@ -27,9 +27,7 @@ type Props = {
 const MobileDropdown: React.FC<Props> = ({ items }) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible<HTMLButtonElement>(false);
-
   const { t, i18n } = useTranslation('common');
-
   const { pathname } = useLocation();
 
   const isSelected = (langCode: LangCode): boolean =>
@@ -39,11 +37,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
     i18n.changeLanguage(langCode);
   };
 
-  const unreadMessagesFound: boolean =
-    useAppSelector(selectChats)
-      .map(chat => chat.messages)
-      .flat()
-      .filter(message => !message.opened).length > 0;
+  const unreadMessagesFound: boolean = useAppSelector(selectHasUnreadMessages);
 
   return (
     <Dropdown

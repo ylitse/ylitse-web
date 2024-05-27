@@ -238,6 +238,16 @@ export const selectChats = createSelector(
   },
 );
 
+export const selectHasUnreadMessages = createSelector(
+  selectChatState,
+  ({ chats }) =>
+    Object.values(chats)
+      .filter(chat => chat.status === 'ok')
+      .map(chat => chat.messages)
+      .flat()
+      .filter(message => !message.opened).length > 0,
+);
+
 const defaultParam: PollingParam = { type: 'New', previousMsgId: '' };
 export const selectCurrentPollingParams = createSelector(
   selectChatState,

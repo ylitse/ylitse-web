@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
-import { selectChats } from '../Chat/chatSlice';
+import { selectHasUnreadMessages } from '../Chat/chatSlice';
 import { useAppSelector } from '@/store';
 
 export type NavigationItem = {
@@ -31,11 +31,7 @@ export const Item = ({ hasNotification, text, url }: NavigationItem) => {
 };
 
 export const Items = ({ items }: { items: Array<NavigationItem> }) => {
-  const unreadMessagesFound: boolean =
-    useAppSelector(selectChats)
-      .map(chat => chat.messages)
-      .flat()
-      .filter(message => !message.opened).length > 0;
+  const unreadMessagesFound: boolean = useAppSelector(selectHasUnreadMessages);
 
   return (
     <>

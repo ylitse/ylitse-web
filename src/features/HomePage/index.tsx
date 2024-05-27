@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import { selectChats } from '@/features/Chat/chatSlice';
+import { selectHasUnreadMessages } from '@/features/Chat/chatSlice';
 import { useAppSelector } from '@/store';
 
 import NewMessagesImage from '@/static/img/new-messages.svg';
@@ -15,12 +15,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('home');
 
-  const unreadMessagesFound: boolean =
-    useAppSelector(selectChats)
-      .map(chat => chat.messages)
-      .flat()
-      .filter(message => !message.opened).length > 0;
-
+  const unreadMessagesFound: boolean = useAppSelector(selectHasUnreadMessages);
   const navigateToChat = () => navigate('/chat');
 
   return (
