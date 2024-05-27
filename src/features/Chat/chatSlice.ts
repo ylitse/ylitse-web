@@ -245,7 +245,7 @@ export const selectHasUnreadMessages = createSelector(
       .filter(chat => chat.status === 'ok')
       .map(chat => chat.messages)
       .flat()
-      .filter(message => !message.opened).length > 0,
+      .some(message => !message.opened),
 );
 
 const defaultParam: PollingParam = { type: 'New', previousMsgId: '' };
