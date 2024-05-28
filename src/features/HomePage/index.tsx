@@ -2,10 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
+import { Mentor, selectFilteredMentors } from '../MentorPage/mentorPageApi';
 import { selectHasUnreadMessages } from '@/features/Chat/chatSlice';
 import { useAppSelector } from '@/store';
 
 import Background from '@/static/img/mountain-background.svg';
+import MentorList from '../MentorPage/components/MentorList';
 import NewMessagesImage from '@/static/img/new-messages.svg';
 import PageWithTransition from '@/components/PageWithTransition';
 import { palette } from '@/components/variables';
@@ -18,6 +20,13 @@ const HomePage = () => {
 
   const unreadMessagesFound: boolean = useAppSelector(selectHasUnreadMessages);
   const navigateToChat = () => navigate('/chat');
+
+  // const { isMobile } = useGetLayoutMode();
+  // const { isLoading } = useGetMentorsQuery();
+  const mentorsToShow: Mentor[] = useAppSelector(selectFilteredMentors()).slice(
+    0,
+    2,
+  );
 
   return (
     <PageWithTransition>
@@ -97,7 +106,13 @@ const HomePage = () => {
             </Concept>
           </Concepts>
         </MiddleContainer>
-        <BottomContainer></BottomContainer>
+        <BottomContainer>
+          <BottomTitle variant="h2">Uusimmat mentorit</BottomTitle>
+          <MentorList
+            setVisibleCard={mentor => console.log(mentor)}
+            mentors={mentorsToShow}
+          />
+        </BottomContainer>
       </Container>
     </PageWithTransition>
   );
@@ -220,9 +235,16 @@ const Concept = styled.div`
 `;
 
 const BottomContainer = styled.div`
+  align-items: center;
   background-color: ${palette.blueWhite};
   display: flex;
+  flex-direction: column;
   min-height: 50vh;
+  width: 100%;
+`;
+
+const BottomTitle = styled(Text)`
+  color: ${palette.white};
 `;
 
 export default HomePage;
