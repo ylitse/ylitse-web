@@ -2,17 +2,25 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import { Mentor, selectFilteredMentors } from '../MentorPage/mentorPageApi';
+import {
+  Mentor,
+  selectFilteredMentors,
+  useGetMentorsQuery,
+} from '../MentorPage/mentorPageApi';
 import { selectHasUnreadMessages } from '@/features/Chat/chatSlice';
 import { useAppSelector } from '@/store';
+// import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import Background from '@/static/img/mountain-background.svg';
-import MentorList from '../MentorPage/components/MentorList';
 import NewMessagesImage from '@/static/img/new-messages.svg';
 import PageWithTransition from '@/components/PageWithTransition';
 import { palette } from '@/components/variables';
+import Spinner from '@/components/Spinner';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
+import ListCard from '../MentorPage/components/MentorList/MentorCard/List';
+import MentorCard from '../MentorPage/components/MentorList/MentorCard/Expanded';
+import { useState } from 'react';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -20,13 +28,15 @@ const HomePage = () => {
 
   const unreadMessagesFound: boolean = useAppSelector(selectHasUnreadMessages);
   const navigateToChat = () => navigate('/chat');
+  const navigateToMentors = () => navigate('/mentors');
 
   // const { isMobile } = useGetLayoutMode();
-  // const { isLoading } = useGetMentorsQuery();
+  const { isLoading } = useGetMentorsQuery();
   const mentorsToShow: Mentor[] = useAppSelector(selectFilteredMentors()).slice(
     0,
     2,
   );
+  const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
 
   return (
     <PageWithTransition>
@@ -79,7 +89,7 @@ const HomePage = () => {
                   Kun sopiva mentori löytyy, voit aloittaa keskustelun hänen
                   kanssaan.
                 </Text>
-                <Button variant="outline" onClick={navigateToChat}>
+                <Button variant="outline" onClick={navigateToMentors}>
                   Etsi mentori
                 </Button>
               </TextContainer>
@@ -125,11 +135,47 @@ const HomePage = () => {
           </RightMiddleContainer>
         </MiddleContainer>
         <BottomContainer>
-          <BottomTitle variant="h2">Uusimmat mentorit</BottomTitle>
-          <MentorList
-            setVisibleCard={mentor => console.log(mentor)}
-            mentors={mentorsToShow}
-          />
+          <BottomLeftContainer>
+            <BottomTitle variant="h2">Uusimmat mentorit</BottomTitle>
+            {isLoading ? (
+              <Spinner variant="large" />
+            ) : (
+              <MentorCardContainer>
+                {selectedMentor && (
+                  <MentorCard
+                    mentor={selectedMentor}
+                    onDismiss={() => setSelectedMentor(null)}
+                  />
+                )}
+                {mentorsToShow.map(mentor => (
+                  <ListCard
+                    key={mentor.buddyId}
+                    mentor={mentor}
+                    setVisibleCard={() => setSelectedMentor(mentor)}
+                  />
+                ))}
+              </MentorCardContainer>
+            )}
+          </BottomLeftContainer>
+          <BottomRightContainer>
+            <FindMentorContainer>
+              <TextContainer>
+                <Title variant="h2" color="white">
+                  Vertaistukea nuorille ja aikuisille
+                </Title>
+                <Text color="white">
+                  Voit jutella SOS-Lapsikylän valmentamien vertaismentoreiden
+                  kanssa mistä tahansa mieltäsi painavasta asiasta.
+                  Vertaismentori voi olla sinulle juttukaveri, opastaja,
+                  ymmärtävä kuuntelija tai sparraaja elämän erilaisissa
+                  tilanteissa.
+                </Text>
+                <Button variant="outline" onClick={navigateToMentors}>
+                  Etsi mentori
+                </Button>
+              </TextContainer>
+            </FindMentorContainer>
+          </BottomRightContainer>
         </BottomContainer>
       </Container>
     </PageWithTransition>
@@ -269,13 +315,43 @@ const BottomContainer = styled.div`
   align-items: center;
   background-color: ${palette.blueWhite};
   display: flex;
-  flex-direction: column;
-  min-height: 50vh;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 4rem;
   width: 100%;
+`;
+
+const BottomLeftContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 const BottomTitle = styled(Text)`
   color: ${palette.white};
+`;
+
+const MentorCardContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const BottomRightContainer = styled.div`
+  display: flex;
+  width: 600px;
+`;
+
+const FindMentorContainer = styled.div`
+  align-items: center;
+  background-color: ${palette.purple};
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  justify-content: center;
+  padding: 2rem;
 `;
 
 export default HomePage;
