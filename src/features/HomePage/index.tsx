@@ -185,14 +185,13 @@ const HomePage = () => {
                   Vertaistukea nuorille ja aikuisille
                 </Title>
                 <Text color="white">
-                  Voit jutella SOS-Lapsikylän valmentamien vertaismentoreiden
-                  kanssa mistä tahansa mieltäsi painavasta asiasta.
-                  Vertaismentori voi olla sinulle juttukaveri, opastaja,
-                  ymmärtävä kuuntelija tai sparraaja elämän erilaisissa
-                  tilanteissa.
+                  Voit jutella vertaismentoreiden kanssa mistä tahansa mieltäsi
+                  painavasta asiasta. Vertaismentori voi olla sinulle
+                  juttukaveri, opastaja, ymmärtävä kuuntelija tai sparraaja
+                  elämän erilaisissa tilanteissa.
                 </Text>
                 <Button variant="outline" onClick={navigateToMentors}>
-                  Etsi mentori
+                  Löydä lisää mentoreita
                 </Button>
               </TextContainer>
             </FindMentorContainer>
