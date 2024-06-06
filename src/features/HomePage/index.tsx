@@ -28,6 +28,7 @@ const HomePage = () => {
   const { t } = useTranslation('home');
 
   const unreadMessagesFound: boolean = useAppSelector(selectHasUnreadMessages);
+  const navigateToAdminPanel = () => navigate('/admin');
   const navigateToChat = () => navigate('/chat');
   const navigateToMentors = () => navigate('/mentors');
 
@@ -83,19 +84,35 @@ const HomePage = () => {
               </NewMessagesNotification>
             )}
             <WelcomeNotice>
-              {/* Eri tekstit jos mentori tai admin */}
               <TextContainer>
                 <Title variant="h2" color="white">
-                  Aloita etsimällä mentori
+                  {userRole === 'admin' && 'Hallinnoi käyttäjätilejä'}
+                  {userRole === 'mentor' && 'Keskustele aktoreiden kanssa'}
+                  {userRole === 'mentee' && 'Aloita etsimällä mentori'}
                 </Title>
                 <Text color="white">
-                  Selaa mentoreiden profiileja tai hae tietyn hakusanan mukaan.
-                  Kun sopiva mentori löytyy, voit aloittaa keskustelun hänen
-                  kanssaan.
+                  {userRole === 'admin' &&
+                    'Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.'}
+                  {userRole === 'mentor' &&
+                    'Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.'}
+                  {userRole === 'mentee' &&
+                    'Selaa mentoreiden profiileja tai hae tietyn hakusanan mukaan. Kun sopiva mentori löytyy, voit aloittaa keskustelun hänen kanssaan.'}
                 </Text>
-                <Button variant="outline" onClick={navigateToMentors}>
-                  Etsi mentori
-                </Button>
+                {userRole === 'admin' && (
+                  <Button variant="outline" onClick={navigateToAdminPanel}>
+                    Siirry tilien hallinnointiin
+                  </Button>
+                )}
+                {userRole === 'mentor' && (
+                  <Button variant="outline" onClick={navigateToChat}>
+                    Siirry chattiin
+                  </Button>
+                )}
+                {userRole === 'mentee' && (
+                  <Button variant="outline" onClick={navigateToMentors}>
+                    Etsi mentori
+                  </Button>
+                )}
               </TextContainer>
             </WelcomeNotice>
             <Notices>
