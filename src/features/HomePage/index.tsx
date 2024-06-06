@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Mentor,
@@ -9,18 +10,17 @@ import {
 } from '../MentorPage/mentorPageApi';
 import { selectHasUnreadMessages } from '@/features/Chat/chatSlice';
 import { useAppSelector } from '@/store';
-// import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import Background from '@/static/img/mountain-background.svg';
+import ListCard from '../MentorPage/components/MentorList/MentorCard/List';
+import MentorCard from '../MentorPage/components/MentorList/MentorCard/Expanded';
 import NewMessagesImage from '@/static/img/new-messages.svg';
 import PageWithTransition from '@/components/PageWithTransition';
 import { palette } from '@/components/variables';
 import Spinner from '@/components/Spinner';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
-import ListCard from '../MentorPage/components/MentorList/MentorCard/List';
-import MentorCard from '../MentorPage/components/MentorList/MentorCard/Expanded';
-import { useState } from 'react';
 import { UserRole, selectUserRole } from '../Authentication/userSlice';
 
 const HomePage = () => {
@@ -33,37 +33,28 @@ const HomePage = () => {
   const navigateToMentors = () => navigate('/mentors');
 
   const userRole: UserRole | null = useAppSelector(selectUserRole);
-  console.log(userRole);
 
-  // const { isMobile } = useGetLayoutMode();
+  const { isMobile } = useGetLayoutMode();
+  console.log('isMobile is ' + isMobile);
   const { isLoading } = useGetMentorsQuery();
+  const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
   const mentorsToShow: Mentor[] = useAppSelector(selectFilteredMentors()).slice(
     0,
     2,
   );
-  const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
 
   return (
     <PageWithTransition>
       <Container>
         <TopContainer>
           <InfoContainer>
-            <Text variant="h1">Ylitse MentorApp</Text>
-            <Text variant="p">
-              Ylitse MentorApp -vertaismentoripalvelussa mentorit auttavat sinua
-              henkilökohtaisessa tilanteessasi luottamuksellisesti. Voit valita
-              sopivan mentorin ongelmasi perusteella ja saada apua ajasta ja
-              paikasta riippumatta.
-            </Text>
+            <Text variant="h1">{t('info.title')}</Text>
+            <Text>{t('info.description1')}</Text>
             <List>
-              <Text variant="p">
-                - Voit käyttää sovellusta nimettömästi ja luottamuksellisesti.
-              </Text>
-              <Text variant="p">- Palvelun käyttö on sinulle maksutonta.</Text>
-              <Text variant="p">
-                - Kohtaat ihmisiä, jotka ovat olleet samassa tilanteessa.
-              </Text>
-              <Text variant="boldSource">He tietävät, mistä puhut.</Text>
+              <Text>{t('info.description2')}</Text>
+              <Text>{t('info.description3')}</Text>
+              <Text>{t('info.description4')}</Text>
+              <Text variant="boldSource">{t('info.description5')}</Text>
             </List>
           </InfoContainer>
         </TopContainer>
@@ -84,39 +75,46 @@ const HomePage = () => {
               </NewMessagesNotification>
             )}
             <WelcomeNotice>
-              <TextContainer>
-                <Title variant="h2" color="white">
-                  {userRole === 'admin' && 'Hallinnoi käyttäjätilejä'}
-                  {userRole === 'mentor' && 'Keskustele aktoreiden kanssa'}
-                  {userRole === 'mentee' && 'Aloita etsimällä mentori'}
-                </Title>
-                <Text color="white">
-                  {userRole === 'admin' &&
-                    'Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.'}
-                  {userRole === 'mentor' &&
-                    'Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.'}
-                  {userRole === 'mentee' &&
-                    'Selaa mentoreiden profiileja tai hae tietyn hakusanan mukaan. Kun sopiva mentori löytyy, voit aloittaa keskustelun hänen kanssaan.'}
-                </Text>
-                {userRole === 'admin' && (
+              {userRole === 'admin' && (
+                <TextContainer>
+                  <Title variant="h2" color="white">
+                    {t('welcome.admin.title')}
+                  </Title>
+                  <Text color="white">{t('welcome.admin.text')}</Text>
                   <Button variant="outline" onClick={navigateToAdminPanel}>
-                    Siirry tilien hallinnointiin
+                    {t('welcome.admin.button')}
                   </Button>
-                )}
-                {userRole === 'mentor' && (
+                </TextContainer>
+              )}
+
+              {userRole === 'mentor' && (
+                <TextContainer>
+                  <Title variant="h2" color="white">
+                    {t('welcome.mentor.title')}
+                  </Title>
+                  <Text color="white">{t('welcome.mentor.text')}</Text>
                   <Button variant="outline" onClick={navigateToChat}>
-                    Siirry chattiin
+                    {t('welcome.mentor.button')}
                   </Button>
-                )}
-                {userRole === 'mentee' && (
+                </TextContainer>
+              )}
+
+              {userRole === 'mentee' && (
+                <TextContainer>
+                  <Title variant="h2" color="white">
+                    {t('welcome.mentee.title')}
+                  </Title>
+                  <Text color="white">{t('welcome.mentee.text')}</Text>
                   <Button variant="outline" onClick={navigateToMentors}>
-                    Etsi mentori
+                    {t('welcome.mentee.button')}
                   </Button>
-                )}
-              </TextContainer>
+                </TextContainer>
+              )}
             </WelcomeNotice>
+
             <Notices>
-              <Title variant="h2">Tiedotteet</Title>
+              <Title variant="h2">{t('notices.title')}</Title>
+              {/* Nämä haetaan bäkkäriltä */}
               <Notice variant="p">
                 Palvelussa on käyttökatko 24.4.2022 klo 13 - 14. Pahoittelemme
                 häiriötä.
@@ -125,39 +123,26 @@ const HomePage = () => {
           </LeftMiddleContainer>
           <RightMiddleContainer>
             <Concepts>
-              <Title variant="h2">Käsitteet</Title>
-              <Text variant="p">
-                Tässä muutamia käsitteitä, joiden avulla palvelun käyttö on
-                helpompaa.
-              </Text>
+              <Title variant="h2">{t('concepts.title')}</Title>
+              <Text variant="p">{t('concepts.description')} </Text>
               <Concept>
-                <Text variant="boldSource">Tilaviesti =</Text>
-                <Text variant="p">
-                  Jos mentori ei ole tavoitettavissa esimerkiksi loman takia,
-                  hän voi ilmoittaa siitä tilaviestillä. Tilaviesti näkyy
-                  mentorin profiilissa sekä keskustelussa mentorin kanssa.
-                </Text>
+                <Text variant="boldSource">{t('concepts.concept1.name')}</Text>
+                <Text variant="p">{t('concepts.concept1.definition')}</Text>
               </Concept>
               <Concept>
-                <Text variant="boldSource">Käsite 2 =</Text>
-                <Text variant="p">
-                  Lorem ipsum dolor sit amet. Vestibulum eu vulputate ipsum.
-                  Proin eget dapibus risus.
-                </Text>
+                <Text variant="boldSource">{t('concepts.concept2.name')}</Text>
+                <Text variant="p">{t('concepts.concept2.definition')}</Text>
               </Concept>
               <Concept>
-                <Text variant="boldSource">Käsite 3 =</Text>
-                <Text variant="p">
-                  Ellentesque scelerisque diam eget metus sollicitudin,
-                  tristique interdum lacus tristique.
-                </Text>
+                <Text variant="boldSource">{t('concepts.concept3.name')}</Text>
+                <Text variant="p">{t('concepts.concept3.definition')}</Text>
               </Concept>
             </Concepts>
           </RightMiddleContainer>
         </MiddleContainer>
         <BottomContainer>
           <BottomLeftContainer>
-            <BottomTitle variant="h2">Uusimmat mentorit</BottomTitle>
+            <BottomTitle variant="h2">{t('newestMentors.title')}</BottomTitle>
             {isLoading ? (
               <Spinner variant="large" />
             ) : (
@@ -182,16 +167,11 @@ const HomePage = () => {
             <FindMentorContainer>
               <TextContainer>
                 <Title variant="h2" color="white">
-                  Vertaistukea nuorille ja aikuisille
+                  {t('newestMentors.info.title')}
                 </Title>
-                <Text color="white">
-                  Voit jutella vertaismentoreiden kanssa mistä tahansa mieltäsi
-                  painavasta asiasta. Vertaismentori voi olla sinulle
-                  juttukaveri, opastaja, ymmärtävä kuuntelija tai sparraaja
-                  elämän erilaisissa tilanteissa.
-                </Text>
+                <Text color="white">{t('newestMentors.info.text')}</Text>
                 <Button variant="outline" onClick={navigateToMentors}>
-                  Löydä lisää mentoreita
+                  {t('newestMentors.info.button')}
                 </Button>
               </TextContainer>
             </FindMentorContainer>
@@ -217,7 +197,6 @@ const TopContainer = styled.div`
   height: 100%;
   justify-content: center;
   min-height: 50vh;
-  width: 100%;
 `;
 
 const InfoContainer = styled.div`
@@ -338,7 +317,6 @@ const BottomContainer = styled.div`
   flex-direction: row;
   gap: 2rem;
   padding: 4rem;
-  width: 100%;
 `;
 
 const BottomLeftContainer = styled.div`
