@@ -21,6 +21,7 @@ import { TextButton } from '@/components/Buttons';
 import ListCard from '../MentorPage/components/MentorList/MentorCard/List';
 import MentorCard from '../MentorPage/components/MentorList/MentorCard/Expanded';
 import { useState } from 'react';
+import { UserRole, selectUserRole } from '../Authentication/userSlice';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -29,6 +30,9 @@ const HomePage = () => {
   const unreadMessagesFound: boolean = useAppSelector(selectHasUnreadMessages);
   const navigateToChat = () => navigate('/chat');
   const navigateToMentors = () => navigate('/mentors');
+
+  const userRole: UserRole | null = useAppSelector(selectUserRole);
+  console.log(userRole);
 
   // const { isMobile } = useGetLayoutMode();
   const { isLoading } = useGetMentorsQuery();
