@@ -17,8 +17,11 @@ import ListCard from '../MentorPage/components/MentorList/MentorCard/List';
 import MentorCard from '../MentorPage/components/MentorList/MentorCard/Expanded';
 import NewMessagesImage from '@/static/img/new-messages.svg';
 import PageWithTransition from '@/components/PageWithTransition';
-import { palette } from '@/components/variables';
-import Spinner from '@/components/Spinner';
+import {
+  NAVIGATION_HEIGHT,
+  OUTER_HORIZONTAL_MARGIN,
+  palette,
+} from '@/components/variables';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 import { UserRole, selectUserRole } from '../Authentication/userSlice';
@@ -34,6 +37,7 @@ const HomePage = () => {
 
   const userRole: UserRole | null = useAppSelector(selectUserRole);
 
+  // TODO: Mobile view
   const { isMobile } = useGetLayoutMode();
   console.log('isMobile is ' + isMobile);
   const { isLoading } = useGetMentorsQuery();
@@ -45,86 +49,84 @@ const HomePage = () => {
 
   return (
     <PageWithTransition>
-      <Container>
-        <TopContainer>
-          <InfoContainer>
-            <Text variant="h1">{t('info.title')}</Text>
-            <Text>{t('info.description1')}</Text>
-            <List>
-              <Text>{t('info.description2')}</Text>
-              <Text>{t('info.description3')}</Text>
-              <Text>{t('info.description4')}</Text>
-              <Text variant="boldSource">{t('info.description5')}</Text>
-            </List>
-          </InfoContainer>
-        </TopContainer>
-        <MiddleContainer>
-          <LeftMiddleContainer>
-            {unreadMessagesFound && (
-              <NewMessagesNotification>
-                <TextContainer>
-                  <Title variant="h2" color="white">
-                    {t('newMessages.title')}
-                  </Title>
-                  <Text color="white">{t('newMessages.text')}</Text>
-                  <Button variant="outline" onClick={navigateToChat}>
-                    {t('newMessages.button')}
-                  </Button>
-                </TextContainer>
-                <Image src={NewMessagesImage} />
-              </NewMessagesNotification>
+      <TopContainer>
+        <InfoContainer>
+          <Text variant="h1">{t('info.title')}</Text>
+          <Text>{t('info.description1')}</Text>
+          <Text>{t('info.description2')}</Text>
+          <Text>{t('info.description3')}</Text>
+          <Text>{t('info.description4')}</Text>
+          <Text variant="boldSource">{t('info.description5')}</Text>
+        </InfoContainer>
+      </TopContainer>
+      <MiddleContainer>
+        <LeftMiddleContainer>
+          {!unreadMessagesFound && (
+            <NewMessagesNotification>
+              <TextContainer>
+                <Text variant="h2" color="white">
+                  {t('newMessages.title')}
+                </Text>
+                <Text color="white">{t('newMessages.text')}</Text>
+                <Button variant="outline" onClick={navigateToChat}>
+                  {t('newMessages.button')}
+                </Button>
+              </TextContainer>
+              <Image src={NewMessagesImage} />
+            </NewMessagesNotification>
+          )}
+          <WelcomeNotice>
+            {userRole === 'admin' && (
+              <TextContainer>
+                <Text variant="h2" color="white">
+                  {t('welcome.admin.title')}
+                </Text>
+                <Text color="white">{t('welcome.admin.text')}</Text>
+                <Button variant="outline" onClick={navigateToAdminPanel}>
+                  {t('welcome.admin.button')}
+                </Button>
+              </TextContainer>
             )}
-            <WelcomeNotice>
-              {userRole === 'admin' && (
-                <TextContainer>
-                  <Title variant="h2" color="white">
-                    {t('welcome.admin.title')}
-                  </Title>
-                  <Text color="white">{t('welcome.admin.text')}</Text>
-                  <Button variant="outline" onClick={navigateToAdminPanel}>
-                    {t('welcome.admin.button')}
-                  </Button>
-                </TextContainer>
-              )}
 
-              {userRole === 'mentor' && (
-                <TextContainer>
-                  <Title variant="h2" color="white">
-                    {t('welcome.mentor.title')}
-                  </Title>
-                  <Text color="white">{t('welcome.mentor.text')}</Text>
-                  <Button variant="outline" onClick={navigateToChat}>
-                    {t('welcome.mentor.button')}
-                  </Button>
-                </TextContainer>
-              )}
+            {userRole === 'mentor' && (
+              <TextContainer>
+                <Text variant="h2" color="white">
+                  {t('welcome.mentor.title')}
+                </Text>
+                <Text color="white">{t('welcome.mentor.text')}</Text>
+                <Button variant="outline" onClick={navigateToChat}>
+                  {t('welcome.mentor.button')}
+                </Button>
+              </TextContainer>
+            )}
 
-              {userRole === 'mentee' && (
-                <TextContainer>
-                  <Title variant="h2" color="white">
-                    {t('welcome.mentee.title')}
-                  </Title>
-                  <Text color="white">{t('welcome.mentee.text')}</Text>
-                  <Button variant="outline" onClick={navigateToMentors}>
-                    {t('welcome.mentee.button')}
-                  </Button>
-                </TextContainer>
-              )}
-            </WelcomeNotice>
+            {userRole === 'mentee' && (
+              <TextContainer>
+                <Text variant="h2" color="white">
+                  {t('welcome.mentee.title')}
+                </Text>
+                <Text color="white">{t('welcome.mentee.text')}</Text>
+                <Button variant="outline" onClick={navigateToMentors}>
+                  {t('welcome.mentee.button')}
+                </Button>
+              </TextContainer>
+            )}
+          </WelcomeNotice>
 
-            <Notices>
-              <Title variant="h2">{t('notices.title')}</Title>
-              {/* Nämä haetaan bäkkäriltä */}
-              <Notice variant="p">
-                Palvelussa on käyttökatko 24.4.2022 klo 13 - 14. Pahoittelemme
-                häiriötä.
-              </Notice>
-            </Notices>
-          </LeftMiddleContainer>
-          <RightMiddleContainer>
+          <Notices>
+            <Text variant="h2">{t('notices.title')}</Text>
+            {/* Nämä haetaan palvelimelta */}
+            <Notice variant="p">
+              Palvelussa on käyttökatko 24.4.2022 klo 13 - 14. Pahoittelemme
+              häiriötä.
+            </Notice>
+          </Notices>
+        </LeftMiddleContainer>
+        <RightMiddleContainer>
+          <ConceptContainer>
+            <Text variant="h2">{t('concepts.title')}</Text>
+            <Text variant="p">{t('concepts.description')} </Text>
             <Concepts>
-              <Title variant="h2">{t('concepts.title')}</Title>
-              <Text variant="p">{t('concepts.description')} </Text>
               <Concept>
                 <Text variant="boldSource">{t('concepts.concept1.name')}</Text>
                 <Text variant="p">{t('concepts.concept1.definition')}</Text>
@@ -138,105 +140,89 @@ const HomePage = () => {
                 <Text variant="p">{t('concepts.concept3.definition')}</Text>
               </Concept>
             </Concepts>
-          </RightMiddleContainer>
-        </MiddleContainer>
-        <BottomContainer>
-          <BottomLeftContainer>
-            <BottomTitle variant="h2">{t('newestMentors.title')}</BottomTitle>
-            {isLoading ? (
-              <Spinner variant="large" />
-            ) : (
-              <MentorCardContainer>
-                {selectedMentor && (
-                  <MentorCard
-                    mentor={selectedMentor}
-                    onDismiss={() => setSelectedMentor(null)}
-                  />
-                )}
-                {mentorsToShow.map(mentor => (
-                  <ListCard
-                    key={mentor.buddyId}
-                    mentor={mentor}
-                    setVisibleCard={() => setSelectedMentor(mentor)}
-                  />
-                ))}
-              </MentorCardContainer>
-            )}
-          </BottomLeftContainer>
-          <BottomRightContainer>
-            <FindMentorContainer>
-              <TextContainer>
-                <Title variant="h2" color="white">
-                  {t('newestMentors.info.title')}
-                </Title>
-                <Text color="white">{t('newestMentors.info.text')}</Text>
-                <Button variant="outline" onClick={navigateToMentors}>
-                  {t('newestMentors.info.button')}
-                </Button>
-              </TextContainer>
-            </FindMentorContainer>
-          </BottomRightContainer>
-        </BottomContainer>
-      </Container>
+          </ConceptContainer>
+        </RightMiddleContainer>
+      </MiddleContainer>
+      <BottomContainer>
+        <BottomTitle variant="h2">{t('newestMentors.title')}</BottomTitle>
+        <MentorContainer>
+          {!isLoading && (
+            <MentorCards>
+              {selectedMentor && (
+                <MentorCard
+                  mentor={selectedMentor}
+                  onDismiss={() => setSelectedMentor(null)}
+                />
+              )}
+              {mentorsToShow.map(mentor => (
+                <ListCard
+                  key={mentor.buddyId}
+                  isHomePage
+                  mentor={mentor}
+                  setVisibleCard={() => setSelectedMentor(mentor)}
+                />
+              ))}
+            </MentorCards>
+          )}
+          <FindMentorContainer>
+            <TextContainer>
+              <Text variant="h2" color="white">
+                {t('newestMentors.info.title')}
+              </Text>
+              <Text color="white">{t('newestMentors.info.text')}</Text>
+              <Button variant="outline" onClick={navigateToMentors}>
+                {t('newestMentors.info.button')}
+              </Button>
+            </TextContainer>
+          </FindMentorContainer>
+        </MentorContainer>
+      </BottomContainer>
     </PageWithTransition>
   );
 };
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const TopContainer = styled.div`
-  align-items: center;
   background: url(${Background});
-  background-position: left;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  min-height: 50vh;
+  height: 40rem;
+  position: relative;
 `;
 
 const InfoContainer = styled.div`
   background-color: ${palette.blue2};
   border-bottom-right-radius: 275px;
-  left: 4rem;
-  max-width: 450px;
+  height: calc(40rem - ${NAVIGATION_HEIGHT} - 2rem);
+  left: calc(${OUTER_HORIZONTAL_MARGIN} - 2vw);
+  max-width: 25vw;
   padding: 2rem;
   position: absolute;
   top: 2rem;
 `;
 
-const List = styled.ul`
-  list-style-type: none;
-  padding-left: 0;
-`;
-
 const MiddleContainer = styled.div`
-  background-color: ${palette.blueLight};
   display: flex;
   gap: 2rem;
-  padding: 4rem;
+  padding: 4rem ${OUTER_HORIZONTAL_MARGIN};
 `;
 
 const LeftMiddleContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  gap: 2rem;
 `;
 
 const NewMessagesNotification = styled.div`
   align-items: center;
   background-color: ${palette.purple};
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   display: flex;
-  height: 300px;
-  margin-bottom: 2rem;
-  padding: 2rem;
+  height: 16rem;
+  padding: 4rem 16rem 4rem 4rem;
   position: relative;
 `;
 
@@ -247,12 +233,6 @@ const TextContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  width: 70%;
-`;
-
-const Title = styled(Text)`
-  color: ${palette.white};
-  margin: 0;
 `;
 
 const Button = styled(TextButton)`
@@ -269,87 +249,94 @@ const WelcomeNotice = styled.div`
   align-items: center;
   background-color: ${palette.purple};
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 300px;
+  height: 16rem;
   justify-content: center;
-  margin-bottom: 2rem;
+  padding: 4rem;
 `;
 
 const Notices = styled.div`
   background-color: ${palette.white};
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   padding: 2rem;
 `;
 
 const Notice = styled(Text)`
   background-color: ${palette.blueWhite};
-  margin-top 1rem;
+  border-left: 10px white solid;
+  box-shadow: -10px 0 0 0 ${palette.blue};
+  left: 10px;
+  margin-top: 1rem;
   padding: 1rem;
+  position: relative;
 `;
 
 const RightMiddleContainer = styled.div`
   flex: 1;
 `;
 
-const Concepts = styled.div`
+const ConceptContainer = styled.div`
   background-color: ${palette.white};
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
+`;
+
+const Concepts = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const Concept = styled.div`
   background-color: ${palette.blueWhite};
-  margin-bottom: 1rem;
   padding: 1rem;
 `;
 
 const BottomContainer = styled.div`
-  align-items: center;
   background-color: ${palette.blueWhite};
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  padding: 4rem;
-`;
-
-const BottomLeftContainer = styled.div`
-  align-items: center;
-  display: flex;
   flex-direction: column;
+  gap: 2rem;
+  padding: 4rem ${OUTER_HORIZONTAL_MARGIN};
 `;
 
 const BottomTitle = styled(Text)`
   color: ${palette.white};
 `;
 
-const MentorCardContainer = styled.div`
+const MentorContainer = styled.div`
+  align-items: center;
   display: flex;
-  flex-direction: row;
+  gap: 2rem;
+  justify-content: space-between;
 `;
 
-const BottomRightContainer = styled.div`
+const MentorCards = styled.div`
   display: flex;
-  width: 600px;
+  gap: 1.5rem;
 `;
 
 const FindMentorContainer = styled.div`
   align-items: center;
   background-color: ${palette.purple};
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 500px;
   justify-content: center;
-  padding: 2rem;
+  max-width: 50%;
+  min-height: 26rem;
+  padding: 4rem;
 `;
 
 export default HomePage;

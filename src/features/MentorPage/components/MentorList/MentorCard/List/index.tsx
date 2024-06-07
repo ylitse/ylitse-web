@@ -11,15 +11,20 @@ import { ExpandButton } from './ExpandButton';
 import { spacing, palette, CONTENT_WIDTH } from '@/components/variables';
 
 type Props = {
+  isHomePage?: boolean;
   setVisibleCard: (mentor: Mentor) => void;
   mentor: Mentor;
 };
 
-export const ListCard: React.FC<Props> = ({ setVisibleCard, mentor }) => {
+export const ListCard: React.FC<Props> = ({
+  isHomePage = false,
+  setVisibleCard,
+  mentor,
+}) => {
   const { isMobile } = useGetLayoutMode();
 
   return (
-    <Container isMobile={isMobile}>
+    <Container isHomePage={isHomePage} isMobile={isMobile}>
       <Header
         name={mentor.name}
         age={mentor.age}
@@ -37,13 +42,13 @@ export const ListCard: React.FC<Props> = ({ setVisibleCard, mentor }) => {
   );
 };
 
-const Container = styled.div<{ isMobile: boolean }>`
+const Container = styled.div<{ isHomePage: boolean; isMobile: boolean }>`
   background-color: ${palette.white};
   border-radius: 0.75rem;
   display: flex;
   flex-direction: column;
 
-  ${({ isMobile }) =>
+  ${({ isHomePage, isMobile }) =>
     isMobile
       ? css`
           margin: 1rem 0;
@@ -60,40 +65,45 @@ const Container = styled.div<{ isMobile: boolean }>`
             margin-right: 1.5rem;
           }
         `
-      : css`
-          flex: 0 0 30%;
-          flex-wrap: wrap;
-          margin: ${spacing.layout_spacing};
-          max-width: calc(
-            ((${CONTENT_WIDTH} + ${spacing.layout_spacing} * 2) / 3) -
-              (${spacing.layout_spacing} * 2)
-          );
-          @media screen and (min-width: 2550px) {
-            flex: 0 0 20%;
-            max-width: calc(
-              ((${CONTENT_WIDTH} + ${spacing.layout_spacing} * 2) / 5) -
-                (${spacing.layout_spacing} * 2)
-            );
-          }
-          @media screen and (min-width: 1950px) {
-            flex: 0 0 25%;
-            max-width: calc(
-              ((${CONTENT_WIDTH} + ${spacing.layout_spacing} * 2) / 4) -
-                (${spacing.layout_spacing} * 2)
-            );
-          }
-          @media screen and (max-width: 1500px) {
+      : isHomePage
+        ? css`
+            flex: 1;
+          `
+        : css`
             flex: 0 0 30%;
+            flex-wrap: wrap;
+            margin: ${spacing.layout_spacing};
             max-width: calc(
-              ((1130px + (${spacing.layout_spacing} * 2)) / 3) -
+              ((${CONTENT_WIDTH} + ${spacing.layout_spacing} * 2) / 3) -
                 (${spacing.layout_spacing} * 2)
             );
-          }
-          @media screen and (max-width: 1200px) {
-            flex: 0 0 50%;
-            max-width: calc((100vw / 2) - (${spacing.layout_spacing} * 2));
-          }
-        `}
+
+            @media screen and (min-width: 2550px) {
+              flex: 0 0 20%;
+              max-width: calc(
+                ((${CONTENT_WIDTH} + ${spacing.layout_spacing} * 2) / 5) -
+                  (${spacing.layout_spacing} * 2)
+              );
+            }
+            @media screen and (min-width: 1950px) {
+              flex: 0 0 25%;
+              max-width: calc(
+                ((${CONTENT_WIDTH} + ${spacing.layout_spacing} * 2) / 4) -
+                  (${spacing.layout_spacing} * 2)
+              );
+            }
+            @media screen and (max-width: 1500px) {
+              flex: 0 0 30%;
+              max-width: calc(
+                ((1130px + (${spacing.layout_spacing} * 2)) / 3) -
+                  (${spacing.layout_spacing} * 2)
+              );
+            }
+            @media screen and (max-width: 1200px) {
+              flex: 0 0 50%;
+              max-width: calc((100vw / 2) - (${spacing.layout_spacing} * 2));
+            }
+          `}
 `;
 
 const CardContent = styled.div<{ isMobile: boolean }>`

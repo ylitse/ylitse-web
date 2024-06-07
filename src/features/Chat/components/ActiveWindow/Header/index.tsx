@@ -116,7 +116,6 @@ const IconContainer = styled.div`
 `;
 
 const MentorName = styled(Text)`
-  margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
