@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { fetchNotices } from './noticesApi';
 import {
   Mentor,
   selectFilteredMentors,
@@ -26,6 +27,8 @@ import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 import { UserRole, selectUserRole } from '../Authentication/userSlice';
 
+import type { Notice } from './noticesApi';
+
 const HomePage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('home');
@@ -46,6 +49,12 @@ const HomePage = () => {
     0,
     2,
   );
+  const [notices, setNotices] = useState<Notice[]>([]);
+
+  useEffect(() => {
+    const notices: Notice[] = fetchNotices();
+    setNotices(notices);
+  }, [notices]);
 
   return (
     <PageWithTransition>
@@ -115,11 +124,9 @@ const HomePage = () => {
 
           <Notices>
             <Text variant="h2">{t('notices.title')}</Text>
-            {/* Nämä haetaan palvelimelta */}
-            <Notice>
-              Palvelussa on käyttökatko 24.4.2022 klo 13 - 14. Pahoittelemme
-              häiriötä.
-            </Notice>
+            {notices.map(notice => (
+              <Notice key={notice.id}>{notice.message}</Notice>
+            ))}
           </Notices>
         </LeftMiddleContainer>
         <RightMiddleContainer>
