@@ -116,7 +116,7 @@ const HomePage = () => {
           <Notices>
             <Text variant="h2">{t('notices.title')}</Text>
             {/* Nämä haetaan palvelimelta */}
-            <Notice variant="p">
+            <Notice>
               Palvelussa on käyttökatko 24.4.2022 klo 13 - 14. Pahoittelemme
               häiriötä.
             </Notice>
@@ -125,19 +125,22 @@ const HomePage = () => {
         <RightMiddleContainer>
           <ConceptContainer>
             <Text variant="h2">{t('concepts.title')}</Text>
-            <Text variant="p">{t('concepts.description')} </Text>
+            <Text>{t('concepts.description')} </Text>
             <Concepts>
               <Concept>
-                <Text variant="boldSource">{t('concepts.concept1.name')}</Text>
-                <Text variant="p">{t('concepts.concept1.definition')}</Text>
+                <Name variant="boldSource">{t('concepts.concept1.name')}</Name>
+                <Equals>{t('concepts.equals')}</Equals>
+                <Definition>{t('concepts.concept1.definition')}</Definition>
               </Concept>
               <Concept>
-                <Text variant="boldSource">{t('concepts.concept2.name')}</Text>
-                <Text variant="p">{t('concepts.concept2.definition')}</Text>
+                <Name variant="boldSource">{t('concepts.concept2.name')}</Name>
+                <Equals>{t('concepts.equals')}</Equals>
+                <Definition>{t('concepts.concept2.definition')}</Definition>
               </Concept>
               <Concept>
-                <Text variant="boldSource">{t('concepts.concept3.name')}</Text>
-                <Text variant="p">{t('concepts.concept3.definition')}</Text>
+                <Name variant="boldSource">{t('concepts.concept3.name')}</Name>
+                <Equals>{t('concepts.equals')}</Equals>
+                <Definition>{t('concepts.concept3.definition')}</Definition>
               </Concept>
             </Concepts>
           </ConceptContainer>
@@ -298,7 +301,21 @@ const Concepts = styled.div`
 
 const Concept = styled.div`
   background-color: ${palette.blueWhite};
+  display: flex;
   padding: 1rem;
+`;
+
+const Name = styled(Text)`
+  margin: 0;
+  white-space: nowrap;
+`;
+
+const Equals = styled(Text)`
+  margin: 0 0.5rem;
+`;
+
+const Definition = styled(Text)`
+  margin: 0;
 `;
 
 const BottomContainer = styled.div`

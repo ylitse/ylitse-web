@@ -35,16 +35,17 @@
   "concepts": {
     "title": "Concepts",
     "description": "Here are some concepts to make using the service easier.",
+    "equals": "=",
     "concept1": {
-      "name": "Status message =",
+      "name": "Status message",
       "definition": "If a mentor is not available, for example, due to vacation, they can announce it with a status message. The status message is visible in the mentor's profile and in the chat with the mentor."
     },
     "concept2": {
-      "name": "Concept2 =",
+      "name": "Concept 2",
       "definition": "Lorem ipsum dolor sit amet. Vestibulum eu vulputate ipsum. Proin eget dapibus risus."
     },
     "concept3": {
-      "name": "Concept 3 =",
+      "name": "Concept 3",
       "definition": "Ellentesque scelerisque diam eget metus sollicitudin, tristique interdum lacus tristique."
     }
   },
