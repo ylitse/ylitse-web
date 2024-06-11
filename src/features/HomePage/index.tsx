@@ -65,7 +65,7 @@ const HomePage = () => {
           <Text>{t('info.description2')}</Text>
           <Text>{t('info.description3')}</Text>
           <Text>{t('info.description4')}</Text>
-          <Text variant="boldSource">{t('info.description5')}</Text>
+          <Text variant="bold">{t('info.description5')}</Text>
         </InfoContainer>
       </TopContainer>
       <MiddleContainer>
@@ -135,17 +135,17 @@ const HomePage = () => {
             <Text>{t('concepts.description')} </Text>
             <Concepts>
               <Concept>
-                <Name variant="boldSource">{t('concepts.concept1.name')}</Name>
+                <Name variant="bold">{t('concepts.concept1.name')}</Name>
                 <Equals>{t('concepts.equals')}</Equals>
                 <Definition>{t('concepts.concept1.definition')}</Definition>
               </Concept>
               <Concept>
-                <Name variant="boldSource">{t('concepts.concept2.name')}</Name>
+                <Name variant="bold">{t('concepts.concept2.name')}</Name>
                 <Equals>{t('concepts.equals')}</Equals>
                 <Definition>{t('concepts.concept2.definition')}</Definition>
               </Concept>
               <Concept>
-                <Name variant="boldSource">{t('concepts.concept3.name')}</Name>
+                <Name variant="bold">{t('concepts.concept3.name')}</Name>
                 <Equals>{t('concepts.equals')}</Equals>
                 <Definition>{t('concepts.concept3.definition')}</Definition>
               </Concept>
@@ -313,7 +313,6 @@ const Concept = styled.div`
 `;
 
 const Name = styled(Text)`
-  margin: 0;
   white-space: nowrap;
 `;
 

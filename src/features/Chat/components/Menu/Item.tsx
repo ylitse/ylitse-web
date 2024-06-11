@@ -49,7 +49,7 @@ export const MenuItem = ({ buddy }: Props) => {
       />
       <MentorInfo>
         <BuddyName>
-          <Text variant="boldSource">{buddy.displayName}</Text>
+          <Text variant="bold">{buddy.displayName}</Text>
           {hasUnread && <Badge>{count}</Badge>}
         </BuddyName>
         {isLoading ? (
