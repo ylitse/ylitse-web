@@ -252,13 +252,9 @@ const defaultParam: PollingParam = { type: 'New', previousMsgId: '' };
 export const selectCurrentPollingParams = createSelector(
   selectChatState,
   ({ pollingParams }) => {
-    const nextParams = !pollingParams
-      ? null
-      : pollingParams.length === 0
-        ? defaultParam
-        : pollingParams[0];
-
-    return nextParams;
+    if (!pollingParams) return null;
+    if (pollingParams.length === 0) return defaultParam;
+    return pollingParams[0];
   },
 );
 
