@@ -25,7 +25,7 @@ import {
 } from '@/components/variables';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
-import { UserRole, selectUserRole } from '../Authentication/userSlice';
+import { selectUserRole } from '../Authentication/userSlice';
 
 import type { Notice } from './noticesApi';
 
@@ -33,22 +33,19 @@ const HomePage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('home');
 
-  const unreadMessagesFound: boolean = useAppSelector(selectHasUnreadMessages);
+  const unreadMessagesFound = useAppSelector(selectHasUnreadMessages);
   const navigateToAdminPanel = () => navigate('/admin');
   const navigateToChat = () => navigate('/chat');
   const navigateToMentors = () => navigate('/mentors');
 
-  const userRole: UserRole | null = useAppSelector(selectUserRole);
+  const userRole = useAppSelector(selectUserRole);
 
   // TODO: Mobile view
   const { isMobile } = useGetLayoutMode();
   console.log('isMobile is ' + isMobile);
   const { isLoading } = useGetMentorsQuery();
   const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
-  const mentorsToShow: Mentor[] = useAppSelector(selectFilteredMentors()).slice(
-    0,
-    2,
-  );
+  const mentorsToShow = useAppSelector(selectFilteredMentors()).slice(0, 2);
   const [notices, setNotices] = useState<Notice[]>([]);
 
   useEffect(() => {
