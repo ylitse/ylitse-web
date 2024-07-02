@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import {
   Mentor,
-  selectFilteredMentors,
+  selectNewestMentors,
   useGetMentorsQuery,
 } from '@/features/MentorPage/mentorPageApi';
 import { useAppSelector } from '@/store';
@@ -23,7 +23,7 @@ const NewestMentors = () => {
 
   const { isLoading } = useGetMentorsQuery();
   const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
-  const mentorsToShow = useAppSelector(selectFilteredMentors()).slice(0, 2);
+  const mentors = useAppSelector(selectNewestMentors(2));
 
   return (
     <Container>
@@ -37,7 +37,7 @@ const NewestMentors = () => {
                 onDismiss={() => setSelectedMentor(null)}
               />
             )}
-            {mentorsToShow.map(mentor => (
+            {mentors.map(mentor => (
               <ListCard
                 key={mentor.buddyId}
                 isHomePage
