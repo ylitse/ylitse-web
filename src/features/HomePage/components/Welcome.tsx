@@ -15,7 +15,6 @@ type Props = {
 const Welcome = ({ role }: Props) => {
   const { t } = useTranslation('home');
 
-  // REFACTOR
   const navigation = {
     admin: '/admin',
     mentor: '/chat',
