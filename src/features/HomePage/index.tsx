@@ -5,12 +5,12 @@ import { selectUserRole } from '../Authentication/userSlice';
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
+import Announcements from './components/Announcements';
 import Background from '@/static/img/mountain-background.svg';
 import Concepts from './components/Concepts';
 import Info from './components/Info';
 import NewestMentors from './components/NewestMentors';
 import NewMessages from './components/NewMessages';
-import Notices from './components/Notices';
 import { OUTER_HORIZONTAL_MARGIN } from '@/components/variables';
 import PageWithTransition from '@/components/PageWithTransition';
 import Welcome from './components/Welcome';
@@ -32,7 +32,7 @@ const HomePage = () => {
         <LeftMiddleContainer>
           {unreadMessagesFound && <NewMessages />}
           {userRole && <Welcome role={userRole} />}
-          <Notices />
+          <Announcements />
         </LeftMiddleContainer>
         <RightMiddleContainer>
           <Concepts />

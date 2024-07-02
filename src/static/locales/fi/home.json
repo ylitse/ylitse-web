@@ -29,8 +29,9 @@
       "button": "Etsi mentori"
     }
   },
-  "notices": {
-    "title": "Tiedotteet"
+  "announcements": {
+    "title": "Tiedotteet",
+    "notice1": "Tervetuloa käyttämään Ylitse MentorApp -palvelua!"
   },
   "concepts": {
     "title": "Käsitteet",

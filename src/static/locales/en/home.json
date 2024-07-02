@@ -29,8 +29,9 @@
       "button": "Find a mentor"
     }
   },
-  "notices": {
-    "title": "Notices"
+  "announcements": {
+    "title": "Announcements",
+    "notice1": "Welcome to the Ylitse MentorApp service!"
   },
   "concepts": {
     "title": "Concepts",

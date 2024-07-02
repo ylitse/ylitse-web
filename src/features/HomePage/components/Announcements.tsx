@@ -1,28 +1,16 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { fetchNotices } from '../noticesApi';
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
-import type { Notice } from '../noticesApi';
-
-const Notices = () => {
+const Announcements = () => {
   const { t } = useTranslation('home');
-  const [notices, setNotices] = useState<Notice[]>([]);
-
-  useEffect(() => {
-    const notices: Notice[] = fetchNotices();
-    setNotices(notices);
-  }, [notices]);
 
   return (
     <Container>
-      <Text variant="h2">{t('notices.title')}</Text>
-      {notices.map(notice => (
-        <Notice key={notice.id}>{notice.message}</Notice>
-      ))}
+      <Text variant="h2">{t('announcements.title')}</Text>
+      <Announcement>{t('announcements.notice1')}</Announcement>
     </Container>
   );
 };
@@ -35,7 +23,7 @@ const Container = styled.div`
   padding: 2rem;
 `;
 
-const Notice = styled(Text)`
+const Announcement = styled(Text)`
   background-color: ${palette.blueWhite};
   border-left: 10px white solid;
   box-shadow: -10px 0 0 0 ${palette.blue};
@@ -45,4 +33,4 @@ const Notice = styled(Text)`
   position: relative;
 `;
 
-export default Notices;
+export default Announcements;
