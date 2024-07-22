@@ -6,12 +6,15 @@ import styled from 'styled-components';
 import { TruncateText, WrappedText } from '../Expanded/BasicInfo';
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 import { Text } from '@/components/Text/Text';
+import { Tag } from './Tag';
 
 type Props = {
   name: string;
   age: number;
   region: string;
   isAvailable: boolean;
+  isMe: boolean;
+  isNew: boolean;
   message: string;
 };
 
@@ -20,18 +23,16 @@ export const Header: React.FC<Props> = ({
   age,
   region,
   isAvailable,
+  isMe,
+  isNew,
   message,
 }) => {
   const { t } = useTranslation('mentors');
   const { isMobile } = useGetLayoutMode();
 
-  const availabilityMessage = isAvailable ? '' : t('card.unavailable');
-
   return (
     <Container isAvailable={isAvailable} isMobile={isMobile}>
-      <Availability isShowing={!isAvailable}>
-        {availabilityMessage}
-      </Availability>
+      <Tag isAvailable={isAvailable} isMe={isMe} isNew={isNew}></Tag>
       <ProfilePicture />
       <BasicInfo>
         <NameText variant="h2" color="white">
@@ -90,16 +91,4 @@ const BasicInfo = styled.div`
 const Divider = styled.span`
   padding-left: 1rem;
   padding-right: 1rem;
-`;
-
-const Availability = styled(Text)<{ isShowing: boolean }>`
-  background-color: ${palette.blueWhite};
-  border-radius: 0.25rem;
-  display: ${props => (props.isShowing ? `flex` : `none`)};
-  margin: 0;
-  padding: 0.25rem 1rem;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transform: translate(-1rem, -50%);
 `;
