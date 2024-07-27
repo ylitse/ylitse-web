@@ -39,7 +39,7 @@ Cypress.Commands.add(
     cy.fillInput('username', username);
     cy.fillInput('password', password);
     cy.get('button[id="submit"]').click();
-    cy.contains('KOTISIVU').should('be.visible');
+    cy.contains('Ylitse MentorApp peer mentoring service').should('be.visible');
   },
 );
 

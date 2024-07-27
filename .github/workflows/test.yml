@@ -5,6 +5,17 @@ on: [workflow_call]
 jobs:
   test:
     runs-on: ubuntu-22.04
+
+    services:
+      postgres:
+        image: postgres
+        env: 
+          POSTGRES_USER: postgres
+          POSTGRES_DB: ylitse
+          POSTGRES_PASSWORD: ${{ secrets.YLITSE_POSTGRES_PASSWORD }}
+        ports:
+          - 5432:5432
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up node
@@ -31,16 +42,18 @@ jobs:
           make env
           source env/bin/activate
           make conf
-        working-directory: ylitse-api
+          make db-upgrade-head 
+          make db-insert-admin 
         env:
-          YLITSE_POSTGRES_URL: ${{ secrets.YLITSE_POSTGRES_URL }}
+          YLITSE_POSTGRES_URL: postgresql://postgres:${{ secrets.YLITSE_POSTGRES_PASSWORD }}@localhost/ylitse
+        working-directory: ylitse-api
       - name: Cache cypress
         uses: actions/cache@v3
         with:
           path: ~/.cache/Cypress
           key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      # - name: Run E2E tests
-      #   run: |
-      #     ${{ github.workspace }}/.github/scripts/start-api &
-      #     npm run start &
-      #     npm run test:e2e
+      - name: Run E2E tests
+        run: |
+          ${{ github.workspace }}/.github/scripts/start-api &
+          npm run start &
+          npm run test:e2e
