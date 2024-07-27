@@ -12,7 +12,7 @@ jobs:
         env: 
           POSTGRES_USER: postgres
           POSTGRES_DB: ylitse
-          POSTGRES_PASSWORD: secret
+          POSTGRES_PASSWORD: ${{ secrets.YLITSE_POSTGRES_PASSWORD }}
         ports:
           - 5432:5432
 
@@ -45,7 +45,7 @@ jobs:
           make db-upgrade-head 
           make db-insert-admin 
         env:
-          YLITSE_POSTGRES_URL: postgresql://postgres:secret@localhost/ylitse
+          YLITSE_POSTGRES_URL: postgresql://postgres:${{ secrets.YLITSE_POSTGRES_PASSWORD }}@localhost/ylitse
         working-directory: ylitse-api
       - name: Cache cypress
         uses: actions/cache@v3
