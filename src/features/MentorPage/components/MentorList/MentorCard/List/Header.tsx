@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { TruncateText, WrappedText } from '../Expanded/BasicInfo';
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 import { Text } from '@/components/Text/Text';
-import { Tag } from './Tag';
+import { Tag, type Status } from './Tag';
 
 type Props = {
   name: string;
@@ -30,9 +30,24 @@ export const Header: React.FC<Props> = ({
   const { t } = useTranslation('mentors');
   const { isMobile } = useGetLayoutMode();
 
+  const getStatus = (
+    isMe: boolean,
+    isAvailable: boolean,
+    isNew: boolean,
+  ): Status => {
+    if (isMe) {
+      return 'me';
+    } else if (!isAvailable) {
+      return 'unavailable';
+    } else if (isNew) {
+      return 'new';
+    }
+    return 'empty';
+  };
+
   return (
     <Container isAvailable={isAvailable} isMobile={isMobile}>
-      <Tag isAvailable={isAvailable} isMe={isMe} isNew={isNew}></Tag>
+      <Tag status={getStatus(isMe, isAvailable, isNew)}></Tag>
       <ProfilePicture />
       <BasicInfo>
         <NameText variant="h2" color="white">

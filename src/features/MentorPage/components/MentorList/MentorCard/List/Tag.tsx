@@ -4,13 +4,15 @@ import { palette } from '@/components/variables';
 import styled from 'styled-components';
 import { Text } from '@/components/Text/Text';
 
+export type Status = 'new' | 'me' | 'unavailable' | 'empty';
+
 type Props = {
-  isAvailable: boolean;
-  isMe: boolean;
-  isNew: boolean;
+
+  status: Status;
+  
 };
 
-export const Tag: React.FC<Props> = ({ isAvailable, isMe, isNew }) => {
+export const Tag: React.FC<Props> = ({ status }) => {
   const { t } = useTranslation('mentors');
 
   const statusMap = {
@@ -20,29 +22,12 @@ export const Tag: React.FC<Props> = ({ isAvailable, isMe, isNew }) => {
     empty: { text: '', color: '' },
   };
 
-  type Status = 'new' | 'me' | 'unavailable' | 'empty';
-  const getStatus = (
-    isMe: boolean,
-    isAvailable: boolean,
-    isNew: boolean,
-  ): Status => {
-    if (isMe) {
-      return 'me';
-    } else if (!isAvailable) {
-      return 'unavailable';
-    } else if (isNew) {
-      return 'new';
-    }
-    return 'empty';
-  };
-
-  const status = getStatus(isMe, isAvailable, isNew);
   const tagMessage = statusMap[status].text;
   const backgroundColor = statusMap[status].color;
-  const needTag = isMe || !isAvailable || isNew;
+  const shouldTagShow = status !== 'empty'
 
   return (
-    <MentorTag isShowing={needTag} backgroundColor={backgroundColor}>
+    <MentorTag isShowing={shouldTagShow} backgroundColor={backgroundColor}>
       {tagMessage}
     </MentorTag>
   );
