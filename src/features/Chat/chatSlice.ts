@@ -219,6 +219,18 @@ export const selectChats = createSelector(
     Object.values(chats)
       .filter(chat => chat.status === activeFolder)
       .sort((a, b) => {
+        const aHasNoMessages = a.messages.length === 0;
+        const bHasNoMessages = b.messages.length === 0;
+
+        // If both chats have no messages, they are considered equal
+        if (aHasNoMessages && bHasNoMessages) return 0;
+
+        // If only a has no messages, it should come first
+        if (aHasNoMessages) return -1;
+
+        // If only b has no messages, it should come first
+        if (bHasNoMessages) return 1;
+
         const mostRecentA = sortMessagesByDateDescending(a.messages)[0];
         const mostRecentB = sortMessagesByDateDescending(b.messages)[0];
         return compareMessagesByTimeCreated(mostRecentA, mostRecentB);
