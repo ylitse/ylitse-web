@@ -7,9 +7,7 @@ import { Text } from '@/components/Text/Text';
 export type Status = 'new' | 'me' | 'unavailable' | 'empty';
 
 type Props = {
-
   status: Status;
-  
 };
 
 export const Tag: React.FC<Props> = ({ status }) => {
@@ -24,7 +22,7 @@ export const Tag: React.FC<Props> = ({ status }) => {
 
   const tagMessage = statusMap[status].text;
   const backgroundColor = statusMap[status].color;
-  const shouldTagShow = status !== 'empty'
+  const shouldTagShow = status !== 'empty';
 
   return (
     <MentorTag isShowing={shouldTagShow} backgroundColor={backgroundColor}>

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { renderWithProviders } from '@/test/testStore';
 import MentorList from '.';
 
 const mentorListCards = [
@@ -53,7 +53,7 @@ const mentorListCards = [
 describe('<MentorListItem />', () => {
   const setVisibleMentor = jest.fn();
   it('Mentor List Item with mentor cards is rendered correctly', () => {
-    const { queryAllByTestId } = render(
+    const { queryAllByTestId } = renderWithProviders(
       <MentorList
         setVisibleCard={setVisibleMentor}
         mentors={mentorListCards}
@@ -62,7 +62,7 @@ describe('<MentorListItem />', () => {
     expect(queryAllByTestId('mentor-cards-container')).toBeTruthy();
   });
   it('Mentor List Item name in header is rendered correctly', () => {
-    const { queryAllByText } = render(
+    const { queryAllByText } = renderWithProviders(
       <MentorList
         setVisibleCard={setVisibleMentor}
         mentors={mentorListCards}
@@ -71,7 +71,7 @@ describe('<MentorListItem />', () => {
     expect(queryAllByText('Matti Meikäläinen')).toBeTruthy();
   });
   it('New mentor is rendered correctly', () => {
-    const { queryAllByText } = render(
+    const { queryAllByText } = renderWithProviders(
       <MentorList
         setVisibleCard={setVisibleMentor}
         mentors={mentorListCards}
@@ -80,7 +80,7 @@ describe('<MentorListItem />', () => {
     expect(queryAllByText('Uusi')).toBeTruthy();
   });
   it('Offline mentor is rendered correctly', () => {
-    const { queryAllByText } = render(
+    const { queryAllByText } = renderWithProviders(
       <MentorList
         setVisibleCard={setVisibleMentor}
         mentors={mentorListCards}

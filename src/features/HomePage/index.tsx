@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { selectHasUnreadMessages } from '@/features/Chat/chatSlice';
 import { selectUserRole } from '../Authentication/userSlice';
 import { useAppSelector } from '@/store';
-import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import Announcements from './components/Announcements';
 import Background from '@/static/img/mountain-background.svg';
@@ -20,8 +19,6 @@ const HomePage = () => {
   const userRole = useAppSelector(selectUserRole);
 
   // TODO: Mobile view
-  const { isMobile } = useGetLayoutMode();
-  console.log('isMobile is ' + isMobile);
 
   return (
     <PageWithTransition>
