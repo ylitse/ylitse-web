@@ -1,5 +1,10 @@
 import { useAppSelector, useAppDispatch } from '@/store';
-import { selectBuddyMessages, setActiveChat } from '@/features/Chat/chatSlice';
+import {
+  selectActiveChat,
+  selectBuddyMessages,
+  selectDefaultChat,
+  setActiveChat,
+} from '@/features/Chat/chatSlice';
 
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
 
@@ -23,7 +28,9 @@ export const MenuItem = ({ buddy }: Props) => {
     isLoading,
   } = useAppSelector(selectBuddyMessages(buddyId));
   const activeFolder = useAppSelector(state => state.chats.activeFolder);
-  const activeChatId = useAppSelector(state => state.chats.activeChatId);
+  const activeChat = useAppSelector(selectActiveChat);
+  const defaultChat = useAppSelector(selectDefaultChat);
+  const activeChatId = activeChat?.buddyId ?? defaultChat.buddyId;
 
   const dispatch = useAppDispatch();
   const openChat = () => dispatch(setActiveChat(buddyId));
