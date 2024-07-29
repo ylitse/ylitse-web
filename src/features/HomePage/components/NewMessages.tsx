@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { clearActiveChat } from '@/features/Chat/chatSlice';
+import { useAppDispatch } from '@/store';
+
 import NewMessagesImage from '@/static/img/new-messages.svg';
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
@@ -9,8 +12,13 @@ import { TextButton } from '@/components/Buttons';
 
 const NewMessages = () => {
   const { t } = useTranslation('home');
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const navigateToChat = () => navigate('/chat');
+
+  const navigateToNewMessages = () => {
+    dispatch(clearActiveChat());
+    navigate('/chat');
+  };
 
   return (
     <Container>
@@ -19,7 +27,7 @@ const NewMessages = () => {
           {t('newMessages.title')}
         </Text>
         <Text color="white">{t('newMessages.text')}</Text>
-        <Button variant="outline" onClick={navigateToChat}>
+        <Button variant="outline" onClick={navigateToNewMessages}>
           {t('newMessages.button')}
         </Button>
       </TextContainer>
