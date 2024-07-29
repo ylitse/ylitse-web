@@ -213,28 +213,30 @@ const compareMessagesByTimeCreated = (
 const sortMessagesByDateDescending = (messages: AppMessage[]): AppMessage[] =>
   [...messages].sort(compareMessagesByTimeCreated);
 
+const sortChats = (a: ChatBuddy, b: ChatBuddy): number => {
+  const aHasNoMessages = a.messages.length === 0;
+  const bHasNoMessages = b.messages.length === 0;
+
+  // If both chats have no messages, they are considered equal
+  if (aHasNoMessages && bHasNoMessages) return 0;
+
+  // If only a has no messages, it should come first
+  if (aHasNoMessages) return -1;
+
+  // If only b has no messages, it should come first
+  if (bHasNoMessages) return 1;
+
+  const mostRecentA = sortMessagesByDateDescending(a.messages)[0];
+  const mostRecentB = sortMessagesByDateDescending(b.messages)[0];
+  return compareMessagesByTimeCreated(mostRecentA, mostRecentB);
+};
+
 export const selectChats = createSelector(
   selectChatState,
   ({ activeFolder, chats }) =>
     Object.values(chats)
       .filter(chat => chat.status === activeFolder)
-      .sort((a, b) => {
-        const aHasNoMessages = a.messages.length === 0;
-        const bHasNoMessages = b.messages.length === 0;
-
-        // If both chats have no messages, they are considered equal
-        if (aHasNoMessages && bHasNoMessages) return 0;
-
-        // If only a has no messages, it should come first
-        if (aHasNoMessages) return -1;
-
-        // If only b has no messages, it should come first
-        if (bHasNoMessages) return 1;
-
-        const mostRecentA = sortMessagesByDateDescending(a.messages)[0];
-        const mostRecentB = sortMessagesByDateDescending(b.messages)[0];
-        return compareMessagesByTimeCreated(mostRecentA, mostRecentB);
-      }),
+      .sort(sortChats),
 );
 
 export const selectAnyChats = createSelector(
@@ -252,13 +254,23 @@ export const selectIsActiveChat = createSelector(
   ({ activeChatId, chats }) => Boolean(activeChatId && chats[activeChatId]),
 );
 
+// Returns most recent unread chat, or the most recent if all are read
 export const selectDefaultChat = createSelector(
   selectChatState,
-  ({ chats }) => {
-    // Returns most recent unread chat, and the most recent if all are read
-    const keys = Object.keys(chats);
-    const firstKey = keys[0];
-    return chats[firstKey];
+  ({ activeFolder, chats }) => {
+    const sortedChats = Object.values(chats)
+      .filter(chat => chat.status === activeFolder)
+      .sort(sortChats);
+
+    const unreadChats = sortedChats.filter(chat => {
+      if (chat.status !== 'ok') return false;
+      for (const message of chat.messages) {
+        if (!message.opened) return true;
+      }
+      return false;
+    });
+
+    return unreadChats[0] ?? sortedChats[0];
   },
 );
 
