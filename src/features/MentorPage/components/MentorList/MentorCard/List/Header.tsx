@@ -37,10 +37,10 @@ export const Header: React.FC<Props> = ({
   ): Status => {
     if (isMe) {
       return 'me';
-    } 
+    }
     if (!isAvailable) {
       return 'unavailable';
-    } 
+    }
     if (isNew) {
       return 'new';
     }
