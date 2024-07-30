@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 import {
@@ -31,7 +32,10 @@ const ActiveWindow = () => {
   const activeChat = useAppSelector(selectActiveChat);
   const defaultChat = useAppSelector(selectDefaultChat);
   const chat = activeChat ?? defaultChat;
-  dispatch(setActiveChat(chat.buddyId));
+
+  useEffect(() => {
+    dispatch(setActiveChat(chat.buddyId));
+  }, [chat.buddyId]);
 
   const [sendMessage, { isLoading: isLoadingSendMessage }] =
     useSendMessageMutation();
