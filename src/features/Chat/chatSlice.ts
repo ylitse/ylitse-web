@@ -239,7 +239,7 @@ export const selectChats = createSelector(
       .sort(sortChats),
 );
 
-export const selectAnyChats = createSelector(
+export const selectChatsExist = createSelector(
   selectChatState,
   ({ chats }) => Object.values(chats).length > 0,
 );
@@ -249,30 +249,20 @@ export const selectActiveChat = createSelector(
   ({ activeChatId, chats }) => (activeChatId ? chats[activeChatId] : null),
 );
 
-export const selectIsActiveChat = createSelector(
+export const selectActiveChatExists = createSelector(
   selectChatState,
   ({ activeChatId, chats }) => Boolean(activeChatId && chats[activeChatId]),
 );
 
 // Returns most recent unread chat, or the most recent if all are read
-export const selectDefaultChat = createSelector(
-  selectChatState,
-  ({ activeFolder, chats }) => {
-    const sortedChats = Object.values(chats)
-      .filter(chat => chat.status === activeFolder)
-      .sort(sortChats);
+export const selectDefaultChat = createSelector(selectChats, chats => {
+  const unreadChats = chats.filter(chat => {
+    if (chat.status !== 'ok') return false;
+    return chat.messages.some(message => !message.opened);
+  });
 
-    const unreadChats = sortedChats.filter(chat => {
-      if (chat.status !== 'ok') return false;
-      for (const message of chat.messages) {
-        if (!message.opened) return true;
-      }
-      return false;
-    });
-
-    return unreadChats[0] ?? sortedChats[0];
-  },
-);
+  return unreadChats[0] ?? chats[0];
+});
 
 export const selectBuddyMessages = (buddyId: string) =>
   createSelector(

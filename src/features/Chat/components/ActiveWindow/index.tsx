@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 import {
-  ChatBuddy,
   selectActiveChat,
   selectIsLoadingBuddyMessages,
   selectDefaultChat,
@@ -29,10 +28,9 @@ const ActiveWindow = () => {
   const { isTablet } = useGetLayoutMode();
   const dispatch = useAppDispatch();
 
-  const activeChat: ChatBuddy | null = useAppSelector(selectActiveChat);
-  const defaultChat: ChatBuddy | null = useAppSelector(selectDefaultChat);
-
-  const chat: ChatBuddy = activeChat ?? defaultChat;
+  const activeChat = useAppSelector(selectActiveChat);
+  const defaultChat = useAppSelector(selectDefaultChat);
+  const chat = activeChat ?? defaultChat;
   dispatch(setActiveChat(chat.buddyId));
 
   const [sendMessage, { isLoading: isLoadingSendMessage }] =
