@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { selectActiveChat } from './chatSlice';
+import { selectActiveChatExists, selectChatsExist } from './chatSlice';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useAppSelector } from '@/store';
 
@@ -14,16 +14,19 @@ import WelcomeWindow from './components/WelcomeWindow';
 
 const Chat = () => {
   const { isTablet } = useGetLayoutMode();
-  const chat = useAppSelector(selectActiveChat);
+  const activeChatExists = useAppSelector(selectActiveChatExists);
+  const chatsExist = useAppSelector(selectChatsExist);
 
   return (
     <PageWithTransition>
       {isTablet ? (
-        <PageContainer>{chat ? <ActiveWindow /> : <Menu />}</PageContainer>
+        <PageContainer>
+          {activeChatExists ? <ActiveWindow /> : <Menu />}
+        </PageContainer>
       ) : (
         <PageContainer isDesktop>
           <Menu />
-          {chat ? <ActiveWindow /> : <WelcomeWindow />}
+          {chatsExist ? <ActiveWindow /> : <WelcomeWindow />}
         </PageContainer>
       )}
     </PageWithTransition>
