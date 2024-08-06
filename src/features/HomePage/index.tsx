@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import { selectHasUnreadMessages } from '@/features/Chat/chatSlice';
 import { selectUserRole } from '../Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import Announcements from './components/Announcements';
 import Background from '@/static/img/mountain-background.svg';
 import Concepts from './components/Concepts';
+import FindMentor from './components/FindMentor';
 import Info from './components/Info';
 import NewestMentors from './components/NewestMentors';
 import NewMessages from './components/NewMessages';
@@ -15,19 +17,29 @@ import PageWithTransition from '@/components/PageWithTransition';
 import Welcome from './components/Welcome';
 
 const HomePage = () => {
-  const unreadMessagesFound = useAppSelector(selectHasUnreadMessages);
+  const hasUnreadMessages = useAppSelector(selectHasUnreadMessages);
   const userRole = useAppSelector(selectUserRole);
 
-  // TODO: Mobile view
+  const { isTablet } = useGetLayoutMode();
 
-  return (
+  return isTablet ? (
+    <PageWithTransition>
+      <Info isMobile />
+      {hasUnreadMessages && <NewMessages isMobile />}
+      {userRole && <Welcome isMobile role={userRole} />}
+      <Announcements isMobile />
+      <NewestMentors isMobile />
+      <FindMentor isMobile />
+      <Concepts isMobile />
+    </PageWithTransition>
+  ) : (
     <PageWithTransition>
       <TopContainer>
         <Info />
       </TopContainer>
       <MiddleContainer>
         <LeftMiddleContainer>
-          {unreadMessagesFound && <NewMessages />}
+          {hasUnreadMessages && <NewMessages />}
           {userRole && <Welcome role={userRole} />}
           <Announcements />
         </LeftMiddleContainer>

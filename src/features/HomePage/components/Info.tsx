@@ -8,20 +8,80 @@ import {
 } from '@/components/variables';
 import Text from '@/components/Text';
 
-const Info = () => {
+type Props = {
+  isMobile?: boolean;
+};
+
+const Info = ({ isMobile = false }: Props) => {
   const { t } = useTranslation('home');
 
-  return (
+  return isMobile ? (
+    <MobileContainer>
+      <Text variant="h1">{t('info.title')}</Text>
+      <Text>{t('info.description')}</Text>
+      <Bullets>
+        <Row>
+          <Bullet />
+          <BulletText>{t('info.bullet1')}</BulletText>
+        </Row>
+        <Row>
+          <Bullet />
+          <BulletText>{t('info.bullet2')}</BulletText>
+        </Row>
+        <Row>
+          <Bullet />
+          <BulletText>
+            {`${t('info.bullet3')} `}
+            <BoldText>{t('info.bullet3Bold')}</BoldText>
+          </BulletText>
+        </Row>
+      </Bullets>
+    </MobileContainer>
+  ) : (
     <Container>
       <Text variant="h1">{t('info.title')}</Text>
-      <Text>{t('info.description1')}</Text>
-      <Text>{t('info.description2')}</Text>
-      <Text>{t('info.description3')}</Text>
-      <Text>{t('info.description4')}</Text>
-      <Text variant="bold">{t('info.description5')}</Text>
+      <Text>{t('info.description')}</Text>
+      <Text>{`- ${t('info.bullet1')}`}</Text>
+      <Text>{`- ${t('info.bullet2')}`}</Text>
+      <Text>
+        {`- ${t('info.bullet3')} `}
+        <BoldText>{t('info.bullet3Bold')}</BoldText>
+      </Text>
     </Container>
   );
 };
+
+const MobileContainer = styled.div`
+  background-color: ${palette.white};
+  padding: 3rem;
+`;
+
+const Bullets = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const Row = styled.div`
+  align-items: center;
+  display: flex;
+`;
+
+const Bullet = styled.div`
+  background-color: ${palette.purple};
+  border-radius: 50%;
+  height: 8px;
+  margin-right: 1rem;
+  min-width: 8px;
+`;
+
+const BulletText = styled(Text)`
+  margin: 0;
+`;
+
+const BoldText = styled.span`
+  font-weight: 600;
+`;
 
 const Container = styled.div`
   background-color: ${palette.blue2};
