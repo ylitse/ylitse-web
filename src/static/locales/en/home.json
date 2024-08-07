@@ -8,8 +8,8 @@
     "bullet3Bold": "They know what you are talking about."
   },
   "newMessages": {
-    "title": "You have new messages",
-    "text": "If you want to return to previous conversations, new messages are waiting for you in the chat.",
+    "title": "You have unread messages",
+    "text": "If you want to return to previous conversations, unread messages are waiting for you in the chat.",
     "button": "Go to chat"
   },
   "welcome": {
