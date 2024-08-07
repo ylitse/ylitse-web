@@ -2,12 +2,15 @@ import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { selectChatsExist } from '@/features/Chat/chatSlice';
 import { selectUserRole } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
+
+type Role = 'admin' | 'freshMentee' | 'mentor' | 'mentee';
 
 type Props = {
   isMobile?: boolean;
@@ -16,28 +19,31 @@ type Props = {
 const Welcome = ({ isMobile = false }: Props) => {
   const { t } = useTranslation('home');
   const userRole = useAppSelector(selectUserRole);
+  const userHasChats = useAppSelector(selectChatsExist);
 
-  const navigation = {
-    admin: '/admin',
-    mentor: '/chat',
-    mentee: '/mentors',
-  };
+  const role: Role | null =
+    userRole === 'mentee' && !userHasChats ? 'freshMentee' : userRole;
 
   const navigate = useNavigate();
-  const navigateBasedOnRole = () => {
-    if (userRole) navigate(navigation[userRole]);
+  const navigation = {
+    admin: '/admin',
+    freshMentee: '/mentors',
+    mentor: '/chat',
+    mentee: '/chat',
   };
+
+  const navigateBasedOnRole = () => role && navigate(navigation[role]);
 
   return (
     <Container isDesktop={!isMobile}>
-      {userRole && (
+      {role && (
         <TextContainer>
           <Text variant="h2" color="white">
-            {t(`welcome.${userRole}.title`)}
+            {t(`welcome.${role}.title`)}
           </Text>
-          <Text color="white">{t(`welcome.${userRole}.text`)}</Text>
+          <Text color="white">{t(`welcome.${role}.text`)}</Text>
           <Button variant="outline" onClick={navigateBasedOnRole}>
-            {t(`welcome.${userRole}.button`)}
+            {t(`welcome.${role}.button`)}
           </Button>
         </TextContainer>
       )}
