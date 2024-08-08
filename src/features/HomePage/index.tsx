@@ -16,13 +16,13 @@ import PageWithTransition from '@/components/PageWithTransition';
 import Welcome from './components/Welcome';
 
 const HomePage = () => {
-  const unreadMessagesFound = useAppSelector(selectHasUnreadMessages);
+  const hasUnreadMessages = useAppSelector(selectHasUnreadMessages);
   const { isTablet } = useGetLayoutMode();
 
   return isTablet ? (
     <PageWithTransition>
       <Info isMobile />
-      {unreadMessagesFound ? <NewMessages isMobile /> : <Welcome isMobile />}
+      {hasUnreadMessages ? <NewMessages isMobile /> : <Welcome isMobile />}
       <Announcements isMobile />
       <NewestMentors isMobile />
       <FindMentor isMobile />
@@ -35,7 +35,7 @@ const HomePage = () => {
       </TopContainer>
       <MiddleContainer>
         <LeftMiddleContainer>
-          {unreadMessagesFound ? <NewMessages /> : <Welcome />}
+          {hasUnreadMessages ? <NewMessages /> : <Welcome />}
           <Announcements />
         </LeftMiddleContainer>
         <RightMiddleContainer>
