@@ -8,8 +8,8 @@
     "bullet3Bold": "They know what you are talking about."
   },
   "newMessages": {
-    "title": "You have new messages",
-    "text": "If you want to return to previous conversations, new messages are waiting for you in the chat.",
+    "title": "You have unread messages",
+    "text": "If you want to return to previous conversations, unread messages are waiting for you in the chat.",
     "button": "Go to chat"
   },
   "welcome": {
@@ -24,6 +24,11 @@
       "button": "Go to chat"
     },
     "mentee": {
+      "title": "Chat with mentors",
+      "text": "Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.",
+      "button": "Go to chat"
+    },
+    "freshMentee": {
       "title": "Start by finding a mentor",
       "text": "Browse mentor profiles or search by a specific keyword. Once you find a suitable mentor, you can start a conversation with them.",
       "button": "Find a mentor"

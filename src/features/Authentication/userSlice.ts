@@ -1,8 +1,10 @@
-import { RootState } from '@/store';
 import { createSelector } from 'reselect';
 import { createSlice } from '@reduxjs/toolkit';
 import { isRight } from 'fp-ts/lib/Either';
+
 import { fetchMyUser } from './myuserApi';
+import { RootState } from '@/store';
+import { selectChatsExist } from '../Chat/chatSlice';
 
 export type UserRole = 'mentee' | 'mentor' | 'admin';
 
@@ -50,5 +52,7 @@ export const selectUserId = createSelector(
 
 export const selectUserRole = createSelector(
   selectUserState,
-  ({ userRole }) => userRole,
+  selectChatsExist,
+  ({ userRole }, hasUserChats) =>
+    userRole === 'mentee' && !hasUserChats ? 'freshMentee' : userRole,
 );

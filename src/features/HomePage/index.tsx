@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { selectHasUnreadMessages } from '@/features/Chat/chatSlice';
-import { selectUserRole } from '../Authentication/userSlice';
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
@@ -18,15 +17,12 @@ import Welcome from './components/Welcome';
 
 const HomePage = () => {
   const hasUnreadMessages = useAppSelector(selectHasUnreadMessages);
-  const userRole = useAppSelector(selectUserRole);
-
   const { isTablet } = useGetLayoutMode();
 
   return isTablet ? (
     <PageWithTransition>
       <Info isMobile />
-      {hasUnreadMessages && <NewMessages isMobile />}
-      {userRole && <Welcome isMobile role={userRole} />}
+      {hasUnreadMessages ? <NewMessages isMobile /> : <Welcome isMobile />}
       <Announcements isMobile />
       <NewestMentors isMobile />
       <FindMentor isMobile />
@@ -39,8 +35,7 @@ const HomePage = () => {
       </TopContainer>
       <MiddleContainer>
         <LeftMiddleContainer>
-          {hasUnreadMessages && <NewMessages />}
-          {userRole && <Welcome role={userRole} />}
+          {hasUnreadMessages ? <NewMessages /> : <Welcome />}
           <Announcements />
         </LeftMiddleContainer>
         <RightMiddleContainer>

@@ -8,8 +8,8 @@
     "bullet3Bold": "He tietävät, mistä puhut."
   },
   "newMessages": {
-    "title": "Sinulle on uusia viestejä",
-    "text": "Mikäli haluat palata aiempien keskustelujen pariin, uudet viestit odottelevat sinua chatissa.",
+    "title": "Sinulla on lukemattomia viestejä",
+    "text": "Mikäli haluat palata aiempien keskustelujen pariin, lukemattomat viestit odottelevat sinua chatissa.",
     "button": "Siirry chattiin"
   },
   "welcome": {
@@ -24,6 +24,11 @@
       "button": "Siirry chattiin"
     },
     "mentee": {
+      "title": "Keskustele mentoreiden kanssa",
+      "text": "Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.",
+      "button": "Siirry chattiin"
+    },
+    "freshMentee": {
       "title": "Aloita etsimällä mentori",
       "text": "Selaa mentoreiden profiileja tai hae tietyn hakusanan mukaan. Kun sopiva mentori löytyy, voit aloittaa keskustelun hänen kanssaan.",
       "button": "Etsi mentori"

@@ -32,14 +32,14 @@ const NewestMentors = ({ isMobile = false }: Props) => {
         {t('newestMentors.title')}
       </Title>
       <MentorContainer>
+        {selectedMentor && (
+          <MentorCard
+            mentor={selectedMentor}
+            onDismiss={() => setSelectedMentor(null)}
+          />
+        )}
         {!isLoading && (
           <MentorCards isMobile={isMobile}>
-            {selectedMentor && (
-              <MentorCard
-                mentor={selectedMentor}
-                onDismiss={() => setSelectedMentor(null)}
-              />
-            )}
             {mentors.map(mentor => (
               <ListCard
                 key={mentor.buddyId}
@@ -87,7 +87,6 @@ const MentorCards = styled.div<{ isMobile: boolean }>`
     isMobile &&
     css`
       flex: 1;
-      overflow: auto;
       scroll-snap-type: x mandatory;
       white-space: nowrap;
       &::-webkit-scrollbar {
