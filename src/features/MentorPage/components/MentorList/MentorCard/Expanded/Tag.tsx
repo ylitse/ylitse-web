@@ -34,11 +34,19 @@ export const Tag: React.FC<Props> = ({ status }) => {
 const MentorTag = styled(Text)<{ isShowing: boolean; tagColor: string }>`
   background-color: ${props => props.tagColor};
   border-radius: 0.25rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
   display: ${props => (props.isShowing ? `flex` : `none`)};
   padding: 0.25rem 1rem;  
-  margin: 0;
+  margin: -1rem auto;
+  position: absolute;
+  left: 20%;
+  top: 0;
+  transform: translate(-50%, -30%);
   width: fit-content;
+  
   @media screen and (max-width: ${breakpoints.mobile}) {
     margin -1rem 1rem;
+    position: absolute;
+    left: 50%;
   }
 `;
