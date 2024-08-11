@@ -5,6 +5,7 @@ import { palette } from '@/components/variables';
 import styled from 'styled-components';
 import { TruncateText, WrappedText } from '../Expanded/BasicInfo';
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
+import ProfilePicPlaceholderForMe from '@/static/icons/chat-profilepic-me.svg';
 import { Text } from '@/components/Text/Text';
 import { Tag, type Status } from './Tag';
 
@@ -50,16 +51,18 @@ export const Header: React.FC<Props> = ({
   return (
     <Container isAvailable={isAvailable} isMobile={isMobile} isMe={isMe}>
       <Tag status={getStatus(isMe, isAvailable, isNew)}></Tag>
-      <ProfilePicture />
+      <ProfilePicture isMe={isMe} />
       <BasicInfo>
-        <NameText variant="h2" color="white">
+        <NameText variant="h2" color={isMe ? 'blueDark' : 'white'}>
           {name}
         </NameText>
-        <WrappedText color="white">
+        <WrappedText color={isMe ? 'blueDark' : 'white'}>
           {age} {t('card.age')} <Divider>|</Divider>
           {region}
         </WrappedText>
-        <TruncateText color="white">{message}</TruncateText>
+        <TruncateText color={isMe ? 'blueDark' : 'white'}>
+          {message}
+        </TruncateText>
       </BasicInfo>
     </Container>
   );
@@ -71,8 +74,16 @@ const Container = styled.div<{
   isMe: boolean;
 }>`
   align-items: center;
-  background-color: ${({ isAvailable }) =>
-    isAvailable ? palette.purple : palette.blueGrey};
+  background-color: ${({ isAvailable, isMe }) => {
+    if (!isAvailable) {
+      return palette.blueGrey;
+    }
+    if (isMe) {
+      return palette.blue;
+    } else {
+      return palette.purple;
+    }
+  }};
   border-radius: 0.75rem;
   box-sizing: border-box;
   color: ${palette.white};
@@ -85,8 +96,9 @@ const Container = styled.div<{
   width: 100%;
 `;
 
-const ProfilePicture = styled.div`
-  background-image: url(${ProfilePicPlaceholder});
+const ProfilePicture = styled.div<{ isMe: boolean }>`
+  background-image: ${({ isMe }) =>
+    `url(${isMe ? ProfilePicPlaceholderForMe : ProfilePicPlaceholder})`};
   background-repeat: no-repeat;
   background-size: contain;
   flex: 0 0 4rem;

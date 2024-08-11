@@ -10,26 +10,35 @@ import { breakpoints, palette } from '@/components/variables';
 
 type Props = {
   mentor: Mentor;
+  isMe: boolean;
 };
 
 export const BasicInfo = ({
   mentor: { name, age, region, statusMessage, languages },
+  isMe,
 }: Props) => {
   const { isMobile } = useGetLayoutMode();
   const { t } = useTranslation('mentors');
 
   return (
     <Container>
-      <NameText variant={isMobile ? 'h1' : 'h2'} color="white">
+      <NameText
+        variant={isMobile ? 'h1' : 'h2'}
+        color={isMe ? 'blueDark' : 'white'}
+      >
         {name}
       </NameText>
-      {!isMobile && <NameDivider />}
-      <WrappedText color="white">
+      {!isMobile && <NameDivider isMe={isMe} />}
+      <WrappedText color={isMe ? 'blueDark' : 'white'}>
         {age} {t('card.age')} <Divider>|</Divider>
         {region}
       </WrappedText>
-      <TruncateText color="white">{statusMessage}</TruncateText>
-      {!isMobile && <Languages languages={languages} isMobile={isMobile} />}
+      <TruncateText color={isMe ? 'blueDark' : 'white'}>
+        {statusMessage}
+      </TruncateText>
+      {!isMobile && (
+        <Languages languages={languages} isMe={isMe} isMobile={isMobile} />
+      )}
     </Container>
   );
 };
@@ -53,8 +62,8 @@ const NameText = styled(Text)`
   overflow-wrap: anywhere;
 `;
 
-const NameDivider = styled.div`
-  border-bottom: 1px solid ${palette.white};
+const NameDivider = styled.div<{ isMe: boolean }>`
+  border-bottom: 1px solid ${({ isMe }) => (isMe ? palette.blueDark : 'white')};
   height: 2px;
   margin-bottom: 0.5rem;
   margin-top: 0.25rem;

@@ -3,6 +3,7 @@ import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
+import ProfilePicPlaceholderForMe from '@/static/icons/chat-profilepic-me.svg';
 import { breakpoints, palette } from '@/components/variables';
 import { IconButton } from '@/components/Buttons';
 import { BasicInfo } from './BasicInfo';
@@ -44,13 +45,13 @@ export const Header = ({
   };
 
   return isMobile ? (
-    <Container isAvailable={!mentor.isVacationing} isMobile>
+    <Container isAvailable={!mentor.isVacationing} isMe={isMe} isMobile>
       <HeaderWrapper>
         <AvatarWrapper>
           <Tag status={getStatus(isMe, isAvailable, isNew)} />
-          <ProfilePicture isMobile />
+          <ProfilePicture isMe={isMe} isMobile />
         </AvatarWrapper>
-        <BasicInfo mentor={mentor} />
+        <BasicInfo isMe={isMe} mentor={mentor} />
         <CloseButton
           onClick={onDismiss}
           variant="closeWithBackground"
@@ -59,31 +60,44 @@ export const Header = ({
       </HeaderWrapper>
     </Container>
   ) : (
-    <Container isAvailable={!mentor.isVacationing} isMobile={false}>
+    <Container isAvailable={!mentor.isVacationing} isMe={isMe} isMobile={false}>
       <Tag status={getStatus(isMe, isAvailable, isNew)} />
-      <ProfilePicture isMobile={false} />
-      <BasicInfo mentor={mentor} />
+      <ProfilePicture isMe={isMe} isMobile={false} />
+      <BasicInfo isMe={isMe} mentor={mentor} />
     </Container>
   );
 };
 
-const Container = styled.div<{ isAvailable: boolean; isMobile: boolean }>`
-  background-color: ${({ isAvailable }) =>
-    isAvailable ? palette.purple : palette.blueGrey};
+const Container = styled.div<{
+  isAvailable: boolean;
+  isMe: boolean;
+  isMobile: boolean;
+}>`
+  background-color: ${({ isAvailable, isMe }) => {
+    if (!isAvailable) {
+      return palette.blueGrey;
+    }
+    if (isMe) {
+      return palette.blue;
+    } else {
+      return palette.purple;
+    }
+  }};
+
   border-radius: 10px;
   flex: 0 0 21vw;
   ${({ isMobile }) => !isMobile && css`padding: 2rem;'`}
 `;
 
-const ProfilePicture = styled.div<{ isMobile: boolean }>`
-  background-image: url(${ProfilePicPlaceholder});
+const ProfilePicture = styled.div<{ isMe: boolean; isMobile: boolean }>`
+  background-image: ${({ isMe }) =>
+    `url(${isMe ? ProfilePicPlaceholderForMe : ProfilePicPlaceholder})`};
   background-repeat: no-repeat;
   background-size: contain;
   flex: 0 0 10vw;
   height: 10vw;
   margin: 2rem auto;
   width: 10vw;
-
   @media screen and (max-width: ${breakpoints.mobile}) {
     width: 20vw;
     height: 20vw;

@@ -33,7 +33,11 @@ export const MentorCard = ({ mentor, onDismiss }: Props) => {
           isNew={isLessThan90DaysOld}
           onDismiss={onDismiss}
         />
-        <Content mentor={mentor} onDismiss={onDismiss} />
+        <Content
+          isMe={currentUserId == mentor.buddyId}
+          mentor={mentor}
+          onDismiss={onDismiss}
+        />
       </Card>
     </Container>
   );
