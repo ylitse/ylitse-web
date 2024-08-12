@@ -29,12 +29,12 @@ export const MentorCard = ({ mentor, onDismiss }: Props) => {
         <Header
           mentor={mentor}
           isAvailable={!mentor.isVacationing}
-          isMe={currentUserId == mentor.buddyId}
+          isMe={currentUserId === mentor.buddyId}
           isNew={isLessThan90DaysOld}
           onDismiss={onDismiss}
         />
         <Content
-          isMe={currentUserId == mentor.buddyId}
+          isMe={currentUserId === mentor.buddyId}
           mentor={mentor}
           onDismiss={onDismiss}
         />

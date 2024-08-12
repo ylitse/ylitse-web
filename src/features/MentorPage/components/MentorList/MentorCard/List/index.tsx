@@ -28,6 +28,7 @@ export const ListCard: React.FC<Props> = ({
   const currentUserId = useAppSelector(selectUserId);
 
   const isLessThan90DaysOld = getIsOlderThanDaysAgo(90, mentor.created);
+
   return (
     <Container isHomePage={isHomePage} isMobile={isMobile}>
       <Header

@@ -1,5 +1,6 @@
 import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 
+import { getStatus } from '@/utils/utils';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
@@ -7,7 +8,7 @@ import ProfilePicPlaceholderForMe from '@/static/icons/chat-profilepic-me.svg';
 import { breakpoints, palette } from '@/components/variables';
 import { IconButton } from '@/components/Buttons';
 import { BasicInfo } from './BasicInfo';
-import { Tag, type Status } from './Tag';
+import { Tag } from './Tag';
 import styled, { css } from 'styled-components';
 
 type Props = {
@@ -27,25 +28,17 @@ export const Header = ({
 }: Props) => {
   const { isMobile } = useGetLayoutMode();
 
-  const getStatus = (
-    isMe: boolean,
-    isAvailable: boolean,
-    isNew: boolean,
-  ): Status => {
-    if (isMe) {
-      return 'me';
-    }
-    if (!isAvailable) {
-      return 'unavailable';
-    }
-    if (isNew) {
-      return 'new';
-    }
-    return 'empty';
+  const status = getStatus(isMe, isAvailable, isNew);
+
+  const statusColors = {
+    me: palette.blue,
+    unavailable: palette.blueGrey,
+    new: palette.purple,
+    empty: palette.purple,
   };
 
   return isMobile ? (
-    <Container isAvailable={!mentor.isVacationing} isMe={isMe} isMobile>
+    <Container statusColor={statusColors[status]} isMobile>
       <HeaderWrapper>
         <AvatarWrapper>
           <Tag status={getStatus(isMe, isAvailable, isNew)} />
@@ -60,30 +53,16 @@ export const Header = ({
       </HeaderWrapper>
     </Container>
   ) : (
-    <Container isAvailable={!mentor.isVacationing} isMe={isMe} isMobile={false}>
-      <Tag status={getStatus(isMe, isAvailable, isNew)} />
+    <Container statusColor={statusColors[status]} isMobile={false}>
+      <Tag status={status} />
       <ProfilePicture isMe={isMe} isMobile={false} />
       <BasicInfo isMe={isMe} mentor={mentor} />
     </Container>
   );
 };
 
-const Container = styled.div<{
-  isAvailable: boolean;
-  isMe: boolean;
-  isMobile: boolean;
-}>`
-  background-color: ${({ isAvailable, isMe }) => {
-    if (!isAvailable) {
-      return palette.blueGrey;
-    }
-    if (isMe) {
-      return palette.blue;
-    } else {
-      return palette.purple;
-    }
-  }};
-
+const Container = styled.div<{ statusColor: string; isMobile: boolean }>`
+  background-color: ${({ statusColor }) => statusColor}};
   border-radius: 10px;
   flex: 0 0 21vw;
   ${({ isMobile }) => !isMobile && css`padding: 2rem;'`}

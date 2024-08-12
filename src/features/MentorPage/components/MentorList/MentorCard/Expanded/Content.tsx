@@ -54,7 +54,7 @@ export const Content = ({
       <Text>{story}</Text>
       {isMobile && (
         <Languages
-          isMe={currentUserId == mentorId}
+          isMe={currentUserId === mentorId}
           languages={languages}
           isMobile={isMobile}
         />
