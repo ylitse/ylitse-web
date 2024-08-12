@@ -41,7 +41,7 @@ export const Header = ({
     <Container statusColor={statusColors[status]} isMobile>
       <HeaderWrapper>
         <AvatarWrapper>
-          <Tag status={getStatus(isMe, isAvailable, isNew)} />
+          <Tag status={status} />
           <ProfilePicture isMe={isMe} isMobile />
         </AvatarWrapper>
         <BasicInfo isMe={isMe} mentor={mentor} />
