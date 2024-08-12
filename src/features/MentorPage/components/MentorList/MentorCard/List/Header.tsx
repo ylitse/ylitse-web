@@ -1,3 +1,4 @@
+import { getStatus } from '@/utils/utils';
 import { useTranslation } from 'react-i18next';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
@@ -5,8 +6,9 @@ import { palette } from '@/components/variables';
 import styled from 'styled-components';
 import { TruncateText, WrappedText } from '../Expanded/BasicInfo';
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
+import ProfilePicPlaceholderForMe from '@/static/icons/chat-profilepic-me.svg';
 import { Text } from '@/components/Text/Text';
-import { Tag, type Status } from './Tag';
+import { Tag } from './Tag';
 
 type Props = {
   name: string;
@@ -30,45 +32,38 @@ export const Header: React.FC<Props> = ({
   const { t } = useTranslation('mentors');
   const { isMobile } = useGetLayoutMode();
 
-  const getStatus = (
-    isMe: boolean,
-    isAvailable: boolean,
-    isNew: boolean,
-  ): Status => {
-    if (isMe) {
-      return 'me';
-    }
-    if (!isAvailable) {
-      return 'unavailable';
-    }
-    if (isNew) {
-      return 'new';
-    }
-    return 'empty';
+  const status = getStatus(isMe, isAvailable, isNew);
+
+  const statusColors = {
+    me: palette.blue,
+    unavailable: palette.blueGrey,
+    new: palette.purple,
+    empty: palette.purple,
   };
 
   return (
-    <Container isAvailable={isAvailable} isMobile={isMobile}>
-      <Tag status={getStatus(isMe, isAvailable, isNew)}></Tag>
-      <ProfilePicture />
+    <Container statusColor={statusColors[status]} isMobile={isMobile}>
+      <Tag status={status}></Tag>
+      <ProfilePicture isMe={isMe} />
       <BasicInfo>
-        <NameText variant="h2" color="white">
+        <NameText variant="h2" color={isMe ? 'blueDark' : 'white'}>
           {name}
         </NameText>
-        <WrappedText color="white">
+        <WrappedText color={isMe ? 'blueDark' : 'white'}>
           {age} {t('card.age')} <Divider>|</Divider>
           {region}
         </WrappedText>
-        <TruncateText color="white">{message}</TruncateText>
+        <TruncateText color={isMe ? 'blueDark' : 'white'}>
+          {message}
+        </TruncateText>
       </BasicInfo>
     </Container>
   );
 };
 
-const Container = styled.div<{ isAvailable: boolean; isMobile: boolean }>`
+const Container = styled.div<{ statusColor: string; isMobile: boolean }>`
   align-items: center;
-  background-color: ${({ isAvailable }) =>
-    isAvailable ? palette.purple : palette.blueGrey};
+  background-color: ${({ statusColor }) => statusColor}};
   border-radius: 0.75rem;
   box-sizing: border-box;
   color: ${palette.white};
@@ -81,8 +76,9 @@ const Container = styled.div<{ isAvailable: boolean; isMobile: boolean }>`
   width: 100%;
 `;
 
-const ProfilePicture = styled.div`
-  background-image: url(${ProfilePicPlaceholder});
+const ProfilePicture = styled.div<{ isMe: boolean }>`
+  background-image: ${({ isMe }) =>
+    `url(${isMe ? ProfilePicPlaceholderForMe : ProfilePicPlaceholder})`};
   background-repeat: no-repeat;
   background-size: contain;
   flex: 0 0 4rem;

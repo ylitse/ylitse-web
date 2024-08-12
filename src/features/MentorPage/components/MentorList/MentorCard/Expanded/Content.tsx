@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { setConversation } from '@/features/Chat/chatSlice';
 
 import type { Mentor } from '@/features/MentorPage/mentorPageApi';
@@ -14,20 +14,23 @@ import { TextButton } from '@/components/Buttons';
 import { Languages } from './Languages';
 import { IconButton } from '@/components/Buttons';
 import { breakpoints } from '@/components/variables';
+import { selectUserId } from '@/features/Authentication/userSlice';
 
 type Props = {
   mentor: Mentor;
+  isMe: boolean;
   onDismiss: () => void;
 };
 
 export const Content = ({
-  mentor: { skills, story, languages, buddyId, name },
+  mentor: { skills, story, languages, buddyId, name, mentorId },
   onDismiss,
 }: Props) => {
   const { isMobile } = useGetLayoutMode();
   const { t } = useTranslation('mentors');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const currentUserId = useAppSelector(selectUserId);
 
   const handleClick = () => {
     dispatch(setConversation({ name, buddyId }));
@@ -49,7 +52,13 @@ export const Content = ({
         {t('card.bio')}
       </StoryHeader>
       <Text>{story}</Text>
-      {isMobile && <Languages languages={languages} isMobile={isMobile} />}
+      {isMobile && (
+        <Languages
+          isMe={currentUserId === mentorId}
+          languages={languages}
+          isMobile={isMobile}
+        />
+      )}
       <Skills skills={skills} />
       <OpenConversationButton onClick={handleClick}>
         {t('card.chat')}

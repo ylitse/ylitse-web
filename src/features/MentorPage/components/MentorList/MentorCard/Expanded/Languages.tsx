@@ -8,14 +8,16 @@ import { breakpoints } from '@/components/variables';
 export const Languages = ({
   languages,
   isMobile,
+  isMe,
 }: {
   languages: Array<string>;
   isMobile: boolean;
+  isMe: boolean;
 }) => {
   const { t } = useTranslation('mentors');
   return (
     <>
-      <Header variant="h3" color={isMobile ? 'purpleDark' : 'white'}>
+      <Header variant="h3" color={isMobile || isMe ? 'blueDark' : 'white'}>
         {t('card.languages')}
       </Header>
       <Chips>

@@ -2,6 +2,9 @@ import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useEscape } from '@/hooks/useEscape';
+import { useAppSelector } from '@/store';
+import { selectUserId } from '@/features/Authentication/userSlice';
+import { getIsOlderThanDaysAgo } from '@/utils/utils';
 
 import styled, { css } from 'styled-components';
 import { Header } from './Header';
@@ -15,14 +18,27 @@ type Props = {
 
 export const MentorCard = ({ mentor, onDismiss }: Props) => {
   const { isMobile } = useGetLayoutMode();
+  const currentUserId = useAppSelector(selectUserId);
+
+  const isLessThan90DaysOld = getIsOlderThanDaysAgo(90, mentor.created);
 
   useEscape(() => onDismiss());
 
   return (
     <Container>
       <Card isMobile={isMobile}>
-        <Header mentor={mentor} onDismiss={onDismiss} />
-        <Content mentor={mentor} onDismiss={onDismiss} />
+        <Header
+          mentor={mentor}
+          isAvailable={!mentor.isVacationing}
+          isMe={currentUserId === mentor.buddyId}
+          isNew={isLessThan90DaysOld}
+          onDismiss={onDismiss}
+        />
+        <Content
+          isMe={currentUserId === mentor.buddyId}
+          mentor={mentor}
+          onDismiss={onDismiss}
+        />
       </Card>
     </Container>
   );

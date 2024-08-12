@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { palette } from '@/components/variables';
+import { breakpoints, palette } from '@/components/variables';
 import styled from 'styled-components';
 import { Text } from '@/components/Text/Text';
 
@@ -35,11 +35,18 @@ const MentorTag = styled(Text)<{ isShowing: boolean; tagColor: string }>`
   background-color: ${props => props.tagColor};
   border-radius: 0.25rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
-  display: ${props => (props.isShowing ? 'flex' : 'none')};
-  margin: 0;
-  padding: 0.25rem 1rem;
+  display: ${props => (props.isShowing ? `flex` : `none`)};
+  padding: 0.25rem 1rem;  
+  margin: -1rem auto;
   position: absolute;
-  right: 0;
+  left: 19.5%;
   top: 0;
-  transform: translate(-1rem, -50%);
+  transform: translate(-50%, -30%);
+  width: fit-content;
+  
+  @media screen and (max-width: ${breakpoints.mobile}) {
+    margin -1rem 1rem;
+    position: absolute;
+    left: 50%;
+  }
 `;
