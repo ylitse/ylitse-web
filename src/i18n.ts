@@ -10,12 +10,26 @@ import homeEn from '@/static/locales/en/home.json';
 import homeFi from '@/static/locales/fi/home.json';
 import mentorsEn from '@/static/locales/en/mentors.json';
 import mentorsFi from '@/static/locales/fi/mentors.json';
+import profileEn from '@/static/locales/en/profile.json';
+import profileFi from '@/static/locales/fi/profile.json';
 
 export const defaultNS = 'common';
 
 export const resources = {
-  en: { chat: chatEn, common: commonEn, home: homeEn, mentors: mentorsEn },
-  fi: { chat: chatFi, common: commonFi, home: homeFi, mentors: mentorsFi },
+  en: {
+    chat: chatEn,
+    common: commonEn,
+    home: homeEn,
+    mentors: mentorsEn,
+    profile: profileEn,
+  },
+  fi: {
+    chat: chatFi,
+    common: commonFi,
+    home: homeFi,
+    mentors: mentorsFi,
+    profile: profileFi,
+  },
 } as const;
 
 const languageDetector = new LanguageDetector() as Module;

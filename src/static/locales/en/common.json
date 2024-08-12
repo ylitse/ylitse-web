@@ -30,6 +30,7 @@
     "logo": "Ylitse",
     "logout": "Logout",
     "mentors": "Mentors",
-    "mobile": { "menu": "Menu" }
+    "mobile": { "menu": "Menu" },
+    "profile": "Profile"
   }
 }

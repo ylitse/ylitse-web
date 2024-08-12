@@ -31,6 +31,7 @@ export const Navbar = () => {
       text: t('navigation.chat'),
       url: '/chat',
     },
+    { text: t('navigation.profile'), url: '/profile' },
   ];
 
   return isTablet ? (

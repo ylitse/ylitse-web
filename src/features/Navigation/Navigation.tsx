@@ -5,6 +5,7 @@ import HomePage from '@/features/HomePage';
 import MentorPage from '@/features/MentorPage';
 import { Logout } from '@/features/Authentication/components/Logout';
 import { Navbar } from './Navbar';
+import ProfilePage from '@/features/ProfilePage';
 
 const Navigation = () => (
   <>
@@ -14,8 +15,10 @@ const Navigation = () => (
       <Route path="/*" element={<HomePage />} />
       <Route path="/chat" element={<ChatPage />} />
       <Route path="/mentors" element={<MentorPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/logout" element={<Logout />} />
     </Routes>
   </>
 );
+
 export default Navigation;
