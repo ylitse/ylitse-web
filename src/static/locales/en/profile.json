@@ -1,1 +1,9 @@
-{ "title": "Profile" }
+{
+  "title": "Profile",
+  "account": {
+    "title": "Account"
+  },
+  "public": {
+    "title": "Public information"
+  }
+}

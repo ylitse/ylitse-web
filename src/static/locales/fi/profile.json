@@ -1,1 +1,9 @@
-{ "title": "Profiili" }
+{
+  "title": "Profiili",
+  "account": {
+    "title": "Tilin tiedot"
+  },
+  "public": {
+    "title": "Julkiset tiedot"
+  }
+}

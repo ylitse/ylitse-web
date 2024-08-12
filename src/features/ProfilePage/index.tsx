@@ -4,31 +4,44 @@ import { useTranslation } from 'react-i18next';
 import { selectUserRole } from '../Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
+import AccountInfo from './components/AccountInfo';
 import {
   CONTENT_WIDTH,
   OUTER_VERTICAL_MARGIN,
   palette,
 } from '@/components/variables';
 import PageWithTransition from '@/components/PageWithTransition';
+import PublicInfo from './components/PublicInfo';
 import Text from '@/components/Text';
 
 const ProfilePage = () => {
   const { t } = useTranslation('profile');
   const userRole = useAppSelector(selectUserRole);
-  console.log('The user is a', userRole);
+  const showMentorProfile = userRole === 'mentor';
 
   return (
     <PageWithTransition>
-      <Container>
-        <Header>
-          <Title variant="h1">{t('title')}</Title>
-        </Header>
-      </Container>
+      {showMentorProfile ? (
+        <Container>
+          <Header>
+            <Title variant="h1">{t('title')}</Title>
+          </Header>
+          <Content>
+            <AccountInfo />
+            <PublicInfo />
+          </Content>
+        </Container>
+      ) : (
+        <Container></Container>
+      )}
     </PageWithTransition>
   );
 };
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   margin: ${OUTER_VERTICAL_MARGIN} auto;
   max-width: ${CONTENT_WIDTH};
   width: ${CONTENT_WIDTH};
@@ -47,6 +60,12 @@ const Header = styled.div`
 
 const Title = styled(Text)`
   align-content: center;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
 `;
 
 export default ProfilePage;
