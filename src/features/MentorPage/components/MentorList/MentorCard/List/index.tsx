@@ -26,7 +26,6 @@ export const ListCard: React.FC<Props> = ({
 }) => {
   const { isMobile } = useGetLayoutMode();
   const currentUserId = useAppSelector(selectUserId);
-
   const isLessThan90DaysOld = getIsOlderThanDaysAgo(90, mentor.created);
 
   return (

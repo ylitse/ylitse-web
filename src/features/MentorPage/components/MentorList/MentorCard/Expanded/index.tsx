@@ -21,6 +21,7 @@ export const MentorCard = ({ mentor, onDismiss }: Props) => {
   const currentUserId = useAppSelector(selectUserId);
 
   const isLessThan90DaysOld = getIsOlderThanDaysAgo(90, mentor.created);
+
   useEscape(() => onDismiss());
 
   return (
