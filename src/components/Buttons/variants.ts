@@ -23,6 +23,15 @@ import SendIcon from '@/static/icons/send.svg';
 import TooltipIcon from '@/static/icons/tooltip.svg';
 
 export const variants = {
+  danger: {
+    backgroundColor: palette.redLight,
+    color: palette.redDark,
+
+    ['&: focus']: {
+      outline: `1px solid ${palette.redDark}`,
+      outlineOffset: '3px',
+    },
+  },
   dark: {
     backgroundColor: palette.purple,
     color: palette.orange,

@@ -22,23 +22,25 @@ const ProfilePage = () => {
   return (
     <PageWithTransition>
       {showMentorProfile ? (
-        <Container>
+        <MentorContainer>
           <Header>
             <Title variant="h1">{t('title')}</Title>
           </Header>
           <Content>
-            <AccountInfo />
+            <AccountInfo role="mentor" />
             <PublicInfo />
           </Content>
-        </Container>
+        </MentorContainer>
       ) : (
-        <Container></Container>
+        <MenteeContainer>
+          <Title variant="h1">{t('title')}</Title>
+        </MenteeContainer>
       )}
     </PageWithTransition>
   );
 };
 
-const Container = styled.div`
+const MentorContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -59,13 +61,26 @@ const Header = styled.div`
 `;
 
 const Title = styled(Text)`
-  align-content: center;
+  align-self: center;
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
+`;
+
+const MenteeContainer = styled.div`
+  align-content: center;
+  background-color: ${palette.white};
+  border-radius: 10px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: ${OUTER_VERTICAL_MARGIN} auto;
+  padding: 3rem;
+  width: 50vw;
 `;
 
 export default ProfilePage;

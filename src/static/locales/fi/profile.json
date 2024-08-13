@@ -2,57 +2,46 @@
   "title": "Profiili",
   "account": {
     "delete": "Poista käyttäjätili",
-    "form": {
-      "email": "Sähköpostiosoite",
-      "emailInfo": "Sähköpostiosoite mahdollistaa salasanan palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin tarkoituksiin.",
-      "mentee": {
-        "passwordInput": {
-          "cancel": "Peruuta",
-          "current": "Nykyinen salasana",
-          "new": "Uusi salasana",
-          "repeat": "Toista uusi salasana",
-          "save": "Tallenna",
-          "show": "Näytä salasana"
-        }
+    "email": "Sähköpostiosoite",
+    "emailInfo": "Sähköpostiosoite mahdollistaa salasanan palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin tarkoituksiin.",
+    "input": {
+      "cancel": "Peruuta",
+      "password": {
+        "current": "Nykyinen salasana",
+        "new": "Uusi salasana",
+        "repeat": "Toista uusi salasana",
+        "show": "Näytä salasana"
       },
-      "mentor": {
-        "presence": "Läsnäolo",
-        "presenceCheckbox": "Näytä aktoreille, kun olen paikalla",
-        "presenceInfo": "Aktorit näkevät mentorikortistasi, kun olet paikalla. Muuten aktorit näkevät arvion, milloin olet ollut viimeksi paikalla."
-      },
-      "password": "Salasana",
-      "username": "Käyttäjätunnus"
+      "save": "Tallenna"
     },
-    "title": "Tilin tiedot"
+    "password": "Salasana",
+    "roles": {
+      "admin": "Ylläpitäjä",
+      "mentee": "Käyttäjä",
+      "mentor": "Mentori",
+      "title": "Rooli"
+    },
+    "title": "Tilin tiedot",
+    "username": "Käyttäjätunnus"
   },
   "public": {
+    "displayName": "Julkinen nimimerkki",
     "mentee": {
-      "displayName": "Julkinen nimimerkki",
       "displayNameInfo": "Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta sinua ei voi tunnistaa."
     },
     "mentor": {
-      "form": {
-        "absence": {
-          "endDate": {
-            "info": "Poissaolotila päättyy automaattisesti kyseisenä päivänä.",
-            "placeholder": "Valitse/syötä päivä (pp.kk.vvvv)",
-            "title": "Poissaolotila päättyy"
-          },
-          "info": "Poissaolotilan aikana sinulle ei voi lähettää viestejä. Ilmoitathan poissaolosi pituuden tilaviestissä.",
-          "switch": "Ei tavoitettavissa",
-          "title": "Poissaolotila"
-        },
-        "addTopic": "Lisää uusi aihe",
-        "area": "Alue",
-        "birthYear": "Syntymävuosi",
-        "displayName": "Julkinen käyttäjänimi",
-        "status": "Tilaviesti",
-        "story": "Tarinani",
-        "storyPlaceholder": "Kirjoita tarina",
-        "topics": "Aiheeni"
+      "absence": {
+        "info": "Poissaolotilan aikana sinulle ei voi lähettää viestejä. Ilmoitathan poissaolosi pituuden tilaviestissä.",
+        "switch": "Ei tavoitettavissa",
+        "title": "Poissaolotila"
       },
+      "addTopic": "Lisää uusi aihe",
+      "area": "Alue",
+      "birthYear": "Syntymävuosi",
       "notice": "Muutokset tallentuvat automaattisesti",
-      "uploadPicture": "Lataa profiilikuva"
+      "status": "Tilaviesti",
+      "story": "Tarinani",
+      "topics": "Aiheeni"
     },
     "title": "Julkiset tiedot"
   }
