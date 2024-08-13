@@ -1,15 +1,37 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
+import { TextButton } from '@/components/Buttons';
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
-const AccountInfo = () => {
+import type { UserRole } from '@/features/Authentication/userSlice';
+
+type Props = {
+  role: UserRole;
+};
+
+const AccountInfo = ({ role }: Props) => {
   const { t } = useTranslation('profile');
 
   return (
     <Container>
       <Text variant="h2">{t('account.title')}</Text>
+      <Section>
+        <Text variant="label">{t('account.roles.title')}</Text>
+        <Text>{t(`account.roles.${role}`)}</Text>
+      </Section>
+      <Section>
+        <Text variant="label">{t('account.username')}</Text>
+      </Section>
+      <Section>
+        <Text variant="label">{t('account.password')}</Text>
+      </Section>
+      <Section>
+        <Text variant="label">{t('account.email')}</Text>
+        <Text>{t('account.emailInfo')}</Text>
+      </Section>
+      <TextButton variant="danger">{t('account.delete')}</TextButton>
     </Container>
   );
 };
@@ -21,7 +43,15 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex: 1;
+  flex-direction: column;
   padding: 3rem;
+`;
+
+const Section = styled.div`
+  border-bottom: 1px solid ${palette.blueDark};
+  display: flex;
+  gap: 1rem;
+  padding: 2rem 2rem 2rem 0;
 `;
 
 export default AccountInfo;
