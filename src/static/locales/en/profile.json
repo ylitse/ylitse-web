@@ -1,9 +1,59 @@
 {
   "title": "Profile",
   "account": {
+    "delete": "Delete account",
+    "form": {
+      "email": "Email",
+      "emailInfo": "Providing an email address allows you to recover your password later. Your email address will not be used for other purposes.",
+      "mentee": {
+        "passwordInput": {
+          "cancel": "Cancel",
+          "current": "Current password",
+          "new": "New password",
+          "repeat": "Repeat new password",
+          "save": "Save",
+          "show": "Show password"
+        }
+      },
+      "mentor": {
+        "presence": "Presence",
+        "presenceCheckbox": "Show actors when I am online",
+        "presenceInfo": "Actors can see from your mentor card when you are online. Otherwise, actors see an estimate of when you were last online."
+      },
+      "password": "Password",
+      "username": "Username"
+    },
     "title": "Account"
   },
   "public": {
+    "mentee": {
+      "displayName": "Display name",
+      "displayNameInfo": "If you want to remain anonymous to mentors, enter a display name that does not identify you."
+    },
+    "mentor": {
+      "form": {
+        "absence": {
+          "endDate": {
+            "info": "The absence mode will automatically end on this date.",
+            "placeholder": "Select/enter date (dd.mm.yyyy)",
+            "title": "Absence mode ends"
+          },
+          "info": "During absence mode, you cannot receive messages. Please specify the duration of your absence in your status message.",
+          "switch": "Not available",
+          "title": "Absence mode"
+        },
+        "addTopic": "Add new topic",
+        "area": "Area",
+        "birthYear": "Year of birth",
+        "displayName": "Display name",
+        "status": "Status message",
+        "story": "My story",
+        "storyPlaceholder": "Write your story",
+        "topics": "My topics"
+      },
+      "notice": "Changes are saved automatically",
+      "uploadPicture": "Upload profile picture"
+    },
     "title": "Public information"
   }
 }
