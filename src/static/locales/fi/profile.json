@@ -38,7 +38,8 @@
       "addTopic": "Lisää uusi aihe",
       "area": "Alue",
       "birthYear": "Syntymävuosi",
-      "notice": "Muutokset tallentuvat automaattisesti",
+      "mandatoryNotice": "Tähdellä * merkityt tiedot tulee täyttää.",
+      "saveNotice": "Muutokset tallentuvat automaattisesti.",
       "status": "Tilaviesti",
       "story": "Tarinani",
       "topics": "Aiheeni"
