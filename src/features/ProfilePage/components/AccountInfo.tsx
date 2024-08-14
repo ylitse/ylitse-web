@@ -23,12 +23,15 @@ const AccountInfo = ({ role }: Props) => {
       </Section>
       <Section>
         <Text variant="label">{t('account.username')}</Text>
+        <Text>Maija19283192</Text>
       </Section>
       <Section>
         <Text variant="label">{t('account.password')}</Text>
+        <Text>************</Text>
       </Section>
       <Section>
         <Text variant="label">{t('account.email')}</Text>
+        <Text>maija1923983@gmail.com</Text>
         <Text>{t('account.emailInfo')}</Text>
       </Section>
       <TextButton variant="danger">{t('account.delete')}</TextButton>
