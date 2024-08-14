@@ -68,6 +68,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
+  width: 100%;
 `;
 
 const MenteeContainer = styled.div`
