@@ -38,7 +38,8 @@
       "addTopic": "Add new topic",
       "area": "Area",
       "birthYear": "Year of birth",
-      "notice": "Changes are saved automatically",
+      "mandatoryNotice": "Fields marked with a star * are required.",
+      "saveNotice": "Changes are saved automatically.",
       "status": "Status message",
       "story": "My story",
       "topics": "My topics"
