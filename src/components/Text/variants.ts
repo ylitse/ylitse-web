@@ -1,7 +1,8 @@
 import CSS from 'csstype';
-import { FOOTER_HEIGHT } from '../variables';
+import { FOOTER_HEIGHT, palette } from '../variables';
 
 export type TextVariant =
+  | 'blueBox'
   | 'boldBaloo'
   | 'bold'
   | 'chip'
@@ -21,6 +22,22 @@ type TextProp = {
 };
 
 export const variants: Record<TextVariant, TextProp> = {
+  blueBox: {
+    element: 'p',
+    styles: {
+      backgroundColor: `${palette.blueWhite}`,
+      borderLeft: '10px white solid',
+      boxShadow: `-10px 0 0 0 ${palette.blue}`,
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      left: '10px',
+      lineHeight: '1.5rem',
+      padding: '1rem',
+      position: 'relative',
+    },
+  },
   boldBaloo: {
     element: 'p',
     styles: {

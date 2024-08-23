@@ -23,6 +23,7 @@ type TextInputProps<T extends ElementType> = {
     variant: ButtonIcon;
     sizeInPx: number;
   } & ComponentPropsWithoutRef<T>;
+  rows?: number;
   onChange: (value: string) => void;
   placeholder?: string;
   value: string;
@@ -36,6 +37,7 @@ export const TextInput = <T extends ElementType = TextInputElement>({
   id,
   leftIcon,
   rightButton,
+  rows = 2,
   onChange,
   placeholder = '',
   value,
@@ -58,6 +60,7 @@ export const TextInput = <T extends ElementType = TextInputElement>({
         style={{ ...variantStyles, ...variantColor }}
         type="text"
         value={value}
+        {...(variant === 'textarea' && { rows })}
       />
       {rightButton && (
         <StyledIconButton

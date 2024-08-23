@@ -14,13 +14,14 @@ const Announcements = ({ isMobile = false }: Props) => {
   return (
     <Container isDesktop={!isMobile}>
       <Text variant="h2">{t('announcements.title')}</Text>
-      <Announcement>{t('announcements.notice1')}</Announcement>
+      <Text variant="blueBox">{t('announcements.notice1')}</Text>
     </Container>
   );
 };
 
 const Container = styled.div<{ isDesktop: boolean }>`
   background-color: ${palette.white};
+  gap: 1rem;
   padding: ${({ isDesktop }) => (isDesktop ? '2rem' : '3rem')};
 
   ${({ isDesktop }) =>
@@ -30,16 +31,6 @@ const Container = styled.div<{ isDesktop: boolean }>`
       box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
       box-sizing: border-box;
     `}
-`;
-
-const Announcement = styled(Text)`
-  background-color: ${palette.blueWhite};
-  border-left: 10px white solid;
-  box-shadow: -10px 0 0 0 ${palette.blue};
-  left: 10px;
-  margin-top: 1rem;
-  padding: 1rem;
-  position: relative;
 `;
 
 export default Announcements;
