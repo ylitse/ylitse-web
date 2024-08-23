@@ -7,9 +7,9 @@
     "input": {
       "cancel": "Peruuta",
       "password": {
-        "current": "Nykyinen salasana",
-        "new": "Uusi salasana",
-        "repeat": "Toista uusi salasana",
+        "current": "Nykyinen salasana *",
+        "new": "Uusi salasana *",
+        "repeat": "Toista uusi salasana *",
         "show": "Näytä salasana"
       },
       "save": "Tallenna"
@@ -32,12 +32,12 @@
     "mentor": {
       "absence": {
         "info": "Poissaolotilan aikana sinulle ei voi lähettää viestejä. Ilmoitathan poissaolosi pituuden tilaviestissä.",
-        "switch": "Ei tavoitettavissa",
+        "switch": { "off": "Tavoitettavissa", "on": "Ei tavoitettavissa" },
         "title": "Poissaolotila"
       },
       "addTopic": "Lisää uusi aihe",
       "area": "Alue",
-      "birthYear": "Syntymävuosi",
+      "birthYear": "Syntymävuosi *",
       "mandatoryNotice": "Tähdellä * merkityt tiedot tulee täyttää.",
       "saveNotice": "Muutokset tallentuvat automaattisesti.",
       "status": "Tilaviesti",

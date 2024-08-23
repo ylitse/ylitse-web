@@ -7,9 +7,9 @@
     "input": {
       "cancel": "Cancel",
       "password": {
-        "current": "Current password",
-        "new": "New password",
-        "repeat": "Repeat new password",
+        "current": "Current password *",
+        "new": "New password *",
+        "repeat": "Repeat new password *",
         "show": "Show password"
       },
       "save": "Save"
@@ -32,12 +32,12 @@
     "mentor": {
       "absence": {
         "info": "During absence mode, you cannot receive messages. Please specify the duration of your absence in your status message.",
-        "switch": "Not available",
+        "switch": { "off": "Available", "on": "Not available" },
         "title": "Absence mode"
       },
       "addTopic": "Add new topic",
       "area": "Area",
-      "birthYear": "Year of birth",
+      "birthYear": "Year of birth *",
       "mandatoryNotice": "Fields marked with a star * are required.",
       "saveNotice": "Changes are saved automatically.",
       "status": "Status message",
