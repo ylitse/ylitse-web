@@ -8,6 +8,7 @@ import {
 import { selectCurrentPollingParams } from './features/Chat/chatSlice';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 
+import { Toaster } from 'react-hot-toast';
 import Navigation from './features/Navigation';
 import Footer from './components/Footer';
 import Spinner from './components/Spinner';
@@ -29,6 +30,7 @@ const App = () => {
     <AppWrapper>
       <Navigation />
       <Footer />
+      <Toaster />
     </AppWrapper>
   ) : (
     <Spinner variant="large" />

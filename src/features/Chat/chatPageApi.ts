@@ -4,6 +4,7 @@ import { validateAndTransformTo } from '@/utils/http';
 import { role } from '../Authentication/myuserApi';
 import { pipe } from 'fp-ts/lib/function';
 import { ChatBuddy, PollingParam } from './chatSlice';
+import toast from 'react-hot-toast';
 
 const status = D.literal('banned', 'archived', 'ok', 'deleted');
 
@@ -126,6 +127,13 @@ export const chatApi = createApi({
           { resources: [] },
           ({ resources }) => toAppBuddies(resources),
         ),
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error('Error fetching contacts');
+        }
+      },
     }),
     getMessages: builder.query<MessageResponse, MessageQuery>({
       query: ({ userId, params }) =>
@@ -147,6 +155,13 @@ export const chatApi = createApi({
         method: 'post',
         body: message,
       }),
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error('Error sending message');
+        }
+      },
     }),
     markSeen: builder.mutation<unknown, PutMessage>({
       query: ({ userId, message }) => ({
@@ -161,6 +176,14 @@ export const chatApi = createApi({
         method: 'put',
         body: { status },
       }),
+      async onQueryStarted({ status }, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          // Here we need to fetch correct translation based on a status-map
+          toast.error(`Error switching ${status} `);
+        }
+      },
     }),
     reportMentor: builder.mutation<unknown, reportMessage>({
       query: ({ buddyId, contactInfo, reportReason, userId }) => ({
@@ -173,6 +196,13 @@ export const chatApi = createApi({
           reporter_user_id: userId,
         },
       }),
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error('Error reporting user');
+        }
+      },
     }),
   }),
 });

@@ -4,6 +4,7 @@ import * as D from 'io-ts/Decoder';
 import { validateAndTransformTo } from '@/utils/http';
 import { selectSelectedSkills, selectSearchString } from './mentorsFilterSlice';
 import { capitalize } from '@/utils/utils';
+import toast from 'react-hot-toast';
 
 type ApiMentor = D.TypeOf<typeof apiMentorType>;
 
@@ -74,6 +75,13 @@ export const mentorsApi = createApi({
           { resources: [] },
           toMentorRecord,
         ),
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error('Error fetching mentors');
+        }
+      },
     }),
   }),
 });
