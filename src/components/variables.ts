@@ -26,6 +26,7 @@ export const palette = {
   redDark: '#972232',
   redLight: '#F1C9C6',
   redSalmon: '#EBA9A9',
+  red: '#EB727C',
   redWhite: '#F9E5E4',
   white: '#FFFFFF',
   whiteOpacity: 'rgba(255, 255, 255, 0.5)',

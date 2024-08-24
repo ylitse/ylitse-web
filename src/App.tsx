@@ -8,10 +8,10 @@ import {
 import { selectCurrentPollingParams } from './features/Chat/chatSlice';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 
-import { Toaster } from 'react-hot-toast';
 import Navigation from './features/Navigation';
 import Footer from './components/Footer';
 import Spinner from './components/Spinner';
+import AppToaster from './components/Toaster';
 import styled from 'styled-components';
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
     <AppWrapper>
       <Navigation />
       <Footer />
-      <Toaster />
+      <AppToaster />
     </AppWrapper>
   ) : (
     <Spinner variant="large" />
