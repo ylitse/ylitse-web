@@ -48,7 +48,7 @@ const Icon = styled.span<{
     height: ${size}px;
     width: ${size}px;
   `}
-  ${({ variant }) => variant && iconVariants[variant]}
+  ${({ variant }) => variant && `background-image: ${iconVariants[variant]};`}
 `;
 
 const StyledButton = styled.button`

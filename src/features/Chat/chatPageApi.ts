@@ -159,7 +159,7 @@ export const chatApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error('Error sending message');
+          toast.loading('Error sending message');
         }
       },
     }),

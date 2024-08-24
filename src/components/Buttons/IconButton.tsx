@@ -50,7 +50,7 @@ const StyledIconButton = styled.button<{
       cursor: not-allowed;
       opacity: 0.5;
     `}
-  ${({ variant }) => variant && iconVariants[variant]}
+  ${({ variant }) => variant && `background-image: ${iconVariants[variant]};`}
 `;
 
 const Container = styled.div`
