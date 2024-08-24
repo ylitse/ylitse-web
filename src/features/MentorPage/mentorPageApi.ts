@@ -5,6 +5,7 @@ import { validateAndTransformTo } from '@/utils/http';
 import { selectSelectedSkills, selectSearchString } from './mentorsFilterSlice';
 import { capitalize } from '@/utils/utils';
 import toast from 'react-hot-toast';
+import { t } from 'i18next';
 
 type ApiMentor = D.TypeOf<typeof apiMentorType>;
 
@@ -79,7 +80,7 @@ export const mentorsApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error('Error fetching mentors');
+          toast.error(t('mentors:notification.errorFetchingMentors'));
         }
       },
     }),

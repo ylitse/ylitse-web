@@ -59,6 +59,13 @@
       "banned": "Estetyt"
     }
   },
+  "notification": {
+    "messageSendFailed": "Viestin lähettäminen epäonnistui",
+    "errorFetchingContacts": "Kontaktien haku epäonnistui",
+    "errorArchiving": "Keskustelu arkistointi epäonnistui",
+    "errorRestoring": "Keskustelun palauttaminen epäonnistui",
+    "errorBanning": "Keskustelun estaminen epäonnistui"
+  },
   "welcome": {
     "lower": {
       "button": "Etsi mentoreita",

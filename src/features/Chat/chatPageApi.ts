@@ -5,6 +5,7 @@ import { role } from '../Authentication/myuserApi';
 import { pipe } from 'fp-ts/lib/function';
 import { ChatBuddy, PollingParam } from './chatSlice';
 import toast from 'react-hot-toast';
+import { t } from 'i18next';
 
 const status = D.literal('banned', 'archived', 'ok', 'deleted');
 
@@ -131,7 +132,7 @@ export const chatApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error('Error fetching contacts');
+          toast.error('chat.notification.errorFetchingContacts');
         }
       },
     }),
@@ -159,7 +160,7 @@ export const chatApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.loading('Error sending message');
+          toast.error(t('chat:notification.messageSendFailed'));
         }
       },
     }),
@@ -180,8 +181,12 @@ export const chatApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          // Here we need to fetch correct translation based on a status-map
-          toast.error(`Error switching ${status} `);
+          const statusUpdateErrorMessages = {
+            ok: 'chat:notification.errorRestoring',
+            banned: 'chat:notification.errorBanning',
+            archived: 'chat:notification.errorArchiving',
+          } as const;
+          toast.error(t(statusUpdateErrorMessages[status]));
         }
       },
     }),
@@ -196,13 +201,6 @@ export const chatApi = createApi({
           reporter_user_id: userId,
         },
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
-        try {
-          await queryFulfilled;
-        } catch (err) {
-          toast.error('Error reporting user');
-        }
-      },
     }),
   }),
 });

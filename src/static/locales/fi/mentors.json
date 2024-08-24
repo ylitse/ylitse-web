@@ -21,5 +21,8 @@
     "show": "Suodata aiheella",
     "title": "Haku"
   },
+  "notification": {
+    "errorFetchingMentors": "Mentoreiden lataaminen epäonnistui"
+  },
   "title": "Mentorit"
 }
