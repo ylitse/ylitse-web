@@ -132,7 +132,7 @@ export const chatApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error('chat.notification.errorFetchingContacts');
+          toast.error('chat.notification.fetchingContactsError');
         }
       },
     }),
@@ -179,12 +179,18 @@ export const chatApi = createApi({
       }),
       async onQueryStarted({ status }, { queryFulfilled }) {
         try {
+          const statusUpdateSuccessMessages = {
+            ok: 'chat:notification.restoringSuccess',
+            banned: 'chat:notification.banningSuccess',
+            archived: 'chat:notification.archivingSuccess',
+          } as const;
           await queryFulfilled;
+          toast.success(t(statusUpdateSuccessMessages[status]));
         } catch (err) {
           const statusUpdateErrorMessages = {
-            ok: 'chat:notification.errorRestoring',
-            banned: 'chat:notification.errorBanning',
-            archived: 'chat:notification.errorArchiving',
+            ok: 'chat:notification.restoringError',
+            banned: 'chat:notification.banningError',
+            archived: 'chat:notification.archivingError',
           } as const;
           toast.error(t(statusUpdateErrorMessages[status]));
         }

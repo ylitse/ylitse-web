@@ -25,22 +25,21 @@ export const AppToast = ({ toast }: Props) => {
       case 'error': {
         return {
           mainColor: palette.red,
-          Icon: <Warning color={'blueDark'} />,
+          Icon: <Warning color={'blueDark'} sizeInPx={23} />,
         };
       }
 
       case 'success': {
         return {
           mainColor: palette.blue,
-          iconColor: palette.blueDark,
-          Icon: <Success color={'blueDark'} />,
+          Icon: <Success color={'blueDark'} sizeInPx={23} />,
         };
       }
 
       default: {
         return {
           mainColor: palette.purple,
-          Icon: <Warning color={'orange'} />,
+          Icon: <Warning color={'orange'} sizeInPx={23} />,
         };
       }
     }
@@ -72,7 +71,7 @@ const Container = styled.div<{ isVisible: boolean; borderColor: string }>`
   gap: 1rem;
   height: 80px;
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-  width: 800px;
+  width: 560px;
 `;
 
 const IconContainer = styled.div<{ bgColor: string }>`
@@ -88,6 +87,7 @@ const ButtonContainer = styled.div`
   display: flex;
   flex: 1;
   justify-content: center;
+  padding: 1rem;
 `;
 
 const MessageContainer = styled.div`

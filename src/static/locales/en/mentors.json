@@ -22,7 +22,7 @@
     "title": "Search"
   },
   "notification": {
-    "errorFetchingMentors": "Failed loading mentors"
+    "fetchingMentorsError": "Failed loading mentors"
   },
   "title": "Mentors"
 }

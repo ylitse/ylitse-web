@@ -60,11 +60,15 @@
     }
   },
   "notification": {
+    "messageSendSuccess": "Viestin lähettäminen onnistui",
     "messageSendFailed": "Viestin lähettäminen epäonnistui",
-    "errorFetchingContacts": "Kontaktien haku epäonnistui",
-    "errorArchiving": "Keskustelu arkistointi epäonnistui",
-    "errorRestoring": "Keskustelun palauttaminen epäonnistui",
-    "errorBanning": "Keskustelun estaminen epäonnistui"
+    "archivingSuccess": "Keskustelu arkistoitu onnistuneesti",
+    "archivingError": "Keskustelu arkistointi epäonnistui",
+    "restoringSuccess": "Keskustelu palautettu onnistuneesti",
+    "restoringError": "Keskustelun palauttaminen epäonnistui",
+    "banningSuccess": "Keskustelu estetty onnistuneesti",
+    "banningError": "Keskustelun estäminen epäonnistui",
+    "fetchingContactsError": "Kontaktien haku epäonnistui"
   },
   "welcome": {
     "lower": {

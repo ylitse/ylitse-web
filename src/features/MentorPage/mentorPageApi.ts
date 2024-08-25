@@ -80,7 +80,7 @@ export const mentorsApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error(t('mentors:notification.errorFetchingMentors'));
+          toast.error(t('mentors:notification.fetchingMentorsError'));
         }
       },
     }),
