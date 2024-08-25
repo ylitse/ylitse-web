@@ -75,6 +75,7 @@ export const mentorsApi = createApi({
           mentorListResponseType,
           { resources: [] },
           toMentorRecord,
+          () => toast.error(t('mentors:notification.parsingMentorsError')),
         ),
       async onQueryStarted(_, { queryFulfilled }) {
         try {

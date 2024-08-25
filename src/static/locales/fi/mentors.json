@@ -22,7 +22,8 @@
     "title": "Haku"
   },
   "notification": {
-    "fetchingMentorsError": "Mentoreiden lataaminen epäonnistui"
+    "fetchingMentorsError": "Mentoreiden lataaminen epäonnistui",
+    "parsingMentorsError": "Mentoreiden lukeminen epäonnistui"
   },
   "title": "Mentorit"
 }

@@ -48,7 +48,11 @@ export const AppToast = ({ toast }: Props) => {
   const { mainColor, Icon } = getToastStyle(toast.type);
 
   return (
-    <Container isVisible={toast.visible} borderColor={mainColor}>
+    <Container
+      role="notification"
+      isVisible={toast.visible}
+      borderColor={mainColor}
+    >
       <IconContainer bgColor={mainColor}>{Icon}</IconContainer>
       <MessageContainer>
         <Text>{resolveValue(toast.message, toast)}</Text>

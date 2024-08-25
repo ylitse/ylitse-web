@@ -22,7 +22,8 @@
     "title": "Search"
   },
   "notification": {
-    "fetchingMentorsError": "Failed loading mentors"
+    "fetchingMentorsError": "Failed loading mentors",
+    "parsingMentorsError": "Failed parsing mentors"
   },
   "title": "Mentors"
 }

@@ -1,11 +1,17 @@
 import { Decoder } from 'io-ts/Decoder';
 import { pipe } from 'fp-ts/function';
-import { Either, isRight } from 'fp-ts/lib/Either';
+import { Either, isRight, isLeft } from 'fp-ts/lib/Either';
 
 const parse =
-  <A, B>(model: Decoder<A, B>) =>
-  (data: A) =>
-    model.decode(data);
+  <A, B>(model: Decoder<A, B>, notification?: () => void) =>
+  (data: A) => {
+    const parsed = model.decode(data);
+    if (isLeft(parsed)) {
+      notification?.();
+    }
+
+    return parsed;
+  };
 
 const getValueOr =
   <A, B>(defaultValue: B) =>
@@ -17,4 +23,6 @@ export const validateAndTransformTo = <A, B, C>(
   model: Decoder<A, B>,
   defaultValue: B,
   mapper: (a: B) => C,
-) => pipe(response, parse(model), getValueOr(defaultValue), mapper);
+  notification?: () => void,
+) =>
+  pipe(response, parse(model, notification), getValueOr(defaultValue), mapper);
