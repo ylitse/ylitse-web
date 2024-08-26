@@ -6,6 +6,10 @@ import { pipe } from 'fp-ts/lib/function';
 import { ChatBuddy, PollingParam } from './chatSlice';
 import toast from 'react-hot-toast';
 import { t } from 'i18next';
+import {
+  statusUpdateErrorMessages,
+  statusUpdateSuccessMessages,
+} from './constants';
 
 const status = D.literal('banned', 'archived', 'ok', 'deleted');
 
@@ -179,19 +183,9 @@ export const chatApi = createApi({
       }),
       async onQueryStarted({ status }, { queryFulfilled }) {
         try {
-          const statusUpdateSuccessMessages = {
-            ok: 'chat:notification.restoringSuccess',
-            banned: 'chat:notification.banningSuccess',
-            archived: 'chat:notification.archivingSuccess',
-          } as const;
           await queryFulfilled;
           toast.success(t(statusUpdateSuccessMessages[status]));
         } catch (err) {
-          const statusUpdateErrorMessages = {
-            ok: 'chat:notification.restoringError',
-            banned: 'chat:notification.banningError',
-            archived: 'chat:notification.archivingError',
-          } as const;
           toast.error(t(statusUpdateErrorMessages[status]));
         }
       },

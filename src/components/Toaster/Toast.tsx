@@ -16,30 +16,26 @@ type Props = {
 };
 
 export const AppToast = ({ toast }: Props) => {
-  const handleClose = (id: string) => {
-    toastEffect.dismiss(id);
-  };
-
   const getToastStyle = (type: ToastType) => {
     switch (type) {
       case 'error': {
         return {
           mainColor: palette.red,
-          Icon: <Warning color={'blueDark'} sizeInPx={23} />,
+          Icon: <Warning color={'blueDark'} sizeInPx={24} />,
         };
       }
 
       case 'success': {
         return {
           mainColor: palette.blue,
-          Icon: <Success color={'blueDark'} sizeInPx={23} />,
+          Icon: <Success color={'blueDark'} sizeInPx={24} />,
         };
       }
 
       default: {
         return {
           mainColor: palette.purple,
-          Icon: <Warning color={'orange'} sizeInPx={23} />,
+          Icon: <Warning color={'orange'} sizeInPx={24} />,
         };
       }
     }
@@ -61,7 +57,7 @@ export const AppToast = ({ toast }: Props) => {
         <IconButton
           variant="closeWithBackground"
           sizeInPx={40}
-          onClick={() => handleClose(toast.id)}
+          onClick={() => toastEffect.dismiss(toast.id)}
         />
       </ButtonContainer>
     </Container>
