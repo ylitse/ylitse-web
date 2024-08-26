@@ -34,6 +34,7 @@ export const variants: Record<TextVariant, TextProp> = {
       fontWeight: 400,
       left: '10px',
       lineHeight: '1.5rem',
+      marginRight: '10px',
       padding: '1rem',
       position: 'relative',
     },
@@ -123,6 +124,7 @@ export const variants: Record<TextVariant, TextProp> = {
       fontStyle: 'normal',
       fontWeight: 600,
       lineHeight: '1.5rem',
+      whiteSpace: 'nowrap',
     },
   },
   link: {
