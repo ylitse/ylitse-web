@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import LabeledInput from '@/components/LabeledInput';
 import { palette } from '@/components/variables';
+import Slider from '@/components/Slider';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 
@@ -16,7 +17,7 @@ const PublicInfo = () => {
   const [birthYear, setBirthYear] = useState('');
   const [area, setArea] = useState('');
   const [status, setStatus] = useState('');
-  const [isAbsent, setIsAbsent] = useState<boolean>(true);
+  const [isAbsent, setIsAbsent] = useState<boolean>(false);
   const [story, setStory] = useState('');
   const [topicSearchValue, setTopicSearchValue] = useState('');
 
@@ -34,7 +35,7 @@ const PublicInfo = () => {
       <SaveNotice>{t('public.mentor.saveNotice')}</SaveNotice>
       <Form>
         <Text>{t('public.mentor.mandatoryNotice')}</Text>
-        <DoubleColumn>
+        <Columns>
           <Column>
             <LabeledInput
               label={t('public.displayName')}
@@ -59,20 +60,17 @@ const PublicInfo = () => {
               value={status}
             />
             <Text variant="label">{t('public.mentor.absence.title')}</Text>
-            <Row>
-              <AbsenceSwitch
-                id="isAbsent"
-                type="checkbox"
-                checked={isAbsent}
-                onChange={toggleIsAbsent}
-              />
-              <Text inputId="isAbsent" variant="label">
-                {t(`public.mentor.absence.switch.${isAbsent ? 'on' : 'off'}`)}
-              </Text>
-            </Row>
+            <Slider
+              id="isAbsent"
+              label={t(
+                `public.mentor.absence.switch.${isAbsent ? 'on' : 'off'}`,
+              )}
+              onChange={toggleIsAbsent}
+              value={isAbsent}
+            />
             <Text variant="blueBox">{t('public.mentor.absence.info')}</Text>
           </Column>
-        </DoubleColumn>
+        </Columns>
         <Text variant="label">{t('public.mentor.story')}</Text>
         <StoryInput
           variant="textarea"
@@ -126,7 +124,7 @@ const Form = styled.div`
   padding: 0 3rem;
 `;
 
-const DoubleColumn = styled.div`
+const Columns = styled.div`
   display: flex;
   gap: 3rem;
 `;
@@ -136,71 +134,6 @@ const Column = styled.div`
   flex: 1;
   flex-direction: column;
 `;
-
-const Row = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-`;
-
-const AbsenceSwitch = styled.input``;
-
-// const Slider = styled.span``;
-
-// /* The switch - the box around the slider */
-// .switch {
-//   position: relative;
-//   display: flex;
-//   width: 60px;
-//   height: 30px;
-// }
-
-// /* Hide default HTML checkbox */
-// .switch input {
-//   opacity: 0;
-//   width: 0;
-//   height: 0;
-// }
-
-// /* The slider */
-// .slider {
-//   border: 2px solid;
-//   border-color: #616161;
-//   border-radius: 20px;
-//   position: absolute;
-//   cursor: pointer;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   background-color: white;
-//   -webkit-transition: 0.4s;
-//   transition: 0.4s;
-// }
-
-// .slider:before {
-//   background-color: #616161;
-//   border-radius: 50%;
-//   position: absolute;
-//   content: '';
-//   height: 22px;
-//   width: 22px;
-//   left: 4px;
-//   bottom: 2px;
-//   -webkit-transition: 0.2s;
-//   transition: 0.2s;
-// }
-
-// input:checked + .slider {
-//   border-color: #4a2acb;
-// }
-
-// input:checked + .slider:before {
-//   background-color: #4a2acb;
-//   -webkit-transform: translateX(26px);
-//   -ms-transform: translateX(26px);
-//   transform: translateX(26px);
-// }
 
 const StoryInput = styled(TextInput)`
   margin-top: 0.5rem;
