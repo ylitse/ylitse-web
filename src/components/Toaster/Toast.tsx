@@ -67,9 +67,8 @@ export const AppToast = ({ toast }: Props) => {
 const Container = styled.div<{ isVisible: boolean; borderColor: string }>`
   background-color: ${palette.white};
   border: solid 2px ${({ borderColor }) => borderColor};
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
   display: flex;
-  gap: 1rem;
-  height: 80px;
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   width: 560px;
 `;
@@ -95,5 +94,5 @@ const MessageContainer = styled.div`
   background-color: ${palette.white};
   display: flex;
   flex: 10;
-  justify-content: center;
+  padding-left: 1rem;
 `;
