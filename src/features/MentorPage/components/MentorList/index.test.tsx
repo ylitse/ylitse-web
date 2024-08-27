@@ -1,10 +1,12 @@
 import { renderWithProviders } from '@/test/testStore';
 import MentorList from '.';
+import { Mentor } from '../../mentorPageApi';
 
-const mentorListCards = [
+const mentorListCards: Array<Mentor> = [
   {
     age: 21,
     buddyId: 'asdf908asdf',
+    created: new Date('2024-01-01').getTime(),
     communicationChannels: [],
     gender: 'muusu',
     isVacationing: true,
@@ -28,6 +30,7 @@ const mentorListCards = [
   {
     age: 21,
     buddyId: 'asdfasdertsdf',
+    created: new Date('2024-01-03').getTime(),
     communicationChannels: [],
     gender: 'muusu',
     isVacationing: false,

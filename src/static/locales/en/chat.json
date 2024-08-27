@@ -59,6 +59,17 @@
       "banned": "Blocked"
     }
   },
+  "notification": {
+    "messageSendSuccess": "Message sent successfully",
+    "messageSendFailed": "Message sending failed",
+    "archivingSuccess": "Conversation archived successfully",
+    "archivingError": "Archiving conversation failed",
+    "restoringSuccess": "Conversation restored successfully",
+    "restoringError": "Restoring conversation failed",
+    "banningSuccess": "Conversation banned successfully",
+    "banningError": "Banning conversation failed",
+    "fetchingContactsError": "Fetching contacts failed"
+  },
   "welcome": {
     "lower": {
       "button": "Find mentors",

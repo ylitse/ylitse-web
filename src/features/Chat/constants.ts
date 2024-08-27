@@ -44,3 +44,15 @@ export const CHAT_MIN_HEIGHT_TABLET = '400px';
 export const ROW_HEIGHT = '80px';
 export const HIGH_ROW_HEIGHT = '100px';
 export const SHORT_ROW_HEIGHT = '60px';
+
+export const statusUpdateSuccessMessages = {
+  ok: 'chat:notification.restoringSuccess',
+  banned: 'chat:notification.banningSuccess',
+  archived: 'chat:notification.archivingSuccess',
+} as const;
+
+export const statusUpdateErrorMessages = {
+  ok: 'chat:notification.restoringError',
+  banned: 'chat:notification.banningError',
+  archived: 'chat:notification.archivingError',
+} as const;

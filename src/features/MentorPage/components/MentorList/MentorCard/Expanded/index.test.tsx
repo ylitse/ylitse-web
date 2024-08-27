@@ -5,6 +5,7 @@ const mentors = [
   {
     age: 21,
     buddyId: 'asdf908asdf',
+    created: new Date('2024-01-01').getTime(),
     communicationChannels: [],
     gender: 'muusu',
     isVacationing: true,
@@ -28,6 +29,7 @@ const mentors = [
   {
     age: 21,
     buddyId: 'asdfasdertsdf',
+    created: new Date('2024-01-03').getTime(),
     communicationChannels: [],
     gender: 'muusu',
     isVacationing: false,

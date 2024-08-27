@@ -77,7 +77,7 @@ const LeftIcon = styled.div<{
   background-repeat: no-repeat;
   background-size: contain;
   position: relative;
-  ${({ variant }) => variant && iconVariants[variant]}
+  ${({ variant }) => variant && `background-image: ${iconVariants[variant]};`}
   ${({ sizeInPx }) => css`
     height: ${sizeInPx}px;
     transform: translate(${sizeInPx + 22}px);

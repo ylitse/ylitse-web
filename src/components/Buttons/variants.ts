@@ -87,95 +87,29 @@ export const variants = {
   },
 };
 
-export type ButtonIcon =
-  | 'archive'
-  | 'archivedChats'
-  | 'back'
-  | 'block'
-  | 'blockedChats'
-  | 'close'
-  | 'closeWithBackground'
-  | 'danger'
-  | 'delete'
-  | 'edit'
-  | 'filter'
-  | 'forward'
-  | 'menuDots'
-  | 'menuLines'
-  | 'next'
-  | 'prev'
-  | 'return'
-  | 'rewind'
-  | 'search'
-  | 'searchWithBackground'
-  | 'send'
-  | 'tooltip';
-
 export const iconVariants = {
-  archive: {
-    backgroundImage: `url(${ArchiveIcon})`,
-  },
-  archivedChats: {
-    backgroundImage: `url(${ArchivedChatsIcon})`,
-  },
-  back: {
-    backgroundImage: `url(${BackIcon})`,
-  },
-  block: {
-    backgroundImage: `url(${BlockIcon})`,
-  },
-  blockedChats: {
-    backgroundImage: `url(${BlockedChatsIcon})`,
-  },
-  close: {
-    backgroundImage: `url(${CloseIcon})`,
-  },
-  closeWithBackground: {
-    backgroundImage: `url(${CloseWithBackgroundIcon})`,
-  },
-  danger: {
-    backgroundImage: `url(${DangerIcon})`,
-  },
-  delete: {
-    backgroundImage: `url(${DeleteIcon})`,
-  },
-  edit: {
-    backgroundImage: `url(${EditIcon})`,
-  },
-  filter: {
-    backgroundImage: `url(${FilterIcon})`,
-  },
-  forward: {
-    backgroundImage: `url(${ForwardIcon})`,
-  },
-  menuDots: {
-    backgroundImage: `url(${MenuDotsIcon})`,
-  },
-  menuLines: {
-    backgroundImage: `url(${MenuLinesIcon})`,
-  },
-  next: {
-    backgroundImage: `url(${NextIcon})`,
-  },
-  prev: {
-    backgroundImage: `url(${PrevIcon})`,
-  },
-  return: {
-    backgroundImage: `url(${ReturnIcon})`,
-  },
-  rewind: {
-    backgroundImage: `url(${RewindIcon})`,
-  },
-  search: {
-    backgroundImage: `url(${SearchIcon})`,
-  },
-  searchWithBackground: {
-    backgroundImage: `url(${SearchWithBackgroundIcon})`,
-  },
-  send: {
-    backgroundImage: `url(${SendIcon})`,
-  },
-  tooltip: {
-    backgroundImage: `url(${TooltipIcon})`,
-  },
+  archive: `url(${ArchiveIcon})`,
+  archivedChats: `url(${ArchivedChatsIcon})`,
+  back: `url(${BackIcon})`,
+  block: `url(${BlockIcon})`,
+  blockedChats: `url(${BlockedChatsIcon})`,
+  close: `url(${CloseIcon})`,
+  closeWithBackground: `url(${CloseWithBackgroundIcon})`,
+  danger: `url(${DangerIcon})`,
+  delete: `url(${DeleteIcon})`,
+  edit: `url(${EditIcon})`,
+  filter: `url(${FilterIcon})`,
+  forward: `url(${ForwardIcon})`,
+  menuDots: `url(${MenuDotsIcon})`,
+  menuLines: `url(${MenuLinesIcon})`,
+  next: `url(${NextIcon})`,
+  prev: `url(${PrevIcon})`,
+  return: `url(${ReturnIcon})`,
+  rewind: `url(${RewindIcon})`,
+  search: `url(${SearchIcon})`,
+  searchWithBackground: `url(${SearchWithBackgroundIcon})`,
+  send: `url(${SendIcon})`,
+  tooltip: `url(${TooltipIcon})`,
 };
+
+export type ButtonIcon = keyof typeof iconVariants;

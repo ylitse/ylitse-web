@@ -21,5 +21,9 @@
     "show": "Filter by tag",
     "title": "Search"
   },
+  "notification": {
+    "fetchingMentorsError": "Failed loading mentors",
+    "parsingMentorsError": "Failed parsing mentors"
+  },
   "title": "Mentors"
 }

@@ -4,6 +4,12 @@ import { validateAndTransformTo } from '@/utils/http';
 import { role } from '../Authentication/myuserApi';
 import { pipe } from 'fp-ts/lib/function';
 import { ChatBuddy, PollingParam } from './chatSlice';
+import toast from 'react-hot-toast';
+import { t } from 'i18next';
+import {
+  statusUpdateErrorMessages,
+  statusUpdateSuccessMessages,
+} from './constants';
 
 const status = D.literal('banned', 'archived', 'ok', 'deleted');
 
@@ -126,6 +132,13 @@ export const chatApi = createApi({
           { resources: [] },
           ({ resources }) => toAppBuddies(resources),
         ),
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error('chat.notification.fetchingContactsError');
+        }
+      },
     }),
     getMessages: builder.query<MessageResponse, MessageQuery>({
       query: ({ userId, params }) =>
@@ -147,6 +160,13 @@ export const chatApi = createApi({
         method: 'post',
         body: message,
       }),
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error(t('chat:notification.messageSendFailed'));
+        }
+      },
     }),
     markSeen: builder.mutation<unknown, PutMessage>({
       query: ({ userId, message }) => ({
@@ -161,6 +181,14 @@ export const chatApi = createApi({
         method: 'put',
         body: { status },
       }),
+      async onQueryStarted({ status }, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          toast.success(t(statusUpdateSuccessMessages[status]));
+        } catch (err) {
+          toast.error(t(statusUpdateErrorMessages[status]));
+        }
+      },
     }),
     reportMentor: builder.mutation<unknown, reportMessage>({
       query: ({ buddyId, contactInfo, reportReason, userId }) => ({

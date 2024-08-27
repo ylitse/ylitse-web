@@ -4,6 +4,8 @@ import * as D from 'io-ts/Decoder';
 import { validateAndTransformTo } from '@/utils/http';
 import { selectSelectedSkills, selectSearchString } from './mentorsFilterSlice';
 import { capitalize } from '@/utils/utils';
+import toast from 'react-hot-toast';
+import { t } from 'i18next';
 
 type ApiMentor = D.TypeOf<typeof apiMentorType>;
 
@@ -73,7 +75,15 @@ export const mentorsApi = createApi({
           mentorListResponseType,
           { resources: [] },
           toMentorRecord,
+          () => toast.error(t('mentors:notification.parsingMentorsError')),
         ),
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error(t('mentors:notification.fetchingMentorsError'));
+        }
+      },
     }),
   }),
 });

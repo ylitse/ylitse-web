@@ -1,3 +1,4 @@
+import AppToaster from '@/components/Toaster';
 import MentorPage from '.';
 import { server } from '@/test/server';
 import { renderWithProviders } from '@/test/testStore';
@@ -39,7 +40,18 @@ const mentorsResponse = {
 };
 
 // Enable API mocking before tests.
-beforeAll(() => server.listen());
+beforeAll(() => {
+  server.listen();
+  Object.defineProperty(window, 'matchMedia', {
+    value: jest.fn(() => {
+      return {
+        matches: true,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+      };
+    }),
+  });
+});
 
 // Disable API mocking after the tests are done.
 afterAll(() => server.close());
@@ -52,14 +64,28 @@ server.use(
 
 describe('<MentorPage />', () => {
   it('displays fetched mentors in list and can open the card for more information', async () => {
-    const { user, getByRole, findByRole, getByText, getAllByRole } =
-      renderWithProviders(<MentorPage />);
+    const {
+      user,
+      getByRole,
+      queryByRole,
+      findByRole,
+      getByText,
+      getAllByRole,
+    } = renderWithProviders(
+      <>
+        <MentorPage />
+        <AppToaster />
+      </>,
+    );
 
     // should be loading initially
     expect(await findByRole('progressbar')).toBeInTheDocument();
 
     // after some time, the mentors should be received
     expect(await findByRole('heading', { name: 'title' })).toBeInTheDocument();
+
+    // no error notification is displayed on screen
+    expect(queryByRole('notification')).not.toBeInTheDocument();
 
     // see that mentorResponse-mentor is found from list
     const mentorText = getByText(mentorsResponse.resources[0].display_name);
@@ -157,12 +183,19 @@ describe('<MentorPage />', () => {
       }),
     );
 
-    const { findByRole, queryAllByRole } = renderWithProviders(<MentorPage />);
+    const { findByRole, queryAllByRole } = renderWithProviders(
+      <>
+        <MentorPage />
+        <AppToaster />
+      </>,
+    );
 
     // should be loading initially
     expect(await findByRole('progressbar')).toBeInTheDocument();
 
-    // after some time, the response should be received
+    // the error notification is displayed on screen
+    expect(await findByRole('notification')).toBeVisible();
+    // and no mentors are shown
     expect(await findByRole('heading', { name: 'title' })).toBeInTheDocument();
 
     // no cards are rendered

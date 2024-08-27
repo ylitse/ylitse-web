@@ -11,6 +11,7 @@ import { skipToken } from '@reduxjs/toolkit/dist/query';
 import Navigation from './features/Navigation';
 import Footer from './components/Footer';
 import Spinner from './components/Spinner';
+import AppToaster from './components/Toaster';
 import styled from 'styled-components';
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
     <AppWrapper>
       <Navigation />
       <Footer />
+      <AppToaster />
     </AppWrapper>
   ) : (
     <Spinner variant="large" />
