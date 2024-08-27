@@ -54,6 +54,7 @@ const Container = styled.div<{ isHomePage: boolean; isMobile: boolean }>`
   border-radius: 0.75rem;
   display: flex;
   flex-direction: column;
+  min-width: 300px;
 
   ${({ isMobile }) =>
     isMobile &&

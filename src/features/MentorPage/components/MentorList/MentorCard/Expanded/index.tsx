@@ -56,7 +56,8 @@ const Card = styled.div<{ isMobile: boolean }>`
           display: flex;
           flex: 1;
           flex-direction: column;
-          margin: 0.5rem;
+          margin: 1rem;
+          margin-top: 4rem;
         `
       : css`
           display: flex;

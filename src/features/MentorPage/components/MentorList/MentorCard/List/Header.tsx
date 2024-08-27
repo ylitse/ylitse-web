@@ -4,7 +4,7 @@ import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import { palette } from '@/components/variables';
 import styled from 'styled-components';
-import { TruncateText, WrappedText } from '../Expanded/BasicInfo';
+import { WrappedText } from '../Expanded/BasicInfo';
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 import ProfilePicPlaceholderForMe from '@/static/icons/chat-profilepic-me.svg';
 import { Text } from '@/components/Text/Text';
@@ -53,7 +53,7 @@ export const Header: React.FC<Props> = ({
           {age} {t('card.age')} <Divider>|</Divider>
           {region}
         </WrappedText>
-        <TruncateText color={isMe ? 'blueDark' : 'white'}>
+        <TruncateText isMobile={isMobile} color={isMe ? 'blueDark' : 'white'}>
           {message}
         </TruncateText>
       </BasicInfo>
@@ -104,4 +104,12 @@ const BasicInfo = styled.div`
 const Divider = styled.span`
   padding-left: 1rem;
   padding-right: 1rem;
+`;
+
+const TruncateText = styled(Text)<{ isMobile: boolean }>`
+  margin: 0 0 0.5rem 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 `;
