@@ -63,7 +63,10 @@ export const Header = ({
 
 const Container = styled.div<{ statusColor: string; isMobile: boolean }>`
   background-color: ${({ statusColor }) => statusColor}};
+  border-radius: 0.75rem;
+  box-sizing: border-box;
   border-radius: 10px;
+  display: ${({ isMobile }) => (isMobile ? 'flex' : '')}
   flex: 0 0 21vw;
   min-height: 7.5rem;
   ${({ isMobile }) => !isMobile && css`padding: 2rem;'`}

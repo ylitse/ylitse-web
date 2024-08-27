@@ -50,5 +50,6 @@ const MentorTag = styled(Text)<{ isShowing: boolean; tagColor: string }>`
     position: absolute;
     top: 3.25rem;
     left: 50%;
+    
 
 `;

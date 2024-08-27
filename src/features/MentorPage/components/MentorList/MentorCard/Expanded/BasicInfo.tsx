@@ -21,7 +21,7 @@ export const BasicInfo = ({
   const { t } = useTranslation('mentors');
 
   return (
-    <Container>
+    <Container isMobile={isMobile}>
       <NameText
         variant={isMobile ? 'h2' : 'h3'}
         color={isMe ? 'blueDark' : 'white'}
@@ -43,13 +43,14 @@ export const BasicInfo = ({
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ isMobile: boolean }>`
   align-items: center;
   box-sizing: border-box;
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin: 0 auto;
+  margin: ${({ isMobile }) =>
+    isMobile ? '1.5rem auto 0.5rem auto' : ' 0 auto'};
   max-width: 70%;
 
   @media screen and (max-width: ${breakpoints.mobile}) {
