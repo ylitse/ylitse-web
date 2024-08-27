@@ -45,8 +45,11 @@ const MentorTag = styled(Text)<{ isShowing: boolean; tagColor: string }>`
   width: fit-content;
   
   @media screen and (max-width: ${breakpoints.mobile}) {
-    margin -1rem 1rem;
+    margin: -1rem 1rem;
+    transform: translateX(-50%);
     position: absolute;
+    top: 3.25rem;
     left: 50%;
-  }
+    
+
 `;

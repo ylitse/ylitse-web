@@ -63,8 +63,12 @@ export const Header = ({
 
 const Container = styled.div<{ statusColor: string; isMobile: boolean }>`
   background-color: ${({ statusColor }) => statusColor}};
+  border-radius: 0.75rem;
+  box-sizing: border-box;
   border-radius: 10px;
+  display: ${({ isMobile }) => (isMobile ? 'flex' : '')}
   flex: 0 0 21vw;
+  min-height: 7.5rem;
   ${({ isMobile }) => !isMobile && css`padding: 2rem;'`}
 `;
 
@@ -78,10 +82,10 @@ const ProfilePicture = styled.div<{ isMe: boolean; isMobile: boolean }>`
   margin: 2rem auto;
   width: 10vw;
   @media screen and (max-width: ${breakpoints.mobile}) {
-    width: 20vw;
-    height: 20vw;
-    margin: 1rem 0.5rem;
-    flex: 1;
+    flex: 0 0 3rem;
+    margin: 1rem 2rem;
+    height: 3rem;
+    width: 3rem;
   }
 `;
 

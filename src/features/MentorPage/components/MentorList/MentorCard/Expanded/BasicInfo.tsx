@@ -21,9 +21,9 @@ export const BasicInfo = ({
   const { t } = useTranslation('mentors');
 
   return (
-    <Container>
+    <Container isMobile={isMobile}>
       <NameText
-        variant={isMobile ? 'h1' : 'h2'}
+        variant={isMobile ? 'h2' : 'h3'}
         color={isMe ? 'blueDark' : 'white'}
       >
         {name}
@@ -33,7 +33,7 @@ export const BasicInfo = ({
         {age} {t('card.age')} <Divider>|</Divider>
         {region}
       </WrappedText>
-      <TruncateText color={isMe ? 'blueDark' : 'white'}>
+      <TruncateText isMobile={isMobile} color={isMe ? 'blueDark' : 'white'}>
         {statusMessage}
       </TruncateText>
       {!isMobile && (
@@ -43,13 +43,14 @@ export const BasicInfo = ({
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ isMobile: boolean }>`
   align-items: center;
   box-sizing: border-box;
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin: 0 auto;
+  margin: ${({ isMobile }) =>
+    isMobile ? '1.5rem auto 0.5rem auto' : ' 0 auto'};
   max-width: 70%;
 
   @media screen and (max-width: ${breakpoints.mobile}) {
@@ -81,11 +82,9 @@ export const WrappedText = styled(Text)`
   margin: 0px;
 `;
 
-export const TruncateText = styled(Text)`
+export const TruncateText = styled(Text)<{ isMobile: boolean }>`
   margin: 0 0 0.5rem 0;
   overflow: hidden;
-  textalign: center;
-  textoverflow: ellipsis;
-  whitespace: nowrap;
+  text-align: ${({ isMobile }) => (isMobile ? 'left' : 'center')};
   width: 100%;
 `;
