@@ -15,6 +15,7 @@
       "save": "Save"
     },
     "password": "Password",
+    "passwordPlaceholder": "************",
     "roles": {
       "admin": "Admin",
       "mentee": "User",
@@ -25,8 +26,8 @@
     "username": "Username"
   },
   "public": {
-    "displayName": "Display name",
     "mentee": {
+      "displayName": "Display name",
       "displayNameInfo": "If you want to remain anonymous to mentors, enter a display name that does not identify you."
     },
     "mentor": {
@@ -38,6 +39,7 @@
       "addTopic": "Add new topic",
       "area": "Area",
       "birthYear": "Year of birth *",
+      "displayName": "Display name *",
       "mandatoryNotice": "Fields marked with a star * are required.",
       "saveNotice": "Changes are saved automatically.",
       "status": "Status message",

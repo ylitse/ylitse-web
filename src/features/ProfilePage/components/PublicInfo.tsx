@@ -2,13 +2,11 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
 import LabeledInput from '@/components/LabeledInput';
-import { palette } from '@/components/variables';
 import Slider from '@/components/Slider';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
-
-const searchInputIconSize = 24;
 
 const PublicInfo = () => {
   const { t } = useTranslation('profile');
@@ -38,7 +36,7 @@ const PublicInfo = () => {
         <Columns>
           <Column>
             <LabeledInput
-              label={t('public.displayName')}
+              label={t('public.mentor.displayName')}
               onChange={updateDisplayName}
               value={displayName}
             />
@@ -84,7 +82,7 @@ const PublicInfo = () => {
             variant="iconInput"
             color={topicSearchValue ? 'blueDark' : 'greyFaded'}
             leftIcon={{
-              sizeInPx: searchInputIconSize,
+              sizeInPx: DEFAULT_ICON_SIZE,
               variant: 'search',
             }}
             onChange={setTopicSearchValue}
@@ -127,6 +125,7 @@ const Form = styled.div`
 const Columns = styled.div`
   display: flex;
   gap: 3rem;
+  margin-top: 1rem;
 `;
 
 const Column = styled.div`
@@ -149,7 +148,7 @@ const SearchBar = styled.div`
   display: flex;
   flex: 1;
   justify-content: flex-end;
-  margin-left: -${searchInputIconSize}px;
+  margin-left: -${DEFAULT_ICON_SIZE}px;
   margin-top: 1rem;
 `;
 
