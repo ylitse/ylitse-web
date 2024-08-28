@@ -15,6 +15,7 @@
       "save": "Tallenna"
     },
     "password": "Salasana",
+    "passwordPlaceholder": "************",
     "roles": {
       "admin": "Ylläpitäjä",
       "mentee": "Käyttäjä",
@@ -25,8 +26,8 @@
     "username": "Käyttäjätunnus"
   },
   "public": {
-    "displayName": "Julkinen nimimerkki",
     "mentee": {
+      "displayName": "Julkinen nimimerkki",
       "displayNameInfo": "Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta sinua ei voi tunnistaa."
     },
     "mentor": {
@@ -38,6 +39,7 @@
       "addTopic": "Lisää uusi aihe",
       "area": "Alue",
       "birthYear": "Syntymävuosi *",
+      "displayName": "Julkinen nimimerkki *",
       "mandatoryNotice": "Tähdellä * merkityt tiedot tulee täyttää.",
       "saveNotice": "Muutokset tallentuvat automaattisesti.",
       "status": "Tilaviesti",

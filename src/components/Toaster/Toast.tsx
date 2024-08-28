@@ -1,4 +1,4 @@
-import { palette } from '../variables';
+import { DEFAULT_ICON_SIZE, palette } from '../variables';
 import {
   Toast,
   ToastType,
@@ -21,21 +21,21 @@ export const AppToast = ({ toast }: Props) => {
       case 'error': {
         return {
           mainColor: palette.red,
-          Icon: <Warning color={'blueDark'} sizeInPx={24} />,
+          Icon: <Warning color={'blueDark'} sizeInPx={DEFAULT_ICON_SIZE} />,
         };
       }
 
       case 'success': {
         return {
           mainColor: palette.blue,
-          Icon: <Success color={'blueDark'} sizeInPx={24} />,
+          Icon: <Success color={'blueDark'} sizeInPx={DEFAULT_ICON_SIZE} />,
         };
       }
 
       default: {
         return {
           mainColor: palette.purple,
-          Icon: <Warning color={'orange'} sizeInPx={24} />,
+          Icon: <Warning color={'orange'} sizeInPx={DEFAULT_ICON_SIZE} />,
         };
       }
     }

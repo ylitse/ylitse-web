@@ -24,8 +24,7 @@ export const Slider = ({ id, label, onChange, value }: Props) => (
 const Container = styled.div`
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin: 1rem 0;
 `;
 
 const Switch = styled.label`

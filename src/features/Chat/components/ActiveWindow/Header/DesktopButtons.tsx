@@ -1,15 +1,13 @@
-// Libraries
-import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 
-// Types
+import { Button, IconButton, StatusButton } from '@/components/Buttons';
+import { DEFAULT_ICON_SIZE } from '@/components/variables';
+import Search from './Search';
+
 import type { ChatBuddy } from '@/features/Chat/chatSlice';
 import type { DialogVariant } from '../Dialogs';
-
-// Components
-import { Button, IconButton, StatusButton } from '@/components/Buttons';
-import Search from './Search';
 
 type Props = {
   chat: ChatBuddy;
@@ -31,7 +29,11 @@ const DesktopButtons = ({ chat, openDialog }: Props) => {
     <Search hideSearch={hideSearch} />
   ) : (
     <Container>
-      <IconButton variant="search" sizeInPx={24} onClick={showSearch} />
+      <IconButton
+        variant="search"
+        sizeInPx={DEFAULT_ICON_SIZE}
+        onClick={showSearch}
+      />
       {chat.status === 'ok' ? (
         <>
           <StatusButton
@@ -55,7 +57,7 @@ const DesktopButtons = ({ chat, openDialog }: Props) => {
       <Button
         onClick={openReportDialog}
         leftIcon={'danger'}
-        sizeInPx={24}
+        sizeInPx={DEFAULT_ICON_SIZE}
         text={{
           color: 'purple',
           text: t('header.report'),
