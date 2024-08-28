@@ -1,12 +1,9 @@
 import { createSelector } from 'reselect';
-import { createSlice } from '@reduxjs/toolkit';
-import { isRight } from 'fp-ts/lib/Either';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import { fetchMyUser } from './myuserApi';
+import { UserRole, authenticationApi } from './authenticationApi';
 import { RootState } from '@/store';
 import { selectChatsExist } from '../Chat/chatSlice';
-
-export type UserRole = 'mentee' | 'mentor' | 'admin';
 
 type Authentication = {
   userId: string | null;
@@ -22,20 +19,25 @@ export const user = createSlice({
   initialState: initialState,
   name: 'user',
   reducers: {
-    logout: () => {
-      return { userId: null, userRole: null };
-    },
+    logout: () => ({ userId: null, userRole: null }),
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchMyUser.fulfilled, ({ userId }, { payload }) => {
-        const nextUserId = isRight(payload) ? payload.right.user.id : userId;
-        const userRole = isRight(payload) ? payload.right.account.role : null;
-        return { userId: nextUserId, userRole };
-      })
-      .addCase(fetchMyUser.rejected, () => {
-        window.location.href = '/login/';
-      });
+      .addMatcher(
+        authenticationApi.endpoints.getMe.matchFulfilled,
+        (_, { payload }) => payload,
+      )
+      .addMatcher(
+        isAnyOf(
+          authenticationApi.endpoints.getMe.matchRejected,
+          authenticationApi.endpoints.logout.matchPending,
+        ),
+        () => {
+          console.log('logout matched!');
+          window.location.href = '/login/';
+          return { userId: null, userRole: null };
+        },
+      );
   },
 });
 

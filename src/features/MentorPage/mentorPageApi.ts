@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import * as D from 'io-ts/Decoder';
-import { validateAndTransformTo } from '@/utils/http';
+import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
 import { selectSelectedSkills, selectSearchString } from './mentorsFilterSlice';
 import { capitalize } from '@/utils/utils';
 import toast from 'react-hot-toast';
@@ -63,14 +63,14 @@ const toMentorRecord = ({ resources }: MentorsResponse) =>
   }, {});
 
 export const mentorsApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),
+  baseQuery: refreshingBaseQuery,
   reducerPath: 'mentors',
 
   endpoints: builder => ({
     getMentors: builder.query<Mentors, void>({
       query: () => 'mentors',
       transformResponse: (response: unknown) =>
-        validateAndTransformTo(
+        parseAndTransformTo(
           response,
           mentorListResponseType,
           { resources: [] },

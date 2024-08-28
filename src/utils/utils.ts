@@ -24,3 +24,19 @@ export const getStatus = (
   }
   return 'empty';
 };
+
+// TODO: Add a test for this
+export const getCookie = (key: string) => {
+  var pattern = RegExp(key + '=.[^;]*');
+  var matched = document.cookie.match(pattern);
+  if (matched) {
+    var cookie = matched[0].split('=');
+    return cookie[1];
+  }
+  return false;
+};
+
+const PAST_DATE = 'Thu, 01 Jan 1970 00:00:00 UTC';
+export const removeCookie = (key: string) => {
+  document.cookie = `${key}=; expires ${PAST_DATE}; path=/;`;
+};

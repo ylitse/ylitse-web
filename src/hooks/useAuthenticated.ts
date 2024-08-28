@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { fetchMyUser } from '@/features/Authentication/myuserApi';
 import { selectIsLoggedIn } from '@/features/Authentication/userSlice';
+import { authenticationApi } from '@/features/Authentication/authenticationApi';
 
 const useAuthenticated = (): boolean => {
   const isAuthenticated = useAppSelector(selectIsLoggedIn);
@@ -9,7 +9,8 @@ const useAuthenticated = (): boolean => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchMyUser());
+    console.log('this is happening?');
+    dispatch(authenticationApi.endpoints.getMe.initiate());
   }, []);
 
   return isAuthenticated;
