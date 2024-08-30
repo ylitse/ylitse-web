@@ -1,6 +1,9 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { selectUserInfo } from '@/features/Authentication/userSlice';
+import { useAppSelector } from '@/store';
 
 import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
 import LabeledInput from '@/components/LabeledInput';
@@ -10,12 +13,13 @@ import TextInput from '@/components/TextInput';
 
 const PublicInfo = () => {
   const { t } = useTranslation('profile');
+  const userInfo = useAppSelector(selectUserInfo);
 
   const [displayName, setDisplayName] = useState('');
   const [birthYear, setBirthYear] = useState('');
   const [area, setArea] = useState('');
   const [status, setStatus] = useState('');
-  const [isAbsent, setIsAbsent] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(true);
   const [story, setStory] = useState('');
   const [topicSearchValue, setTopicSearchValue] = useState('');
 
@@ -24,8 +28,14 @@ const PublicInfo = () => {
   const updateBirthYear = (birthYear: string) => setBirthYear(birthYear);
   const updateArea = (area: string) => setArea(area);
   const updateStatus = (status: string) => setStatus(status);
-  const toggleIsAbsent = () => setIsAbsent(isAbsent => !isAbsent);
+  const toggleIsActive = () => setIsActive(isActive => !isActive);
   const updateStory = (story: string) => setStory(story);
+
+  useEffect(() => {
+    const { displayName, isActive } = userInfo;
+    if (displayName !== null) setDisplayName(displayName);
+    if (isActive !== null) setIsActive(isActive);
+  }, [userInfo]);
 
   return (
     <Container>
@@ -61,10 +71,10 @@ const PublicInfo = () => {
             <Slider
               id="isAbsent"
               label={t(
-                `public.mentor.absence.switch.${isAbsent ? 'on' : 'off'}`,
+                `public.mentor.absence.switch.${isActive ? 'off' : 'on'}`,
               )}
-              onChange={toggleIsAbsent}
-              value={isAbsent}
+              onChange={toggleIsActive}
+              value={!isActive}
             />
             <Text variant="blueBox">{t('public.mentor.absence.info')}</Text>
           </Column>

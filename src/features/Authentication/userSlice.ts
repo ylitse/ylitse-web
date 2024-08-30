@@ -8,11 +8,19 @@ import { selectChatsExist } from '../Chat/chatSlice';
 type Authentication = {
   userId: string | null;
   userRole: UserRole | null;
+  username: string | null;
+  email: string | null;
+  displayName: string | null;
+  isActive: boolean | null;
 };
 
-const initialState: Authentication = {
+const initialState: User = {
   userId: null,
   userRole: null,
+  username: null,
+  email: null,
+  displayName: null,
+  isActive: null,
 };
 
 export const user = createSlice({
@@ -52,4 +60,14 @@ export const selectUserRole = createSelector(
   selectChatsExist,
   ({ userRole }, hasUserChats) =>
     userRole === 'mentee' && !hasUserChats ? 'freshMentee' : userRole,
+);
+
+export const selectUserInfo = createSelector(
+  selectUserState,
+  ({ username, email, displayName, isActive }) => ({
+    username,
+    email,
+    displayName,
+    isActive,
+  }),
 );
