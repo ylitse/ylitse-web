@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { selectUserInfo } from '@/features/Authentication/userSlice';
@@ -6,8 +7,10 @@ import { useAppSelector } from '@/store';
 
 import AdminIcon from '@/static/icons/admin.svg';
 import { IconButton, TextButton } from '@/components/Buttons';
+import LabeledInput from '@/components/LabeledInput';
 import MentorIcon from '@/static/icons/mentor.svg';
 import { OUTER_VERTICAL_MARGIN, palette } from '@/components/variables';
+import PasswordEditor from './PasswordEditor';
 import Text from '@/components/Text';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 
@@ -23,17 +26,32 @@ const AccountInfo = ({ userRole }: Props) => {
 
   const isMentor = userRole === 'mentor';
 
-  const editPassword = () => {
-    console.log('Edit password');
+  const [isEmailEditorOpen, setIsEmailEditorOpen] = useState(false);
+  const toggleIsEmailEditorOpen = () =>
+    setIsEmailEditorOpen(!isEmailEditorOpen);
+  const [email, setEmail] = useState<string>('');
+  const updateEmail = (email: string) => setEmail(email);
+
+  const saveNewEmail = () => {
+    console.log('Save new email');
   };
 
-  const editEmail = () => {
-    console.log('Edit email');
+  const [isDisplayNameEditorOpen, setIsDisplayNameEditorOpen] = useState(false);
+  const toggleIsDisplayNameEditorOpen = () =>
+    setIsDisplayNameEditorOpen(!isDisplayNameEditorOpen);
+  const [displayName, setDisplayName] = useState('');
+  const updateDisplayName = (displayName: string) =>
+    setDisplayName(displayName);
+
+  const saveNewDisplayName = () => {
+    console.log('Save new dispaly name');
   };
 
-  const editDisplayName = () => {
-    console.log('Edit display name');
-  };
+  useEffect(() => {
+    const { displayName, email } = userInfo;
+    if (displayName !== null) setDisplayName(displayName);
+    if (email !== null) setEmail(email);
+  }, [userInfo]);
 
   const deleteAccount = () => {
     console.log('Delete account');
@@ -67,44 +85,80 @@ const AccountInfo = ({ userRole }: Props) => {
         <Value>{userInfo.username}</Value>
       </Section>
 
-      <Section>
-        <Row>
-          <Column>
-            <Text variant="label">{t('account.password')}</Text>
-            <Value>{t('account.passwordPlaceholder')}</Value>
-          </Column>
-          <IconButton variant="edit" sizeInPx={48} onClick={editPassword} />
-        </Row>
-      </Section>
-
-      <Section>
-        <Row>
-          <Column>
-            <Text variant="label">{t('account.email')}</Text>
-            <Value>{userInfo.email}</Value>
-          </Column>
-          <IconButton variant="edit" sizeInPx={48} onClick={editEmail} />
-        </Row>
-        <Text variant="blueBox">{t('account.emailInfo')}</Text>
-      </Section>
+      <PasswordEditor />
+      {isEmailEditorOpen ? (
+        <Section>
+          <LabeledInput
+            label={t('account.email')}
+            onChange={updateEmail}
+            value={email}
+          />
+          <ButtonRow>
+            <TextButton onClick={toggleIsEmailEditorOpen} variant="light">
+              {t('account.input.cancel')}
+            </TextButton>
+            <TextButton onClick={saveNewEmail}>
+              {t('account.input.save')}
+            </TextButton>
+          </ButtonRow>
+        </Section>
+      ) : (
+        <Section>
+          <Row>
+            <Column>
+              <Text variant="label">{t('account.email')}</Text>
+              <Value>{userInfo.email}</Value>
+            </Column>
+            <IconButton
+              variant="edit"
+              sizeInPx={48}
+              onClick={toggleIsEmailEditorOpen}
+            />
+          </Row>
+          <Text variant="blueBox">{t('account.emailInfo')}</Text>
+        </Section>
+      )}
 
       {!isMentor && (
         <Public>
           <Text variant="h2">{t('public.title')}</Text>
-          <Section>
-            <Row>
-              <Column>
-                <Text variant="label">{t('public.mentee.displayName')}</Text>
-                <Value>{userInfo.displayName}</Value>
-              </Column>
-              <IconButton
-                variant="edit"
-                sizeInPx={48}
-                onClick={editDisplayName}
+          {isDisplayNameEditorOpen ? (
+            <Section>
+              <LabeledInput
+                label={t('public.mentee.displayName')}
+                onChange={updateDisplayName}
+                value={displayName}
               />
-            </Row>
-            <Text variant="blueBox">{t('public.mentee.displayNameInfo')}</Text>
-          </Section>
+              <ButtonRow>
+                <TextButton
+                  onClick={toggleIsDisplayNameEditorOpen}
+                  variant="light"
+                >
+                  {t('account.input.cancel')}
+                </TextButton>
+                <TextButton onClick={saveNewDisplayName}>
+                  {t('account.input.save')}
+                </TextButton>
+              </ButtonRow>
+            </Section>
+          ) : (
+            <Section>
+              <Row>
+                <Column>
+                  <Text variant="label">{t('public.mentee.displayName')}</Text>
+                  <Value>{userInfo.displayName}</Value>
+                </Column>
+                <IconButton
+                  variant="edit"
+                  sizeInPx={48}
+                  onClick={toggleIsDisplayNameEditorOpen}
+                />
+              </Row>
+              <Text variant="blueBox">
+                {t('public.mentee.displayNameInfo')}
+              </Text>
+            </Section>
+          )}
         </Public>
       )}
 
@@ -161,6 +215,10 @@ const Value = styled(Text)`
 const Row = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const ButtonRow = styled.div`
+  display: flex;
 `;
 
 const Column = styled.div`
