@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import AdminIcon from '@/static/icons/admin.svg';
+import { selectUserInfo } from '@/features/Authentication/userSlice';
+import { useAppSelector } from '@/store';
 
+import AdminIcon from '@/static/icons/admin.svg';
 import { IconButton, TextButton } from '@/components/Buttons';
 import MentorIcon from '@/static/icons/mentor.svg';
 import { OUTER_VERTICAL_MARGIN, palette } from '@/components/variables';
@@ -17,6 +19,8 @@ type Props = {
 
 const AccountInfo = ({ userRole }: Props) => {
   const { t } = useTranslation('profile');
+  const userInfo = useAppSelector(selectUserInfo);
+
   const isMentor = userRole === 'mentor';
 
   const editPassword = () => {
@@ -60,7 +64,7 @@ const AccountInfo = ({ userRole }: Props) => {
 
       <Section>
         <Text variant="label">{t('account.username')}</Text>
-        <Value>Maija19283192</Value>
+        <Value>{userInfo.username}</Value>
       </Section>
 
       <Section>
@@ -77,7 +81,7 @@ const AccountInfo = ({ userRole }: Props) => {
         <Row>
           <Column>
             <Text variant="label">{t('account.email')}</Text>
-            <Value>maija1923983@gmail.com</Value>
+            <Value>{userInfo.email}</Value>
           </Column>
           <IconButton variant="edit" sizeInPx={48} onClick={editEmail} />
         </Row>
@@ -91,7 +95,7 @@ const AccountInfo = ({ userRole }: Props) => {
             <Row>
               <Column>
                 <Text variant="label">{t('public.mentee.displayName')}</Text>
-                <Value>maija21</Value>
+                <Value>{userInfo.displayName}</Value>
               </Column>
               <IconButton
                 variant="edit"
