@@ -30,10 +30,12 @@ export const user = createSlice({
       .addMatcher(
         isAnyOf(
           authenticationApi.endpoints.getMe.matchRejected,
-          authenticationApi.endpoints.logout.matchPending,
+          authenticationApi.endpoints.logout.matchFulfilled,
         ),
         () => {
           console.log('logout matched!');
+          sessionStorage.removeItem('refresh_token');
+          sessionStorage.removeItem('access_token');
           window.location.href = '/login/';
           return { userId: null, userRole: null };
         },
