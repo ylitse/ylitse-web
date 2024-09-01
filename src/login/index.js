@@ -6,9 +6,23 @@
     function (event) {
       document.getElementById('mfa-token').setAttribute('name', 'mfa_token');
 
-      fetch('/api/weblogin', {
-        body: new FormData(form),
-        credentials: 'include',
+      event.preventDefault();
+
+      const toLoginPayload = (data) => {
+        const formData = new FormData(data)
+        const json = Object.fromEntries(formData)
+        const removedEmpty = Object.keys(json).reduce((acc, curr) => {
+          if (json[curr].length > 0) {
+            return { ...acc, [curr]: json[curr] }
+          }
+          return acc
+        }, {})
+        return JSON.stringify(removedEmpty)
+      }
+
+      fetch('/api/login', {
+        body: toLoginPayload(form),
+        headers: { 'Content-Type': 'application/json' },
         method: 'POST',
       })
         .then(function (response) {
@@ -22,18 +36,16 @@
           throw new TypeError("Couldn't log in.");
         })
         .then(responseJson => {
-          console.log(responseJson)
-          return responseJson
+          sessionStorage.setItem('access_token', responseJson.tokens.access_token)
+          sessionStorage.setItem('refresh_token', responseJson.tokens.refresh_token)
         })
         .then(function () {
-
           window.location.href = '/';
         })
         .catch(function (error) {
           console.log(error.message);
         });
 
-      event.preventDefault();
     },
     false,
   );

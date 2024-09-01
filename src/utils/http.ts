@@ -7,9 +7,6 @@ import {
   FetchBaseQueryError,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/dist/query';
-import { removeCookie } from './utils';
-
-const YLITSE_COOKIE = 'YLITSE';
 
 const parse =
   <A, B>(model: Decoder<A, B>, onError?: (error: DecodeError) => void) =>
@@ -37,6 +34,13 @@ export const parseAndTransformTo = <A, B, C>(
 
 const baseQuery = fetchBaseQuery({
   baseUrl: '/api',
+  prepareHeaders: headers => {
+    const accessToken = sessionStorage.getItem('access_token');
+    if (accessToken) {
+      headers.set('Authorization', `Bearer ${accessToken}`);
+    }
+    return headers;
+  },
 });
 
 export const refreshingBaseQuery: BaseQueryFn<
@@ -49,14 +53,29 @@ export const refreshingBaseQuery: BaseQueryFn<
   // if unauthorized try to refresh
   const isUnauthorized = result.error && result.error.status === 401;
   if (isUnauthorized) {
-    const refreshResult = await baseQuery('/webrefresh', api, extraOptions);
+    const refresh_token = sessionStorage.getItem('refresh_token');
+    const refreshResult = await baseQuery(
+      {
+        url: 'refresh',
+        method: 'POST',
+        body: JSON.stringify({ refresh_token }),
+      },
+      api,
+      extraOptions,
+    );
 
     if (refreshResult.data) {
+      sessionStorage.setItem(
+        'access_token',
+        //@ts-ignore
+        refreshResult.data.access_token,
+      );
       // retry the initial query
-      await baseQuery(args, api, extraOptions);
+      return await baseQuery(args, api, extraOptions);
     } else {
       // if refresh fail, logout
-      removeCookie(YLITSE_COOKIE);
+      sessionStorage.removeItem('refresh_token');
+      sessionStorage.removeItem('access_token');
       window.location.href = '/login/';
       return { data: result.data };
     }
