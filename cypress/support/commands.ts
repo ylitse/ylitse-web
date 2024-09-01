@@ -36,7 +36,7 @@ Cypress.Commands.add(
   (username: string, password: string): void => {
     cy.visit('/login/');
     cy.contains(/Login|Kirjaudu sisään/g).should('be.visible');
-    cy.fillInput('username', username);
+    cy.fillInput('login_name', username);
     cy.fillInput('password', password);
     cy.get('button[id="submit"]').click();
     cy.contains('Ylitse MentorApp peer mentoring service').should('be.visible');

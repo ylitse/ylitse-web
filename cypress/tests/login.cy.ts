@@ -42,27 +42,27 @@ describe('login', () => {
     cy.contains('Kirjaudu sisään').should('be.visible');
   });
 
-  it('shows error if empty username', () => {
+  it('shows error if empty login_name', () => {
     cy.fillInput('password', 'examplePassword');
     clickLogin();
     testErrorVisible();
   });
 
   it('shows error if empty password', () => {
-    cy.fillInput('username', 'exampleUsername');
+    cy.fillInput('login_name', 'exampleUsername');
     clickLogin();
     testErrorVisible();
   });
 
   it('shows error if no account exists', () => {
-    cy.fillInput('username', 'wrongUsername');
+    cy.fillInput('login_name', 'wrongUsername');
     cy.fillInput('password', 'wrongPassword');
     clickLogin();
     testErrorVisible();
   });
 
   it('can log in and out with registered account', () => {
-    cy.fillInput('username', username);
+    cy.fillInput('login_name', username);
     cy.fillInput('password', 'examplePassword');
     clickLogin();
     cy.location('pathname').should('eq', '/');
