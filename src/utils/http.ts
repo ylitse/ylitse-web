@@ -1,4 +1,4 @@
-import { DecodeError, Decoder } from 'io-ts/Decoder';
+import * as D from 'io-ts/Decoder';
 import { pipe } from 'fp-ts/function';
 import { Either, isRight, isLeft } from 'fp-ts/lib/Either';
 import {
@@ -10,7 +10,7 @@ import {
 import { authenticationApi } from '@/features/Authentication/authenticationApi';
 
 const parse =
-  <A, B>(model: Decoder<A, B>, onError?: (error: DecodeError) => void) =>
+  <A, B>(model: D.Decoder<A, B>, onError?: (error: D.DecodeError) => void) =>
   (data: A) => {
     const parsed = model.decode(data);
     if (isLeft(parsed)) {
@@ -27,10 +27,10 @@ const getValueOr =
 
 export const parseAndTransformTo = <A, B, C>(
   response: A,
-  model: Decoder<A, B>,
+  model: D.Decoder<A, B>,
   defaultValue: B,
   mapper: (a: B) => C,
-  onError?: (error: DecodeError) => void,
+  onError?: (error: D.DecodeError) => void,
 ) => pipe(response, parse(model, onError), getValueOr(defaultValue), mapper);
 
 const baseQuery = fetchBaseQuery({
@@ -42,6 +42,10 @@ const baseQuery = fetchBaseQuery({
     }
     return headers;
   },
+});
+
+const refreshResponse = D.struct({
+  access_token: D.string,
 });
 
 export const refreshingBaseQuery: BaseQueryFn<
@@ -66,11 +70,13 @@ export const refreshingBaseQuery: BaseQueryFn<
     );
 
     if (refreshResult.data) {
-      sessionStorage.setItem(
-        'access_token',
-        //@ts-ignore
-        refreshResult.data.access_token,
+      const token = parseAndTransformTo(
+        refreshResult.data,
+        refreshResponse,
+        { access_token: '' },
+        ({ access_token }) => access_token,
       );
+      sessionStorage.setItem('access_token', token);
       // retry the initial query
       return await baseQuery(args, api, extraOptions);
     } else {
