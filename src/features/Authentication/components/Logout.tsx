@@ -4,7 +4,7 @@ import { authenticationApi } from '../authenticationApi';
 
 import Spinner from '@/components/Spinner';
 
-const Logout = () => {
+export const Logout = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -13,5 +13,3 @@ const Logout = () => {
 
   return <Spinner variant="large" />;
 };
-
-export default Logout;

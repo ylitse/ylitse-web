@@ -2,8 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import ChatPage from '@/features/Chat';
 import HomePage from '@/features/HomePage';
-import Logout from '@/features/Authentication/Logout';
 import MentorPage from '@/features/MentorPage';
+import { Logout } from '@/features/Authentication/components/Logout';
 import { Navbar } from './Navbar';
 
 const Navigation = () => (

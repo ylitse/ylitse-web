@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { UserRole, authenticationApi } from './authenticationApi';
 import { RootState } from '@/store';
@@ -27,19 +27,12 @@ export const user = createSlice({
         authenticationApi.endpoints.getMe.matchFulfilled,
         (_, { payload }) => payload,
       )
-      .addMatcher(
-        isAnyOf(
-          authenticationApi.endpoints.getMe.matchRejected,
-          authenticationApi.endpoints.logout.matchFulfilled,
-        ),
-        () => {
-          console.log('logout matched!');
-          sessionStorage.removeItem('refresh_token');
-          sessionStorage.removeItem('access_token');
-          window.location.href = '/login/';
-          return { userId: null, userRole: null };
-        },
-      );
+      .addMatcher(authenticationApi.endpoints.logout.matchFulfilled, () => {
+        sessionStorage.removeItem('refresh_token');
+        sessionStorage.removeItem('access_token');
+        window.location.href = '/login/';
+        return { userId: null, userRole: null };
+      });
   },
 });
 

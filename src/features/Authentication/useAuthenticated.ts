@@ -9,7 +9,6 @@ const useAuthenticated = (): boolean => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log('this is happening?');
     dispatch(authenticationApi.endpoints.getMe.initiate());
   }, []);
 
