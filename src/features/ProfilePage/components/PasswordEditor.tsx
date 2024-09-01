@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { IconButton, TextButton } from '@/components/Buttons';
-import LabeledInput from '@/components/LabeledInput';
 import { palette } from '@/components/variables';
+import PasswordInput from '@/components/PasswordInput/PasswordInput';
 import Text from '@/components/Text';
 
 const PasswordEditor = () => {
@@ -32,17 +32,17 @@ const PasswordEditor = () => {
 
   return isPasswordEditorOpen ? (
     <Section>
-      <LabeledInput
+      <PasswordInput
         label={t('account.input.password.current')}
         onChange={updateCurrentPassword}
         value={currentPassword}
       />
-      <LabeledInput
+      <PasswordInput
         label={t('account.input.password.new')}
         onChange={updateNewPassword}
         value={newPassword}
       />
-      <LabeledInput
+      <PasswordInput
         label={t('account.input.password.repeat')}
         onChange={updateRepeatedNewPassword}
         value={repeatedNewPassword}
