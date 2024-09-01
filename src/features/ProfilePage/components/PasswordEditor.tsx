@@ -91,6 +91,8 @@ const Row = styled.div`
 
 const ButtonRow = styled.div`
   display: flex;
+  gap: 2rem;
+  justify-content: center;
 `;
 
 const Column = styled.div`

@@ -63,7 +63,6 @@ const Header = styled.div`
   display: flex;
   height: 4rem;
   justify-content: center;
-  width: ${CONTENT_WIDTH};
 `;
 
 const Content = styled.div`

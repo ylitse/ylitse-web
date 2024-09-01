@@ -86,6 +86,7 @@ const AccountInfo = ({ userRole }: Props) => {
       </Section>
 
       <PasswordEditor />
+
       {isEmailEditorOpen ? (
         <Section>
           <LabeledInput
@@ -101,13 +102,14 @@ const AccountInfo = ({ userRole }: Props) => {
               {t('account.input.save')}
             </TextButton>
           </ButtonRow>
+          <Text variant="blueBox">{t('account.emailInfo')}</Text>
         </Section>
       ) : (
         <Section>
           <Row>
             <Column>
               <Text variant="label">{t('account.email')}</Text>
-              <Value>{userInfo.email}</Value>
+              <Value>{email}</Value>
             </Column>
             <IconButton
               variant="edit"
@@ -140,13 +142,16 @@ const AccountInfo = ({ userRole }: Props) => {
                   {t('account.input.save')}
                 </TextButton>
               </ButtonRow>
+              <Text variant="blueBox">
+                {t('public.mentee.displayNameInfo')}
+              </Text>
             </Section>
           ) : (
             <Section>
               <Row>
                 <Column>
                   <Text variant="label">{t('public.mentee.displayName')}</Text>
-                  <Value>{userInfo.displayName}</Value>
+                  <Value>{displayName}</Value>
                 </Column>
                 <IconButton
                   variant="edit"
@@ -219,6 +224,8 @@ const Row = styled.div`
 
 const ButtonRow = styled.div`
   display: flex;
+  gap: 2rem;
+  justify-content: center;
 `;
 
 const Column = styled.div`
