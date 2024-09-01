@@ -5,7 +5,6 @@
     event.preventDefault();
     const formData = new FormData(form);
 
-
     try {
       // Create a new account
       const createAccountResponse = await fetch('/api/accounts', {

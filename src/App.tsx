@@ -1,5 +1,5 @@
 import { useAppSelector } from './store';
-import useAuthenticated from './hooks/useAuthenticated';
+import useAuthenticated from './features/Authentication/useAuthenticated';
 import { selectUserId } from './features/Authentication/userSlice';
 import {
   useGetContactsQuery,

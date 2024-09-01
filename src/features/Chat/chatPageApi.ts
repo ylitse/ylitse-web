@@ -9,9 +9,9 @@ import {
   statusUpdateErrorMessages,
   statusUpdateSuccessMessages,
 } from './constants';
+import { role } from '../Authentication/authenticationApi';
 
 const status = D.literal('banned', 'archived', 'ok', 'deleted');
-const role = D.literal('mentee', 'mentor', 'admin');
 
 const optionalProperties = D.partial({
   status: status,

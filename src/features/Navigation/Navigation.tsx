@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import ChatPage from '@/features/Chat';
 import HomePage from '@/features/HomePage';
-import Logout from '@/features/Logout';
+import Logout from '@/features/Authentication/Logout';
 import MentorPage from '@/features/MentorPage';
 import { Navbar } from './Navbar';
 

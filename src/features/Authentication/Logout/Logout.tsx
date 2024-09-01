@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/store';
-import { authenticationApi } from '../Authentication/authenticationApi';
+import { authenticationApi } from '../authenticationApi';
 
 import Spinner from '@/components/Spinner';
 

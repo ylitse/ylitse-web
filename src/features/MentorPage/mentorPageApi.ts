@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import * as D from 'io-ts/Decoder';
 import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
 import { selectSelectedSkills, selectSearchString } from './mentorsFilterSlice';

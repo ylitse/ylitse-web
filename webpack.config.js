@@ -4,12 +4,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const redirect = (res, loc) => {
-  res.statusCode = 302;
-  res.statusMessage = 'Found';
-  res.headers.location = loc;
-};
-
 const DEV_API = process.env.DEV_API
   ? process.env.DEV_API
   : 'http://localhost:8080';
