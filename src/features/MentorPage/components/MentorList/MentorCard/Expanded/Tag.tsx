@@ -38,9 +38,9 @@ const MentorTag = styled(Text)<{ isShowing: boolean; tagColor: string }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
   padding: 0.25rem 1rem;  
   margin: -1rem auto;
-  position: absolute;
-  left: 19.5%;
-  top: 0;
+  position: relative;
+  left: 50%;
+  top: -8%;
   transform: translate(-50%, -30%);
   width: fit-content;
   
