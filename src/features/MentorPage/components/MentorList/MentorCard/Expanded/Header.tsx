@@ -77,15 +77,15 @@ const ProfilePicture = styled.div<{ isMe: boolean; isMobile: boolean }>`
     `url(${isMe ? ProfilePicPlaceholderForMe : ProfilePicPlaceholder})`};
   background-repeat: no-repeat;
   background-size: contain;
-  flex: 0 0 10vw;
+  flex: 0 2 10vw;
   height: 10vw;
   margin: 2rem auto;
   width: 10vw;
   @media screen and (max-width: ${breakpoints.mobile}) {
-    flex: 0 0 3rem;
-    margin: 1rem 2rem;
-    height: 3rem;
-    width: 3rem;
+    flex: 0 0 4rem;
+    margin: 2rem 2rem 1rem 1rem;
+    height: 5rem;
+    width: 5rem;
   }
 `;
 
