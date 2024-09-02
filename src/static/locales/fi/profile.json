@@ -23,7 +23,7 @@
       "title": "Rooli"
     },
     "title": "Tilin tiedot",
-    "username": "Käyttäjätunnus"
+    "loginName": "Käyttäjätunnus"
   },
   "public": {
     "mentee": {
