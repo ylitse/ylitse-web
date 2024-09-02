@@ -1,7 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import * as D from 'io-ts/Decoder';
-import { validateAndTransformTo } from '@/utils/http';
-import { role } from '../Authentication/myuserApi';
+import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
 import { pipe } from 'fp-ts/lib/function';
 import { ChatBuddy, PollingParam } from './chatSlice';
 import toast from 'react-hot-toast';
@@ -10,6 +9,7 @@ import {
   statusUpdateErrorMessages,
   statusUpdateSuccessMessages,
 } from './constants';
+import { role } from '../Authentication/authenticationApi';
 
 const status = D.literal('banned', 'archived', 'ok', 'deleted');
 
@@ -120,13 +120,13 @@ const toQueryString = (params: PollingParam) => {
 };
 
 export const chatApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),
+  baseQuery: refreshingBaseQuery,
   reducerPath: 'chatsApi',
   endpoints: builder => ({
     getContacts: builder.query<Array<Buddy>, string>({
       query: userId => `users/${userId}/contacts`,
       transformResponse: (response: unknown) =>
-        validateAndTransformTo(
+        parseAndTransformTo(
           response,
           contactsResponseCodec,
           { resources: [] },
@@ -144,7 +144,7 @@ export const chatApi = createApi({
       query: ({ userId, params }) =>
         `users/${userId}/messages?${toQueryString(params)}`,
       transformResponse: (response: unknown, _meta, { userId }) =>
-        validateAndTransformTo(
+        parseAndTransformTo(
           response,
           messagesResponseCodec,
           { resources: [], contacts: [] },

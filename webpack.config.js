@@ -4,19 +4,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const redirect = (res, loc) => {
-  res.statusCode = 302;
-  res.statusMessage = 'Found';
-  res.headers.location = loc;
-};
-
-const checkAuth = (res, req) => {
-  if (req.url !== '/login' && [401].includes(res.statusCode)) {
-    // not logged in, redirect to login page
-    redirect(res, '/login/');
-  }
-};
-
 const DEV_API = process.env.DEV_API
   ? process.env.DEV_API
   : 'http://localhost:8080';
@@ -32,7 +19,6 @@ module.exports = {
         changeOrigin: true,
         cookieDomainRewrite: JSON.stringify(DEV_API),
         logLevel: 'debug',
-        onProxyRes: checkAuth,
         pathRewrite: { '^/api': '' },
         target: DEV_API,
       },
