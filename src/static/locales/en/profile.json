@@ -23,7 +23,7 @@
       "title": "Role"
     },
     "title": "Account",
-    "username": "Username"
+    "loginName": "Username"
   },
   "public": {
     "mentee": {

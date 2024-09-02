@@ -81,8 +81,8 @@ const AccountInfo = ({ userRole }: Props) => {
       </Section>
 
       <Section>
-        <Text variant="label">{t('account.username')}</Text>
-        <Value>{userInfo.username}</Value>
+        <Text variant="label">{t('account.loginName')}</Text>
+        <Value>{userInfo.loginName}</Value>
       </Section>
 
       <PasswordEditor />
