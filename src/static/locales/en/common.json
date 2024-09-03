@@ -32,5 +32,9 @@
     "mentors": "Mentors",
     "mobile": { "menu": "Menu" },
     "profile": "Profile"
+  },
+  "password": {
+    "hide": "Hide password",
+    "show": "Show password"
   }
 }

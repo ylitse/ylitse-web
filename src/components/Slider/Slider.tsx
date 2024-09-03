@@ -63,9 +63,9 @@ const Thumb = styled.span<{ checked: boolean }>`
     border-radius: 50%;
     content: '';
     height: 21px;
-    left: 3px;
+    left: 3.5px;
     position: absolute;
-    top: 2px;
+    top: 2.5px;
     transition: 0.4s;
     width: 21px;
   }

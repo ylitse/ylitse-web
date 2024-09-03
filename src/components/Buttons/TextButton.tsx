@@ -48,6 +48,7 @@ const StyledTextButton = styled.button<{
   line-height: 1.5rem;
   padding: 0.5rem 2rem;
   width: fit-content;
+
   &:hover {
     opacity: 0.7;
   }

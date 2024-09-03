@@ -9,10 +9,8 @@
       "cancel": "Cancel",
       "password": {
         "current": "Current password *",
-        "hide": "Hide password",
         "new": "New password *",
         "repeat": "Repeat new password *",
-        "show": "Show password",
         "tooltip": "Your password has to be at least 8 characters long."
       },
       "save": "Save"
