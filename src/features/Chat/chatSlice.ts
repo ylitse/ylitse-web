@@ -1,27 +1,14 @@
-import { RootState } from '@/store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createSelector } from 'reselect';
+import type { ChatFolder } from './chatPageApi';
+import type { Conversation, PollingParam, ChatBuddy } from './mappers';
+import { chatApi, extractMostRecentId } from './chatPageApi';
 import {
-  chatApi,
-  ChatFolder,
-  extractMostRecentId,
-  AppMessage,
-  Buddy,
-  MessageResponse,
-  sortByCreated,
-} from './chatPageApi';
-
-export type ChatBuddy = Buddy & {
-  messages: AppMessage[];
-};
-
-export type PollingParam =
-  | {
-      type: 'New';
-      previousMsgId: string;
-    }
-  | { type: 'OlderThan'; buddyId: string; messageId: string }
-  | { type: 'InitialMessages'; buddyIds: Array<string> };
+  toNewBuddy,
+  mergeMessages,
+  getNextParams,
+  getParamsForUnreadMessages,
+  createBuddyChunks,
+} from './mappers';
 
 export type ChatState = {
   showFolders: boolean;
@@ -29,11 +16,6 @@ export type ChatState = {
   activeChatId: string | null;
   chats: Record<string, ChatBuddy>;
   pollingParams: Array<PollingParam> | null;
-};
-
-type Conversation = {
-  name: string;
-  buddyId: string;
 };
 
 const initialState: ChatState = {
@@ -158,218 +140,6 @@ export const chats = createSlice({
       );
   },
 });
-
-const toNewBuddy = ({ name, buddyId }: Conversation): ChatBuddy => ({
-  displayName: name,
-  buddyId,
-  role: 'mentor',
-  status: 'ok',
-  messages: [],
-});
-
-const createBuddyChunks = (buddyIds: Array<string>): Array<PollingParam> => {
-  const chunkSize = 40;
-  const amountOfBatches = Math.ceil(buddyIds.length / chunkSize);
-
-  return [...Array(amountOfBatches).keys()]
-    .map(index => buddyIds.slice(index * chunkSize, (index + 1) * chunkSize))
-    .map(chunk => ({ type: 'InitialMessages', buddyIds: chunk }));
-};
-
-const mergeMessages = (
-  originalChats: Record<string, ChatBuddy>,
-  response: MessageResponse,
-) =>
-  response.buddies.reduce((chats, contact) => {
-    const newMessages = response.messages.filter(
-      ({ buddyId }) => buddyId === contact.buddyId,
-    );
-    const existingBuddy = originalChats[contact.buddyId];
-    const existingMessages = existingBuddy ? existingBuddy.messages : [];
-
-    return {
-      ...chats,
-      [contact.buddyId]: {
-        ...contact,
-        messages: existingMessages.concat(newMessages).sort(sortByCreated),
-      },
-    };
-  }, originalChats);
-
-export const getNextParams = (
-  pollingQueue: Array<PollingParam> | null,
-  previousMsgId: string,
-): Array<PollingParam> => {
-  const normalPoll = { type: 'New', previousMsgId } as PollingParam;
-  const params = pollingQueue?.filter((_p, i) => i !== 0);
-
-  if (params?.length === 0) {
-    return [normalPoll];
-  }
-
-  return params ?? [normalPoll];
-};
-
-export const getParamsForUnreadMessages = (
-  messages: Array<AppMessage>,
-  params: Array<PollingParam> | null,
-): Array<PollingParam> => {
-  if (!params || params?.length === 0) {
-    return [];
-  }
-
-  const param = params[0];
-  switch (param.type) {
-    case 'OlderThan': {
-      return getOlderThanParamsIfHasUnread(messages)(param.buddyId);
-    }
-
-    case 'InitialMessages': {
-      return param.buddyIds.flatMap(getOlderThanParamsIfHasUnread(messages));
-    }
-
-    default: {
-      return [];
-    }
-  }
-};
-
-export const getOlderThanParamsIfHasUnread =
-  (messages: Array<AppMessage>) =>
-  (buddyId: string): Array<PollingParam> => {
-    const buddyMessages = messages.filter(
-      message => message.buddyId === buddyId,
-    );
-    const hasUnread = buddyMessages.some(message => !message.opened);
-
-    return hasUnread
-      ? [{ type: 'OlderThan', buddyId, messageId: buddyMessages[0].id }]
-      : [];
-  };
-
-const selectChatState = ({ chats }: RootState) => chats;
-
-const compareMessagesByTimeCreated = (
-  messageA: AppMessage,
-  messageB: AppMessage,
-): number =>
-  new Date(messageB.created).getTime() - new Date(messageA.created).getTime();
-
-const sortMessagesByDateDescending = (messages: AppMessage[]): AppMessage[] =>
-  [...messages].sort(compareMessagesByTimeCreated);
-
-const sortChats = (a: ChatBuddy, b: ChatBuddy): number => {
-  const aHasNoMessages = a.messages.length === 0;
-  const bHasNoMessages = b.messages.length === 0;
-
-  // If both chats have no messages, they are considered equal
-  if (aHasNoMessages && bHasNoMessages) return 0;
-
-  // If only a has no messages, it should come first
-  if (aHasNoMessages) return -1;
-
-  // If only b has no messages, it should come first
-  if (bHasNoMessages) return 1;
-
-  const mostRecentA = sortMessagesByDateDescending(a.messages)[0];
-  const mostRecentB = sortMessagesByDateDescending(b.messages)[0];
-  return compareMessagesByTimeCreated(mostRecentA, mostRecentB);
-};
-
-export const selectChats = createSelector(
-  selectChatState,
-  ({ activeFolder, chats }) =>
-    Object.values(chats)
-      .filter(chat => chat.status === activeFolder)
-      .sort(sortChats),
-);
-
-export const selectChatsExist = createSelector(
-  selectChatState,
-  ({ chats }) => Object.values(chats).length > 0,
-);
-
-export const selectActiveChat = createSelector(
-  selectChatState,
-  ({ activeChatId, chats }) => (activeChatId ? chats[activeChatId] : null),
-);
-
-export const selectActiveChatExists = createSelector(
-  selectChatState,
-  ({ activeChatId, chats }) => Boolean(activeChatId && chats[activeChatId]),
-);
-
-// Returns most recent unread chat, or the most recent if all are read
-export const selectDefaultChat = createSelector(selectChats, chats => {
-  const unreadChats = chats.filter(chat => {
-    if (chat.status !== 'ok') return false;
-    return chat.messages.some(message => !message.opened);
-  });
-
-  return unreadChats[0] ?? chats[0];
-});
-
-export const selectBuddyMessages = (buddyId: string) =>
-  createSelector(
-    selectChatState,
-    selectIsLoadingBuddyMessages(buddyId),
-    ({ chats }, isLoading) => {
-      const buddy = chats[buddyId];
-      const hasMessages = buddy.messages.length > 0;
-      const unread = buddy.messages.filter(message => !message.opened);
-
-      return {
-        latest: hasMessages
-          ? buddy.messages[buddy.messages.length - 1].content
-          : '',
-        unread: { hasUnread: unread.length > 0, count: unread.length },
-        isLoading,
-      };
-    },
-  );
-
-export const selectHasUnreadMessages = createSelector(
-  selectChatState,
-  ({ chats }): boolean =>
-    Object.values(chats)
-      .filter(chat => chat.status === 'ok')
-      .map(chat => chat.messages)
-      .flat()
-      .some(message => !message.opened),
-);
-
-const defaultParam: PollingParam = { type: 'New', previousMsgId: '' };
-export const selectCurrentPollingParams = createSelector(
-  selectChatState,
-  ({ pollingParams }) => {
-    if (!pollingParams) return null;
-    if (pollingParams.length === 0) return defaultParam;
-    return pollingParams[0];
-  },
-);
-
-const isLoadingOlderMessages = (pollingParams: PollingParam, buddyId: string) =>
-  pollingParams.type === 'OlderThan' && pollingParams.buddyId === buddyId;
-
-const isLoadingInitialMessages = (
-  pollingParams: PollingParam,
-  buddyId: string,
-) =>
-  pollingParams.type === 'InitialMessages' &&
-  pollingParams.buddyIds.includes(buddyId);
-
-export const selectIsLoadingBuddyMessages = (buddyId?: string) =>
-  createSelector(selectChatState, ({ pollingParams }) => {
-    if (!pollingParams || !buddyId) {
-      return false;
-    }
-
-    return pollingParams.some(
-      param =>
-        isLoadingOlderMessages(param, buddyId) ||
-        isLoadingInitialMessages(param, buddyId),
-    );
-  });
 
 export const {
   setShowFolders,
