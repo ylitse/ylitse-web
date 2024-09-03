@@ -9,7 +9,7 @@ type Props = {
   value: boolean;
 };
 
-const Slider = ({ id, label, onChange, value }: Props) => (
+export const Slider = ({ id, label, onChange, value }: Props) => (
   <Container>
     <Switch>
       <Input id={id} type="checkbox" checked={value} onChange={onChange} />
@@ -70,5 +70,3 @@ const Thumb = styled.span<{ checked: boolean }>`
     width: 21px;
   }
 `;
-
-export default Slider;
