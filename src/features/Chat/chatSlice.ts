@@ -104,15 +104,19 @@ export const chats = createSlice({
             chats,
             response.messages,
           );
-          const nextPollingParams = getNextParams(
-            rest.pollingParams ?? [],
+          const newOlderThanParams = getParamsForUnreadMessages(
+            response.messages,
+            rest.pollingParams,
+          );
+          const nextParams = getNextParams(
+            rest.pollingParams,
             mostRecentMessageId,
           );
 
           return {
             ...rest,
             chats: updatedMessages,
-            pollingParams: nextPollingParams,
+            pollingParams: [...newOlderThanParams, ...nextParams],
           };
         },
       )
@@ -192,15 +196,56 @@ const mergeMessages = (
     };
   }, originalChats);
 
-const getNextParams = (
-  pollingQueue: Array<PollingParam>,
+export const getNextParams = (
+  pollingQueue: Array<PollingParam> | null,
   previousMsgId: string,
 ): Array<PollingParam> => {
-  const normalPoll = { type: 'New', previousMsgId } as const;
-  const nextParams = pollingQueue.slice(1);
-  // If params exist, resolve those - when no params, then do the 'normalPoll'
-  return nextParams.length > 0 ? nextParams : [normalPoll];
+  const normalPoll = { type: 'New', previousMsgId } as PollingParam;
+  const params = pollingQueue?.filter((_p, i) => i !== 0);
+
+  if (params?.length === 0) {
+    return [normalPoll];
+  }
+
+  return params ?? [normalPoll];
 };
+
+export const getParamsForUnreadMessages = (
+  messages: Array<AppMessage>,
+  params: Array<PollingParam> | null,
+): Array<PollingParam> => {
+  if (!params || params?.length === 0) {
+    return [];
+  }
+
+  const param = params[0];
+  switch (param.type) {
+    case 'OlderThan': {
+      return getOlderThanParamsIfHasUnread(messages)(param.buddyId);
+    }
+
+    case 'InitialMessages': {
+      return param.buddyIds.flatMap(getOlderThanParamsIfHasUnread(messages));
+    }
+
+    default: {
+      return [];
+    }
+  }
+};
+
+export const getOlderThanParamsIfHasUnread =
+  (messages: Array<AppMessage>) =>
+  (buddyId: string): Array<PollingParam> => {
+    const buddyMessages = messages.filter(
+      message => message.buddyId === buddyId,
+    );
+    const hasUnread = buddyMessages.some(message => !message.opened);
+
+    return hasUnread
+      ? [{ type: 'OlderThan', buddyId, messageId: buddyMessages[0].id }]
+      : [];
+  };
 
 const selectChatState = ({ chats }: RootState) => chats;
 
