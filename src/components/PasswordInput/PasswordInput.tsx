@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Text from '../Text';
 import { TextButton } from '../Buttons';
@@ -9,7 +10,6 @@ import Tooltip from '../Tooltip';
 type Props = {
   label: string;
   onChange: (value: string) => void;
-  showPasswordText: string;
   tooltip?: string;
   value: string;
 };
@@ -17,10 +17,10 @@ type Props = {
 export const PasswordInput = ({
   label,
   onChange,
-  showPasswordText,
   tooltip,
   value,
 }: Props): JSX.Element => {
+  const { t } = useTranslation('common');
   const inputId = Math.random().toString();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () =>
@@ -34,7 +34,7 @@ export const PasswordInput = ({
         </Text>
         <RightContainer>
           <TextButton onClick={togglePasswordVisibility} variant="textOnly">
-            {showPasswordText}
+            {t(`password.${isPasswordVisible ? 'hide' : 'show'}`)}
           </TextButton>
           {tooltip && <Tooltip text={tooltip} />}
         </RightContainer>
@@ -56,6 +56,7 @@ const Container = styled.div`
 const Row = styled.div`
   align-items: center;
   display: flex;
+  gap: 2rem;
   justify-content: space-between;
   padding-right: 0.5rem;
 `;

@@ -9,10 +9,8 @@
       "cancel": "Peruuta",
       "password": {
         "current": "Nykyinen salasana *",
-        "hide": "Piilota salasana",
         "new": "Uusi salasana *",
         "repeat": "Toista uusi salasana *",
-        "show": "Näytä salasana",
         "tooltip": "Salasanan tulee olla vähintään 8 merkkiä pitkä."
       },
       "save": "Tallenna"
