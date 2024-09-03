@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useAppSelector } from '@/store';
 import { selectUserId } from '@/features/Authentication/userSlice';
+import { useIsVisible } from '@/hooks/useIsVisible';
 
 import {
   AppMessage,
@@ -29,24 +30,28 @@ type Props = {
 export const Message = ({ folder, buddyId, message }: Props) => {
   const [markSeen] = useMarkSeenMutation();
   const userId = useAppSelector(selectUserId);
+  const ref = useRef(null);
+  const isVisible = useIsVisible<HTMLDivElement>(ref);
 
   const handleMarkSeen = () => {
     if (!userId) return;
 
-    markSeen({ userId, message: toPutMessage(message, buddyId, userId) });
+    console.log('NotOpened', message.content);
+    console.log('Visibility', isVisible);
+    // markSeen({ userId, message: toPutMessage(message, buddyId, userId) });
   };
 
   useEffect(() => {
-    if (!message.opened) {
+    if (!message.opened && isVisible) {
       handleMarkSeen();
     }
-  }, []);
+  }, [isVisible]);
 
   const background =
     messageColors[folder][message.isSent ? 'sent' : 'received'];
 
   return (
-    <Container isSent={message.isSent}>
+    <Container isSent={message.isSent} isVisible={isVisible} ref={ref}>
       <Bubble background={background}>
         <Content>{message.content}</Content>
       </Bubble>
@@ -57,8 +62,9 @@ export const Message = ({ folder, buddyId, message }: Props) => {
   );
 };
 
-const Container = styled.div<{ isSent: boolean }>`
+const Container = styled.div<{ isSent: boolean; isVisible: boolean }>`
   align-items: ${({ isSent }) => (isSent ? 'flex-end' : 'flex-start')};
+  border: ${({ isVisible }) => `1px solid ${isVisible ? 'green' : 'red'}`};
   display: flex;
   flex-direction: column;
 `;
