@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { selectUserRole, UserRole } from '../Authentication/userSlice';
+import { selectUserRole } from '../Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
 import AccountInfo from './components/AccountInfo';
@@ -13,6 +13,8 @@ import {
 import PageWithTransition from '@/components/PageWithTransition';
 import PublicInfo from './components/PublicInfo';
 import Text from '@/components/Text';
+
+import type { UserRole } from '../Authentication/authenticationApi';
 
 const ProfilePage = () => {
   const { t } = useTranslation('profile');

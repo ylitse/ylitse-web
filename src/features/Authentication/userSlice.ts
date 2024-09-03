@@ -1,33 +1,33 @@
 import { createSelector } from 'reselect';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { UserRole, authenticationApi } from './authenticationApi';
+import { authenticationApi, UserRole } from './authenticationApi';
 import { RootState } from '@/store';
 import { selectChatsExist } from '../Chat/chatSlice';
 
-type Authentication = {
+type User = {
+  active: boolean;
+  displayName: string;
+  email: string;
+  loginName: string;
   userId: string | null;
   userRole: UserRole | null;
-  loginName: string | null;
-  email: string | null;
-  displayName: string | null;
-  isActive: boolean | null;
 };
 
 const initialState: User = {
+  active: false,
+  displayName: '',
+  email: '',
+  loginName: '',
   userId: null,
   userRole: null,
-  loginName: null,
-  email: null,
-  displayName: null,
-  isActive: null,
 };
 
 export const user = createSlice({
   initialState: initialState,
   name: 'user',
   reducers: {
-    logout: () => ({ userId: null, userRole: null }),
+    logout: () => initialState,
   },
   extraReducers: builder => {
     builder
@@ -39,7 +39,7 @@ export const user = createSlice({
         sessionStorage.removeItem('refresh_token');
         sessionStorage.removeItem('access_token');
         window.location.href = '/login/';
-        return { userId: null, userRole: null };
+        return initialState;
       });
   },
 });
@@ -64,10 +64,10 @@ export const selectUserRole = createSelector(
 
 export const selectUserInfo = createSelector(
   selectUserState,
-  ({ loginName, email, displayName, isActive }) => ({
-    loginName,
-    email,
+  ({ active, displayName, email, loginName }) => ({
+    active,
     displayName,
-    isActive,
+    email,
+    loginName,
   }),
 );

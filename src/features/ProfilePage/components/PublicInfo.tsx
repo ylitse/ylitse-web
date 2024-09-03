@@ -19,7 +19,7 @@ const PublicInfo = () => {
   const [birthYear, setBirthYear] = useState('');
   const [area, setArea] = useState('');
   const [status, setStatus] = useState('');
-  const [isActive, setIsActive] = useState<boolean>(true);
+  const [isActive, setIsActive] = useState<boolean>(false);
   const [story, setStory] = useState('');
   const [topicSearchValue, setTopicSearchValue] = useState('');
 
@@ -32,9 +32,9 @@ const PublicInfo = () => {
   const updateStory = (story: string) => setStory(story);
 
   useEffect(() => {
-    const { displayName, isActive } = userInfo;
+    const { displayName, active } = userInfo;
     if (displayName !== null) setDisplayName(displayName);
-    if (isActive !== null) setIsActive(isActive);
+    if (isActive !== null) setIsActive(active);
   }, [userInfo]);
 
   return (

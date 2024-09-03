@@ -14,7 +14,7 @@ import PasswordEditor from './PasswordEditor';
 import Text from '@/components/Text';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 
-import type { UserRole } from '@/features/Authentication/userSlice';
+import type { UserRole } from '@/features/Authentication/authenticationApi';
 
 type Props = {
   userRole: UserRole;
