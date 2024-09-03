@@ -49,13 +49,15 @@ const Container = styled.div<{ isMobile: boolean }>`
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin: ${({ isMobile }) => (isMobile ? '1rem auto 0.5rem auto' : ' 0 auto')};
+  margin: ${({ isMobile }) =>
+    isMobile ? '1.5rem auto 0.5rem auto' : ' 0 auto'};
   max-width: 70%;
   padding-bottom: ${({ isMobile }) => (isMobile ? '0' : '5rem')};
 
   @media screen and (max-width: ${breakpoints.mobile}) {
     align-items: flex-start;
     justify-content: center;
+    margin-left: -2rem;
   }
 `;
 
@@ -83,8 +85,10 @@ export const WrappedText = styled(Text)`
 `;
 
 export const TruncateText = styled(Text)<{ isMobile: boolean }>`
-  margin: ${({ isMobile }) => (isMobile ? '0 0 0.5rem 0' : '1rem 0 3rem 0')};
-  max-width: 25vw;
+  ${({ isMobile }) => `
+    margin: ${isMobile ? '0.25rem 0 0.5rem 0' : '1rem 0 3rem 0'};
+    max-width: ${isMobile ? '100%' : '25vw'};
+    text-align: ${isMobile ? 'left' : 'center'};
+  `}
   overflow: hidden;
-  text-align: ${({ isMobile }) => (isMobile ? 'left' : 'center')};
 `;

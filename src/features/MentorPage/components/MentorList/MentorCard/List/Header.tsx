@@ -98,7 +98,7 @@ const BasicInfo = styled.div`
   flex: 0 0 100%;
   flex-direction: column;
   max-width: calc(100% - 3.8rem);
-  padding-left: 1.9rem;
+  padding-left: 1rem;
 `;
 
 const Divider = styled.span`
