@@ -38,8 +38,6 @@ const MessageField = ({ chat }: Props) => {
     try {
       await sendMessage({ userId, message }).unwrap();
     } catch (error) {
-      console.error('Failed to send message:', error);
-      // TODO: Tässä voitaisiin näyttää virheviesti käyttäjälle.
       setIsLoadingNewMessage(false);
     }
   };
