@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+// Types
+import type { ChatBuddy } from '@/features/Chat/mappers';
+import type { DialogVariant } from '../Dialogs';
+
 // Variables
 import { HIGH_ROW_HEIGHT } from '@/features/Chat/constants';
 import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
 
 // Components
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
-
-// Types
-import type { ChatBuddy } from '@/features/Chat/chatSlice';
-import type { DialogVariant } from '../Dialogs';
 
 type Props = {
   chat: ChatBuddy;

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 // Store and hooks
-import { selectChats } from '@/features/Chat/chatSlice';
+import { selectChats } from '@/features/Chat/selectors';
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 

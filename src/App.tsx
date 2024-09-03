@@ -5,7 +5,7 @@ import {
   useGetContactsQuery,
   useGetMessagesQuery,
 } from './features/Chat/chatPageApi';
-import { selectCurrentPollingParams } from './features/Chat/chatSlice';
+import { selectCurrentPollingParams } from './features/Chat/selectors';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 import Navigation from './features/Navigation';
@@ -23,7 +23,7 @@ const App = () => {
 
   useGetContactsQuery(userId ?? skipToken);
   useGetMessagesQuery(messageParams, {
-    pollingInterval: 5000,
+    pollingInterval: 30000,
   });
 
   return isAuthenticated ? (

@@ -6,7 +6,8 @@ import { Button, IconButton, StatusButton } from '@/components/Buttons';
 import { DEFAULT_ICON_SIZE } from '@/components/variables';
 import Search from './Search';
 
-import type { ChatBuddy } from '@/features/Chat/chatSlice';
+// Types
+import type { ChatBuddy } from '@/features/Chat/mappers';
 import type { DialogVariant } from '../Dialogs';
 
 type Props = {

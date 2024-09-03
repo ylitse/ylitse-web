@@ -1,8 +1,9 @@
 // Libraries
 import styled from 'styled-components';
 
-// Store and hooks
-import { clearActiveChat, type ChatBuddy } from '@/features/Chat/chatSlice';
+// Store and hooks, type ChatBuddy
+import type { ChatBuddy } from '@/features/Chat/mappers';
+import { clearActiveChat } from '@/features/Chat/chatSlice';
 import {
   selectMentorById,
   useGetMentorsQuery,

@@ -3,10 +3,10 @@ import {
   selectActiveChat,
   selectBuddyMessages,
   selectDefaultChat,
-  setActiveChat,
-} from '@/features/Chat/chatSlice';
+} from '@/features/Chat/selectors';
+import { setActiveChat } from '@/features/Chat/chatSlice';
 
-import type { ChatBuddy } from '@/features/Chat/chatSlice';
+import type { ChatBuddy } from '@/features/Chat/mappers';
 
 import styled, { css } from 'styled-components';
 import { folderColors } from '@/features/Chat/constants';

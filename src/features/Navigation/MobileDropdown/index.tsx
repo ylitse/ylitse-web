@@ -2,7 +2,7 @@ import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import { selectHasUnreadMessages } from '@/features/Chat/chatSlice';
+import { selectHasUnreadMessages } from '@/features/Chat/selectors';
 import { useAppSelector } from '@/store';
 
 import {
