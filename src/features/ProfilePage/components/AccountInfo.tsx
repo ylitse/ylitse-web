@@ -109,7 +109,7 @@ const AccountInfo = ({ userRole }: Props) => {
           <Row>
             <Column>
               <Text variant="label">{t('account.email')}</Text>
-              <Value>{email}</Value>
+              <Value>{email ? email : t('account.emailMissing')}</Value>
             </Column>
             <IconButton
               variant="edit"

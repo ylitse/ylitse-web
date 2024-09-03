@@ -4,6 +4,7 @@
     "delete": "Poista käyttäjätili",
     "email": "Sähköpostiosoite",
     "emailInfo": "Sähköpostiosoite mahdollistaa salasanan palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin tarkoituksiin.",
+    "emailMissing": "Ei sähköpostiosoitetta",
     "input": {
       "cancel": "Peruuta",
       "password": {
