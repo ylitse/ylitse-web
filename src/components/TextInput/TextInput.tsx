@@ -46,6 +46,9 @@ export const TextInput = <T extends ElementType = TextInputElement>({
   const variantStyles = variants[variant].styles;
   const variantColor: CSS.Properties = { color: palette[color] };
 
+  const isPassword = variant === 'password';
+  const isTextArea = variant === 'textarea';
+
   return (
     <>
       {leftIcon && (
@@ -58,9 +61,9 @@ export const TextInput = <T extends ElementType = TextInputElement>({
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         style={{ ...variantStyles, ...variantColor }}
-        type="text"
+        type={isPassword ? 'password' : 'text'}
         value={value}
-        {...(variant === 'textarea' && { rows })}
+        {...(isTextArea && { rows })}
       />
       {rightButton && (
         <StyledIconButton

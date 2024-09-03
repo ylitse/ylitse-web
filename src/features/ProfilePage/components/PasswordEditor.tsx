@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { IconButton, TextButton } from '@/components/Buttons';
 import { palette } from '@/components/variables';
-import PasswordInput from '@/components/PasswordInput/PasswordInput';
+import PasswordInput from '@/components/PasswordInput';
 import Text from '@/components/Text';
 
 const PasswordEditor = () => {
@@ -35,16 +35,21 @@ const PasswordEditor = () => {
       <PasswordInput
         label={t('account.input.password.current')}
         onChange={updateCurrentPassword}
+        showPasswordText={t('account.input.password.show')}
         value={currentPassword}
       />
       <PasswordInput
         label={t('account.input.password.new')}
         onChange={updateNewPassword}
+        showPasswordText={t('account.input.password.show')}
+        tooltip={t('account.input.password.tooltip')}
         value={newPassword}
       />
       <PasswordInput
         label={t('account.input.password.repeat')}
         onChange={updateRepeatedNewPassword}
+        showPasswordText={t('account.input.password.show')}
+        tooltip={t('account.input.password.tooltip')}
         value={repeatedNewPassword}
       />
       <ButtonRow>

@@ -94,6 +94,11 @@ export const variants = {
       backgroundColor: palette.purpleDark,
     },
   },
+  textOnly: {
+    background: 'none',
+    color: palette.purple,
+    padding: 0,
+  },
 };
 
 export const iconVariants = {
