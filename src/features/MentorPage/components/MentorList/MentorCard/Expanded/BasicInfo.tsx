@@ -51,6 +51,7 @@ const Container = styled.div<{ isMobile: boolean }>`
   flex-direction: column;
   margin: ${({ isMobile }) => (isMobile ? '1rem auto 0.5rem auto' : ' 0 auto')};
   max-width: 70%;
+  padding-bottom: 5rem;
 
   @media screen and (max-width: ${breakpoints.mobile}) {
     align-items: flex-start;
@@ -71,8 +72,8 @@ const NameDivider = styled.div<{ isMe: boolean }>`
 `;
 
 const Divider = styled.span`
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 `;
 
 export const WrappedText = styled(Text)`
@@ -82,8 +83,8 @@ export const WrappedText = styled(Text)`
 `;
 
 export const TruncateText = styled(Text)<{ isMobile: boolean }>`
-  margin: 0 0 0.5rem 0;
+  margin: 1rem 0 3rem 0;
+  max-width: 25vw;
   overflow: hidden;
   text-align: ${({ isMobile }) => (isMobile ? 'left' : 'center')};
-  width: 100%;
 `;
