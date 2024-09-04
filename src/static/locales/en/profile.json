@@ -1,7 +1,12 @@
 {
   "title": "Profile",
   "account": {
-    "delete": "Delete account",
+    "delete": {
+      "cancel": "Cancel",
+      "confirm": "Delete",
+      "description": "Deleting your account cannot be undone after this. All conversations from the account will be deleted.",
+      "title": "Delete account"
+    },
     "email": "Email",
     "emailInfo": "Providing an email address allows you to recover your password later. Your email address will not be used for other purposes.",
     "emailMissing": "No email address",

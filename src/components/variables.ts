@@ -34,6 +34,7 @@ export const palette = {
 };
 
 export const DEFAULT_ICON_SIZE = { SMALL: 24, LARGE: 46 };
+export const DIALOG_WIDTH = '687px';
 
 export const OUTER_VERTICAL_MARGIN = '6vh';
 export const OUTER_HORIZONTAL_MARGIN = '6vw';

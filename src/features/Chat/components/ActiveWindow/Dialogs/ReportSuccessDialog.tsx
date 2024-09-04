@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
-import { DIALOG_WIDTH } from '@/features/Chat/constants';
+import { DIALOG_WIDTH } from '@/components/variables';
 import { IconButton, TextButton } from '@/components/Buttons';
 import IconSuccess from '@/static/icons/success.svg';
 import Text from '@/components/Text';

@@ -19,6 +19,7 @@ import Text from '@/components/Text';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 
 import type { UserRole } from '@/features/Authentication/authenticationApi';
+import Dialog from '@/components/Dialog';
 
 type Props = {
   userRole: UserRole;
@@ -57,8 +58,14 @@ const AccountInfo = ({ userRole }: Props) => {
     if (email !== null) setEmail(email);
   }, [userInfo]);
 
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
+  const openDeleteConfirmation = () => setIsDeleteConfirmationOpen(true);
+  const closeDeleteConfirmation = () => setIsDeleteConfirmationOpen(false);
+
   const deleteAccount = () => {
-    console.log('Delete account');
+    console.log('Account deleted!');
+    closeDeleteConfirmation();
   };
 
   const userRoleIcons = {
@@ -69,6 +76,18 @@ const AccountInfo = ({ userRole }: Props) => {
 
   return (
     <Container isMentor={isMentor}>
+      {isDeleteConfirmationOpen && (
+        <Dialog
+          borderColor={palette.redSalmon}
+          closeText={t('account.delete.cancel')}
+          confirmText={t('account.delete.confirm')}
+          onClose={closeDeleteConfirmation}
+          onConfirm={deleteAccount}
+          description={t('account.delete.description')}
+          title={t('account.delete.title')}
+        />
+      )}
+
       {!isMentor && (
         <MenteeHeader>
           <Text variant="h1">{t('title')}</Text>
@@ -174,8 +193,8 @@ const AccountInfo = ({ userRole }: Props) => {
         </Public>
       )}
 
-      <DeleteButton variant="danger" onClick={deleteAccount}>
-        {t('account.delete')}
+      <DeleteButton variant="danger" onClick={openDeleteConfirmation}>
+        {t('account.delete.title')}
       </DeleteButton>
     </Container>
   );

@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -5,8 +6,7 @@ import { selectUserId } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 import { useReportMentorMutation } from '@/features/Chat/chatPageApi';
 
-import styled from 'styled-components';
-import { DIALOG_WIDTH } from '@/features/Chat/constants';
+import { DIALOG_WIDTH } from '@/components/variables';
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import { palette } from '@/components/variables';

@@ -1,7 +1,12 @@
 {
   "title": "Profiili",
   "account": {
-    "delete": "Poista käyttäjätili",
+    "delete": {
+      "cancel": "Peruuta",
+      "confirm": "Poista",
+      "description": "Käyttäjätilin poistamista ei voi tämän jälkeen perua. Kaikki käyttäjätilin keskustelut poistetaan.",
+      "title": "Poista käyttäjätili"
+    },
     "email": "Sähköpostiosoite",
     "emailInfo": "Sähköpostiosoite mahdollistaa salasanan palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin tarkoituksiin.",
     "emailMissing": "Ei sähköpostiosoitetta",
