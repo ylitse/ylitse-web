@@ -14,18 +14,9 @@ import PageWithTransition from '@/components/PageWithTransition';
 import PublicInfo from './components/PublicInfo';
 import Text from '@/components/Text';
 
-import type { UserRole } from '../Authentication/authenticationApi';
-
 const ProfilePage = () => {
   const { t } = useTranslation('profile');
-  const storedUserRole = useAppSelector(selectUserRole);
-
-  const convertUserRole = () => {
-    if (storedUserRole === 'admin') return 'admin';
-    if (storedUserRole === 'mentor') return 'mentor';
-    return 'mentee';
-  };
-  const userRole: UserRole = convertUserRole();
+  const userRole = useAppSelector(selectUserRole);
   const isMentor = userRole === 'mentor';
 
   return (

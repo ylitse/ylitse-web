@@ -3,13 +3,7 @@ import styled from 'styled-components';
 import { spacing } from '../variables';
 import { variants } from './variants';
 
-export type ButtonVariant =
-  | 'danger'
-  | 'dark'
-  | 'disabled'
-  | 'light'
-  | 'outline'
-  | 'textOnly';
+import type { ButtonVariant } from './variants';
 
 type Size = 'normal' | 'large';
 
