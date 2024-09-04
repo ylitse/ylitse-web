@@ -1,25 +1,23 @@
 import styled, { css } from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { selectUserInfo } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
 import AdminIcon from '@/static/icons/admin.svg';
-import {
-  DEFAULT_ICON_SIZE,
-  OUTER_VERTICAL_MARGIN,
-  palette,
-} from '@/components/variables';
-import { IconButton, TextButton } from '@/components/Buttons';
-import LabeledInput from '@/components/LabeledInput';
+import Dialog from '@/components/Dialog';
+import DisplayNameEditor from './DisplayNameEditor';
+import EmailEditor from './EmailEditor';
 import MentorIcon from '@/static/icons/mentor.svg';
+import { OUTER_VERTICAL_MARGIN, palette } from '@/components/variables';
 import PasswordEditor from './PasswordEditor';
-import Text from '@/components/Text';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
+import { Section, Value } from '.';
+import Text from '@/components/Text';
+import { TextButton } from '@/components/Buttons';
 
 import type { UserRole } from '@/features/Authentication/authenticationApi';
-import Dialog from '@/components/Dialog';
 
 type Props = {
   userRole: UserRole;
@@ -27,36 +25,9 @@ type Props = {
 
 const AccountInfo = ({ userRole }: Props) => {
   const { t } = useTranslation('profile');
-  const userInfo = useAppSelector(selectUserInfo);
+  const { loginName } = useAppSelector(selectUserInfo);
 
   const isMentor = userRole === 'mentor';
-
-  const [isEmailEditorOpen, setIsEmailEditorOpen] = useState(false);
-  const toggleIsEmailEditorOpen = () =>
-    setIsEmailEditorOpen(!isEmailEditorOpen);
-  const [email, setEmail] = useState<string>('');
-  const updateEmail = (email: string) => setEmail(email);
-
-  const saveNewEmail = () => {
-    console.log('Save new email');
-  };
-
-  const [isDisplayNameEditorOpen, setIsDisplayNameEditorOpen] = useState(false);
-  const toggleIsDisplayNameEditorOpen = () =>
-    setIsDisplayNameEditorOpen(!isDisplayNameEditorOpen);
-  const [displayName, setDisplayName] = useState('');
-  const updateDisplayName = (displayName: string) =>
-    setDisplayName(displayName);
-
-  const saveNewDisplayName = () => {
-    console.log('Save new dispaly name');
-  };
-
-  useEffect(() => {
-    const { displayName, email } = userInfo;
-    if (displayName !== null) setDisplayName(displayName);
-    if (email !== null) setEmail(email);
-  }, [userInfo]);
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
@@ -64,7 +35,7 @@ const AccountInfo = ({ userRole }: Props) => {
   const closeDeleteConfirmation = () => setIsDeleteConfirmationOpen(false);
 
   const deleteAccount = () => {
-    console.log('Account deleted!');
+    console.log('API: Delete account');
     closeDeleteConfirmation();
   };
 
@@ -93,8 +64,8 @@ const AccountInfo = ({ userRole }: Props) => {
           <Text variant="h1">{t('title')}</Text>
         </MenteeHeader>
       )}
-      <Text variant="h2">{t('account.title')}</Text>
 
+      <Text variant="h2">{t('account.title')}</Text>
       <Section>
         <Text variant="label">{t('account.roles.title')}</Text>
         <Role>
@@ -102,94 +73,17 @@ const AccountInfo = ({ userRole }: Props) => {
           <Text>{t(`account.roles.${userRole}`)}</Text>
         </Role>
       </Section>
-
       <Section>
         <Text variant="label">{t('account.loginName')}</Text>
-        <Value>{userInfo.loginName}</Value>
+        <Value>{loginName}</Value>
       </Section>
-
       <PasswordEditor />
-
-      {isEmailEditorOpen ? (
-        <Section>
-          <LabeledInput
-            label={t('account.email')}
-            onChange={updateEmail}
-            value={email}
-          />
-          <ButtonRow>
-            <TextButton onClick={toggleIsEmailEditorOpen} variant="light">
-              {t('account.input.cancel')}
-            </TextButton>
-            <TextButton onClick={saveNewEmail}>
-              {t('account.input.save')}
-            </TextButton>
-          </ButtonRow>
-          <Text variant="blueBox">{t('account.emailInfo')}</Text>
-        </Section>
-      ) : (
-        <Section>
-          <Row>
-            <Column>
-              <Text variant="label">{t('account.email')}</Text>
-              <Value>{email ? email : t('account.emailMissing')}</Value>
-            </Column>
-            <IconButton
-              variant="edit"
-              sizeInPx={DEFAULT_ICON_SIZE.LARGE}
-              onClick={toggleIsEmailEditorOpen}
-            />
-          </Row>
-          <Text variant="blueBox">{t('account.emailInfo')}</Text>
-        </Section>
-      )}
+      <EmailEditor />
 
       {!isMentor && (
         <Public>
           <Text variant="h2">{t('public.title')}</Text>
-          {isDisplayNameEditorOpen ? (
-            <Section>
-              <LabeledInput
-                label={t('public.mentee.displayName.title')}
-                onChange={updateDisplayName}
-                tooltip={t('public.mentee.displayName.tooltip')}
-                value={displayName}
-              />
-              <ButtonRow>
-                <TextButton
-                  onClick={toggleIsDisplayNameEditorOpen}
-                  variant="light"
-                >
-                  {t('account.input.cancel')}
-                </TextButton>
-                <TextButton onClick={saveNewDisplayName}>
-                  {t('account.input.save')}
-                </TextButton>
-              </ButtonRow>
-              <Text variant="blueBox">
-                {t('public.mentee.displayName.info')}
-              </Text>
-            </Section>
-          ) : (
-            <Section>
-              <Row>
-                <Column>
-                  <Text variant="label">
-                    {t('public.mentee.displayName.title')}
-                  </Text>
-                  <Value>{displayName}</Value>
-                </Column>
-                <IconButton
-                  variant="edit"
-                  sizeInPx={DEFAULT_ICON_SIZE.LARGE}
-                  onClick={toggleIsDisplayNameEditorOpen}
-                />
-              </Row>
-              <Text variant="blueBox">
-                {t('public.mentee.displayName.info')}
-              </Text>
-            </Section>
-          )}
+          <DisplayNameEditor />
         </Public>
       )}
 
@@ -225,38 +119,11 @@ const MenteeHeader = styled.div`
   text-align: center;
 `;
 
-const Section = styled.div`
-  border-bottom: 1px solid ${palette.blueDark};
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0;
-`;
-
 const Role = styled.div`
   align-items: center;
   display: flex;
   gap: 0.5rem;
   margin-top: 0.5rem;
-`;
-
-const Value = styled(Text)`
-  margin: 0.5rem 0 0 0;
-`;
-
-const Row = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ButtonRow = styled.div`
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 const Public = styled.div`

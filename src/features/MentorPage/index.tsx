@@ -38,10 +38,7 @@ const MentorPage = () => {
         />
       )}
       <MentorsFilter />
-      <MentorList
-        setVisibleCard={mentor => setSelectedMentor(mentor)}
-        mentors={mentors}
-      />
+      <MentorList setVisibleCard={setSelectedMentor} mentors={mentors} />
     </>
   );
 

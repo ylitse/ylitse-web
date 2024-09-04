@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 import { createUniqueId } from '@/utils/id';
-import Text from './Text';
-import TextInput from './TextInput';
-import Tooltip from './Tooltip';
+import Text from '../Text';
+import TextInput from '../TextInput';
+import Tooltip from '../Tooltip';
 
 type LabeledInputProps = {
   label: string;
@@ -12,7 +12,7 @@ type LabeledInputProps = {
   value: string;
 };
 
-const LabeledInput = ({
+export const LabeledInput = ({
   label,
   onChange,
   tooltip,
@@ -52,5 +52,3 @@ const LabelRow = styled.div`
 const Input = styled(TextInput)`
   margin-top: 0.5rem;
 `;
-
-export default LabeledInput;

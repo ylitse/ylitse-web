@@ -23,13 +23,7 @@ const PublicInfo = () => {
   const [story, setStory] = useState('');
   const [topicSearchValue, setTopicSearchValue] = useState('');
 
-  const updateDisplayName = (displayName: string) =>
-    setDisplayName(displayName);
-  const updateBirthYear = (birthYear: string) => setBirthYear(birthYear);
-  const updateArea = (area: string) => setArea(area);
-  const updateStatus = (status: string) => setStatus(status);
   const toggleIsActive = () => setIsActive(isActive => !isActive);
-  const updateStory = (story: string) => setStory(story);
 
   useEffect(() => {
     const { displayName, active } = userInfo;
@@ -47,24 +41,24 @@ const PublicInfo = () => {
           <Column>
             <LabeledInput
               label={t('public.mentor.displayName')}
-              onChange={updateDisplayName}
+              onChange={setDisplayName}
               value={displayName}
             />
             <LabeledInput
               label={t('public.mentor.birthYear')}
-              onChange={updateBirthYear}
+              onChange={setBirthYear}
               value={birthYear}
             />
             <LabeledInput
               label={t('public.mentor.area')}
-              onChange={updateArea}
+              onChange={setArea}
               value={area}
             />
           </Column>
           <Column>
             <LabeledInput
               label={t('public.mentor.status')}
-              onChange={updateStatus}
+              onChange={setStatus}
               value={status}
             />
             <Text variant="label">{t('public.mentor.absence.title')}</Text>
@@ -82,7 +76,7 @@ const PublicInfo = () => {
         <Text variant="label">{t('public.mentor.story')}</Text>
         <StoryInput
           variant="textarea"
-          onChange={updateStory}
+          onChange={setStory}
           rows={4}
           value={story}
         />
