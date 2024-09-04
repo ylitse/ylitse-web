@@ -190,7 +190,7 @@ const Container = styled.div<{ isMentor: boolean }>`
     css`
       align-content: center;
       margin: ${OUTER_VERTICAL_MARGIN} auto;
-      width: 50vw;
+      width: 670px;
     `}
 `;
 
