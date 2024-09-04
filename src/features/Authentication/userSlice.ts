@@ -57,9 +57,17 @@ export const selectUserId = createSelector(
 
 export const selectUserRole = createSelector(
   selectUserState,
+  ({ userRole }) => userRole ?? 'mentee',
+);
+
+export const selectAppRole = createSelector(
+  selectUserState,
   selectChatsExist,
-  ({ userRole }, hasUserChats) =>
-    userRole === 'mentee' && !hasUserChats ? 'freshMentee' : userRole,
+  ({ userRole }, hasUserChats) => {
+    if (userRole === 'mentee' && !hasUserChats) return 'freshMentee';
+    if (!userRole) return 'mentee';
+    return userRole;
+  },
 );
 
 export const selectUserInfo = createSelector(

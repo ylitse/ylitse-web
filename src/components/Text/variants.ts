@@ -1,27 +1,16 @@
 import CSS from 'csstype';
 import { FOOTER_HEIGHT, palette } from '../variables';
 
-export type TextVariant =
-  | 'blueBox'
-  | 'boldBaloo'
-  | 'bold'
-  | 'chip'
-  | 'footer'
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'link'
-  | 'label'
-  | 'logo'
-  | 'p';
-export type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'label' | 'p';
+type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'label' | 'p';
 
 type TextProp = {
   element: TextElement;
   styles: CSS.Properties;
 };
 
-export const variants: Record<TextVariant, TextProp> = {
+export type TextVariant = keyof typeof variants;
+
+export const variants: Record<string, TextProp> = {
   blueBox: {
     element: 'p',
     styles: {

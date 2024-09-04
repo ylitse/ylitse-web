@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { createUniqueId } from '@/utils/id';
 import Text from '../Text';
 import { TextButton } from '../Buttons';
 import TextInput from '../TextInput';
@@ -21,7 +22,7 @@ export const PasswordInput = ({
   value,
 }: Props): JSX.Element => {
   const { t } = useTranslation('common');
-  const inputId = Math.random().toString();
+  const inputId = createUniqueId();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible);

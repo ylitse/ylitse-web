@@ -22,6 +22,8 @@ import SearchWithBackgroundIcon from '@/static/icons/search-with-background.svg'
 import SendIcon from '@/static/icons/send.svg';
 import TooltipIcon from '@/static/icons/tooltip.svg';
 
+export type ButtonVariant = keyof typeof variants;
+
 export const variants = {
   danger: {
     backgroundColor: palette.redLight,

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+
+import { createUniqueId } from '@/utils/id';
 import Text from './Text';
 import TextInput from './TextInput';
 
@@ -13,7 +15,7 @@ const LabeledInput = ({
   onChange,
   value,
 }: LabeledInputProps): JSX.Element => {
-  const inputId = Math.random().toString();
+  const inputId = createUniqueId();
 
   return (
     <Container>
