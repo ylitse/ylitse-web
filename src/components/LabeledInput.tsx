@@ -15,7 +15,7 @@ const LabeledInput = ({
   onChange,
   value,
 }: LabeledInputProps): JSX.Element => {
-  const inputId = createUniqueId();
+  const inputId = `labeled_input_${createUniqueId()}`;
 
   return (
     <Container>

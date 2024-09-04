@@ -61,11 +61,10 @@ export const selectUserRole = createSelector(
 );
 
 export const selectAppRole = createSelector(
-  selectUserState,
+  selectUserRole,
   selectChatsExist,
-  ({ userRole }, hasUserChats) => {
+  (userRole, hasUserChats) => {
     if (userRole === 'mentee' && !hasUserChats) return 'freshMentee';
-    if (!userRole) return 'mentee';
     return userRole;
   },
 );

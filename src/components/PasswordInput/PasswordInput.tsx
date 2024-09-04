@@ -22,7 +22,7 @@ export const PasswordInput = ({
   value,
 }: Props): JSX.Element => {
   const { t } = useTranslation('common');
-  const inputId = createUniqueId();
+  const inputId = `password_input_${createUniqueId()}`;
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible);
