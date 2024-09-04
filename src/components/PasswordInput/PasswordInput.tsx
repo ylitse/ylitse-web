@@ -29,7 +29,7 @@ export const PasswordInput = ({
 
   return (
     <Container>
-      <Row>
+      <LabelRow>
         <Text inputId={inputId} variant="label">
           {label}
         </Text>
@@ -39,7 +39,7 @@ export const PasswordInput = ({
           </TextButton>
           {tooltip && <Tooltip text={tooltip} />}
         </RightContainer>
-      </Row>
+      </LabelRow>
       <Input
         id={inputId}
         variant={isPasswordVisible ? 'formInput' : 'password'}
@@ -54,10 +54,9 @@ const Container = styled.div`
   margin-bottom: 1rem;
 `;
 
-const Row = styled.div`
+const LabelRow = styled.div`
   align-items: center;
   display: flex;
-  gap: 2rem;
   justify-content: space-between;
   padding-right: 0.5rem;
 `;

@@ -127,8 +127,9 @@ const AccountInfo = ({ userRole }: Props) => {
           {isDisplayNameEditorOpen ? (
             <Section>
               <LabeledInput
-                label={t('public.mentee.displayName')}
+                label={t('public.mentee.displayName.title')}
                 onChange={updateDisplayName}
+                tooltip={t('public.mentee.displayName.tooltip')}
                 value={displayName}
               />
               <ButtonRow>
@@ -143,14 +144,16 @@ const AccountInfo = ({ userRole }: Props) => {
                 </TextButton>
               </ButtonRow>
               <Text variant="blueBox">
-                {t('public.mentee.displayNameInfo')}
+                {t('public.mentee.displayName.info')}
               </Text>
             </Section>
           ) : (
             <Section>
               <Row>
                 <Column>
-                  <Text variant="label">{t('public.mentee.displayName')}</Text>
+                  <Text variant="label">
+                    {t('public.mentee.displayName.title')}
+                  </Text>
                   <Value>{displayName}</Value>
                 </Column>
                 <IconButton
@@ -160,7 +163,7 @@ const AccountInfo = ({ userRole }: Props) => {
                 />
               </Row>
               <Text variant="blueBox">
-                {t('public.mentee.displayNameInfo')}
+                {t('public.mentee.displayName.info')}
               </Text>
             </Section>
           )}

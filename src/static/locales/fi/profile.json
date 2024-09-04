@@ -28,8 +28,11 @@
   },
   "public": {
     "mentee": {
-      "displayName": "Julkinen nimimerkki",
-      "displayNameInfo": "Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta sinua ei voi tunnistaa."
+      "displayName": {
+        "title": "Julkinen nimimerkki",
+        "info": "Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta sinua ei voi tunnistaa.",
+        "tooltip": "Nimimerkin tulee olla vähintään 2 merkkiä pitkä."
+      }
     },
     "mentor": {
       "absence": {

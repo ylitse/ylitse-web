@@ -28,8 +28,11 @@
   },
   "public": {
     "mentee": {
-      "displayName": "Display name",
-      "displayNameInfo": "If you want to remain anonymous to mentors, enter a display name that does not identify you."
+      "displayName": {
+        "title": "Display name",
+        "info": "If you want to remain anonymous to mentors, enter a display name that does not identify you.",
+        "tooltip": "Your username has to be at least 2 characters long."
+      }
     },
     "mentor": {
       "absence": {
