@@ -21,21 +21,25 @@ export const AppToast = ({ toast }: Props) => {
       case 'error': {
         return {
           mainColor: palette.red,
-          Icon: <Warning color={'blueDark'} sizeInPx={DEFAULT_ICON_SIZE} />,
+          Icon: (
+            <Warning color={'blueDark'} sizeInPx={DEFAULT_ICON_SIZE.SMALL} />
+          ),
         };
       }
 
       case 'success': {
         return {
           mainColor: palette.blue,
-          Icon: <Success color={'blueDark'} sizeInPx={DEFAULT_ICON_SIZE} />,
+          Icon: (
+            <Success color={'blueDark'} sizeInPx={DEFAULT_ICON_SIZE.SMALL} />
+          ),
         };
       }
 
       default: {
         return {
           mainColor: palette.purple,
-          Icon: <Warning color={'orange'} sizeInPx={DEFAULT_ICON_SIZE} />,
+          Icon: <Warning color={'orange'} sizeInPx={DEFAULT_ICON_SIZE.SMALL} />,
         };
       }
     }

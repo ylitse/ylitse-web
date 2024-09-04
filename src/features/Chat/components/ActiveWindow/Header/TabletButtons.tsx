@@ -63,7 +63,7 @@ const TabletButtons = ({ chat, openDialog }: Props) => {
           <ReportButton
             onClick={openReportDialog}
             leftIcon={'danger'}
-            sizeInPx={DEFAULT_ICON_SIZE}
+            sizeInPx={DEFAULT_ICON_SIZE.SMALL}
             text={{
               color: 'purple',
               text: t('header.report'),

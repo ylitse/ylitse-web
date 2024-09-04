@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
 import { IconButton, TextButton } from '@/components/Buttons';
-import { palette } from '@/components/variables';
 import PasswordInput from '@/components/PasswordInput';
 import Text from '@/components/Text';
 
@@ -67,7 +67,7 @@ const PasswordEditor = () => {
         </Column>
         <IconButton
           variant="edit"
-          sizeInPx={48}
+          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
           onClick={toggleIsPasswordEditorOpen}
         />
       </Row>

@@ -92,7 +92,7 @@ const PublicInfo = () => {
             variant="iconInput"
             color={topicSearchValue ? 'blueDark' : 'greyFaded'}
             leftIcon={{
-              sizeInPx: DEFAULT_ICON_SIZE,
+              sizeInPx: DEFAULT_ICON_SIZE.SMALL,
               variant: 'search',
             }}
             onChange={setTopicSearchValue}
@@ -158,7 +158,7 @@ const SearchBar = styled.div`
   display: flex;
   flex: 1;
   justify-content: flex-end;
-  margin-left: -${DEFAULT_ICON_SIZE}px;
+  margin-left: -${DEFAULT_ICON_SIZE.SMALL}px;
   margin-top: 1rem;
 `;
 

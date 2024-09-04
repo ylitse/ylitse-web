@@ -33,7 +33,7 @@ export const palette = {
   whiteOpacity: 'rgba(255, 255, 255, 0.5)',
 };
 
-export const DEFAULT_ICON_SIZE = 24;
+export const DEFAULT_ICON_SIZE = { SMALL: 24, LARGE: 46 };
 
 export const OUTER_VERTICAL_MARGIN = '6vh';
 export const OUTER_HORIZONTAL_MARGIN = '6vw';

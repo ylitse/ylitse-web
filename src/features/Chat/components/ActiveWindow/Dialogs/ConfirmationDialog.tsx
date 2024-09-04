@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -8,14 +9,13 @@ import {
 import { useAppSelector } from '@/store';
 import { selectUserId } from '@/features/Authentication/userSlice';
 
-import type { ConfirmationDialogVariant } from '.';
-
-import styled from 'styled-components';
+import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
 import { DIALOG_WIDTH } from '@/features/Chat/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import IconWarning from '@/static/icons/warning.svg';
-import { palette } from '@/components/variables';
 import Text from '@/components/Text';
+
+import type { ConfirmationDialogVariant } from '.';
 
 type Props = {
   variant: ConfirmationDialogVariant;
@@ -52,7 +52,7 @@ const ConfirmationDialog = ({ variant, chat, close }: Props) => {
         <WarningIcon src={IconWarning} />
         <CloseButton
           variant="closeWithBackground"
-          sizeInPx={46}
+          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
           onClick={close}
         />
         <Text variant="h3">{t(`dialog.${variant}.title`)}</Text>

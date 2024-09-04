@@ -15,7 +15,7 @@ const StatusButton = <T extends ElementType = 'button'>({
 }: ButtonProps<T>): JSX.Element => (
   <Button
     leftIcon={icon}
-    sizeInPx={DEFAULT_ICON_SIZE}
+    sizeInPx={DEFAULT_ICON_SIZE.SMALL}
     text={{
       color: 'purple',
       text,

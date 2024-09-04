@@ -11,8 +11,8 @@ import {
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
+import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
 import { IconButton } from '@/components/Buttons';
-import { palette } from '@/components/variables';
 import { ROW_HEIGHT, SHORT_ROW_HEIGHT } from '@/features/Chat/constants';
 import TextInput from '@/components/TextInput';
 
@@ -63,7 +63,7 @@ const MessageField = ({ chat }: Props) => {
       <SendButton
         variant="send"
         isDisabled={isLoadingNewMessage}
-        sizeInPx={46}
+        sizeInPx={DEFAULT_ICON_SIZE.LARGE}
         onClick={() => handleMessageSend(chat.buddyId, text)}
       />
     </Container>

@@ -3,13 +3,10 @@ import { palette } from '../variables';
 
 type Props = {
   color?: Color;
-  sizeInPx?: number;
+  sizeInPx: number;
 };
 
-export const Warning: React.FC<Props> = ({
-  color = 'blueDark',
-  sizeInPx = 48,
-}) => (
+export const Warning: React.FC<Props> = ({ color = 'blueDark', sizeInPx }) => (
   <svg
     width={sizeInPx}
     height={sizeInPx}

@@ -6,10 +6,14 @@ import { selectUserInfo } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
 import AdminIcon from '@/static/icons/admin.svg';
+import {
+  DEFAULT_ICON_SIZE,
+  OUTER_VERTICAL_MARGIN,
+  palette,
+} from '@/components/variables';
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import MentorIcon from '@/static/icons/mentor.svg';
-import { OUTER_VERTICAL_MARGIN, palette } from '@/components/variables';
 import PasswordEditor from './PasswordEditor';
 import Text from '@/components/Text';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
@@ -113,7 +117,7 @@ const AccountInfo = ({ userRole }: Props) => {
             </Column>
             <IconButton
               variant="edit"
-              sizeInPx={48}
+              sizeInPx={DEFAULT_ICON_SIZE.LARGE}
               onClick={toggleIsEmailEditorOpen}
             />
           </Row>
@@ -158,7 +162,7 @@ const AccountInfo = ({ userRole }: Props) => {
                 </Column>
                 <IconButton
                   variant="edit"
-                  sizeInPx={48}
+                  sizeInPx={DEFAULT_ICON_SIZE.LARGE}
                   onClick={toggleIsDisplayNameEditorOpen}
                 />
               </Row>
