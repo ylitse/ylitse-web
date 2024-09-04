@@ -1,16 +1,24 @@
 import { createSelector } from 'reselect';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { UserRole, authenticationApi } from './authenticationApi';
+import { authenticationApi, UserRole } from './authenticationApi';
 import { RootState } from '@/store';
 import { selectChatsExist } from '../Chat/chatSlice';
 
-type Authentication = {
+type User = {
+  active: boolean;
+  displayName: string;
+  email: string;
+  loginName: string;
   userId: string | null;
   userRole: UserRole | null;
 };
 
-const initialState: Authentication = {
+const initialState: User = {
+  active: false,
+  displayName: '',
+  email: '',
+  loginName: '',
   userId: null,
   userRole: null,
 };
@@ -19,7 +27,7 @@ export const user = createSlice({
   initialState: initialState,
   name: 'user',
   reducers: {
-    logout: () => ({ userId: null, userRole: null }),
+    logout: () => initialState,
   },
   extraReducers: builder => {
     builder
@@ -31,7 +39,7 @@ export const user = createSlice({
         sessionStorage.removeItem('refresh_token');
         sessionStorage.removeItem('access_token');
         window.location.href = '/login/';
-        return { userId: null, userRole: null };
+        return initialState;
       });
   },
 });
@@ -49,7 +57,25 @@ export const selectUserId = createSelector(
 
 export const selectUserRole = createSelector(
   selectUserState,
+  ({ userRole }) => userRole ?? 'mentee',
+);
+
+export const selectAppRole = createSelector(
+  selectUserState,
   selectChatsExist,
-  ({ userRole }, hasUserChats) =>
-    userRole === 'mentee' && !hasUserChats ? 'freshMentee' : userRole,
+  ({ userRole }, hasUserChats) => {
+    if (userRole === 'mentee' && !hasUserChats) return 'freshMentee';
+    if (!userRole) return 'mentee';
+    return userRole;
+  },
+);
+
+export const selectUserInfo = createSelector(
+  selectUserState,
+  ({ active, displayName, email, loginName }) => ({
+    active,
+    displayName,
+    email,
+    loginName,
+  }),
 );

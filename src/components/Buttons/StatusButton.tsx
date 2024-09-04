@@ -1,5 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react';
+
 import Button from './Button';
+import { DEFAULT_ICON_SIZE } from '../variables';
 
 type ButtonProps<T extends ElementType> = {
   icon: 'archive' | 'block' | 'return';
@@ -13,7 +15,7 @@ const StatusButton = <T extends ElementType = 'button'>({
 }: ButtonProps<T>): JSX.Element => (
   <Button
     leftIcon={icon}
-    sizeInPx={24}
+    sizeInPx={DEFAULT_ICON_SIZE}
     text={{
       color: 'purple',
       text,

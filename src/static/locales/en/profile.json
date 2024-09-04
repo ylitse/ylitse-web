@@ -1,0 +1,52 @@
+{
+  "title": "Profile",
+  "account": {
+    "delete": "Delete account",
+    "email": "Email",
+    "emailInfo": "Providing an email address allows you to recover your password later. Your email address will not be used for other purposes.",
+    "emailMissing": "No email address",
+    "input": {
+      "cancel": "Cancel",
+      "password": {
+        "current": "Current password *",
+        "new": "New password *",
+        "repeat": "Repeat new password *",
+        "tooltip": "Your password has to be at least 8 characters long."
+      },
+      "save": "Save"
+    },
+    "password": "Password",
+    "passwordPlaceholder": "************",
+    "roles": {
+      "admin": "Admin",
+      "mentee": "User",
+      "mentor": "Mentor",
+      "title": "Role"
+    },
+    "title": "Account",
+    "loginName": "Username"
+  },
+  "public": {
+    "mentee": {
+      "displayName": "Display name",
+      "displayNameInfo": "If you want to remain anonymous to mentors, enter a display name that does not identify you."
+    },
+    "mentor": {
+      "absence": {
+        "info": "During absence mode, you cannot receive messages. Please specify the duration of your absence in your status message.",
+        "switch": { "off": "Available", "on": "Not available" },
+        "title": "Absence mode"
+      },
+      "addTopic": "Add new topic",
+      "area": "Area",
+      "birthYear": "Year of birth *",
+      "displayName": "Display name *",
+      "mandatoryNotice": "Fields marked with a star * are required.",
+      "saveNotice": "Changes are saved automatically.",
+      "status": "Status message",
+      "story": "My story",
+      "topics": "My topics"
+    },
+    "title": "Public information"
+  }
+}

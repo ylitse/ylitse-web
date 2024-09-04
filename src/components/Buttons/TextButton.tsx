@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { spacing } from '../variables';
 import { variants } from './variants';
 
-export type ButtonColorVariant = 'dark' | 'disabled' | 'light' | 'outline';
+import type { ButtonVariant } from './variants';
 
 type Size = 'normal' | 'large';
 
@@ -11,7 +11,7 @@ type ButtonProps<T extends ElementType> = {
   children: ReactNode;
   className?: string;
   size?: Size;
-  variant?: ButtonColorVariant;
+  variant?: ButtonVariant;
 } & ComponentPropsWithoutRef<T>;
 
 const TextButton = <T extends ElementType = 'button'>({
@@ -29,7 +29,7 @@ const TextButton = <T extends ElementType = 'button'>({
 
 const StyledTextButton = styled.button<{
   size: Size;
-  variant: ButtonColorVariant;
+  variant: ButtonVariant;
 }>`
   border: none;
   border-radius: 50px;
@@ -40,8 +40,9 @@ const StyledTextButton = styled.button<{
   font-style: normal;
   font-weight: 700;
   line-height: 1.5rem;
-  padding: 10px 24px;
+  padding: 0.5rem 2rem;
   width: fit-content;
+
   &:hover {
     opacity: 0.7;
   }

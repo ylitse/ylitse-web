@@ -5,6 +5,7 @@ export type Color = keyof typeof palette;
 export const palette = {
   blue: '#01A5EC',
   blue2: '#43BFFF',
+  blue3: '#84CCF1',
   blueDark: '#1C325D',
   blueGrey: '#4C6282',
   blueLight: '#D3EFFF',
@@ -31,6 +32,8 @@ export const palette = {
   white: '#FFFFFF',
   whiteOpacity: 'rgba(255, 255, 255, 0.5)',
 };
+
+export const DEFAULT_ICON_SIZE = 24;
 
 export const OUTER_VERTICAL_MARGIN = '6vh';
 export const OUTER_HORIZONTAL_MARGIN = '6vw';

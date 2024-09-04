@@ -30,6 +30,11 @@
     "logo": "Ylitse",
     "logout": "Kirjaudu ulos",
     "mentors": "Mentorit",
-    "mobile": { "menu": "Valikko" }
+    "mobile": { "menu": "Valikko" },
+    "profile": "Profiili"
+  },
+  "password": {
+    "hide": "Piilota salasana",
+    "show": "Näytä salasana"
   }
 }

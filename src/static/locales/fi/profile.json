@@ -1,0 +1,52 @@
+{
+  "title": "Profiili",
+  "account": {
+    "delete": "Poista käyttäjätili",
+    "email": "Sähköpostiosoite",
+    "emailInfo": "Sähköpostiosoite mahdollistaa salasanan palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin tarkoituksiin.",
+    "emailMissing": "Ei sähköpostiosoitetta",
+    "input": {
+      "cancel": "Peruuta",
+      "password": {
+        "current": "Nykyinen salasana *",
+        "new": "Uusi salasana *",
+        "repeat": "Toista uusi salasana *",
+        "tooltip": "Salasanan tulee olla vähintään 8 merkkiä pitkä."
+      },
+      "save": "Tallenna"
+    },
+    "password": "Salasana",
+    "passwordPlaceholder": "************",
+    "roles": {
+      "admin": "Ylläpitäjä",
+      "mentee": "Käyttäjä",
+      "mentor": "Mentori",
+      "title": "Rooli"
+    },
+    "title": "Tilin tiedot",
+    "loginName": "Käyttäjätunnus"
+  },
+  "public": {
+    "mentee": {
+      "displayName": "Julkinen nimimerkki",
+      "displayNameInfo": "Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta sinua ei voi tunnistaa."
+    },
+    "mentor": {
+      "absence": {
+        "info": "Poissaolotilan aikana sinulle ei voi lähettää viestejä. Ilmoitathan poissaolosi pituuden tilaviestissä.",
+        "switch": { "off": "Tavoitettavissa", "on": "Ei tavoitettavissa" },
+        "title": "Poissaolotila"
+      },
+      "addTopic": "Lisää uusi aihe",
+      "area": "Alue",
+      "birthYear": "Syntymävuosi *",
+      "displayName": "Julkinen nimimerkki *",
+      "mandatoryNotice": "Tähdellä * merkityt tiedot tulee täyttää.",
+      "saveNotice": "Muutokset tallentuvat automaattisesti.",
+      "status": "Tilaviesti",
+      "story": "Tarinani",
+      "topics": "Aiheeni"
+    },
+    "title": "Julkiset tiedot"
+  }
+}

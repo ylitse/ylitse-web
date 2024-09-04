@@ -22,7 +22,18 @@ import SearchWithBackgroundIcon from '@/static/icons/search-with-background.svg'
 import SendIcon from '@/static/icons/send.svg';
 import TooltipIcon from '@/static/icons/tooltip.svg';
 
+export type ButtonVariant = keyof typeof variants;
+
 export const variants = {
+  danger: {
+    backgroundColor: palette.redLight,
+    color: palette.redDark,
+
+    ['&: focus']: {
+      outline: `1px solid ${palette.redDark}`,
+      outlineOffset: '3px',
+    },
+  },
   dark: {
     backgroundColor: palette.purple,
     color: palette.orange,
@@ -84,6 +95,11 @@ export const variants = {
     ['&: hover']: {
       backgroundColor: palette.purpleDark,
     },
+  },
+  textOnly: {
+    background: 'none',
+    color: palette.purple,
+    padding: 0,
   },
 };
 

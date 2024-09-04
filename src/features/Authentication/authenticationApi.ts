@@ -33,6 +33,10 @@ type UserResponse = D.TypeOf<typeof myuserResponse>;
 export type UserRole = D.TypeOf<typeof role>;
 
 type AppUser = {
+  active: boolean;
+  displayName: string;
+  email: string;
+  loginName: string;
   userId: string;
   userRole: UserRole;
 };
@@ -79,6 +83,10 @@ export const authenticationApi = createApi({
 });
 
 const toUserInfo = (user: UserResponse): AppUser => ({
+  active: user.account.active,
+  displayName: user.user.display_name,
+  email: user.account.email,
+  loginName: user.account.login_name,
   userId: user.user.id,
   userRole: user.account.role,
 });

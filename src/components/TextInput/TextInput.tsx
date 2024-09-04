@@ -23,6 +23,7 @@ type TextInputProps<T extends ElementType> = {
     variant: ButtonIcon;
     sizeInPx: number;
   } & ComponentPropsWithoutRef<T>;
+  rows?: number;
   onChange: (value: string) => void;
   placeholder?: string;
   value: string;
@@ -36,6 +37,7 @@ export const TextInput = <T extends ElementType = TextInputElement>({
   id,
   leftIcon,
   rightButton,
+  rows = 2,
   onChange,
   placeholder = '',
   value,
@@ -43,6 +45,9 @@ export const TextInput = <T extends ElementType = TextInputElement>({
   const TextInputElement = variants[variant].element;
   const variantStyles = variants[variant].styles;
   const variantColor: CSS.Properties = { color: palette[color] };
+
+  const isPassword = variant === 'password';
+  const isTextArea = variant === 'textarea';
 
   return (
     <>
@@ -56,8 +61,9 @@ export const TextInput = <T extends ElementType = TextInputElement>({
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         style={{ ...variantStyles, ...variantColor }}
-        type="text"
+        type={isPassword ? 'password' : 'text'}
         value={value}
+        {...(isTextArea && { rows })}
       />
       {rightButton && (
         <StyledIconButton

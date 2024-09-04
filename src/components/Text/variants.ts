@@ -1,26 +1,33 @@
 import CSS from 'csstype';
-import { FOOTER_HEIGHT } from '../variables';
+import { FOOTER_HEIGHT, palette } from '../variables';
 
-export type TextVariant =
-  | 'boldBaloo'
-  | 'bold'
-  | 'chip'
-  | 'footer'
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'link'
-  | 'label'
-  | 'logo'
-  | 'p';
-export type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'label' | 'p';
+type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'label' | 'p';
 
 type TextProp = {
   element: TextElement;
   styles: CSS.Properties;
 };
 
-export const variants: Record<TextVariant, TextProp> = {
+export type TextVariant = keyof typeof variants;
+
+export const variants: Record<string, TextProp> = {
+  blueBox: {
+    element: 'p',
+    styles: {
+      backgroundColor: `${palette.blueWhite}`,
+      borderLeft: '10px white solid',
+      boxShadow: `-10px 0 0 0 ${palette.blue}`,
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      left: '10px',
+      lineHeight: '1.5rem',
+      marginRight: '10px',
+      padding: '1rem',
+      position: 'relative',
+    },
+  },
   boldBaloo: {
     element: 'p',
     styles: {
@@ -106,6 +113,7 @@ export const variants: Record<TextVariant, TextProp> = {
       fontStyle: 'normal',
       fontWeight: 600,
       lineHeight: '1.5rem',
+      whiteSpace: 'nowrap',
     },
   },
   link: {
