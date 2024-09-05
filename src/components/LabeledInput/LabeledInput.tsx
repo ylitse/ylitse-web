@@ -28,12 +28,7 @@ export const LabeledInput = ({
         </Text>
         {tooltip && <Tooltip text={tooltip} />}
       </LabelRow>
-      <Input
-        id={inputId}
-        variant="formInput"
-        onChange={onChange}
-        value={value}
-      />
+      <Input id={inputId} onChange={onChange} value={value} />
     </Container>
   );
 };

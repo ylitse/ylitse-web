@@ -6,7 +6,7 @@ import { useAppSelector } from '@/store';
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
-import { DEFAULT_ICON_SIZE } from '@/components/variables';
+import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';

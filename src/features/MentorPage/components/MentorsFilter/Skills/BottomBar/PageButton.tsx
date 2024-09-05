@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { THREE_DOTS } from './usePagination';
 
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import Text from '@/components/Text';
 
 type Props = {

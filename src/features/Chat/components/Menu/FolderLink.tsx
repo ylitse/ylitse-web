@@ -6,7 +6,7 @@ import type { ChatFolder } from '@/features/Chat/chatPageApi';
 
 import styled, { css } from 'styled-components';
 import BackArrowIcon from '@/static/icons/back-arrow.svg';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import { Row } from './Row';
 import Text from '@/components/Text';
 

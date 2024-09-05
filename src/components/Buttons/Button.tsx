@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 import { TextVariant } from '../Text/variants';
 import Text from '../Text';
-import { Color } from '../variables';
+import { Color } from '../constants';
 import { ButtonIcon, iconVariants } from './variants';
 
 type ButtonProps<T extends ElementType> = {

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import SearchBar from '@/components/SearchBar';
 import { Button } from '@/components/Buttons';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import Text from '@/components/Text';
 
 type Props = {

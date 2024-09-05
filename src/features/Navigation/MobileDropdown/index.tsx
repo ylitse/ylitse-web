@@ -10,7 +10,7 @@ import {
   MOBILE_NAVIGATION_BORDER_HEIGHT,
   NAVIGATION_HEIGHT,
   palette,
-} from '@/components/variables';
+} from '@/components/constants';
 import { Chevron } from '@/components/Icons/Chevron';
 import { useLocation } from 'react-router-dom';
 import { LanguageItem } from './MobileLangItem';

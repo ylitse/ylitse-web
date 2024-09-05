@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import styled from 'styled-components';
-import { spacing } from '../variables';
+import { spacing } from '../constants';
 import { variants } from './variants';
 
 import type { ButtonVariant } from './variants';

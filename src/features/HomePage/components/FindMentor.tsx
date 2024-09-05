@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 

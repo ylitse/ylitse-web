@@ -1,6 +1,6 @@
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import SearchIconImg from '@/static/icons/search.svg';
-import { palette } from '../variables';
+import { palette } from '../constants';
 
 type Variant = 'small' | 'normal';
 

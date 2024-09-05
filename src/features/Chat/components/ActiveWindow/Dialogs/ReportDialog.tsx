@@ -6,10 +6,10 @@ import { selectUserId } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 import { useReportMentorMutation } from '@/features/Chat/chatPageApi';
 
-import { DIALOG_WIDTH } from '@/components/variables';
+import { DIALOG_WIDTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import ReportSuccessDialog from './ReportSuccessDialog';
 import Text from '@/components/Text';
 

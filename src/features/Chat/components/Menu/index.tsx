@@ -18,7 +18,7 @@ import {
   FOOTER_HEIGHT,
   NAVIGATION_HEIGHT,
   palette,
-} from '@/components/variables';
+} from '@/components/constants';
 
 // Components
 import FolderLink from './FolderLink';

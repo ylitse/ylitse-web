@@ -1,4 +1,4 @@
-import { Color, palette } from '../variables';
+import { Color, palette } from '../constants';
 
 type Props = {
   color?: Color;

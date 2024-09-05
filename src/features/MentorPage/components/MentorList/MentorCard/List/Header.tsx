@@ -2,7 +2,7 @@ import { getStatus } from '@/utils/utils';
 import { useTranslation } from 'react-i18next';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import styled from 'styled-components';
 import { WrappedText } from '../Expanded/BasicInfo';
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';

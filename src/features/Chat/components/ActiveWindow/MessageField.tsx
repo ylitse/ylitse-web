@@ -11,7 +11,7 @@ import {
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
-import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
+import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
 import { IconButton } from '@/components/Buttons';
 import { ROW_HEIGHT, SHORT_ROW_HEIGHT } from '@/features/Chat/constants';
 import TextInput from '@/components/TextInput';

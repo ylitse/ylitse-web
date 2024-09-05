@@ -19,7 +19,7 @@ import {
   CONTENT_WIDTH,
   OUTER_VERTICAL_MARGIN,
   spacing,
-} from '@/components/variables';
+} from '@/components/constants';
 
 const MentorPage = () => {
   const { isMobile } = useGetLayoutMode();

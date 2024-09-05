@@ -1,7 +1,7 @@
 import type { NavigationItem } from '../NavigationItems';
 
 import styled from 'styled-components';
-import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
+import { NAVIGATION_HEIGHT, palette } from '@/components/constants';
 
 import Outsidelink from '@/static/icons/outsidelink.svg';
 import Text from '@/components/Text';

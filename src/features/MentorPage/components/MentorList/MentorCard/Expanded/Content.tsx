@@ -13,7 +13,7 @@ import { Skills } from './Skills';
 import { TextButton } from '@/components/Buttons';
 import { Languages } from './Languages';
 import { IconButton } from '@/components/Buttons';
-import { breakpoints } from '@/components/variables';
+import { breakpoints } from '@/components/constants';
 import { selectUserId } from '@/features/Authentication/userSlice';
 
 type Props = {

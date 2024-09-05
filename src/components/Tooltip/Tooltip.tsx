@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { palette } from '../variables';
+import { palette } from '../constants';
 import Text from '../Text';
 import TooltipIcon from '@/static/icons/tooltip.svg';
 

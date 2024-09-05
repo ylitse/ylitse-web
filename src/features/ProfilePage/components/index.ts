@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import Text from '@/components/Text';
 
 export const Section = styled.div`

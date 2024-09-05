@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
+import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
 import TextInput from '@/components/TextInput';
 
 const closeInputIconSize = 34;

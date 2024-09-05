@@ -1,19 +1,21 @@
-import { ComponentPropsWithoutRef, ElementType } from 'react';
-
 import CSS from 'csstype';
-
-import { IconButton } from '@/components/Buttons';
-import { ButtonIcon, iconVariants } from '@/components/Buttons/variants';
-import { Color, palette } from '@/components/variables';
-import { TextInputElement, variants } from './variants';
-import type { TextInputVariant } from './variants';
+import { ComponentPropsWithoutRef, ElementType } from 'react';
 import styled, { css } from 'styled-components';
+
+import { ButtonIcon, iconVariants } from '@/components/Buttons/variants';
+import { Color, palette } from '@/components/constants';
+import { IconButton } from '@/components/Buttons';
+import { TextInputElement, variants } from './variants';
+
+import type { TextInputVariant } from './variants';
 
 type TextInputProps<T extends ElementType> = {
   variant?: TextInputVariant;
   color?: Color;
   className?: string;
   isDisabled?: boolean;
+  isError?: boolean;
+  isPassword?: boolean;
   id?: string;
   leftIcon?: {
     variant: ButtonIcon;
@@ -32,8 +34,9 @@ type TextInputProps<T extends ElementType> = {
 export const TextInput = <T extends ElementType = TextInputElement>({
   variant = 'input',
   color = 'blueDark',
-  className,
   isDisabled = false,
+  isError = false,
+  isPassword = false,
   id,
   leftIcon,
   rightButton,
@@ -44,9 +47,15 @@ export const TextInput = <T extends ElementType = TextInputElement>({
 }: TextInputProps<T>): JSX.Element => {
   const TextInputElement = variants[variant].element;
   const variantStyles = variants[variant].styles;
+
+  const variantBorder: CSS.Properties = {
+    border: isError
+      ? `2px solid ${palette.redDark}`
+      : `1px solid ${palette.purple}`,
+  };
   const variantColor: CSS.Properties = { color: palette[color] };
 
-  const isPassword = variant === 'password';
+  const type = isPassword ? 'password' : 'text';
   const isTextArea = variant === 'textarea';
 
   return (
@@ -55,13 +64,12 @@ export const TextInput = <T extends ElementType = TextInputElement>({
         <LeftIcon variant={leftIcon.variant} sizeInPx={leftIcon.sizeInPx} />
       )}
       <TextInputElement
-        className={className}
         disabled={isDisabled}
         id={id}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
-        style={{ ...variantStyles, ...variantColor }}
-        type={isPassword ? 'password' : 'text'}
+        style={{ ...variantStyles, ...variantBorder, ...variantColor }}
+        type={type}
         value={value}
         {...(isTextArea && { rows })}
       />

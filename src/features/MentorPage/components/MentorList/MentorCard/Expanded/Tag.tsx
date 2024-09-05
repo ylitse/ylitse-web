@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { breakpoints, palette } from '@/components/variables';
+import { breakpoints, palette } from '@/components/constants';
 import styled from 'styled-components';
 import { Text } from '@/components/Text/Text';
 

@@ -9,7 +9,7 @@ import type { DialogVariant } from '../Dialogs';
 
 // Variables
 import { HIGH_ROW_HEIGHT } from '@/features/Chat/constants';
-import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
+import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
 
 // Components
 import { Button, IconButton, StatusButton } from '@/components/Buttons';

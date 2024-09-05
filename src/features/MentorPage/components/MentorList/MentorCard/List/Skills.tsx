@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
 import { SimpleChip } from '@/components/Chip';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import Text from '@/components/Text';
 
 export const Skills = ({ skills }: { skills: Array<string> }) => {

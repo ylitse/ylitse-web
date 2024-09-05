@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react';
 
 import Button from './Button';
-import { DEFAULT_ICON_SIZE } from '../variables';
+import { DEFAULT_ICON_SIZE } from '../constants';
 
 type ButtonProps<T extends ElementType> = {
   icon: 'archive' | 'block' | 'return';

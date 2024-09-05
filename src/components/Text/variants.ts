@@ -1,5 +1,20 @@
 import CSS from 'csstype';
-import { FOOTER_HEIGHT, palette } from '../variables';
+import { FOOTER_HEIGHT, palette } from '../constants';
+
+export type TextVariant =
+  | 'blueBox'
+  | 'boldBaloo'
+  | 'bold'
+  | 'chip'
+  | 'error'
+  | 'footer'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'label'
+  | 'link'
+  | 'logo'
+  | 'p';
 
 type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'label' | 'p';
 
@@ -8,9 +23,7 @@ type TextProp = {
   styles: CSS.Properties;
 };
 
-export type TextVariant = keyof typeof variants;
-
-export const variants: Record<string, TextProp> = {
+export const variants: Record<TextVariant, TextProp> = {
   blueBox: {
     element: 'p',
     styles: {
@@ -57,6 +70,17 @@ export const variants: Record<string, TextProp> = {
       fontSize: '1rem',
       fontStyle: 'normal',
       fontWeight: 400,
+      lineHeight: '1rem',
+      margin: 0,
+    },
+  },
+  error: {
+    element: 'p',
+    styles: {
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '0.8rem',
+      fontStyle: 'normal',
+      fontWeight: 700,
       lineHeight: '1rem',
       margin: 0,
     },

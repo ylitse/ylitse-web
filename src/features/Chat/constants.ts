@@ -1,4 +1,4 @@
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 
 export const folderColors = {
   ok: {

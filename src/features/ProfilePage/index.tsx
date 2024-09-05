@@ -9,7 +9,7 @@ import {
   CONTENT_WIDTH,
   OUTER_VERTICAL_MARGIN,
   palette,
-} from '@/components/variables';
+} from '@/components/constants';
 import PageWithTransition from '@/components/PageWithTransition';
 import PublicInfo from './components/PublicInfo';
 import Text from '@/components/Text';

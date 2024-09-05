@@ -1,4 +1,4 @@
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import styled, { css } from 'styled-components';
 
 import { NavLink as RouterNavLink } from 'react-router-dom';

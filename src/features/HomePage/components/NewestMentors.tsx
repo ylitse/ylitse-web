@@ -12,7 +12,7 @@ import { useAppSelector } from '@/store';
 import FindMentor from '@/features/HomePage/components/FindMentor';
 import ListCard from '@/features/MentorPage/components/MentorList/MentorCard/List';
 import MentorCard from '@/features/MentorPage/components/MentorList/MentorCard/Expanded';
-import { OUTER_HORIZONTAL_MARGIN, palette } from '@/components/variables';
+import { OUTER_HORIZONTAL_MARGIN, palette } from '@/components/constants';
 import Text from '@/components/Text';
 
 type Props = {

@@ -1,6 +1,7 @@
 import CSS from 'csstype';
-import { palette } from '../variables';
+import { palette } from '../constants';
 
+export type TextInputVariant = 'iconInput' | 'input' | 'textarea';
 export type TextInputElement = 'input' | 'textarea';
 
 type TextInputProp = {
@@ -8,24 +9,7 @@ type TextInputProp = {
   styles: CSS.Properties;
 };
 
-export type TextInputVariant = keyof typeof variants;
-
-export const variants: Record<string, TextInputProp> = {
-  formInput: {
-    element: 'input',
-    styles: {
-      border: `1px solid ${palette.purple}`,
-      borderRadius: '5px',
-      boxSizing: 'border-box',
-      fontFamily: '"Source Sans Pro"',
-      fontSize: '1rem',
-      fontStyle: 'normal',
-      fontWeight: '400',
-      lineHeight: '1.5rem',
-      padding: '0.5rem 1rem',
-      width: '100%',
-    },
-  },
+export const variants: Record<TextInputVariant, TextInputProp> = {
   iconInput: {
     element: 'input',
     styles: {
@@ -40,19 +24,6 @@ export const variants: Record<string, TextInputProp> = {
     },
   },
   input: {
-    element: 'input',
-    styles: {
-      border: `1px solid ${palette.purple}`,
-      borderRadius: '20px',
-      fontFamily: '"Source Sans Pro"',
-      fontSize: '1rem',
-      fontStyle: 'normal',
-      fontWeight: '400',
-      lineHeight: '1.5rem',
-      padding: '0.5rem 1rem',
-    },
-  },
-  password: {
     element: 'input',
     styles: {
       border: `1px solid ${palette.purple}`,

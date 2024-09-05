@@ -5,7 +5,7 @@ import {
   MOBILE_NAVIGATION_BORDER_HEIGHT,
   NAVIGATION_HEIGHT,
   palette,
-} from '@/components/variables';
+} from '@/components/constants';
 import styled, { css } from 'styled-components';
 
 import { Items, Item } from './NavigationItems';

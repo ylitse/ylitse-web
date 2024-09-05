@@ -1,7 +1,7 @@
 import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 
-import { animations, NAVIGATION_HEIGHT, palette } from '@/components/variables';
+import { animations, NAVIGATION_HEIGHT, palette } from '@/components/constants';
 import styled from 'styled-components';
 import { InfoItem, Container } from './InfoItem';
 import { DropdownButton } from './DropdownButton';

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Text from '../Text';
-import { animations, palette } from '../variables';
+import { animations, palette } from '../constants';
 import CloseIcon from '@/static/icons/close.svg';
 
 type Props = {

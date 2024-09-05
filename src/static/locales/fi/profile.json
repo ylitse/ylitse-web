@@ -14,9 +14,12 @@
       "cancel": "Peruuta",
       "password": {
         "current": "Nykyinen salasana *",
+        "dontMatchError": "Salasanat eivät täsmää",
+        "invalid": "Nykyinen salasana on virheellinen",
         "new": "Uusi salasana *",
         "repeat": "Toista uusi salasana *",
-        "tooltip": "Salasanan tulee olla vähintään 8 merkkiä pitkä."
+        "tooltip": "Salasanan tulee olla vähintään 8 merkkiä pitkä.",
+        "tooShortError": "Salasana on liian lyhyt"
       },
       "save": "Tallenna"
     },

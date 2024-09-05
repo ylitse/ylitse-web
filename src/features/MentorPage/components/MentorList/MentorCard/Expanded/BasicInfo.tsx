@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Text } from '@/components/Text/Text';
 import { Languages } from './Languages';
-import { breakpoints, palette } from '@/components/variables';
+import { breakpoints, palette } from '@/components/constants';
 
 type Props = {
   mentor: Mentor;

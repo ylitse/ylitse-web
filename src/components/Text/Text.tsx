@@ -1,8 +1,8 @@
 import CSS from 'csstype';
 import { variants } from './variants';
-import { palette } from '../variables';
+import { palette } from '../constants';
 import type { TextVariant } from './variants';
-import type { Color } from '../variables';
+import type { Color } from '../constants';
 
 type Props = {
   variant?: TextVariant;

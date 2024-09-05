@@ -33,18 +33,27 @@ export const palette = {
   whiteOpacity: 'rgba(255, 255, 255, 0.5)',
 };
 
+// Business logic
+export const PASSWORD_MIN_LENGTH = 8;
+
+// Size
 export const DEFAULT_ICON_SIZE = { SMALL: 24, LARGE: 46 };
-export const DIALOG_WIDTH = '687px';
 
-export const OUTER_VERTICAL_MARGIN = '6vh';
-export const OUTER_HORIZONTAL_MARGIN = '6vw';
-export const NAVIGATION_HEIGHT = '3rem';
-export const MOBILE_NAVIGATION_BORDER_HEIGHT = '4px';
+// Height
 export const FOOTER_HEIGHT = '3rem';
-export const MOBILE_AND_TABLET_CONTENT_HEIGHT = `calc(100vh - (${NAVIGATION_HEIGHT} + ${MOBILE_NAVIGATION_BORDER_HEIGHT} + ${FOOTER_HEIGHT}))`;
-export const DESKTOP_CONTENT_HEIGHT = `calc(100vh - (2 * ${OUTER_VERTICAL_MARGIN} + ${NAVIGATION_HEIGHT} + ${FOOTER_HEIGHT}))`;
-export const CONTENT_WIDTH = '76vw';
+export const MOBILE_NAVIGATION_BORDER_HEIGHT = '4px';
+export const NAVIGATION_HEIGHT = '3rem';
+export const OUTER_VERTICAL_MARGIN = '6vh';
 
+export const DESKTOP_CONTENT_HEIGHT = `calc(100vh - (2 * ${OUTER_VERTICAL_MARGIN} + ${NAVIGATION_HEIGHT} + ${FOOTER_HEIGHT}))`;
+export const MOBILE_AND_TABLET_CONTENT_HEIGHT = `calc(100vh - (${NAVIGATION_HEIGHT} + ${MOBILE_NAVIGATION_BORDER_HEIGHT} + ${FOOTER_HEIGHT}))`;
+
+// Width
+export const CONTENT_WIDTH = '76vw';
+export const DIALOG_WIDTH = '687px';
+export const OUTER_HORIZONTAL_MARGIN = '6vw';
+
+// Breakpoints
 export const TABLET_TRESHOLD = 1510; // (CHAT_MENU_WIDTH + 5 * CHAT_GAP_WIDTH + CHAT_WINDOW_MIN_WIDTH)
 export const MOBILE_TRESHOLD = 600;
 export const breakpoints = {

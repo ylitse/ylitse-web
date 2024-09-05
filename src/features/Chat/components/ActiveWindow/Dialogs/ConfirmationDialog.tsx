@@ -8,7 +8,7 @@ import {
 import { useAppSelector } from '@/store';
 import { selectUserId } from '@/features/Authentication/userSlice';
 
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import Dialog from '@/components/Dialog';
 
 import type { ConfirmationDialogVariant } from '.';

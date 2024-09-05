@@ -1,4 +1,4 @@
-import { DEFAULT_ICON_SIZE, palette } from '../variables';
+import { DEFAULT_ICON_SIZE, palette } from '../constants';
 import {
   Toast,
   ToastType,

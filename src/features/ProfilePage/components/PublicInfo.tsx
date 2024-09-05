@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { selectUserInfo } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
-import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
+import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
 import LabeledInput from '@/components/LabeledInput';
 import Slider from '@/components/Slider';
 import Text from '@/components/Text';
@@ -19,7 +19,7 @@ const PublicInfo = () => {
   const [birthYear, setBirthYear] = useState('');
   const [area, setArea] = useState('');
   const [status, setStatus] = useState('');
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState(true);
   const [story, setStory] = useState('');
   const [topicSearchValue, setTopicSearchValue] = useState('');
 

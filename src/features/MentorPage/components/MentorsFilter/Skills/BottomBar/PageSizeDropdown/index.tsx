@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { pageSizes } from './constants';
 
-import { animations, palette } from '@/components/variables';
+import { animations, palette } from '@/components/constants';
 import styled from 'styled-components';
 import Text from '@/components/Text';
 import { OpenButton } from './OpenButton';

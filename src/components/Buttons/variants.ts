@@ -1,4 +1,4 @@
-import { palette } from '../variables';
+import { palette } from '../constants';
 import ArchivedChatsIcon from '@/static/icons/archived-chats.svg';
 import ArchiveIcon from '@/static/icons/archive.svg';
 import BackIcon from '@/static/icons/back.svg';

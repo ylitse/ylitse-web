@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { createUniqueId } from '@/utils/id';
+import WarningIcon from '@/static/icons/warning-with-background.svg';
 import Text from '../Text';
 import { TextButton } from '../Buttons';
 import TextInput from '../TextInput';
 import Tooltip from '../Tooltip';
 
 type Props = {
+  error?: string | null;
   label: string;
   onChange: (value: string) => void;
   tooltip?: string;
@@ -16,6 +18,7 @@ type Props = {
 };
 
 export const PasswordInput = ({
+  error,
   label,
   onChange,
   tooltip,
@@ -23,29 +26,41 @@ export const PasswordInput = ({
 }: Props): JSX.Element => {
   const { t } = useTranslation('common');
   const inputId = `password_input_${createUniqueId()}`;
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const togglePasswordVisibility = () =>
-    setIsPasswordVisible(!isPasswordVisible);
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const togglePasswordVisibility = () => setIsPasswordHidden(!isPasswordHidden);
 
   return (
     <Container>
       <LabelRow>
-        <Text inputId={inputId} variant="label">
+        <Text
+          color={error ? 'redDark' : 'blueDark'}
+          inputId={inputId}
+          variant="label"
+        >
           {label}
         </Text>
         <RightContainer>
           <TextButton onClick={togglePasswordVisibility} variant="textOnly">
-            {t(`password.${isPasswordVisible ? 'hide' : 'show'}`)}
+            {t(`password.${isPasswordHidden ? 'show' : 'hide'}`)}
           </TextButton>
           {tooltip && <Tooltip text={tooltip} />}
         </RightContainer>
       </LabelRow>
       <Input
         id={inputId}
-        variant={isPasswordVisible ? 'formInput' : 'password'}
+        isError={!!error}
+        isPassword={isPasswordHidden}
         onChange={onChange}
         value={value}
       />
+      {!!error && (
+        <Error>
+          <img src={WarningIcon} />
+          <Text color="redDark" variant="error">
+            {error}
+          </Text>
+        </Error>
+      )}
     </Container>
   );
 };
@@ -68,5 +83,12 @@ const RightContainer = styled.div`
 `;
 
 const Input = styled(TextInput)`
+  margin-top: 0.5rem;
+`;
+
+const Error = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
   margin-top: 0.5rem;
 `;

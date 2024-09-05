@@ -5,7 +5,7 @@ import {
   NAVIGATION_HEIGHT,
   OUTER_HORIZONTAL_MARGIN,
   palette,
-} from '@/components/variables';
+} from '@/components/constants';
 import Text from '@/components/Text';
 
 type Props = {

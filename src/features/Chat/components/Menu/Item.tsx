@@ -10,7 +10,7 @@ import type { ChatBuddy } from '@/features/Chat/mappers';
 
 import styled, { css } from 'styled-components';
 import { folderColors } from '@/features/Chat/constants';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import { Row } from './Row';
 import Text from '@/components/Text';

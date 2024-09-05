@@ -6,7 +6,7 @@ import { clearActiveChat } from '@/features/Chat/chatSlice';
 import { useAppDispatch } from '@/store';
 
 import NewMessagesImage from '@/static/img/new-messages.svg';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 

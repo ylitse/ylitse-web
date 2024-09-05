@@ -8,7 +8,7 @@ import {
   CHAT_MIN_HEIGHT,
   CHAT_WINDOW_MIN_WIDTH,
 } from '@/features/Chat/constants';
-import { DESKTOP_CONTENT_HEIGHT, palette } from '@/components/variables';
+import { DESKTOP_CONTENT_HEIGHT, palette } from '@/components/constants';
 
 // Components
 import Text from '@/components/Text';

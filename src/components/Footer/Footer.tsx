@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { breakpoints, FOOTER_HEIGHT, palette } from '../variables';
+import { breakpoints, FOOTER_HEIGHT, palette } from '../constants';
 import FooterLogo from '@/static/img/footer-logo.svg';
 import Text from '../Text';
 

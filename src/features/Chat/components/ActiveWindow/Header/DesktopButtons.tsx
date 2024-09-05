@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
-import { DEFAULT_ICON_SIZE } from '@/components/variables';
+import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import Search from './Search';
 
 // Types

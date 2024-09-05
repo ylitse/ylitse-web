@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
-import { DIALOG_WIDTH } from '@/components/variables';
+import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
+import { DIALOG_WIDTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import IconSuccess from '@/static/icons/success.svg';
 import Text from '@/components/Text';

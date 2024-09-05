@@ -10,7 +10,7 @@ import Dialog from '@/components/Dialog';
 import DisplayNameEditor from './DisplayNameEditor';
 import EmailEditor from './EmailEditor';
 import MentorIcon from '@/static/icons/mentor.svg';
-import { OUTER_VERTICAL_MARGIN, palette } from '@/components/variables';
+import { OUTER_VERTICAL_MARGIN, palette } from '@/components/constants';
 import PasswordEditor from './PasswordEditor';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import { Section, Value } from '.';

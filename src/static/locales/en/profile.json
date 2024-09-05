@@ -14,9 +14,12 @@
       "cancel": "Cancel",
       "password": {
         "current": "Current password *",
+        "dontMatchError": "Passwords don't match",
+        "invalid": "Current password is invalid",
         "new": "New password *",
         "repeat": "Repeat new password *",
-        "tooltip": "Your password has to be at least 8 characters long."
+        "tooltip": "Your password has to be at least 8 characters long.",
+        "tooShortError": "Password is too short"
       },
       "save": "Save"
     },
