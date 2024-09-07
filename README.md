@@ -77,6 +77,8 @@ Project uses [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hook
 
 ## End-to-end tests
 
+Tests need `YLITSE_API_PASS` and `YLITSE_MFA_SECRET` environment-variables for admin-user that can setup the database for tests
+
 Run locally:
 
 1. Start Ylitse-API `YLITSE_POSTGRES_DATA= make run-gunicorn`

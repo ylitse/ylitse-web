@@ -55,5 +55,9 @@ jobs:
       - name: Run E2E tests
         run: |
           ${{ github.workspace }}/.github/scripts/start-api &
+
+          export YLITSE_API_PASS=$(grep -oP '(?<=admin_password: ).*' ./ylitse-api/ylitse_conf/ylitse.conf)
+          export YLITSE_MFA_SECRET=$(grep -oP '(?<=admin_2fa: ).*' ./ylitse-api/ylitse_conf/ylitse.conf)
+
           npm run start &
           npm run test:e2e
