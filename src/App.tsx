@@ -23,7 +23,7 @@ const App = () => {
 
   useGetContactsQuery(userId ?? skipToken);
   useGetMessagesQuery(messageParams, {
-    pollingInterval: 30000,
+    pollingInterval: 5000,
   });
 
   return isAuthenticated ? (
