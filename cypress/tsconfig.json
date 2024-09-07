@@ -4,5 +4,6 @@
   },
   "exclude": ["src/**/*.test.tsx"],
   "extends": "../tsconfig.json",
-  "include": ["../node_modules/cypress"]
+  "include": ["../node_modules/cypress", "**/*.ts"],
+  "types": ["cypress"]
 }

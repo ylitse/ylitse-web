@@ -36,13 +36,14 @@ export const Message = ({ folder, buddyId, message }: Props) => {
   const handleMarkSeen = () => {
     if (!userId) return;
 
-    console.log('NotOpened', message.content);
-    console.log('Visibility', isVisible);
-    // markSeen({ userId, message: toPutMessage(message, buddyId, userId) });
+    // console.log('NotOpened', message.content);
+    // console.log('Visibility', isVisible);
+    markSeen({ userId, message: toPutMessage(message, buddyId, userId) });
   };
 
   useEffect(() => {
-    if (!message.opened && isVisible) {
+    const shouldMarkUnseen = !message.isSent && !message.opened && isVisible;
+    if (shouldMarkUnseen) {
       handleMarkSeen();
     }
   }, [isVisible]);
