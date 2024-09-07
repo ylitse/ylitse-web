@@ -8,7 +8,14 @@ export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:8082',
     specPattern: 'cypress/tests/**/*.cy.{js,jsx,ts,tsx}',
-    setupNodeEvents(_on, config) {
+    setupNodeEvents(on, config) {
+      on('task', {
+        log(message) {
+          console.log(message);
+          return null;
+        },
+      });
+
       config.env.apiUrl = process.env.YLITSE_API_URL;
       config.env.apiUser = process.env.YLITSE_API_USER;
       config.env.apiPass = process.env.YLITSE_API_PASS;
