@@ -20,7 +20,7 @@ Cypress.Commands.add(
     };
 
     cy.visit('/register/');
-    cy.fillInput('logi', username);
+    cy.fillInput('username', username);
     cy.fillInput('password', password);
     cy.fillInput('password-confirmation', password);
     cy.fillInput('display-name', 'exampleDisplayName');

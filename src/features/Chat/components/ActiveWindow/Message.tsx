@@ -36,8 +36,6 @@ export const Message = ({ folder, buddyId, message }: Props) => {
   const handleMarkSeen = () => {
     if (!userId) return;
 
-    // console.log('NotOpened', message.content);
-    // console.log('Visibility', isVisible);
     markSeen({ userId, message: toPutMessage(message, buddyId, userId) });
   };
 
@@ -65,7 +63,6 @@ export const Message = ({ folder, buddyId, message }: Props) => {
 
 const Container = styled.div<{ isSent: boolean; isVisible: boolean }>`
   align-items: ${({ isSent }) => (isSent ? 'flex-end' : 'flex-start')};
-  border: ${({ isVisible }) => `1px solid ${isVisible ? 'green' : 'red'}`};
   display: flex;
   flex-direction: column;
 `;

@@ -64,6 +64,7 @@ const getUsers = (access_token: string) => {
 const deleteAccounts = () => {
   return adminAccessToken().then(access_token => {
     return getUsers(access_token).then(users => {
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
       users.forEach((user: any) => {
         if (user.role !== 'admin') {
           cy.request({
@@ -226,26 +227,35 @@ const signUpMentor = (mentor: Mentor) => {
   });
 };
 
+type Sender = {
+  id: string;
+  loginName: string;
+  password: string;
+};
+type Reciever = Pick<Sender, 'id'>;
 type Data = {
-  sender_id: string;
-  recipient_id: string;
+  sender: Sender;
+  reciever: Reciever;
   content: string;
-  headers: Record<string, string>;
 };
 
-const sendMessage = ({ sender_id, recipient_id, content, headers }: Data) => {
-  return cy
-    .request({
-      method: 'POST',
-      url: `${API_URL}/users/${sender_id}/messages`,
-      headers: headers,
-      body: {
-        sender_id,
-        recipient_id,
-        content,
-        opened: false,
-      },
-    })
+const sendMessage = ({ sender, reciever, content }: Data) => {
+  return accessToken(sender.loginName, sender.password)
+    .then(senderAccessToken =>
+      cy.request({
+        method: 'POST',
+        url: `${API_URL}/users/${sender.id}/messages`,
+        headers: {
+          Authorization: `Bearer ${senderAccessToken}`,
+        },
+        body: {
+          sender_id: sender.id,
+          recipient_id: reciever.id,
+          content,
+          opened: false,
+        },
+      }),
+    )
     .then(response => {
       return response.body;
     });
