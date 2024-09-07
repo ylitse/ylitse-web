@@ -1,13 +1,10 @@
 import type { Mentee, Mentor } from '../fixtures/accounts';
 import { generateToken } from 'node-2fa';
 
-const API_URL = Cypress.env('YLITSE_API_URL') || 'http://127.0.0.1:8080';
-const API_USER = Cypress.env('YLITSE_API_USER') || 'admin';
-const API_PASS =
-  Cypress.env('YLITSE_API_PASS') ||
-  '46b76c3a52e9863347177b36d6c7a2e4f7167db83eecdba4';
-const MFA_SECRET =
-  Cypress.env('YLITSE_MFA_SECRET') || 'D4U3VOMWH7B4E3CNHL6JD6CAI366M6PF';
+const API_URL = Cypress.env('apiUrl') || 'http://127.0.0.1:8080';
+const API_USER = Cypress.env('apiUrl') || 'admin';
+const API_PASS = Cypress.env('apiPass') || '';
+const MFA_SECRET = Cypress.env('mfaSecret') || '';
 
 /**
  * Get access_token for admin
