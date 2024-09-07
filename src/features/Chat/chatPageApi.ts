@@ -149,7 +149,9 @@ export const chatApi = createApi({
           messagesResponseCodec,
           { resources: [], contacts: [] },
           ({ resources, contacts }) => ({
-            messages: resources.map(toAppMessage(userId)),
+            messages: [...resources]
+              .map(toAppMessage(userId))
+              .sort(sortByCreated),
             buddies: toAppBuddies(contacts),
           }),
         ),

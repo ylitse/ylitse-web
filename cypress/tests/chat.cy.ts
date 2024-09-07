@@ -177,14 +177,20 @@ describe('chat', () => {
         };
         const reciever = { id: mentorResponse.body.user_id };
 
-        // send messages to other user
         for (let i = 1; i <= numberOfMessages; i++) {
           api.sendMessage({ sender, reciever, content: `${message} ${i}!` });
+          //   .then(response => {
+          //     cy.task(
+          //       'log',
+          //       `sent message ${i} with id:${response.id}, timestamp: ${response.created}`,
+          //     );
+          //   });
+          // cy.wait(1500);
         }
       });
     });
 
-    cy.loginUser(mentee.loginName, mentee.password);
+    cy.loginUser(mentor.loginName, mentor.password);
 
     // go to chat-page
     cy.get('[href="/chat"]').click();
@@ -192,7 +198,7 @@ describe('chat', () => {
     // should scroll to last message
     cy.findByText(`${message} ${numberOfMessages}!`, 'p').should('be.visible');
 
-    // scroll-up, oldest message should be visible
+    // scroll-up oldest message should be visible
     cy.findByText(`${message} 1!`, 'p').scrollIntoView().should('be.visible');
   });
 });
