@@ -28,7 +28,12 @@ export const NavigationItem: React.FC<Props> = ({
       >
         {text}
       </LinkText>
-      {hasNotification && <NotificationCircle withBorder={isCurrentLocation} />}
+      {hasNotification && (
+        <UnseenDot
+          withBorder={isCurrentLocation}
+          aria-label="unseen-messages-dot"
+        />
+      )}
     </UnstyledRouteLink>
   );
 };
@@ -53,7 +58,7 @@ const LinkText = styled(Text)<{ isCurrentLocation: boolean }>`
     `}
 `;
 
-const NotificationCircle = styled.div<{ withBorder: boolean }>`
+const UnseenDot = styled.div<{ withBorder: boolean }>`
   background-color: ${palette.orange};
   ${({ withBorder }) => withBorder && `border: 1px solid ${palette.blueDark};`}
   border-radius: 50%;
