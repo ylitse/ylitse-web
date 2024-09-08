@@ -140,10 +140,12 @@ describe('chat', () => {
         };
         const reciever = { id: mentorResponse.body.user_id };
 
-        // send messages to other user
-        for (let i = 1; i <= numberOfMessages; i++) {
-          api.sendMessage({ sender, reciever, content: `${message} ${i}!` });
-        }
+        api.sendMultipleMessage({
+          sender,
+          reciever,
+          content: message,
+          amountOfMessages: 20,
+        });
       });
     });
 
@@ -177,16 +179,12 @@ describe('chat', () => {
         };
         const reciever = { id: mentorResponse.body.user_id };
 
-        for (let i = 1; i <= numberOfMessages; i++) {
-          api.sendMessage({ sender, reciever, content: `${message} ${i}!` });
-          //   .then(response => {
-          //     cy.task(
-          //       'log',
-          //       `sent message ${i} with id:${response.id}, timestamp: ${response.created}`,
-          //     );
-          //   });
-          // cy.wait(1500);
-        }
+        api.sendMultipleMessage({
+          sender,
+          reciever,
+          content: message,
+          amountOfMessages: 20,
+        });
       });
     });
 
