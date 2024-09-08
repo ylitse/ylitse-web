@@ -230,13 +230,13 @@ type Sender = {
   password: string;
 };
 type Reciever = Pick<Sender, 'id'>;
-type Data = {
+type SendData = {
   sender: Sender;
   reciever: Reciever;
   content: string;
 };
 
-const sendMessage = ({ sender, reciever, content }: Data) => {
+const sendMessage = ({ sender, reciever, content }: SendData) => {
   return accessToken(sender.loginName, sender.password)
     .then(senderAccessToken =>
       cy.request({
@@ -258,10 +258,55 @@ const sendMessage = ({ sender, reciever, content }: Data) => {
     });
 };
 
+type SendMultiData = SendData & { amountOfMessages: number };
+const sendMultipleMessage = ({
+  sender,
+  reciever,
+  content,
+  amountOfMessages,
+}: SendMultiData) => {
+  return accessToken(sender.loginName, sender.password).then(
+    senderAccessToken => {
+      const indices = Array.from({ length: amountOfMessages }, (_, i) => i + 1);
+
+      cy.wrap(null)
+        .then(() => {
+          return indices.reduce((chain, i) => {
+            return chain
+              .then(() => {
+                cy.task('log', `Sending message ${i}`);
+                return cy.request({
+                  method: 'POST',
+                  url: `${API_URL}/users/${sender.id}/messages`,
+                  headers: {
+                    Authorization: `Bearer ${senderAccessToken}`,
+                  },
+                  body: {
+                    sender_id: sender.id,
+                    recipient_id: reciever.id,
+                    content: `${content} ${i}!`,
+                    opened: false,
+                  },
+                });
+              })
+              .then(() => {
+                // dont hammer the backend
+                cy.wait(500);
+              });
+          }, Cypress.Promise.resolve());
+        })
+        .then(() => {
+          cy.task('log', 'All messages have been sent in order with delays!');
+        });
+    },
+  );
+};
+
 export const api = {
   signUpMentee,
   signUpMentor,
   deleteAccount,
   deleteAccounts,
   sendMessage,
+  sendMultipleMessage,
 };
