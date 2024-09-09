@@ -10,12 +10,12 @@ import Text from '@/components/Text';
 
 const PasswordEditor = () => {
   const { t } = useTranslation('profile');
-
   const [isOpen, setIsOpen] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [isNewPasswordTouched, setIsNewPasswordTouched] = useState(false);
   const [repeatedPassword, setRepeatedPassword] = useState('');
+
+  const [isNewPasswordTouched, setIsNewPasswordTouched] = useState(false);
   const [isRepeatedPasswordTouched, setIsRepeatedPasswordTouched] =
     useState(false);
 
@@ -29,10 +29,10 @@ const PasswordEditor = () => {
   const isPasswordTooShort =
     isNewPasswordTouched && newPassword.length < PASSWORD_MIN_LENGTH;
 
-  const doPasswordsMatch =
+  const arePasswordsNotMatching =
     isNewPasswordTouched &&
     isRepeatedPasswordTouched &&
-    newPassword === repeatedPassword;
+    newPassword !== repeatedPassword;
 
   const saveNewPassword = () => {
     console.log('API: Save new password');
@@ -61,7 +61,9 @@ const PasswordEditor = () => {
       />
       <PasswordInput
         error={
-          doPasswordsMatch ? t('account.input.password.dontMatchError') : null
+          arePasswordsNotMatching
+            ? t('account.input.password.dontMatchError')
+            : null
         }
         label={t('account.input.password.repeat')}
         onBlur={touchRepeatedPassword}
