@@ -8,6 +8,7 @@
       "title": "Poista käyttäjätili"
     },
     "email": "Sähköpostiosoite",
+    "emailError": "Sähköpostiosoite on virheellinen",
     "emailInfo": "Sähköpostiosoite mahdollistaa salasanan palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin tarkoituksiin.",
     "emailMissing": "Ei sähköpostiosoitetta",
     "input": {
