@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { selectActiveChatExists, selectChatsExist } from './chatSlice';
+import { selectActiveChatExists, selectChatsExist } from './selectors';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useAppSelector } from '@/store';
 

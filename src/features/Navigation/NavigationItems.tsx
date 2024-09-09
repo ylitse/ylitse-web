@@ -1,10 +1,11 @@
 import { NavLink as RouterNavLink, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
 import { useState } from 'react';
 
-import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
-import { selectHasUnreadMessages } from '../Chat/chatSlice';
+import { selectHasUnreadMessages } from '@/features/Chat/selectors';
 import { useAppSelector } from '@/store';
+
+import styled from 'styled-components';
+import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
 
 export type NavigationItem = {
   hasNotification?: boolean;
@@ -24,7 +25,10 @@ export const Item = ({ hasNotification, text, url }: NavigationItem) => {
     >
       {text}
       {hasNotification && (
-        <NotificationCircle withBorder={isHovered || isCurrentLocation} />
+        <UnseenDot
+          withBorder={isHovered || isCurrentLocation}
+          aria-label="unseen-messages-dot"
+        />
       )}
     </Link>
   );
@@ -70,7 +74,7 @@ export const Link = styled(RouterNavLink)`
   }
 `;
 
-const NotificationCircle = styled.div<{ withBorder: boolean }>`
+const UnseenDot = styled.div<{ withBorder: boolean }>`
   background-color: ${palette.orange};
   ${({ withBorder }) => withBorder && `border: 1px solid ${palette.blueDark};`}
   border-radius: 50%;

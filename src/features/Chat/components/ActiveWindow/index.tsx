@@ -5,8 +5,8 @@ import {
   selectActiveChat,
   selectIsLoadingBuddyMessages,
   selectDefaultChat,
-  setActiveChat,
-} from '@/features/Chat/chatSlice';
+} from '@/features/Chat/selectors';
+import { setActiveChat } from '@/features/Chat/chatSlice';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useSendMessageMutation } from '@/features/Chat/chatPageApi';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';

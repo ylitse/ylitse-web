@@ -3,10 +3,10 @@ import {
   selectActiveChat,
   selectBuddyMessages,
   selectDefaultChat,
-  setActiveChat,
-} from '@/features/Chat/chatSlice';
+} from '@/features/Chat/selectors';
+import { setActiveChat } from '@/features/Chat/chatSlice';
 
-import type { ChatBuddy } from '@/features/Chat/chatSlice';
+import type { ChatBuddy } from '@/features/Chat/mappers';
 
 import styled, { css } from 'styled-components';
 import { folderColors } from '@/features/Chat/constants';
@@ -52,7 +52,9 @@ export const MenuItem = ({ buddy }: Props) => {
       <MentorInfo>
         <BuddyName>
           <Text variant="bold">{displayName}</Text>
-          {hasUnread && <Badge>{count}</Badge>}
+          {hasUnread && (
+            <UnseenDot aria-label="unseen-messages-dot">{count}</UnseenDot>
+          )}
         </BuddyName>
         {isLoading ? (
           <Spinner variant="tiny" isDark centered={false} />
@@ -103,7 +105,7 @@ const Message = styled(Text)`
   white-space: nowrap;
 `;
 
-const Badge = styled.div`
+const UnseenDot = styled.div`
   align-items: center;
   background-color: ${palette.blue2};
   border-radius: 50%;

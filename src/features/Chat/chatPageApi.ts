@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import * as D from 'io-ts/Decoder';
 import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
 import { pipe } from 'fp-ts/lib/function';
-import { ChatBuddy, PollingParam } from './chatSlice';
+import type { ChatBuddy, PollingParam } from './mappers';
 import toast from 'react-hot-toast';
 import { t } from 'i18next';
 import {
@@ -149,7 +149,9 @@ export const chatApi = createApi({
           messagesResponseCodec,
           { resources: [], contacts: [] },
           ({ resources, contacts }) => ({
-            messages: resources.map(toAppMessage(userId)),
+            messages: [...resources]
+              .map(toAppMessage(userId))
+              .sort(sortByCreated),
             buddies: toAppBuddies(contacts),
           }),
         ),

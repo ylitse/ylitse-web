@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import type { ChatBuddy } from '@/features/Chat/mappers';
 import { selectUserId } from '@/features/Authentication/userSlice';
 import {
   toSendMessage,
@@ -14,8 +15,6 @@ import { IconButton } from '@/components/Buttons';
 import { palette } from '@/components/variables';
 import { ROW_HEIGHT, SHORT_ROW_HEIGHT } from '@/features/Chat/constants';
 import TextInput from '@/components/TextInput';
-
-import type { ChatBuddy } from '@/features/Chat/chatSlice';
 
 type Props = {
   chat: ChatBuddy;
@@ -39,8 +38,6 @@ const MessageField = ({ chat }: Props) => {
     try {
       await sendMessage({ userId, message }).unwrap();
     } catch (error) {
-      console.error('Failed to send message:', error);
-      // TODO: Tässä voitaisiin näyttää virheviesti käyttäjälle.
       setIsLoadingNewMessage(false);
     }
   };

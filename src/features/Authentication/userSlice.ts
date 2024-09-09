@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { authenticationApi, UserRole } from './authenticationApi';
-import { RootState } from '@/store';
-import { selectChatsExist } from '../Chat/chatSlice';
+import type { RootState } from '@/store';
+import { type UserRole, authenticationApi } from './authenticationApi';
+import { selectChatsExist } from '../Chat/selectors';
 
 type User = {
   active: boolean;

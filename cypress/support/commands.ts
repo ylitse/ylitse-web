@@ -43,11 +43,16 @@ Cypress.Commands.add(
   },
 );
 
+Cypress.Commands.add('findByText', (text: string, selector = '*') => {
+  cy.get(selector).contains(text);
+});
+
 declare namespace Cypress {
   interface Chainable {
     switchLanguage(language: string): Chainable<void>;
     fillInput(id: string, value: string): Chainable<void>;
     registerUser(username: string, password: string): Chainable<void>;
     loginUser(username: string, password: string): Chainable<void>;
+    findByText(text: string, selector?: string): Chainable<void>;
   }
 }
