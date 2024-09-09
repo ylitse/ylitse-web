@@ -39,7 +39,8 @@
       "displayName": {
         "title": "Julkinen nimimerkki",
         "info": "Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta sinua ei voi tunnistaa.",
-        "tooltip": "Nimimerkin tulee olla vähintään 2 merkkiä pitkä."
+        "tooltip": "Nimimerkin tulee olla vähintään 2 merkkiä pitkä.",
+        "tooShortError": "Nimimerkki on liian lyhyt"
       }
     },
     "mentor": {

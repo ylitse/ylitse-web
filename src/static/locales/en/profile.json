@@ -39,7 +39,8 @@
       "displayName": {
         "title": "Display name",
         "info": "If you want to remain anonymous to mentors, enter a display name that does not identify you.",
-        "tooltip": "Your username has to be at least 2 characters long."
+        "tooltip": "Your username has to be at least 2 characters long.",
+        "tooShortError": "Display name is too short"
       }
     },
     "mentor": {

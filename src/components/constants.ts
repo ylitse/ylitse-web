@@ -34,6 +34,7 @@ export const palette = {
 };
 
 // Business logic
+export const DISPLAY_NAME_MIN_LENGTH = 2;
 export const PASSWORD_MIN_LENGTH = 8;
 
 // Size

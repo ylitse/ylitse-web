@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 import { createUniqueId } from '@/utils/id';
+import InputErrorMessage from '../InputErrorMessage';
 import Text from '../Text';
 import TextInput from '../TextInput';
 import Tooltip from '../Tooltip';
 
-type LabeledInputProps = {
+type Props = {
+  error?: string | null;
   label: string;
   onChange: (value: string) => void;
   tooltip?: string;
@@ -13,11 +15,12 @@ type LabeledInputProps = {
 };
 
 export const LabeledInput = ({
+  error,
   label,
   onChange,
   tooltip,
   value,
-}: LabeledInputProps): JSX.Element => {
+}: Props): JSX.Element => {
   const inputId = `labeled_input_${createUniqueId()}`;
 
   return (
@@ -28,7 +31,8 @@ export const LabeledInput = ({
         </Text>
         {tooltip && <Tooltip text={tooltip} />}
       </LabelRow>
-      <Input id={inputId} onChange={onChange} value={value} />
+      <Input id={inputId} isError={!!error} onChange={onChange} value={value} />
+      {!!error && <InputErrorMessage text={error} />}
     </Container>
   );
 };

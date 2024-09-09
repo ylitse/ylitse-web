@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { createUniqueId } from '@/utils/id';
-import WarningIcon from '@/static/icons/warning-with-background.svg';
+import InputErrorMessage from '../InputErrorMessage';
 import Text from '../Text';
 import { TextButton } from '../Buttons';
 import TextInput from '../TextInput';
@@ -56,14 +56,7 @@ export const PasswordInput = ({
         onChange={onChange}
         value={value}
       />
-      {!!error && (
-        <Error>
-          <img src={WarningIcon} />
-          <Text color="redDark" variant="error">
-            {error}
-          </Text>
-        </Error>
-      )}
+      {!!error && <InputErrorMessage text={error} />}
     </Container>
   );
 };
@@ -86,12 +79,5 @@ const RightContainer = styled.div`
 `;
 
 const Input = styled(TextInput)`
-  margin-top: 0.5rem;
-`;
-
-const Error = styled.div`
-  align-items: center;
-  display: flex;
-  gap: 0.5rem;
   margin-top: 0.5rem;
 `;
