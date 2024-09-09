@@ -12,6 +12,7 @@ import Tooltip from '../Tooltip';
 type Props = {
   error?: string | null;
   label: string;
+  onBlur?: () => void;
   onChange: (value: string) => void;
   tooltip?: string;
   value: string;
@@ -20,6 +21,7 @@ type Props = {
 export const PasswordInput = ({
   error,
   label,
+  onBlur,
   onChange,
   tooltip,
   value,
@@ -50,6 +52,7 @@ export const PasswordInput = ({
         id={inputId}
         isError={!!error}
         isPassword={isPasswordHidden}
+        onBlur={onBlur}
         onChange={onChange}
         value={value}
       />

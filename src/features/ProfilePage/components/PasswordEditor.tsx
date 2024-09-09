@@ -14,14 +14,25 @@ const PasswordEditor = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [repeatedNewPassword, setRepeatedNewPassword] = useState('');
+  const [isNewPasswordTouched, setIsNewPasswordTouched] = useState(false);
+  const [repeatedPassword, setRepeatedPassword] = useState('');
+  const [isRepeatedPasswordTouched, setIsRepeatedPasswordTouched] =
+    useState(false);
 
   const toggleIsOpen = () => setIsOpen(!isOpen);
+  const touchNewPassword = () => setIsNewPasswordTouched(true);
+  const touchRepeatedPassword = () => setIsRepeatedPasswordTouched(true);
 
   const [isCurrentPasswordInvalid, setIsCurrentPasswordInvalid] =
     useState(false);
-  const isPasswordTooShort = newPassword.length < PASSWORD_MIN_LENGTH;
-  const doPasswordsMatch = newPassword === repeatedNewPassword;
+
+  const isPasswordTooShort =
+    isNewPasswordTouched && newPassword.length < PASSWORD_MIN_LENGTH;
+
+  const doPasswordsMatch =
+    isNewPasswordTouched &&
+    isRepeatedPasswordTouched &&
+    newPassword === repeatedPassword;
 
   const saveNewPassword = () => {
     console.log('API: Save new password');
@@ -43,6 +54,7 @@ const PasswordEditor = () => {
           isPasswordTooShort ? t('account.input.password.tooShortError') : null
         }
         label={t('account.input.password.new')}
+        onBlur={touchNewPassword}
         onChange={setNewPassword}
         tooltip={t('account.input.password.tooltip')}
         value={newPassword}
@@ -52,9 +64,10 @@ const PasswordEditor = () => {
           doPasswordsMatch ? t('account.input.password.dontMatchError') : null
         }
         label={t('account.input.password.repeat')}
-        onChange={setRepeatedNewPassword}
+        onBlur={touchRepeatedPassword}
+        onChange={setRepeatedPassword}
         tooltip={t('account.input.password.tooltip')}
-        value={repeatedNewPassword}
+        value={repeatedPassword}
       />
       <ButtonRow>
         <TextButton onClick={toggleIsOpen} variant="light">

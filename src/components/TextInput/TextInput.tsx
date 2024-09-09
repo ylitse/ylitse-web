@@ -26,6 +26,7 @@ type TextInputProps<T extends ElementType> = {
     sizeInPx: number;
   } & ComponentPropsWithoutRef<T>;
   rows?: number;
+  onBlur?: () => void;
   onChange: (value: string) => void;
   placeholder?: string;
   value: string;
@@ -41,6 +42,7 @@ export const TextInput = <T extends ElementType = TextInputElement>({
   leftIcon,
   rightButton,
   rows = 2,
+  onBlur,
   onChange,
   placeholder = '',
   value,
@@ -66,6 +68,7 @@ export const TextInput = <T extends ElementType = TextInputElement>({
       <TextInputElement
         disabled={isDisabled}
         id={id}
+        onBlur={onBlur}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         style={{ ...variantStyles, ...variantBorder, ...variantColor }}
