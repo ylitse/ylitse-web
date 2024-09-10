@@ -136,7 +136,7 @@ export const variants: Record<TextVariant, TextProp> = {
       fontSize: '1rem',
       fontStyle: 'normal',
       fontWeight: 600,
-      lineHeight: '1.5rem',
+      lineHeight: '2rem',
       whiteSpace: 'nowrap',
     },
   },
