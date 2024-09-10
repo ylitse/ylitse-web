@@ -45,7 +45,10 @@ const DisplayNameEditor = () => {
         <TextButton onClick={toggleIsOpen} variant="light">
           {t('account.input.cancel')}
         </TextButton>
-        <TextButton onClick={saveNewDisplayName}>
+        <TextButton
+          onClick={saveNewDisplayName}
+          variant={isTooShort ? 'disabled' : 'dark'}
+        >
           {t('account.input.save')}
         </TextButton>
       </ButtonRow>
@@ -59,9 +62,9 @@ const DisplayNameEditor = () => {
           <Value>{displayName}</Value>
         </Column>
         <IconButton
-          variant="edit"
-          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
           onClick={toggleIsOpen}
+          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+          variant="edit"
         />
       </SpacedRow>
       <Text variant="blueBox">{t('public.mentee.displayName.info')}</Text>

@@ -34,6 +34,9 @@ const PasswordEditor = () => {
     isRepeatedPasswordTouched &&
     newPassword !== repeatedPassword;
 
+  const isSavingDisabled =
+    !currentPassword.length || isPasswordTooShort || arePasswordsNotMatching;
+
   const saveNewPassword = () => {
     console.log('API: Save new password');
     setIsCurrentPasswordInvalid(true);
@@ -75,7 +78,10 @@ const PasswordEditor = () => {
         <TextButton onClick={toggleIsOpen} variant="light">
           {t('account.input.cancel')}
         </TextButton>
-        <TextButton onClick={saveNewPassword}>
+        <TextButton
+          onClick={saveNewPassword}
+          variant={isSavingDisabled ? 'disabled' : 'dark'}
+        >
           {t('account.input.save')}
         </TextButton>
       </ButtonRow>

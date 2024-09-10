@@ -54,6 +54,7 @@ export const variants = {
   disabled: {
     backgroundColor: palette.greyMid,
     color: palette.greyFaded,
+    cursor: 'not-allowed',
 
     ['&: active, &: visited']: {
       outline: 'none',

@@ -19,8 +19,10 @@ const EmailEditor = () => {
   const toggleIsOpen = () => setIsOpen(!isOpen);
   const [email, setEmail] = useState<string>('');
 
-  const emailValue = email.length ? email : t('account.emailMissing');
-  const isEmailInvalid = email.length && !email.match(EMAIL_REGEX);
+  const isEmailMissing = !email.length;
+  const emailValue = isEmailMissing ? t('account.emailMissing') : email;
+  const isEmailInvalid = email.length > 0 && !email.match(EMAIL_REGEX);
+  const isSavingDisabled = isEmailMissing || isEmailInvalid;
 
   useEffect(() => {
     setEmail(userInfo.email ?? '');
@@ -43,7 +45,10 @@ const EmailEditor = () => {
         <TextButton onClick={toggleIsOpen} variant="light">
           {t('account.input.cancel')}
         </TextButton>
-        <TextButton onClick={saveNewEmail}>
+        <TextButton
+          variant={isSavingDisabled ? 'disabled' : 'dark'}
+          onClick={saveNewEmail}
+        >
           {t('account.input.save')}
         </TextButton>
       </ButtonRow>

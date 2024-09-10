@@ -4,26 +4,26 @@ import styled, { css } from 'styled-components';
 import { ButtonIcon, iconVariants } from './variants';
 
 type ButtonProps<T extends ElementType> = {
-  variant: ButtonIcon;
   isDisabled?: boolean;
   sizeInPx: number;
+  variant: ButtonIcon;
 } & ComponentPropsWithoutRef<T>;
 
 const IconButton = <T extends ElementType = 'button'>({
-  variant,
   isDisabled = false,
-  sizeInPx,
   onClick,
+  sizeInPx,
+  variant,
   ...rest
 }: ButtonProps<T>): JSX.Element => {
   return (
     <Container onClick={onClick}>
       <StyledIconButton
-        variant={variant}
+        aria-label={variant}
         disabled={isDisabled}
         size={sizeInPx}
+        variant={variant}
         {...rest}
-        aria-label={variant}
       />
     </Container>
   );
