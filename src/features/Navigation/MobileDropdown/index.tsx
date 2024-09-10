@@ -129,6 +129,7 @@ const Row = styled.div`
   align-items: center;
   display: flex;
   gap: 6px;
+  margin-left: -2rem;
 `;
 
 const Menu = styled.div`
