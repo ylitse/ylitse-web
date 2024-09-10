@@ -35,30 +35,30 @@ const DisplayNameEditor = () => {
   return isOpen ? (
     <Section>
       <LabeledInput
-        error={isTooShort ? t('public.mentee.displayName.tooShortError') : null}
-        label={t('public.mentee.displayName.title')}
+        error={isTooShort ? t('public.displayName.tooShortError') : null}
+        label={t('public.displayName.label')}
         onChange={setDisplayName}
-        tooltip={t('public.mentee.displayName.tooltip')}
+        tooltip={t('public.displayName.tooltip')}
         value={displayName}
       />
       <ButtonRow>
         <TextButton onClick={toggleIsOpen} variant="light">
-          {t('account.input.cancel')}
+          {t('account.cancel')}
         </TextButton>
         <TextButton
           onClick={saveNewDisplayName}
           variant={isTooShort ? 'disabled' : 'dark'}
         >
-          {t('account.input.save')}
+          {t('account.save')}
         </TextButton>
       </ButtonRow>
-      <Text variant="blueBox">{t('public.mentee.displayName.info')}</Text>
+      <Text variant="blueBox">{t('public.displayName.info')}</Text>
     </Section>
   ) : (
     <Section>
       <SpacedRow>
         <Column>
-          <Text variant="label">{t('public.mentee.displayName.title')}</Text>
+          <Text variant="label">{t('public.displayName.label')}</Text>
           <Value>{displayName}</Value>
         </Column>
         <IconButton
@@ -67,7 +67,7 @@ const DisplayNameEditor = () => {
           variant="edit"
         />
       </SpacedRow>
-      <Text variant="blueBox">{t('public.mentee.displayName.info')}</Text>
+      <Text variant="blueBox">{t('public.displayName.info')}</Text>
     </Section>
   );
 };

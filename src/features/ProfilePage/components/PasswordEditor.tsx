@@ -46,43 +46,39 @@ const PasswordEditor = () => {
     <Section>
       <PasswordInput
         error={
-          isCurrentPasswordInvalid ? t('account.input.password.invalid') : null
+          isCurrentPasswordInvalid ? t('account.password.error.invalid') : null
         }
-        label={t('account.input.password.current')}
+        label={t('account.password.current')}
         onChange={setCurrentPassword}
         value={currentPassword}
       />
       <PasswordInput
-        error={
-          isPasswordTooShort ? t('account.input.password.tooShortError') : null
-        }
-        label={t('account.input.password.new')}
+        error={isPasswordTooShort ? t('account.password.error.tooShort') : null}
+        label={t('account.password.new')}
         onBlur={touchNewPassword}
         onChange={setNewPassword}
-        tooltip={t('account.input.password.tooltip')}
+        tooltip={t('account.password.tooltip')}
         value={newPassword}
       />
       <PasswordInput
         error={
-          arePasswordsNotMatching
-            ? t('account.input.password.dontMatchError')
-            : null
+          arePasswordsNotMatching ? t('account.password.error.dontMatch') : null
         }
-        label={t('account.input.password.repeat')}
+        label={t('account.password.repeat')}
         onBlur={touchRepeatedPassword}
         onChange={setRepeatedPassword}
-        tooltip={t('account.input.password.tooltip')}
+        tooltip={t('account.password.tooltip')}
         value={repeatedPassword}
       />
       <ButtonRow>
         <TextButton onClick={toggleIsOpen} variant="light">
-          {t('account.input.cancel')}
+          {t('account.cancel')}
         </TextButton>
         <TextButton
           onClick={saveNewPassword}
           variant={isSavingDisabled ? 'disabled' : 'dark'}
         >
-          {t('account.input.save')}
+          {t('account.save')}
         </TextButton>
       </ButtonRow>
     </Section>
@@ -90,8 +86,8 @@ const PasswordEditor = () => {
     <Section>
       <SpacedRow>
         <Column>
-          <Text variant="label">{t('account.password')}</Text>
-          <Value>{t('account.passwordPlaceholder')}</Value>
+          <Text variant="label">{t('account.password.label')}</Text>
+          <Value>{t('account.password.placeholder')}</Value>
         </Column>
         <IconButton
           variant="edit"

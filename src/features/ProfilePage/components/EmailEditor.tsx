@@ -20,7 +20,7 @@ const EmailEditor = () => {
   const [email, setEmail] = useState<string>('');
 
   const isEmailMissing = !email.length;
-  const emailValue = isEmailMissing ? t('account.emailMissing') : email;
+  const emailValue = isEmailMissing ? t('account.email.missing') : email;
   const isEmailInvalid = email.length > 0 && !email.match(EMAIL_REGEX);
   const isSavingDisabled = isEmailMissing || isEmailInvalid;
 
@@ -36,29 +36,29 @@ const EmailEditor = () => {
   return isOpen ? (
     <Section>
       <LabeledInput
-        error={isEmailInvalid ? t('account.emailError') : null}
-        label={t('account.email')}
+        error={isEmailInvalid ? t('account.email.invalid') : null}
+        label={t('account.email.label')}
         onChange={setEmail}
         value={email}
       />
       <ButtonRow>
         <TextButton onClick={toggleIsOpen} variant="light">
-          {t('account.input.cancel')}
+          {t('account.cancel')}
         </TextButton>
         <TextButton
           variant={isSavingDisabled ? 'disabled' : 'dark'}
           onClick={saveNewEmail}
         >
-          {t('account.input.save')}
+          {t('account.save')}
         </TextButton>
       </ButtonRow>
-      <Text variant="blueBox">{t('account.emailInfo')}</Text>
+      <Text variant="blueBox">{t('account.email.info')}</Text>
     </Section>
   ) : (
     <Section>
       <SpacedRow>
         <Column>
-          <Text variant="label">{t('account.email')}</Text>
+          <Text variant="label">{t('account.email.label')}</Text>
           <Value>{emailValue}</Value>
         </Column>
         <IconButton
@@ -67,7 +67,7 @@ const EmailEditor = () => {
           onClick={toggleIsOpen}
         />
       </SpacedRow>
-      <Text variant="blueBox">{t('account.emailInfo')}</Text>
+      <Text variant="blueBox">{t('account.email.info')}</Text>
     </Section>
   );
 };

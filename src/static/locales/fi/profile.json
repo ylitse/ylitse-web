@@ -1,48 +1,48 @@
 {
   "title": "Profiili",
   "account": {
+    "cancel": "Peruuta",
     "delete": {
       "cancel": "Peruuta",
       "confirm": "Poista",
       "description": "Käyttäjätilin poistamista ei voi tämän jälkeen perua. Kaikki käyttäjätilin keskustelut poistetaan.",
       "title": "Poista käyttäjätili"
     },
-    "email": "Sähköpostiosoite",
-    "emailError": "Sähköpostiosoite on virheellinen",
-    "emailInfo": "Sähköpostiosoite mahdollistaa salasanan palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin tarkoituksiin.",
-    "emailMissing": "Ei sähköpostiosoitetta",
-    "input": {
-      "cancel": "Peruuta",
-      "password": {
-        "current": "Nykyinen salasana *",
-        "dontMatchError": "Salasanat eivät täsmää",
-        "invalid": "Nykyinen salasana on virheellinen",
-        "new": "Uusi salasana *",
-        "repeat": "Toista uusi salasana *",
-        "tooltip": "Salasanan tulee olla vähintään 8 merkkiä pitkä.",
-        "tooShortError": "Salasana on liian lyhyt"
-      },
-      "save": "Tallenna"
+    "email": {
+      "invalid": "Sähköpostiosoite on virheellinen",
+      "info": "Sähköpostiosoite mahdollistaa salasanan palauttamisen myöhemmin. Sähköpostiosoitetta ei käytetä muihin tarkoituksiin.",
+      "missing": "Ei sähköpostiosoitetta",
+      "label": "Sähköpostiosoite"
     },
-    "password": "Salasana",
-    "passwordPlaceholder": "************",
-    "roles": {
+    "loginName": "Käyttäjätunnus",
+    "password": {
+      "current": "Nykyinen salasana *",
+      "error": {
+        "dontMatch": "Salasanat eivät täsmää",
+        "invalid": "Nykyinen salasana on virheellinen",
+        "tooShort": "Salasana on liian lyhyt"
+      },
+      "label": "Salasana",
+      "new": "Uusi salasana *",
+      "placeholder": "************",
+      "repeat": "Toista uusi salasana *",
+      "tooltip": "Salasanan tulee olla vähintään 8 merkkiä pitkä."
+    },
+    "role": {
       "admin": "Ylläpitäjä",
       "mentee": "Käyttäjä",
       "mentor": "Mentori",
       "title": "Rooli"
     },
-    "title": "Tilin tiedot",
-    "loginName": "Käyttäjätunnus"
+    "save": "Tallenna",
+    "title": "Tilin tiedot"
   },
   "public": {
-    "mentee": {
-      "displayName": {
-        "title": "Julkinen nimimerkki",
-        "info": "Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta sinua ei voi tunnistaa.",
-        "tooltip": "Nimimerkin tulee olla vähintään 2 merkkiä pitkä.",
-        "tooShortError": "Nimimerkki on liian lyhyt"
-      }
+    "displayName": {
+      "label": "Julkinen nimimerkki",
+      "info": "Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta sinua ei voi tunnistaa.",
+      "tooltip": "Nimimerkin tulee olla vähintään 2 merkkiä pitkä.",
+      "tooShortError": "Nimimerkki on liian lyhyt"
     },
     "mentor": {
       "absence": {

@@ -67,10 +67,10 @@ const AccountInfo = ({ userRole }: Props) => {
 
       <Text variant="h2">{t('account.title')}</Text>
       <Section>
-        <Text variant="label">{t('account.roles.title')}</Text>
+        <Text variant="label">{t('account.role.title')}</Text>
         <Role>
           {userRoleIcons[userRole]}
-          <Text>{t(`account.roles.${userRole}`)}</Text>
+          <Text>{t(`account.role.${userRole}`)}</Text>
         </Role>
       </Section>
       <Section>

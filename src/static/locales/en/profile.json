@@ -1,48 +1,48 @@
 {
   "title": "Profile",
   "account": {
+    "cancel": "Cancel",
     "delete": {
       "cancel": "Cancel",
       "confirm": "Delete",
       "description": "Deleting your account cannot be undone after this. All conversations from the account will be deleted.",
       "title": "Delete account"
     },
-    "email": "Email",
-    "emailError": "Email is invalid",
-    "emailInfo": "Providing an email address allows you to recover your password later. Your email address will not be used for other purposes.",
-    "emailMissing": "No email address",
-    "input": {
-      "cancel": "Cancel",
-      "password": {
-        "current": "Current password *",
-        "dontMatchError": "Passwords don't match",
-        "invalid": "Current password is invalid",
-        "new": "New password *",
-        "repeat": "Repeat new password *",
-        "tooltip": "Your password has to be at least 8 characters long.",
-        "tooShortError": "Password is too short"
-      },
-      "save": "Save"
+    "email": {
+      "invalid": "Email is invalid",
+      "info": "Providing an email address allows you to recover your password later. Your email address will not be used for other purposes.",
+      "missing": "No email address",
+      "label": "Email"
     },
-    "password": "Password",
-    "passwordPlaceholder": "************",
-    "roles": {
+    "loginName": "Username",
+    "password": {
+      "current": "Current password *",
+      "error": {
+        "dontMatch": "Passwords don't match",
+        "invalid": "Current password is invalid",
+        "tooShort": "Password is too short"
+      },
+      "label": "Password",
+      "new": "New password *",
+      "placeholder": "************",
+      "repeat": "Repeat new password *",
+      "tooltip": "Your password has to be at least 8 characters long."
+    },
+    "role": {
       "admin": "Admin",
       "mentee": "User",
       "mentor": "Mentor",
       "title": "Role"
     },
-    "title": "Account",
-    "loginName": "Username"
+    "save": "Save",
+    "title": "Account"
   },
   "public": {
-    "mentee": {
-      "displayName": {
-        "title": "Display name",
-        "info": "If you want to remain anonymous to mentors, enter a display name that does not identify you.",
-        "tooltip": "Your username has to be at least 2 characters long.",
-        "tooShortError": "Display name is too short"
-      }
+    "displayName": {
+      "label": "Display name",
+      "info": "If you want to remain anonymous to mentors, enter a display name that does not identify you.",
+      "tooltip": "Your username has to be at least 2 characters long.",
+      "tooShortError": "Display name is too short"
     },
     "mentor": {
       "absence": {
