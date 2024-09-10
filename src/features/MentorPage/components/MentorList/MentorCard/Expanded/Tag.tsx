@@ -38,15 +38,18 @@ const MentorTag = styled(Text)<{ isShowing: boolean; tagColor: string }>`
   display: ${props => (props.isShowing ? `flex` : `none`)};
   padding: 0.25rem 1rem;  
   margin: -1rem auto;
-  position: absolute;
-  left: 19.5%;
-  top: 0;
-  transform: translate(-50%, -30%);
+  position: relative;
+  left: 50%;
+  top: -6%;
+  transform: translate(-50%, -50%);
   width: fit-content;
   
   @media screen and (max-width: ${breakpoints.mobile}) {
-    margin -1rem 1rem;
+    margin: -1rem 1rem;
+    transform: translateX(-50%);
     position: absolute;
+    top: 3.25rem;
     left: 50%;
-  }
+    
+
 `;

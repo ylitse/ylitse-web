@@ -63,8 +63,12 @@ export const Header = ({
 
 const Container = styled.div<{ statusColor: string; isMobile: boolean }>`
   background-color: ${({ statusColor }) => statusColor}};
+  border-radius: 0.75rem;
+  box-sizing: border-box;
   border-radius: 10px;
+  display: ${({ isMobile }) => (isMobile ? 'flex' : '')}
   flex: 0 0 21vw;
+  min-height: 7.5rem;
   ${({ isMobile }) => !isMobile && css`padding: 2rem;'`}
 `;
 
@@ -73,15 +77,15 @@ const ProfilePicture = styled.div<{ isMe: boolean; isMobile: boolean }>`
     `url(${isMe ? ProfilePicPlaceholderForMe : ProfilePicPlaceholder})`};
   background-repeat: no-repeat;
   background-size: contain;
-  flex: 0 0 10vw;
+  flex: 0 2 10vw;
   height: 10vw;
   margin: 2rem auto;
   width: 10vw;
   @media screen and (max-width: ${breakpoints.mobile}) {
-    width: 20vw;
-    height: 20vw;
-    margin: 1rem 0.5rem;
-    flex: 1;
+    flex: 0 0 4rem;
+    margin: 2rem 2rem 1rem 1rem;
+    height: 5rem;
+    width: 5rem;
   }
 `;
 

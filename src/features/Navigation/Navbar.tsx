@@ -56,7 +56,7 @@ export const Container = styled.div<{ isTablet?: boolean }>`
   align-items: center;
   background-color: ${palette.purple};
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: row;
   height: ${NAVIGATION_HEIGHT};
   justify-content: space-between;
   position: relative;
