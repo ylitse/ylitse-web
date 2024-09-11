@@ -30,11 +30,11 @@ type Props = {
 
 const AccountInfo = ({ userRole }: Props) => {
   const { t } = useTranslation('profile');
-  const { loginName } = useAppSelector(selectUserInfo);
+  const dispatch = useAppDispatch();
+  const [deleteAccount] = useDeleteAccountMutation();
 
   const accountId = useAppSelector(selectAccountId);
-  const [deleteAccount] = useDeleteAccountMutation();
-  const dispatch = useAppDispatch();
+  const { loginName } = useAppSelector(selectUserInfo);
 
   const isMentor = userRole === 'mentor';
 
@@ -94,15 +94,16 @@ const AccountInfo = ({ userRole }: Props) => {
       <EmailEditor />
 
       {!isMentor && (
-        <Public>
-          <Text variant="h2">{t('public.title')}</Text>
-          <DisplayNameEditor />
-        </Public>
+        <>
+          <Public>
+            <Text variant="h2">{t('public.title')}</Text>
+            <DisplayNameEditor />
+          </Public>
+          <DeleteButton variant="danger" onClick={openDeleteConfirmation}>
+            {t('account.delete.title')}
+          </DeleteButton>
+        </>
       )}
-
-      <DeleteButton variant="danger" onClick={openDeleteConfirmation}>
-        {t('account.delete.title')}
-      </DeleteButton>
     </Container>
   );
 };
