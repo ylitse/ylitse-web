@@ -11,7 +11,11 @@ import FindMentor from './components/FindMentor';
 import Info from './components/Info';
 import NewestMentors from './components/NewestMentors';
 import NewMessages from './components/NewMessages';
+
 import { OUTER_HORIZONTAL_MARGIN } from '@/components/constants';
+
+import ProfileWidget from './components/ProfileWidget';
+
 import PageWithTransition from '@/components/PageWithTransition';
 import Welcome from './components/Welcome';
 
@@ -37,6 +41,7 @@ const HomePage = () => {
         <LeftMiddleContainer>
           {hasUnreadMessages ? <NewMessages /> : <Welcome />}
           <Announcements />
+          <ProfileWidget />
         </LeftMiddleContainer>
         <RightMiddleContainer>
           <Concepts />
