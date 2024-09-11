@@ -2,8 +2,13 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectUserInfo } from '@/features/Authentication/userSlice';
-import { useAppSelector } from '@/store';
+import { logout } from '@/features/Authentication/authenticationApi';
+import {
+  selectAccountId,
+  selectUserInfo,
+} from '@/features/Authentication/userSlice';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { useDeleteAccountMutation } from '@/features/ProfilePage/profilePageApi';
 
 import AdminIcon from '@/static/icons/admin.svg';
 import Dialog from '@/components/Dialog';
@@ -27,6 +32,10 @@ const AccountInfo = ({ userRole }: Props) => {
   const { t } = useTranslation('profile');
   const { loginName } = useAppSelector(selectUserInfo);
 
+  const accountId = useAppSelector(selectAccountId);
+  const [deleteAccount] = useDeleteAccountMutation();
+  const dispatch = useAppDispatch();
+
   const isMentor = userRole === 'mentor';
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
@@ -34,9 +43,13 @@ const AccountInfo = ({ userRole }: Props) => {
   const openDeleteConfirmation = () => setIsDeleteConfirmationOpen(true);
   const closeDeleteConfirmation = () => setIsDeleteConfirmationOpen(false);
 
-  const deleteAccount = () => {
-    console.log('API: Delete account');
+  const deleteOwnAccount = async () => {
+    if (accountId) {
+      await deleteAccount(accountId);
+      dispatch(logout);
+    }
     closeDeleteConfirmation();
+    // TODO: Show error notification
   };
 
   const userRoleIcons = {
@@ -53,7 +66,7 @@ const AccountInfo = ({ userRole }: Props) => {
           closeText={t('account.delete.cancel')}
           confirmText={t('account.delete.confirm')}
           onClose={closeDeleteConfirmation}
-          onConfirm={deleteAccount}
+          onConfirm={deleteOwnAccount}
           description={t('account.delete.description')}
           title={t('account.delete.title')}
         />

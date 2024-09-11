@@ -2,10 +2,13 @@ import { createSelector } from 'reselect';
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { RootState } from '@/store';
-import { type UserRole, authenticationApi } from './authenticationApi';
+import { authenticationApi } from './authenticationApi';
 import { selectChatsExist } from '../Chat/selectors';
 
+import type { UserRole } from './authenticationApi';
+
 type User = {
+  accountId: string | null;
   active: boolean;
   displayName: string;
   email: string;
@@ -15,6 +18,7 @@ type User = {
 };
 
 const initialState: User = {
+  accountId: null,
   active: false,
   displayName: '',
   email: '',
@@ -48,6 +52,11 @@ const selectUserState = ({ user }: RootState) => user;
 
 export const selectIsLoggedIn = createSelector(selectUserState, ({ userId }) =>
   Boolean(userId),
+);
+
+export const selectAccountId = createSelector(
+  selectUserState,
+  ({ accountId }) => accountId,
 );
 
 export const selectUserId = createSelector(
