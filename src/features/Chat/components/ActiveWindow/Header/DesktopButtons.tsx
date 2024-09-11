@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
-import { DEFAULT_ICON_SIZE } from '@/components/variables';
+import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import Search from './Search';
 
 // Types
@@ -32,7 +32,7 @@ const DesktopButtons = ({ chat, openDialog }: Props) => {
     <Container>
       <IconButton
         variant="search"
-        sizeInPx={DEFAULT_ICON_SIZE}
+        sizeInPx={DEFAULT_ICON_SIZE.SMALL}
         onClick={showSearch}
       />
       {chat.status === 'ok' ? (
@@ -58,7 +58,7 @@ const DesktopButtons = ({ chat, openDialog }: Props) => {
       <Button
         onClick={openReportDialog}
         leftIcon={'danger'}
-        sizeInPx={DEFAULT_ICON_SIZE}
+        sizeInPx={DEFAULT_ICON_SIZE.SMALL}
         text={{
           color: 'purple',
           text: t('header.report'),

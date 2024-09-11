@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import type { Props } from '../LanguageDropdown/LangItem';
 import { ButtonText } from '../LanguageDropdown/LangItem';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 
 export const LanguageItem: React.FC<Props> = ({
   changeLang,

@@ -1,11 +1,10 @@
 import { NavLink as RouterNavLink, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 import { useState } from 'react';
 
+import { NAVIGATION_HEIGHT, palette } from '@/components/constants';
 import { selectHasUnreadMessages } from '@/features/Chat/selectors';
 import { useAppSelector } from '@/store';
-
-import styled from 'styled-components';
-import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
 
 export type NavigationItem = {
   hasNotification?: boolean;

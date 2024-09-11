@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { animations } from '../variables';
+import { animations } from '../constants';
 
 import Background from '@/static/img/loading-background.svg';
 

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { selectUserInfo } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
-import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
+import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
 import LabeledInput from '@/components/LabeledInput';
 import Slider from '@/components/Slider';
 import Text from '@/components/Text';
@@ -19,17 +19,11 @@ const PublicInfo = () => {
   const [birthYear, setBirthYear] = useState('');
   const [area, setArea] = useState('');
   const [status, setStatus] = useState('');
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState(true);
   const [story, setStory] = useState('');
   const [topicSearchValue, setTopicSearchValue] = useState('');
 
-  const updateDisplayName = (displayName: string) =>
-    setDisplayName(displayName);
-  const updateBirthYear = (birthYear: string) => setBirthYear(birthYear);
-  const updateArea = (area: string) => setArea(area);
-  const updateStatus = (status: string) => setStatus(status);
   const toggleIsActive = () => setIsActive(isActive => !isActive);
-  const updateStory = (story: string) => setStory(story);
 
   useEffect(() => {
     const { displayName, active } = userInfo;
@@ -47,24 +41,24 @@ const PublicInfo = () => {
           <Column>
             <LabeledInput
               label={t('public.mentor.displayName')}
-              onChange={updateDisplayName}
+              onChange={setDisplayName}
               value={displayName}
             />
             <LabeledInput
               label={t('public.mentor.birthYear')}
-              onChange={updateBirthYear}
+              onChange={setBirthYear}
               value={birthYear}
             />
             <LabeledInput
               label={t('public.mentor.area')}
-              onChange={updateArea}
+              onChange={setArea}
               value={area}
             />
           </Column>
           <Column>
             <LabeledInput
               label={t('public.mentor.status')}
-              onChange={updateStatus}
+              onChange={setStatus}
               value={status}
             />
             <Text variant="label">{t('public.mentor.absence.title')}</Text>
@@ -82,7 +76,7 @@ const PublicInfo = () => {
         <Text variant="label">{t('public.mentor.story')}</Text>
         <StoryInput
           variant="textarea"
-          onChange={updateStory}
+          onChange={setStory}
           rows={4}
           value={story}
         />
@@ -92,7 +86,7 @@ const PublicInfo = () => {
             variant="iconInput"
             color={topicSearchValue ? 'blueDark' : 'greyFaded'}
             leftIcon={{
-              sizeInPx: DEFAULT_ICON_SIZE,
+              sizeInPx: DEFAULT_ICON_SIZE.SMALL,
               variant: 'search',
             }}
             onChange={setTopicSearchValue}
@@ -158,7 +152,7 @@ const SearchBar = styled.div`
   display: flex;
   flex: 1;
   justify-content: flex-end;
-  margin-left: -${DEFAULT_ICON_SIZE}px;
+  margin-left: -${DEFAULT_ICON_SIZE.SMALL}px;
   margin-top: 1rem;
 `;
 

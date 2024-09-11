@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { useHover } from '@/hooks/useHover';
 
 import { Chevron } from '@/components/Icons/Chevron';
-import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
+import { NAVIGATION_HEIGHT, palette } from '@/components/constants';
 import Text from '@/components/Text';
 
 type Props = {

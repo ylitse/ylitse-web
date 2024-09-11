@@ -1,15 +1,12 @@
-import { Color } from '../variables';
-import { palette } from '../variables';
+import { Color } from '../constants';
+import { palette } from '../constants';
 
 type Props = {
   color?: Color;
-  sizeInPx?: number;
+  sizeInPx: number;
 };
 
-export const Warning: React.FC<Props> = ({
-  color = 'blueDark',
-  sizeInPx = 48,
-}) => (
+export const Warning: React.FC<Props> = ({ color = 'blueDark', sizeInPx }) => (
   <svg
     width={sizeInPx}
     height={sizeInPx}

@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import styled from 'styled-components';
-import { spacing } from '../variables';
+
+import { spacing } from '../constants';
 import { variants } from './variants';
 
 import type { ButtonVariant } from './variants';
@@ -20,8 +21,15 @@ const TextButton = <T extends ElementType = 'button'>({
   variant = 'dark',
   ...rest
 }: ButtonProps<T>): JSX.Element => {
+  const isDisabled = variant === 'disabled';
+
   return (
-    <StyledTextButton size={size} variant={variant} {...rest}>
+    <StyledTextButton
+      disabled={isDisabled}
+      size={size}
+      variant={variant}
+      {...rest}
+    >
       {children}
     </StyledTextButton>
   );

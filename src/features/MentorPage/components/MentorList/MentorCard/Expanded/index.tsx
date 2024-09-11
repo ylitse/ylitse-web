@@ -9,7 +9,7 @@ import { getIsOlderThanDaysAgo } from '@/utils/utils';
 import styled, { css } from 'styled-components';
 import { Header } from './Header';
 import { Content } from './Content';
-import { palette, breakpoints } from '@/components/variables';
+import { palette, breakpoints } from '@/components/constants';
 
 type Props = {
   onDismiss: () => void;

@@ -1,105 +1,102 @@
-import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { ButtonRow, Section, Value } from '.';
+import { Column, SpacedRow } from '@/components/common';
+import { DEFAULT_ICON_SIZE, PASSWORD_MIN_LENGTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
-import { palette } from '@/components/variables';
 import PasswordInput from '@/components/PasswordInput';
 import Text from '@/components/Text';
 
 const PasswordEditor = () => {
   const { t } = useTranslation('profile');
-
-  const [isPasswordEditorOpen, setIsPasswordEditorOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [repeatedNewPassword, setRepeatedNewPassword] = useState('');
+  const [repeatedPassword, setRepeatedPassword] = useState('');
 
-  const toggleIsPasswordEditorOpen = () =>
-    setIsPasswordEditorOpen(!isPasswordEditorOpen);
+  const [isNewPasswordTouched, setIsNewPasswordTouched] = useState(false);
+  const [isRepeatedPasswordTouched, setIsRepeatedPasswordTouched] =
+    useState(false);
 
-  const updateCurrentPassword = (password: string) =>
-    setCurrentPassword(password);
+  const toggleIsOpen = () => setIsOpen(!isOpen);
+  const touchNewPassword = () => setIsNewPasswordTouched(true);
+  const touchRepeatedPassword = () => setIsRepeatedPasswordTouched(true);
 
-  const updateNewPassword = (password: string) => setNewPassword(password);
+  const [isCurrentPasswordInvalid, setIsCurrentPasswordInvalid] =
+    useState(false);
 
-  const updateRepeatedNewPassword = (password: string) =>
-    setRepeatedNewPassword(password);
+  const isPasswordTooShort =
+    isNewPasswordTouched && newPassword.length < PASSWORD_MIN_LENGTH;
+
+  const arePasswordsNotMatching =
+    isNewPasswordTouched &&
+    isRepeatedPasswordTouched &&
+    newPassword !== repeatedPassword;
+
+  const isSavingDisabled =
+    !currentPassword.length || isPasswordTooShort || arePasswordsNotMatching;
 
   const saveNewPassword = () => {
-    console.log('Save new password');
+    console.log('API: Save new password');
+    setIsCurrentPasswordInvalid(true);
   };
 
-  return isPasswordEditorOpen ? (
+  return isOpen ? (
     <Section>
       <PasswordInput
-        label={t('account.input.password.current')}
-        onChange={updateCurrentPassword}
+        error={
+          isCurrentPasswordInvalid ? t('account.password.error.invalid') : null
+        }
+        label={t('account.password.current')}
+        onChange={setCurrentPassword}
         value={currentPassword}
       />
       <PasswordInput
-        label={t('account.input.password.new')}
-        onChange={updateNewPassword}
-        tooltip={t('account.input.password.tooltip')}
+        error={isPasswordTooShort ? t('account.password.error.tooShort') : null}
+        label={t('account.password.new')}
+        onBlur={touchNewPassword}
+        onChange={setNewPassword}
+        tooltip={t('account.password.tooltip')}
         value={newPassword}
       />
       <PasswordInput
-        label={t('account.input.password.repeat')}
-        onChange={updateRepeatedNewPassword}
-        tooltip={t('account.input.password.tooltip')}
-        value={repeatedNewPassword}
+        error={
+          arePasswordsNotMatching ? t('account.password.error.dontMatch') : null
+        }
+        label={t('account.password.repeat')}
+        onBlur={touchRepeatedPassword}
+        onChange={setRepeatedPassword}
+        tooltip={t('account.password.tooltip')}
+        value={repeatedPassword}
       />
       <ButtonRow>
-        <TextButton onClick={toggleIsPasswordEditorOpen} variant="light">
-          {t('account.input.cancel')}
+        <TextButton onClick={toggleIsOpen} variant="light">
+          {t('account.cancel')}
         </TextButton>
-        <TextButton onClick={saveNewPassword}>
-          {t('account.input.save')}
+        <TextButton
+          onClick={saveNewPassword}
+          variant={isSavingDisabled ? 'disabled' : 'dark'}
+        >
+          {t('account.save')}
         </TextButton>
       </ButtonRow>
     </Section>
   ) : (
     <Section>
-      <Row>
+      <SpacedRow>
         <Column>
-          <Text variant="label">{t('account.password')}</Text>
-          <Value>{t('account.passwordPlaceholder')}</Value>
+          <Text variant="label">{t('account.password.label')}</Text>
+          <Value>{t('account.password.placeholder')}</Value>
         </Column>
         <IconButton
           variant="edit"
-          sizeInPx={48}
-          onClick={toggleIsPasswordEditorOpen}
+          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+          onClick={toggleIsOpen}
         />
-      </Row>
+      </SpacedRow>
     </Section>
   );
 };
-
-const Section = styled.div`
-  border-bottom: 1px solid ${palette.blueDark};
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0;
-`;
-
-const Value = styled(Text)`
-  margin: 0.5rem 0 0 0;
-`;
-
-const Row = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ButtonRow = styled.div`
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 export default PasswordEditor;

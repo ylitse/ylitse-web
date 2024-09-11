@@ -3,7 +3,7 @@ import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import styled, { css } from 'styled-components';
-import { CONTENT_WIDTH, spacing } from '@/components/variables';
+import { CONTENT_WIDTH, spacing } from '@/components/constants';
 import ListCard from './MentorCard/List';
 
 type Props = {

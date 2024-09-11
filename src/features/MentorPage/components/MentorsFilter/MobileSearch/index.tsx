@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import { Text } from '@/components/Text/Text';
 import SearchBar from '@/components/SearchBar';
 

@@ -3,9 +3,10 @@ import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { getStatus } from '@/utils/utils';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
+import { Column, SpacedRow } from '@/components/common';
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 import ProfilePicPlaceholderForMe from '@/static/icons/chat-profilepic-me.svg';
-import { breakpoints, palette } from '@/components/variables';
+import { breakpoints, palette } from '@/components/constants';
 import { IconButton } from '@/components/Buttons';
 import { BasicInfo } from './BasicInfo';
 import { Tag } from './Tag';
@@ -39,18 +40,18 @@ export const Header = ({
 
   return isMobile ? (
     <Container statusColor={statusColors[status]} isMobile>
-      <HeaderWrapper>
-        <AvatarWrapper>
+      <SpacedRow>
+        <Column>
           <Tag status={status} />
           <ProfilePicture isMe={isMe} isMobile />
-        </AvatarWrapper>
+        </Column>
         <BasicInfo isMe={isMe} mentor={mentor} />
         <CloseButton
           onClick={onDismiss}
           variant="closeWithBackground"
           sizeInPx={38}
         />
-      </HeaderWrapper>
+      </SpacedRow>
     </Container>
   ) : (
     <Container statusColor={statusColors[status]} isMobile={false}>
@@ -87,16 +88,6 @@ const ProfilePicture = styled.div<{ isMe: boolean; isMobile: boolean }>`
     height: 5rem;
     width: 5rem;
   }
-`;
-
-const HeaderWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const AvatarWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 const CloseButton = styled(IconButton)`

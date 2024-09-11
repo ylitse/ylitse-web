@@ -8,7 +8,7 @@ import { useScrollToTop } from '@/hooks/useScrollToTop';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import styled, { css } from 'styled-components';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import { Message } from './Message';
 import Text from '@/components/Text';
 import Spinner from '@/components/Spinner';

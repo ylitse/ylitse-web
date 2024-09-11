@@ -19,7 +19,7 @@ import {
   DESKTOP_CONTENT_HEIGHT,
   MOBILE_AND_TABLET_CONTENT_HEIGHT,
   palette,
-} from '@/components/variables';
+} from '@/components/constants';
 
 import Header from './Header';
 import MessageField from './MessageField';

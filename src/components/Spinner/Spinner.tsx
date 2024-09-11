@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { animations, palette } from '../variables';
+import { animations, palette } from '../constants';
 
 type Variant = 'large' | 'medium' | 'small' | 'tiny';
 

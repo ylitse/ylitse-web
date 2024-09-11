@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { NAVIGATION_HEIGHT, palette } from '@/components/variables';
+import { NAVIGATION_HEIGHT, palette } from '@/components/constants';
 import Text from '@/components/Text';
 
 export type Props = {

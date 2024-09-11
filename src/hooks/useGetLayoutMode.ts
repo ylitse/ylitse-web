@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TABLET_TRESHOLD, MOBILE_TRESHOLD } from '@/components/variables';
+import { TABLET_TRESHOLD, MOBILE_TRESHOLD } from '@/components/constants';
 
 /**
  * Checks the width of screen and returns flags for size

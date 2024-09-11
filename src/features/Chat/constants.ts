@@ -1,4 +1,4 @@
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 
 export const folderColors = {
   ok: {
@@ -34,7 +34,6 @@ export const messageColors = {
 export const CHAT_GAP_WIDTH = '22px';
 export const CHAT_MENU_WIDTH = '400px';
 export const CHAT_WINDOW_MIN_WIDTH = '1000px';
-export const DIALOG_WIDTH = '687px';
 
 // Heights
 export const CHAT_MIN_HEIGHT = '600px';

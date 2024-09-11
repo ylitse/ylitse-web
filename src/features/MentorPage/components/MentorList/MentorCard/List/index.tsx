@@ -11,7 +11,7 @@ import { Languages } from './Languages';
 import { Skills } from './Skills';
 import { Story } from './Story';
 import { ExpandButton } from './ExpandButton';
-import { spacing, palette, CONTENT_WIDTH } from '@/components/variables';
+import { spacing, palette, CONTENT_WIDTH } from '@/components/constants';
 
 type Props = {
   isHomePage?: boolean;

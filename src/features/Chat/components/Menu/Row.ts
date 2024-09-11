@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import { ROW_HEIGHT } from '@/features/Chat/constants';
 
 export const Row = styled.div`

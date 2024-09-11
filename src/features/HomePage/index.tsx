@@ -11,7 +11,7 @@ import FindMentor from './components/FindMentor';
 import Info from './components/Info';
 import NewestMentors from './components/NewestMentors';
 import NewMessages from './components/NewMessages';
-import { OUTER_HORIZONTAL_MARGIN } from '@/components/variables';
+import { OUTER_HORIZONTAL_MARGIN } from '@/components/constants';
 import PageWithTransition from '@/components/PageWithTransition';
 import Welcome from './components/Welcome';
 

@@ -1,5 +1,5 @@
 import Text from '@/components/Text';
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import styled from 'styled-components';
 
 type Props = {

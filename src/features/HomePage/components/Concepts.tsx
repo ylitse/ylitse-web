@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import Text from '@/components/Text';
 
 type Props = {

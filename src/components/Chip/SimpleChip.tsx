@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { palette } from '../variables';
+import { palette } from '../constants';
 import Text from '../Text';
 
 /**

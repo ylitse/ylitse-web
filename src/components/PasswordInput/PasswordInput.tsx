@@ -3,49 +3,60 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { createUniqueId } from '@/utils/id';
+import InputErrorMessage from '../InputErrorMessage';
 import Text from '../Text';
 import { TextButton } from '../Buttons';
 import TextInput from '../TextInput';
 import Tooltip from '../Tooltip';
 
 type Props = {
+  error?: string | null;
   label: string;
+  onBlur?: () => void;
   onChange: (value: string) => void;
   tooltip?: string;
   value: string;
 };
 
 export const PasswordInput = ({
+  error,
   label,
+  onBlur,
   onChange,
   tooltip,
   value,
 }: Props): JSX.Element => {
   const { t } = useTranslation('common');
-  const inputId = createUniqueId();
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const togglePasswordVisibility = () =>
-    setIsPasswordVisible(!isPasswordVisible);
+  const inputId = `password_input_${createUniqueId()}`;
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const togglePasswordVisibility = () => setIsPasswordHidden(!isPasswordHidden);
 
   return (
     <Container>
-      <Row>
-        <Text inputId={inputId} variant="label">
+      <LabelRow>
+        <Text
+          color={error ? 'redDark' : 'blueDark'}
+          inputId={inputId}
+          variant="label"
+        >
           {label}
         </Text>
         <RightContainer>
           <TextButton onClick={togglePasswordVisibility} variant="textOnly">
-            {t(`password.${isPasswordVisible ? 'hide' : 'show'}`)}
+            {t(`password.${isPasswordHidden ? 'show' : 'hide'}`)}
           </TextButton>
           {tooltip && <Tooltip text={tooltip} />}
         </RightContainer>
-      </Row>
+      </LabelRow>
       <Input
         id={inputId}
-        variant={isPasswordVisible ? 'formInput' : 'password'}
+        isError={!!error}
+        isPassword={isPasswordHidden}
+        onBlur={onBlur}
         onChange={onChange}
         value={value}
       />
+      {!!error && <InputErrorMessage text={error} />}
     </Container>
   );
 };
@@ -54,10 +65,9 @@ const Container = styled.div`
   margin-bottom: 1rem;
 `;
 
-const Row = styled.div`
+const LabelRow = styled.div`
   align-items: center;
   display: flex;
-  gap: 2rem;
   justify-content: space-between;
   padding-right: 0.5rem;
 `;

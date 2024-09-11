@@ -5,7 +5,7 @@ import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useAppSelector } from '@/store';
 
 import { CHAT_GAP_WIDTH } from '@/features/Chat/constants';
-import { CONTENT_WIDTH, OUTER_VERTICAL_MARGIN } from '@/components/variables';
+import { CONTENT_WIDTH, OUTER_VERTICAL_MARGIN } from '@/components/constants';
 
 import ActiveWindow from './components/ActiveWindow';
 import Menu from './components/Menu';

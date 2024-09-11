@@ -18,7 +18,7 @@ import {
   HIGH_ROW_HEIGHT,
   ROW_HEIGHT,
 } from '@/features/Chat/constants';
-import { CONTENT_WIDTH, palette } from '@/components/variables';
+import { CONTENT_WIDTH, palette } from '@/components/constants';
 
 // Components
 import ArchivedIcon from '@/static/icons/archived-chats.svg';

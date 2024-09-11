@@ -9,7 +9,7 @@ import type { DialogVariant } from '../Dialogs';
 
 // Variables
 import { HIGH_ROW_HEIGHT } from '@/features/Chat/constants';
-import { DEFAULT_ICON_SIZE, palette } from '@/components/variables';
+import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
 
 // Components
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
@@ -63,7 +63,7 @@ const TabletButtons = ({ chat, openDialog }: Props) => {
           <ReportButton
             onClick={openReportDialog}
             leftIcon={'danger'}
-            sizeInPx={DEFAULT_ICON_SIZE}
+            sizeInPx={DEFAULT_ICON_SIZE.SMALL}
             text={{
               color: 'purple',
               text: t('header.report'),

@@ -1,10 +1,10 @@
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import styled from 'styled-components';
-import { DIALOG_WIDTH } from '@/features/Chat/constants';
+import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
+import { DIALOG_WIDTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import IconSuccess from '@/static/icons/success.svg';
-import { palette } from '@/components/variables';
 import Text from '@/components/Text';
 
 type Props = {
@@ -19,7 +19,7 @@ const ReportSuccessDialog = ({ close }: Props) => {
       <SuccessIcon src={IconSuccess} />
       <SuccessCloseButton
         variant="closeWithBackground"
-        sizeInPx={46}
+        sizeInPx={DEFAULT_ICON_SIZE.LARGE}
         onClick={close}
       />
       <Text variant="h3">{t(`dialog.report.success.title`)}</Text>

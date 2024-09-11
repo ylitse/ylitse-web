@@ -19,7 +19,7 @@ import {
   CONTENT_WIDTH,
   OUTER_VERTICAL_MARGIN,
   spacing,
-} from '@/components/variables';
+} from '@/components/constants';
 
 const MentorPage = () => {
   const { isMobile } = useGetLayoutMode();
@@ -38,10 +38,7 @@ const MentorPage = () => {
         />
       )}
       <MentorsFilter />
-      <MentorList
-        setVisibleCard={mentor => setSelectedMentor(mentor)}
-        mentors={mentors}
-      />
+      <MentorList setVisibleCard={setSelectedMentor} mentors={mentors} />
     </>
   );
 

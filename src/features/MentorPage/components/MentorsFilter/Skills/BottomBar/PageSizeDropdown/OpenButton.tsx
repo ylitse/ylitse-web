@@ -1,4 +1,4 @@
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import styled, { css } from 'styled-components';
 import Text from '@/components/Text';
 import { Chevron } from '@/components/Icons/Chevron';

@@ -12,7 +12,7 @@ import {
   MOBILE_AND_TABLET_CONTENT_HEIGHT,
   NAVIGATION_HEIGHT,
   palette,
-} from '../variables';
+} from '../constants';
 
 type Props = {
   children: React.ReactNode;
