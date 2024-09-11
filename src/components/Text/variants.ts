@@ -1,29 +1,8 @@
-import CSS from 'csstype';
 import { FOOTER_HEIGHT, palette } from '../constants';
 
-export type TextVariant =
-  | 'blueBox'
-  | 'boldBaloo'
-  | 'bold'
-  | 'chip'
-  | 'error'
-  | 'footer'
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'label'
-  | 'link'
-  | 'logo'
-  | 'p';
+export type TextVariant = keyof typeof variants;
 
-type TextElement = 'a' | 'h1' | 'h2' | 'h3' | 'label' | 'p';
-
-type TextProp = {
-  element: TextElement;
-  styles: CSS.Properties;
-};
-
-export const variants: Record<TextVariant, TextProp> = {
+export const variants = {
   blueBox: {
     element: 'p',
     styles: {
@@ -172,4 +151,4 @@ export const variants: Record<TextVariant, TextProp> = {
       lineHeight: '1.5rem',
     },
   },
-};
+} as const;

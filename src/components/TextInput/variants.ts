@@ -1,15 +1,9 @@
-import CSS from 'csstype';
 import { palette } from '../constants';
 
-export type TextInputVariant = 'iconInput' | 'input' | 'textarea';
 export type TextInputElement = 'input' | 'textarea';
+export type TextInputVariant = keyof typeof variants;
 
-type TextInputProp = {
-  element: TextInputElement;
-  styles: CSS.Properties;
-};
-
-export const variants: Record<TextInputVariant, TextInputProp> = {
+export const variants = {
   iconInput: {
     element: 'input',
     styles: {
@@ -52,4 +46,4 @@ export const variants: Record<TextInputVariant, TextInputProp> = {
       resize: 'none',
     },
   },
-};
+} as const;
