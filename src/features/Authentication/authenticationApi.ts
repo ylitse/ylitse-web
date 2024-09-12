@@ -1,5 +1,6 @@
 import * as D from 'io-ts/Decoder';
 import { createApi } from '@reduxjs/toolkit/query/react';
+import { pipe } from 'fp-ts/lib/function';
 
 import { mentorCodec } from '../MentorPage/mentorPageApi';
 import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
@@ -26,11 +27,16 @@ const accountCodec = D.struct({
   updated: D.string,
 });
 
-const myuserResponse = D.struct({
-  account: accountCodec,
+const mentorResponse = D.partial({
   mentor: mentorCodec,
+});
+
+const commonResponse = D.struct({
+  account: accountCodec,
   user: userCodec,
 });
+
+const myuserResponse = pipe(commonResponse, D.intersect(mentorResponse));
 
 type UserResponse = D.TypeOf<typeof myuserResponse>;
 export type UserRole = D.TypeOf<typeof role>;
@@ -120,15 +126,14 @@ const toUserInfo = (user: UserResponse): AppUser => ({
   loginName: user.account.login_name,
   userId: user.user.id,
   userRole: user.account.role,
-  mentorData:
-    user.account.role === 'mentor'
-      ? {
-          birthYear: user.mentor.birth_year,
-          isAbsent: user.mentor.is_vacationing,
-          region: user.mentor.region,
-          skills: user.mentor.skills,
-          status: user.mentor.status_message,
-          story: user.mentor.story,
-        }
-      : null,
+  mentorData: user.mentor
+    ? {
+        birthYear: user.mentor.birth_year,
+        isAbsent: user.mentor.is_vacationing,
+        region: user.mentor.region,
+        skills: user.mentor.skills,
+        status: user.mentor.status_message,
+        story: user.mentor.story,
+      }
+    : null,
 });
