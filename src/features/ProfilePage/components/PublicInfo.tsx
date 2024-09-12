@@ -19,7 +19,7 @@ const PublicInfo = () => {
   const [birthYear, setBirthYear] = useState('');
   const [region, setRegion] = useState('');
   const [status, setStatus] = useState('');
-  const [isAbsent, setIsAbsent] = useState(true);
+  const [isAbsent, setIsAbsent] = useState(false);
   const [story, setStory] = useState('');
   const [topicSearchValue, setTopicSearchValue] = useState('');
 
@@ -75,10 +75,10 @@ const PublicInfo = () => {
             <Slider
               id="isAbsent"
               label={t(
-                `public.mentor.absence.switch.${isAbsent ? 'off' : 'on'}`,
+                `public.mentor.absence.switch.${isAbsent ? 'on' : 'off'}`,
               )}
               onChange={toggleIsActive}
-              value={!isAbsent}
+              value={isAbsent}
             />
             <Text variant="blueBox">{t('public.mentor.absence.info')}</Text>
           </Column>

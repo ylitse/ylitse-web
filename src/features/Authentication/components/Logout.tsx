@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { authenticationApi } from '../authenticationApi';
 import { useAppDispatch } from '@/store';
+import { authenticationApi } from '../authenticationApi';
+
 import Spinner from '@/components/Spinner';
 
 export const Logout = () => {
