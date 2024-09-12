@@ -1,6 +1,8 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
 import * as D from 'io-ts/Decoder';
+import { createApi } from '@reduxjs/toolkit/query/react';
+
+import { mentorCodec } from '../MentorPage/mentorPageApi';
+import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
 
 export const role = D.literal('mentee', 'mentor', 'admin');
 
@@ -26,11 +28,21 @@ const accountCodec = D.struct({
 
 const myuserResponse = D.struct({
   account: accountCodec,
+  mentor: mentorCodec,
   user: userCodec,
 });
 
 type UserResponse = D.TypeOf<typeof myuserResponse>;
 export type UserRole = D.TypeOf<typeof role>;
+
+export type MentorData = {
+  birthYear: number;
+  isAbsent: boolean;
+  region: string;
+  skills: Array<string>;
+  status: string;
+  story: string;
+};
 
 type AppUser = {
   accountId: string;
@@ -40,6 +52,7 @@ type AppUser = {
   loginName: string;
   userId: string;
   userRole: UserRole;
+  mentorData: MentorData | null;
 };
 
 const defaultAccount = {
@@ -62,6 +75,22 @@ const defaultUser = {
   updated: '',
 } as const;
 
+const defaultMentor = {
+  birth_year: NaN,
+  communication_channels: [],
+  created: '',
+  display_name: '',
+  gender: '',
+  id: '',
+  is_vacationing: false,
+  languages: [],
+  region: '',
+  skills: [],
+  status_message: '',
+  story: '',
+  user_id: '',
+};
+
 export const authenticationApi = createApi({
   baseQuery: refreshingBaseQuery,
   reducerPath: 'authentication',
@@ -73,7 +102,7 @@ export const authenticationApi = createApi({
         parseAndTransformTo(
           response,
           myuserResponse,
-          { account: defaultAccount, user: defaultUser },
+          { account: defaultAccount, user: defaultUser, mentor: defaultMentor },
           toUserInfo,
         ),
     }),
@@ -83,8 +112,6 @@ export const authenticationApi = createApi({
   }),
 });
 
-export const logout = authenticationApi.endpoints.logout.initiate();
-
 const toUserInfo = (user: UserResponse): AppUser => ({
   accountId: user.account.id,
   active: user.account.active,
@@ -93,4 +120,17 @@ const toUserInfo = (user: UserResponse): AppUser => ({
   loginName: user.account.login_name,
   userId: user.user.id,
   userRole: user.account.role,
+  mentorData:
+    user.account.role === 'mentor'
+      ? {
+          birthYear: user.mentor.birth_year,
+          isAbsent: user.mentor.is_vacationing,
+          region: user.mentor.region,
+          skills: user.mentor.skills,
+          status: user.mentor.status_message,
+          story: user.mentor.story,
+        }
+      : null,
 });
+
+export const { useLogoutMutation } = authenticationApi;

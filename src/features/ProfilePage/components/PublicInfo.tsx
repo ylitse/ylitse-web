@@ -17,18 +17,27 @@ const PublicInfo = () => {
 
   const [displayName, setDisplayName] = useState('');
   const [birthYear, setBirthYear] = useState('');
-  const [area, setArea] = useState('');
+  const [region, setRegion] = useState('');
   const [status, setStatus] = useState('');
-  const [isActive, setIsActive] = useState(true);
+  const [isAbsent, setIsAbsent] = useState(true);
   const [story, setStory] = useState('');
   const [topicSearchValue, setTopicSearchValue] = useState('');
 
-  const toggleIsActive = () => setIsActive(isActive => !isActive);
+  const toggleIsActive = () => setIsAbsent(isAbsent => !isAbsent);
 
   useEffect(() => {
-    const { displayName, active } = userInfo;
-    if (displayName !== null) setDisplayName(displayName);
-    if (isActive !== null) setIsActive(active);
+    const { displayName } = userInfo;
+    if (displayName) setDisplayName(displayName);
+
+    if (userInfo.mentorData) {
+      const { birthYear, isAbsent, region, status, story } =
+        userInfo.mentorData;
+      if (birthYear) setBirthYear(String(birthYear));
+      if (isAbsent) setIsAbsent(isAbsent);
+      if (region) setRegion(region);
+      if (status) setStatus(status);
+      if (story) setStory(story);
+    }
   }, [userInfo]);
 
   return (
@@ -48,11 +57,12 @@ const PublicInfo = () => {
               label={t('public.mentor.birthYear')}
               onChange={setBirthYear}
               value={birthYear}
+              type="number"
             />
             <LabeledInput
-              label={t('public.mentor.area')}
-              onChange={setArea}
-              value={area}
+              label={t('public.mentor.region')}
+              onChange={setRegion}
+              value={region}
             />
           </Column>
           <Column>
@@ -65,10 +75,10 @@ const PublicInfo = () => {
             <Slider
               id="isAbsent"
               label={t(
-                `public.mentor.absence.switch.${isActive ? 'off' : 'on'}`,
+                `public.mentor.absence.switch.${isAbsent ? 'off' : 'on'}`,
               )}
               onChange={toggleIsActive}
-              value={!isActive}
+              value={!isAbsent}
             />
             <Text variant="blueBox">{t('public.mentor.absence.info')}</Text>
           </Column>

@@ -5,26 +5,26 @@ import type { RootState } from '@/store';
 import { authenticationApi } from './authenticationApi';
 import { selectChatsExist } from '../Chat/selectors';
 
-import type { UserRole } from './authenticationApi';
+import type { MentorData, UserRole } from './authenticationApi';
 
 type User = {
   accountId: string | null;
-  active: boolean;
   displayName: string;
   email: string;
   loginName: string;
   userId: string | null;
   userRole: UserRole | null;
+  mentorData: MentorData | null;
 };
 
 const initialState: User = {
   accountId: null,
-  active: false,
   displayName: '',
   email: '',
   loginName: '',
   userId: null,
   userRole: null,
+  mentorData: null,
 };
 
 export const user = createSlice({
@@ -80,10 +80,10 @@ export const selectAppRole = createSelector(
 
 export const selectUserInfo = createSelector(
   selectUserState,
-  ({ active, displayName, email, loginName }) => ({
-    active,
+  ({ displayName, email, loginName, mentorData }) => ({
     displayName,
     email,
     loginName,
+    mentorData,
   }),
 );

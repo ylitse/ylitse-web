@@ -6,11 +6,14 @@ import Text from '../Text';
 import TextInput from '../TextInput';
 import Tooltip from '../Tooltip';
 
+import type { InputType } from '../TextInput/TextInput';
+
 type Props = {
   error?: string | null;
   label: string;
   onChange: (value: string) => void;
   tooltip?: string;
+  type?: InputType;
   value: string;
 };
 
@@ -19,6 +22,7 @@ export const LabeledInput = ({
   label,
   onChange,
   tooltip,
+  type = 'text',
   value,
 }: Props): JSX.Element => {
   const inputId = `labeled_input_${createUniqueId()}`;
@@ -31,7 +35,13 @@ export const LabeledInput = ({
         </Text>
         {tooltip && <Tooltip text={tooltip} />}
       </LabelRow>
-      <Input id={inputId} isError={!!error} onChange={onChange} value={value} />
+      <Input
+        id={inputId}
+        isError={!!error}
+        onChange={onChange}
+        type={type}
+        value={value}
+      />
       {!!error && <InputErrorMessage text={error} />}
     </Container>
   );

@@ -51,7 +51,7 @@
         "title": "Poissaolotila"
       },
       "addTopic": "Lisää uusi aihe",
-      "area": "Alue",
+      "region": "Alue",
       "birthYear": "Syntymävuosi *",
       "displayName": "Julkinen nimimerkki *",
       "mandatoryNotice": "Tähdellä * merkityt tiedot tulee täyttää.",

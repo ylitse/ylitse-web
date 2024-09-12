@@ -7,9 +7,9 @@ import { capitalize } from '@/utils/utils';
 import toast from 'react-hot-toast';
 import { t } from 'i18next';
 
-type ApiMentor = D.TypeOf<typeof apiMentorType>;
+type ApiMentor = D.TypeOf<typeof mentorCodec>;
 
-const apiMentorType = D.struct({
+export const mentorCodec = D.struct({
   birth_year: D.number,
   communication_channels: D.array(D.string),
   created: D.string,
@@ -25,7 +25,7 @@ const apiMentorType = D.struct({
   user_id: D.string,
 });
 
-const mentorListResponseType = D.struct({ resources: D.array(apiMentorType) });
+const mentorListResponseType = D.struct({ resources: D.array(mentorCodec) });
 type MentorsResponse = D.TypeOf<typeof mentorListResponseType>;
 
 export type Mentor = ReturnType<typeof toMentor>;

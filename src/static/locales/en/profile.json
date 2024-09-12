@@ -51,7 +51,7 @@
         "title": "Absence mode"
       },
       "addTopic": "Add new topic",
-      "area": "Area",
+      "region": "Region",
       "birthYear": "Year of birth *",
       "displayName": "Display name *",
       "mandatoryNotice": "Fields marked with a star * are required.",
