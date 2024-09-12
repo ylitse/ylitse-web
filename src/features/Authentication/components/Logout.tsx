@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { useLogoutMutation } from '../authenticationApi';
-
+import { authenticationApi } from '../authenticationApi';
+import { useAppDispatch } from '@/store';
 import Spinner from '@/components/Spinner';
 
 export const Logout = () => {
-  const [logout] = useLogoutMutation();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    logout();
+    dispatch(authenticationApi.endpoints.logout.initiate());
   }, []);
 
   return <Spinner variant="large" />;

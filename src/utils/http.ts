@@ -81,7 +81,7 @@ export const refreshingBaseQuery: BaseQueryFn<
       return await baseQuery(args, api, extraOptions);
     } else {
       // if refresh fail, logout
-      api.dispatch(authenticationApi.endpoints.logout);
+      api.dispatch(authenticationApi.endpoints.logout.initiate());
       return { data: result.data };
     }
   }

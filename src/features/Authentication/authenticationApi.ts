@@ -132,5 +132,3 @@ const toUserInfo = (user: UserResponse): AppUser => ({
         }
       : null,
 });
-
-export const { useLogoutMutation } = authenticationApi;

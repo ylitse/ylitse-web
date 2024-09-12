@@ -2,12 +2,12 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useLogoutMutation } from '@/features/Authentication/authenticationApi';
+import { authenticationApi } from '@/features/Authentication/authenticationApi';
 import {
   selectAccountId,
   selectUserInfo,
 } from '@/features/Authentication/userSlice';
-import { useAppSelector } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { useDeleteAccountMutation } from '@/features/ProfilePage/profilePageApi';
 
 import AdminIcon from '@/static/icons/admin.svg';
@@ -31,7 +31,7 @@ type Props = {
 const AccountInfo = ({ userRole }: Props) => {
   const { t } = useTranslation('profile');
   const [deleteAccount] = useDeleteAccountMutation();
-  const [logout] = useLogoutMutation();
+  const dispatch = useAppDispatch();
 
   const accountId = useAppSelector(selectAccountId);
   const { loginName } = useAppSelector(selectUserInfo);
@@ -46,7 +46,7 @@ const AccountInfo = ({ userRole }: Props) => {
   const deleteOwnAccount = async () => {
     if (accountId) {
       await deleteAccount(accountId);
-      logout();
+      dispatch(authenticationApi.endpoints.getMe.initiate());
     }
     closeDeleteConfirmation();
     // TODO: Show error notification
