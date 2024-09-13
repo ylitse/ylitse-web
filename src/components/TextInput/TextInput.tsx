@@ -1,6 +1,6 @@
 import CSS from 'csstype';
 import { ComponentPropsWithoutRef, ElementType } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components';
 
 import { ButtonIcon, iconVariants } from '@/components/Buttons/variants';
 import { Color, palette } from '@/components/constants';
@@ -8,6 +8,18 @@ import { IconButton } from '@/components/Buttons';
 import { TextInputElement, variants } from './variants';
 
 import type { TextInputVariant } from './variants';
+
+const NumberInputStyles = createGlobalStyle`
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+`;
 
 export type InputType = 'number' | 'password' | 'text';
 
@@ -59,19 +71,12 @@ export const TextInput = <T extends ElementType = TextInputElement>({
   };
   const variantColor: CSS.Properties = { color: palette[color] };
 
-  const numberInputStyles: CSS.Properties =
-    type === 'number'
-      ? {
-          margin: '0',
-          MozAppearance: 'textfield',
-          WebkitAppearance: 'none',
-        }
-      : {};
-
   const isTextArea = variant === 'textarea';
 
   return (
     <>
+      {type === 'number' && <NumberInputStyles />}
+
       {leftIcon && (
         <LeftIcon variant={leftIcon.variant} sizeInPx={leftIcon.sizeInPx} />
       )}
@@ -85,7 +90,6 @@ export const TextInput = <T extends ElementType = TextInputElement>({
           ...variantStyles,
           ...variantBorder,
           ...variantColor,
-          ...numberInputStyles,
         }}
         type={type}
         value={value}
