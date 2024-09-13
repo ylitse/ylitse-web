@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectUserInfo } from '@/features/Authentication/userSlice';
+import {
+  selectAccountId,
+  selectUserInfo,
+} from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
 import { ButtonRow, Section, Value } from '.';
@@ -10,9 +13,11 @@ import { DEFAULT_ICON_SIZE, EMAIL_REGEX } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';
+import { useUpdateEmailMutation } from '../profilePageApi';
 
 const EmailEditor = () => {
   const { t } = useTranslation('profile');
+  const accountId = useAppSelector(selectAccountId);
   const userInfo = useAppSelector(selectUserInfo);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -28,9 +33,14 @@ const EmailEditor = () => {
     setEmail(userInfo.email ?? '');
   }, [userInfo.email]);
 
-  const saveNewEmail = () => {
-    console.log('API: Save new email');
+  const [updateEmail] = useUpdateEmailMutation();
+
+  const saveNewEmail = async () => {
+    if (accountId) {
+      await updateEmail({ accountId, email });
+    }
     setIsOpen(false);
+    // TODO: Show error notification
   };
 
   return isOpen ? (
