@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { useChangePasswordMutation } from '../profilePageApi';
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
@@ -7,6 +9,8 @@ import { DEFAULT_ICON_SIZE, PASSWORD_MIN_LENGTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import PasswordInput from '@/components/PasswordInput';
 import Text from '@/components/Text';
+import { useAppSelector } from '@/store';
+import { selectAccountId } from '@/features/Authentication/userSlice';
 
 const PasswordEditor = () => {
   const { t } = useTranslation('profile');
@@ -34,13 +38,36 @@ const PasswordEditor = () => {
     isRepeatedPasswordTouched &&
     newPassword !== repeatedPassword;
 
+  const accountId = useAppSelector(selectAccountId);
+  const [changePassword, { isLoading, isError, isSuccess }] =
+    useChangePasswordMutation();
+
   const isSavingDisabled =
-    !currentPassword.length || isPasswordTooShort || arePasswordsNotMatching;
+    !currentPassword.length ||
+    isPasswordTooShort ||
+    arePasswordsNotMatching ||
+    isLoading;
 
   const saveNewPassword = () => {
-    console.log('API: Save new password');
-    setIsCurrentPasswordInvalid(true);
+    changePassword({ accountId, currentPassword, newPassword });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsOpen(false);
+      console.log('GREAT SUCCESS');
+      // TODO: Show success notification
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      // Käsittele erilaiset virheet
+      setIsCurrentPasswordInvalid(true);
+      console.error('ERROR');
+      // TODO: Show error notification
+    }
+  }, [isError]);
 
   return isOpen ? (
     <Section>

@@ -56,7 +56,7 @@ export const selectIsLoggedIn = createSelector(selectUserState, ({ userId }) =>
 
 export const selectAccountId = createSelector(
   selectUserState,
-  ({ accountId }) => accountId,
+  ({ accountId }) => accountId ?? '',
 );
 
 export const selectUserId = createSelector(

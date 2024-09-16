@@ -36,9 +36,7 @@ const EmailEditor = () => {
   const [updateEmail] = useUpdateEmailMutation();
 
   const saveNewEmail = async () => {
-    if (accountId) {
-      await updateEmail({ accountId, email });
-    }
+    await updateEmail({ accountId, email });
     setIsOpen(false);
     // TODO: Show error notification
   };

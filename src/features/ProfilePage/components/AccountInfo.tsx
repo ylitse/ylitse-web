@@ -44,10 +44,8 @@ const AccountInfo = ({ userRole }: Props) => {
   const closeDeleteConfirmation = () => setIsDeleteConfirmationOpen(false);
 
   const deleteOwnAccount = async () => {
-    if (accountId) {
-      await deleteAccount(accountId);
-      dispatch(authenticationApi.endpoints.getMe.initiate());
-    }
+    await deleteAccount(accountId);
+    dispatch(authenticationApi.endpoints.getMe.initiate());
     closeDeleteConfirmation();
     // TODO: Show error notification
   };
