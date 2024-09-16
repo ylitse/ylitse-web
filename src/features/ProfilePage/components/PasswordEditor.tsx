@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { selectAccountId } from '@/features/Authentication/userSlice';
+import { useAppSelector } from '@/store';
 import { useChangePasswordMutation } from '../profilePageApi';
 
 import { ButtonRow, Section, Value } from '.';
@@ -9,8 +11,6 @@ import { DEFAULT_ICON_SIZE, PASSWORD_MIN_LENGTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import PasswordInput from '@/components/PasswordInput';
 import Text from '@/components/Text';
-import { useAppSelector } from '@/store';
-import { selectAccountId } from '@/features/Authentication/userSlice';
 
 const PasswordEditor = () => {
   const { t } = useTranslation('profile');

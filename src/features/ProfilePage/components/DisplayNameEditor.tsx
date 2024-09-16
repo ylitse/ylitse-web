@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-  selectAccountId,
-  selectUserId,
-  selectUserInfo,
-  selectUserRole,
-} from '@/features/Authentication/userSlice';
+import { selectUser } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
 import { ButtonRow, Section, Value } from '.';
@@ -22,8 +17,7 @@ import { useUpdateUserMutation } from '../profilePageApi';
 
 const DisplayNameEditor = () => {
   const { t } = useTranslation('profile');
-  const userId = useAppSelector(selectUserId);
-  const userInfo = useAppSelector(selectUserInfo);
+  const user = useAppSelector(selectUser);
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
@@ -32,21 +26,18 @@ const DisplayNameEditor = () => {
   const isTooShort = displayName.length < DISPLAY_NAME_MIN_LENGTH;
 
   useEffect(() => {
-    setDisplayName(userInfo.displayName ?? '');
-  }, [userInfo.displayName]);
+    setDisplayName(user.display_name);
+  }, []);
 
   const [updateUser] = useUpdateUserMutation();
 
-  // POISTA TÄÄ
-  const accountId = useAppSelector(selectAccountId);
-  const role = useAppSelector(selectUserRole);
-
   const saveNewDisplayName = async () => {
+    const { account_id, active, id, role } = user;
     await updateUser({
-      account_id: accountId,
-      active: true,
+      account_id,
+      active,
       display_name: displayName,
-      id: userId,
+      id,
       role,
     });
     setIsOpen(false);

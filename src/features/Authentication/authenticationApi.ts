@@ -2,7 +2,6 @@ import * as D from 'io-ts/Decoder';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { pipe } from 'fp-ts/lib/function';
 
-import { mentorCodec } from '../MentorPage/mentorPageApi';
 import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
 
 export const role = D.literal('mentee', 'mentor', 'admin');
@@ -10,25 +9,35 @@ export const role = D.literal('mentee', 'mentor', 'admin');
 const userCodec = D.struct({
   account_id: D.string,
   active: D.boolean,
-  created: D.string,
   display_name: D.string,
   id: D.string,
   role: role,
-  updated: D.string,
 });
 
 const accountCodec = D.struct({
   active: D.boolean,
-  created: D.string,
   email: D.string,
   id: D.string,
   login_name: D.string,
+  phone: D.string,
   role: role,
-  updated: D.string,
 });
 
-const mentorResponse = D.partial({
-  mentor: mentorCodec,
+const mentorCodec = D.struct({
+  account_id: D.string,
+  active: D.boolean,
+  birth_year: D.number,
+  communication_channels: D.array(D.string),
+  display_name: D.string,
+  gender: D.string,
+  id: D.string,
+  is_vacationing: D.boolean,
+  languages: D.array(D.string),
+  region: D.string,
+  skills: D.array(D.string),
+  status_message: D.string,
+  story: D.string,
+  user_id: D.string,
 });
 
 const commonResponse = D.struct({
@@ -36,55 +45,38 @@ const commonResponse = D.struct({
   user: userCodec,
 });
 
+const mentorResponse = D.partial({
+  mentor: mentorCodec,
+});
+
 const myuserResponse = pipe(commonResponse, D.intersect(mentorResponse));
 
-type UserResponse = D.TypeOf<typeof myuserResponse>;
 export type UserRole = D.TypeOf<typeof role>;
 
-export type MentorData = {
-  birthYear: number;
-  isAbsent: boolean;
-  region: string;
-  skills: Array<string>;
-  status: string;
-  story: string;
+export type Account = D.TypeOf<typeof accountCodec>;
+export type Mentor = D.TypeOf<typeof mentorCodec>;
+export type User = D.TypeOf<typeof userCodec>;
+
+export type AppUser = {
+  account: Account;
+  mentor?: Mentor;
+  user: User;
 };
 
-type AppUser = {
-  accountId: string;
-  active: boolean;
-  displayName: string;
-  email: string;
-  loginName: string;
-  userId: string;
-  userRole: UserRole;
-  mentorData: MentorData | null;
-};
-
-const defaultAccount = {
+export const defaultAccount: Account = {
   active: false,
-  created: '',
   email: '',
   id: '',
   login_name: '',
+  phone: '',
   role: 'mentee',
-  updated: '',
 } as const;
 
-const defaultUser = {
+export const defaultMentor: Mentor = {
   account_id: '',
   active: false,
-  created: '',
-  display_name: '',
-  id: '',
-  role: 'mentee',
-  updated: '',
-} as const;
-
-const defaultMentor = {
   birth_year: NaN,
   communication_channels: [],
-  created: '',
   display_name: '',
   gender: '',
   id: '',
@@ -95,6 +87,20 @@ const defaultMentor = {
   status_message: '',
   story: '',
   user_id: '',
+};
+
+export const defaultUser: User = {
+  account_id: '',
+  active: false,
+  display_name: '',
+  id: '',
+  role: 'mentee',
+} as const;
+
+export const defaultAppUser: AppUser = {
+  account: defaultAccount,
+  mentor: defaultMentor,
+  user: defaultUser,
 };
 
 export const authenticationApi = createApi({
@@ -108,32 +114,12 @@ export const authenticationApi = createApi({
         parseAndTransformTo(
           response,
           myuserResponse,
-          { account: defaultAccount, user: defaultUser, mentor: defaultMentor },
-          toUserInfo,
+          defaultAppUser,
+          user => user,
         ),
     }),
     logout: builder.mutation<unknown, void>({
       query: () => 'logout',
     }),
   }),
-});
-
-const toUserInfo = (user: UserResponse): AppUser => ({
-  accountId: user.account.id,
-  active: user.account.active,
-  displayName: user.user.display_name,
-  email: user.account.email,
-  loginName: user.account.login_name,
-  userId: user.user.id,
-  userRole: user.account.role,
-  mentorData: user.mentor
-    ? {
-        birthYear: user.mentor.birth_year,
-        isAbsent: user.mentor.is_vacationing,
-        region: user.mentor.region,
-        skills: user.mentor.skills,
-        status: user.mentor.status_message,
-        story: user.mentor.story,
-      }
-    : null,
 });

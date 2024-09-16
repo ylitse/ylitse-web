@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 
 import { authenticationApi } from '@/features/Authentication/authenticationApi';
 import {
-  selectAccountId,
-  selectUserInfo,
+  selectAccount,
+  selectIsMentor,
 } from '@/features/Authentication/userSlice';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useDeleteAccountMutation } from '@/features/ProfilePage/profilePageApi';
@@ -22,21 +22,13 @@ import { Section, Value } from '.';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 
-import type { UserRole } from '@/features/Authentication/authenticationApi';
-
-type Props = {
-  userRole: UserRole;
-};
-
-const AccountInfo = ({ userRole }: Props) => {
+const AccountInfo = () => {
   const { t } = useTranslation('profile');
+  const { id, login_name: loginName, role } = useAppSelector(selectAccount);
+  const isMentor = useAppSelector(selectIsMentor);
+
   const [deleteAccount] = useDeleteAccountMutation();
   const dispatch = useAppDispatch();
-
-  const accountId = useAppSelector(selectAccountId);
-  const { loginName } = useAppSelector(selectUserInfo);
-
-  const isMentor = userRole === 'mentor';
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
@@ -44,7 +36,7 @@ const AccountInfo = ({ userRole }: Props) => {
   const closeDeleteConfirmation = () => setIsDeleteConfirmationOpen(false);
 
   const deleteOwnAccount = async () => {
-    await deleteAccount(accountId);
+    await deleteAccount(id);
     dispatch(authenticationApi.endpoints.getMe.initiate());
     closeDeleteConfirmation();
     // TODO: Show error notification
@@ -80,8 +72,8 @@ const AccountInfo = ({ userRole }: Props) => {
       <Section>
         <Text variant="label">{t('account.role.title')}</Text>
         <Role>
-          {userRoleIcons[userRole]}
-          <Text>{t(`account.role.${userRole}`)}</Text>
+          {userRoleIcons[role]}
+          <Text>{t(`account.role.${role}`)}</Text>
         </Role>
       </Section>
       <Section>

@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-  selectAccountId,
-  selectUserInfo,
-  selectUserRole,
-} from '@/features/Authentication/userSlice';
+import { selectAccount } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 import { useUpdateAccountMutation } from '../profilePageApi';
 
@@ -18,8 +14,7 @@ import Text from '@/components/Text';
 
 const EmailEditor = () => {
   const { t } = useTranslation('profile');
-  const accountId = useAppSelector(selectAccountId);
-  const userInfo = useAppSelector(selectUserInfo);
+  const account = useAppSelector(selectAccount);
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
@@ -31,21 +26,19 @@ const EmailEditor = () => {
   const isSavingDisabled = isEmailMissing || isEmailInvalid;
 
   useEffect(() => {
-    setEmail(userInfo.email ?? '');
-  }, [userInfo.email]);
-
-  // POISTA TÄÄ
-  const { loginName } = useAppSelector(selectUserInfo);
-  const role = useAppSelector(selectUserRole);
+    setEmail(account.email);
+  }, []);
 
   const [updateAccount] = useUpdateAccountMutation();
 
   const saveNewEmail = async () => {
+    const { active, id, login_name, phone, role } = account;
     await updateAccount({
-      active: true,
+      active,
       email,
-      id: accountId,
-      login_name: loginName,
+      id,
+      login_name,
+      phone,
       role,
     });
     setIsOpen(false);

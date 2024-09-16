@@ -1,28 +1,15 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-
 import { refreshingBaseQuery } from '@/utils/http';
-import { UserRole } from '../Authentication/authenticationApi';
+import type {
+  Account,
+  Mentor,
+  User,
+} from '../Authentication/authenticationApi';
 
 type PasswordUpdate = {
   accountId: string;
   currentPassword: string;
   newPassword: string;
-};
-
-type Account = {
-  active: boolean;
-  email: string;
-  id: string;
-  login_name: string;
-  role: UserRole;
-};
-
-type User = {
-  account_id: string;
-  active: boolean;
-  display_name: string;
-  id: string;
-  role: UserRole;
 };
 
 export const profilePageApi = createApi({
@@ -42,18 +29,25 @@ export const profilePageApi = createApi({
         method: 'delete',
       }),
     }),
-    updateUser: builder.mutation<unknown, User>({
-      query: user => ({
-        url: `/users/${user.id}`,
-        method: 'put',
-        body: user,
-      }),
-    }),
     updateAccount: builder.mutation<unknown, Account>({
       query: account => ({
         url: `/accounts/${account.id}`,
         method: 'put',
         body: account,
+      }),
+    }),
+    updateMentor: builder.mutation<unknown, Mentor>({
+      query: mentor => ({
+        url: `/mentors/${mentor.id}`,
+        method: 'put',
+        body: mentor,
+      }),
+    }),
+    updateUser: builder.mutation<unknown, User>({
+      query: user => ({
+        url: `/users/${user.id}`,
+        method: 'put',
+        body: user,
       }),
     }),
   }),
@@ -62,6 +56,7 @@ export const profilePageApi = createApi({
 export const {
   useChangePasswordMutation,
   useDeleteAccountMutation,
-  useUpdateUserMutation,
   useUpdateAccountMutation,
+  useUpdateMentorMutation,
+  useUpdateUserMutation,
 } = profilePageApi;
