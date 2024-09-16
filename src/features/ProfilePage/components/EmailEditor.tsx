@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next';
 import {
   selectAccountId,
   selectUserInfo,
+  selectUserRole,
 } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useUpdateAccountMutation } from '../profilePageApi';
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
@@ -13,7 +15,6 @@ import { DEFAULT_ICON_SIZE, EMAIL_REGEX } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';
-import { useUpdateEmailMutation } from '../profilePageApi';
 
 const EmailEditor = () => {
   const { t } = useTranslation('profile');
@@ -33,10 +34,20 @@ const EmailEditor = () => {
     setEmail(userInfo.email ?? '');
   }, [userInfo.email]);
 
-  const [updateEmail] = useUpdateEmailMutation();
+  // POISTA TÄÄ
+  const { loginName } = useAppSelector(selectUserInfo);
+  const role = useAppSelector(selectUserRole);
+
+  const [updateAccount] = useUpdateAccountMutation();
 
   const saveNewEmail = async () => {
-    await updateEmail({ accountId, email });
+    await updateAccount({
+      active: true,
+      email,
+      id: accountId,
+      login_name: loginName,
+      role,
+    });
     setIsOpen(false);
     // TODO: Show error notification
   };

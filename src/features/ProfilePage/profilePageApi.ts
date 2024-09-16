@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { refreshingBaseQuery } from '@/utils/http';
+import { UserRole } from '../Authentication/authenticationApi';
 
 type PasswordUpdate = {
   accountId: string;
@@ -8,14 +9,20 @@ type PasswordUpdate = {
   newPassword: string;
 };
 
-type DisplayNameUpdate = {
-  userId: string;
-  displayName: string;
+type Account = {
+  active: boolean;
+  email: string;
+  id: string;
+  login_name: string;
+  role: UserRole;
 };
 
-type EmailUpdate = {
-  accountId: string;
-  email: string;
+type User = {
+  account_id: string;
+  active: boolean;
+  display_name: string;
+  id: string;
+  role: UserRole;
 };
 
 export const profilePageApi = createApi({
@@ -35,18 +42,18 @@ export const profilePageApi = createApi({
         method: 'delete',
       }),
     }),
-    updateDisplayName: builder.mutation<unknown, DisplayNameUpdate>({
-      query: ({ userId, displayName }) => ({
-        url: `/users/${userId}`,
-        method: 'patch',
-        body: { displayName },
+    updateUser: builder.mutation<unknown, User>({
+      query: user => ({
+        url: `/users/${user.id}`,
+        method: 'put',
+        body: user,
       }),
     }),
-    updateEmail: builder.mutation<unknown, EmailUpdate>({
-      query: ({ accountId, email }) => ({
-        url: `/users/${accountId}`,
-        method: 'patch',
-        body: { email },
+    updateAccount: builder.mutation<unknown, Account>({
+      query: account => ({
+        url: `/accounts/${account.id}`,
+        method: 'put',
+        body: account,
       }),
     }),
   }),
@@ -55,6 +62,6 @@ export const profilePageApi = createApi({
 export const {
   useChangePasswordMutation,
   useDeleteAccountMutation,
-  useUpdateDisplayNameMutation,
-  useUpdateEmailMutation,
+  useUpdateUserMutation,
+  useUpdateAccountMutation,
 } = profilePageApi;

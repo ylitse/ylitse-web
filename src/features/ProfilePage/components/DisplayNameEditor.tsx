@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
+  selectAccountId,
   selectUserId,
   selectUserInfo,
+  selectUserRole,
 } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
@@ -16,7 +18,7 @@ import {
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';
-import { useUpdateDisplayNameMutation } from '../profilePageApi';
+import { useUpdateUserMutation } from '../profilePageApi';
 
 const DisplayNameEditor = () => {
   const { t } = useTranslation('profile');
@@ -33,12 +35,20 @@ const DisplayNameEditor = () => {
     setDisplayName(userInfo.displayName ?? '');
   }, [userInfo.displayName]);
 
-  const [updateDisplayName] = useUpdateDisplayNameMutation();
+  const [updateUser] = useUpdateUserMutation();
+
+  // POISTA TÄÄ
+  const accountId = useAppSelector(selectAccountId);
+  const role = useAppSelector(selectUserRole);
 
   const saveNewDisplayName = async () => {
-    if (userId) {
-      await updateDisplayName({ userId, displayName });
-    }
+    await updateUser({
+      account_id: accountId,
+      active: true,
+      display_name: displayName,
+      id: userId,
+      role,
+    });
     setIsOpen(false);
     // TODO: Show error notification
   };

@@ -61,7 +61,7 @@ export const selectAccountId = createSelector(
 
 export const selectUserId = createSelector(
   selectUserState,
-  ({ userId }) => userId,
+  ({ userId }) => userId ?? '',
 );
 
 export const selectUserRole = createSelector(
