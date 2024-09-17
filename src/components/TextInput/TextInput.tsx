@@ -47,6 +47,7 @@ type TextInputProps<T extends ElementType> = {
 };
 
 export const TextInput = <T extends ElementType = TextInputElement>({
+  className,
   variant = 'input',
   color = 'blueDark',
   isDisabled = false,
@@ -71,16 +72,18 @@ export const TextInput = <T extends ElementType = TextInputElement>({
   };
   const variantColor: CSS.Properties = { color: palette[color] };
 
+  const isNumberInput = type === 'number';
   const isTextArea = variant === 'textarea';
 
   return (
     <>
-      {type === 'number' && <NumberInputStyles />}
+      {isNumberInput && <NumberInputStyles />}
 
       {leftIcon && (
         <LeftIcon variant={leftIcon.variant} sizeInPx={leftIcon.sizeInPx} />
       )}
       <TextInputElement
+        className={className}
         disabled={isDisabled}
         id={id}
         onBlur={onBlur}
