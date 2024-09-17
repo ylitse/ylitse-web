@@ -47,8 +47,6 @@ const DisplayNameEditor = () => {
     }
   }, [isSuccess]);
 
-  const saveDisplayName = () => updateUser(userToSave);
-
   return isOpen ? (
     <Section>
       <LabeledInput
@@ -63,7 +61,7 @@ const DisplayNameEditor = () => {
           {t('account.cancel')}
         </TextButton>
         <TextButton
-          onClick={saveDisplayName}
+          onClick={() => updateUser(userToSave)}
           variant={isSavingDisabled ? 'disabled' : 'dark'}
         >
           {t('account.save')}

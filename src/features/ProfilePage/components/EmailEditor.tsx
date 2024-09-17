@@ -49,8 +49,6 @@ const EmailEditor = () => {
     }
   }, [isSuccess]);
 
-  const saveEmail = () => updateAccount(accountToSave);
-
   return isOpen ? (
     <Section>
       <LabeledInput
@@ -65,7 +63,7 @@ const EmailEditor = () => {
         </TextButton>
         <TextButton
           variant={isSavingDisabled ? 'disabled' : 'dark'}
-          onClick={saveEmail}
+          onClick={() => updateAccount(accountToSave)}
         >
           {t('account.save')}
         </TextButton>

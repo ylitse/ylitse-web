@@ -34,8 +34,6 @@ const AccountInfo = () => {
   const openDeleteConfirmation = () => setIsDeleteConfirmationOpen(true);
   const closeDeleteConfirmation = () => setIsDeleteConfirmationOpen(false);
 
-  const deleteOwnAccount = () => deleteAccount(id);
-
   useEffect(() => {
     if (isError) {
       // TODO: Show error notification
@@ -60,7 +58,7 @@ const AccountInfo = () => {
           closeText={t('account.delete.cancel')}
           confirmText={t('account.delete.confirm')}
           onClose={closeDeleteConfirmation}
-          onConfirm={deleteOwnAccount}
+          onConfirm={() => deleteAccount(id)}
           description={t('account.delete.description')}
           title={t('account.delete.title')}
         />
