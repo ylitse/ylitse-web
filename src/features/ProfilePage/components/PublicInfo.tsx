@@ -19,95 +19,74 @@ import {
   useUpdateMentorMutation,
   useUpdateUserMutation,
 } from '../profilePageApi';
+import { Mentor, User } from '@/features/Authentication/authenticationApi';
 
 const PublicInfo = () => {
   const { t } = useTranslation('profile');
   const user = useAppSelector(selectUser);
   const mentor = useAppSelector(selectMentor);
+  const [updateUser, { isError: isUserError, isSuccess: isUserSuccess }] =
+    useUpdateUserMutation();
+  const [updateMentor, { isError: isMentorError, isSuccess: isMentorSuccess }] =
+    useUpdateMentorMutation();
 
-  const [displayName, setDisplayName] = useState('');
-  const [birthYear, setBirthYear] = useState(NaN);
-  const [region, setRegion] = useState('');
-  const [status, setStatus] = useState('');
-  const [isAbsent, setIsAbsent] = useState(false);
-  const [story, setStory] = useState('');
+  const [birthYear, setBirthYear] = useState(String(mentor.birth_year));
+  const [displayName, setDisplayName] = useState(mentor.display_name);
+  const [isAbsent, setIsAbsent] = useState(mentor.is_vacationing);
+  const [region, setRegion] = useState(mentor.region);
+  const [status, setStatus] = useState(mentor.status_message);
+  const [story, setStory] = useState(mentor.story);
   const [topicSearchValue, setTopicSearchValue] = useState('');
 
+  const toggleIsAbsent = () => setIsAbsent(!isAbsent);
+
   useEffect(() => {
-    setDisplayName(user.display_name);
-    setBirthYear(mentor.birth_year);
-    setIsAbsent(mentor.is_vacationing);
-    setRegion(mentor.region);
-    setStatus(mentor.status_message);
-    setStory(mentor.story);
-  }, []);
+    if (isUserError || isMentorError) {
+      // TODO: Show error notification
+    }
+  }, [isUserError, isMentorError]);
 
-  const [updateUser] = useUpdateUserMutation();
-  const [updateMentor] = useUpdateMentorMutation();
+  useEffect(() => {
+    if (isUserSuccess && isMentorSuccess) {
+      // TODO: Show success notification
+    }
+  }, [isUserSuccess, isMentorSuccess]);
 
-  const updateUserToApi = useDebounce(
-    () =>
-      updateUser({
-        account_id: user.account_id,
-        active: user.active,
-        display_name: displayName,
-        id: user.id,
-        role: user.role,
-      }),
+  const userToSave: User = {
+    ...user,
+    display_name: displayName,
+  };
+
+  const mentorToSave: Mentor = {
+    ...mentor,
+    birth_year: Number(birthYear),
+    display_name: displayName,
+    is_vacationing: isAbsent,
+    region,
+    status_message: status,
+    story,
+  };
+
+  const saveMentor = useDebounce(
+    () => updateMentor(mentorToSave),
     SAVE_DELAY_MS,
   );
+  // TODO: Save to state too
 
-  const updateMentorToApi = useDebounce(
-    () =>
-      updateMentor({
-        account_id: mentor.account_id,
-        active: mentor.active,
-        birth_year: birthYear,
-        communication_channels: mentor.communication_channels,
-        display_name: displayName,
-        gender: mentor.gender,
-        id: mentor.id,
-        is_vacationing: isAbsent,
-        languages: mentor.languages,
-        region,
-        skills: mentor.skills,
-        status_message: status,
-        story,
-        user_id: mentor.user_id,
-      }),
-    SAVE_DELAY_MS,
-  );
+  const saveUserAndMentor = useDebounce(() => {
+    updateUser(userToSave);
+    updateMentor(mentorToSave);
+  }, SAVE_DELAY_MS);
+  // TODO: Save to state too
 
-  const handleDisplayNameChange = (displayName: string) => {
-    setDisplayName(displayName);
-    updateUserToApi();
-    updateMentorToApi();
-  };
-
-  const handleBirthYearChange = (birthYear: string) => {
-    setBirthYear(Number(birthYear));
-    updateMentorToApi();
-  };
-
-  const handleRegionChange = (region: string) => {
-    setRegion(region);
-    updateMentorToApi();
-  };
-
-  const handleStatusChange = (status: string) => {
-    setStatus(status);
-    updateMentorToApi();
-  };
-
-  const handleIsAbsentChange = () => {
-    setIsAbsent(!isAbsent);
-    updateMentorToApi();
-  };
-
-  const handleStoryChange = (story: string) => {
-    setStory(story);
-    updateMentorToApi();
-  };
+  useEffect(() => {
+    if (Number(birthYear) !== mentor.birth_year) saveMentor();
+    if (displayName !== mentor.display_name) saveUserAndMentor();
+    if (isAbsent !== mentor.is_vacationing) saveMentor();
+    if (region !== mentor.region) saveMentor();
+    if (status !== mentor.status_message) saveMentor();
+    if (story !== mentor.story) saveMentor();
+  }, [birthYear, displayName, isAbsent, region, status, story]);
 
   return (
     <Container>
@@ -119,25 +98,25 @@ const PublicInfo = () => {
           <Column>
             <LabeledInput
               label={t('public.mentor.displayName')}
-              onChange={handleDisplayNameChange}
+              onChange={setDisplayName}
               value={displayName}
             />
             <LabeledInput
               label={t('public.mentor.birthYear')}
-              onChange={handleBirthYearChange}
+              onChange={setBirthYear}
               value={String(birthYear)}
               type="number"
             />
             <LabeledInput
               label={t('public.mentor.region')}
-              onChange={handleRegionChange}
+              onChange={setRegion}
               value={region}
             />
           </Column>
           <Column>
             <LabeledInput
               label={t('public.mentor.status')}
-              onChange={handleStatusChange}
+              onChange={setStatus}
               value={status}
             />
             <Text variant="label">{t('public.mentor.absence.title')}</Text>
@@ -146,7 +125,7 @@ const PublicInfo = () => {
               label={t(
                 `public.mentor.absence.switch.${isAbsent ? 'on' : 'off'}`,
               )}
-              onChange={handleIsAbsentChange}
+              onChange={toggleIsAbsent}
               value={isAbsent}
             />
             <Text variant="blueBox">{t('public.mentor.absence.info')}</Text>
@@ -155,7 +134,7 @@ const PublicInfo = () => {
         <Text variant="label">{t('public.mentor.story')}</Text>
         <StoryInput
           variant="textarea"
-          onChange={handleStoryChange}
+          onChange={setStory}
           rows={4}
           value={story}
         />

@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { authenticationApi } from '@/features/Authentication/authenticationApi';
 import {
   selectAccount,
   selectIsMentor,
 } from '@/features/Authentication/userSlice';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppSelector } from '@/store';
 import { useDeleteAccountMutation } from '@/features/ProfilePage/profilePageApi';
+import { useLogoutMutation } from '@/features/Authentication/authenticationApi';
 
 import AdminIcon from '@/static/icons/admin.svg';
 import Dialog from '@/components/Dialog';
@@ -26,21 +26,25 @@ const AccountInfo = () => {
   const { t } = useTranslation('profile');
   const { id, login_name: loginName, role } = useAppSelector(selectAccount);
   const isMentor = useAppSelector(selectIsMentor);
-
-  const [deleteAccount] = useDeleteAccountMutation();
-  const dispatch = useAppDispatch();
+  const [deleteAccount, { isError, isSuccess }] = useDeleteAccountMutation();
+  const [logout] = useLogoutMutation();
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
   const openDeleteConfirmation = () => setIsDeleteConfirmationOpen(true);
   const closeDeleteConfirmation = () => setIsDeleteConfirmationOpen(false);
 
-  const deleteOwnAccount = async () => {
-    await deleteAccount(id);
-    dispatch(authenticationApi.endpoints.getMe.initiate());
-    closeDeleteConfirmation();
-    // TODO: Show error notification
-  };
+  const deleteOwnAccount = () => deleteAccount(id);
+
+  useEffect(() => {
+    if (isError) {
+      // TODO: Show error notification
+    }
+  }, [isError]);
+
+  useEffect(() => {
+    if (isSuccess) logout();
+  }, [isSuccess]);
 
   const userRoleIcons = {
     admin: <img src={AdminIcon} />,

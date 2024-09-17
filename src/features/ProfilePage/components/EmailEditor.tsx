@@ -15,35 +15,37 @@ import Text from '@/components/Text';
 const EmailEditor = () => {
   const { t } = useTranslation('profile');
   const account = useAppSelector(selectAccount);
+  const [updateAccount, { isError, isLoading, isSuccess }] =
+    useUpdateAccountMutation();
 
+  const [email, setEmail] = useState(account.email);
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
-  const [email, setEmail] = useState<string>('');
 
   const isEmailMissing = !email.length;
   const emailValue = isEmailMissing ? t('account.email.missing') : email;
   const isEmailInvalid = email.length > 0 && !email.match(EMAIL_REGEX);
-  const isSavingDisabled = isEmailMissing || isEmailInvalid;
+  const isSavingDisabled = isLoading || isEmailMissing || isEmailInvalid;
 
   useEffect(() => {
-    setEmail(account.email);
-  }, []);
+    if (isError) {
+      // TODO: Show error notification
+    }
+  }, [isError]);
 
-  const [updateAccount] = useUpdateAccountMutation();
+  useEffect(() => {
+    if (isSuccess) {
+      setIsOpen(false);
+      // TODO: Show success notification
+    }
+  }, [isSuccess]);
 
-  const saveNewEmail = async () => {
-    const { active, id, login_name, phone, role } = account;
-    await updateAccount({
-      active,
+  const saveEmail = () =>
+    updateAccount({
+      ...account,
       email,
-      id,
-      login_name,
-      phone,
-      role,
     });
-    setIsOpen(false);
-    // TODO: Show error notification
-  };
+  // TODO: Save to state too
 
   return isOpen ? (
     <Section>
@@ -59,7 +61,7 @@ const EmailEditor = () => {
         </TextButton>
         <TextButton
           variant={isSavingDisabled ? 'disabled' : 'dark'}
-          onClick={saveNewEmail}
+          onClick={saveEmail}
         >
           {t('account.save')}
         </TextButton>

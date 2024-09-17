@@ -14,6 +14,10 @@ import Text from '@/components/Text';
 
 const PasswordEditor = () => {
   const { t } = useTranslation('profile');
+  const accountId = useAppSelector(selectAccountId);
+  const [changePassword, { isLoading, isError, isSuccess }] =
+    useChangePasswordMutation();
+
   const [isOpen, setIsOpen] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -38,33 +42,26 @@ const PasswordEditor = () => {
     isRepeatedPasswordTouched &&
     newPassword !== repeatedPassword;
 
-  const accountId = useAppSelector(selectAccountId);
-  const [changePassword, { isLoading, isError, isSuccess }] =
-    useChangePasswordMutation();
-
   const isSavingDisabled =
+    isLoading ||
     !currentPassword.length ||
     isPasswordTooShort ||
-    arePasswordsNotMatching ||
-    isLoading;
+    arePasswordsNotMatching;
 
-  const saveNewPassword = () => {
+  const savePassword = () => {
     changePassword({ accountId, currentPassword, newPassword });
   };
 
   useEffect(() => {
     if (isSuccess) {
       setIsOpen(false);
-      console.log('GREAT SUCCESS');
       // TODO: Show success notification
     }
   }, [isSuccess]);
 
   useEffect(() => {
     if (isError) {
-      // Käsittele erilaiset virheet
       setIsCurrentPasswordInvalid(true);
-      console.error('ERROR');
       // TODO: Show error notification
     }
   }, [isError]);
@@ -102,7 +99,7 @@ const PasswordEditor = () => {
           {t('account.cancel')}
         </TextButton>
         <TextButton
-          onClick={saveNewPassword}
+          onClick={savePassword}
           variant={isSavingDisabled ? 'disabled' : 'dark'}
         >
           {t('account.save')}

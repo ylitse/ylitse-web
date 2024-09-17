@@ -18,31 +18,35 @@ import { useUpdateUserMutation } from '../profilePageApi';
 const DisplayNameEditor = () => {
   const { t } = useTranslation('profile');
   const user = useAppSelector(selectUser);
+  const [updateUser, { isError, isLoading, isSuccess }] =
+    useUpdateUserMutation();
 
+  const [displayName, setDisplayName] = useState(user.display_name);
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
-  const [displayName, setDisplayName] = useState('');
 
   const isTooShort = displayName.length < DISPLAY_NAME_MIN_LENGTH;
+  const isSavingDisabled = isLoading || isTooShort;
 
   useEffect(() => {
-    setDisplayName(user.display_name);
-  }, []);
+    if (isError) {
+      // TODO: Show error notification
+    }
+  }, [isError]);
 
-  const [updateUser] = useUpdateUserMutation();
+  useEffect(() => {
+    if (isSuccess) {
+      setIsOpen(false);
+      // TODO: Show success notification
+    }
+  }, [isSuccess]);
 
-  const saveNewDisplayName = async () => {
-    const { account_id, active, id, role } = user;
-    await updateUser({
-      account_id,
-      active,
+  const saveDisplayName = () =>
+    updateUser({
+      ...user,
       display_name: displayName,
-      id,
-      role,
     });
-    setIsOpen(false);
-    // TODO: Show error notification
-  };
+  // TODO: Save to state too
 
   return isOpen ? (
     <Section>
@@ -58,8 +62,8 @@ const DisplayNameEditor = () => {
           {t('account.cancel')}
         </TextButton>
         <TextButton
-          onClick={saveNewDisplayName}
-          variant={isTooShort ? 'disabled' : 'dark'}
+          onClick={saveDisplayName}
+          variant={isSavingDisabled ? 'disabled' : 'dark'}
         >
           {t('account.save')}
         </TextButton>

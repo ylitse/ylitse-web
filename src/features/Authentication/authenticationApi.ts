@@ -19,7 +19,6 @@ const accountCodec = D.struct({
   email: D.string,
   id: D.string,
   login_name: D.string,
-  phone: D.string,
   role: role,
 });
 
@@ -68,7 +67,6 @@ export const defaultAccount: Account = {
   email: '',
   id: '',
   login_name: '',
-  phone: '',
   role: 'mentee',
 } as const;
 
@@ -123,3 +121,5 @@ export const authenticationApi = createApi({
     }),
   }),
 });
+
+export const { useLogoutMutation } = authenticationApi;
