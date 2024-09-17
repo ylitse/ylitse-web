@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectUser } from '@/features/Authentication/userSlice';
-import { useAppSelector } from '@/store';
+import { selectUser, setUser } from '@/features/Authentication/userSlice';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { useUpdateUserMutation } from '../profilePageApi';
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
@@ -13,10 +14,12 @@ import {
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';
-import { useUpdateUserMutation } from '../profilePageApi';
+
+import type { User } from '@/features/Authentication/authenticationApi';
 
 const DisplayNameEditor = () => {
   const { t } = useTranslation('profile');
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const [updateUser, { isError, isLoading, isSuccess }] =
     useUpdateUserMutation();
@@ -28,6 +31,8 @@ const DisplayNameEditor = () => {
   const isTooShort = displayName.length < DISPLAY_NAME_MIN_LENGTH;
   const isSavingDisabled = isLoading || isTooShort;
 
+  const userToSave: User = { ...user, display_name: displayName };
+
   useEffect(() => {
     if (isError) {
       // TODO: Show error notification
@@ -36,17 +41,13 @@ const DisplayNameEditor = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      dispatch(setUser(userToSave));
       setIsOpen(false);
       // TODO: Show success notification
     }
   }, [isSuccess]);
 
-  const saveDisplayName = () =>
-    updateUser({
-      ...user,
-      display_name: displayName,
-    });
-  // TODO: Save to state too
+  const saveDisplayName = () => updateUser(userToSave);
 
   return isOpen ? (
     <Section>

@@ -48,10 +48,6 @@ const PasswordEditor = () => {
     isPasswordTooShort ||
     arePasswordsNotMatching;
 
-  const savePassword = () => {
-    changePassword({ accountId, currentPassword, newPassword });
-  };
-
   useEffect(() => {
     if (isSuccess) {
       setIsOpen(false);
@@ -65,6 +61,9 @@ const PasswordEditor = () => {
       // TODO: Show error notification
     }
   }, [isError]);
+
+  const savePassword = () =>
+    changePassword({ accountId, currentPassword, newPassword });
 
   return isOpen ? (
     <Section>

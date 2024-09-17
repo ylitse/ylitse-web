@@ -2,8 +2,13 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectMentor, selectUser } from '@/features/Authentication/userSlice';
-import { useAppSelector } from '@/store';
+import {
+  selectMentor,
+  selectUser,
+  setMentor,
+  setUser,
+} from '@/features/Authentication/userSlice';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { useDebounce } from '@/hooks/useDebounce';
 
 import {
@@ -19,10 +24,12 @@ import {
   useUpdateMentorMutation,
   useUpdateUserMutation,
 } from '../profilePageApi';
-import { Mentor, User } from '@/features/Authentication/authenticationApi';
+
+import type { Mentor, User } from '@/features/Authentication/authenticationApi';
 
 const PublicInfo = () => {
   const { t } = useTranslation('profile');
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const mentor = useAppSelector(selectMentor);
   const [updateUser, { isError: isUserError, isSuccess: isUserSuccess }] =
@@ -40,18 +47,6 @@ const PublicInfo = () => {
 
   const toggleIsAbsent = () => setIsAbsent(!isAbsent);
 
-  useEffect(() => {
-    if (isUserError || isMentorError) {
-      // TODO: Show error notification
-    }
-  }, [isUserError, isMentorError]);
-
-  useEffect(() => {
-    if (isUserSuccess && isMentorSuccess) {
-      // TODO: Show success notification
-    }
-  }, [isUserSuccess, isMentorSuccess]);
-
   const userToSave: User = {
     ...user,
     display_name: displayName,
@@ -67,17 +62,32 @@ const PublicInfo = () => {
     story,
   };
 
+  useEffect(() => {
+    if (isUserError || isMentorError) {
+      // TODO: Show error notification
+    }
+  }, [isUserError, isMentorError]);
+
+  useEffect(() => {
+    if (isUserSuccess) dispatch(setUser(userToSave));
+  }, [isUserSuccess]);
+
+  useEffect(() => {
+    if (isMentorSuccess) {
+      dispatch(setMentor(mentorToSave));
+      // TODO: Show success notification
+    }
+  }, [isMentorSuccess]);
+
   const saveMentor = useDebounce(
     () => updateMentor(mentorToSave),
     SAVE_DELAY_MS,
   );
-  // TODO: Save to state too
 
   const saveUserAndMentor = useDebounce(() => {
     updateUser(userToSave);
     updateMentor(mentorToSave);
   }, SAVE_DELAY_MS);
-  // TODO: Save to state too
 
   useEffect(() => {
     if (Number(birthYear) !== mentor.birth_year) saveMentor();

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from '@/store';
 import {
@@ -9,7 +9,7 @@ import {
 } from './authenticationApi';
 import { selectChatsExist } from '../Chat/selectors';
 
-import type { AppUser } from './authenticationApi';
+import type { Account, AppUser, Mentor, User } from './authenticationApi';
 
 const initialState: AppUser = defaultAppUser;
 
@@ -18,6 +18,15 @@ export const user = createSlice({
   name: 'user',
   reducers: {
     logout: () => initialState,
+    setAccount: (state, action: PayloadAction<Account>) => {
+      state.account = action.payload;
+    },
+    setMentor: (state, action: PayloadAction<Mentor>) => {
+      state.mentor = action.payload;
+    },
+    setUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -64,3 +73,5 @@ export const selectAppRole = createSelector(
     return userRole;
   },
 );
+
+export const { setAccount, setMentor, setUser } = user.actions;
