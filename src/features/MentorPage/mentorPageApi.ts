@@ -7,6 +7,11 @@ import { capitalize } from '@/utils/utils';
 import toast from 'react-hot-toast';
 import { t } from 'i18next';
 
+import {
+  authenticationApi,
+  type MentorUser,
+} from '../Authentication/authenticationApi';
+
 type ApiMentor = D.TypeOf<typeof mentorCodec>;
 
 export const mentorCodec = D.struct({
@@ -65,10 +70,12 @@ const toMentorRecord = ({ resources }: MentorsResponse) =>
 export const mentorsApi = createApi({
   baseQuery: refreshingBaseQuery,
   reducerPath: 'mentors',
+  tagTypes: ['mentors'],
 
   endpoints: builder => ({
     getMentors: builder.query<Mentors, void>({
       query: () => 'mentors',
+      providesTags: ['mentors'],
       transformResponse: (response: unknown) =>
         parseAndTransformTo(
           response,
@@ -82,6 +89,23 @@ export const mentorsApi = createApi({
           await queryFulfilled;
         } catch (err) {
           toast.error(t('mentors:notification.fetchingMentorsError'));
+        }
+      },
+    }),
+    updateMentor: builder.mutation<unknown, MentorUser>({
+      query: mentor => ({
+        url: `mentors/${mentor.id}`,
+        method: 'put',
+        body: mentor,
+      }),
+      invalidatesTags: ['mentors'],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(authenticationApi.util.invalidateTags(['myuser']));
+          toast.success('Profiili päivitettty onnistuneesti!');
+        } catch (err) {
+          toast.error('Profiilin päivitys epäonnistui!');
         }
       },
     }),
@@ -177,4 +201,4 @@ export const selectMentorById = (buddyId: string) =>
     mentors => mentors.data?.[buddyId] ?? undefined,
   );
 
-export const { useGetMentorsQuery } = mentorsApi;
+export const { useGetMentorsQuery, useUpdateMentorMutation } = mentorsApi;

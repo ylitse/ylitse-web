@@ -10,7 +10,6 @@ import { chatApi } from '@/features/Chat/chatPageApi';
 import { chats } from './features/Chat/chatSlice';
 import { mentorsApi } from '@/features/MentorPage/mentorPageApi';
 import { mentorsFilter } from '@/features/MentorPage/mentorsFilterSlice';
-import { profilePageApi } from './features/ProfilePage/profilePageApi';
 import { user } from './features/Authentication/userSlice';
 
 const rootReducer = combineReducers({
@@ -20,7 +19,6 @@ const rootReducer = combineReducers({
   [authenticationApi.reducerPath]: authenticationApi.reducer,
   [chatApi.reducerPath]: chatApi.reducer,
   [mentorsApi.reducerPath]: mentorsApi.reducer,
-  [profilePageApi.reducerPath]: profilePageApi.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
@@ -29,8 +27,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
       getDefaultMiddleware({ immutableCheck: true })
         .concat(authenticationApi.middleware)
         .concat(chatApi.middleware)
-        .concat(mentorsApi.middleware)
-        .concat(profilePageApi.middleware),
+        .concat(mentorsApi.middleware),
     preloadedState,
     reducer: rootReducer,
   });

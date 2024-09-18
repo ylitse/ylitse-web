@@ -7,7 +7,7 @@ import {
   selectIsMentor,
 } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
-import { useDeleteAccountMutation } from '@/features/ProfilePage/profilePageApi';
+import { useDeleteAccountMutation } from '@/features/Authentication/authenticationApi';
 import { useLogoutMutation } from '@/features/Authentication/authenticationApi';
 
 import AdminIcon from '@/static/icons/admin.svg';
@@ -26,23 +26,18 @@ const AccountInfo = () => {
   const { t } = useTranslation('profile');
   const { id, login_name: loginName, role } = useAppSelector(selectAccount);
   const isMentor = useAppSelector(selectIsMentor);
-  const [deleteAccount, { isError, isSuccess }] = useDeleteAccountMutation();
+  const [deleteAccount, { isSuccess: isDeleteSuccess }] =
+    useDeleteAccountMutation();
   const [logout] = useLogoutMutation();
+
+  useEffect(() => {
+    if (isDeleteSuccess) logout();
+  }, [isDeleteSuccess]);
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
   const openDeleteConfirmation = () => setIsDeleteConfirmationOpen(true);
   const closeDeleteConfirmation = () => setIsDeleteConfirmationOpen(false);
-
-  useEffect(() => {
-    if (isError) {
-      // TODO: Show error notification
-    }
-  }, [isError]);
-
-  useEffect(() => {
-    if (isSuccess) logout();
-  }, [isSuccess]);
 
   const userRoleIcons = {
     admin: <img src={AdminIcon} />,

@@ -1,7 +1,6 @@
 import { createSelector } from 'reselect';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { RootState } from '@/store';
 import {
   authenticationApi,
   defaultAppUser,
@@ -9,7 +8,8 @@ import {
 } from './authenticationApi';
 import { selectChatsExist } from '../Chat/selectors';
 
-import type { Account, AppUser, Mentor, User } from './authenticationApi';
+import type { Account, AppUser, MentorUser, User } from './authenticationApi';
+import type { RootState } from '@/store';
 
 const initialState: AppUser = defaultAppUser;
 
@@ -21,7 +21,7 @@ export const user = createSlice({
     setAccount: (state, action: PayloadAction<Account>) => {
       state.account = action.payload;
     },
-    setMentor: (state, action: PayloadAction<Mentor>) => {
+    setMentor: (state, action: PayloadAction<MentorUser>) => {
       state.mentor = action.payload;
     },
     setUser: (state, action: PayloadAction<User>) => {

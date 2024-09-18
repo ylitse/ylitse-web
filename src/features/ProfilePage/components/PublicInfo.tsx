@@ -1,15 +1,12 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-  selectMentor,
-  selectUser,
-  setMentor,
-  setUser,
-} from '@/features/Authentication/userSlice';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { selectMentor, selectUser } from '@/features/Authentication/userSlice';
+import { useAppSelector } from '@/store';
 import { useDebounce } from '@/hooks/useDebounce';
+import { useUpdateMentorMutation } from '@/features/MentorPage/mentorPageApi';
+import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
 
 import {
   DEFAULT_ICON_SIZE,
@@ -20,22 +17,18 @@ import LabeledInput from '@/components/LabeledInput';
 import Slider from '@/components/Slider';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
-import {
-  useUpdateMentorMutation,
-  useUpdateUserMutation,
-} from '../profilePageApi';
 
-import type { Mentor, User } from '@/features/Authentication/authenticationApi';
+import type {
+  MentorUser,
+  User,
+} from '@/features/Authentication/authenticationApi';
 
 const PublicInfo = () => {
   const { t } = useTranslation('profile');
-  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const mentor = useAppSelector(selectMentor);
-  const [updateUser, { isError: isUserError, isSuccess: isUserSuccess }] =
-    useUpdateUserMutation();
-  const [updateMentor, { isError: isMentorError, isSuccess: isMentorSuccess }] =
-    useUpdateMentorMutation();
+  const [updateUser] = useUpdateUserMutation();
+  const [updateMentor] = useUpdateMentorMutation();
 
   const [birthYear, setBirthYear] = useState(String(mentor.birth_year));
   const [displayName, setDisplayName] = useState(mentor.display_name);
@@ -45,58 +38,51 @@ const PublicInfo = () => {
   const [story, setStory] = useState(mentor.story);
   const [topicSearchValue, setTopicSearchValue] = useState('');
 
-  const toggleIsAbsent = () => setIsAbsent(!isAbsent);
-
-  const userToSave: User = {
-    ...user,
-    display_name: displayName,
-  };
-
-  const mentorToSave: Mentor = {
-    ...mentor,
-    birth_year: Number(birthYear),
-    display_name: displayName,
-    is_vacationing: isAbsent,
-    region,
-    status_message: status,
-    story,
-  };
-
-  useEffect(() => {
-    if (isUserError || isMentorError) {
-      // TODO: Show error notification
-    }
-  }, [isUserError, isMentorError]);
-
-  useEffect(() => {
-    if (isUserSuccess) dispatch(setUser(userToSave));
-  }, [isUserSuccess]);
-
-  useEffect(() => {
-    if (isMentorSuccess) {
-      dispatch(setMentor(mentorToSave));
-      // TODO: Show success notification
-    }
-  }, [isMentorSuccess]);
-
-  const saveMentor = useDebounce(
-    () => updateMentor(mentorToSave),
+  const saveMentorData = useDebounce(
+    (mentor: MentorUser) => updateMentor(mentor),
     SAVE_DELAY_MS,
   );
 
-  const saveUserAndMentor = useDebounce(() => {
-    updateUser(userToSave);
-    updateMentor(mentorToSave);
-  }, SAVE_DELAY_MS);
+  const saveUserAndMentorData = useDebounce(
+    (mentor: MentorUser, user: User) => {
+      updateUser(user);
+      updateMentor(mentor);
+    },
+    SAVE_DELAY_MS,
+  );
 
-  useEffect(() => {
-    if (Number(birthYear) !== mentor.birth_year) saveMentor();
-    if (displayName !== mentor.display_name) saveUserAndMentor();
-    if (isAbsent !== mentor.is_vacationing) saveMentor();
-    if (region !== mentor.region) saveMentor();
-    if (status !== mentor.status_message) saveMentor();
-    if (story !== mentor.story) saveMentor();
-  }, [birthYear, displayName, isAbsent, region, status, story]);
+  const handleDisplayNameChange = (updatedDisplayName: string) => {
+    setDisplayName(updatedDisplayName);
+    saveUserAndMentorData(
+      { ...mentor, display_name: updatedDisplayName },
+      { ...user, display_name: updatedDisplayName },
+    );
+  };
+
+  const handleBirthYearChange = (updatedBirthYear: string) => {
+    setBirthYear(updatedBirthYear);
+    saveMentorData({ ...mentor, birth_year: Number(updatedBirthYear) });
+  };
+
+  const handleRegionChange = (updatedRegion: string) => {
+    setRegion(updatedRegion);
+    saveMentorData({ ...mentor, region: updatedRegion });
+  };
+
+  const handleStatusChange = (updatedStatus: string) => {
+    setStatus(updatedStatus);
+    saveMentorData({ ...mentor, status_message: updatedStatus });
+  };
+
+  const handleIsAbsentChange = () => {
+    setIsAbsent(!isAbsent);
+    saveMentorData({ ...mentor, is_vacationing: !isAbsent });
+  };
+
+  const handleStoryChange = (updatedStory: string) => {
+    setStory(updatedStory);
+    saveMentorData({ ...mentor, story: updatedStory });
+  };
 
   return (
     <Container>
@@ -108,25 +94,25 @@ const PublicInfo = () => {
           <Column>
             <LabeledInput
               label={t('public.mentor.displayName')}
-              onChange={setDisplayName}
+              onChange={handleDisplayNameChange}
               value={displayName}
             />
             <LabeledInput
               label={t('public.mentor.birthYear')}
-              onChange={setBirthYear}
-              value={String(birthYear)}
+              onChange={handleBirthYearChange}
+              value={birthYear}
               type="number"
             />
             <LabeledInput
               label={t('public.mentor.region')}
-              onChange={setRegion}
+              onChange={handleRegionChange}
               value={region}
             />
           </Column>
           <Column>
             <LabeledInput
               label={t('public.mentor.status')}
-              onChange={setStatus}
+              onChange={handleStatusChange}
               value={status}
             />
             <Text variant="label">{t('public.mentor.absence.title')}</Text>
@@ -135,7 +121,7 @@ const PublicInfo = () => {
               label={t(
                 `public.mentor.absence.switch.${isAbsent ? 'on' : 'off'}`,
               )}
-              onChange={toggleIsAbsent}
+              onChange={handleIsAbsentChange}
               value={isAbsent}
             />
             <Text variant="blueBox">{t('public.mentor.absence.info')}</Text>
@@ -144,7 +130,7 @@ const PublicInfo = () => {
         <Text variant="label">{t('public.mentor.story')}</Text>
         <StoryInput
           variant="textarea"
-          onChange={setStory}
+          onChange={handleStoryChange}
           rows={4}
           value={story}
         />

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectAccount, setAccount } from '@/features/Authentication/userSlice';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { useUpdateAccountMutation } from '../profilePageApi';
+import { selectAccount } from '@/features/Authentication/userSlice';
+import { useAppSelector } from '@/store';
+import { useUpdateAccountMutation } from '@/features/Authentication/authenticationApi';
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
@@ -16,10 +16,8 @@ import type { Account } from '@/features/Authentication/authenticationApi';
 
 const EmailEditor = () => {
   const { t } = useTranslation('profile');
-  const dispatch = useAppDispatch();
   const account = useAppSelector(selectAccount);
-  const [updateAccount, { isError, isLoading, isSuccess }] =
-    useUpdateAccountMutation();
+  const [updateAccount, { isLoading, isSuccess }] = useUpdateAccountMutation();
 
   const [email, setEmail] = useState(account.email);
   const [isOpen, setIsOpen] = useState(false);
@@ -36,17 +34,7 @@ const EmailEditor = () => {
   };
 
   useEffect(() => {
-    if (isError) {
-      // TODO: Show error notification
-    }
-  }, [isError]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(setAccount(accountToSave));
-      setIsOpen(false);
-      // TODO: Show success notification
-    }
+    if (isSuccess) setIsOpen(false);
   }, [isSuccess]);
 
   return isOpen ? (

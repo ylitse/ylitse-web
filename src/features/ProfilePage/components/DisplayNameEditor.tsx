@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectUser, setUser } from '@/features/Authentication/userSlice';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { useUpdateUserMutation } from '../profilePageApi';
+import { selectUser } from '@/features/Authentication/userSlice';
+import { useAppSelector } from '@/store';
+import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
@@ -19,10 +19,8 @@ import type { User } from '@/features/Authentication/authenticationApi';
 
 const DisplayNameEditor = () => {
   const { t } = useTranslation('profile');
-  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
-  const [updateUser, { isError, isLoading, isSuccess }] =
-    useUpdateUserMutation();
+  const [updateUser, { isLoading, isSuccess }] = useUpdateUserMutation();
 
   const [displayName, setDisplayName] = useState(user.display_name);
   const [isOpen, setIsOpen] = useState(false);
@@ -34,17 +32,7 @@ const DisplayNameEditor = () => {
   const userToSave: User = { ...user, display_name: displayName };
 
   useEffect(() => {
-    if (isError) {
-      // TODO: Show error notification
-    }
-  }, [isError]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(setUser(userToSave));
-      setIsOpen(false);
-      // TODO: Show success notification
-    }
+    if (isSuccess) setIsOpen(false);
   }, [isSuccess]);
 
   return isOpen ? (

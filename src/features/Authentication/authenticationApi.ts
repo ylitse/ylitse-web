@@ -1,6 +1,7 @@
 import * as D from 'io-ts/Decoder';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { pipe } from 'fp-ts/lib/function';
+import toast from 'react-hot-toast';
 
 import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
 
@@ -53,12 +54,12 @@ const myuserResponse = pipe(commonResponse, D.intersect(mentorResponse));
 export type UserRole = D.TypeOf<typeof role>;
 
 export type Account = D.TypeOf<typeof accountCodec>;
-export type Mentor = D.TypeOf<typeof mentorCodec>;
+export type MentorUser = D.TypeOf<typeof mentorCodec>;
 export type User = D.TypeOf<typeof userCodec>;
 
 export type AppUser = {
   account: Account;
-  mentor?: Mentor;
+  mentor?: MentorUser;
   user: User;
 };
 
@@ -70,7 +71,7 @@ export const defaultAccount: Account = {
   role: 'mentee',
 } as const;
 
-export const defaultMentor: Mentor = {
+export const defaultMentor: MentorUser = {
   account_id: '',
   active: false,
   birth_year: NaN,
@@ -101,13 +102,50 @@ export const defaultAppUser: AppUser = {
   user: defaultUser,
 };
 
+type PasswordUpdate = {
+  accountId: string;
+  currentPassword: string;
+  newPassword: string;
+};
+
 export const authenticationApi = createApi({
   baseQuery: refreshingBaseQuery,
   reducerPath: 'authentication',
+  tagTypes: ['myuser'],
 
   endpoints: builder => ({
+    changePassword: builder.mutation<unknown, PasswordUpdate>({
+      query: ({ accountId, currentPassword, newPassword }) => ({
+        url: `accounts/${accountId}/password`,
+        method: 'put',
+        body: { current_password: currentPassword, new_password: newPassword },
+      }),
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          toast.success('Salasana päivitetty onnistuneesti!');
+        } catch (err) {
+          toast.error('Salasanan päivitys epäonnistui!');
+        }
+      },
+    }),
+    deleteAccount: builder.mutation<unknown, string>({
+      query: accountId => ({
+        url: `accounts/${accountId}`,
+        method: 'delete',
+      }),
+      invalidatesTags: ['myuser'],
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error('Tilin poisto epäonnistui!');
+        }
+      },
+    }),
     getMe: builder.query<AppUser, void>({
       query: () => 'myuser',
+      providesTags: ['myuser'],
       transformResponse: (response: unknown) =>
         parseAndTransformTo(
           response,
@@ -119,7 +157,45 @@ export const authenticationApi = createApi({
     logout: builder.mutation<unknown, void>({
       query: () => 'logout',
     }),
+    updateAccount: builder.mutation<unknown, Account>({
+      query: account => ({
+        url: `accounts/${account.id}`,
+        method: 'put',
+        body: account,
+      }),
+      invalidatesTags: ['myuser'],
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          toast.success('Profiili päivitettty onnistuneesti!');
+        } catch (err) {
+          toast.error('Profiilin päivitys epäonnistui!');
+        }
+      },
+    }),
+    updateUser: builder.mutation<unknown, User>({
+      query: user => ({
+        url: `users/${user.id}`,
+        method: 'put',
+        body: user,
+      }),
+      invalidatesTags: ['myuser'],
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          toast.success('Profiili päivitettty onnistuneesti!');
+        } catch (err) {
+          toast.error('Profiilin päivitys epäonnistui!');
+        }
+      },
+    }),
   }),
 });
 
-export const { useLogoutMutation } = authenticationApi;
+export const {
+  useChangePasswordMutation,
+  useDeleteAccountMutation,
+  useLogoutMutation,
+  useUpdateAccountMutation,
+  useUpdateUserMutation,
+} = authenticationApi;

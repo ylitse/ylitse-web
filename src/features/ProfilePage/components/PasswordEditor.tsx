@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { selectAccountId } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
-import { useChangePasswordMutation } from '../profilePageApi';
+import { useChangePasswordMutation } from '@/features/Authentication/authenticationApi';
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
@@ -15,7 +15,7 @@ import Text from '@/components/Text';
 const PasswordEditor = () => {
   const { t } = useTranslation('profile');
   const accountId = useAppSelector(selectAccountId);
-  const [changePassword, { isLoading, isError, isSuccess }] =
+  const [changePassword, { isLoading, isSuccess }] =
     useChangePasswordMutation();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -30,9 +30,6 @@ const PasswordEditor = () => {
   const toggleIsOpen = () => setIsOpen(!isOpen);
   const touchNewPassword = () => setIsNewPasswordTouched(true);
   const touchRepeatedPassword = () => setIsRepeatedPasswordTouched(true);
-
-  const [isCurrentPasswordInvalid, setIsCurrentPasswordInvalid] =
-    useState(false);
 
   const isPasswordTooShort =
     isNewPasswordTouched && newPassword.length < PASSWORD_MIN_LENGTH;
@@ -49,18 +46,8 @@ const PasswordEditor = () => {
     arePasswordsNotMatching;
 
   useEffect(() => {
-    if (isSuccess) {
-      setIsOpen(false);
-      // TODO: Show success notification
-    }
+    if (isSuccess) setIsOpen(false);
   }, [isSuccess]);
-
-  useEffect(() => {
-    if (isError) {
-      setIsCurrentPasswordInvalid(true);
-      // TODO: Show error notification
-    }
-  }, [isError]);
 
   const savePassword = () =>
     changePassword({ accountId, currentPassword, newPassword });
@@ -68,9 +55,6 @@ const PasswordEditor = () => {
   return isOpen ? (
     <Section>
       <PasswordInput
-        error={
-          isCurrentPasswordInvalid ? t('account.password.error.invalid') : null
-        }
         label={t('account.password.current')}
         onChange={setCurrentPassword}
         value={currentPassword}
