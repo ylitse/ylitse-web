@@ -103,9 +103,9 @@ export const mentorsApi = createApi({
         try {
           await queryFulfilled;
           dispatch(authenticationApi.util.invalidateTags(['myuser']));
-          toast.success('Profiili päivitettty onnistuneesti!');
+          toast.success(t('profile:notification.success.update'));
         } catch (err) {
-          toast.error('Profiilin päivitys epäonnistui!');
+          toast.error(t('profile:notification.failure.update'));
         }
       },
     }),

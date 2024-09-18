@@ -37,6 +37,17 @@
     "save": "Save",
     "title": "Account"
   },
+  "notification": {
+    "success": {
+      "password": "Password updated successfully",
+      "update": "Profile updated successfully"
+    },
+    "failure": {
+      "delete": "Account deletion failed",
+      "password": "Password update failed",
+      "update": "Profile update failed"
+    }
+  },
   "public": {
     "displayName": {
       "label": "Display name",

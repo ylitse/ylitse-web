@@ -1,6 +1,7 @@
 import * as D from 'io-ts/Decoder';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { pipe } from 'fp-ts/lib/function';
+import { t } from 'i18next';
 import toast from 'react-hot-toast';
 
 import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
@@ -123,9 +124,9 @@ export const authenticationApi = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success('Salasana päivitetty onnistuneesti!');
+          toast.success(t('profile:notification.success.password'));
         } catch (err) {
-          toast.error('Salasanan päivitys epäonnistui!');
+          toast.error(t('profile:notification.failure.password'));
         }
       },
     }),
@@ -139,7 +140,7 @@ export const authenticationApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error('Tilin poisto epäonnistui!');
+          toast.error(t('profile:notification.failure.delete'));
         }
       },
     }),
@@ -167,9 +168,9 @@ export const authenticationApi = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success('Profiili päivitettty onnistuneesti!');
+          toast.success(t('profile:notification.success.update'));
         } catch (err) {
-          toast.error('Profiilin päivitys epäonnistui!');
+          toast.error(t('profile:notification.failure.update'));
         }
       },
     }),
@@ -183,9 +184,9 @@ export const authenticationApi = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success('Profiili päivitettty onnistuneesti!');
+          toast.success(t('profile:notification.success.update'));
         } catch (err) {
-          toast.error('Profiilin päivitys epäonnistui!');
+          toast.error(t('profile:notification.failure.update'));
         }
       },
     }),
