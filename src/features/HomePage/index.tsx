@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { selectHasUnreadMessages } from '@/features/Chat/selectors';
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
+import type { UserRole } from '@/features/Authentication/authenticationApi';
 
 import Announcements from './components/Announcements';
 import Background from '@/static/img/mountain-background.svg';
@@ -19,9 +20,14 @@ import ProfileWidget from './components/ProfileWidget';
 import PageWithTransition from '@/components/PageWithTransition';
 import Welcome from './components/Welcome';
 
-const HomePage = () => {
+type Props = {
+  userRole: UserRole;
+};
+
+const HomePage = ({ userRole }: Props) => {
   const hasUnreadMessages = useAppSelector(selectHasUnreadMessages);
   const { isTablet } = useGetLayoutMode();
+  const isMentor = userRole === 'mentor';
 
   return isTablet ? (
     <PageWithTransition>
@@ -42,6 +48,7 @@ const HomePage = () => {
           {hasUnreadMessages ? <NewMessages /> : <Welcome />}
           <Announcements />
           <ProfileWidget />
+          {isMentor ? <ProfileWidget /> : <></>}
         </LeftMiddleContainer>
         <RightMiddleContainer>
           <Concepts />

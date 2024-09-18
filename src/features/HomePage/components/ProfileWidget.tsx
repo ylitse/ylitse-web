@@ -13,13 +13,18 @@ const ProfileWidget = ({ isMobile = false }: Props) => {
 
   return (
     <Container isDesktop={!isMobile}>
-      <Text variant="h2">{t('profileWidget.title')}</Text>
-      <InfoBox>
-        <Text>{t('profileWidget.statusMessage')}</Text>
-      </InfoBox>
-      <InfoBox>
-        <Text>{t('profileWidget.status')}</Text>
-      </InfoBox>
+      <Text variant="boldBaloo">{t('profileWidget.title')}</Text>
+      <MiddleContainer>
+        <InfoBox>
+          <Text variant="bold">{t('profileWidget.statusMessage')}</Text>
+          <Text variant="p">Statusteksti</Text>
+        </InfoBox>
+        <InfoBox>
+          <Text variant="bold">{t('profileWidget.status')}</Text>
+          <Text variant="p">Päällä</Text>
+        </InfoBox>
+      </MiddleContainer>
+      <Text variant="p">{t('profileWidget.text')}</Text>
     </Container>
   );
 };
@@ -27,8 +32,15 @@ const ProfileWidget = ({ isMobile = false }: Props) => {
 const InfoBox = styled.div`
   background-color: ${palette.blueWhite};
   display: flex;
-  margin: 1rem;
-  padding: 1rem;
+  margin: 1rem 0 1rem 0;
+  padding: 1rem 0 1rem 0;
+  width: 49%;
+`;
+
+const MiddleContainer = styled.div`
+  display: flex;
+  flex-direction: 'row';
+  justify-content: space-between;
 `;
 
 const Container = styled.div<{ isDesktop: boolean }>`
