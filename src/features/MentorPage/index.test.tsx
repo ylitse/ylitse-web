@@ -7,6 +7,8 @@ import { rest } from 'msw';
 const mentorsResponse = {
   resources: [
     {
+      account_id: 'account_id_1',
+      active: true,
       birth_year: 1991,
       communication_channels: [],
       created: '2020-01-01T00:00:00.000000',
@@ -22,6 +24,8 @@ const mentorsResponse = {
       user_id: 'user_id_1',
     },
     {
+      account_id: 'account_id_2',
+      active: true,
       birth_year: 1998,
       communication_channels: [],
       created: '2022-02-02T00:00:00.000000',
