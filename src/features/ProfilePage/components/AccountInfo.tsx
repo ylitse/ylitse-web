@@ -8,7 +8,6 @@ import {
 } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 import { useDeleteAccountMutation } from '@/features/Authentication/authenticationApi';
-import { useLogoutMutation } from '@/features/Authentication/authenticationApi';
 
 import AdminIcon from '@/static/icons/admin.svg';
 import Dialog from '@/components/Dialog';
@@ -27,16 +26,6 @@ const AccountInfo = () => {
   const { id, login_name: loginName, role } = useAppSelector(selectAccount);
   const isMentor = useAppSelector(selectIsMentor);
   const [deleteAccount] = useDeleteAccountMutation();
-  const [logout] = useLogoutMutation();
-
-  const confirmDeletion = async () => {
-    try {
-      await deleteAccount(id).unwrap();
-      logout();
-    } catch (err) {
-      return;
-    }
-  };
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
@@ -57,7 +46,7 @@ const AccountInfo = () => {
           closeText={t('account.delete.cancel')}
           confirmText={t('account.delete.confirm')}
           onClose={closeDeleteConfirmation}
-          onConfirm={confirmDeletion}
+          onConfirm={() => deleteAccount(id)}
           description={t('account.delete.description')}
           title={t('account.delete.title')}
         />

@@ -4,7 +4,10 @@ import { pipe } from 'fp-ts/lib/function';
 import { t } from 'i18next';
 import toast from 'react-hot-toast';
 
+import { mentorCodec } from '../MentorPage/mentorPageApi';
 import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
+
+import type { ApiMentor } from '../MentorPage/mentorPageApi';
 
 export const role = D.literal('mentee', 'mentor', 'admin');
 
@@ -24,23 +27,6 @@ const accountCodec = D.struct({
   role: role,
 });
 
-const mentorCodec = D.struct({
-  account_id: D.string,
-  active: D.boolean,
-  birth_year: D.number,
-  communication_channels: D.array(D.string),
-  display_name: D.string,
-  gender: D.string,
-  id: D.string,
-  is_vacationing: D.boolean,
-  languages: D.array(D.string),
-  region: D.string,
-  skills: D.array(D.string),
-  status_message: D.string,
-  story: D.string,
-  user_id: D.string,
-});
-
 const commonResponse = D.struct({
   account: accountCodec,
   user: userCodec,
@@ -55,12 +41,11 @@ const myuserResponse = pipe(commonResponse, D.intersect(mentorResponse));
 export type UserRole = D.TypeOf<typeof role>;
 
 export type Account = D.TypeOf<typeof accountCodec>;
-export type MentorUser = D.TypeOf<typeof mentorCodec>;
 export type User = D.TypeOf<typeof userCodec>;
 
 export type AppUser = {
   account: Account;
-  mentor?: MentorUser;
+  mentor?: ApiMentor;
   user: User;
 };
 
@@ -72,11 +57,12 @@ export const defaultAccount: Account = {
   role: 'mentee',
 } as const;
 
-export const defaultMentor: MentorUser = {
+export const defaultMentor: ApiMentor = {
   account_id: '',
   active: false,
   birth_year: NaN,
   communication_channels: [],
+  created: '',
   display_name: '',
   gender: '',
   id: '',

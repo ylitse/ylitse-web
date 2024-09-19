@@ -18,10 +18,8 @@ import Slider from '@/components/Slider';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 
-import type {
-  MentorUser,
-  User,
-} from '@/features/Authentication/authenticationApi';
+import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
+import type { User } from '@/features/Authentication/authenticationApi';
 
 const PublicInfo = () => {
   const { t } = useTranslation('profile');
@@ -31,25 +29,17 @@ const PublicInfo = () => {
   const [updateMentor] = useUpdateMentorMutation();
 
   const saveMentorData = useDebounce(
-    (mentor: MentorUser) => updateMentor(mentor),
+    (mentor: ApiMentor) => updateMentor(mentor),
     SAVE_DELAY_MS,
   );
 
-  const saveUserAndMentorData = useDebounce(
-    (mentor: MentorUser, user: User) => {
-      updateUser(user);
-      updateMentor(mentor);
-    },
-    SAVE_DELAY_MS,
-  );
+  const saveUserAndMentorData = useDebounce((mentor: ApiMentor, user: User) => {
+    updateUser(user);
+    updateMentor(mentor);
+  }, SAVE_DELAY_MS);
 
-  const [localData, setLocalData] = useState<MentorUser>(mentor);
+  const [localData, setLocalData] = useState<ApiMentor>(mentor);
   const [skillSearchValue, setSkillSearchValue] = useState('');
-
-  const updateMentorData = (key: keyof MentorUser, value: string) => {
-    setLocalData({ ...localData, [key]: value });
-    saveMentorData({ ...mentor, [key]: value });
-  };
 
   const handleDisplayNameChange = (display_name: string) => {
     setLocalData({ ...localData, display_name });
@@ -59,23 +49,13 @@ const PublicInfo = () => {
     );
   };
 
-  const handleBirthYearChange = (birth_year: string) => {
-    setLocalData({ ...localData, birth_year: Number(birth_year) });
-    saveMentorData({ ...mentor, birth_year: Number(birth_year) });
+  const updateMentorData = <K extends keyof ApiMentor>(
+    key: K,
+    value: ApiMentor[K],
+  ) => {
+    setLocalData({ ...localData, [key]: value });
+    saveMentorData({ ...mentor, [key]: value });
   };
-
-  const handleIsVacationingChange = () => {
-    setLocalData({ ...localData, is_vacationing: !localData.is_vacationing });
-    saveMentorData({ ...mentor, is_vacationing: !localData.is_vacationing });
-  };
-
-  const handleRegionChange = (value: string) =>
-    updateMentorData('region', value);
-
-  const handleStatusMessageChange = (value: string) =>
-    updateMentorData('status_message', value);
-
-  const handleStoryChange = (value: string) => updateMentorData('story', value);
 
   return (
     <Container>
@@ -92,20 +72,20 @@ const PublicInfo = () => {
             />
             <LabeledInput
               label={t('public.mentor.birthYear')}
-              onChange={handleBirthYearChange}
+              onChange={value => updateMentorData('birth_year', Number(value))}
               value={String(localData.birth_year)}
               type="number"
             />
             <LabeledInput
               label={t('public.mentor.region')}
-              onChange={handleRegionChange}
+              onChange={value => updateMentorData('region', value)}
               value={localData.region}
             />
           </Column>
           <Column>
             <LabeledInput
               label={t('public.mentor.statusMessage')}
-              onChange={handleStatusMessageChange}
+              onChange={value => updateMentorData('status_message', value)}
               value={localData.status_message}
             />
             <Text variant="label">{t('public.mentor.vacation.title')}</Text>
@@ -116,7 +96,9 @@ const PublicInfo = () => {
                   localData.is_vacationing ? 'on' : 'off'
                 }`,
               )}
-              onChange={handleIsVacationingChange}
+              onChange={() =>
+                updateMentorData('is_vacationing', !localData.is_vacationing)
+              }
               value={localData.is_vacationing}
             />
             <Text variant="blueBox">{t('public.mentor.vacation.info')}</Text>
@@ -125,7 +107,7 @@ const PublicInfo = () => {
         <Text variant="label">{t('public.mentor.story')}</Text>
         <StoryInput
           variant="textarea"
-          onChange={handleStoryChange}
+          onChange={value => updateMentorData('story', value)}
           rows={4}
           value={localData.story}
         />

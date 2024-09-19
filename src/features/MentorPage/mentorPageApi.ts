@@ -7,14 +7,13 @@ import { capitalize } from '@/utils/utils';
 import toast from 'react-hot-toast';
 import { t } from 'i18next';
 
-import {
-  authenticationApi,
-  type MentorUser,
-} from '../Authentication/authenticationApi';
+import { authenticationApi } from '../Authentication/authenticationApi';
 
-type ApiMentor = D.TypeOf<typeof mentorCodec>;
+export type ApiMentor = D.TypeOf<typeof mentorCodec>;
 
 export const mentorCodec = D.struct({
+  account_id: D.string,
+  active: D.boolean,
   birth_year: D.number,
   communication_channels: D.array(D.string),
   created: D.string,
@@ -40,23 +39,29 @@ const toMentor = ({
   communication_channels,
   created,
   display_name,
+  gender,
   id,
   is_vacationing,
+  languages,
+  region,
   skills,
   status_message,
+  story,
   user_id,
-  ...props
 }: ApiMentor) => ({
-  ...props,
   age: new Date().getFullYear() - birth_year,
   buddyId: user_id,
   communicationChannels: communication_channels,
   created: new Date(created).getTime(),
+  gender,
   isVacationing: is_vacationing,
+  languages,
   mentorId: id,
   name: display_name,
+  region,
   skills: skills.map(skill => capitalize(skill)),
   statusMessage: status_message,
+  story,
 });
 
 export type Mentors = Record<string, Mentor>;
@@ -92,7 +97,7 @@ export const mentorsApi = createApi({
         }
       },
     }),
-    updateMentor: builder.mutation<unknown, MentorUser>({
+    updateMentor: builder.mutation<unknown, ApiMentor>({
       query: mentor => ({
         url: `mentors/${mentor.id}`,
         method: 'put',
