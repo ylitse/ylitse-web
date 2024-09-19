@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -26,13 +26,17 @@ const AccountInfo = () => {
   const { t } = useTranslation('profile');
   const { id, login_name: loginName, role } = useAppSelector(selectAccount);
   const isMentor = useAppSelector(selectIsMentor);
-  const [deleteAccount, { isSuccess: isDeleteSuccess }] =
-    useDeleteAccountMutation();
+  const [deleteAccount] = useDeleteAccountMutation();
   const [logout] = useLogoutMutation();
 
-  useEffect(() => {
-    if (isDeleteSuccess) logout();
-  }, [isDeleteSuccess]);
+  const confirmDeletion = async () => {
+    try {
+      await deleteAccount(id).unwrap();
+      logout();
+    } catch (err) {
+      return;
+    }
+  };
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
@@ -53,7 +57,7 @@ const AccountInfo = () => {
           closeText={t('account.delete.cancel')}
           confirmText={t('account.delete.confirm')}
           onClose={closeDeleteConfirmation}
-          onConfirm={() => deleteAccount(id)}
+          onConfirm={confirmDeletion}
           description={t('account.delete.description')}
           title={t('account.delete.title')}
         />

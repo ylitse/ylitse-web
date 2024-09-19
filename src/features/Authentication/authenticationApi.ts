@@ -136,9 +136,10 @@ export const authenticationApi = createApi({
         method: 'delete',
       }),
       invalidatesTags: ['myuser'],
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
+          dispatch(authenticationApi.endpoints.logout.initiate());
         } catch (err) {
           toast.error(t('profile:notification.failure.delete'));
         }

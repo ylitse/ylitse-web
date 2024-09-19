@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { selectAccountId } from '@/features/Authentication/userSlice';
@@ -15,8 +15,7 @@ import Text from '@/components/Text';
 const PasswordEditor = () => {
   const { t } = useTranslation('profile');
   const accountId = useAppSelector(selectAccountId);
-  const [changePassword, { isLoading, isSuccess }] =
-    useChangePasswordMutation();
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
@@ -45,12 +44,18 @@ const PasswordEditor = () => {
     isPasswordTooShort ||
     arePasswordsNotMatching;
 
-  useEffect(() => {
-    if (isSuccess) setIsOpen(false);
-  }, [isSuccess]);
-
-  const savePassword = () =>
-    changePassword({ accountId, currentPassword, newPassword });
+  const savePassword = async () => {
+    try {
+      await changePassword({
+        accountId,
+        currentPassword,
+        newPassword,
+      }).unwrap();
+      setIsOpen(false);
+    } catch (err) {
+      return;
+    }
+  };
 
   return isOpen ? (
     <Section>

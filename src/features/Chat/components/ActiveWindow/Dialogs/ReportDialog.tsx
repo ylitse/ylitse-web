@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { selectUserId } from '@/features/Authentication/userSlice';
@@ -22,17 +22,21 @@ const ReportDialog = ({ buddyId, close }: Props) => {
   const { t } = useTranslation('chat');
 
   const userId = useAppSelector(selectUserId);
-  const [reportMentor, { isSuccess }] = useReportMentorMutation();
-
-  useEffect(() => {
-    if (isSuccess) {
-      setIsReported(true);
-    }
-  }, [isSuccess]);
+  const [reportMentor] = useReportMentorMutation();
 
   const sendReportRequest = async () => {
-    if (!userId) return;
-    reportMentor({ buddyId, contactInfo, reportReason, userId });
+    try {
+      if (!userId) return;
+      await reportMentor({
+        buddyId,
+        contactInfo,
+        reportReason,
+        userId,
+      }).unwrap();
+      setIsReported(true);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const [isReported, setIsReported] = useState(false);

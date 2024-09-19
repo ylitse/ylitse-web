@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { selectUser } from '@/features/Authentication/userSlice';
@@ -15,12 +15,10 @@ import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';
 
-import type { User } from '@/features/Authentication/authenticationApi';
-
 const DisplayNameEditor = () => {
   const { t } = useTranslation('profile');
   const user = useAppSelector(selectUser);
-  const [updateUser, { isLoading, isSuccess }] = useUpdateUserMutation();
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
 
   const [displayName, setDisplayName] = useState(user.display_name);
   const [isOpen, setIsOpen] = useState(false);
@@ -29,11 +27,14 @@ const DisplayNameEditor = () => {
   const isTooShort = displayName.length < DISPLAY_NAME_MIN_LENGTH;
   const isSavingDisabled = isLoading || isTooShort;
 
-  const userToSave: User = { ...user, display_name: displayName };
-
-  useEffect(() => {
-    if (isSuccess) setIsOpen(false);
-  }, [isSuccess]);
+  const saveDisplayName = async () => {
+    try {
+      await updateUser({ ...user, display_name: displayName }).unwrap();
+      setIsOpen(false);
+    } catch (err) {
+      return;
+    }
+  };
 
   return isOpen ? (
     <Section>
@@ -49,7 +50,7 @@ const DisplayNameEditor = () => {
           {t('account.cancel')}
         </TextButton>
         <TextButton
-          onClick={() => updateUser(userToSave)}
+          onClick={saveDisplayName}
           variant={isSavingDisabled ? 'disabled' : 'dark'}
         >
           {t('account.save')}

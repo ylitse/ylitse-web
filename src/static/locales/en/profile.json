@@ -56,20 +56,20 @@
       "tooShortError": "Display name is too short"
     },
     "mentor": {
-      "absence": {
-        "info": "During absence mode, you cannot receive messages. Please specify the duration of your absence in your status message.",
+      "vacation": {
+        "info": "During vacation mode, you cannot receive messages. Please specify the duration of your vacation in your status message.",
         "switch": { "off": "Available", "on": "Not available" },
-        "title": "Absence mode"
+        "title": "Vacation mode"
       },
-      "addTopic": "Add new topic",
+      "addSkill": "Add new skill",
       "region": "Region",
       "birthYear": "Year of birth *",
       "displayName": "Display name *",
       "mandatoryNotice": "Fields marked with a star * are required.",
       "saveNotice": "Changes are saved automatically.",
-      "status": "Status message",
+      "statusMessage": "Status message",
       "story": "My story",
-      "topics": "My topics"
+      "skills": "My skills"
     },
     "title": "Public information"
   }

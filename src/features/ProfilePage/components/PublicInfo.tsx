@@ -30,14 +30,6 @@ const PublicInfo = () => {
   const [updateUser] = useUpdateUserMutation();
   const [updateMentor] = useUpdateMentorMutation();
 
-  const [birthYear, setBirthYear] = useState(String(mentor.birth_year));
-  const [displayName, setDisplayName] = useState(mentor.display_name);
-  const [isAbsent, setIsAbsent] = useState(mentor.is_vacationing);
-  const [region, setRegion] = useState(mentor.region);
-  const [status, setStatus] = useState(mentor.status_message);
-  const [story, setStory] = useState(mentor.story);
-  const [topicSearchValue, setTopicSearchValue] = useState('');
-
   const saveMentorData = useDebounce(
     (mentor: MentorUser) => updateMentor(mentor),
     SAVE_DELAY_MS,
@@ -51,38 +43,39 @@ const PublicInfo = () => {
     SAVE_DELAY_MS,
   );
 
-  const handleDisplayNameChange = (updatedDisplayName: string) => {
-    setDisplayName(updatedDisplayName);
+  const [localData, setLocalData] = useState<MentorUser>(mentor);
+  const [skillSearchValue, setSkillSearchValue] = useState('');
+
+  const updateMentorData = (key: keyof MentorUser, value: string) => {
+    setLocalData({ ...localData, [key]: value });
+    saveMentorData({ ...mentor, [key]: value });
+  };
+
+  const handleDisplayNameChange = (display_name: string) => {
+    setLocalData({ ...localData, display_name });
     saveUserAndMentorData(
-      { ...mentor, display_name: updatedDisplayName },
-      { ...user, display_name: updatedDisplayName },
+      { ...mentor, display_name },
+      { ...user, display_name },
     );
   };
 
-  const handleBirthYearChange = (updatedBirthYear: string) => {
-    setBirthYear(updatedBirthYear);
-    saveMentorData({ ...mentor, birth_year: Number(updatedBirthYear) });
+  const handleBirthYearChange = (birth_year: string) => {
+    setLocalData({ ...localData, birth_year: Number(birth_year) });
+    saveMentorData({ ...mentor, birth_year: Number(birth_year) });
   };
 
-  const handleRegionChange = (updatedRegion: string) => {
-    setRegion(updatedRegion);
-    saveMentorData({ ...mentor, region: updatedRegion });
+  const handleIsVacationingChange = () => {
+    setLocalData({ ...localData, is_vacationing: !localData.is_vacationing });
+    saveMentorData({ ...mentor, is_vacationing: !localData.is_vacationing });
   };
 
-  const handleStatusChange = (updatedStatus: string) => {
-    setStatus(updatedStatus);
-    saveMentorData({ ...mentor, status_message: updatedStatus });
-  };
+  const handleRegionChange = (value: string) =>
+    updateMentorData('region', value);
 
-  const handleIsAbsentChange = () => {
-    setIsAbsent(!isAbsent);
-    saveMentorData({ ...mentor, is_vacationing: !isAbsent });
-  };
+  const handleStatusMessageChange = (value: string) =>
+    updateMentorData('status_message', value);
 
-  const handleStoryChange = (updatedStory: string) => {
-    setStory(updatedStory);
-    saveMentorData({ ...mentor, story: updatedStory });
-  };
+  const handleStoryChange = (value: string) => updateMentorData('story', value);
 
   return (
     <Container>
@@ -95,36 +88,38 @@ const PublicInfo = () => {
             <LabeledInput
               label={t('public.mentor.displayName')}
               onChange={handleDisplayNameChange}
-              value={displayName}
+              value={localData.display_name}
             />
             <LabeledInput
               label={t('public.mentor.birthYear')}
               onChange={handleBirthYearChange}
-              value={birthYear}
+              value={String(localData.birth_year)}
               type="number"
             />
             <LabeledInput
               label={t('public.mentor.region')}
               onChange={handleRegionChange}
-              value={region}
+              value={localData.region}
             />
           </Column>
           <Column>
             <LabeledInput
-              label={t('public.mentor.status')}
-              onChange={handleStatusChange}
-              value={status}
+              label={t('public.mentor.statusMessage')}
+              onChange={handleStatusMessageChange}
+              value={localData.status_message}
             />
-            <Text variant="label">{t('public.mentor.absence.title')}</Text>
+            <Text variant="label">{t('public.mentor.vacation.title')}</Text>
             <Slider
-              id="isAbsent"
+              id="isVacationing"
               label={t(
-                `public.mentor.absence.switch.${isAbsent ? 'on' : 'off'}`,
+                `public.mentor.vacation.switch.${
+                  localData.is_vacationing ? 'on' : 'off'
+                }`,
               )}
-              onChange={handleIsAbsentChange}
-              value={isAbsent}
+              onChange={handleIsVacationingChange}
+              value={localData.is_vacationing}
             />
-            <Text variant="blueBox">{t('public.mentor.absence.info')}</Text>
+            <Text variant="blueBox">{t('public.mentor.vacation.info')}</Text>
           </Column>
         </Columns>
         <Text variant="label">{t('public.mentor.story')}</Text>
@@ -132,20 +127,20 @@ const PublicInfo = () => {
           variant="textarea"
           onChange={handleStoryChange}
           rows={4}
-          value={story}
+          value={localData.story}
         />
-        <Label variant="label">{t('public.mentor.topics')}</Label>
+        <Label variant="label">{t('public.mentor.skills')}</Label>
         <SearchBar>
-          <TopicSearch
+          <SkillSearch
             variant="iconInput"
-            color={topicSearchValue ? 'blueDark' : 'greyFaded'}
+            color={skillSearchValue ? 'blueDark' : 'greyFaded'}
             leftIcon={{
               sizeInPx: DEFAULT_ICON_SIZE.SMALL,
               variant: 'search',
             }}
-            onChange={setTopicSearchValue}
-            placeholder={t('public.mentor.addTopic')}
-            value={topicSearchValue}
+            onChange={setSkillSearchValue}
+            placeholder={t('public.mentor.addSkill')}
+            value={skillSearchValue}
           />
         </SearchBar>
       </Form>
@@ -210,7 +205,7 @@ const SearchBar = styled.div`
   margin-top: 1rem;
 `;
 
-const TopicSearch = styled(TextInput)`
+const SkillSearch = styled(TextInput)`
   max-width: 350px;
 
   &:focus {
