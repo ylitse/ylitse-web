@@ -21,7 +21,7 @@ const App = () => {
   const params = useAppSelector(selectCurrentPollingParams);
   const messageParams = !!params && !!userId ? { params, userId } : skipToken;
 
-  useGetContactsQuery(userId ?? skipToken);
+  useGetContactsQuery(userId.length ? userId : skipToken);
   useGetMessagesQuery(messageParams, {
     pollingInterval: 2000,
   });

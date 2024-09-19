@@ -1,33 +1,33 @@
 import { createSelector } from 'reselect';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { RootState } from '@/store';
-import { type UserRole, authenticationApi } from './authenticationApi';
+import {
+  authenticationApi,
+  defaultAppUser,
+  defaultMentor,
+} from './authenticationApi';
 import { selectChatsExist } from '../Chat/selectors';
 
-type User = {
-  active: boolean;
-  displayName: string;
-  email: string;
-  loginName: string;
-  userId: string | null;
-  userRole: UserRole | null;
-};
+import type { Account, AppUser, User } from './authenticationApi';
+import type { ApiMentor } from '../MentorPage/mentorPageApi';
+import type { RootState } from '@/store';
 
-const initialState: User = {
-  active: false,
-  displayName: '',
-  email: '',
-  loginName: '',
-  userId: null,
-  userRole: null,
-};
+const initialState: AppUser = defaultAppUser;
 
 export const user = createSlice({
   initialState: initialState,
   name: 'user',
   reducers: {
     logout: () => initialState,
+    setAccount: (state, action: PayloadAction<Account>) => {
+      state.account = action.payload;
+    },
+    setMentor: (state, action: PayloadAction<ApiMentor>) => {
+      state.mentor = action.payload;
+    },
+    setUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -44,20 +44,26 @@ export const user = createSlice({
   },
 });
 
-const selectUserState = ({ user }: RootState) => user;
+export const selectAccount = ({ user }: RootState) => user.account;
 
-export const selectIsLoggedIn = createSelector(selectUserState, ({ userId }) =>
-  Boolean(userId),
+export const selectMentor = ({ user }: RootState) =>
+  user.mentor ?? defaultMentor;
+
+export const selectUser = ({ user }: RootState) => user.user;
+
+export const selectIsLoggedIn = createSelector(selectUser, ({ id }) =>
+  Boolean(id),
 );
 
-export const selectUserId = createSelector(
-  selectUserState,
-  ({ userId }) => userId,
-);
+export const selectAccountId = createSelector(selectAccount, ({ id }) => id);
 
-export const selectUserRole = createSelector(
-  selectUserState,
-  ({ userRole }) => userRole ?? 'mentee',
+export const selectUserId = createSelector(selectUser, ({ id }) => id);
+
+const selectUserRole = createSelector(selectUser, ({ role }) => role);
+
+export const selectIsMentor = createSelector(
+  selectUserRole,
+  role => role === 'mentor',
 );
 
 export const selectAppRole = createSelector(
@@ -69,12 +75,4 @@ export const selectAppRole = createSelector(
   },
 );
 
-export const selectUserInfo = createSelector(
-  selectUserState,
-  ({ active, displayName, email, loginName }) => ({
-    active,
-    displayName,
-    email,
-    loginName,
-  }),
-);
+export const { setAccount, setMentor, setUser } = user.actions;

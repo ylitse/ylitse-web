@@ -2,8 +2,12 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectUserInfo } from '@/features/Authentication/userSlice';
+import {
+  selectAccount,
+  selectIsMentor,
+} from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useDeleteAccountMutation } from '@/features/Authentication/authenticationApi';
 
 import AdminIcon from '@/static/icons/admin.svg';
 import Dialog from '@/components/Dialog';
@@ -17,27 +21,16 @@ import { Section, Value } from '.';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 
-import type { UserRole } from '@/features/Authentication/authenticationApi';
-
-type Props = {
-  userRole: UserRole;
-};
-
-const AccountInfo = ({ userRole }: Props) => {
+const AccountInfo = () => {
   const { t } = useTranslation('profile');
-  const { loginName } = useAppSelector(selectUserInfo);
-
-  const isMentor = userRole === 'mentor';
+  const { id, login_name: loginName, role } = useAppSelector(selectAccount);
+  const isMentor = useAppSelector(selectIsMentor);
+  const [deleteAccount] = useDeleteAccountMutation();
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
   const openDeleteConfirmation = () => setIsDeleteConfirmationOpen(true);
   const closeDeleteConfirmation = () => setIsDeleteConfirmationOpen(false);
-
-  const deleteAccount = () => {
-    console.log('API: Delete account');
-    closeDeleteConfirmation();
-  };
 
   const userRoleIcons = {
     admin: <img src={AdminIcon} />,
@@ -53,7 +46,7 @@ const AccountInfo = ({ userRole }: Props) => {
           closeText={t('account.delete.cancel')}
           confirmText={t('account.delete.confirm')}
           onClose={closeDeleteConfirmation}
-          onConfirm={deleteAccount}
+          onConfirm={() => deleteAccount(id)}
           description={t('account.delete.description')}
           title={t('account.delete.title')}
         />
@@ -69,8 +62,8 @@ const AccountInfo = ({ userRole }: Props) => {
       <Section>
         <Text variant="label">{t('account.role.title')}</Text>
         <Role>
-          {userRoleIcons[userRole]}
-          <Text>{t(`account.role.${userRole}`)}</Text>
+          {userRoleIcons[role]}
+          <Text>{t(`account.role.${role}`)}</Text>
         </Role>
       </Section>
       <Section>
@@ -81,15 +74,16 @@ const AccountInfo = ({ userRole }: Props) => {
       <EmailEditor />
 
       {!isMentor && (
-        <Public>
-          <Text variant="h2">{t('public.title')}</Text>
-          <DisplayNameEditor />
-        </Public>
+        <>
+          <Public>
+            <Text variant="h2">{t('public.title')}</Text>
+            <DisplayNameEditor />
+          </Public>
+          <DeleteButton variant="danger" onClick={openDeleteConfirmation}>
+            {t('account.delete.title')}
+          </DeleteButton>
+        </>
       )}
-
-      <DeleteButton variant="danger" onClick={openDeleteConfirmation}>
-        {t('account.delete.title')}
-      </DeleteButton>
     </Container>
   );
 };

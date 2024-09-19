@@ -7,9 +7,13 @@ import { capitalize } from '@/utils/utils';
 import toast from 'react-hot-toast';
 import { t } from 'i18next';
 
-type ApiMentor = D.TypeOf<typeof apiMentorType>;
+import { authenticationApi } from '../Authentication/authenticationApi';
 
-const apiMentorType = D.struct({
+export type ApiMentor = D.TypeOf<typeof mentorCodec>;
+
+export const mentorCodec = D.struct({
+  account_id: D.string,
+  active: D.boolean,
   birth_year: D.number,
   communication_channels: D.array(D.string),
   created: D.string,
@@ -25,7 +29,7 @@ const apiMentorType = D.struct({
   user_id: D.string,
 });
 
-const mentorListResponseType = D.struct({ resources: D.array(apiMentorType) });
+const mentorListResponseType = D.struct({ resources: D.array(mentorCodec) });
 type MentorsResponse = D.TypeOf<typeof mentorListResponseType>;
 
 export type Mentor = ReturnType<typeof toMentor>;
@@ -35,23 +39,29 @@ const toMentor = ({
   communication_channels,
   created,
   display_name,
+  gender,
   id,
   is_vacationing,
+  languages,
+  region,
   skills,
   status_message,
+  story,
   user_id,
-  ...props
 }: ApiMentor) => ({
-  ...props,
   age: new Date().getFullYear() - birth_year,
   buddyId: user_id,
   communicationChannels: communication_channels,
   created: new Date(created).getTime(),
+  gender,
   isVacationing: is_vacationing,
+  languages,
   mentorId: id,
   name: display_name,
+  region,
   skills: skills.map(skill => capitalize(skill)),
   statusMessage: status_message,
+  story,
 });
 
 export type Mentors = Record<string, Mentor>;
@@ -65,10 +75,12 @@ const toMentorRecord = ({ resources }: MentorsResponse) =>
 export const mentorsApi = createApi({
   baseQuery: refreshingBaseQuery,
   reducerPath: 'mentors',
+  tagTypes: ['mentors'],
 
   endpoints: builder => ({
     getMentors: builder.query<Mentors, void>({
       query: () => 'mentors',
+      providesTags: ['mentors'],
       transformResponse: (response: unknown) =>
         parseAndTransformTo(
           response,
@@ -82,6 +94,23 @@ export const mentorsApi = createApi({
           await queryFulfilled;
         } catch (err) {
           toast.error(t('mentors:notification.fetchingMentorsError'));
+        }
+      },
+    }),
+    updateMentor: builder.mutation<unknown, ApiMentor>({
+      query: mentor => ({
+        url: `mentors/${mentor.id}`,
+        method: 'put',
+        body: mentor,
+      }),
+      invalidatesTags: ['mentors'],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(authenticationApi.util.invalidateTags(['myuser']));
+          toast.success(t('profile:notification.success.update'));
+        } catch (err) {
+          toast.error(t('profile:notification.failure.update'));
         }
       },
     }),
@@ -177,4 +206,4 @@ export const selectMentorById = (buddyId: string) =>
     mentors => mentors.data?.[buddyId] ?? undefined,
   );
 
-export const { useGetMentorsQuery } = mentorsApi;
+export const { useGetMentorsQuery, useUpdateMentorMutation } = mentorsApi;

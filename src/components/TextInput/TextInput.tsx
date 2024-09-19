@@ -1,6 +1,6 @@
 import CSS from 'csstype';
 import { ComponentPropsWithoutRef, ElementType } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components';
 
 import { ButtonIcon, iconVariants } from '@/components/Buttons/variants';
 import { Color, palette } from '@/components/constants';
@@ -9,13 +9,26 @@ import { TextInputElement, variants } from './variants';
 
 import type { TextInputVariant } from './variants';
 
+const NumberInputStyles = createGlobalStyle`
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+`;
+
+export type InputType = 'number' | 'password' | 'text';
+
 type TextInputProps<T extends ElementType> = {
   variant?: TextInputVariant;
   color?: Color;
   className?: string;
   isDisabled?: boolean;
   isError?: boolean;
-  isPassword?: boolean;
   id?: string;
   leftIcon?: {
     variant: ButtonIcon;
@@ -29,15 +42,16 @@ type TextInputProps<T extends ElementType> = {
   onBlur?: () => void;
   onChange: (value: string) => void;
   placeholder?: string;
+  type?: InputType;
   value: string;
 };
 
 export const TextInput = <T extends ElementType = TextInputElement>({
+  className,
   variant = 'input',
   color = 'blueDark',
   isDisabled = false,
   isError = false,
-  isPassword = false,
   id,
   leftIcon,
   rightButton,
@@ -45,6 +59,7 @@ export const TextInput = <T extends ElementType = TextInputElement>({
   onBlur,
   onChange,
   placeholder = '',
+  type = 'text',
   value,
 }: TextInputProps<T>): JSX.Element => {
   const TextInputElement = variants[variant].element;
@@ -57,21 +72,28 @@ export const TextInput = <T extends ElementType = TextInputElement>({
   };
   const variantColor: CSS.Properties = { color: palette[color] };
 
-  const type = isPassword ? 'password' : 'text';
+  const isNumberInput = type === 'number';
   const isTextArea = variant === 'textarea';
 
   return (
     <>
+      {isNumberInput && <NumberInputStyles />}
+
       {leftIcon && (
         <LeftIcon variant={leftIcon.variant} sizeInPx={leftIcon.sizeInPx} />
       )}
       <TextInputElement
+        className={className}
         disabled={isDisabled}
         id={id}
         onBlur={onBlur}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
-        style={{ ...variantStyles, ...variantBorder, ...variantColor }}
+        style={{
+          ...variantStyles,
+          ...variantBorder,
+          ...variantColor,
+        }}
         type={type}
         value={value}
         {...(isTextArea && { rows })}

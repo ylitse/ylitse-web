@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectUserInfo } from '@/features/Authentication/userSlice';
+import { selectAccount } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useUpdateAccountMutation } from '@/features/Authentication/authenticationApi';
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
@@ -13,24 +14,25 @@ import Text from '@/components/Text';
 
 const EmailEditor = () => {
   const { t } = useTranslation('profile');
-  const userInfo = useAppSelector(selectUserInfo);
+  const account = useAppSelector(selectAccount);
+  const [updateAccount, { isLoading }] = useUpdateAccountMutation();
 
+  const [email, setEmail] = useState(account.email);
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
-  const [email, setEmail] = useState<string>('');
 
   const isEmailMissing = !email.length;
   const emailValue = isEmailMissing ? t('account.email.missing') : email;
   const isEmailInvalid = email.length > 0 && !email.match(EMAIL_REGEX);
-  const isSavingDisabled = isEmailMissing || isEmailInvalid;
+  const isSavingDisabled = isLoading || isEmailMissing || isEmailInvalid;
 
-  useEffect(() => {
-    setEmail(userInfo.email ?? '');
-  }, [userInfo.email]);
-
-  const saveNewEmail = () => {
-    console.log('API: Save new email');
-    setIsOpen(false);
+  const saveEmail = async () => {
+    try {
+      await updateAccount({ ...account, email }).unwrap();
+      setIsOpen(false);
+    } catch (err) {
+      return;
+    }
   };
 
   return isOpen ? (
@@ -47,7 +49,7 @@ const EmailEditor = () => {
         </TextButton>
         <TextButton
           variant={isSavingDisabled ? 'disabled' : 'dark'}
-          onClick={saveNewEmail}
+          onClick={saveEmail}
         >
           {t('account.save')}
         </TextButton>

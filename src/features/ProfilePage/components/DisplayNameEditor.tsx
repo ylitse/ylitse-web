@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectUserInfo } from '@/features/Authentication/userSlice';
+import { selectUser } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
@@ -16,20 +17,23 @@ import Text from '@/components/Text';
 
 const DisplayNameEditor = () => {
   const { t } = useTranslation('profile');
-  const userInfo = useAppSelector(selectUserInfo);
+  const user = useAppSelector(selectUser);
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
 
+  const [displayName, setDisplayName] = useState(user.display_name);
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
-  const [displayName, setDisplayName] = useState('');
 
   const isTooShort = displayName.length < DISPLAY_NAME_MIN_LENGTH;
+  const isSavingDisabled = isLoading || isTooShort;
 
-  useEffect(() => {
-    setDisplayName(userInfo.displayName ?? '');
-  }, [userInfo.displayName]);
-
-  const saveNewDisplayName = () => {
-    console.log('API: Save new display name');
+  const saveDisplayName = async () => {
+    try {
+      await updateUser({ ...user, display_name: displayName }).unwrap();
+      setIsOpen(false);
+    } catch (err) {
+      return;
+    }
   };
 
   return isOpen ? (
@@ -46,8 +50,8 @@ const DisplayNameEditor = () => {
           {t('account.cancel')}
         </TextButton>
         <TextButton
-          onClick={saveNewDisplayName}
-          variant={isTooShort ? 'disabled' : 'dark'}
+          onClick={saveDisplayName}
+          variant={isSavingDisabled ? 'disabled' : 'dark'}
         >
           {t('account.save')}
         </TextButton>

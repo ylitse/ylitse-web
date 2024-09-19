@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { selectUserRole } from '../Authentication/userSlice';
+import { selectIsMentor } from '../Authentication/userSlice';
 import { useAppSelector } from '@/store';
 
 import AccountInfo from './components/AccountInfo';
@@ -16,8 +16,7 @@ import Text from '@/components/Text';
 
 const ProfilePage = () => {
   const { t } = useTranslation('profile');
-  const userRole = useAppSelector(selectUserRole);
-  const isMentor = userRole === 'mentor';
+  const isMentor = useAppSelector(selectIsMentor);
 
   return (
     <PageWithTransition>
@@ -27,12 +26,12 @@ const ProfilePage = () => {
             <Text variant="h1">{t('title')}</Text>
           </Header>
           <Content>
-            <AccountInfo userRole="mentor" />
+            <AccountInfo />
             <PublicInfo />
           </Content>
         </Container>
       ) : (
-        <AccountInfo userRole={userRole} />
+        <AccountInfo />
       )}
     </PageWithTransition>
   );

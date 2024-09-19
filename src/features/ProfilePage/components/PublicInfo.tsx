@@ -1,35 +1,61 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectUserInfo } from '@/features/Authentication/userSlice';
+import { selectMentor, selectUser } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useDebounce } from '@/hooks/useDebounce';
+import { useUpdateMentorMutation } from '@/features/MentorPage/mentorPageApi';
+import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
 
-import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
+import {
+  DEFAULT_ICON_SIZE,
+  palette,
+  SAVE_DELAY_MS,
+} from '@/components/constants';
 import LabeledInput from '@/components/LabeledInput';
 import Slider from '@/components/Slider';
 import Text from '@/components/Text';
 import TextInput from '@/components/TextInput';
 
+import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
+import type { User } from '@/features/Authentication/authenticationApi';
+
 const PublicInfo = () => {
   const { t } = useTranslation('profile');
-  const userInfo = useAppSelector(selectUserInfo);
+  const user = useAppSelector(selectUser);
+  const mentor = useAppSelector(selectMentor);
+  const [updateUser] = useUpdateUserMutation();
+  const [updateMentor] = useUpdateMentorMutation();
 
-  const [displayName, setDisplayName] = useState('');
-  const [birthYear, setBirthYear] = useState('');
-  const [area, setArea] = useState('');
-  const [status, setStatus] = useState('');
-  const [isActive, setIsActive] = useState(true);
-  const [story, setStory] = useState('');
-  const [topicSearchValue, setTopicSearchValue] = useState('');
+  const saveMentorData = useDebounce(
+    (mentor: ApiMentor) => updateMentor(mentor),
+    SAVE_DELAY_MS,
+  );
 
-  const toggleIsActive = () => setIsActive(isActive => !isActive);
+  const saveUserAndMentorData = useDebounce((mentor: ApiMentor, user: User) => {
+    updateUser(user);
+    updateMentor(mentor);
+  }, SAVE_DELAY_MS);
 
-  useEffect(() => {
-    const { displayName, active } = userInfo;
-    if (displayName !== null) setDisplayName(displayName);
-    if (isActive !== null) setIsActive(active);
-  }, [userInfo]);
+  const [localData, setLocalData] = useState<ApiMentor>(mentor);
+  const [skillSearchValue, setSkillSearchValue] = useState('');
+
+  const handleDisplayNameChange = (display_name: string) => {
+    setLocalData({ ...localData, display_name });
+    saveUserAndMentorData(
+      { ...mentor, display_name },
+      { ...user, display_name },
+    );
+  };
+
+  const updateMentorData = <K extends keyof ApiMentor>(
+    key: K,
+    value: ApiMentor[K],
+  ) => {
+    setLocalData({ ...localData, [key]: value });
+    saveMentorData({ ...mentor, [key]: value });
+  };
 
   return (
     <Container>
@@ -41,57 +67,62 @@ const PublicInfo = () => {
           <Column>
             <LabeledInput
               label={t('public.mentor.displayName')}
-              onChange={setDisplayName}
-              value={displayName}
+              onChange={handleDisplayNameChange}
+              value={localData.display_name}
             />
             <LabeledInput
               label={t('public.mentor.birthYear')}
-              onChange={setBirthYear}
-              value={birthYear}
+              onChange={value => updateMentorData('birth_year', Number(value))}
+              value={String(localData.birth_year)}
+              type="number"
             />
             <LabeledInput
-              label={t('public.mentor.area')}
-              onChange={setArea}
-              value={area}
+              label={t('public.mentor.region')}
+              onChange={value => updateMentorData('region', value)}
+              value={localData.region}
             />
           </Column>
           <Column>
             <LabeledInput
-              label={t('public.mentor.status')}
-              onChange={setStatus}
-              value={status}
+              label={t('public.mentor.statusMessage')}
+              onChange={value => updateMentorData('status_message', value)}
+              value={localData.status_message}
             />
-            <Text variant="label">{t('public.mentor.absence.title')}</Text>
+            <Text variant="label">{t('public.mentor.vacation.title')}</Text>
             <Slider
-              id="isAbsent"
+              id="isVacationing"
               label={t(
-                `public.mentor.absence.switch.${isActive ? 'off' : 'on'}`,
+                `public.mentor.vacation.switch.${
+                  localData.is_vacationing ? 'on' : 'off'
+                }`,
               )}
-              onChange={toggleIsActive}
-              value={!isActive}
+              onChange={() =>
+                updateMentorData('is_vacationing', !localData.is_vacationing)
+              }
+              value={localData.is_vacationing}
             />
-            <Text variant="blueBox">{t('public.mentor.absence.info')}</Text>
+            <Text variant="blueBox">{t('public.mentor.vacation.info')}</Text>
           </Column>
         </Columns>
         <Text variant="label">{t('public.mentor.story')}</Text>
         <StoryInput
           variant="textarea"
-          onChange={setStory}
+          onChange={value => updateMentorData('story', value)}
           rows={4}
-          value={story}
+          value={localData.story}
         />
-        <Label variant="label">{t('public.mentor.topics')}</Label>
+        <Label variant="label">{t('public.mentor.skills')}</Label>
         <SearchBar>
-          <TopicSearch
+          <SkillSearch
             variant="iconInput"
-            color={topicSearchValue ? 'blueDark' : 'greyFaded'}
+            color={skillSearchValue ? 'blueDark' : 'greyFaded'}
             leftIcon={{
               sizeInPx: DEFAULT_ICON_SIZE.SMALL,
               variant: 'search',
             }}
-            onChange={setTopicSearchValue}
-            placeholder={t('public.mentor.addTopic')}
-            value={topicSearchValue}
+            onChange={setSkillSearchValue}
+            placeholder={t('public.mentor.addSkill')}
+            value={skillSearchValue}
           />
         </SearchBar>
       </Form>
@@ -156,7 +187,7 @@ const SearchBar = styled.div`
   margin-top: 1rem;
 `;
 
-const TopicSearch = styled(TextInput)`
+const SkillSearch = styled(TextInput)`
   max-width: 350px;
 
   &:focus {

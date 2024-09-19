@@ -13,7 +13,6 @@ import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
 import { IconButton } from '@/components/Buttons';
-import { ROW_HEIGHT, SHORT_ROW_HEIGHT } from '@/features/Chat/constants';
 import TextInput from '@/components/TextInput';
 
 type Props = {
@@ -76,10 +75,8 @@ const Container = styled.div`
 `;
 
 const Input = styled(TextInput)<{ isMobile: boolean }>`
-  box-sizing: border-box;
   flex: 1;
-  height: ${({ isMobile }) => (isMobile ? SHORT_ROW_HEIGHT : ROW_HEIGHT)};
-  margin: 20px 1.25rem 20px 40px;
+  margin: 1rem 1rem 1rem 2rem;
 
   &:focus {
     outline: 1px solid ${palette.purple};

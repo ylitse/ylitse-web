@@ -28,7 +28,9 @@ export const PasswordInput = ({
 }: Props): JSX.Element => {
   const { t } = useTranslation('common');
   const inputId = `password_input_${createUniqueId()}`;
+
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const inputType = isPasswordHidden ? 'password' : 'text';
   const togglePasswordVisibility = () => setIsPasswordHidden(!isPasswordHidden);
 
   return (
@@ -51,9 +53,9 @@ export const PasswordInput = ({
       <Input
         id={inputId}
         isError={!!error}
-        isPassword={isPasswordHidden}
         onBlur={onBlur}
         onChange={onChange}
+        type={inputType}
         value={value}
       />
       {!!error && <InputErrorMessage text={error} />}
