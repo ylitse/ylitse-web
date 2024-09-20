@@ -40,11 +40,13 @@ const DesktopButtons = ({ chat, openDialog }: Props) => {
           <StatusButton
             onClick={openArchiveDialog}
             icon="archive"
+            id="archive"
             text={t('header.archive')}
           />
           <StatusButton
             onClick={openBlockDialog}
             icon="block"
+            id="block"
             text={t('header.block')}
           />
         </>
@@ -52,6 +54,7 @@ const DesktopButtons = ({ chat, openDialog }: Props) => {
         <StatusButton
           onClick={openRestoreDialog}
           icon="return"
+          id="restore"
           text={t('header.restore')}
         />
       )}

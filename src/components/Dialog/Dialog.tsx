@@ -41,7 +41,7 @@ export const Dialog = ({
           <TextButton onClick={onClose} variant="light">
             {closeText}
           </TextButton>
-          <TextButton onClick={onConfirm} variant="dark">
+          <TextButton id="dialogConfirm" onClick={onConfirm} variant="dark">
             {confirmText}
           </TextButton>
         </ButtonContainer>

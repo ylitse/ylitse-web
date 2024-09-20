@@ -5,6 +5,7 @@ describe('chat', () => {
   beforeEach(() => {
     api.deleteAccounts();
     cy.visit('/login/');
+    cy.switchLanguage('fi');
   });
 
   afterEach(() => {
@@ -25,7 +26,7 @@ describe('chat', () => {
     // send message
     cy.findByText('Open card', 'button').scrollIntoView().click();
     cy.findByText('Start conversation', 'button').click();
-    cy.get('textarea[placeholder*="Write your message here"]')
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]')
       .click()
       .type('Hello there');
     cy.get('button[aria-label="send"]').click();
@@ -72,7 +73,7 @@ describe('chat', () => {
     cy.findByText(message, 'p').should('be.visible');
 
     // send message
-    cy.get('textarea[placeholder*="Write your message here"]')
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]')
       .click()
       .type(answer);
     cy.get('button[aria-label="send"]').click();
@@ -199,4 +200,191 @@ describe('chat', () => {
     // scroll-up oldest message should be visible
     cy.findByText(`${message} 1!`, 'p').scrollIntoView().should('be.visible');
   });
+
+  it('can archive and restore conversation', () => {
+    const mentee = accounts.mentees[0];
+    const mentor = accounts.mentors[0];
+    const message = 'I would like to talk to you';
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    api.signUpMentee(mentee).then((menteeResponse: any) => {
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+      api.signUpMentor(mentor).then((mentorResponse: any) => {
+        const sender = {
+          id: menteeResponse.body.id,
+          loginName: mentee.loginName,
+          password: mentee.password,
+        };
+        const reciever = { id: mentorResponse.body.user_id };
+
+        // send message between users
+        api.sendMessage({
+          sender,
+          reciever,
+          content: message,
+        });
+      });
+    });
+
+    cy.loginUser(mentor.loginName, mentor.password);
+
+    // go to chat-page
+    cy.get('[href="/chat"]').click();
+    cy.findByText(message, 'p').should('be.visible');
+
+    // archive the chat
+    cy.get('button[id="archive"]').click();
+    cy.get('button[id="dialogConfirm"]').click();
+
+    // should show notification
+    cy.contains('Keskustelu arkistoitu onnistuneesti').should('be.visible');
+
+    // should not display message field anymore
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(
+      'not.be.visible',
+    );
+
+    // unarchive chat
+    cy.get('button[id="restore"]').click();
+    cy.get('button[id="dialogConfirm"]').click();
+
+    // should show notification
+    cy.contains('Keskustelu palautettiin onnistuneesti').should('be.visible');
+
+    // should display message field again
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(
+      'be.visible',
+    );
+  });
+
+  //   it('will not notify user of new messages in archived conversation', () => {
+  //     const mentee = accounts.mentees[0];
+  //     const mentor = accounts.mentors[0];
+  //     const message = 'I would like to talk to you';
+  //     //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     api.signUpMentee(mentee).then((menteeResponse: any) => {
+  //       //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //       api.signUpMentor(mentor).then((mentorResponse: any) => {
+  //         const sender = {
+  //           id: menteeResponse.body.id,
+  //           loginName: mentee.loginName,
+  //           password: mentee.password,
+  //         };
+  //         const reciever = { id: mentorResponse.body.user_id };
+
+  //         // send message between users
+  //         api.sendMessage({
+  //           sender,
+  //           reciever,
+  //           content: message,
+  //         });
+  //       });
+  //     });
+
+  //     cy.loginUser(mentor.loginName, mentor.password);
+
+  //     // go to chat-page
+  //     cy.get('[href="/chat"]').click();
+  //     cy.findByText(message, 'p').should('be.visible');
+
+  //     // archive the chat
+  //     cy.get('button[id="archive"]').click();
+  //     cy.get('button[id="dialogConfirm"]').click();
+
+  //     // send message to chat
+
+  //     // check menu new message dot
+
+  //     // check home page
+
+  //     // check navigation new message dot
+  //   });
+
+  //   it('can block and restore conversation', () => {
+  //     const mentee = accounts.mentees[0];
+  //     const mentor = accounts.mentors[0];
+  //     const message = 'I would like to talk to you';
+  //     //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     api.signUpMentee(mentee).then((menteeResponse: any) => {
+  //       //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //       api.signUpMentor(mentor).then((mentorResponse: any) => {
+  //         const sender = {
+  //           id: menteeResponse.body.id,
+  //           loginName: mentee.loginName,
+  //           password: mentee.password,
+  //         };
+  //         const reciever = { id: mentorResponse.body.user_id };
+
+  //         // send message between users
+  //         api.sendMessage({
+  //           sender,
+  //           reciever,
+  //           content: message,
+  //         });
+  //       });
+  //     });
+
+  //     cy.loginUser(mentor.loginName, mentor.password);
+
+  //     // go to chat-page
+  //     cy.get('[href="/chat"]').click();
+  //     cy.findByText(message, 'p').should('be.visible');
+
+  //     // block the chat
+  //     cy.get('button[id="block"]').click();
+  //     cy.get('button[id="dialogConfirm"]').click();
+  //     // should show notification
+
+  //     // go to blocked chats
+
+  //     // unarchive chat
+  //     cy.get('button[id="restore"]').click();
+  //     cy.get('button[id="dialogConfirm"]').click();
+  //     // should show notification
+
+  //     // return to active chats
+  //   });
+  // });
+
+  // it('will not notify user of new messages in blocked conversation', () => {
+  //   const mentee = accounts.mentees[0];
+  //   const mentor = accounts.mentors[0];
+  //   const message = 'I would like to talk to you';
+  //   //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   api.signUpMentee(mentee).then((menteeResponse: any) => {
+  //     //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     api.signUpMentor(mentor).then((mentorResponse: any) => {
+  //       const sender = {
+  //         id: menteeResponse.body.id,
+  //         loginName: mentee.loginName,
+  //         password: mentee.password,
+  //       };
+  //       const reciever = { id: mentorResponse.body.user_id };
+
+  //       // send message between users
+  //       api.sendMessage({
+  //         sender,
+  //         reciever,
+  //         content: message,
+  //       });
+  //     });
+  //   });
+
+  //   cy.loginUser(mentor.loginName, mentor.password);
+
+  //   // go to chat-page
+  //   cy.get('[href="/chat"]').click();
+  //   cy.findByText(message, 'p').should('be.visible');
+
+  //   // block the chat
+  //   cy.get('button[id="block"]').click();
+  //   cy.get('button[id="dialogConfirm"]').click();
+
+  //   // send message to chat
+
+  //   // check menu new message dot
+
+  //   // check home page
+
+  //   // check navigation new message dot
+  // });
 });
