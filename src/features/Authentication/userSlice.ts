@@ -6,7 +6,7 @@ import {
   defaultAppUser,
   defaultMentor,
 } from './authenticationApi';
-import { selectChatsExist } from '../Chat/selectors';
+import { selectHasBeenChatting } from '../Chat/selectors';
 
 import type { Account, AppUser, User } from './authenticationApi';
 import type { ApiMentor } from '../MentorPage/mentorPageApi';
@@ -68,9 +68,9 @@ export const selectIsMentor = createSelector(
 
 export const selectAppRole = createSelector(
   selectUserRole,
-  selectChatsExist,
-  (userRole, hasUserChats) => {
-    if (userRole === 'mentee' && !hasUserChats) return 'freshMentee';
+  selectHasBeenChatting,
+  (userRole, hasBeenChatting) => {
+    if (userRole === 'mentee' && !hasBeenChatting) return 'freshMentee';
     return userRole;
   },
 );
