@@ -33,6 +33,21 @@ const sortChats = (a: ChatBuddy, b: ChatBuddy): number => {
   return compareMessagesByTimeCreated(mostRecentA, mostRecentB);
 };
 
+export const selectActiveFolder = createSelector(
+  selectChatState,
+  ({ activeFolder }) => activeFolder,
+);
+
+export const selectIsDefaultFolder = createSelector(
+  selectActiveFolder,
+  activeFolder => activeFolder === 'ok',
+);
+
+export const selectIsArchivedFolder = createSelector(
+  selectActiveFolder,
+  activeFolder => activeFolder === 'ok',
+);
+
 export const selectChats = createSelector(
   selectChatState,
   ({ activeFolder, chats }) =>
@@ -48,8 +63,7 @@ export const selectHasBeenChatting = createSelector(
 
 export const selectOngoingChatsExist = createSelector(
   selectChatState,
-  ({ chats }) =>
-    Object.values(chats).filter(chat => chat.status === 'ok').length > 0,
+  ({ chats }) => Object.values(chats).some(chat => chat.status === 'ok'),
 );
 
 export const selectActiveChat = createSelector(

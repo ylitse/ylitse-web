@@ -1,8 +1,10 @@
 import { useAppSelector, useAppDispatch } from '@/store';
 import {
   selectActiveChat,
+  selectActiveFolder,
   selectBuddyMessages,
-  selectDefaultChat,
+  selectIsArchivedFolder,
+  selectIsDefaultFolder,
 } from '@/features/Chat/selectors';
 import { setActiveChat } from '@/features/Chat/chatSlice';
 
@@ -27,26 +29,27 @@ export const MenuItem = ({ buddy }: Props) => {
     latest,
     isLoading,
   } = useAppSelector(selectBuddyMessages(buddyId));
-  const activeFolder = useAppSelector(state => state.chats.activeFolder);
+  const activeFolder = useAppSelector(selectActiveFolder);
+  const isDefaultFolder = useAppSelector(selectIsDefaultFolder);
+  const isArchived = useAppSelector(selectIsArchivedFolder);
   const activeChat = useAppSelector(selectActiveChat);
-  const defaultChat = useAppSelector(selectDefaultChat);
-  const activeChatId = activeChat?.buddyId ?? defaultChat.buddyId;
+  const isActiveChat = buddyId === activeChat?.buddyId;
 
   const dispatch = useAppDispatch();
   const openChat = () => dispatch(setActiveChat(buddyId));
 
   const getProfileIconColor = () => {
-    if (buddyId === activeChatId) return 'blueDark';
-    if (activeFolder === 'ok') return 'purpleDark';
-    if (activeFolder === 'archived') return 'orangeDark';
+    if (isActiveChat) return 'blueDark';
+    if (isDefaultFolder) return 'purpleDark';
+    if (isArchived) return 'orangeDark';
     return 'redDark';
   };
 
-  const showUnseenDot = activeFolder === 'ok' && hasUnread;
+  const isUnseenDotVisible = isDefaultFolder && hasUnread;
 
   return (
     <ItemRow
-      active={buddyId === activeChatId}
+      active={isActiveChat}
       background={folderColors[activeFolder]}
       onClick={openChat}
     >
@@ -54,7 +57,7 @@ export const MenuItem = ({ buddy }: Props) => {
       <MentorInfo>
         <BuddyName>
           <Text variant="bold">{displayName}</Text>
-          {showUnseenDot && (
+          {isUnseenDotVisible && (
             <UnseenDot aria-label="unseen-messages-dot">{count}</UnseenDot>
           )}
         </BuddyName>

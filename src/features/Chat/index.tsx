@@ -14,15 +14,15 @@ import WelcomeWindow from './components/WelcomeWindow';
 
 const Chat = () => {
   const { isTablet } = useGetLayoutMode();
-  const activeChatExists = useAppSelector(selectActiveChatExists);
+  const isActiveChatExisting = useAppSelector(selectActiveChatExists);
   const areOngoingChats = useAppSelector(selectOngoingChatsExist);
-  const isDesktopChatOpen = activeChatExists || areOngoingChats;
+  const isDesktopChatOpen = isActiveChatExisting || areOngoingChats;
 
   return (
     <PageWithTransition>
       {isTablet ? (
         <PageContainer>
-          {activeChatExists ? <ActiveWindow /> : <Menu />}
+          {isActiveChatExisting ? <ActiveWindow /> : <Menu />}
         </PageContainer>
       ) : (
         <PageContainer isDesktop>
