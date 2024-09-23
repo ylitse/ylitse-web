@@ -42,6 +42,8 @@ export const MenuItem = ({ buddy }: Props) => {
     return 'redDark';
   };
 
+  const showUnseenDot = activeFolder === 'ok' && hasUnread;
+
   return (
     <ItemRow
       active={buddyId === activeChatId}
@@ -52,7 +54,7 @@ export const MenuItem = ({ buddy }: Props) => {
       <MentorInfo>
         <BuddyName>
           <Text variant="bold">{displayName}</Text>
-          {hasUnread && (
+          {showUnseenDot && (
             <UnseenDot aria-label="unseen-messages-dot">{count}</UnseenDot>
           )}
         </BuddyName>

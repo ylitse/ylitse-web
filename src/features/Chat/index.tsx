@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { selectActiveChatExists, selectChatsExist } from './selectors';
+import { selectActiveChatExists, selectOngoingChatsExist } from './selectors';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useAppSelector } from '@/store';
 
@@ -15,7 +15,8 @@ import WelcomeWindow from './components/WelcomeWindow';
 const Chat = () => {
   const { isTablet } = useGetLayoutMode();
   const activeChatExists = useAppSelector(selectActiveChatExists);
-  const chatsExist = useAppSelector(selectChatsExist);
+  const areOngoingChats = useAppSelector(selectOngoingChatsExist);
+  const isDesktopChatOpen = activeChatExists || areOngoingChats;
 
   return (
     <PageWithTransition>
@@ -26,7 +27,7 @@ const Chat = () => {
       ) : (
         <PageContainer isDesktop>
           <Menu />
-          {chatsExist ? <ActiveWindow /> : <WelcomeWindow />}
+          {isDesktopChatOpen ? <ActiveWindow /> : <WelcomeWindow />}
         </PageContainer>
       )}
     </PageWithTransition>

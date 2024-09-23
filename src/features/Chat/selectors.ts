@@ -41,9 +41,15 @@ export const selectChats = createSelector(
       .sort(sortChats),
 );
 
-export const selectChatsExist = createSelector(
+export const selectHasBeenChatting = createSelector(
   selectChatState,
   ({ chats }) => Object.values(chats).length > 0,
+);
+
+export const selectOngoingChatsExist = createSelector(
+  selectChatState,
+  ({ chats }) =>
+    Object.values(chats).filter(chat => chat.status === 'ok').length > 0,
 );
 
 export const selectActiveChat = createSelector(
