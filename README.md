@@ -88,7 +88,7 @@ Run locally:
 Example of cypress command for better debugging of a specific test:
 
 ```shell
-cypress run --spec 'cypress/tests/logout.cy.ts' --headed --browser firefox --no-exit"
+npx cypress run --spec 'cypress/tests/logout.cy.ts' --headed --browser firefox --no-exit
 ```
 
 To target test run to a specific step you can use `it.only()`.
