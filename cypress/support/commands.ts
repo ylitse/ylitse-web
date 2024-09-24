@@ -39,7 +39,9 @@ Cypress.Commands.add(
     cy.fillInput('login_name', username);
     cy.fillInput('password', password);
     cy.get('button[id="submit"]').click();
-    cy.contains('Ylitse MentorApp peer mentoring service').should('be.visible');
+    cy.contains(
+      /Ylitse MentorApp peer mentoring service|Ylitse MentorApp -vertaismentoripalvelu/g,
+    ).should('be.visible');
   },
 );
 

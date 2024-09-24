@@ -66,6 +66,6 @@ describe('login', () => {
     cy.fillInput('password', 'examplePassword');
     clickLogin();
     cy.location('pathname').should('eq', '/');
-    cy.contains('Logout').should('be.visible');
+    cy.contains('Kirjaudu ulos').should('be.visible');
   });
 });

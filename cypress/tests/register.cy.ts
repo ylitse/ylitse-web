@@ -47,7 +47,7 @@ describe('register', () => {
   it('registers new user if form is correctly filled', () => {
     cy.registerUser(username, 'examplePassword');
     cy.location('pathname').should('contain', '/login');
-    cy.contains('Login').should('be.visible');
+    cy.contains('Kirjaudu sisään').should('be.visible');
   });
 
   // Username

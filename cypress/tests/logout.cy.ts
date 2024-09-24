@@ -12,22 +12,24 @@ describe('logout', () => {
   });
 
   beforeEach(() => {
+    cy.visit('/login/');
+    cy.switchLanguage('fi');
     cy.loginUser(username, 'examplePassword');
   });
 
   it('logout redirects user to login page', () => {
     clickLogout();
     cy.url().should('match', /login/);
-    cy.contains('Login').should('be.visible');
+    cy.contains('Kirjaudu sisään').should('be.visible');
   });
 
   // FIXME: re-enable when dev server issue is resolved
   xit('logout ends session', () => {
     clickLogout();
     cy.url().should('match', /login/);
-    cy.contains('Login').should('be.visible');
+    cy.contains('Kirjaudu sisään').should('be.visible');
     cy.visit('/');
     cy.url().should('match', /login/);
-    cy.contains('Login').should('be.visible');
+    cy.contains('Kirjaudu sisään').should('be.visible');
   });
 });

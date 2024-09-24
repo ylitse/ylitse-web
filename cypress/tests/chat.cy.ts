@@ -24,8 +24,8 @@ describe('chat', () => {
     cy.contains('mentor_paavo').should('be.visible');
 
     // send message
-    cy.findByText('Open card', 'button').scrollIntoView().click();
-    cy.findByText('Start conversation', 'button').click();
+    cy.findByText('Avaa kortti', 'button').scrollIntoView().click();
+    cy.findByText('Aloita keskustelu', 'button').click();
     cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]')
       .click()
       .type('Hello there');
@@ -238,17 +238,15 @@ describe('chat', () => {
     // should show notification
     cy.contains('Keskustelu arkistoitu onnistuneesti').should('be.visible');
 
-    // should not display message field anymore
-    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(
-      'not.be.visible',
-    );
+    // should not have message field anymore
+    cy.contains('Kirjoita viestisi tähän').should('not.exist');
 
     // unarchive chat
     cy.get('button[id="restore"]').click();
     cy.get('button[id="dialogConfirm"]').click();
 
     // should show notification
-    cy.contains('Keskustelu palautettiin onnistuneesti').should('be.visible');
+    cy.contains('Keskustelu palautettu onnistuneesti').should('be.visible');
 
     // should display message field again
     cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(
