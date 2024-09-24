@@ -232,8 +232,12 @@ describe('chat', () => {
     cy.findByText(message, 'p').should('be.visible');
 
     // archive the chat
-    cy.get('button[id="archive"]').click();
-    cy.get('button[id="dialogConfirm"]').click();
+    cy.findByText('Arkistoi', 'button').click();
+    cy.contains(
+      `Haluatko arkistoida keskustelun käyttäjän ${mentee.displayName} kanssa?`,
+    ).should('be.visible');
+    cy.findByText('Arkistoi keskustelu', 'button').click({ force: true });
+    cy.wait(500);
 
     // should show notification
     cy.contains('Keskustelu arkistoitu onnistuneesti').should('be.visible');
@@ -242,16 +246,18 @@ describe('chat', () => {
     cy.contains('Kirjoita viestisi tähän').should('not.exist');
 
     // unarchive chat
-    cy.get('button[id="restore"]').click();
-    cy.get('button[id="dialogConfirm"]').click();
+    cy.findByText('Palauta keskustelu', 'button').click();
+    cy.contains(
+      `Haluatko palauttaa keskustelun käyttäjän ${mentee.displayName} kanssa?`,
+    ).should('be.visible');
+    cy.findByText('Palauta keskustelu', 'button').click({ force: true });
+    cy.wait(500);
 
     // should show notification
     cy.contains('Keskustelu palautettu onnistuneesti').should('be.visible');
 
     // should display message field again
-    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(
-      'be.visible',
-    );
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should('exist');
   });
 
   //   it('will not notify user of new messages in archived conversation', () => {
@@ -297,51 +303,66 @@ describe('chat', () => {
   //     // check navigation new message dot
   //   });
 
-  //   it('can block and restore conversation', () => {
-  //     const mentee = accounts.mentees[0];
-  //     const mentor = accounts.mentors[0];
-  //     const message = 'I would like to talk to you';
-  //     //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //     api.signUpMentee(mentee).then((menteeResponse: any) => {
-  //       //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //       api.signUpMentor(mentor).then((mentorResponse: any) => {
-  //         const sender = {
-  //           id: menteeResponse.body.id,
-  //           loginName: mentee.loginName,
-  //           password: mentee.password,
-  //         };
-  //         const reciever = { id: mentorResponse.body.user_id };
+  it('can block and restore conversation', () => {
+    const mentee = accounts.mentees[0];
+    const mentor = accounts.mentors[0];
+    const message = 'I would like to talk to you';
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    api.signUpMentee(mentee).then((menteeResponse: any) => {
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+      api.signUpMentor(mentor).then((mentorResponse: any) => {
+        const sender = {
+          id: menteeResponse.body.id,
+          loginName: mentee.loginName,
+          password: mentee.password,
+        };
+        const reciever = { id: mentorResponse.body.user_id };
 
-  //         // send message between users
-  //         api.sendMessage({
-  //           sender,
-  //           reciever,
-  //           content: message,
-  //         });
-  //       });
-  //     });
+        // send message between users
+        api.sendMessage({
+          sender,
+          reciever,
+          content: message,
+        });
+      });
+    });
 
-  //     cy.loginUser(mentor.loginName, mentor.password);
+    cy.loginUser(mentor.loginName, mentor.password);
 
-  //     // go to chat-page
-  //     cy.get('[href="/chat"]').click();
-  //     cy.findByText(message, 'p').should('be.visible');
+    // go to chat-page
+    cy.get('[href="/chat"]').click();
+    cy.findByText(message, 'p').should('be.visible');
 
-  //     // block the chat
-  //     cy.get('button[id="block"]').click();
-  //     cy.get('button[id="dialogConfirm"]').click();
-  //     // should show notification
+    // block the chat
+    cy.findByText('Estä käyttäjä', 'button').click();
+    cy.contains(`Haluatko estää käyttäjän ${mentee.displayName}?`).should(
+      'be.visible',
+    );
+    cy.findByText('Estä käyttäjä', 'button').click({ force: true });
+    cy.wait(500);
 
-  //     // go to blocked chats
+    // should show notification
+    cy.contains('Keskustelu estetty onnistuneesti').should('be.visible');
 
-  //     // unarchive chat
-  //     cy.get('button[id="restore"]').click();
-  //     cy.get('button[id="dialogConfirm"]').click();
-  //     // should show notification
+    // should not have message field anymore
+    cy.contains('Kirjoita viestisi tähän').should('not.exist');
 
-  //     // return to active chats
-  //   });
-  // });
+    // unarchive chat
+    cy.findByText('Palauta keskustelu', 'button').click();
+    cy.contains(
+      `Haluatko palauttaa keskustelun käyttäjän ${mentee.displayName} kanssa?`,
+    ).should('be.visible');
+    cy.findByText('Palauta keskustelu', 'button').click({ force: true });
+    cy.wait(500);
+
+    // should show notification
+    cy.contains('Keskustelu palautettu onnistuneesti').should('be.visible');
+
+    // should display message field again
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(
+      'be.visible',
+    );
+  });
 
   // it('will not notify user of new messages in blocked conversation', () => {
   //   const mentee = accounts.mentees[0];

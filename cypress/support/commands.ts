@@ -27,7 +27,7 @@ Cypress.Commands.add(
     toggle('required-age');
     toggle('privacy-consent');
     cy.get(`button[id="submit"]`).click();
-    cy.contains(/Login|Kirjaudu sisään/g).should('be.visible');
+    cy.contains('Kirjaudu sisään').should('be.visible');
   },
 );
 
@@ -35,13 +35,11 @@ Cypress.Commands.add(
   'loginUser',
   (username: string, password: string): void => {
     cy.visit('/login/');
-    cy.contains(/Login|Kirjaudu sisään/g).should('be.visible');
+    cy.contains('Kirjaudu sisään').should('be.visible');
     cy.fillInput('login_name', username);
     cy.fillInput('password', password);
     cy.get('button[id="submit"]').click();
-    cy.contains(
-      /Ylitse MentorApp peer mentoring service|Ylitse MentorApp -vertaismentoripalvelu/g,
-    ).should('be.visible');
+    cy.contains('Ylitse MentorApp -vertaismentoripalvelu').should('be.visible');
   },
 );
 
