@@ -7,12 +7,14 @@ import { NAVIGATION_HEIGHT, palette } from '@/components/constants';
 import Text from '@/components/Text';
 
 type Props = {
+  id?: string;
   isComponentVisible: boolean;
   setIsComponentVisible: (next: boolean) => void;
   text: string;
 };
 
 export const DropdownButton: React.FC<Props> = ({
+  id,
   isComponentVisible,
   setIsComponentVisible,
   text,
@@ -22,6 +24,7 @@ export const DropdownButton: React.FC<Props> = ({
 
   return (
     <Button
+      id={id}
       isExpanded={isComponentVisible}
       onClick={() => setIsComponentVisible(!isComponentVisible)}
       ref={ref}

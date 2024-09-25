@@ -4,8 +4,6 @@ import { api } from '../support/api';
 describe('chat', () => {
   beforeEach(() => {
     api.deleteAccounts();
-    cy.visit('/login/');
-    cy.switchLanguage('fi');
   });
 
   after(() => {

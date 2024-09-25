@@ -18,7 +18,7 @@ describe('login', () => {
 
   beforeEach(() => {
     cy.visit('/login/');
-    cy.switchLanguage('fi');
+    cy.switchLanguageBeforeLogin('fi');
     cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
@@ -41,9 +41,9 @@ describe('login', () => {
   });
 
   it('changes language on button press', () => {
-    cy.switchLanguage('en');
+    cy.switchLanguageBeforeLogin('en');
     cy.findByText('Login', 'h1').should('be.visible');
-    cy.switchLanguage('fi');
+    cy.switchLanguageBeforeLogin('fi');
     cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
@@ -66,11 +66,12 @@ describe('login', () => {
     testErrorVisible();
   });
 
-  it('can log in and out with registered account', () => {
+  it('can log in with registered account', () => {
     cy.fillInput('login_name', username);
     cy.fillInput('password', 'examplePassword');
     clickLogin();
     cy.location('pathname').should('eq', '/');
+    cy.switchLanguageAfterLogin('fi');
     cy.contains('Kirjaudu ulos').should('be.visible');
   });
 });

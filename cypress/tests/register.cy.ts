@@ -27,7 +27,7 @@ describe('register', () => {
 
   beforeEach(() => {
     cy.visit('/register/');
-    cy.switchLanguage('fi');
+    cy.switchLanguageBeforeLogin('fi');
     cy.findByText('Rekisteröidy', 'h1').should('be.visible');
   });
 
@@ -43,9 +43,9 @@ describe('register', () => {
   });
 
   it('changes language on button press', () => {
-    cy.switchLanguage('en');
+    cy.switchLanguageBeforeLogin('en');
     cy.findByText('Register', 'h1').should('be.visible');
-    cy.switchLanguage('fi');
+    cy.switchLanguageBeforeLogin('fi');
     cy.findByText('Rekisteröidy', 'h1').should('be.visible');
   });
 

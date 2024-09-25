@@ -4,8 +4,6 @@ import { api } from '../support/api';
 describe('home', () => {
   beforeEach(() => {
     api.deleteAccounts();
-    cy.visit('/login/');
-    cy.switchLanguage('fi');
   });
 
   after(() => {
@@ -14,8 +12,8 @@ describe('home', () => {
 
   it('displays right content for fresh mentee', () => {
     const mentee = accounts.mentees[0];
-    api.signUpMentee(mentee);
     const mentor = accounts.mentors[0];
+    api.signUpMentee(mentee);
     api.signUpMentor(mentor);
     cy.loginUser(mentee.loginName, mentee.password);
 
