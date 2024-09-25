@@ -9,6 +9,7 @@ import Text from '@/components/Text';
 type Props = {
   borderColor: string;
   closeText: string;
+  confirmId: string;
   confirmText: string;
   onClose: () => void;
   onConfirm: () => void;
@@ -19,6 +20,7 @@ type Props = {
 export const Dialog = ({
   borderColor,
   closeText,
+  confirmId,
   confirmText,
   onClose,
   onConfirm,
@@ -41,7 +43,7 @@ export const Dialog = ({
           <TextButton onClick={onClose} variant="light">
             {closeText}
           </TextButton>
-          <TextButton onClick={onConfirm} variant="dark">
+          <TextButton id={confirmId} onClick={onConfirm} variant="dark">
             {confirmText}
           </TextButton>
         </ButtonContainer>

@@ -302,6 +302,32 @@ const sendMultipleMessage = ({
   );
 };
 
+type ChatStatus = 'archived' | 'banned' | 'ok';
+type StatusUpdate = {
+  sender: Sender;
+  buddyId: string;
+  status: ChatStatus;
+};
+
+const updateChatStatus = ({ sender, buddyId, status }: StatusUpdate) => {
+  return accessToken(sender.loginName, sender.password)
+    .then(senderAccessToken =>
+      cy.request({
+        method: 'PUT',
+        url: `${API_URL}/users/${sender.id}/contacts/${buddyId}`,
+        headers: {
+          Authorization: `Bearer ${senderAccessToken}`,
+        },
+        body: {
+          status,
+        },
+      }),
+    )
+    .then(response => {
+      return response.body;
+    });
+};
+
 export const api = {
   signUpMentee,
   signUpMentor,
@@ -309,4 +335,5 @@ export const api = {
   deleteAccounts,
   sendMessage,
   sendMultipleMessage,
+  updateChatStatus,
 };

@@ -236,8 +236,7 @@ describe('chat', () => {
     cy.contains(
       `Haluatko arkistoida keskustelun käyttäjän ${mentee.displayName} kanssa?`,
     ).should('be.visible');
-    cy.findByText('Arkistoi keskustelu', 'button').click({ force: true });
-    cy.wait(500);
+    cy.get('button[id="confirm-archive"]').click();
 
     // should show notification
     cy.contains('Keskustelu arkistoitu onnistuneesti').should('be.visible');
@@ -250,8 +249,7 @@ describe('chat', () => {
     cy.contains(
       `Haluatko palauttaa keskustelun käyttäjän ${mentee.displayName} kanssa?`,
     ).should('be.visible');
-    cy.findByText('Palauta keskustelu', 'button').click({ force: true });
-    cy.wait(500);
+    cy.get('button[id="confirm-restore"]').click();
 
     // should show notification
     cy.contains('Keskustelu palautettu onnistuneesti').should('be.visible');
@@ -260,48 +258,59 @@ describe('chat', () => {
     cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should('exist');
   });
 
-  //   it('will not notify user of new messages in archived conversation', () => {
-  //     const mentee = accounts.mentees[0];
-  //     const mentor = accounts.mentors[0];
-  //     const message = 'I would like to talk to you';
-  //     //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //     api.signUpMentee(mentee).then((menteeResponse: any) => {
-  //       //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //       api.signUpMentor(mentor).then((mentorResponse: any) => {
-  //         const sender = {
-  //           id: menteeResponse.body.id,
-  //           loginName: mentee.loginName,
-  //           password: mentee.password,
-  //         };
-  //         const reciever = { id: mentorResponse.body.user_id };
+  it('will not show unseen dot for new messages in archived conversation', () => {
+    const mentee = accounts.mentees[0];
+    const mentor = accounts.mentors[0];
+    const message = 'I would like to talk to you';
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    api.signUpMentee(mentee).then((menteeResponse: any) => {
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+      api.signUpMentor(mentor).then((mentorResponse: any) => {
+        const menteeId = menteeResponse.body.id;
+        const mentorId = mentorResponse.body.user_id;
 
-  //         // send message between users
-  //         api.sendMessage({
-  //           sender,
-  //           reciever,
-  //           content: message,
-  //         });
-  //       });
-  //     });
+        const menteeSender = {
+          id: menteeId,
+          loginName: mentee.loginName,
+          password: mentee.password,
+        };
 
-  //     cy.loginUser(mentor.loginName, mentor.password);
+        const mentorSender = {
+          id: mentorId,
+          loginName: mentor.loginName,
+          password: mentor.password,
+        };
 
-  //     // go to chat-page
-  //     cy.get('[href="/chat"]').click();
-  //     cy.findByText(message, 'p').should('be.visible');
+        const mentorReciever = { id: mentorId };
 
-  //     // archive the chat
-  //     cy.get('button[id="archive"]').click();
-  //     cy.get('button[id="dialogConfirm"]').click();
+        // send message between users
+        api
+          .sendMessage({
+            sender: menteeSender,
+            reciever: mentorReciever,
+            content: message,
+          })
+          .then(() =>
+            // archive conversation
+            api.updateChatStatus({
+              sender: mentorSender,
+              buddyId: menteeId,
+              status: 'archived',
+            }),
+          );
+      });
+    });
 
-  //     // send message to chat
+    cy.loginUser(mentor.loginName, mentor.password);
 
-  //     // check menu new message dot
+    cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
 
-  //     // check home page
-
-  //     // check navigation new message dot
-  //   });
+    // go to archived conversations
+    cy.get('[href="/chat"]').click();
+    cy.get('button[aria-label="menuLines"]').click();
+    cy.findByText('Arkistoidut keskustelut', 'a');
+    cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
+  });
 
   it('can block and restore conversation', () => {
     const mentee = accounts.mentees[0];
@@ -338,8 +347,7 @@ describe('chat', () => {
     cy.contains(`Haluatko estää käyttäjän ${mentee.displayName}?`).should(
       'be.visible',
     );
-    cy.findByText('Estä käyttäjä', 'button').click({ force: true });
-    cy.wait(500);
+    cy.get('button[id="confirm-block"]').click();
 
     // should show notification
     cy.contains('Keskustelu estetty onnistuneesti').should('be.visible');
@@ -352,8 +360,7 @@ describe('chat', () => {
     cy.contains(
       `Haluatko palauttaa keskustelun käyttäjän ${mentee.displayName} kanssa?`,
     ).should('be.visible');
-    cy.findByText('Palauta keskustelu', 'button').click({ force: true });
-    cy.wait(500);
+    cy.get('button[id="confirm-restore"]').click();
 
     // should show notification
     cy.contains('Keskustelu palautettu onnistuneesti').should('be.visible');
@@ -364,46 +371,57 @@ describe('chat', () => {
     );
   });
 
-  // it('will not notify user of new messages in blocked conversation', () => {
-  //   const mentee = accounts.mentees[0];
-  //   const mentor = accounts.mentors[0];
-  //   const message = 'I would like to talk to you';
-  //   //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //   api.signUpMentee(mentee).then((menteeResponse: any) => {
-  //     //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //     api.signUpMentor(mentor).then((mentorResponse: any) => {
-  //       const sender = {
-  //         id: menteeResponse.body.id,
-  //         loginName: mentee.loginName,
-  //         password: mentee.password,
-  //       };
-  //       const reciever = { id: mentorResponse.body.user_id };
+  it('will not show unseen dot for new messages in blocked conversation', () => {
+    const mentee = accounts.mentees[0];
+    const mentor = accounts.mentors[0];
+    const message = 'I would like to talk to you';
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    api.signUpMentee(mentee).then((menteeResponse: any) => {
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+      api.signUpMentor(mentor).then((mentorResponse: any) => {
+        const menteeId = menteeResponse.body.id;
+        const mentorId = mentorResponse.body.user_id;
 
-  //       // send message between users
-  //       api.sendMessage({
-  //         sender,
-  //         reciever,
-  //         content: message,
-  //       });
-  //     });
-  //   });
+        const menteeSender = {
+          id: menteeId,
+          loginName: mentee.loginName,
+          password: mentee.password,
+        };
 
-  //   cy.loginUser(mentor.loginName, mentor.password);
+        const mentorSender = {
+          id: mentorId,
+          loginName: mentor.loginName,
+          password: mentor.password,
+        };
 
-  //   // go to chat-page
-  //   cy.get('[href="/chat"]').click();
-  //   cy.findByText(message, 'p').should('be.visible');
+        const mentorReciever = { id: mentorId };
 
-  //   // block the chat
-  //   cy.get('button[id="block"]').click();
-  //   cy.get('button[id="dialogConfirm"]').click();
+        // send message between users
+        api
+          .sendMessage({
+            sender: menteeSender,
+            reciever: mentorReciever,
+            content: message,
+          })
+          .then(() =>
+            // archive conversation
+            api.updateChatStatus({
+              sender: mentorSender,
+              buddyId: menteeId,
+              status: 'banned',
+            }),
+          );
+      });
+    });
 
-  //   // send message to chat
+    cy.loginUser(mentor.loginName, mentor.password);
 
-  //   // check menu new message dot
+    cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
 
-  //   // check home page
-
-  //   // check navigation new message dot
-  // });
+    // go to blocked conversations
+    cy.get('[href="/chat"]').click();
+    cy.get('button[aria-label="menuLines"]').click();
+    cy.findByText('Estetyt keskustelut', 'a');
+    cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
+  });
 });

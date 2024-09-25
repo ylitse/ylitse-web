@@ -44,6 +44,7 @@ const AccountInfo = () => {
         <Dialog
           borderColor={palette.redSalmon}
           closeText={t('account.delete.cancel')}
+          confirmId="confirm-delete"
           confirmText={t('account.delete.confirm')}
           onClose={closeDeleteConfirmation}
           onConfirm={() => deleteAccount(id)}

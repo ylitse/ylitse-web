@@ -45,6 +45,7 @@ const ConfirmationDialog = ({ variant, chat, close }: Props) => {
     <Dialog
       borderColor={variants[variant].borderColor}
       closeText={t('dialog.cancel')}
+      confirmId={`confirm-${variant}`}
       confirmText={t(`dialog.${variant}.confirm`)}
       onClose={close}
       onConfirm={confirm}
