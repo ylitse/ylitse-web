@@ -71,6 +71,7 @@
       "available": "Available",
       "unavailable": "Unvailable"
     },
-    "text": "Do you want change information on your profile?"
+    "text": "Do you want to edit your profile information? ",
+    "link": "Go to profile"
   }
 }

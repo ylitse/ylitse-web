@@ -59,7 +59,7 @@ export const selectAccountId = createSelector(selectAccount, ({ id }) => id);
 
 export const selectUserId = createSelector(selectUser, ({ id }) => id);
 
-const selectUserRole = createSelector(selectUser, ({ role }) => role);
+export const selectUserRole = createSelector(selectUser, ({ role }) => role);
 
 export const selectIsMentor = createSelector(
   selectUserRole,

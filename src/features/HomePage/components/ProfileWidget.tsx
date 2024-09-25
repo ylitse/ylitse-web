@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { palette } from '@/components/variables';
+import { palette } from '@/components/constants';
 import Text from '@/components/Text';
 import { Mentor } from '@/features/MentorPage/mentorPageApi';
+import { Link } from 'react-router-dom';
 
 type Props = {
   isMobile?: boolean;
@@ -37,7 +38,14 @@ const ProfileWidget: React.FC<Props> = ({
           </InfoBoxText>
         </InfoBox>
       </MiddleContainer>
-      <Text variant="p">{t('profileWidget.text')}</Text>
+      <Text variant="p">
+        {t('profileWidget.text')}
+        <Link to="/profile">
+          <Text variant="link" color="purple">
+            {t('profileWidget.link')}
+          </Text>
+        </Link>
+      </Text>
     </Container>
   );
 };

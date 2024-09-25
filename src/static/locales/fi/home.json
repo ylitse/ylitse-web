@@ -71,6 +71,7 @@
       "available": "Pois päältä",
       "unavailable": "Päällä"
     },
-    "text": "Haluatko muuttaa profiilisi tietoja?"
+    "text": "Haluatko muuttaa profiilisi tietoja? ",
+    "link": "Siirry profiiliin"
   }
 }
