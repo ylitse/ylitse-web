@@ -1,3 +1,4 @@
+import { api } from 'cypress/support/api';
 import { v4 as uuidv4 } from 'uuid';
 
 describe('register', () => {
@@ -28,6 +29,10 @@ describe('register', () => {
     cy.visit('/register/');
     cy.switchLanguage('fi');
     cy.contains('Rekisteröidy').should('be.visible');
+  });
+
+  after(() => {
+    api.deleteAccounts();
   });
 
   it('loads page', () => {

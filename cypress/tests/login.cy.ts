@@ -1,3 +1,4 @@
+import { api } from 'cypress/support/api';
 import { v4 as uuidv4 } from 'uuid';
 
 describe('login', () => {
@@ -19,6 +20,10 @@ describe('login', () => {
     cy.visit('/login/');
     cy.switchLanguage('fi');
     cy.contains('Kirjaudu').should('be.visible');
+  });
+
+  after(() => {
+    api.deleteAccounts();
   });
 
   it('contains buttons', () => {

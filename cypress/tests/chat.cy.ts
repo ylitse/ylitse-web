@@ -8,8 +8,8 @@ describe('chat', () => {
     cy.switchLanguage('fi');
   });
 
-  afterEach(() => {
-    cy.get('[href="/logout"]').click();
+  after(() => {
+    api.deleteAccounts();
   });
 
   it('can start a conversation with mentor', () => {
@@ -32,7 +32,7 @@ describe('chat', () => {
     cy.get('button[aria-label="send"]').click();
 
     // log out
-    cy.get('[href="/logout"]').click();
+    cy.clickLogout();
     // log in with mentor-user
     cy.loginUser(mentor.loginName, mentor.password);
 
@@ -79,7 +79,7 @@ describe('chat', () => {
     cy.get('button[aria-label="send"]').click();
 
     // log in with original-user
-    cy.get('[href="/logout"]').click();
+    cy.clickLogout();
     cy.loginUser(mentee.loginName, mentee.password);
 
     // message came

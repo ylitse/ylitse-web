@@ -47,6 +47,10 @@ Cypress.Commands.add('findByText', (text: string, selector = '*') => {
   cy.get(selector).contains(text);
 });
 
+Cypress.Commands.add('clickLogout', () => {
+  cy.get('a[href="/logout"]').click();
+});
+
 declare namespace Cypress {
   interface Chainable {
     switchLanguage(language: string): Chainable<void>;
@@ -54,5 +58,6 @@ declare namespace Cypress {
     registerUser(username: string, password: string): Chainable<void>;
     loginUser(username: string, password: string): Chainable<void>;
     findByText(text: string, selector?: string): Chainable<void>;
+    clickLogout(): Chainable<void>;
   }
 }
