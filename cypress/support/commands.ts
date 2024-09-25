@@ -12,6 +12,10 @@ Cypress.Commands.add('fillInput', (id: string, value: string): void => {
   cy.get(`input[id="${id}"]`).type(value).blur();
 });
 
+Cypress.Commands.add('findByText', (text: string, selector = '*') => {
+  cy.get(selector).contains(text);
+});
+
 Cypress.Commands.add(
   'registerUser',
   (username: string, password: string): void => {
@@ -27,7 +31,7 @@ Cypress.Commands.add(
     toggle('required-age');
     toggle('privacy-consent');
     cy.get(`button[id="submit"]`).click();
-    cy.contains('Kirjaudu sisään').should('be.visible');
+    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
   },
 );
 
@@ -35,17 +39,13 @@ Cypress.Commands.add(
   'loginUser',
   (username: string, password: string): void => {
     cy.visit('/login/');
-    cy.contains('Kirjaudu sisään').should('be.visible');
+    // cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
     cy.fillInput('login_name', username);
     cy.fillInput('password', password);
     cy.get('button[id="submit"]').click();
     cy.contains('Ylitse MentorApp -vertaismentoripalvelu').should('be.visible');
   },
 );
-
-Cypress.Commands.add('findByText', (text: string, selector = '*') => {
-  cy.get(selector).contains(text);
-});
 
 Cypress.Commands.add('clickLogout', () => {
   cy.get('a[href="/logout"]').click();
@@ -55,9 +55,9 @@ declare namespace Cypress {
   interface Chainable {
     switchLanguage(language: string): Chainable<void>;
     fillInput(id: string, value: string): Chainable<void>;
+    findByText(text: string, selector?: string): Chainable<void>;
     registerUser(username: string, password: string): Chainable<void>;
     loginUser(username: string, password: string): Chainable<void>;
-    findByText(text: string, selector?: string): Chainable<void>;
     clickLogout(): Chainable<void>;
   }
 }

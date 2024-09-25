@@ -21,16 +21,16 @@ describe('logout', () => {
   it('logout redirects user to login page', () => {
     cy.clickLogout();
     cy.url().should('match', /login/);
-    cy.contains('Kirjaudu sisään').should('be.visible');
+    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
   // FIXME: re-enable when dev server issue is resolved
   xit('logout ends session', () => {
     cy.clickLogout();
     cy.url().should('match', /login/);
-    cy.contains('Kirjaudu sisään').should('be.visible');
+    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
     cy.visit('/');
     cy.url().should('match', /login/);
-    cy.contains('Kirjaudu sisään').should('be.visible');
+    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 });

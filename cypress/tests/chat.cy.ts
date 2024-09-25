@@ -21,7 +21,7 @@ describe('chat', () => {
 
     // go to mentors page
     cy.get('[href="/mentors"]').click();
-    cy.contains('mentor_paavo').should('be.visible');
+    cy.findByText(mentor.displayName, 'h2').should('be.visible');
 
     // send message
     cy.findByText('Avaa kortti', 'button').scrollIntoView().click();
@@ -242,7 +242,9 @@ describe('chat', () => {
     cy.contains('Keskustelu arkistoitu onnistuneesti').should('be.visible');
 
     // should not have message field anymore
-    cy.contains('Kirjoita viestisi tähän').should('not.exist');
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(
+      'not.exist',
+    );
 
     // unarchive chat
     cy.findByText('Palauta keskustelu', 'button').click();
