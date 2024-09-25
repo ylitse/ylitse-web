@@ -3,25 +3,38 @@ import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/variables';
 import Text from '@/components/Text';
+import { Mentor } from '@/features/MentorPage/mentorPageApi';
 
 type Props = {
   isMobile?: boolean;
+  mentor: Mentor;
 };
 
-const ProfileWidget = ({ isMobile = false }: Props) => {
+const ProfileWidget: React.FC<Props> = ({
+  isMobile = false,
+  mentor,
+}: Props) => {
   const { t } = useTranslation('home');
 
   return (
     <Container isDesktop={!isMobile}>
-      <Text variant="boldBaloo">{t('profileWidget.title')}</Text>
+      <Text variant="h2">{t('profileWidget.title')}</Text>
       <MiddleContainer>
         <InfoBox>
-          <Text variant="bold">{t('profileWidget.statusMessage')}</Text>
-          <Text variant="p">Statusteksti</Text>
+          <InfoBoxTitle variant="boldBaloo">
+            {t('profileWidget.statusMessage')}
+          </InfoBoxTitle>
+          <InfoBoxText variant="p">{mentor.statusMessage}</InfoBoxText>
         </InfoBox>
         <InfoBox>
-          <Text variant="bold">{t('profileWidget.status')}</Text>
-          <Text variant="p">Päällä</Text>
+          <InfoBoxTitle variant="boldBaloo">
+            {t('profileWidget.status.availability')}
+          </InfoBoxTitle>
+          <InfoBoxText>
+            {mentor.isVacationing
+              ? t('profileWidget.status.unavailable')
+              : t('profileWidget.status.available')}
+          </InfoBoxText>
         </InfoBox>
       </MiddleContainer>
       <Text variant="p">{t('profileWidget.text')}</Text>
@@ -32,9 +45,18 @@ const ProfileWidget = ({ isMobile = false }: Props) => {
 const InfoBox = styled.div`
   background-color: ${palette.blueWhite};
   display: flex;
+  flex-direction: column;
   margin: 1rem 0 1rem 0;
-  padding: 1rem 0 1rem 0;
+  padding: 0 0 1rem 0;
   width: 49%;
+`;
+
+const InfoBoxTitle = styled(Text)`
+  padding: 1.5rem 0 0 1.5rem;
+`;
+
+const InfoBoxText = styled(Text)`
+  padding: 0 0 0 1.5rem;
 `;
 
 const MiddleContainer = styled.div`

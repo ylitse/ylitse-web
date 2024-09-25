@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 import { selectHasUnreadMessages } from '@/features/Chat/selectors';
+import { selectUserId, selectUserRole } from '../Authentication/userSlice';
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
-import type { UserRole } from '@/features/Authentication/authenticationApi';
 
 import Announcements from './components/Announcements';
 import Background from '@/static/img/mountain-background.svg';
@@ -19,15 +19,14 @@ import ProfileWidget from './components/ProfileWidget';
 
 import PageWithTransition from '@/components/PageWithTransition';
 import Welcome from './components/Welcome';
+import { selectMentorById } from '../MentorPage/mentorPageApi';
 
-type Props = {
-  userRole: UserRole;
-};
-
-const HomePage = ({ userRole }: Props) => {
+const HomePage = () => {
   const hasUnreadMessages = useAppSelector(selectHasUnreadMessages);
   const { isTablet } = useGetLayoutMode();
+  const userRole = useAppSelector(selectUserRole);
   const isMentor = userRole === 'mentor';
+  const mentor = useAppSelector(selectMentorById(useAppSelector(selectUserId)));
 
   return isTablet ? (
     <PageWithTransition>
@@ -46,11 +45,11 @@ const HomePage = ({ userRole }: Props) => {
       <MiddleContainer>
         <LeftMiddleContainer>
           {hasUnreadMessages ? <NewMessages /> : <Welcome />}
-          <Announcements />
-          <ProfileWidget />
-          {isMentor ? <ProfileWidget /> : <></>}
+          {!isMentor && <Announcements />}
+          {isMentor && mentor && <ProfileWidget mentor={mentor} />}
         </LeftMiddleContainer>
         <RightMiddleContainer>
+          {isMentor && <Announcements />}
           <Concepts />
         </RightMiddleContainer>
       </MiddleContainer>
@@ -82,7 +81,10 @@ const LeftMiddleContainer = styled.div`
 `;
 
 const RightMiddleContainer = styled.div`
+  display: flex;
   flex: 1;
+  flex-direction: column;
+  gap: 2rem;
 `;
 
 export default HomePage;

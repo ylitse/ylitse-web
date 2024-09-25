@@ -64,9 +64,13 @@
     }
   },
   "profileWidget": {
-    "title": "Your Profile Info",
-    "statusMessage": "Statusmessage",
-    "status": "Status",
+    "title": "Profile Info",
+    "statusMessage": "Status message",
+    "status": {
+      "availability": "Status",
+      "available": "Available",
+      "unavailable": "Unvailable"
+    },
     "text": "Do you want change information on your profile?"
   }
 }

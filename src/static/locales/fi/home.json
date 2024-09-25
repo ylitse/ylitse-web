@@ -66,7 +66,11 @@
   "profileWidget": {
     "title": "Tietoja profiilistasi",
     "statusMessage": "Tilaviesti",
-    "status": "Poissaolotila",
+    "status": {
+      "availability": "Poissaolotila",
+      "available": "Pois päältä",
+      "unavailable": "Päällä"
+    },
     "text": "Haluatko muuttaa profiilisi tietoja?"
   }
 }

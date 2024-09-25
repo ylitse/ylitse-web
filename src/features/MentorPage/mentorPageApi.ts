@@ -200,10 +200,9 @@ export const selectNewestMentors = (amount: number) =>
     return sortedMentors.slice(0, amount);
   });
 
-export const selectMentorById = (buddyId: string) =>
-  createSelector(
-    selectMentors,
-    mentors => mentors.data?.[buddyId] ?? undefined,
+export const selectMentorById = (buddyId: string | null) =>
+  createSelector(selectMentors, mentors =>
+    buddyId ? mentors.data?.[buddyId] : undefined,
   );
 
 export const { useGetMentorsQuery, useUpdateMentorMutation } = mentorsApi;
