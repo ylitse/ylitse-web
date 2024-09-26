@@ -7,13 +7,11 @@ import { useUpdateUserMutation } from '@/features/Authentication/authenticationA
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
-import {
-  DEFAULT_ICON_SIZE,
-  DISPLAY_NAME_MIN_LENGTH,
-} from '@/components/constants';
+import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';
+import { validateDisplayNameLength } from '../validators';
 
 const DisplayNameEditor = () => {
   const { t } = useTranslation('profile');
@@ -24,7 +22,7 @@ const DisplayNameEditor = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
-  const isTooShort = displayName.length < DISPLAY_NAME_MIN_LENGTH;
+  const isTooShort = !validateDisplayNameLength(displayName);
   const isSavingDisabled = isLoading || isTooShort;
 
   const saveDisplayName = async () => {

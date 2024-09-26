@@ -14,6 +14,7 @@ import Slider from '@/components/Slider';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 import TextInput from '@/components/TextInput';
+import { validateBirthYear, validateDisplayNameLength } from '../validators';
 
 import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
 
@@ -21,8 +22,9 @@ const PublicInfo = () => {
   const { t } = useTranslation('profile');
   const user = useAppSelector(selectUser);
   const mentor = useAppSelector(selectMentor);
-  const [updateUser] = useUpdateUserMutation();
-  const [updateMentor] = useUpdateMentorMutation();
+  const [updateMentor, { isLoading: isLoadingMentor }] =
+    useUpdateMentorMutation();
+  const [updateUser, { isLoading: isLoadingUser }] = useUpdateUserMutation();
 
   const [localData, setLocalData] = useState<ApiMentor>(mentor);
   const [skillSearchValue, setSkillSearchValue] = useState('');
@@ -44,23 +46,33 @@ const PublicInfo = () => {
     updateMentor(localData);
   };
 
+  const isLoading = isLoadingMentor || isLoadingUser;
   const areNoChanges = JSON.stringify(mentor) === JSON.stringify(localData);
+
+  const isDisplayNameTooShort = !validateDisplayNameLength(
+    localData.display_name,
+  );
+  const isBirthYearInvalid = !validateBirthYear(localData.birth_year);
+
+  const isDiscardingDisabled = areNoChanges || isLoading;
+  const isSavingDisabled =
+    areNoChanges || isBirthYearInvalid || isDisplayNameTooShort || isLoading;
 
   return (
     <Container>
       <Text variant="h2">{t('public.title')}</Text>
       <Buttons>
         <TextButton
-          isDisabled={areNoChanges}
+          isDisabled={isDiscardingDisabled}
           onClick={discardChanges}
-          variant={areNoChanges ? 'disabledOutline' : 'outlinePurple'}
+          variant={isDiscardingDisabled ? 'disabledOutline' : 'outlinePurple'}
         >
           {t('public.mentor.discardChanges')}
         </TextButton>
         <TextButton
-          isDisabled={areNoChanges}
+          isDisabled={isSavingDisabled}
           onClick={saveMentorData}
-          variant={areNoChanges ? 'disabled' : 'dark'}
+          variant={isSavingDisabled ? 'disabled' : 'dark'}
         >
           {t('public.mentor.save')}
         </TextButton>
@@ -70,12 +82,22 @@ const PublicInfo = () => {
         <Columns>
           <Column>
             <LabeledInput
-              label={t('public.mentor.displayName')}
+              error={
+                isDisplayNameTooShort
+                  ? t('public.mentor.displayName.tooShortError')
+                  : null
+              }
+              label={t('public.mentor.displayName.label')}
               onChange={value => updateMentorData('display_name', value)}
               value={localData.display_name}
             />
             <LabeledInput
-              label={t('public.mentor.birthYear')}
+              error={
+                isBirthYearInvalid
+                  ? t('public.mentor.birthYear.invalidError')
+                  : null
+              }
+              label={t('public.mentor.birthYear.label')}
               onChange={value => updateMentorData('birth_year', Number(value))}
               value={String(localData.birth_year)}
               type="number"

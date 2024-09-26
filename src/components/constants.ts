@@ -33,11 +33,6 @@ export const palette = {
   whiteOpacity: 'rgba(255, 255, 255, 0.5)',
 };
 
-// Business logic
-export const DISPLAY_NAME_MIN_LENGTH = 2;
-export const EMAIL_REGEX = '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$';
-export const PASSWORD_MIN_LENGTH = 8;
-
 // Size
 export const DEFAULT_ICON_SIZE = { SMALL: 24, LARGE: 46 };
 

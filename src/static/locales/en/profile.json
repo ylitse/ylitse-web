@@ -57,9 +57,15 @@
     },
     "mentor": {
       "addSkill": "Add new skill",
-      "birthYear": "Year of birth *",
+      "birthYear": {
+        "invalidError": "Birth year is invalid",
+        "label": "Year of birth *"
+      },
       "discardChanges": "Discard changes",
-      "displayName": "Display name *",
+      "displayName": {
+        "label": "Display name *",
+        "tooShortError": "Display name is too short"
+      },
       "mandatoryNotice": "Fields marked with a star * are required.",
       "region": "Region",
       "save": "Save",

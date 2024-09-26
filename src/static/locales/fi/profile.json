@@ -57,9 +57,15 @@
     },
     "mentor": {
       "addSkill": "Lisää uusi aihe",
-      "birthYear": "Syntymävuosi *",
+      "birthYear": {
+        "invalidError": "Syntymävuosi on virheellinen",
+        "label": "Syntymävuosi *"
+      },
       "discardChanges": "Hylkää muutokset",
-      "displayName": "Julkinen nimimerkki *",
+      "displayName": {
+        "label": "Julkinen nimimerkki *",
+        "tooShortError": "Nimimerkki on liian lyhyt"
+      },
       "mandatoryNotice": "Tähdellä * merkityt tiedot tulee täyttää.",
       "region": "Alue",
       "save": "Tallenna",
