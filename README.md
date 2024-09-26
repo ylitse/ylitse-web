@@ -81,14 +81,41 @@ Tests need `YLITSE_API_PASS` and `YLITSE_MFA_SECRET` environment-variables for a
 
 Run locally:
 
-1. Start Ylitse-API `YLITSE_POSTGRES_DATA= make run-gunicorn`
-1. Start dev server `npm run start`
-1. Run cypress `npm run test:e2e` or interactively `npx cypress open`
+1. Start Ylitse-API
+
+```shell
+docker compose --project-name e2e up
+```
+
+2. Start dev server
+
+```shell
+DEV_API="http://localhost:8080" npm start
+```
+
+3. Export env variables (found in `ylitse-api/ylitse_conf/ylitse.conf`)
+
+```shell
+export YLITSE_API_PASS={{admin_password}}
+export YLITSE_MFA_SECRET={{admin_2fa}}
+```
+
+4. Run cypress
+
+```shell
+npm run test:e2e
+```
+
+or interactively
+
+```shell
+npx cypress open
+```
 
 Example of cypress command for better debugging of a specific test:
 
 ```shell
-cypress run --spec 'cypress/tests/logout.cy.ts' --headed --browser firefox --no-exit"
+npx cypress run --spec 'cypress/tests/logout.cy.ts' --headed --browser firefox --no-exit
 ```
 
 To target test run to a specific step you can use `it.only()`.

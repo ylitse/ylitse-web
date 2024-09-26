@@ -1,3 +1,4 @@
+import { api } from 'cypress/support/api';
 import { v4 as uuidv4 } from 'uuid';
 
 describe('login', () => {
@@ -17,17 +18,21 @@ describe('login', () => {
 
   beforeEach(() => {
     cy.visit('/login/');
-    cy.switchLanguage('fi');
-    cy.contains('Kirjaudu').should('be.visible');
+    cy.switchLanguageBeforeLogin('fi');
+    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
+  });
+
+  after(() => {
+    api.deleteAccounts();
   });
 
   it('contains buttons', () => {
-    cy.contains('Rekisteröidy').should('be.visible');
-    cy.contains('Kirjaudu').should('be.visible');
+    cy.findByText('Rekisteröidy', 'a').should('be.visible'); // TODO: This should be a button
+    cy.findByText('Kirjaudu', 'button').should('be.visible');
   });
 
   it('has right content', () => {
-    cy.contains('Kirjaudu sisään').should('be.visible');
+    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
     cy.contains(
       'Uusi täällä? Palvelussa voit jutella SOS-Lapsikylän valmentamien vertaismentoreiden kanssa mistä tahansa mieltäsi painavasta asiasta. Palvelun käyttö on luottamuksellista ja täysin maksutonta.',
     ).should('be.visible');
@@ -36,10 +41,10 @@ describe('login', () => {
   });
 
   it('changes language on button press', () => {
-    cy.switchLanguage('en');
-    cy.contains('Login').should('be.visible');
-    cy.switchLanguage('fi');
-    cy.contains('Kirjaudu sisään').should('be.visible');
+    cy.switchLanguageBeforeLogin('en');
+    cy.findByText('Login', 'h1').should('be.visible');
+    cy.switchLanguageBeforeLogin('fi');
+    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
   it('shows error if empty login_name', () => {
@@ -61,11 +66,12 @@ describe('login', () => {
     testErrorVisible();
   });
 
-  it('can log in and out with registered account', () => {
+  it('can log in with registered account', () => {
     cy.fillInput('login_name', username);
     cy.fillInput('password', 'examplePassword');
     clickLogin();
     cy.location('pathname').should('eq', '/');
-    cy.contains('Logout').should('be.visible');
+    cy.switchLanguageAfterLogin('fi');
+    cy.contains('Kirjaudu ulos').should('be.visible');
   });
 });

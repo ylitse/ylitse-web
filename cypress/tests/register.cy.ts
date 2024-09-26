@@ -1,3 +1,4 @@
+import { api } from 'cypress/support/api';
 import { v4 as uuidv4 } from 'uuid';
 
 describe('register', () => {
@@ -26,28 +27,32 @@ describe('register', () => {
 
   beforeEach(() => {
     cy.visit('/register/');
-    cy.switchLanguage('fi');
-    cy.contains('Rekisteröidy').should('be.visible');
+    cy.switchLanguageBeforeLogin('fi');
+    cy.findByText('Rekisteröidy', 'h1').should('be.visible');
+  });
+
+  after(() => {
+    api.deleteAccounts();
   });
 
   it('loads page', () => {
-    cy.contains('Rekisteröidy').should('be.visible');
+    cy.findByText('Rekisteröidy', 'h1').should('be.visible');
     cy.contains('Hienoa, että haluat aloittaa palvelun käytön.').should(
       'be.visible',
     );
   });
 
   it('changes language on button press', () => {
-    cy.switchLanguage('en');
-    cy.contains('Register').should('be.visible');
-    cy.switchLanguage('fi');
-    cy.contains('Rekisteröidy').should('be.visible');
+    cy.switchLanguageBeforeLogin('en');
+    cy.findByText('Register', 'h1').should('be.visible');
+    cy.switchLanguageBeforeLogin('fi');
+    cy.findByText('Rekisteröidy', 'h1').should('be.visible');
   });
 
   it('registers new user if form is correctly filled', () => {
     cy.registerUser(username, 'examplePassword');
     cy.location('pathname').should('contain', '/login');
-    cy.contains('Login').should('be.visible');
+    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
   // Username

@@ -23,6 +23,7 @@ const LangDropdown = () => {
   return (
     <Anchor ref={ref}>
       <DropdownButton
+        id="lang-dropdown-button"
         isComponentVisible={isComponentVisible}
         setIsComponentVisible={setIsComponentVisible}
         text={
