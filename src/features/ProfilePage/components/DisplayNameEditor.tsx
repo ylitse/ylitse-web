@@ -50,6 +50,7 @@ const DisplayNameEditor = () => {
           {t('account.cancel')}
         </TextButton>
         <TextButton
+          isDisabled={isSavingDisabled}
           onClick={saveDisplayName}
           variant={isSavingDisabled ? 'disabled' : 'dark'}
         >

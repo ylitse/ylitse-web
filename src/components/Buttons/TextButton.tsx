@@ -11,29 +11,27 @@ type Size = 'normal' | 'large';
 type ButtonProps<T extends ElementType> = {
   children: ReactNode;
   className?: string;
+  isDisabled?: boolean;
   size?: Size;
   variant?: ButtonVariant;
 } & ComponentPropsWithoutRef<T>;
 
 const TextButton = <T extends ElementType = 'button'>({
   children,
+  isDisabled = false,
   size = 'normal',
   variant = 'dark',
   ...rest
-}: ButtonProps<T>): JSX.Element => {
-  const isDisabled = variant === 'disabled';
-
-  return (
-    <StyledTextButton
-      disabled={isDisabled}
-      size={size}
-      variant={variant}
-      {...rest}
-    >
-      {children}
-    </StyledTextButton>
-  );
-};
+}: ButtonProps<T>): JSX.Element => (
+  <StyledTextButton
+    disabled={isDisabled}
+    size={size}
+    variant={variant}
+    {...rest}
+  >
+    {children}
+  </StyledTextButton>
+);
 
 const StyledTextButton = styled.button<{
   size: Size;

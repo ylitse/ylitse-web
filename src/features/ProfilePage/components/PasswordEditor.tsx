@@ -87,6 +87,7 @@ const PasswordEditor = () => {
           {t('account.cancel')}
         </TextButton>
         <TextButton
+          isDisabled={isSavingDisabled}
           onClick={savePassword}
           variant={isSavingDisabled ? 'disabled' : 'dark'}
         >

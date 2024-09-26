@@ -4,24 +4,18 @@ import { useTranslation } from 'react-i18next';
 
 import { selectMentor, selectUser } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
-import { useDebounce } from '@/hooks/useDebounce';
 import { useUpdateMentorMutation } from '@/features/MentorPage/mentorPageApi';
 import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
 
-import {
-  DEFAULT_ICON_SIZE,
-  palette,
-  SAVE_DELAY_MS,
-} from '@/components/constants';
+import { ButtonRow } from '.';
+import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
 import LabeledInput from '@/components/LabeledInput';
 import Slider from '@/components/Slider';
 import Text from '@/components/Text';
+import { TextButton } from '@/components/Buttons';
 import TextInput from '@/components/TextInput';
 
 import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
-import type { User } from '@/features/Authentication/authenticationApi';
-import { ButtonRow } from '.';
-import { TextButton } from '@/components/Buttons';
 
 const PublicInfo = () => {
   const { t } = useTranslation('profile');
@@ -30,55 +24,43 @@ const PublicInfo = () => {
   const [updateUser] = useUpdateUserMutation();
   const [updateMentor] = useUpdateMentorMutation();
 
-  const saveMentorData = useDebounce(
-    (mentor: ApiMentor) => updateMentor(mentor),
-    SAVE_DELAY_MS,
-  );
-
-  const saveUserAndMentorData = useDebounce((mentor: ApiMentor, user: User) => {
-    updateUser(user);
-    updateMentor(mentor);
-  }, SAVE_DELAY_MS);
-
   const [localData, setLocalData] = useState<ApiMentor>(mentor);
   const [skillSearchValue, setSkillSearchValue] = useState('');
-
-  const handleDisplayNameChange = (display_name: string) => {
-    setLocalData({ ...localData, display_name });
-    saveUserAndMentorData(
-      { ...mentor, display_name },
-      { ...user, display_name },
-    );
-  };
 
   const updateMentorData = <K extends keyof ApiMentor>(
     key: K,
     value: ApiMentor[K],
   ) => {
     setLocalData({ ...localData, [key]: value });
-    saveMentorData({ ...mentor, [key]: value });
   };
 
-  const isSavingDisabled = true;
-  const isDiscardingDisabled = true;
+  const discardChanges = () => setLocalData(mentor);
 
-  const discardChanges = () => {
-    console.log('Discarding changes');
+  const saveMentorData = () => {
+    // Only update user if display_name has changed
+    if (localData.display_name !== mentor.display_name) {
+      updateUser({ ...user, display_name: localData.display_name });
+    }
+    updateMentor(localData);
   };
+
+  const areNoChanges = JSON.stringify(mentor) === JSON.stringify(localData);
 
   return (
     <Container>
       <Text variant="h2">{t('public.title')}</Text>
       <Buttons>
         <TextButton
+          isDisabled={areNoChanges}
           onClick={discardChanges}
-          variant={isDiscardingDisabled ? 'disabledOutline' : 'outlinePurple'}
+          variant={areNoChanges ? 'disabledOutline' : 'outlinePurple'}
         >
           {t('public.mentor.discardChanges')}
         </TextButton>
         <TextButton
+          isDisabled={areNoChanges}
           onClick={saveMentorData}
-          variant={isSavingDisabled ? 'disabled' : 'dark'}
+          variant={areNoChanges ? 'disabled' : 'dark'}
         >
           {t('public.mentor.save')}
         </TextButton>
@@ -89,7 +71,7 @@ const PublicInfo = () => {
           <Column>
             <LabeledInput
               label={t('public.mentor.displayName')}
-              onChange={handleDisplayNameChange}
+              onChange={value => updateMentorData('display_name', value)}
               value={localData.display_name}
             />
             <LabeledInput
