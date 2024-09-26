@@ -20,6 +20,8 @@ import TextInput from '@/components/TextInput';
 
 import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
 import type { User } from '@/features/Authentication/authenticationApi';
+import { ButtonRow } from '.';
+import { TextButton } from '@/components/Buttons';
 
 const PublicInfo = () => {
   const { t } = useTranslation('profile');
@@ -57,10 +59,30 @@ const PublicInfo = () => {
     saveMentorData({ ...mentor, [key]: value });
   };
 
+  const isSavingDisabled = true;
+  const isDiscardingDisabled = true;
+
+  const discardChanges = () => {
+    console.log('Discarding changes');
+  };
+
   return (
     <Container>
       <Text variant="h2">{t('public.title')}</Text>
-      <SaveNotice>{t('public.mentor.saveNotice')}</SaveNotice>
+      <Buttons>
+        <TextButton
+          onClick={discardChanges}
+          variant={isDiscardingDisabled ? 'disabledOutline' : 'outlinePurple'}
+        >
+          {t('public.mentor.discardChanges')}
+        </TextButton>
+        <TextButton
+          onClick={saveMentorData}
+          variant={isSavingDisabled ? 'disabled' : 'dark'}
+        >
+          {t('public.mentor.save')}
+        </TextButton>
+      </Buttons>
       <Form>
         <Text>{t('public.mentor.mandatoryNotice')}</Text>
         <Columns>
@@ -142,13 +164,10 @@ const Container = styled.div`
   padding: 3rem 0;
 `;
 
-const SaveNotice = styled(Text)`
-  align-items: center;
+const Buttons = styled(ButtonRow)`
   background-color: ${palette.blue3};
-  display: flex;
-  height: 2.5rem;
-  justify-content: center;
-  width 100%;
+  margin-top: 1rem;
+  padding: 1.5rem;
 `;
 
 const Form = styled.div`

@@ -5,7 +5,7 @@ export type Color = keyof typeof palette;
 export const palette = {
   blue: '#01A5EC',
   blue2: '#43BFFF',
-  blue3: '#84CCF1',
+  blue3: '#A2DBF8',
   blueDark: '#1C325D',
   blueGrey: '#4C6282',
   blueLight: '#D3EFFF',

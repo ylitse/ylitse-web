@@ -56,20 +56,21 @@
       "tooShortError": "Nimimerkki on liian lyhyt"
     },
     "mentor": {
+      "addSkill": "Lisää uusi aihe",
+      "birthYear": "Syntymävuosi *",
+      "discardChanges": "Hylkää muutokset",
+      "displayName": "Julkinen nimimerkki *",
+      "mandatoryNotice": "Tähdellä * merkityt tiedot tulee täyttää.",
+      "region": "Alue",
+      "save": "Tallenna",
+      "statusMessage": "Tilaviesti",
+      "story": "Tarinani",
+      "skills": "Aiheeni",
       "vacation": {
         "info": "Poissaolotilan aikana sinulle ei voi lähettää viestejä. Ilmoitathan poissaolosi pituuden tilaviestissä.",
         "switch": { "off": "Tavoitettavissa", "on": "Ei tavoitettavissa" },
         "title": "Poissaolotila"
-      },
-      "addSkill": "Lisää uusi aihe",
-      "region": "Alue",
-      "birthYear": "Syntymävuosi *",
-      "displayName": "Julkinen nimimerkki *",
-      "mandatoryNotice": "Tähdellä * merkityt tiedot tulee täyttää.",
-      "saveNotice": "Muutokset tallentuvat automaattisesti.",
-      "statusMessage": "Tilaviesti",
-      "story": "Tarinani",
-      "skills": "Aiheeni"
+      }
     },
     "title": "Julkiset tiedot"
   }

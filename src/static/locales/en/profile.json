@@ -56,20 +56,21 @@
       "tooShortError": "Display name is too short"
     },
     "mentor": {
+      "addSkill": "Add new skill",
+      "birthYear": "Year of birth *",
+      "discardChanges": "Discard changes",
+      "displayName": "Display name *",
+      "mandatoryNotice": "Fields marked with a star * are required.",
+      "region": "Region",
+      "save": "Save",
+      "statusMessage": "Status message",
+      "story": "My story",
+      "skills": "My skills",
       "vacation": {
         "info": "During vacation mode, you cannot receive messages. Please specify the duration of your vacation in your status message.",
         "switch": { "off": "Available", "on": "Not available" },
         "title": "Vacation mode"
-      },
-      "addSkill": "Add new skill",
-      "region": "Region",
-      "birthYear": "Year of birth *",
-      "displayName": "Display name *",
-      "mandatoryNotice": "Fields marked with a star * are required.",
-      "saveNotice": "Changes are saved automatically.",
-      "statusMessage": "Status message",
-      "story": "My story",
-      "skills": "My skills"
+      }
     },
     "title": "Public information"
   }

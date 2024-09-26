@@ -66,6 +66,22 @@ export const variants = {
       outline: `none`,
     },
   },
+  disabledOutline: {
+    background: 'none',
+    border: `2px solid ${palette.greyFaded}`,
+    color: palette.greyFaded,
+    cursor: 'not-allowed',
+
+    ['&: active, &: visited']: {
+      outline: 'none',
+    },
+    ['&: focus']: {
+      outline: 'none',
+    },
+    ['&: hover']: {
+      outline: `none`,
+    },
+  },
   light: {
     backgroundColor: palette.white,
     border: `2px solid ${palette.purple}`,
@@ -83,8 +99,8 @@ export const variants = {
       outline: `none`,
     },
   },
-  outline: {
-    backgroundColor: palette.purple,
+  outlineOrange: {
+    background: 'none',
     border: `2px solid ${palette.orange}`,
     color: palette.orange,
 
@@ -96,6 +112,11 @@ export const variants = {
     ['&: hover']: {
       backgroundColor: palette.purpleDark,
     },
+  },
+  outlinePurple: {
+    background: 'none',
+    border: `2px solid ${palette.purple}`,
+    color: palette.purple,
   },
   textOnly: {
     background: 'none',
