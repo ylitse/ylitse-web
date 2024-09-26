@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import { t } from 'i18next';
 
 import { authenticationApi } from '../Authentication/authenticationApi';
+import { selectUserId } from '../Authentication/userSlice';
 
 export type ApiMentor = D.TypeOf<typeof mentorCodec>;
 
@@ -204,5 +205,10 @@ export const selectMentorById = (buddyId: string | null) =>
   createSelector(selectMentors, mentors =>
     buddyId ? mentors.data?.[buddyId] : undefined,
   );
+
+export const selectMentorProfile = createSelector(
+  [selectMentors, selectUserId],
+  (mentors, userId) => mentors.data?.[userId],
+);
 
 export const { useGetMentorsQuery, useUpdateMentorMutation } = mentorsApi;
