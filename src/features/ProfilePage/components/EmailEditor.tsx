@@ -22,10 +22,13 @@ const EmailEditor = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
-  const isEmailMissing = !email.length;
-  const emailValue = isEmailMissing ? t('account.email.missing') : email;
+  const hasNotChanged = account.email === email;
   const isEmailInvalid = !validateEmail(email);
-  const isSavingDisabled = isLoading || isEmailMissing || isEmailInvalid;
+  const isEmailMissing = !email.length;
+  const isSavingDisabled =
+    hasNotChanged || isEmailInvalid || isEmailMissing || isLoading;
+
+  const emailValue = isEmailMissing ? t('account.email.missing') : email;
 
   const saveEmail = async () => {
     try {

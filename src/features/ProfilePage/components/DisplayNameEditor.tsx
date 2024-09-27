@@ -22,8 +22,9 @@ const DisplayNameEditor = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
+  const hasNotChanged = user.display_name === displayName;
   const isTooShort = !validateDisplayNameLength(displayName);
-  const isSavingDisabled = isLoading || isTooShort;
+  const isSavingDisabled = hasNotChanged || isLoading || isTooShort;
 
   const saveDisplayName = async () => {
     try {
