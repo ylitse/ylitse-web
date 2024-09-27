@@ -27,6 +27,7 @@ const PublicInfo = () => {
   const [updateUser, { isLoading: isLoadingUser }] = useUpdateUserMutation();
 
   const [localData, setLocalData] = useState<ApiMentor>(mentor);
+  const [isDirty, setIsDirty] = useState(false);
   const [skillSearchValue, setSkillSearchValue] = useState('');
 
   const updateMentorData = <K extends keyof ApiMentor>(
@@ -34,29 +35,40 @@ const PublicInfo = () => {
     value: ApiMentor[K],
   ) => {
     setLocalData({ ...localData, [key]: value });
+    setIsDirty(true);
   };
 
-  const discardChanges = () => setLocalData(mentor);
+  const discardChanges = () => {
+    setLocalData(mentor);
+    setIsDirty(false);
+  };
 
-  const saveMentorData = () => {
-    // Only update user if display_name has changed
-    if (localData.display_name !== mentor.display_name) {
-      updateUser({ ...user, display_name: localData.display_name });
+  const saveMentorData = async () => {
+    try {
+      // Only update user if display_name has changed
+      if (localData.display_name !== mentor.display_name) {
+        await updateUser({
+          ...user,
+          display_name: localData.display_name,
+        }).unwrap();
+      }
+      await updateMentor(localData).unwrap();
+      setIsDirty(false);
+    } catch (err) {
+      return;
     }
-    updateMentor(localData);
   };
 
   const isLoading = isLoadingMentor || isLoadingUser;
-  const areNoChanges = JSON.stringify(mentor) === JSON.stringify(localData);
 
   const isDisplayNameTooShort = !validateDisplayNameLength(
     localData.display_name,
   );
   const isBirthYearInvalid = !validateBirthYear(localData.birth_year);
 
-  const isDiscardingDisabled = areNoChanges || isLoading;
+  const isDiscardingDisabled = !isDirty || isLoading;
   const isSavingDisabled =
-    areNoChanges || isBirthYearInvalid || isDisplayNameTooShort || isLoading;
+    !isDirty || isBirthYearInvalid || isDisplayNameTooShort || isLoading;
 
   return (
     <Container>
