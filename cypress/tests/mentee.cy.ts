@@ -16,27 +16,27 @@ describe('mentee profile', () => {
   });
 
   it('displays right content on profile page', () => {
-    cy.findByText('Profiili', 'h1').should('be.visible');
-    cy.findByText('Tilin tiedot', 'h2').should('be.visible');
-    cy.findByText('Käyttäjä', 'p').should('be.visible');
-    cy.findByText(mentee.loginName, 'p').should('be.visible');
-    cy.findByText(mentee.email, 'p').should('be.visible');
+    cy.getByText('Profiili', 'h1').should('be.visible');
+    cy.getByText('Tilin tiedot', 'h2').should('be.visible');
+    cy.getByText('Käyttäjä', 'p').should('be.visible');
+    cy.getByText(mentee.loginName, 'p').should('be.visible');
+    cy.getByText(mentee.email, 'p').should('be.visible');
 
-    cy.findByText('Julkiset tiedot', 'h2').should('be.visible');
-    cy.findByText(mentee.displayName, 'p').should('be.visible');
+    cy.getByText('Julkiset tiedot', 'h2').should('be.visible');
+    cy.getByText(mentee.displayName, 'p').should('be.visible');
   });
 
-  it('password is changed if provided inputs are valid', () => {});
+  // it('password is changed if provided inputs are valid', () => {});
 
-  it('correct password error messages and notifications are shown for invalid inputs', () => {});
+  // it('correct password error messages and notifications are shown for invalid inputs', () => {});
 
-  it('email is changed if provided input is valid', () => {});
+  // it('email is changed if provided input is valid', () => {});
 
-  it('email error message is shown for invalid inputs', () => {});
+  // it('email error message is shown for invalid inputs', () => {});
 
-  it('display name is changed if provided input is valid', () => {});
+  // it('display name is changed if provided input is valid', () => {});
 
-  it('display name error message is shown for invalid inputs', () => {});
+  // it('display name error message is shown for invalid inputs', () => {});
 
-  it('account is deleted after confirmation', () => {});
+  // it('account is deleted after confirmation', () => {});
 });

@@ -17,26 +17,26 @@ describe('home', () => {
     api.signUpMentor(mentor);
     cy.loginUser(mentee.loginName, mentee.password);
 
-    cy.findByText('Ylitse MentorApp', 'h1').should('be.visible');
-    cy.findByText(
+    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText(
       'Ylitse MentorApp -vertaismentoripalvelussa mentorit auttavat sinua henkilökohtaisessa tilanteessasi luottamuksellisesti. Voit valita sopivan mentorin ongelmasi perusteella ja saada apua ajasta ja paikasta riippumatta.',
       'p',
     ).should('be.visible');
 
-    cy.findByText('Aloita etsimällä mentori', 'h2').should('be.visible');
+    cy.getByText('Aloita etsimällä mentori', 'h2').should('be.visible');
     // assure that find mentor button works
-    cy.findByText('Etsi mentori', 'button').click();
+    cy.getByText('Etsi mentori', 'button').click();
     cy.url().should('match', /mentors/);
 
     // return to home page
     cy.visit('/');
 
-    cy.findByText('Tiedotteet', 'h2').should('be.visible');
-    cy.findByText('Käsitteet', 'h2').should('be.visible');
+    cy.getByText('Tiedotteet', 'h2').should('be.visible');
+    cy.getByText('Käsitteet', 'h2').should('be.visible');
 
     // assure that the newest mentor is displayed
-    cy.findByText('Uusimmat mentorit', 'h2').should('be.visible');
-    cy.findByText(mentor.displayName, 'h2').should('be.visible');
+    cy.getByText('Uusimmat mentorit', 'h2').should('be.visible');
+    cy.getByText(mentor.displayName, 'h2').should('be.visible');
     cy.contains('Tarinani').should('be.visible');
     cy.contains(mentor.story).should('be.visible');
     cy.contains('Puhun näitä kieliä').should('be.visible');
@@ -46,11 +46,11 @@ describe('home', () => {
       cy.contains(skill, { matchCase: false }).should('be.visible'),
     );
 
-    cy.findByText('Vertaistukea nuorille ja aikuisille', 'h2').should(
+    cy.getByText('Vertaistukea nuorille ja aikuisille', 'h2').should(
       'be.visible',
     );
     // assure that find more mentors button works
-    cy.findByText('Löydä lisää mentoreita', 'button').click();
+    cy.getByText('Löydä lisää mentoreita', 'button').click();
     cy.url().should('match', /mentors/);
   });
 
@@ -80,15 +80,15 @@ describe('home', () => {
 
     cy.loginUser(mentee.loginName, mentee.password);
 
-    cy.findByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
 
-    cy.findByText('Aloita etsimällä mentori', 'h2').should('not.exist');
-    cy.findByText('Keskustele mentoreiden kanssa', 'h2').should('be.visible');
+    cy.getByText('Aloita etsimällä mentori', 'h2').should('not.exist');
+    cy.getByText('Keskustele mentoreiden kanssa', 'h2').should('be.visible');
 
     // assure that go to chat button works
-    cy.findByText('Siirry chattiin', 'button').click();
+    cy.getByText('Siirry chattiin', 'button').click();
     cy.url().should('match', /chat/);
-    cy.findByText(mentor.displayName, 'h2').should('be.visible');
+    cy.getByText(mentor.displayName, 'h2').should('be.visible');
   });
 
   it('displays right content for mentor', () => {
@@ -96,16 +96,14 @@ describe('home', () => {
     api.signUpMentor(mentor);
     cy.loginUser(mentor.loginName, mentor.password);
 
-    cy.findByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
 
-    cy.findByText('Keskustele aktoreiden kanssa', 'h2').should('be.visible');
+    cy.getByText('Keskustele aktoreiden kanssa', 'h2').should('be.visible');
 
     // assure that go to chat button works
-    cy.findByText('Siirry chattiin', 'button').click();
+    cy.getByText('Siirry chattiin', 'button').click();
     cy.url().should('match', /chat/);
-    cy.findByText('Sinulla ei ole vielä keskusteluja', 'p').should(
-      'be.visible',
-    );
+    cy.getByText('Sinulla ei ole vielä keskusteluja', 'p').should('be.visible');
   });
 
   // TODO: This does not work because of mentee name bug on Chat page
@@ -135,17 +133,15 @@ describe('home', () => {
 
     cy.loginUser(mentor.loginName, mentor.password);
 
-    cy.findByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
 
-    cy.findByText('Keskustele aktoreiden kanssa', 'h2').should('not.exist');
-    cy.findByText('Sinulla on lukemattomia viestejä', 'h2').should(
-      'be.visible',
-    );
+    cy.getByText('Keskustele aktoreiden kanssa', 'h2').should('not.exist');
+    cy.getByText('Sinulla on lukemattomia viestejä', 'h2').should('be.visible');
 
     // assure that go to chat button works
-    cy.findByText('Siirry chattiin', 'button').click();
+    cy.getByText('Siirry chattiin', 'button').click();
     cy.url().should('match', /chat/);
-    cy.findByText(mentee.displayName, 'h2').should('be.visible');
+    cy.getByText(mentee.displayName, 'h2').should('be.visible');
   });
 
   it('will not display notification if there is unseen messages in an archived chat', () => {
@@ -193,10 +189,10 @@ describe('home', () => {
 
     cy.loginUser(mentor.loginName, mentor.password);
 
-    cy.findByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
 
-    cy.findByText('Sinulla on lukemattomia viestejä', 'h2').should('not.exist');
-    cy.findByText('Keskustele aktoreiden kanssa', 'h2').should('be.visible');
+    cy.getByText('Sinulla on lukemattomia viestejä', 'h2').should('not.exist');
+    cy.getByText('Keskustele aktoreiden kanssa', 'h2').should('be.visible');
   });
 
   it('will not display notification if there is unseen messages in a blocked chat', () => {
@@ -244,9 +240,9 @@ describe('home', () => {
 
     cy.loginUser(mentor.loginName, mentor.password);
 
-    cy.findByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
 
-    cy.findByText('Sinulla on lukemattomia viestejä', 'h2').should('not.exist');
-    cy.findByText('Keskustele aktoreiden kanssa', 'h2').should('be.visible');
+    cy.getByText('Sinulla on lukemattomia viestejä', 'h2').should('not.exist');
+    cy.getByText('Keskustele aktoreiden kanssa', 'h2').should('be.visible');
   });
 });

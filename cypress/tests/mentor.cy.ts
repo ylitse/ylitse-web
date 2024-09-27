@@ -16,13 +16,13 @@ describe('mentor profile', () => {
   });
 
   it('displays right content on profile page', () => {
-    cy.findByText('Profiili', 'h1').should('be.visible');
-    cy.findByText('Tilin tiedot', 'h2').should('be.visible');
-    cy.findByText('Mentori', 'p').should('be.visible');
-    cy.findByText(mentor.loginName, 'p').should('be.visible');
-    cy.findByText(mentor.email, 'p').should('be.visible');
+    cy.getByText('Profiili', 'h1').should('be.visible');
+    cy.getByText('Tilin tiedot', 'h2').should('be.visible');
+    cy.getByText('Mentori', 'p').should('be.visible');
+    cy.getByText(mentor.loginName, 'p').should('be.visible');
+    cy.getByText(mentor.email, 'p').should('be.visible');
 
-    cy.findByText('Julkiset tiedot', 'h2').should('be.visible');
+    cy.getByText('Julkiset tiedot', 'h2').should('be.visible');
     cy.getInputByLabel('Julkinen nimimerkki *').should(
       'have.value',
       mentor.displayName,
@@ -36,17 +36,17 @@ describe('mentor profile', () => {
       'have.value',
       mentor.status_message,
     );
-    cy.findByText('Tavoitettavissa', 'label').should('be.visible');
+    cy.getByText('Tavoitettavissa', 'label').should('be.visible');
     cy.get('textarea').should('have.value', mentor.story);
   });
 
-  it('password is changed if provided inputs are valid', () => {});
+  // it('password is changed if provided inputs are valid', () => {});
 
-  it('public info is changed if provided inputs are valid', () => {});
+  // it('public info is changed if provided inputs are valid', () => {});
 
-  it('public info changes are discarded after button press', () => {});
+  // it('public info changes are discarded after button press', () => {});
 
-  it('display name error message is shown for invalid inputs ', () => {});
+  // it('display name error message is shown for invalid inputs ', () => {});
 
-  it('birth year error message is shown for invalid inputs', () => {});
+  // it('birth year error message is shown for invalid inputs', () => {});
 });
