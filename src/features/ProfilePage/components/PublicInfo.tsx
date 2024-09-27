@@ -128,7 +128,7 @@ const PublicInfo = () => {
             />
             <Text variant="label">{t('public.mentor.vacation.title')}</Text>
             <Slider
-              id="isVacationing"
+              id="is-vacationing-slider"
               label={t(
                 `public.mentor.vacation.switch.${
                   localData.is_vacationing ? 'on' : 'off'

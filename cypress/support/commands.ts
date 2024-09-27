@@ -18,14 +18,6 @@ Cypress.Commands.add('switchLanguageAfterLogin', (lang: LangCode) => {
   }
 });
 
-Cypress.Commands.add('fillInput', (id: string, value: string) => {
-  cy.get(`input[id="${id}"]`).type(value).blur();
-});
-
-Cypress.Commands.add('findByText', (text: string, selector = '*') => {
-  cy.get(selector).contains(text);
-});
-
 Cypress.Commands.add('registerUser', (username: string, password: string) => {
   const toggle = (input: string) => {
     cy.get(`input[id="${input}"]`).parent().click();
@@ -61,14 +53,32 @@ Cypress.Commands.add('clickLogout', () => {
   cy.get('a[href="/logout"]').click();
 });
 
+Cypress.Commands.add('fillInput', (id: string, value: string) => {
+  cy.get(`input[id="${id}"]`).type(value).blur();
+});
+
+Cypress.Commands.add('findByText', (text: string, selector = '*') => {
+  cy.get(selector).contains(text);
+});
+
+Cypress.Commands.add('getInputByLabel', (labelText: string) => {
+  return cy
+    .contains('label', labelText)
+    .invoke('attr', 'for')
+    .then(inputId => {
+      return cy.get(`#${inputId}`);
+    });
+});
+
 declare namespace Cypress {
   interface Chainable {
     switchLanguageBeforeLogin(language: LangCode): Chainable<void>;
     switchLanguageAfterLogin(language: LangCode): Chainable<void>;
-    fillInput(id: string, value: string): Chainable<void>;
-    findByText(text: string, selector?: string): Chainable<void>;
     registerUser(username: string, password: string): Chainable<void>;
     loginUser(username: string, password: string): Chainable<void>;
     clickLogout(): Chainable<void>;
+    fillInput(id: string, value: string): Chainable<void>;
+    findByText(text: string, selector?: string): Chainable<void>;
+    getInputByLabel(labelText: string): Chainable<JQuery<HTMLElement>>;
   }
 }
