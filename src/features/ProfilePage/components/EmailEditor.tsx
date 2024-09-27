@@ -7,10 +7,11 @@ import { useUpdateAccountMutation } from '@/features/Authentication/authenticati
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
-import { DEFAULT_ICON_SIZE, EMAIL_REGEX } from '@/components/constants';
+import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';
+import { validateEmail } from '../validators';
 
 const EmailEditor = () => {
   const { t } = useTranslation('profile');
@@ -23,7 +24,7 @@ const EmailEditor = () => {
 
   const isEmailMissing = !email.length;
   const emailValue = isEmailMissing ? t('account.email.missing') : email;
-  const isEmailInvalid = email.length > 0 && !email.match(EMAIL_REGEX);
+  const isEmailInvalid = !validateEmail(email);
   const isSavingDisabled = isLoading || isEmailMissing || isEmailInvalid;
 
   const saveEmail = async () => {
@@ -48,8 +49,9 @@ const EmailEditor = () => {
           {t('account.cancel')}
         </TextButton>
         <TextButton
-          variant={isSavingDisabled ? 'disabled' : 'dark'}
+          isDisabled={isSavingDisabled}
           onClick={saveEmail}
+          variant={isSavingDisabled ? 'disabled' : 'dark'}
         >
           {t('account.save')}
         </TextButton>

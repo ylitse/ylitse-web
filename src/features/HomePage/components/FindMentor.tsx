@@ -22,7 +22,7 @@ const FindMentor = ({ isMobile = false }: Props) => {
           {t('newestMentors.info.title')}
         </Text>
         <Text color="white">{t('newestMentors.info.text')}</Text>
-        <Button variant="outline" onClick={navigateToMentors}>
+        <Button variant="outlineOrange" onClick={navigateToMentors}>
           {t('newestMentors.info.button')}
         </Button>
       </TextContainer>

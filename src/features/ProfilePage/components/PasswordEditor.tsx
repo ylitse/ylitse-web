@@ -7,10 +7,11 @@ import { useChangePasswordMutation } from '@/features/Authentication/authenticat
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
-import { DEFAULT_ICON_SIZE, PASSWORD_MIN_LENGTH } from '@/components/constants';
+import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import PasswordInput from '@/components/PasswordInput';
 import Text from '@/components/Text';
+import { validatePasswordLength } from '../validators';
 
 const PasswordEditor = () => {
   const { t } = useTranslation('profile');
@@ -30,8 +31,10 @@ const PasswordEditor = () => {
   const touchNewPassword = () => setIsNewPasswordTouched(true);
   const touchRepeatedPassword = () => setIsRepeatedPasswordTouched(true);
 
-  const isPasswordTooShort =
-    isNewPasswordTouched && newPassword.length < PASSWORD_MIN_LENGTH;
+  const isPasswordTooShort = validatePasswordLength(
+    newPassword,
+    isNewPasswordTouched,
+  );
 
   const arePasswordsNotMatching =
     isNewPasswordTouched &&
@@ -87,6 +90,7 @@ const PasswordEditor = () => {
           {t('account.cancel')}
         </TextButton>
         <TextButton
+          isDisabled={isSavingDisabled}
           onClick={savePassword}
           variant={isSavingDisabled ? 'disabled' : 'dark'}
         >

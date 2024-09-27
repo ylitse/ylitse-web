@@ -5,7 +5,7 @@ export type Color = keyof typeof palette;
 export const palette = {
   blue: '#01A5EC',
   blue2: '#43BFFF',
-  blue3: '#84CCF1',
+  blue3: '#A2DBF8',
   blueDark: '#1C325D',
   blueGrey: '#4C6282',
   blueLight: '#D3EFFF',
@@ -32,12 +32,6 @@ export const palette = {
   white: '#FFFFFF',
   whiteOpacity: 'rgba(255, 255, 255, 0.5)',
 };
-
-// Business logic
-export const DISPLAY_NAME_MIN_LENGTH = 2;
-export const EMAIL_REGEX = '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$';
-export const PASSWORD_MIN_LENGTH = 8;
-export const SAVE_DELAY_MS = 500;
 
 // Size
 export const DEFAULT_ICON_SIZE = { SMALL: 24, LARGE: 46 };

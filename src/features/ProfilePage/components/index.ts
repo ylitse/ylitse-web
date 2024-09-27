@@ -10,9 +10,11 @@ export const Section = styled.div`
 `;
 
 export const ButtonRow = styled.div`
+  box-sizing: border-box;
   display: flex;
   gap: 2rem;
   justify-content: center;
+  width: 100%;
 `;
 
 export const Value = styled(Text)`
