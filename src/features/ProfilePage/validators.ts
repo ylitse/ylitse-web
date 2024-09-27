@@ -1,5 +1,6 @@
 const DISPLAY_NAME_MIN_LENGTH = 2;
-const EMAIL_REGEX = '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$';
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9!#$%&'*+\-/=?^_`.{|}~]{1,64}@[a-z0-9.-]+\.[a-z]{2,64}$/;
 const MAX_BIRTH_YEAR = new Date().getFullYear() - 17;
 const MIN_BIRTH_YEAR = 1900;
 const PASSWORD_MIN_LENGTH = 8;
@@ -15,7 +16,8 @@ export const validateDisplayNameLength = (displayName: string) =>
 
 export const validateEmail = (email: string) => {
   if (email.length === 0) return true;
-  return email.match(EMAIL_REGEX);
+  if (email.length > 320) return false;
+  return EMAIL_REGEX.test(email);
 };
 
 export const validatePasswordLength = (

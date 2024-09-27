@@ -36,12 +36,44 @@ describe('Validation Functions', () => {
       expect(validateEmail('')).toBe(true);
     });
 
-    it('should return true for a valid email', () => {
-      expect(validateEmail('test@example.com')).toBeTruthy();
+    [
+      '',
+      'email@example.com',
+      'firstname.lastname@example.com',
+      'email@subdomain.example.com',
+      'firstname+lastname@example.com',
+      '1234567890@example.com',
+      'email@example-one.com',
+      '_______@example.com',
+      'email@example.name',
+      'email@example.museum',
+      'email@example.co.jp',
+      'firstname-lastname@example.com',
+      "!#$%&'*+-/=?^_`.{|}~@kebab.fi",
+      `${'x'.repeat(63)}@${'e'.repeat(191)}.${'f'.repeat(62)}`,
+    ].forEach(validEmail => {
+      it(`should return true for valid email ${validEmail}`, () => {
+        expect(validateEmail(validEmail)).toEqual(true);
+      });
     });
 
-    it('should return false for an invalid email', () => {
-      expect(validateEmail('invalid-email')).toBeFalsy();
+    [
+      'plainaddress',
+      '#@%^%#$@#$@#.com',
+      '@example.com',
+      'Joe Smith <email@example.com>',
+      'email.example.com',
+      'email@example@example.com',
+      'あいうえお@example.com',
+      'email@example.com (Joe Smith)',
+      'email@example',
+      'email@111.222.333.44444',
+      'a',
+      `${'x'.repeat(400)}@example.org`,
+    ].forEach(invalidEmail => {
+      it(`should return false for invalid email ${invalidEmail}`, () => {
+        expect(validateEmail(invalidEmail)).toEqual(false);
+      });
     });
   });
 
