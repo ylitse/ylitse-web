@@ -1,13 +1,12 @@
+import { useState } from 'react';
 // Libraries
 import styled from 'styled-components';
 
 // Store and hooks, type ChatBuddy
 import type { ChatBuddy } from '@/features/Chat/mappers';
 import { clearActiveChat } from '@/features/Chat/chatSlice';
-import {
-  selectMentorById,
-  useGetMentorsQuery,
-} from '@/features/MentorPage/mentorPageApi';
+import { useGetMentorsQuery } from '@/features/MentorPage/mentorPageApi';
+import { selectMentorById } from '@/features/MentorPage/selectors';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
@@ -28,7 +27,6 @@ import { IconButton } from '@/components/Buttons';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import TabletButtons from './TabletButtons';
 import Text from '@/components/Text';
-import { useState } from 'react';
 import { ConfirmationDialog, DialogVariant, ReportDialog } from '../Dialogs';
 
 type Props = {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { selectSkills } from '../../mentorPageApi';
+import { selectSkills } from '../../selectors';
 import {
   changeSearchString,
   selectSearchString,
