@@ -1,4 +1,4 @@
-import { mapSkills } from './mentorPageApi';
+import { mapSkills } from './selectors';
 
 const mentors = {
   user_id_1: {

@@ -62,5 +62,16 @@
       "text": "You can talk to peer mentors about any issue weighing on your mind. A peer mentor can be a companion, guide, understanding listener, or coach for various situations in life.",
       "button": "Find more mentors"
     }
+  },
+  "profileWidget": {
+    "title": "Profile Info",
+    "statusMessage": "Status message",
+    "status": {
+      "availability": "Status",
+      "available": "Available",
+      "unavailable": "Unvailable"
+    },
+    "text": "Do you want to edit your profile information? ",
+    "link": "Go to profile"
   }
 }

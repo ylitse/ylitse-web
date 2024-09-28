@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import {
   Mentor,
-  selectNewestMentors,
   useGetMentorsQuery,
 } from '@/features/MentorPage/mentorPageApi';
+import { selectNewestMentors } from '@/features/MentorPage/selectors';
 import { useAppSelector } from '@/store';
 
 import FindMentor from '@/features/HomePage/components/FindMentor';

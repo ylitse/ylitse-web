@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { selectHasUnreadMessages } from '@/features/Chat/selectors';
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
+import { selectMyMentorProfile } from '../MentorPage/selectors';
 
 import Announcements from './components/Announcements';
 import Background from '@/static/img/mountain-background.svg';
@@ -11,13 +12,17 @@ import FindMentor from './components/FindMentor';
 import Info from './components/Info';
 import NewestMentors from './components/NewestMentors';
 import NewMessages from './components/NewMessages';
+import ProfileWidget from './components/ProfileWidget';
+
 import { OUTER_HORIZONTAL_MARGIN } from '@/components/constants';
+
 import PageWithTransition from '@/components/PageWithTransition';
 import Welcome from './components/Welcome';
 
 const HomePage = () => {
   const hasUnreadMessages = useAppSelector(selectHasUnreadMessages);
   const { isTablet } = useGetLayoutMode();
+  const mentor = useAppSelector(selectMyMentorProfile);
 
   return isTablet ? (
     <PageWithTransition>
@@ -36,9 +41,11 @@ const HomePage = () => {
       <MiddleContainer>
         <LeftMiddleContainer>
           {hasUnreadMessages ? <NewMessages /> : <Welcome />}
-          <Announcements />
+          {!mentor && <Announcements />}
+          {mentor && <ProfileWidget mentor={mentor} />}
         </LeftMiddleContainer>
         <RightMiddleContainer>
+          {mentor && <Announcements />}
           <Concepts />
         </RightMiddleContainer>
       </MiddleContainer>
@@ -70,7 +77,10 @@ const LeftMiddleContainer = styled.div`
 `;
 
 const RightMiddleContainer = styled.div`
+  display: flex;
   flex: 1;
+  flex-direction: column;
+  gap: 2rem;
 `;
 
 export default HomePage;

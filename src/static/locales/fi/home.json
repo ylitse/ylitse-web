@@ -62,5 +62,16 @@
       "text": "Voit jutella vertaismentoreiden kanssa mistä tahansa mieltäsi painavasta asiasta. Vertaismentori voi olla sinulle juttukaveri, opastaja, ymmärtävä kuuntelija tai sparraaja elämän erilaisissa tilanteissa.",
       "button": "Löydä lisää mentoreita"
     }
+  },
+  "profileWidget": {
+    "title": "Tietoja profiilistasi",
+    "statusMessage": "Tilaviesti",
+    "status": {
+      "availability": "Poissaolotila",
+      "available": "Pois päältä",
+      "unavailable": "Päällä"
+    },
+    "text": "Haluatko muuttaa profiilisi tietoja? ",
+    "link": "Siirry profiiliin"
   }
 }
