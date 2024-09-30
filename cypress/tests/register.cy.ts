@@ -136,7 +136,6 @@ describe('register', () => {
   it('shows no error message if different passwords are corrected', () => {
     cy.fillInput('password', 'wrongPassword');
     cy.fillInput('password-confirmation', 'examplePassword');
-    clear('password');
     cy.fillInput('password', 'examplePassword');
     cy.contains('Salasanat eivät täsmää').should('not.be.visible');
   });

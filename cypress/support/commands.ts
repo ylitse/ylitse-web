@@ -54,7 +54,7 @@ Cypress.Commands.add('clickLogout', () => {
 });
 
 Cypress.Commands.add('fillInput', (id: string, value: string) => {
-  cy.get(`input[id="${id}"]`).type(value).blur();
+  cy.get(`input[id="${id}"]`).clear().type(value).blur();
 });
 
 Cypress.Commands.add('getByText', (text: string, selector = '*') => {
@@ -70,6 +70,10 @@ Cypress.Commands.add('getInputByLabel', (labelText: string) => {
     });
 });
 
+Cypress.Commands.add('fillInputByLabel', (labelText: string, value: string) => {
+  cy.getInputByLabel(labelText).clear().type(value).blur();
+});
+
 declare namespace Cypress {
   interface Chainable {
     switchLanguageBeforeLogin(language: LangCode): Chainable<void>;
@@ -80,5 +84,9 @@ declare namespace Cypress {
     fillInput(id: string, value: string): Chainable<void>;
     getByText(text: string, selector?: string): Chainable<JQuery<HTMLElement>>;
     getInputByLabel(labelText: string): Chainable<JQuery<HTMLElement>>;
+    fillInputByLabel(
+      labelText: string,
+      value: string,
+    ): Chainable<JQuery<HTMLElement>>;
   }
 }
