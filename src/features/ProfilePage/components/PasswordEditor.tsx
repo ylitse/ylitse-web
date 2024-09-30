@@ -31,7 +31,7 @@ const PasswordEditor = () => {
   const touchNewPassword = () => setIsNewPasswordTouched(true);
   const touchRepeatedPassword = () => setIsRepeatedPasswordTouched(true);
 
-  const isPasswordTooShort = validatePasswordLength(
+  const isPasswordTooShort = !validatePasswordLength(
     newPassword,
     isNewPasswordTouched,
   );
