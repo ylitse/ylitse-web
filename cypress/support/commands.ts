@@ -77,11 +77,7 @@ Cypress.Commands.add('fillInputByLabel', (labelText: string, value: string) => {
 Cypress.Commands.add(
   'fillNumberInputByLabel',
   (labelText: string, value: string) => {
-    cy.getInputByLabel(labelText)
-      .clear()
-      .type('{selectall}')
-      .type(value)
-      .blur();
+    cy.getInputByLabel(labelText).type('{selectall}').type(value).blur();
   },
 );
 

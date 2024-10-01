@@ -106,8 +106,7 @@ describe('home', () => {
     cy.getByText('Sinulla ei ole vielä keskusteluja', 'p').should('be.visible');
   });
 
-  // TODO: This does not work because of mentee name bug on Chat page
-  xit('will display notification if there is unseen messages', () => {
+  it('will display notification if there is unseen messages', () => {
     const mentee = accounts.mentees[0];
     const mentor = accounts.mentors[0];
     const message = 'I would like to talk to you';

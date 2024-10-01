@@ -5,10 +5,11 @@ import styled from 'styled-components';
 // Store and hooks, type ChatBuddy
 import type { ChatBuddy } from '@/features/Chat/mappers';
 import { clearActiveChat } from '@/features/Chat/chatSlice';
-import { useGetMentorsQuery } from '@/features/MentorPage/mentorPageApi';
+import { selectIsMentor } from '@/features/Authentication/userSlice';
 import { selectMentorById } from '@/features/MentorPage/selectors';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
+import { useGetMentorsQuery } from '@/features/MentorPage/mentorPageApi';
 
 // Variables
 import {
@@ -42,6 +43,7 @@ const Header = ({ chat }: Props) => {
 
   useGetMentorsQuery();
 
+  const isMentor = useAppSelector(selectIsMentor);
   const mentor = useAppSelector(selectMentorById(chat.buddyId));
 
   const icons = {
@@ -68,8 +70,10 @@ const Header = ({ chat }: Props) => {
         <IconButton variant="back" sizeInPx={40} onClick={returnToTabletMenu} />
       )}
       <IconContainer>{icons[chat.status]}</IconContainer>
-      <MentorName variant="h2">{mentor?.name}</MentorName>
-      <MentorBio isTablet={isTablet}>{mentor?.statusMessage}</MentorBio>
+      <DisplayName variant="h2">{chat.displayName}</DisplayName>
+      {isMentor && (
+        <MentorBio isTablet={isTablet}>{mentor?.statusMessage}</MentorBio>
+      )}
 
       <ButtonsWrapper>
         {isConfirmDialogOpen && (
@@ -112,7 +116,7 @@ const IconContainer = styled.div`
   flex-shrink: 0;
 `;
 
-const MentorName = styled(Text)`
+const DisplayName = styled(Text)`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
