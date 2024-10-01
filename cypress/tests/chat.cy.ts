@@ -19,11 +19,11 @@ describe('chat', () => {
 
     // go to mentors page
     cy.get('[href="/mentors"]').click();
-    cy.findByText(mentor.displayName, 'h2').should('be.visible');
+    cy.getByText(mentor.displayName, 'h2').should('be.visible');
 
     // send message
-    cy.findByText('Avaa kortti', 'button').scrollIntoView().click();
-    cy.findByText('Aloita keskustelu', 'button').click();
+    cy.getByText('Avaa kortti', 'button').scrollIntoView().click();
+    cy.getByText('Aloita keskustelu', 'button').click();
     cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]')
       .click()
       .type('Hello there');
@@ -36,7 +36,7 @@ describe('chat', () => {
 
     // message came
     cy.get('[href="/chat"]').click();
-    cy.findByText('Hello there', 'p').should('be.visible');
+    cy.getByText('Hello there', 'p').should('be.visible');
   });
 
   it('can send message to existing conversation', () => {
@@ -68,7 +68,7 @@ describe('chat', () => {
 
     // go to chat-page
     cy.get('[href="/chat"]').click();
-    cy.findByText(message, 'p').should('be.visible');
+    cy.getByText(message, 'p').should('be.visible');
 
     // send message
     cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]')
@@ -82,7 +82,7 @@ describe('chat', () => {
 
     // message came
     cy.get('[href="/chat"]').click();
-    cy.findByText(answer, 'p').should('be.visible');
+    cy.getByText(answer, 'p').should('be.visible');
   });
 
   it('marks unseen messages seen', () => {
@@ -115,7 +115,7 @@ describe('chat', () => {
     cy.get('div[aria-label="unseen-messages-dot"]').should('be.visible');
     // go to chat-page and mark message unseen
     cy.get('[href="/chat"]').click();
-    cy.findByText(message, 'p').should('be.visible');
+    cy.getByText(message, 'p').should('be.visible');
     cy.wait(1000);
     cy.get('[href="/mentors"]').click();
 
@@ -154,7 +154,7 @@ describe('chat', () => {
     cy.get('[href="/chat"]').click();
 
     // should scroll to last message
-    cy.findByText(`${message} ${numberOfMessages}!`, 'p').should('be.visible');
+    cy.getByText(`${message} ${numberOfMessages}!`, 'p').should('be.visible');
     cy.wait(1000);
     cy.get('[href="/mentors"]').click();
 
@@ -193,10 +193,10 @@ describe('chat', () => {
     cy.get('[href="/chat"]').click();
 
     // should scroll to last message
-    cy.findByText(`${message} ${numberOfMessages}!`, 'p').should('be.visible');
+    cy.getByText(`${message} ${numberOfMessages}!`, 'p').should('be.visible');
 
     // scroll-up oldest message should be visible
-    cy.findByText(`${message} 1!`, 'p').scrollIntoView().should('be.visible');
+    cy.getByText(`${message} 1!`, 'p').scrollIntoView().should('be.visible');
   });
 
   it('can archive and restore conversation', () => {
@@ -227,10 +227,10 @@ describe('chat', () => {
 
     // go to chat-page
     cy.get('[href="/chat"]').click();
-    cy.findByText(message, 'p').should('be.visible');
+    cy.getByText(message, 'p').should('be.visible');
 
     // archive the chat
-    cy.findByText('Arkistoi', 'button').click();
+    cy.getByText('Arkistoi', 'button').click();
     cy.contains(
       `Haluatko arkistoida keskustelun käyttäjän ${mentee.displayName} kanssa?`,
     ).should('be.visible');
@@ -245,7 +245,7 @@ describe('chat', () => {
     );
 
     // unarchive chat
-    cy.findByText('Palauta keskustelu', 'button').click();
+    cy.getByText('Palauta keskustelu', 'button').click();
     cy.contains(
       `Haluatko palauttaa keskustelun käyttäjän ${mentee.displayName} kanssa?`,
     ).should('be.visible');
@@ -308,7 +308,7 @@ describe('chat', () => {
     // go to archived conversations
     cy.get('[href="/chat"]').click();
     cy.get('button[aria-label="menuLines"]').click();
-    cy.findByText('Arkistoidut keskustelut', 'a');
+    cy.getByText('Arkistoidut keskustelut', 'a');
     cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
   });
 
@@ -340,10 +340,10 @@ describe('chat', () => {
 
     // go to chat-page
     cy.get('[href="/chat"]').click();
-    cy.findByText(message, 'p').should('be.visible');
+    cy.getByText(message, 'p').should('be.visible');
 
     // block the chat
-    cy.findByText('Estä käyttäjä', 'button').click();
+    cy.getByText('Estä käyttäjä', 'button').click();
     cy.contains(`Haluatko estää käyttäjän ${mentee.displayName}?`).should(
       'be.visible',
     );
@@ -356,7 +356,7 @@ describe('chat', () => {
     cy.contains('Kirjoita viestisi tähän').should('not.exist');
 
     // unarchive chat
-    cy.findByText('Palauta keskustelu', 'button').click();
+    cy.getByText('Palauta keskustelu', 'button').click();
     cy.contains(
       `Haluatko palauttaa keskustelun käyttäjän ${mentee.displayName} kanssa?`,
     ).should('be.visible');
@@ -421,7 +421,7 @@ describe('chat', () => {
     // go to blocked conversations
     cy.get('[href="/chat"]').click();
     cy.get('button[aria-label="menuLines"]').click();
-    cy.findByText('Estetyt keskustelut', 'a');
+    cy.getByText('Estetyt keskustelut', 'a');
     cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
   });
 });

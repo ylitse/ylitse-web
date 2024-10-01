@@ -31,7 +31,7 @@ const PasswordEditor = () => {
   const touchNewPassword = () => setIsNewPasswordTouched(true);
   const touchRepeatedPassword = () => setIsRepeatedPasswordTouched(true);
 
-  const isPasswordTooShort = validatePasswordLength(
+  const isPasswordTooShort = !validatePasswordLength(
     newPassword,
     isNewPasswordTouched,
   );
@@ -106,9 +106,10 @@ const PasswordEditor = () => {
           <Value>{t('account.password.placeholder')}</Value>
         </Column>
         <IconButton
-          variant="edit"
-          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+          id="open-password-editor"
           onClick={toggleIsOpen}
+          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+          variant="edit"
         />
       </SpacedRow>
     </Section>

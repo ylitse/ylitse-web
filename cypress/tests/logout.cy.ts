@@ -20,7 +20,7 @@ describe('logout', () => {
     cy.clickLogout();
     cy.url().should('match', /login/);
     cy.switchLanguageBeforeLogin('fi');
-    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
   // FIXME: re-enable when dev server issue is resolved
@@ -28,11 +28,11 @@ describe('logout', () => {
     cy.clickLogout();
     cy.url().should('match', /login/);
     cy.switchLanguageBeforeLogin('fi');
-    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
 
     cy.visit('/');
     cy.url().should('match', /login/);
     cy.switchLanguageBeforeLogin('fi');
-    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 });

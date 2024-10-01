@@ -19,7 +19,7 @@ describe('login', () => {
   beforeEach(() => {
     cy.visit('/login/');
     cy.switchLanguageBeforeLogin('fi');
-    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
   after(() => {
@@ -27,12 +27,12 @@ describe('login', () => {
   });
 
   it('contains buttons', () => {
-    cy.findByText('Rekisteröidy', 'a').should('be.visible'); // TODO: This should be a button
-    cy.findByText('Kirjaudu', 'button').should('be.visible');
+    cy.getByText('Rekisteröidy', 'a').should('be.visible'); // TODO: This should be a button
+    cy.getByText('Kirjaudu', 'button').should('be.visible');
   });
 
   it('has right content', () => {
-    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
     cy.contains(
       'Uusi täällä? Palvelussa voit jutella SOS-Lapsikylän valmentamien vertaismentoreiden kanssa mistä tahansa mieltäsi painavasta asiasta. Palvelun käyttö on luottamuksellista ja täysin maksutonta.',
     ).should('be.visible');
@@ -42,9 +42,9 @@ describe('login', () => {
 
   it('changes language on button press', () => {
     cy.switchLanguageBeforeLogin('en');
-    cy.findByText('Login', 'h1').should('be.visible');
+    cy.getByText('Login', 'h1').should('be.visible');
     cy.switchLanguageBeforeLogin('fi');
-    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
   it('shows error if empty login_name', () => {

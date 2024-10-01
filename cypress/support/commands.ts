@@ -14,16 +14,8 @@ Cypress.Commands.add('switchLanguageAfterLogin', (lang: LangCode) => {
     cy.get('button[id="lang-dropdown-button"]').click();
 
     const langButtonText = lang === 'fi' ? 'Fi - Suomeksi' : 'En - In English';
-    cy.findByText(langButtonText, 'button').click({ force: true });
+    cy.getByText(langButtonText, 'button').click({ force: true });
   }
-});
-
-Cypress.Commands.add('fillInput', (id: string, value: string) => {
-  cy.get(`input[id="${id}"]`).type(value).blur();
-});
-
-Cypress.Commands.add('findByText', (text: string, selector = '*') => {
-  cy.get(selector).contains(text);
 });
 
 Cypress.Commands.add('registerUser', (username: string, password: string) => {
@@ -42,7 +34,7 @@ Cypress.Commands.add('registerUser', (username: string, password: string) => {
   cy.wait(500);
 
   cy.switchLanguageBeforeLogin('fi');
-  cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
+  cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
 });
 
 Cypress.Commands.add('loginUser', (username: string, password: string) => {
@@ -52,7 +44,7 @@ Cypress.Commands.add('loginUser', (username: string, password: string) => {
   cy.get('button[id="submit"]').click();
 
   cy.switchLanguageAfterLogin('fi');
-  cy.findByText('Ylitse MentorApp -vertaismentoripalvelu', 'p').should(
+  cy.getByText('Ylitse MentorApp -vertaismentoripalvelu', 'p').should(
     'be.visible',
   );
 });
@@ -61,14 +53,55 @@ Cypress.Commands.add('clickLogout', () => {
   cy.get('a[href="/logout"]').click();
 });
 
+Cypress.Commands.add('fillInput', (id: string, value: string) => {
+  cy.get(`input[id="${id}"]`).clear().type(value).blur();
+});
+
+Cypress.Commands.add('getByText', (text: string, selector = '*') => {
+  return cy.get(selector).contains(text);
+});
+
+Cypress.Commands.add('getInputByLabel', (labelText: string) => {
+  return cy
+    .contains('label', labelText)
+    .invoke('attr', 'for')
+    .then(inputId => {
+      return cy.get(`#${inputId}`);
+    });
+});
+
+Cypress.Commands.add('fillInputByLabel', (labelText: string, value: string) => {
+  cy.getInputByLabel(labelText).clear().type(value).blur();
+});
+
+Cypress.Commands.add(
+  'fillNumberInputByLabel',
+  (labelText: string, value: string) => {
+    cy.getInputByLabel(labelText)
+      .clear()
+      .type('{selectall}')
+      .type(value)
+      .blur();
+  },
+);
+
 declare namespace Cypress {
   interface Chainable {
     switchLanguageBeforeLogin(language: LangCode): Chainable<void>;
     switchLanguageAfterLogin(language: LangCode): Chainable<void>;
-    fillInput(id: string, value: string): Chainable<void>;
-    findByText(text: string, selector?: string): Chainable<void>;
     registerUser(username: string, password: string): Chainable<void>;
     loginUser(username: string, password: string): Chainable<void>;
     clickLogout(): Chainable<void>;
+    fillInput(id: string, value: string): Chainable<void>;
+    getByText(text: string, selector?: string): Chainable<JQuery<HTMLElement>>;
+    getInputByLabel(labelText: string): Chainable<JQuery<HTMLElement>>;
+    fillInputByLabel(
+      labelText: string,
+      value: string,
+    ): Chainable<JQuery<HTMLElement>>;
+    fillNumberInputByLabel(
+      labelText: string,
+      value: string,
+    ): Chainable<JQuery<HTMLElement>>;
   }
 }

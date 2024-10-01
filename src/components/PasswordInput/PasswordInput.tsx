@@ -27,7 +27,7 @@ export const PasswordInput = ({
   value,
 }: Props): JSX.Element => {
   const { t } = useTranslation('common');
-  const inputId = `password_input_${createUniqueId()}`;
+  const inputId = `password-input-${createUniqueId()}`;
 
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const inputType = isPasswordHidden ? 'password' : 'text';
@@ -44,7 +44,11 @@ export const PasswordInput = ({
           {label}
         </Text>
         <RightContainer>
-          <TextButton onClick={togglePasswordVisibility} variant="textOnly">
+          <TextButton
+            id={`${inputId}-visibility-toggle`}
+            onClick={togglePasswordVisibility}
+            variant="textOnly"
+          >
             {t(`password.${isPasswordHidden ? 'show' : 'hide'}`)}
           </TextButton>
           {tooltip && <Tooltip text={tooltip} />}

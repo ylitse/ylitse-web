@@ -28,7 +28,7 @@ describe('register', () => {
   beforeEach(() => {
     cy.visit('/register/');
     cy.switchLanguageBeforeLogin('fi');
-    cy.findByText('Rekisteröidy', 'h1').should('be.visible');
+    cy.getByText('Rekisteröidy', 'h1').should('be.visible');
   });
 
   after(() => {
@@ -36,7 +36,7 @@ describe('register', () => {
   });
 
   it('loads page', () => {
-    cy.findByText('Rekisteröidy', 'h1').should('be.visible');
+    cy.getByText('Rekisteröidy', 'h1').should('be.visible');
     cy.contains('Hienoa, että haluat aloittaa palvelun käytön.').should(
       'be.visible',
     );
@@ -44,15 +44,15 @@ describe('register', () => {
 
   it('changes language on button press', () => {
     cy.switchLanguageBeforeLogin('en');
-    cy.findByText('Register', 'h1').should('be.visible');
+    cy.getByText('Register', 'h1').should('be.visible');
     cy.switchLanguageBeforeLogin('fi');
-    cy.findByText('Rekisteröidy', 'h1').should('be.visible');
+    cy.getByText('Rekisteröidy', 'h1').should('be.visible');
   });
 
   it('registers new user if form is correctly filled', () => {
     cy.registerUser(username, 'examplePassword');
     cy.location('pathname').should('contain', '/login');
-    cy.findByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
   // Username
@@ -136,7 +136,6 @@ describe('register', () => {
   it('shows no error message if different passwords are corrected', () => {
     cy.fillInput('password', 'wrongPassword');
     cy.fillInput('password-confirmation', 'examplePassword');
-    clear('password');
     cy.fillInput('password', 'examplePassword');
     cy.contains('Salasanat eivät täsmää').should('not.be.visible');
   });

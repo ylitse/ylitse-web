@@ -22,10 +22,13 @@ const EmailEditor = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
-  const isEmailMissing = !email.length;
-  const emailValue = isEmailMissing ? t('account.email.missing') : email;
+  const hasNotChanged = account.email === email;
   const isEmailInvalid = !validateEmail(email);
-  const isSavingDisabled = isLoading || isEmailMissing || isEmailInvalid;
+  const isEmailMissing = !email.length;
+  const isSavingDisabled =
+    hasNotChanged || isEmailInvalid || isEmailMissing || isLoading;
+
+  const emailValue = isEmailMissing ? t('account.email.missing') : email;
 
   const saveEmail = async () => {
     try {
@@ -66,9 +69,10 @@ const EmailEditor = () => {
           <Value>{emailValue}</Value>
         </Column>
         <IconButton
-          variant="edit"
-          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+          id="open-email-editor"
           onClick={toggleIsOpen}
+          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+          variant="edit"
         />
       </SpacedRow>
       <Text variant="blueBox">{t('account.email.info')}</Text>
