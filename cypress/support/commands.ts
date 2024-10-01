@@ -74,6 +74,17 @@ Cypress.Commands.add('fillInputByLabel', (labelText: string, value: string) => {
   cy.getInputByLabel(labelText).clear().type(value).blur();
 });
 
+Cypress.Commands.add(
+  'fillNumberInputByLabel',
+  (labelText: string, value: string) => {
+    cy.getInputByLabel(labelText)
+      .clear()
+      .type('{selectall}')
+      .type(value)
+      .blur();
+  },
+);
+
 declare namespace Cypress {
   interface Chainable {
     switchLanguageBeforeLogin(language: LangCode): Chainable<void>;
@@ -85,6 +96,10 @@ declare namespace Cypress {
     getByText(text: string, selector?: string): Chainable<JQuery<HTMLElement>>;
     getInputByLabel(labelText: string): Chainable<JQuery<HTMLElement>>;
     fillInputByLabel(
+      labelText: string,
+      value: string,
+    ): Chainable<JQuery<HTMLElement>>;
+    fillNumberInputByLabel(
       labelText: string,
       value: string,
     ): Chainable<JQuery<HTMLElement>>;

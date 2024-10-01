@@ -90,9 +90,7 @@ describe('mentor profile', () => {
 
   it('public info is changed if provided inputs are valid', () => {
     cy.fillInputByLabel('Julkinen nimimerkki *', NEW_DISPLAY_NAME);
-    cy.getInputByLabel('Syntymävuosi *')
-      .type('{selectall}')
-      .type(NEW_BIRTH_YEAR);
+    cy.fillNumberInputByLabel('Syntymävuosi *', NEW_BIRTH_YEAR);
     cy.getInputByLabel('Alue').clear();
     cy.fillInputByLabel('Tilaviesti', NEW_STATUS_MESSAGE);
     cy.getByText('Tallenna', 'button').click();
@@ -110,9 +108,7 @@ describe('mentor profile', () => {
 
   it('public info changes are discarded after button press', () => {
     cy.fillInputByLabel('Julkinen nimimerkki *', NEW_DISPLAY_NAME);
-    cy.getInputByLabel('Syntymävuosi *')
-      .type('{selectall}')
-      .type(NEW_BIRTH_YEAR);
+    cy.fillNumberInputByLabel('Syntymävuosi *', NEW_BIRTH_YEAR);
     cy.getInputByLabel('Alue').clear();
     cy.fillInputByLabel('Tilaviesti', NEW_STATUS_MESSAGE);
     cy.getByText('Hylkää muutokset', 'button').click();
@@ -143,8 +139,8 @@ describe('mentor profile', () => {
 
   it('birth year error message is shown for invalid inputs', () => {
     INVALID_BIRTH_YEARS.forEach(invalidYear => {
-      cy.fillInputByLabel('Syntymävuosi *', invalidYear);
-      cy.wait(200);
+      cy.fillNumberInputByLabel('Syntymävuosi *', invalidYear);
+      cy.wait(500);
       cy.contains('Syntymävuosi on virheellinen').should('be.visible');
       cy.getByText('Tallenna', 'button').should('be.disabled');
     });
