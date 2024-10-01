@@ -1,5 +1,14 @@
 import { accounts } from 'cypress/fixtures/accounts';
 import { api } from 'cypress/support/api';
+import {
+  INVALID_EMAILS,
+  NEW_DISPLAY_NAME,
+  NEW_EMAIL,
+  NEW_PASSWORD,
+  TOO_SHORT_DISPLAY_NAME,
+  TOO_SHORT_PASSWORD,
+  WRONG_PASSWORD,
+} from 'cypress/fixtures/inputs';
 
 describe('mentee profile', () => {
   const mentee = accounts.mentees[0];
@@ -27,7 +36,6 @@ describe('mentee profile', () => {
   });
 
   it('password is changed if provided inputs are valid', () => {
-    // open password editor
     cy.get('button[id="open-password-editor"]').click();
     cy.getByText('Nykyinen salasana *', 'label').should('be.visible');
     cy.getByText('Uusi salasana *', 'label').should('be.visible');
@@ -39,15 +47,15 @@ describe('mentee profile', () => {
 
     // provide inputs
     cy.fillInputByLabel('Nykyinen salasana *', mentee.password);
-    cy.fillInputByLabel('Uusi salasana *', 'newPassword');
+    cy.fillInputByLabel('Uusi salasana *', NEW_PASSWORD);
     cy.wait(200);
-    cy.fillInputByLabel('Toista uusi salasana *', 'newPassword');
+    cy.fillInputByLabel('Toista uusi salasana *', NEW_PASSWORD);
     cy.getByText('Tallenna', 'button').click();
 
     // should show notification
     cy.contains('Salasana päivitetty onnistuneesti').should('be.visible');
 
-    // should not show editor
+    // should not show editor anymore
     cy.getByText('Nykyinen salasana *', 'label').should('not.exist');
     cy.getByText('Uusi salasana *', 'label').should('not.exist');
     cy.getByText('Toista uusi salasana *', 'label').should('not.exist');
@@ -68,23 +76,21 @@ describe('mentee profile', () => {
   });
 
   it('correct password error messages and notifications are shown for invalid inputs', () => {
-    // open password editor
     cy.get('button[id="open-password-editor"]').click();
 
     // provide too short a password
-    cy.fillInputByLabel('Uusi salasana *', 'short');
-    // cy.wait(200);
+    cy.fillInputByLabel('Uusi salasana *', TOO_SHORT_PASSWORD);
     cy.contains('Salasana on liian lyhyt').should('be.visible');
 
     // provide unmatching new passwords
-    cy.fillInputByLabel('Uusi salasana *', 'LongEnough');
-    cy.fillInputByLabel('Toista uusi salasana *', 'notAMatch');
+    cy.fillInputByLabel('Uusi salasana *', NEW_PASSWORD);
+    cy.fillInputByLabel('Toista uusi salasana *', WRONG_PASSWORD);
     cy.contains('Salasanat eivät täsmää').should('be.visible');
 
     // provide invalid current password
-    cy.fillInputByLabel('Nykyinen salasana *', 'WRONG');
-    cy.fillInputByLabel('Uusi salasana *', 'LongEnough');
-    cy.fillInputByLabel('Toista uusi salasana *', 'LongEnough');
+    cy.fillInputByLabel('Nykyinen salasana *', WRONG_PASSWORD);
+    cy.fillInputByLabel('Uusi salasana *', NEW_PASSWORD);
+    cy.fillInputByLabel('Toista uusi salasana *', NEW_PASSWORD);
     cy.getByText('Tallenna', 'button').click();
     cy.contains('Salasanan päivitys epäonnistui').should('be.visible');
 
@@ -96,10 +102,9 @@ describe('mentee profile', () => {
   });
 
   it('email is changed if provided input is valid', () => {
-    // open email editor
     cy.get('button[id="open-email-editor"]').click();
     cy.getByText('Tallenna', 'button').should('be.disabled');
-    cy.fillInputByLabel('Sähköpostiosoite', 'esimerkki.esimerkki@esim.fi');
+    cy.fillInputByLabel('Sähköpostiosoite', NEW_EMAIL);
 
     // should not show error for valid input
     cy.contains('Sähköpostiosoite on virheellinen').should('not.exist');
@@ -107,40 +112,25 @@ describe('mentee profile', () => {
 
     // should show notification
     cy.contains('Profiili päivitetty onnistuneesti').should('be.visible');
-    cy.contains('esimerkki.esimerkki@esim.fi').should('be.visible');
+    cy.contains(NEW_EMAIL).should('be.visible');
   });
 
   it('email error message is shown for invalid inputs', () => {
-    // open email editor
     cy.get('button[id="open-email-editor"]').click();
 
     // try invalid inputs
-    [
-      'plainaddress',
-      '#@%^%#$@#$@#.com',
-      '@example.com',
-      'Joe Smith <email@example.com>',
-      'email.example.com',
-      'email@example@example.com',
-      'あいうえお@example.com',
-      'email@example.com (Joe Smith)',
-      'email@example',
-      'email@111.222.333.44444',
-      'a',
-      `${'x'.repeat(400)}@example.org`,
-    ].forEach(invalidEmail => {
+    INVALID_EMAILS.forEach(invalidEmail => {
       cy.fillInputByLabel('Sähköpostiosoite', invalidEmail);
-      cy.wait(200);
+      cy.wait(500);
       cy.contains('Sähköpostiosoite on virheellinen').should('be.visible');
       cy.getByText('Tallenna', 'button').should('be.disabled');
     });
   });
 
   it('display name is changed if provided input is valid', () => {
-    // open display name editor
     cy.get('button[id="open-display-name-editor"]').click();
     cy.getByText('Tallenna', 'button').should('be.disabled');
-    cy.fillInputByLabel('Julkinen nimimerkki', 'esimerkki');
+    cy.fillInputByLabel('Julkinen nimimerkki', NEW_DISPLAY_NAME);
 
     // should not show error for valid input
     cy.contains('Nimimerkki on liian lyhyt').should('not.exist');
@@ -148,14 +138,14 @@ describe('mentee profile', () => {
 
     // should show notification
     cy.contains('Profiili päivitetty onnistuneesti').should('be.visible');
-    cy.contains('esimerkki').should('be.visible');
+    cy.contains(NEW_DISPLAY_NAME).should('be.visible');
   });
 
   it('display name error message is shown for invalid input', () => {
     cy.get('button[id="open-display-name-editor"]').click();
 
     // try invalid input
-    cy.fillInputByLabel('Julkinen nimimerkki', 'a');
+    cy.fillInputByLabel('Julkinen nimimerkki', TOO_SHORT_DISPLAY_NAME);
     cy.wait(200);
     cy.contains('Nimimerkki on liian lyhyt').should('be.visible');
     cy.getByText('Tallenna', 'button').should('be.disabled');

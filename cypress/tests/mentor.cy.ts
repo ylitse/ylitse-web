@@ -1,10 +1,16 @@
 import { accounts } from 'cypress/fixtures/accounts';
 import { api } from 'cypress/support/api';
+import {
+  INVALID_BIRTH_YEARS,
+  NEW_BIRTH_YEAR,
+  NEW_DISPLAY_NAME,
+  NEW_PASSWORD,
+  NEW_STATUS_MESSAGE,
+  TOO_SHORT_DISPLAY_NAME,
+} from 'cypress/fixtures/inputs';
 
 describe('mentor profile', () => {
   const mentor = accounts.mentors[0];
-
-  const getTooYoungBirthYear = () => String(new Date().getFullYear() - 16); // Younger than 17
 
   beforeEach(() => {
     api.deleteAccounts();
@@ -43,7 +49,6 @@ describe('mentor profile', () => {
   });
 
   it('password is changed if provided inputs are valid', () => {
-    // open password editor
     cy.get('button[id="open-password-editor"]').click();
     cy.getByText('Nykyinen salasana *', 'label').should('be.visible');
     cy.getByText('Uusi salasana *', 'label').should('be.visible');
@@ -55,9 +60,9 @@ describe('mentor profile', () => {
 
     // provide inputs
     cy.fillInputByLabel('Nykyinen salasana *', mentor.password);
-    cy.fillInputByLabel('Uusi salasana *', 'newPassword');
+    cy.fillInputByLabel('Uusi salasana *', NEW_PASSWORD);
     cy.wait(200);
-    cy.fillInputByLabel('Toista uusi salasana *', 'newPassword');
+    cy.fillInputByLabel('Toista uusi salasana *', NEW_PASSWORD);
     cy.getByText('Tallenna', 'button').click();
 
     // should show notification
@@ -78,31 +83,38 @@ describe('mentor profile', () => {
     cy.get('[id="login-error"]').should('be.visible');
 
     // new password should work
-    cy.loginUser(mentor.loginName, 'newPassword');
+    cy.loginUser(mentor.loginName, NEW_PASSWORD);
     cy.location('pathname').should('eq', '/');
     cy.contains('Kirjaudu ulos').should('be.visible');
   });
 
   it('public info is changed if provided inputs are valid', () => {
-    cy.fillInputByLabel('Julkinen nimimerkki *', 'uusi');
-    cy.getInputByLabel('Syntymävuosi *').type('{selectall}').type('2000');
+    cy.fillInputByLabel('Julkinen nimimerkki *', NEW_DISPLAY_NAME);
+    cy.getInputByLabel('Syntymävuosi *')
+      .type('{selectall}')
+      .type(NEW_BIRTH_YEAR);
     cy.getInputByLabel('Alue').clear();
-    cy.fillInputByLabel('Tilaviesti', 'Olen käytettävissä');
+    cy.fillInputByLabel('Tilaviesti', NEW_STATUS_MESSAGE);
     cy.getByText('Tallenna', 'button').click();
 
     // check that values were updated
     cy.reload();
-    cy.getInputByLabel('Julkinen nimimerkki *').should('have.value', 'uusi');
-    cy.getInputByLabel('Syntymävuosi *').should('have.value', '2000');
+    cy.getInputByLabel('Julkinen nimimerkki *').should(
+      'have.value',
+      NEW_DISPLAY_NAME,
+    );
+    cy.getInputByLabel('Syntymävuosi *').should('have.value', NEW_BIRTH_YEAR);
     cy.getInputByLabel('Alue').should('not.have.value');
-    cy.getInputByLabel('Tilaviesti').should('have.value', 'Olen käytettävissä');
+    cy.getInputByLabel('Tilaviesti').should('have.value', NEW_STATUS_MESSAGE);
   });
 
   it('public info changes are discarded after button press', () => {
-    cy.fillInputByLabel('Julkinen nimimerkki *', 'uusi');
-    cy.getInputByLabel('Syntymävuosi *').type('{selectall}').type('2000');
+    cy.fillInputByLabel('Julkinen nimimerkki *', NEW_DISPLAY_NAME);
+    cy.getInputByLabel('Syntymävuosi *')
+      .type('{selectall}')
+      .type(NEW_BIRTH_YEAR);
     cy.getInputByLabel('Alue').clear();
-    cy.fillInputByLabel('Tilaviesti', 'Olen käytettävissä');
+    cy.fillInputByLabel('Tilaviesti', NEW_STATUS_MESSAGE);
     cy.getByText('Hylkää muutokset', 'button').click();
 
     // check that values were discarded
@@ -123,20 +135,18 @@ describe('mentor profile', () => {
   });
 
   it('display name error message is shown for invalid inputs ', () => {
-    cy.fillInputByLabel('Julkinen nimimerkki *', 'a');
+    cy.fillInputByLabel('Julkinen nimimerkki *', TOO_SHORT_DISPLAY_NAME);
     cy.wait(200);
     cy.contains('Nimimerkki on liian lyhyt').should('be.visible');
     cy.getByText('Tallenna', 'button').should('be.disabled');
   });
 
   it('birth year error message is shown for invalid inputs', () => {
-    ['0', '1', '1899', getTooYoungBirthYear(), '2100', '9999'].forEach(
-      invalidInput => {
-        cy.fillInputByLabel('Syntymävuosi *', invalidInput);
-        cy.wait(200);
-        cy.contains('Syntymävuosi on virheellinen').should('be.visible');
-        cy.getByText('Tallenna', 'button').should('be.disabled');
-      },
-    );
+    INVALID_BIRTH_YEARS.forEach(invalidYear => {
+      cy.fillInputByLabel('Syntymävuosi *', invalidYear);
+      cy.wait(200);
+      cy.contains('Syntymävuosi on virheellinen').should('be.visible');
+      cy.getByText('Tallenna', 'button').should('be.disabled');
+    });
   });
 });
