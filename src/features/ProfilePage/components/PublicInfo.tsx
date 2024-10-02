@@ -8,8 +8,9 @@ import { useUpdateMentorMutation } from '@/features/MentorPage/mentorPageApi';
 import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
 
 import { ButtonRow } from '.';
-import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
 import LabeledInput from '@/components/LabeledInput';
+import { palette } from '@/components/constants';
+import SkillsEditor from './SkillsEditor';
 import Slider from '@/components/Slider';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
@@ -28,7 +29,6 @@ const PublicInfo = () => {
 
   const [localData, setLocalData] = useState<ApiMentor>(mentor);
   const [isDirty, setIsDirty] = useState(false);
-  const [skillSearchValue, setSkillSearchValue] = useState('');
 
   const updateMentorData = <K extends keyof ApiMentor>(
     key: K,
@@ -149,20 +149,7 @@ const PublicInfo = () => {
           rows={4}
           value={localData.story}
         />
-        <Label variant="label">{t('public.mentor.skills')}</Label>
-        <SearchBar>
-          <SkillSearch
-            variant="iconInput"
-            color={skillSearchValue ? 'blueDark' : 'greyFaded'}
-            leftIcon={{
-              sizeInPx: DEFAULT_ICON_SIZE.SMALL,
-              variant: 'search',
-            }}
-            onChange={setSkillSearchValue}
-            placeholder={t('public.mentor.addSkill')}
-            value={skillSearchValue}
-          />
-        </SearchBar>
+        <SkillsEditor skills={localData.skills} />
       </Form>
     </Container>
   );
@@ -206,28 +193,6 @@ const Column = styled.div`
 
 const StoryInput = styled(TextInput)`
   margin-top: 0.5rem;
-`;
-
-const Label = styled(Text)`
-  margin-top: 1rem;
-`;
-
-const SearchBar = styled.div`
-  align-items: center;
-  align-self: flex-start;
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  margin-left: -${DEFAULT_ICON_SIZE.SMALL}px;
-  margin-top: 1rem;
-`;
-
-const SkillSearch = styled(TextInput)`
-  max-width: 350px;
-
-  &:focus {
-    outline: 1px solid ${palette.purple};
-  }
 `;
 
 export default PublicInfo;
