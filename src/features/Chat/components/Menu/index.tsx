@@ -40,7 +40,7 @@ const Menu = () => {
 
   const menuContent = (
     <>
-      <Header showSearch={chatsExist} />
+      <Header />
       {showActiveFolderLink && <FolderLink targetFolder="ok" />}
       {showFolders && <FolderLink targetFolder="archived" />}
       {showFolders && <FolderLink targetFolder="banned" />}

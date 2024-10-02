@@ -11,6 +11,7 @@ type Props = {
   hideSearch: () => void;
 };
 
+// TODO: Not yet in use
 const Search = ({ hideSearch }: Props) => {
   const { t } = useTranslation('chat');
   const [searchValue, setSearchValue] = useState('');
