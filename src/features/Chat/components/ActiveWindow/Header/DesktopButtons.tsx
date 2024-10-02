@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import { Button, IconButton, StatusButton } from '@/components/Buttons';
+import { Button, StatusButton } from '@/components/Buttons';
 import { DEFAULT_ICON_SIZE } from '@/components/constants';
-import Search from './Search';
 
-// Types
 import type { ChatBuddy } from '@/features/Chat/mappers';
 import type { DialogVariant } from '../Dialogs';
 
@@ -17,24 +14,14 @@ type Props = {
 
 const DesktopButtons = ({ chat, openDialog }: Props) => {
   const { t } = useTranslation('chat');
-  const [isSearchShown, setIsSearchShown] = useState(false);
-  const showSearch = () => setIsSearchShown(true);
-  const hideSearch = () => setIsSearchShown(false);
 
   const openArchiveDialog = () => openDialog('archive');
   const openBlockDialog = () => openDialog('block');
   const openRestoreDialog = () => openDialog('restore');
   const openReportDialog = () => openDialog('report');
 
-  return isSearchShown ? (
-    <Search hideSearch={hideSearch} />
-  ) : (
+  return (
     <Container>
-      <IconButton
-        variant="search"
-        sizeInPx={DEFAULT_ICON_SIZE.SMALL}
-        onClick={showSearch}
-      />
       {chat.status === 'ok' ? (
         <>
           <StatusButton

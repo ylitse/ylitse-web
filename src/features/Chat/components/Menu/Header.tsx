@@ -7,11 +7,7 @@ import IconButton from '@/components/Buttons/IconButton';
 import { Row } from './Row';
 import Text from '@/components/Text';
 
-type Props = {
-  showSearch: boolean;
-};
-
-const Header = ({ showSearch }: Props) => {
+const Header = () => {
   const { t } = useTranslation('chat');
   const { showFolders, activeFolder } = useAppSelector(state => state.chats);
 
@@ -24,13 +20,6 @@ const Header = ({ showSearch }: Props) => {
     <HeaderRow>
       <Title variant="h1">{t(`menu.title.${activeFolder}`)}</Title>
       <Buttons>
-        {showSearch && (
-          <IconButton
-            variant="searchWithBackground"
-            sizeInPx={40}
-            onClick={() => console.log('searching...')}
-          />
-        )}
         <IconButton variant="menuLines" sizeInPx={40} onClick={toggleFolders} />
       </Buttons>
     </HeaderRow>
