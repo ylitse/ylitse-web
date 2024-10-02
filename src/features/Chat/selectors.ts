@@ -110,8 +110,7 @@ export const selectHasUnreadMessages = createSelector(
   ({ chats }): boolean =>
     Object.values(chats)
       .filter(chat => chat.status === 'ok')
-      .map(chat => chat.messages)
-      .flat()
+      .flatMap(chat => chat.messages)
       .some(message => !message.opened),
 );
 

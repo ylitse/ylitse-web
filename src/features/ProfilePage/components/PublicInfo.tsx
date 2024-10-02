@@ -149,7 +149,10 @@ const PublicInfo = () => {
           rows={4}
           value={localData.story}
         />
-        <SkillsEditor skills={localData.skills} />
+        <SkillsEditor
+          onChange={value => updateMentorData('skills', value)}
+          skills={localData.skills}
+        />
       </Form>
     </Container>
   );

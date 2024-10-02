@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectSkills } from '@/features/MentorPage/selectors';
+import { selectAllSkillOptions } from '@/features/MentorPage/selectors';
 import { useAppSelector } from '@/store';
 
 import { Chip } from '@/components/Chip';
@@ -11,15 +10,23 @@ import DropdownSearch from '@/components/DropdownSearch/DropdownSearch';
 import Text from '@/components/Text';
 
 type Props = {
+  onChange: (value: string[]) => void;
   skills: string[];
 };
 
-const SkillsEditor = ({ skills }: Props) => {
+const SkillsEditor = ({ onChange, skills }: Props) => {
   const { t } = useTranslation('profile');
 
-  const skillSelection = useAppSelector(selectSkills());
+  const skillSelection = useAppSelector(selectAllSkillOptions());
 
-  const [skillSearchValue, setSkillSearchValue] = useState('');
+  const addSkill = (skill: string) => {
+    onChange([...skills, skill]);
+  };
+
+  const removeSkill = (skill: string) => {
+    const updatedSkills = skills.filter(s => s !== skill);
+    onChange(updatedSkills);
+  };
 
   return (
     <>
@@ -31,16 +38,15 @@ const SkillsEditor = ({ skills }: Props) => {
             text={skill}
             isSelected={true}
             shouldShake={false}
-            onToggle={() => null}
+            onToggle={removeSkill}
           />
         ))}
       </Skills>
       <SearchBar>
         <DropdownSearch
-          onChange={setSkillSearchValue}
+          addSkill={addSkill}
           options={skillSelection}
           placeholder={t('public.mentor.addSkill')}
-          value={skillSearchValue}
         />
       </SearchBar>
     </>
