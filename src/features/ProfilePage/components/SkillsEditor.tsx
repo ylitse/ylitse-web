@@ -2,9 +2,13 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
+import { selectSkills } from '@/features/MentorPage/selectors';
+import { useAppSelector } from '@/store';
+
+import { Chip } from '@/components/Chip';
+import { DEFAULT_ICON_SIZE } from '@/components/constants';
+import DropdownSearch from '@/components/DropdownSearch/DropdownSearch';
 import Text from '@/components/Text';
-import TextInput from '@/components/TextInput';
 
 type Props = {
   skills: string[];
@@ -12,22 +16,29 @@ type Props = {
 
 const SkillsEditor = ({ skills }: Props) => {
   const { t } = useTranslation('profile');
-  const [skillSearchValue, setSkillSearchValue] = useState('');
 
-  console.log(skills);
+  const skillSelection = useAppSelector(selectSkills());
+
+  const [skillSearchValue, setSkillSearchValue] = useState('');
 
   return (
     <>
       <Label variant="label">{t('public.mentor.skills')}</Label>
+      <Skills>
+        {skills.map(skill => (
+          <Chip
+            key={skill}
+            text={skill}
+            isSelected={true}
+            shouldShake={false}
+            onToggle={() => null}
+          />
+        ))}
+      </Skills>
       <SearchBar>
-        <SkillSearch
-          variant="iconInput"
-          color={skillSearchValue ? 'blueDark' : 'greyFaded'}
-          leftIcon={{
-            sizeInPx: DEFAULT_ICON_SIZE.SMALL,
-            variant: 'search',
-          }}
+        <DropdownSearch
           onChange={setSkillSearchValue}
+          options={skillSelection}
           placeholder={t('public.mentor.addSkill')}
           value={skillSearchValue}
         />
@@ -40,6 +51,15 @@ const Label = styled(Text)`
   margin-top: 1rem;
 `;
 
+const Skills = styled.div`
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 1rem;
+  overflow: hidden;
+  width: 100%;
+`;
+
 const SearchBar = styled.div`
   align-items: center;
   align-self: flex-start;
@@ -48,14 +68,7 @@ const SearchBar = styled.div`
   justify-content: flex-end;
   margin-left: -${DEFAULT_ICON_SIZE.SMALL}px;
   margin-top: 1rem;
-`;
-
-const SkillSearch = styled(TextInput)`
   max-width: 350px;
-
-  &:focus {
-    outline: 1px solid ${palette.purple};
-  }
 `;
 
 export default SkillsEditor;

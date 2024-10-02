@@ -65,9 +65,7 @@ Cypress.Commands.add('getInputByLabel', (labelText: string) => {
   return cy
     .contains('label', labelText)
     .invoke('attr', 'for')
-    .then(inputId => {
-      return cy.get(`#${inputId}`);
-    });
+    .then(inputId => cy.get(`#${inputId}`));
 });
 
 Cypress.Commands.add('fillInputByLabel', (labelText: string, value: string) => {

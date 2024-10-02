@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Text from '../Text';
 import { animations, palette } from '../constants';
-import CloseIcon from '@/static/icons/close.svg';
+import CloseIcon from '@/static/icons/close-with-background.svg';
 
 type Props = {
   text: string;
