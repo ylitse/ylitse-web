@@ -5,11 +5,14 @@ import { palette } from '../constants';
 type Variant = 'small' | 'normal';
 
 type SearchProps = {
+  className?: string;
+  hasOpenDropdown?: boolean;
+  onBlur?: () => void;
+  onChange: (value: string) => void;
+  onFocus?: () => void;
   placeholder: string;
   value: string;
-  onChange: (value: string) => void;
   variant: Variant;
-  className?: string;
 };
 
 const sizingMap: Record<Variant, FlattenSimpleInterpolation> = {
@@ -22,25 +25,35 @@ const sizingMap: Record<Variant, FlattenSimpleInterpolation> = {
 };
 
 const SearchBar: React.FC<SearchProps> = ({
-  onChange,
-  variant,
   className,
+  hasOpenDropdown = false,
+  onBlur,
+  onChange,
+  onFocus,
+  variant,
   ...props
 }) => (
   <SearchBox className={className}>
     <SearchIcon />
     <SearchInput
+      hasOpenDropdown={hasOpenDropdown}
+      onBlur={onBlur}
+      onChange={e => onChange(e.target.value)}
+      onFocus={onFocus}
       type="text"
       variant={variant}
       {...props}
-      onChange={e => onChange(e.target.value)}
     ></SearchInput>
   </SearchBox>
 );
 
-const SearchInput = styled.input<{ variant: Variant }>`
-  border: ${palette.purple} solid 1px;
-  border-radius: 1.75rem;
+const SearchInput = styled.input<{
+  hasOpenDropdown: boolean;
+  variant: Variant;
+}>`
+  border: 1px solid ${palette.purple};
+  border-radius: ${({ hasOpenDropdown }) =>
+    hasOpenDropdown ? '20px 20px 0 0' : '20px'};
   box-sizing: border-box;
   display: flex;
   flex: 1;

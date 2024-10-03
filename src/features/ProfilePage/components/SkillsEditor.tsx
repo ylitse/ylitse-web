@@ -5,76 +5,51 @@ import { selectAllSkillOptions } from '@/features/MentorPage/selectors';
 import { useAppSelector } from '@/store';
 
 import { Chip } from '@/components/Chip';
-import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import DropdownSearch from '@/components/DropdownSearch/DropdownSearch';
 import Text from '@/components/Text';
 
 type Props = {
-  onChange: (value: string[]) => void;
+  updateSkills: (skills: string[]) => void;
   skills: string[];
 };
 
-const SkillsEditor = ({ onChange, skills }: Props) => {
+const SkillsEditor = ({ updateSkills, skills }: Props) => {
   const { t } = useTranslation('profile');
+  const skillOptions = useAppSelector(selectAllSkillOptions());
 
-  const skillSelection = useAppSelector(selectAllSkillOptions());
+  const addSkill = (skill: string) => updateSkills([...skills, skill]);
 
-  const addSkill = (skill: string) => {
-    onChange([...skills, skill]);
-  };
-
-  const removeSkill = (skill: string) => {
-    const updatedSkills = skills.filter(s => s !== skill);
-    onChange(updatedSkills);
-  };
+  const removeSkill = (skill: string) =>
+    updateSkills(skills.filter(s => s !== skill));
 
   return (
-    <>
-      <Label variant="label">{t('public.mentor.skills')}</Label>
+    <Container>
+      <Text variant="label">{t('public.mentor.skills')}</Text>
       <Skills>
         {skills.map(skill => (
-          <Chip
-            key={skill}
-            text={skill}
-            isSelected={true}
-            shouldShake={false}
-            onToggle={removeSkill}
-          />
+          <Chip key={skill} text={skill} onToggle={removeSkill} />
         ))}
       </Skills>
-      <SearchBar>
-        <DropdownSearch
-          addSkill={addSkill}
-          options={skillSelection}
-          placeholder={t('public.mentor.addSkill')}
-        />
-      </SearchBar>
-    </>
+      <DropdownSearch
+        options={skillOptions.filter(so => !skills.includes(so))} // Options should not include already chosen skills
+        placeholder={t('public.mentor.addSkill')}
+        selectOption={addSkill}
+      />
+    </Container>
   );
 };
 
-const Label = styled(Text)`
-  margin-top: 1rem;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
 `;
 
 const Skills = styled.div`
   display: flex;
-  flex: 0 0 auto;
   flex-wrap: wrap;
   gap: 1rem;
-  overflow: hidden;
-  width: 100%;
-`;
-
-const SearchBar = styled.div`
-  align-items: center;
-  align-self: flex-start;
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  margin-left: -${DEFAULT_ICON_SIZE.SMALL}px;
-  margin-top: 1rem;
-  max-width: 350px;
+  margin-top: 0.5rem;
 `;
 
 export default SkillsEditor;

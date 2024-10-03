@@ -141,6 +141,17 @@ export const variants = {
       textTransform: 'uppercase',
     },
   },
+  menuOption: {
+    element: 'p',
+    styles: {
+      fontFamily: '"Source Sans Pro"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      lineHeight: '1.5rem',
+      margin: 0,
+    },
+  },
   p: {
     element: 'p',
     styles: {

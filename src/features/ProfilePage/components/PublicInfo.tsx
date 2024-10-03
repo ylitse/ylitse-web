@@ -150,7 +150,7 @@ const PublicInfo = () => {
           value={localData.story}
         />
         <SkillsEditor
-          onChange={value => updateMentorData('skills', value)}
+          updateSkills={skills => updateMentorData('skills', skills)}
           skills={localData.skills}
         />
       </Form>
