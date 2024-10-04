@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { selectAllSkillOptions } from '@/features/MentorPage/selectors';
 import { useAppSelector } from '@/store';
+import { useGetMentorsQuery } from '@/features/MentorPage/mentorPageApi';
 
 import { Chip } from '@/components/Chip';
 import DropdownSearch from '@/components/DropdownSearch/DropdownSearch';
@@ -15,7 +16,13 @@ type Props = {
 
 const SkillsEditor = ({ updateSkills, skills }: Props) => {
   const { t } = useTranslation('profile');
-  const skillOptions = useAppSelector(selectAllSkillOptions());
+
+  // This should be run before all skill options are selected
+  useGetMentorsQuery();
+
+  const allSkills = useAppSelector(selectAllSkillOptions());
+  // Options should not include already chosen skills
+  const skillOptions = allSkills.filter(s => !skills.includes(s));
 
   const addSkill = (skill: string) => updateSkills([...skills, skill]);
 
@@ -31,7 +38,7 @@ const SkillsEditor = ({ updateSkills, skills }: Props) => {
         ))}
       </Skills>
       <DropdownSearch
-        options={skillOptions.filter(so => !skills.includes(so))} // Options should not include already chosen skills
+        options={skillOptions}
         placeholder={t('public.mentor.addSkill')}
         selectOption={addSkill}
       />

@@ -17,6 +17,7 @@ export const DropdownSearch = ({
   selectOption,
 }: Props): JSX.Element => {
   const [query, setQuery] = useState('');
+  const [notChosenOptions, setNotChosenOptions] = useState(options);
   const [filteredOptions, setFilteredOptions] = useState(options);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -25,7 +26,7 @@ export const DropdownSearch = ({
     setIsDropdownVisible(true);
     if (query.length > 0) {
       setFilteredOptions(
-        options.filter(option =>
+        notChosenOptions.filter(option =>
           option.toLowerCase().includes(query.toLowerCase()),
         ),
       );
@@ -36,7 +37,9 @@ export const DropdownSearch = ({
 
   const handleOptionClick = (option: string) => {
     setQuery('');
-    setFilteredOptions(options);
+    const notChosen = notChosenOptions.filter(o => o !== option);
+    setNotChosenOptions(notChosen);
+    setFilteredOptions(notChosen);
     setIsDropdownVisible(false);
     selectOption(option);
   };
@@ -45,10 +48,12 @@ export const DropdownSearch = ({
   const handleBlur = () => setTimeout(() => setIsDropdownVisible(false), 200);
   const handleFocus = () => setIsDropdownVisible(true);
 
+  const isDropdownOpen = isDropdownVisible && filteredOptions.length > 0;
+
   return (
     <Container>
       <SearchBar
-        hasOpenDropdown={isDropdownVisible}
+        hasOpenDropdown={isDropdownOpen}
         onBlur={handleBlur}
         onChange={handleQueryChange}
         onFocus={handleFocus}
@@ -56,7 +61,7 @@ export const DropdownSearch = ({
         value={query}
         variant="small"
       />
-      {isDropdownVisible && filteredOptions.length > 0 && (
+      {isDropdownOpen && (
         <Dropdown>
           {filteredOptions.map((option, index) => (
             <DropdownItem key={index} onClick={() => handleOptionClick(option)}>
