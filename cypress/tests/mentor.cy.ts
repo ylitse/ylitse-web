@@ -97,6 +97,7 @@ describe('mentor profile', () => {
 
     // check that values were updated
     cy.reload();
+    cy.switchLanguageAfterLogin('fi');
     cy.getInputByLabel('Julkinen nimimerkki *').should(
       'have.value',
       NEW_DISPLAY_NAME,
