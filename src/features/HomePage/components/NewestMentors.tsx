@@ -86,7 +86,9 @@ const MentorCards = styled.div<{ isMobile: boolean }>`
   ${({ isMobile }) =>
     isMobile &&
     css`
-      flex: 1;
+      gap: 1.5rem;
+      margin: auto -1rem auto -1rem;
+      overflow: auto;
       scroll-snap-type: x mandatory;
       white-space: nowrap;
       &::-webkit-scrollbar {
