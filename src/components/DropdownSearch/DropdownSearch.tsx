@@ -7,69 +7,50 @@ import Text from '../Text';
 
 type Props = {
   isDisabled: boolean;
+  isDropdownVisible: boolean;
   options: string[];
   placeholder: string;
   selectOption: (option: string) => void;
+  setIsDropdownVisible: (isVisible: boolean) => void;
 };
 
 export const DropdownSearch = ({
   isDisabled,
+  isDropdownVisible,
   options,
   placeholder,
   selectOption,
+  setIsDropdownVisible,
 }: Props): JSX.Element => {
   const [query, setQuery] = useState('');
-  const [notChosenOptions, setNotChosenOptions] = useState(options);
-  const [filteredOptions, setFilteredOptions] = useState(options);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
-  console.log('filtered options', filteredOptions);
-
-  const handleQueryChange = (query: string) => {
-    setQuery(query);
-    setIsDropdownVisible(true);
-    if (query.length > 0) {
-      setFilteredOptions(
-        notChosenOptions.filter(option =>
-          option.toLowerCase().includes(query.toLowerCase()),
-        ),
-      );
-    } else {
-      setFilteredOptions(options);
-    }
-  };
-
-  const handleOptionClick = (option: string) => {
-    setQuery('');
-    const notChosen = notChosenOptions.filter(o => o !== option);
-    setNotChosenOptions(notChosen);
-    setFilteredOptions(notChosen);
-    setIsDropdownVisible(false);
-    selectOption(option);
-  };
 
   // Delay dropdown hide to allow click event on options
   const handleBlur = () => setTimeout(() => setIsDropdownVisible(false), 200);
   const handleFocus = () => setIsDropdownVisible(true);
 
-  const isDropdownOpen = isDropdownVisible && filteredOptions.length > 0;
+  const filteredOptions = options.filter(
+    option =>
+      query.length === 0 || option.toLowerCase().includes(query.toLowerCase()),
+  );
+
+  const shouldShowDropdown = isDropdownVisible && filteredOptions.length > 0;
 
   return (
     <Container>
       <SearchBar
         isDisabled={isDisabled}
-        hasOpenDropdown={isDropdownOpen}
+        hasOpenDropdown={shouldShowDropdown}
         onBlur={handleBlur}
-        onChange={handleQueryChange}
+        onChange={setQuery}
         onFocus={handleFocus}
         placeholder={placeholder}
         value={query}
         variant="small"
       />
-      {isDropdownOpen && (
+      {shouldShowDropdown && (
         <Dropdown>
-          {filteredOptions.map((option, index) => (
-            <DropdownItem key={index} onClick={() => handleOptionClick(option)}>
+          {filteredOptions.map((option, i) => (
+            <DropdownItem key={i} onClick={() => selectOption(option)}>
               <Text variant="menuOption">{option}</Text>
             </DropdownItem>
           ))}
