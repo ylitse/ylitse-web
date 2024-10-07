@@ -7,6 +7,7 @@ type Variant = 'small' | 'normal';
 type SearchProps = {
   className?: string;
   hasOpenDropdown?: boolean;
+  isDisabled: boolean;
   onBlur?: () => void;
   onChange: (value: string) => void;
   onFocus?: () => void;
@@ -27,6 +28,7 @@ const sizingMap: Record<Variant, FlattenSimpleInterpolation> = {
 const SearchBar: React.FC<SearchProps> = ({
   className,
   hasOpenDropdown = false,
+  isDisabled,
   onBlur,
   onChange,
   onFocus,
@@ -36,6 +38,7 @@ const SearchBar: React.FC<SearchProps> = ({
   <SearchBox className={className}>
     <SearchIcon />
     <SearchInput
+      disabled={isDisabled}
       hasOpenDropdown={hasOpenDropdown}
       onBlur={onBlur}
       onChange={e => onChange(e.target.value)}

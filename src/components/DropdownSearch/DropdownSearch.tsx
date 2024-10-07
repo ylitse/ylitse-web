@@ -6,12 +6,14 @@ import SearchBar from '../SearchBar';
 import Text from '../Text';
 
 type Props = {
+  isDisabled: boolean;
   options: string[];
   placeholder: string;
   selectOption: (option: string) => void;
 };
 
 export const DropdownSearch = ({
+  isDisabled,
   options,
   placeholder,
   selectOption,
@@ -20,6 +22,8 @@ export const DropdownSearch = ({
   const [notChosenOptions, setNotChosenOptions] = useState(options);
   const [filteredOptions, setFilteredOptions] = useState(options);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  console.log('filtered options', filteredOptions);
 
   const handleQueryChange = (query: string) => {
     setQuery(query);
@@ -53,6 +57,7 @@ export const DropdownSearch = ({
   return (
     <Container>
       <SearchBar
+        isDisabled={isDisabled}
         hasOpenDropdown={isDropdownOpen}
         onBlur={handleBlur}
         onChange={handleQueryChange}

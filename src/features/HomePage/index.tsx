@@ -39,15 +39,15 @@ const HomePage = () => {
         <Info />
       </TopContainer>
       <MiddleContainer>
-        <LeftMiddleContainer>
+        <InnerContainer>
           {hasUnreadMessages ? <NewMessages /> : <Welcome />}
           {!mentor && <Announcements />}
           {mentor && <ProfileWidget mentor={mentor} />}
-        </LeftMiddleContainer>
-        <RightMiddleContainer>
+        </InnerContainer>
+        <InnerContainer>
           {mentor && <Announcements />}
           <Concepts />
-        </RightMiddleContainer>
+        </InnerContainer>
       </MiddleContainer>
       <NewestMentors />
     </PageWithTransition>
@@ -69,14 +69,7 @@ const MiddleContainer = styled.div`
   padding: 4rem ${OUTER_HORIZONTAL_MARGIN};
 `;
 
-const LeftMiddleContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
-const RightMiddleContainer = styled.div`
+const InnerContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
