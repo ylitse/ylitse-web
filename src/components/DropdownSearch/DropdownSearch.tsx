@@ -48,7 +48,7 @@ export const DropdownSearch = ({
         variant="small"
       />
       {shouldShowDropdown && (
-        <Dropdown>
+        <Dropdown id="skill-dropdown">
           {filteredOptions.map((option, i) => (
             <DropdownItem key={i} onClick={() => selectOption(option)}>
               <Text variant="menuOption">{option}</Text>

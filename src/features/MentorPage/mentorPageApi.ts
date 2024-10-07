@@ -1,7 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import * as D from 'io-ts/Decoder';
 import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
-import { capitalize } from '@/utils/utils';
 import toast from 'react-hot-toast';
 import { t } from 'i18next';
 
@@ -57,7 +56,7 @@ const toMentor = ({
   mentorId: id,
   name: display_name,
   region,
-  skills: skills.map(skill => capitalize(skill)),
+  skills,
   statusMessage: status_message,
   story,
 });
