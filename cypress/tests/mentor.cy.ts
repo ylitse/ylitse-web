@@ -46,6 +46,10 @@ describe('mentor profile', () => {
     );
     cy.getByText('Tavoitettavissa', 'label').should('be.visible');
     cy.get('textarea').should('have.value', mentor.story);
+
+    mentor.skills.forEach(skill => {
+      cy.getByText(skill, 'button').should('be.visible');
+    });
   });
 
   it('password is changed if provided inputs are valid', () => {
@@ -116,6 +120,7 @@ describe('mentor profile', () => {
 
     // check that values were discarded
     cy.reload();
+    cy.switchLanguageAfterLogin('fi');
     cy.getInputByLabel('Julkinen nimimerkki *').should(
       'have.value',
       mentor.displayName,
@@ -144,6 +149,80 @@ describe('mentor profile', () => {
       cy.wait(500);
       cy.contains('Syntymävuosi on virheellinen').should('be.visible');
       cy.getByText('Tallenna', 'button').should('be.disabled');
+    });
+  });
+
+  it('skills held by another mentor can be found and added to profile', () => {
+    // register a second mentor
+    const secondMentor = accounts.mentors[1];
+    api.signUpMentor(secondMentor);
+
+    const skillSearch = cy.get('input[placeholder*="Lisää uusi aihe"]');
+    // only skills held by other mentors should be found in the dropdown
+    secondMentor.skills.forEach(skill => {
+      cy.wait(200);
+      // skill should be found in unfiltered dropdown
+      skillSearch.focus();
+      cy.getByText(skill, '#skill-dropdown p').should('be.visible');
+
+      // skill should still be found after typing it in the search bar
+      skillSearch.clear().type(skill);
+
+      cy.getByText(skill, '#skill-dropdown p').should('be.visible').click();
+      cy.wait(200);
+
+      // skill should now be found as a skill chip button
+      cy.getByText(skill, 'button').should('be.visible');
+
+      // skill should not be found in dropdown anymore
+      skillSearch.clear().focus();
+
+      cy.get('body').then(body => {
+        // the dropdown only exists when there are more skills to add
+        if (body.find('#skill-dropdown').length) {
+          // check that the skill should not be present
+          cy.getByText(skill, '#skill-dropdown p').should('not.exist');
+        }
+      });
+    });
+
+    // save changes
+    cy.getByText('Tallenna', 'button').click();
+
+    // check that values were updated correctly
+    cy.reload();
+    cy.switchLanguageAfterLogin('fi');
+    // mentor should now have both the original skills and the skills from the second mentor
+    mentor.skills.forEach(skill => {
+      cy.getByText(skill, 'button').should('be.visible');
+    });
+    secondMentor.skills.forEach(skill => {
+      cy.getByText(skill, 'button').should('be.visible');
+    });
+  });
+
+  it('skills can be removed from profile', () => {
+    const skillSearch = cy.get('input[placeholder*="Lisää uusi aihe"]');
+
+    mentor.skills.forEach(skill => {
+      // remove skill
+      cy.getByText(skill, 'button').should('be.visible').click();
+      cy.wait(200);
+
+      // skill chip button should be gone
+      cy.getByText(skill, 'button').should('not.exist');
+
+      // skill should now be found in the dropdown
+      skillSearch.focus();
+      cy.getByText(skill, 'p').should('be.visible');
+    });
+
+    // check that values were updated correctly
+    cy.reload();
+    cy.switchLanguageAfterLogin('fi');
+    // mentor should not have any of the former skills
+    mentor.skills.forEach(skill => {
+      cy.getByText(skill, 'button').should('not.exist');
     });
   });
 });

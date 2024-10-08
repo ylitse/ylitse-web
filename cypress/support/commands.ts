@@ -65,19 +65,27 @@ Cypress.Commands.add('getInputByLabel', (labelText: string) => {
   return cy
     .contains('label', labelText)
     .invoke('attr', 'for')
-    .then(inputId => {
-      return cy.get(`#${inputId}`);
-    });
+    .then(inputId => cy.get(`#${inputId}`));
 });
 
 Cypress.Commands.add('fillInputByLabel', (labelText: string, value: string) => {
-  cy.getInputByLabel(labelText).clear().type(value).blur();
+  cy.getInputByLabel(labelText)
+    .should('exist')
+    .should('be.visible')
+    .clear()
+    .type(value)
+    .blur();
 });
 
 Cypress.Commands.add(
   'fillNumberInputByLabel',
   (labelText: string, value: string) => {
-    cy.getInputByLabel(labelText).type('{selectall}').type(value).blur();
+    cy.getInputByLabel(labelText)
+      .should('exist')
+      .should('be.visible')
+      .type('{selectall}')
+      .type(value)
+      .blur();
   },
 );
 

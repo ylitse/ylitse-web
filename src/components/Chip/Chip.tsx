@@ -2,16 +2,21 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Text from '../Text';
 import { animations, palette } from '../constants';
-import CloseIcon from '@/static/icons/close.svg';
+import CloseIcon from '@/static/icons/close-with-background.svg';
 
 type Props = {
   text: string;
-  isSelected: boolean;
-  shouldShake: boolean;
+  isSelected?: boolean;
+  shouldShake?: boolean;
   onToggle: (text: string) => void;
 };
 
-const Chip: React.FC<Props> = ({ text, isSelected, shouldShake, onToggle }) => {
+const Chip: React.FC<Props> = ({
+  text,
+  isSelected = true,
+  shouldShake = false,
+  onToggle,
+}) => {
   return (
     <StyledChip
       key={text}
@@ -33,13 +38,13 @@ const StyledChip = styled.button<{ isSelected: boolean; shouldShake: boolean }>`
   align-items: center;
   appearance: none;
   border: none;
-  border-radius: 1.75rem;
+  border-radius: 2rem;
   cursor: pointer;
   display: flex;
   flex: 0 0 auto;
   gap: 0.5rem;
   height: 2.75rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0 1rem;
 
   ${({ isSelected }) =>
     isSelected

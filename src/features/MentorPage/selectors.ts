@@ -39,6 +39,14 @@ export const selectMentorById = (buddyId: string | null) =>
     buddyId ? mentors.data?.[buddyId] : undefined,
   );
 
+export const selectAllSkillOptions = () =>
+  createSelector(selectMentors, mentorsQuery => {
+    const mentors = mentorsQuery.data ?? {};
+    const skills = Object.values(mentors).flatMap(mentor => mentor.skills);
+    const uniqueSkills = Array.from(new Set(skills));
+    return uniqueSkills;
+  });
+
 export const selectSkills = () =>
   createSelector(
     selectMentors,
