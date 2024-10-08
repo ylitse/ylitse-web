@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { selectIsMentor } from '../Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import AccountInfo from './components/AccountInfo';
 import {
@@ -16,9 +17,24 @@ import Text from '@/components/Text';
 
 const ProfilePage = () => {
   const { t } = useTranslation('profile');
+  const { isTablet } = useGetLayoutMode();
   const isMentor = useAppSelector(selectIsMentor);
 
-  return (
+  return isTablet ? (
+    <PageWithTransition>
+      {isMentor ? (
+        <MobileContainer>
+          <MobileHeader>
+            <Text variant="h1">{t('title')}</Text>
+          </MobileHeader>
+          <AccountInfo isMobile />
+          <PublicInfo />
+        </MobileContainer>
+      ) : (
+        <AccountInfo isMobile />
+      )}
+    </PageWithTransition>
+  ) : (
     <PageWithTransition>
       {isMentor ? (
         <Container>
@@ -36,6 +52,21 @@ const ProfilePage = () => {
     </PageWithTransition>
   );
 };
+
+const MobileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const MobileHeader = styled.div`
+  align-items: center;
+  background-color: ${palette.white};
+  box-sizing: border-box;
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+`;
 
 const Container = styled.div`
   display: flex;
