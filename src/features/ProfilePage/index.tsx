@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import { selectIsMentor } from '../Authentication/userSlice';
@@ -20,77 +20,70 @@ const ProfilePage = () => {
   const { isTablet } = useGetLayoutMode();
   const isMentor = useAppSelector(selectIsMentor);
 
-  return isTablet ? (
+  return (
     <PageWithTransition>
       {isMentor ? (
-        <MobileContainer>
-          <MobileHeader>
-            <Text variant="h1">{t('title')}</Text>
-          </MobileHeader>
-          <AccountInfo isMobile />
-          <PublicInfo isMobile />
-        </MobileContainer>
-      ) : (
-        <AccountInfo isMobile />
-      )}
-    </PageWithTransition>
-  ) : (
-    <PageWithTransition>
-      {isMentor ? (
-        <Container>
-          <Header>
+        <Container isMobile={isTablet}>
+          <Header isMobile={isTablet}>
             <Text variant="h1">{t('title')}</Text>
           </Header>
-          <Content>
-            <AccountInfo />
-            <PublicInfo />
+          <Content isMobile={isTablet}>
+            <AccountInfo isMobile={isTablet} />
+            <PublicInfo isMobile={isTablet} />
           </Content>
         </Container>
       ) : (
-        <AccountInfo />
+        <AccountInfo isMobile={isTablet} />
       )}
     </PageWithTransition>
   );
 };
 
-const MobileContainer = styled.div`
-  background-color: ${palette.white};
+const Container = styled.div<{ isMobile: boolean }>`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 3rem 0;
-  width: 100%;
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          background-color: ${palette.white};
+          padding-bottom: 8rem;
+          padding-top: 3rem;
+          width: 100%;
+        `
+      : css`
+          gap: 1rem;
+          margin: ${OUTER_VERTICAL_MARGIN} auto;
+          max-width: ${CONTENT_WIDTH};
+          width: ${CONTENT_WIDTH};
+        `}
 `;
 
-const MobileHeader = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin: ${OUTER_VERTICAL_MARGIN} auto;
-  max-width: ${CONTENT_WIDTH};
-  width: ${CONTENT_WIDTH};
-`;
-
-const Header = styled.div`
-  align-items: center;
-  background-color: ${palette.blue2};
-  border-radius: 10px;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+const Header = styled.div<{ isMobile: boolean }>`
   box-sizing: border-box;
   display: flex;
-  height: 4rem;
   justify-content: center;
+  ${({ isMobile }) =>
+    !isMobile &&
+    css`
+      align-items: center;
+      background-color: ${palette.blue2};
+      border-radius: 10px;
+      box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+      height: 4rem;
+    `}
 `;
 
-const Content = styled.div`
+const Content = styled.div<{ isMobile: boolean }>`
   display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          flex-direction: column;
+        `
+      : css`
+          gap: 1.5rem;
+        `}
 `;
 
 export default ProfilePage;

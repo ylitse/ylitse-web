@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+
+import { Column } from '../common';
 import { palette } from '../constants';
 import Text from '../Text';
 
@@ -11,7 +13,7 @@ type Props = {
 };
 
 export const Slider = ({ id, label, onChange, text, value }: Props) => (
-  <Container>
+  <Column>
     <Text variant="label">{label}</Text>
     <SwitchContainer>
       <Switch>
@@ -22,14 +24,8 @@ export const Slider = ({ id, label, onChange, text, value }: Props) => (
         {text}
       </Text>
     </SwitchContainer>
-  </Container>
+  </Column>
 );
-
-const Container = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-`;
 
 const SwitchContainer = styled.div`
   display: flex;

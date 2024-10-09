@@ -139,7 +139,7 @@ const Container = styled.div<{ isMobile: boolean }>`
           display: flex;
           flex: 2;
           flex-direction: column;
-          padding: 3rem 0;
+          padding: 2rem 0 4rem;
         `}
 `;
 

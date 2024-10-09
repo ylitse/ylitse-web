@@ -7,16 +7,15 @@ import { selectMyMentorProfile } from '../MentorPage/selectors';
 
 import Announcements from './components/Announcements';
 import Background from '@/static/img/home-page-background.svg';
+import { Column } from '@/components/common';
 import Concepts from './components/Concepts';
 import FindMentor from './components/FindMentor';
 import Info from './components/Info';
 import NewestMentors from './components/NewestMentors';
 import NewMessages from './components/NewMessages';
-import ProfileWidget from './components/ProfileWidget';
-
 import { OUTER_HORIZONTAL_MARGIN } from '@/components/constants';
-
 import PageWithTransition from '@/components/PageWithTransition';
+import ProfileWidget from './components/ProfileWidget';
 import Welcome from './components/Welcome';
 
 const HomePage = () => {
@@ -69,10 +68,7 @@ const MiddleContainer = styled.div`
   padding: 4rem ${OUTER_HORIZONTAL_MARGIN};
 `;
 
-const InnerContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+const InnerContainer = styled(Column)`
   gap: 2rem;
 `;
 

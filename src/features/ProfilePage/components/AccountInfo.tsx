@@ -100,7 +100,7 @@ const Container = styled.div<{ isMentor: boolean; isMobile: boolean }>`
   flex: 1;
   flex-direction: column;
   height: fit-content;
-  padding: 1.5rem 3rem;
+  padding: 2rem 3rem;
 
   ${({ isMentor, isMobile }) =>
     !isMobile &&
