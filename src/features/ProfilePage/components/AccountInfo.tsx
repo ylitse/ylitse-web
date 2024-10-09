@@ -21,7 +21,11 @@ import { Section, Value } from '.';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 
-const AccountInfo = () => {
+type Props = {
+  isMobile?: boolean;
+};
+
+const AccountInfo = ({ isMobile = false }: Props) => {
   const { t } = useTranslation('profile');
   const { id, login_name: loginName, role } = useAppSelector(selectAccount);
   const isMentor = useAppSelector(selectIsMentor);
@@ -39,7 +43,7 @@ const AccountInfo = () => {
   };
 
   return (
-    <Container isMentor={isMentor}>
+    <Container isMentor={isMentor} isMobile={isMobile}>
       {isDeleteConfirmationOpen && (
         <Dialog
           borderColor={palette.redSalmon}
@@ -89,23 +93,26 @@ const AccountInfo = () => {
   );
 };
 
-const Container = styled.div<{ isMentor: boolean }>`
+const Container = styled.div<{ isMentor: boolean; isMobile: boolean }>`
   background-color: ${palette.white};
-  border-radius: 10px;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   display: flex;
   flex: 1;
   flex-direction: column;
   height: fit-content;
-  padding: 3rem;
+  padding: 2rem 3rem;
 
-  ${({ isMentor }) =>
-    !isMentor &&
+  ${({ isMentor, isMobile }) =>
+    !isMobile &&
     css`
+      border-radius: 10px;
+      box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+      ${!isMentor &&
+      `
       align-content: center;
       margin: ${OUTER_VERTICAL_MARGIN} auto;
       width: 670px;
+      `}
     `}
 `;
 

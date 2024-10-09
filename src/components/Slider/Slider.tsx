@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+
+import { Column } from '../common';
 import { palette } from '../constants';
 import Text from '../Text';
 
@@ -6,25 +8,29 @@ type Props = {
   id: string;
   label: string;
   onChange: () => void;
+  text: string;
   value: boolean;
 };
 
-export const Slider = ({ id, label, onChange, value }: Props) => (
-  <Container>
-    <Switch>
-      <Input id={id} type="checkbox" checked={value} onChange={onChange} />
-      <Thumb checked={value} />
-    </Switch>
-    <Text inputId={id} variant="label">
-      {label}
-    </Text>
-  </Container>
+export const Slider = ({ id, label, onChange, text, value }: Props) => (
+  <Column>
+    <Text variant="label">{label}</Text>
+    <SwitchContainer>
+      <Switch>
+        <Input id={id} type="checkbox" checked={value} onChange={onChange} />
+        <Thumb checked={value} />
+      </Switch>
+      <Text inputId={id} variant="label">
+        {text}
+      </Text>
+    </SwitchContainer>
+  </Column>
 );
 
-const Container = styled.div`
+const SwitchContainer = styled.div`
   display: flex;
   gap: 1rem;
-  margin: 1rem 0;
+  margin-top: 0.5rem;
 `;
 
 const Switch = styled.label`

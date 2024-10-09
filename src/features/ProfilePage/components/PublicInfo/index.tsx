@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,19 +7,25 @@ import { useAppSelector } from '@/store';
 import { useUpdateMentorMutation } from '@/features/MentorPage/mentorPageApi';
 import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
 
-import { ButtonRow } from '.';
-import LabeledInput from '@/components/LabeledInput';
+import { ButtonRow } from '..';
+import Columns from './Columns';
 import { palette } from '@/components/constants';
-import SkillsEditor from './SkillsEditor';
-import Slider from '@/components/Slider';
+import SkillsEditor from '../SkillsEditor';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 import TextInput from '@/components/TextInput';
-import { validateBirthYear, validateDisplayNameLength } from '../validators';
+import {
+  validateBirthYear,
+  validateDisplayNameLength,
+} from '@/features/ProfilePage/validators';
 
 import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
 
-const PublicInfo = () => {
+type Props = {
+  isMobile?: boolean;
+};
+
+const PublicInfo = ({ isMobile = false }: Props) => {
   const { t } = useTranslation('profile');
   const user = useAppSelector(selectUser);
   const mentor = useAppSelector(selectMentor);
@@ -71,8 +77,10 @@ const PublicInfo = () => {
     !isDirty || isBirthYearInvalid || isDisplayNameTooShort || isLoading;
 
   return (
-    <Container>
-      <Text variant="h2">{t('public.title')}</Text>
+    <Container isMobile={isMobile}>
+      <Header isMobile={isMobile} variant="h2">
+        {t('public.title')}
+      </Header>
       <Buttons>
         <TextButton
           isDisabled={isDiscardingDisabled}
@@ -91,57 +99,13 @@ const PublicInfo = () => {
       </Buttons>
       <Form>
         <Text>{t('public.mentor.mandatoryNotice')}</Text>
-        <Columns>
-          <Column>
-            <LabeledInput
-              error={
-                isDisplayNameTooShort
-                  ? t('public.mentor.displayName.tooShortError')
-                  : null
-              }
-              label={t('public.mentor.displayName.label')}
-              onChange={value => updateMentorData('display_name', value)}
-              value={localData.display_name}
-            />
-            <LabeledInput
-              error={
-                isBirthYearInvalid
-                  ? t('public.mentor.birthYear.invalidError')
-                  : null
-              }
-              label={t('public.mentor.birthYear.label')}
-              onChange={value => updateMentorData('birth_year', Number(value))}
-              value={String(localData.birth_year)}
-              type="number"
-            />
-            <LabeledInput
-              label={t('public.mentor.region')}
-              onChange={value => updateMentorData('region', value)}
-              value={localData.region}
-            />
-          </Column>
-          <Column>
-            <LabeledInput
-              label={t('public.mentor.statusMessage')}
-              onChange={value => updateMentorData('status_message', value)}
-              value={localData.status_message}
-            />
-            <Text variant="label">{t('public.mentor.vacation.title')}</Text>
-            <Slider
-              id="is-vacationing-slider"
-              label={t(
-                `public.mentor.vacation.switch.${
-                  localData.is_vacationing ? 'on' : 'off'
-                }`,
-              )}
-              onChange={() =>
-                updateMentorData('is_vacationing', !localData.is_vacationing)
-              }
-              value={localData.is_vacationing}
-            />
-            <Text variant="blueBox">{t('public.mentor.vacation.info')}</Text>
-          </Column>
-        </Columns>
+        <Columns
+          isBirthYearInvalid={isBirthYearInvalid}
+          isDisplayNameTooShort={isDisplayNameTooShort}
+          isMobile={isMobile}
+          mentor={localData}
+          updateMentor={updateMentorData}
+        />
         <Text variant="label">{t('public.mentor.story')}</Text>
         <StoryInput
           variant="textarea"
@@ -158,16 +122,30 @@ const PublicInfo = () => {
   );
 };
 
-const Container = styled.div`
-  align-items: center;
-  background-color: ${palette.white};
-  border-radius: 10px;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
-  display: flex;
-  flex: 2;
-  flex-direction: column;
-  padding: 3rem 0;
+const Container = styled.div<{ isMobile: boolean }>`
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          box-sizing: border-box;
+          display: flex;
+          flex: 2;
+          flex-direction: column;
+        `
+      : css`
+          background-color: ${palette.white};
+          border-radius: 10px;
+          box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+          box-sizing: border-box;
+          display: flex;
+          flex: 2;
+          flex-direction: column;
+          padding: 2rem 0 4rem;
+        `}
+`;
+
+const Header = styled(Text)<{ isMobile: boolean }>`
+  align-self: ${({ isMobile }) => (isMobile ? 'flex-start' : 'center')};
+  padding: 0 3rem;
 `;
 
 const Buttons = styled(ButtonRow)`
@@ -180,18 +158,6 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 3rem;
-`;
-
-const Columns = styled.div`
-  display: flex;
-  gap: 3rem;
-  margin-top: 1rem;
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
 `;
 
 const StoryInput = styled(TextInput)`
