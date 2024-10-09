@@ -7,15 +7,17 @@ import { useAppSelector } from '@/store';
 import { useUpdateMentorMutation } from '@/features/MentorPage/mentorPageApi';
 import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
 
-import { ButtonRow } from '.';
-import LabeledInput from '@/components/LabeledInput';
+import { ButtonRow } from '..';
+import Columns from './Columns';
 import { palette } from '@/components/constants';
-import SkillsEditor from './SkillsEditor';
-import Slider from '@/components/Slider';
+import SkillsEditor from '../SkillsEditor';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
 import TextInput from '@/components/TextInput';
-import { validateBirthYear, validateDisplayNameLength } from '../validators';
+import {
+  validateBirthYear,
+  validateDisplayNameLength,
+} from '@/features/ProfilePage/validators';
 
 import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
 
@@ -97,109 +99,13 @@ const PublicInfo = ({ isMobile = false }: Props) => {
       </Buttons>
       <Form>
         <Text>{t('public.mentor.mandatoryNotice')}</Text>
-        {isMobile ? (
-          <>
-            <LabeledInput
-              error={
-                isDisplayNameTooShort
-                  ? t('public.mentor.displayName.tooShortError')
-                  : null
-              }
-              label={t('public.mentor.displayName.label')}
-              onChange={value => updateMentorData('display_name', value)}
-              value={localData.display_name}
-            />
-            <LabeledInput
-              error={
-                isBirthYearInvalid
-                  ? t('public.mentor.birthYear.invalidError')
-                  : null
-              }
-              label={t('public.mentor.birthYear.label')}
-              onChange={value => updateMentorData('birth_year', Number(value))}
-              value={String(localData.birth_year)}
-              type="number"
-            />
-            <LabeledInput
-              label={t('public.mentor.region')}
-              onChange={value => updateMentorData('region', value)}
-              value={localData.region}
-            />
-            <LabeledInput
-              label={t('public.mentor.statusMessage')}
-              onChange={value => updateMentorData('status_message', value)}
-              value={localData.status_message}
-            />
-            <Slider
-              id="is-vacationing-slider"
-              label={t('public.mentor.vacation.title')}
-              onChange={() =>
-                updateMentorData('is_vacationing', !localData.is_vacationing)
-              }
-              text={t(
-                `public.mentor.vacation.switch.${
-                  localData.is_vacationing ? 'on' : 'off'
-                }`,
-              )}
-              value={localData.is_vacationing}
-            />
-            <Text variant="blueBox">{t('public.mentor.vacation.info')}</Text>
-          </>
-        ) : (
-          <Columns>
-            <Column>
-              <LabeledInput
-                error={
-                  isDisplayNameTooShort
-                    ? t('public.mentor.displayName.tooShortError')
-                    : null
-                }
-                label={t('public.mentor.displayName.label')}
-                onChange={value => updateMentorData('display_name', value)}
-                value={localData.display_name}
-              />
-              <LabeledInput
-                error={
-                  isBirthYearInvalid
-                    ? t('public.mentor.birthYear.invalidError')
-                    : null
-                }
-                label={t('public.mentor.birthYear.label')}
-                onChange={value =>
-                  updateMentorData('birth_year', Number(value))
-                }
-                value={String(localData.birth_year)}
-                type="number"
-              />
-              <LabeledInput
-                label={t('public.mentor.region')}
-                onChange={value => updateMentorData('region', value)}
-                value={localData.region}
-              />
-            </Column>
-            <Column>
-              <LabeledInput
-                label={t('public.mentor.statusMessage')}
-                onChange={value => updateMentorData('status_message', value)}
-                value={localData.status_message}
-              />
-              <Slider
-                id="is-vacationing-slider"
-                label={t('public.mentor.vacation.title')}
-                onChange={() =>
-                  updateMentorData('is_vacationing', !localData.is_vacationing)
-                }
-                text={t(
-                  `public.mentor.vacation.switch.${
-                    localData.is_vacationing ? 'on' : 'off'
-                  }`,
-                )}
-                value={localData.is_vacationing}
-              />
-              <Text variant="blueBox">{t('public.mentor.vacation.info')}</Text>
-            </Column>
-          </Columns>
-        )}
+        <Columns
+          isBirthYearInvalid={isBirthYearInvalid}
+          isDisplayNameTooShort={isDisplayNameTooShort}
+          isMobile={isMobile}
+          mentor={localData}
+          updateMentor={updateMentorData}
+        />
         <Text variant="label">{t('public.mentor.story')}</Text>
         <StoryInput
           variant="textarea"
@@ -252,17 +158,6 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 3rem;
-`;
-
-const Columns = styled.div`
-  display: flex;
-  gap: 3rem;
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
 `;
 
 const StoryInput = styled(TextInput)`
