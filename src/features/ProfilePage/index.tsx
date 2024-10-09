@@ -28,7 +28,7 @@ const ProfilePage = () => {
             <Text variant="h1">{t('title')}</Text>
           </MobileHeader>
           <AccountInfo isMobile />
-          <PublicInfo />
+          <PublicInfo isMobile />
         </MobileContainer>
       ) : (
         <AccountInfo isMobile />
@@ -54,17 +54,16 @@ const ProfilePage = () => {
 };
 
 const MobileContainer = styled.div`
+  background-color: ${palette.white};
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  padding: 3rem 0;
   width: 100%;
 `;
 
 const MobileHeader = styled.div`
-  align-items: center;
-  background-color: ${palette.white};
-  box-sizing: border-box;
   display: flex;
-  height: 4rem;
   justify-content: center;
 `;
 

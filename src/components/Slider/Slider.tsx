@@ -6,25 +6,35 @@ type Props = {
   id: string;
   label: string;
   onChange: () => void;
+  text: string;
   value: boolean;
 };
 
-export const Slider = ({ id, label, onChange, value }: Props) => (
+export const Slider = ({ id, label, onChange, text, value }: Props) => (
   <Container>
-    <Switch>
-      <Input id={id} type="checkbox" checked={value} onChange={onChange} />
-      <Thumb checked={value} />
-    </Switch>
-    <Text inputId={id} variant="label">
-      {label}
-    </Text>
+    <Text variant="label">{label}</Text>
+    <SwitchContainer>
+      <Switch>
+        <Input id={id} type="checkbox" checked={value} onChange={onChange} />
+        <Thumb checked={value} />
+      </Switch>
+      <Text inputId={id} variant="label">
+        {text}
+      </Text>
+    </SwitchContainer>
   </Container>
 );
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
+  flex-direction: column;
+`;
+
+const SwitchContainer = styled.div`
+  display: flex;
   gap: 1rem;
-  margin: 1rem 0;
+  margin-top: 0.5rem;
 `;
 
 const Switch = styled.label`

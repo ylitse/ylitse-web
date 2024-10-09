@@ -94,35 +94,26 @@ const AccountInfo = ({ isMobile = false }: Props) => {
 };
 
 const Container = styled.div<{ isMentor: boolean; isMobile: boolean }>`
-  ${({ isMentor, isMobile }) =>
-    isMobile
-      ? css`
-          background-color: ${palette.white};
-          box-sizing: border-box;
-          display: flex;
-          flex: 1;
-          flex-direction: column;
-          height: fit-content;
-          padding: 3rem;
-        `
-      : css`
-          background-color: ${palette.white};
-          border-radius: 10px;
-          box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
-          box-sizing: border-box;
-          display: flex;
-          flex: 1;
-          flex-direction: column;
-          height: fit-content;
-          padding: 3rem;
+  background-color: ${palette.white};
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: fit-content;
+  padding: 1.5rem 3rem;
 
-          ${!isMentor &&
-          `
-          align-content: center;
-          margin: ${OUTER_VERTICAL_MARGIN} auto;
-          width: 670px;
-          `}
-        `}
+  ${({ isMentor, isMobile }) =>
+    !isMobile &&
+    css`
+      border-radius: 10px;
+      box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+      ${!isMentor &&
+      `
+      align-content: center;
+      margin: ${OUTER_VERTICAL_MARGIN} auto;
+      width: 670px;
+      `}
+    `}
 `;
 
 const MenteeHeader = styled.div`
