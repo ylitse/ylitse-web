@@ -13,18 +13,17 @@
     "cancel": "Cancel",
     "report": {
       "confirm": "Send",
-      "description1": "Report a user if you suspect or notice a mentor misusing the service. Such situations include for example situation X and a brief description of it, and situation Y and similarly a short description of it.",
-      "description2": "After the report, an SOS Children's Village worker goes through the conversation to investigate the misuse of the service. It might be good to specify here also, whether this conversation then disappears from the user's view or what happens.",
-      "description3": "At the end here, an explanation of why we ask for contact information and what is done with it, so that the user feels more confident about wanting to give us their contact details.",
-      "description4": "Fields marked with a star * are required.",
+      "description1": "Report a user if you detect criminal or wrongful activity violating SOS-Lapsikylä rules or values.",
+      "description2": "An SOS-Lapsikylä representative will contact you after the investigation. Your contact information will be used accordingly and won’t be admitted to outside parties.",
+      "description3": "Fields marked with a star * are required.",
       "input": {
         "reason": "Reason for reporting *",
         "contactInfo": "Contact information"
       },
       "success": {
         "confirm": "Ok",
-        "description": "An SOS Children's Village worker goes through the conversation and this is further explanation of what happens next.",
-        "title": "User reported"
+        "description": "An SOS-Lapsikylä representative will contact you after the investigation.",
+        "title": "Report sent successfully"
       },
       "title": "Report user"
     },
