@@ -62,7 +62,6 @@ const ReportDialog = ({ buddyId, close }: Props) => {
             <Paragraph>{t('dialog.report.description1')}</Paragraph>
             <Paragraph>{t('dialog.report.description2')}</Paragraph>
             <Paragraph>{t('dialog.report.description3')}</Paragraph>
-            <Paragraph>{t('dialog.report.description4')}</Paragraph>
             <LabeledInput
               label={t('dialog.report.input.reason')}
               onChange={setReportReason}
@@ -106,7 +105,7 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 905px;
+  height: fit-content;
   left: 50%;
   position: absolute;
   top: 50%;
@@ -127,7 +126,7 @@ const Title = styled(Text)`
 `;
 
 const Content = styled.div`
-  padding: 1.5rem 5rem;
+  padding: 2rem 5rem;
 `;
 
 const Paragraph = styled(Text)`
