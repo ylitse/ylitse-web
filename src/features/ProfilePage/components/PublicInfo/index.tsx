@@ -9,15 +9,19 @@ import { useUpdateUserMutation } from '@/features/Authentication/authenticationA
 
 import { ButtonRow } from '..';
 import Columns from './Columns';
+import {
+  isDisplayNameTooLong,
+  isDisplayNameTooShort,
+  isRegionTooLong,
+  isStatusMessageTooLong,
+  isStoryTooLong,
+  validateBirthYear,
+} from '@/features/ProfilePage/validators';
+import LabeledInput from '@/components/LabeledInput';
 import { palette } from '@/components/constants';
 import SkillsEditor from '../SkillsEditor';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
-import TextInput from '@/components/TextInput';
-import {
-  validateBirthYear,
-  validateDisplayNameLength,
-} from '@/features/ProfilePage/validators';
 
 import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
 
@@ -66,15 +70,44 @@ const PublicInfo = ({ isMobile = false }: Props) => {
   };
 
   const isLoading = isLoadingMentor || isLoadingUser;
-
-  const isDisplayNameTooShort = !validateDisplayNameLength(
-    localData.display_name,
-  );
-  const isBirthYearInvalid = !validateBirthYear(localData.birth_year);
-
   const isDiscardingDisabled = !isDirty || isLoading;
+
+  const getBirthYearError = (): string | null =>
+    validateBirthYear(localData.birth_year)
+      ? null
+      : t('public.mentor.birthYear.invalidError');
+
+  const getDisplayNameError = (): string | null => {
+    if (isDisplayNameTooLong(localData.display_name))
+      return t('public.mentor.displayName.tooLongError');
+    if (isDisplayNameTooShort(localData.display_name))
+      return t('public.mentor.displayName.tooShortError');
+    return null;
+  };
+
+  const getRegionError = (): string | null =>
+    isRegionTooLong(localData.region)
+      ? t('public.mentor.region.tooLongError')
+      : null;
+
+  const getStatusMessageError = (): string | null =>
+    isStatusMessageTooLong(localData.status_message)
+      ? t('public.mentor.statusMessage.tooLongError')
+      : null;
+
+  const getStoryError = (): string | null =>
+    isStoryTooLong(localData.story)
+      ? t('public.mentor.story.tooLongError')
+      : null;
+
   const isSavingDisabled =
-    !isDirty || isBirthYearInvalid || isDisplayNameTooShort || isLoading;
+    !!getBirthYearError() ||
+    !!getDisplayNameError() ||
+    !!getRegionError() ||
+    !!getStatusMessageError() ||
+    !!getStoryError() ||
+    !isDirty ||
+    isLoading;
 
   return (
     <Container isMobile={isMobile}>
@@ -100,18 +133,21 @@ const PublicInfo = ({ isMobile = false }: Props) => {
       <Form>
         <Text>{t('public.mentor.mandatoryNotice')}</Text>
         <Columns
-          isBirthYearInvalid={isBirthYearInvalid}
-          isDisplayNameTooShort={isDisplayNameTooShort}
+          birthYearError={getBirthYearError()}
+          displayNameError={getDisplayNameError()}
           isMobile={isMobile}
           mentor={localData}
+          regionError={getRegionError()}
+          statusMessageError={getStatusMessageError()}
           updateMentor={updateMentorData}
         />
-        <Text variant="label">{t('public.mentor.story')}</Text>
-        <StoryInput
-          variant="textarea"
+        <LabeledInput
+          error={getStoryError()}
+          label={t('public.mentor.story.label')}
           onChange={value => updateMentorData('story', value)}
           rows={4}
           value={localData.story}
+          variant="textarea"
         />
         <SkillsEditor
           updateSkills={skills => updateMentorData('skills', skills)}
@@ -158,10 +194,6 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 3rem;
-`;
-
-const StoryInput = styled(TextInput)`
-  margin-top: 0.5rem;
 `;
 
 export default PublicInfo;

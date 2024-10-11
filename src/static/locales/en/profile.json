@@ -52,6 +52,7 @@
     "displayName": {
       "label": "Display name",
       "info": "If you want to remain anonymous to mentors, enter a display name that does not identify you.",
+      "tooLongError": "Display name is too long",
       "tooltip": "Your username has to be at least 2 characters long.",
       "tooShortError": "Display name is too short"
     },
@@ -64,13 +65,20 @@
       "discardChanges": "Discard changes",
       "displayName": {
         "label": "Display name *",
+        "tooLongError": "Display name is too long",
         "tooShortError": "Display name is too short"
       },
       "mandatoryNotice": "Fields marked with a star * are required.",
-      "region": "Region",
+      "region": {
+        "label": "Region",
+        "tooLongError": "Input is too long"
+      },
       "save": "Save",
-      "statusMessage": "Status message",
-      "story": "My story",
+      "statusMessage": {
+        "label": "Status message",
+        "tooLongError": "Message is too long"
+      },
+      "story": { "label": "My story", "tooLongError": "Story is too long" },
       "skills": "My skills",
       "vacation": {
         "info": "During vacation mode, you cannot receive messages. Please specify the duration of your vacation in your status message.",

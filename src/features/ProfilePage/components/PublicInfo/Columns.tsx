@@ -9,10 +9,12 @@ import Text from '@/components/Text';
 import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
 
 type Props = {
-  isBirthYearInvalid: boolean;
-  isDisplayNameTooShort: boolean;
+  birthYearError: string | null;
+  displayNameError: string | null;
   isMobile: boolean;
   mentor: ApiMentor;
+  regionError: string | null;
+  statusMessageError: string | null;
   updateMentor: <K extends keyof ApiMentor>(
     key: K,
     value: ApiMentor[K],
@@ -20,10 +22,12 @@ type Props = {
 };
 
 const Columns = ({
-  isBirthYearInvalid,
-  isDisplayNameTooShort,
+  birthYearError,
+  displayNameError,
   isMobile,
   mentor,
+  regionError,
+  statusMessageError,
   updateMentor,
 }: Props) => {
   const { t } = useTranslation('profile');
@@ -32,35 +36,29 @@ const Columns = ({
     <Container isMobile={isMobile}>
       <Column>
         <LabeledInput
-          error={
-            isDisplayNameTooShort
-              ? t('public.mentor.displayName.tooShortError')
-              : null
-          }
+          error={displayNameError}
           label={t('public.mentor.displayName.label')}
           onChange={value => updateMentor('display_name', value)}
           value={mentor.display_name}
         />
         <LabeledInput
-          error={
-            isBirthYearInvalid
-              ? t('public.mentor.birthYear.invalidError')
-              : null
-          }
+          error={birthYearError}
           label={t('public.mentor.birthYear.label')}
           onChange={value => updateMentor('birth_year', Number(value))}
           value={String(mentor.birth_year)}
           type="number"
         />
         <LabeledInput
-          label={t('public.mentor.region')}
+          error={regionError}
+          label={t('public.mentor.region.label')}
           onChange={value => updateMentor('region', value)}
           value={mentor.region}
         />
       </Column>
       <Column>
         <LabeledInput
-          label={t('public.mentor.statusMessage')}
+          error={statusMessageError}
+          label={t('public.mentor.statusMessage.label')}
           onChange={value => updateMentor('status_message', value)}
           value={mentor.status_message}
         />

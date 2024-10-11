@@ -38,7 +38,7 @@ const SkillsEditor = ({ updateSkills, skills }: Props) => {
   const skillOptions = allSkills.filter(skill => !skills.includes(skill));
 
   return (
-    <Container>
+    <Column>
       <Text variant="label">{t('public.mentor.skills')}</Text>
       <Skills>
         {skills.map(skill => (
@@ -53,13 +53,9 @@ const SkillsEditor = ({ updateSkills, skills }: Props) => {
         selectOption={addSkill}
         setIsDropdownVisible={setIsDropdownVisible}
       />
-    </Container>
+    </Column>
   );
 };
-
-const Container = styled(Column)`
-  margin: 1rem 0;
-`;
 
 const Skills = styled.div`
   display: flex;

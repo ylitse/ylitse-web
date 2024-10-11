@@ -1,71 +1,100 @@
 import {
+  isDisplayNameTooLong,
+  isDisplayNameTooShort,
+  isPasswordTooShort,
+  isRegionTooLong,
+  isStatusMessageTooLong,
+  isStoryTooLong,
   validateBirthYear,
-  validateIsDisplayNameInvalid,
-  validateIsDisplayNameTooLong,
-  validateIsDisplayNameTooShort,
   validateEmail,
-  validatePasswordLength,
-  validateIsRegionTooLong,
-  validateIsStatusMessageTooLong,
-  validateIsStoryTooLong,
 } from './validators';
 
-describe('Validation Functions', () => {
-  // Test birth year validation
+describe('Validators', () => {
+  describe('isDisplayNameTooLong', () => {
+    it('should return true if the display name is too long', () => {
+      expect(isDisplayNameTooLong('A'.repeat(31))).toBe(true);
+    });
+
+    it('should return false if the display name is within the limit', () => {
+      expect(isDisplayNameTooLong('A'.repeat(30))).toBe(false);
+    });
+  });
+
+  describe('isDisplayNameTooShort', () => {
+    it('should return true if the display name is too short', () => {
+      expect(isDisplayNameTooShort('A')).toBe(true);
+    });
+
+    it('should return false if the display name is within the limit', () => {
+      expect(isDisplayNameTooShort('AA')).toBe(false);
+    });
+  });
+
+  describe('isPasswordTooShort', () => {
+    it('should return false if the field has not been touched', () => {
+      expect(isPasswordTooShort('short', false)).toBe(false);
+    });
+
+    it('should return true if the password is too short and touched', () => {
+      expect(isPasswordTooShort('short', true)).toBe(true);
+    });
+
+    it('should return false if the password length is sufficient and touched', () => {
+      expect(isPasswordTooShort('longenough', true)).toBe(false);
+    });
+  });
+  describe('isRegionTooLong', () => {
+    it('should return true if the region is too long', () => {
+      expect(isRegionTooLong('A'.repeat(101))).toBe(true);
+    });
+
+    it('should return false if the region is within the limit', () => {
+      expect(isRegionTooLong('A'.repeat(100))).toBe(false);
+    });
+  });
+
+  describe('isStatusMessageTooLong', () => {
+    it('should return true if the status message is too long', () => {
+      expect(isStatusMessageTooLong('A'.repeat(2001))).toBe(true);
+    });
+
+    it('should return false if the status message is within the limit', () => {
+      expect(isStatusMessageTooLong('A'.repeat(2000))).toBe(false);
+    });
+  });
+
+  describe('isStoryTooLong', () => {
+    it('should return true if the story is too long', () => {
+      expect(isStoryTooLong('A'.repeat(2001))).toBe(true);
+    });
+
+    it('should return false if the story is within the limit', () => {
+      expect(isStoryTooLong('A'.repeat(2000))).toBe(false);
+    });
+  });
+
   describe('validateBirthYear', () => {
-    it('should return false for a birth year less than MIN_BIRTH_YEAR', () => {
+    const currentYear = new Date().getFullYear();
+
+    it('should return false if birth year is too old', () => {
       expect(validateBirthYear(1899)).toBe(false);
     });
 
-    it('should return false for a birth year greater than MAX_BIRTH_YEAR', () => {
-      const futureBirthYear = new Date().getFullYear() - 16; // Younger than 17
-      expect(validateBirthYear(futureBirthYear)).toBe(false);
+    it('should return false if birth year is too recent', () => {
+      expect(validateBirthYear(currentYear - 16)).toBe(false);
     });
 
-    it('should return true for a valid birth year within range', () => {
-      expect(validateBirthYear(1990)).toBe(true);
-    });
-  });
-
-  // Test display name validation
-  describe('validateIsDisplayNameInvalid', () => {
-    test('returns true for valid display name', () => {
-      expect(validateIsDisplayNameInvalid('Valid_Name123')).toBe(true);
-    });
-
-    test('returns false for invalid display name', () => {
-      expect(validateIsDisplayNameInvalid('Invalid@Name')).toBe(false);
+    it('should return true for a valid birth year', () => {
+      expect(validateBirthYear(currentYear - 18)).toBe(true);
     });
   });
 
-  describe('validateIsDisplayNameTooLong', () => {
-    test('returns true when display name is within the max length', () => {
-      expect(validateIsDisplayNameTooLong('ShortName')).toBe(true);
-    });
-
-    test('returns false when display name exceeds max length', () => {
-      expect(validateIsDisplayNameTooLong('A'.repeat(31))).toBe(false);
-    });
-  });
-
-  describe('validateIsDisplayNameTooShort', () => {
-    test('returns true when display name is above the minimum length', () => {
-      expect(validateIsDisplayNameTooShort('AB')).toBe(true);
-    });
-
-    test('returns false when display name is too short', () => {
-      expect(validateIsDisplayNameTooShort('A')).toBe(false);
-    });
-  });
-
-  // Test email validation
   describe('validateEmail', () => {
-    it('should return true for an empty email (optional field)', () => {
+    it('should return true for an empty email', () => {
       expect(validateEmail('')).toBe(true);
     });
 
     [
-      '',
       'email@example.com',
       'firstname.lastname@example.com',
       'email@subdomain.example.com',
@@ -102,56 +131,6 @@ describe('Validation Functions', () => {
       it(`should return false for invalid email ${invalidEmail}`, () => {
         expect(validateEmail(invalidEmail)).toEqual(false);
       });
-    });
-  });
-
-  // Test password length validation
-  describe('validatePasswordLength', () => {
-    it('should return true if password is not touched', () => {
-      expect(validatePasswordLength('123', false)).toBe(true);
-    });
-
-    it('should return false if password length is less than PASSWORD_MIN_LENGTH and isTouched is true', () => {
-      expect(validatePasswordLength('short', true)).toBe(false);
-    });
-
-    it('should return true if password length is greater than or equal to PASSWORD_MIN_LENGTH and isTouched is true', () => {
-      expect(validatePasswordLength('longenough', true)).toBe(true);
-    });
-  });
-
-  // Test region length validation
-  describe('validateIsRegionTooLong', () => {
-    test('returns true when region length is within limit', () => {
-      expect(validateIsRegionTooLong('Some region name')).toBe(true);
-    });
-
-    test('returns false when region length exceeds limit', () => {
-      expect(validateIsRegionTooLong('A'.repeat(101))).toBe(false);
-    });
-  });
-
-  // Test status message length validation
-  describe('validateIsStatusMessageTooLong', () => {
-    test('returns true when status message is within limit', () => {
-      expect(validateIsStatusMessageTooLong('This is a status message.')).toBe(
-        true,
-      );
-    });
-
-    test('returns false when status message exceeds limit', () => {
-      expect(validateIsStatusMessageTooLong('A'.repeat(2001))).toBe(false);
-    });
-  });
-
-  // Test story length validation
-  describe('validateIsStoryTooLong', () => {
-    test('returns true when story is within limit', () => {
-      expect(validateIsStoryTooLong('This is a short story.')).toBe(true);
-    });
-
-    test('returns false when story exceeds limit', () => {
-      expect(validateIsStoryTooLong('A'.repeat(2001))).toBe(false);
     });
   });
 });

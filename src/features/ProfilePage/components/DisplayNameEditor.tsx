@@ -9,9 +9,9 @@ import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
 import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
+import { isDisplayNameTooLong, isDisplayNameTooShort } from '../validators';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';
-import { validateDisplayNameLength } from '../validators';
 
 const DisplayNameEditor = () => {
   const { t } = useTranslation('profile');
@@ -23,8 +23,16 @@ const DisplayNameEditor = () => {
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
   const hasNotChanged = user.display_name === displayName;
-  const isTooShort = !validateDisplayNameLength(displayName);
-  const isSavingDisabled = hasNotChanged || isLoading || isTooShort;
+  const isTooLong = isDisplayNameTooLong(displayName);
+  const isTooShort = isDisplayNameTooShort(displayName);
+  const isSavingDisabled =
+    hasNotChanged || isLoading || isTooLong || isTooShort;
+
+  const getDisplayNameError = (): string | null => {
+    if (isTooLong) return t('public.displayName.tooLongError');
+    if (isTooShort) return t('public.displayName.tooShortError');
+    return null;
+  };
 
   const saveDisplayName = async () => {
     try {
@@ -38,7 +46,7 @@ const DisplayNameEditor = () => {
   return isOpen ? (
     <Section>
       <LabeledInput
-        error={isTooShort ? t('public.displayName.tooShortError') : null}
+        error={getDisplayNameError()}
         label={t('public.displayName.label')}
         onChange={setDisplayName}
         tooltip={t('public.displayName.tooltip')}

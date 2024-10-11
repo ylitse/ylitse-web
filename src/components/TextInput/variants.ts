@@ -44,6 +44,7 @@ export const variants = {
       lineHeight: '1.5rem',
       padding: '0.75rem 1.25rem',
       resize: 'none',
+      width: '-webkit-fill-available',
     },
   },
 } as const;
