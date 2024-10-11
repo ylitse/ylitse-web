@@ -1,11 +1,17 @@
 import {
   validateBirthYear,
-  validateDisplayNameLength,
+  validateIsDisplayNameInvalid,
+  validateIsDisplayNameTooLong,
+  validateIsDisplayNameTooShort,
   validateEmail,
   validatePasswordLength,
+  validateIsRegionTooLong,
+  validateIsStatusMessageTooLong,
+  validateIsStoryTooLong,
 } from './validators';
 
 describe('Validation Functions', () => {
+  // Test birth year validation
   describe('validateBirthYear', () => {
     it('should return false for a birth year less than MIN_BIRTH_YEAR', () => {
       expect(validateBirthYear(1899)).toBe(false);
@@ -21,16 +27,38 @@ describe('Validation Functions', () => {
     });
   });
 
-  describe('validateDisplayNameLength', () => {
-    it('should return false if display name length is less than DISPLAY_NAME_MIN_LENGTH', () => {
-      expect(validateDisplayNameLength('A')).toBe(false);
+  // Test display name validation
+  describe('validateIsDisplayNameInvalid', () => {
+    test('returns true for valid display name', () => {
+      expect(validateIsDisplayNameInvalid('Valid_Name123')).toBe(true);
     });
 
-    it('should return true if display name length is greater than or equal to DISPLAY_NAME_MIN_LENGTH', () => {
-      expect(validateDisplayNameLength('AB')).toBe(true);
+    test('returns false for invalid display name', () => {
+      expect(validateIsDisplayNameInvalid('Invalid@Name')).toBe(false);
     });
   });
 
+  describe('validateIsDisplayNameTooLong', () => {
+    test('returns true when display name is within the max length', () => {
+      expect(validateIsDisplayNameTooLong('ShortName')).toBe(true);
+    });
+
+    test('returns false when display name exceeds max length', () => {
+      expect(validateIsDisplayNameTooLong('A'.repeat(31))).toBe(false);
+    });
+  });
+
+  describe('validateIsDisplayNameTooShort', () => {
+    test('returns true when display name is above the minimum length', () => {
+      expect(validateIsDisplayNameTooShort('AB')).toBe(true);
+    });
+
+    test('returns false when display name is too short', () => {
+      expect(validateIsDisplayNameTooShort('A')).toBe(false);
+    });
+  });
+
+  // Test email validation
   describe('validateEmail', () => {
     it('should return true for an empty email (optional field)', () => {
       expect(validateEmail('')).toBe(true);
@@ -77,6 +105,7 @@ describe('Validation Functions', () => {
     });
   });
 
+  // Test password length validation
   describe('validatePasswordLength', () => {
     it('should return true if password is not touched', () => {
       expect(validatePasswordLength('123', false)).toBe(true);
@@ -88,6 +117,41 @@ describe('Validation Functions', () => {
 
     it('should return true if password length is greater than or equal to PASSWORD_MIN_LENGTH and isTouched is true', () => {
       expect(validatePasswordLength('longenough', true)).toBe(true);
+    });
+  });
+
+  // Test region length validation
+  describe('validateIsRegionTooLong', () => {
+    test('returns true when region length is within limit', () => {
+      expect(validateIsRegionTooLong('Some region name')).toBe(true);
+    });
+
+    test('returns false when region length exceeds limit', () => {
+      expect(validateIsRegionTooLong('A'.repeat(101))).toBe(false);
+    });
+  });
+
+  // Test status message length validation
+  describe('validateIsStatusMessageTooLong', () => {
+    test('returns true when status message is within limit', () => {
+      expect(validateIsStatusMessageTooLong('This is a status message.')).toBe(
+        true,
+      );
+    });
+
+    test('returns false when status message exceeds limit', () => {
+      expect(validateIsStatusMessageTooLong('A'.repeat(2001))).toBe(false);
+    });
+  });
+
+  // Test story length validation
+  describe('validateIsStoryTooLong', () => {
+    test('returns true when story is within limit', () => {
+      expect(validateIsStoryTooLong('This is a short story.')).toBe(true);
+    });
+
+    test('returns false when story exceeds limit', () => {
+      expect(validateIsStoryTooLong('A'.repeat(2001))).toBe(false);
     });
   });
 });
