@@ -121,7 +121,7 @@ describe('mentee profile', () => {
     // try invalid inputs
     INVALID_EMAILS.forEach(invalidEmail => {
       cy.fillInputByLabel('Sähköpostiosoite', invalidEmail);
-      cy.wait(500);
+      cy.wait(200);
       cy.contains('Sähköpostiosoite on virheellinen').should('be.visible');
       cy.getByText('Tallenna', 'button').should('be.disabled');
     });
