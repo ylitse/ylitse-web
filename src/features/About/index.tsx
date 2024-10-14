@@ -1,10 +1,16 @@
-import { breakpoints, palette } from '@/components/constants';
-import { useEscape } from '@/hooks/useEscape';
-import styled, { css } from 'styled-components';
-import { Text } from '@/components/Text/Text';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IconButton, TextButton } from '@/components/Buttons';
+
+import { useEscape } from '@/hooks/useEscape';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
+
+import { breakpoints, palette } from '@/components/constants';
+import { Text } from '@/components/Text/Text';
+import { IconButton, TextButton } from '@/components/Buttons';
+import styled, { css } from 'styled-components';
+
+import LicenseModal from './LicenseList';
+import version from '../../../package.json';
 
 type Props = {
   onDismiss: () => void;
@@ -13,10 +19,9 @@ type Props = {
 export const About = ({ onDismiss }: Props) => {
   const { isMobile } = useGetLayoutMode();
   const { t } = useTranslation('common');
-
-  const handleClick = () => {
-    console.log('TODO');
-  };
+  const [isLicenseModalVisible, setIsLicenseModalVisible] = useState(false);
+  const toggleLicenseModal = () =>
+    setIsLicenseModalVisible(!isLicenseModalVisible);
 
   useEscape(() => onDismiss());
 
@@ -31,10 +36,11 @@ export const About = ({ onDismiss }: Props) => {
           />
         </CloseContainer>
         <Text variant="h1">{t('about.title')} </Text>
-        <Text variant="p">UI version</Text>
+        <Text variant="p">UI version {version.version}</Text>
         <Text variant="p">API version</Text>
-        <LicensesButton onClick={handleClick}>
-          {t('about.licenses')}
+        {isLicenseModalVisible && <LicenseModal />}
+        <LicensesButton onClick={toggleLicenseModal}>
+          {!isLicenseModalVisible ? t('about.open') : t('about.close')}
         </LicensesButton>
       </AboutCard>
     </Container>
