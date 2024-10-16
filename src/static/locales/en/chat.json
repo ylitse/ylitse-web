@@ -59,15 +59,16 @@
     }
   },
   "notification": {
-    "messageSendSuccess": "Message sent successfully",
-    "messageSendFailed": "Message sending failed",
-    "archivingSuccess": "Conversation archived successfully",
     "archivingError": "Archiving conversation failed",
-    "restoringSuccess": "Conversation restored successfully",
-    "restoringError": "Restoring conversation failed",
-    "banningSuccess": "Conversation banned successfully",
+    "archivingSuccess": "Conversation archived successfully",
     "banningError": "Banning conversation failed",
-    "fetchingContactsError": "Fetching contacts failed"
+    "banningSuccess": "Conversation banned successfully",
+    "fetchingContactsError": "Fetching contacts failed",
+    "messageSendFailed": "Message sending failed",
+    "messageSendSuccess": "Message sent successfully",
+    "pollingFailed": "Something went wrong",
+    "restoringError": "Restoring conversation failed",
+    "restoringSuccess": "Conversation restored successfully"
   },
   "welcome": {
     "lower": {
