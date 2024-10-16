@@ -110,9 +110,13 @@ export const authenticationApi = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success(t('profile:notification.success.password'));
+          toast.success(t('profile:notification.success.password'), {
+            id: 'password-success',
+          });
         } catch (err) {
-          toast.error(t('profile:notification.failure.password'));
+          toast.error(t('profile:notification.failure.password'), {
+            id: 'password-failure',
+          });
         }
       },
     }),
@@ -127,7 +131,9 @@ export const authenticationApi = createApi({
           await queryFulfilled;
           dispatch(authenticationApi.endpoints.logout.initiate());
         } catch (err) {
-          toast.error(t('profile:notification.failure.delete'));
+          toast.error(t('profile:notification.failure.delete'), {
+            id: 'delete-failure',
+          });
         }
       },
     }),
@@ -155,9 +161,13 @@ export const authenticationApi = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success(t('profile:notification.success.update'));
+          toast.success(t('profile:notification.success.update'), {
+            id: 'update-success',
+          });
         } catch (err) {
-          toast.error(t('profile:notification.failure.update'));
+          toast.error(t('profile:notification.failure.update'), {
+            id: 'update-failure',
+          });
         }
       },
     }),
@@ -171,9 +181,13 @@ export const authenticationApi = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success(t('profile:notification.success.update'));
+          toast.success(t('profile:notification.success.update'), {
+            id: 'update-success',
+          });
         } catch (err) {
-          toast.error(t('profile:notification.failure.update'));
+          toast.error(t('profile:notification.failure.update'), {
+            id: 'update-failure',
+          });
         }
       },
     }),

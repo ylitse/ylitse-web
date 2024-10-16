@@ -136,7 +136,9 @@ export const chatApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error('chat.notification.fetchingContactsError');
+          toast.error(t('chat:notification.fetchingContactsError'), {
+            id: 'contact-fetch-failure',
+          });
         }
       },
     }),
@@ -166,7 +168,9 @@ export const chatApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error(t('chat:notification.messageSendFailed'));
+          toast.error(t('chat:notification.messageSendFailed'), {
+            id: 'message-send-failure',
+          });
         }
       },
     }),
@@ -186,9 +190,13 @@ export const chatApi = createApi({
       async onQueryStarted({ status }, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success(t(statusUpdateSuccessMessages[status]));
+          toast.success(t(statusUpdateSuccessMessages[status]), {
+            id: `${status}-status-success`,
+          });
         } catch (err) {
-          toast.error(t(statusUpdateErrorMessages[status]));
+          toast.error(t(statusUpdateErrorMessages[status]), {
+            id: `${status}-status-failure`,
+          });
         }
       },
     }),

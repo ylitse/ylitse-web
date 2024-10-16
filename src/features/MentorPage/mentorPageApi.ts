@@ -84,13 +84,18 @@ export const mentorsApi = createApi({
           mentorListResponseType,
           { resources: [] },
           toMentorRecord,
-          () => toast.error(t('mentors:notification.parsingMentorsError')),
+          () =>
+            toast.error(t('mentors:notification.parsingMentorsError'), {
+              id: 'mentor-parse-failure',
+            }),
         ),
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error(t('mentors:notification.fetchingMentorsError'));
+          toast.error(t('mentors:notification.fetchingMentorsError'), {
+            id: 'mentor-fetch-failure',
+          });
         }
       },
     }),
@@ -105,9 +110,13 @@ export const mentorsApi = createApi({
         try {
           await queryFulfilled;
           dispatch(authenticationApi.util.invalidateTags(['myuser']));
-          toast.success(t('profile:notification.success.update'));
+          toast.success(t('profile:notification.success.update'), {
+            id: 'update-success',
+          });
         } catch (err) {
-          toast.error(t('profile:notification.failure.update'));
+          toast.error(t('profile:notification.failure.update'), {
+            id: 'update-failure',
+          });
         }
       },
     }),
