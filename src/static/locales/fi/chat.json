@@ -59,15 +59,16 @@
     }
   },
   "notification": {
-    "messageSendSuccess": "Viestin lähettäminen onnistui",
-    "messageSendFailed": "Viestin lähettäminen epäonnistui",
-    "archivingSuccess": "Keskustelu arkistoitu onnistuneesti",
     "archivingError": "Keskustelu arkistointi epäonnistui",
-    "restoringSuccess": "Keskustelu palautettu onnistuneesti",
-    "restoringError": "Keskustelun palauttaminen epäonnistui",
-    "banningSuccess": "Keskustelu estetty onnistuneesti",
+    "archivingSuccess": "Keskustelu arkistoitu onnistuneesti",
     "banningError": "Keskustelun estäminen epäonnistui",
-    "fetchingContactsError": "Kontaktien haku epäonnistui"
+    "banningSuccess": "Keskustelu estetty onnistuneesti",
+    "fetchingContactsError": "Kontaktien haku epäonnistui",
+    "messageSendError": "Viestin lähettäminen epäonnistui",
+    "messageSendSuccess": "Viestin lähettäminen onnistui",
+    "pollingError": "Jokin meni vikaan",
+    "restoringError": "Keskustelun palauttaminen epäonnistui",
+    "restoringSuccess": "Keskustelu palautettu onnistuneesti"
   },
   "welcome": {
     "lower": {

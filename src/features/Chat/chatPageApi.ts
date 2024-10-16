@@ -157,6 +157,15 @@ export const chatApi = createApi({
             buddies: toAppBuddies(contacts),
           }),
         ),
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error(t('chat:notification.pollingError'), {
+            id: 'poll-failure',
+          });
+        }
+      },
     }),
     sendMessage: builder.mutation<unknown, NewMessage>({
       query: ({ userId, message }) => ({
@@ -168,7 +177,7 @@ export const chatApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error(t('chat:notification.messageSendFailed'), {
+          toast.error(t('chat:notification.messageSendError'), {
             id: 'message-send-failure',
           });
         }
