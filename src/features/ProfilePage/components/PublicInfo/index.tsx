@@ -80,8 +80,10 @@ const PublicInfo = ({ isMobile = false }: Props) => {
   const getDisplayNameError = (): string | null => {
     if (isDisplayNameTooLong(localData.display_name))
       return t('public.mentor.displayName.tooLongError');
+
     if (isDisplayNameTooShort(localData.display_name))
       return t('public.mentor.displayName.tooShortError');
+
     return null;
   };
 
@@ -101,11 +103,11 @@ const PublicInfo = ({ isMobile = false }: Props) => {
       : null;
 
   const isSavingDisabled =
-    !!getBirthYearError() ||
-    !!getDisplayNameError() ||
-    !!getRegionError() ||
-    !!getStatusMessageError() ||
-    !!getStoryError() ||
+    Boolean(getBirthYearError()) ||
+    Boolean(getDisplayNameError()) ||
+    Boolean(getRegionError()) ||
+    Boolean(getStatusMessageError()) ||
+    Boolean(getStoryError()) ||
     !isDirty ||
     isLoading;
 
