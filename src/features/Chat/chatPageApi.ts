@@ -161,7 +161,7 @@ export const chatApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error(t('chat:notification.pollingFailed'), {
+          toast.error(t('chat:notification.pollingError'), {
             id: 'poll-failure',
           });
         }
@@ -177,7 +177,7 @@ export const chatApi = createApi({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error(t('chat:notification.messageSendFailed'), {
+          toast.error(t('chat:notification.messageSendError'), {
             id: 'message-send-failure',
           });
         }

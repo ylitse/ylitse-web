@@ -64,9 +64,9 @@
     "banningError": "Banning conversation failed",
     "banningSuccess": "Conversation banned successfully",
     "fetchingContactsError": "Fetching contacts failed",
-    "messageSendFailed": "Message sending failed",
+    "messageSendError": "Message sending failed",
     "messageSendSuccess": "Message sent successfully",
-    "pollingFailed": "Something went wrong",
+    "pollingError": "Something went wrong",
     "restoringError": "Restoring conversation failed",
     "restoringSuccess": "Conversation restored successfully"
   },

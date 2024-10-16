@@ -64,9 +64,9 @@
     "banningError": "Keskustelun estäminen epäonnistui",
     "banningSuccess": "Keskustelu estetty onnistuneesti",
     "fetchingContactsError": "Kontaktien haku epäonnistui",
-    "messageSendFailed": "Viestin lähettäminen epäonnistui",
+    "messageSendError": "Viestin lähettäminen epäonnistui",
     "messageSendSuccess": "Viestin lähettäminen onnistui",
-    "pollingFailed": "Jokin meni vikaan",
+    "pollingError": "Jokin meni vikaan",
     "restoringError": "Keskustelun palauttaminen epäonnistui",
     "restoringSuccess": "Keskustelu palautettu onnistuneesti"
   },
