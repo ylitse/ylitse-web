@@ -9,9 +9,9 @@ import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
 import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
+import { isPasswordTooShort } from '../validators';
 import PasswordInput from '@/components/PasswordInput';
 import Text from '@/components/Text';
-import { validatePasswordLength } from '../validators';
 
 const PasswordEditor = () => {
   const { t } = useTranslation('profile');
@@ -31,11 +31,6 @@ const PasswordEditor = () => {
   const touchNewPassword = () => setIsNewPasswordTouched(true);
   const touchRepeatedPassword = () => setIsRepeatedPasswordTouched(true);
 
-  const isPasswordTooShort = !validatePasswordLength(
-    newPassword,
-    isNewPasswordTouched,
-  );
-
   const arePasswordsNotMatching =
     isNewPasswordTouched &&
     isRepeatedPasswordTouched &&
@@ -44,8 +39,13 @@ const PasswordEditor = () => {
   const isSavingDisabled =
     isLoading ||
     !currentPassword.length ||
-    isPasswordTooShort ||
+    isPasswordTooShort(newPassword, isNewPasswordTouched) ||
     arePasswordsNotMatching;
+
+  const getPasswordError = () =>
+    isPasswordTooShort(newPassword, isNewPasswordTouched)
+      ? t('account.password.error.tooShort')
+      : null;
 
   const savePassword = async () => {
     try {
@@ -68,7 +68,7 @@ const PasswordEditor = () => {
         value={currentPassword}
       />
       <PasswordInput
-        error={isPasswordTooShort ? t('account.password.error.tooShort') : null}
+        error={getPasswordError()}
         label={t('account.password.new')}
         onBlur={touchNewPassword}
         onChange={setNewPassword}

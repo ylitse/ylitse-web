@@ -52,6 +52,7 @@
     "displayName": {
       "label": "Julkinen nimimerkki",
       "info": "Jos haluat pysyä anonyymina mentoreille, syötä nimimerkki, josta sinua ei voi tunnistaa.",
+      "tooLongError": "Nimimerkki on liian pitkä",
       "tooltip": "Nimimerkin tulee olla vähintään 2 merkkiä pitkä.",
       "tooShortError": "Nimimerkki on liian lyhyt"
     },
@@ -64,13 +65,20 @@
       "discardChanges": "Hylkää muutokset",
       "displayName": {
         "label": "Julkinen nimimerkki *",
+        "tooLongError": "Nimimerkki on liian pitkä",
         "tooShortError": "Nimimerkki on liian lyhyt"
       },
       "mandatoryNotice": "Tähdellä * merkityt tiedot tulee täyttää.",
-      "region": "Alue",
+      "region": {
+        "label": "Alue",
+        "tooLongError": "Syöte on liian pitkä"
+      },
       "save": "Tallenna",
-      "statusMessage": "Tilaviesti",
-      "story": "Tarinani",
+      "statusMessage": {
+        "label": "Tilaviesti",
+        "tooLongError": "Viesti on liian pitkä"
+      },
+      "story": { "label": "Tarinani", "tooLongError": "Tarina on liian pitkä" },
       "skills": "Aiheeni",
       "vacation": {
         "info": "Poissaolotilan aikana sinulle ei voi lähettää viestejä. Ilmoitathan poissaolosi pituuden tilaviestissä.",

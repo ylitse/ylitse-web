@@ -146,10 +146,17 @@ describe('mentor profile', () => {
   it('birth year error message is shown for invalid inputs', () => {
     INVALID_BIRTH_YEARS.forEach(invalidYear => {
       cy.fillNumberInputByLabel('Syntymävuosi *', invalidYear);
-      cy.wait(500);
+      cy.wait(200);
       cy.contains('Syntymävuosi on virheellinen').should('be.visible');
       cy.getByText('Tallenna', 'button').should('be.disabled');
     });
+  });
+
+  it('region error message is shown for too long input', () => {
+    cy.fillNumberInputByLabel('Alue', 'A'.repeat(101));
+    cy.wait(200);
+    cy.contains('Syöte on liian pitkä').should('be.visible');
+    cy.getByText('Tallenna', 'button').should('be.disabled');
   });
 
   it('skills held by another mentor can be found and added to profile', () => {
