@@ -1,4 +1,3 @@
-import { DEFAULT_ICON_SIZE, palette } from '../constants';
 import {
   Toast,
   ToastType,
@@ -6,10 +5,12 @@ import {
   toast as toastEffect,
 } from 'react-hot-toast';
 import styled from 'styled-components';
+
+import { DEFAULT_ICON_SIZE, palette } from '../constants';
 import { IconButton } from '../Buttons';
+import { Success } from '@/components/Icons/Success';
 import Text from '../Text';
 import { Warning } from '@/components/Icons/Warning';
-import { Success } from '@/components/Icons/Success';
 
 type Props = {
   toast: Toast;
