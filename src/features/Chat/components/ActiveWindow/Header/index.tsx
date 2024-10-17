@@ -18,7 +18,11 @@ import {
   HIGH_ROW_HEIGHT,
   ROW_HEIGHT,
 } from '@/features/Chat/constants';
-import { CONTENT_WIDTH, palette } from '@/components/constants';
+import {
+  CONTENT_WIDTH,
+  DEFAULT_ICON_SIZE,
+  palette,
+} from '@/components/constants';
 
 // Components
 import ArchivedIcon from '@/static/icons/archived-chats.svg';
@@ -65,13 +69,18 @@ const Header = ({ chat }: Props) => {
   const closeDialog = () => setIsDialogOpen(false);
 
   return (
-    <Container isTablet={isTablet}>
-      {isConfirmDialogOpen && (
-        <ConfirmationDialog
-          variant={dialogVariant}
-          chat={chat}
-          close={closeDialog}
+    <Container tablet={isTablet}>
+      {isTablet && (
+        <IconButton
+          variant="back"
+          sizeInPx={DEFAULT_ICON_SIZE.MEDIUM}
+          onClick={returnToTabletMenu}
         />
+      )}
+      <IconContainer>{icons[chat.status]}</IconContainer>
+      <DisplayName variant="h2">{chat.displayName}</DisplayName>
+      {isMentor && (
+        <MentorBio isTablet={isTablet}>{mentor?.statusMessage}</MentorBio>
       )}
 
       {isReportDialogOpen && (
