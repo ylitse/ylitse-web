@@ -38,7 +38,7 @@ const InfoDropdown = () => {
               url: t('navigation.info.link.termsAndPrivacy.url'),
             }}
           />
-          <Container onClick={() => toggleAbout()}>
+          <Container onClick={toggleAbout}>
             <Text variant="link" color="purple">
               {t('navigation.info.applicationInfo')}
             </Text>
