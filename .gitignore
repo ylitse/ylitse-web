@@ -9,6 +9,8 @@ node_modules
 dist
 *.local
 
+licenses.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
