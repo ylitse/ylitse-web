@@ -122,7 +122,8 @@ To target test run to a specific step you can use `it.only()`.
 
 ## How to create lisences list
 
-Run `npm run licensesjson:create` to generate new licenses list.
+If the licenses.json file is not found, a warning will be displayed. 
+To create a new licenses list run `npm run licensesjson:create`.
 
 ## Development
 

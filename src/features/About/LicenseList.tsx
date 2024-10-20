@@ -1,10 +1,11 @@
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
+import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/constants';
 import { Text } from '@/components/Text/Text';
 import styled, { css } from 'styled-components';
 
-import licenses from '../../../licenses.json';
+import { useEffect, useState } from 'react';
 
 type LicenseData = {
   name: string;
@@ -12,27 +13,57 @@ type LicenseData = {
   repository?: string;
 };
 
+type LicensesJson = {
+  [key: string]: {
+    licenses: string;
+    repository?: string;
+  };
+};
+
 export const LicenseModal = () => {
   const { isMobile } = useGetLayoutMode();
-  const licenseMap = Object.entries(licenses).map<LicenseData>(
-    ([libraryName, libraryData]) => ({
-      name: libraryName,
-      ...libraryData,
-    }),
-  );
+  const { t } = useTranslation('common');
+  const [licenseMap, setLicenseMap] = useState<LicenseData[]>([]);
+
+  useEffect(() => {
+    const loadLicenses = () => {
+      try {
+        //eslint-disable-next-line @typescript-eslint/no-var-requires
+        const licenses: LicensesJson = require('../../../licenses.json');
+        const licenseData = Object.entries(licenses).map<LicenseData>(
+          ([libraryName, libraryData]) => ({
+            name: libraryName,
+            licenses: libraryData.licenses,
+            repository: libraryData.repository,
+          }),
+        );
+        setLicenseMap(licenseData);
+      } catch (error) {
+        setLicenseMap([]);
+      }
+    };
+
+    loadLicenses();
+  }, []);
 
   return (
     <Container isMobile={isMobile}>
-      {licenseMap.map(license => (
-        <LicenseRow key={license.name}>
-          <LicenseInfo variant="p">
-            {license.name} {license.licenses}
-          </LicenseInfo>
-          <LicenseInfo variant="p">
-            <a href={license.repository}>{license.repository}</a>
-          </LicenseInfo>
-        </LicenseRow>
-      ))}
+      {licenseMap.length > 0 ? (
+        licenseMap.map(license => (
+          <LicenseRow key={license.name}>
+            <LicenseInfo variant="p">
+              {license.name} {license.licenses}
+            </LicenseInfo>
+            {license.repository && (
+              <LicenseInfo variant="p">
+                <a href={license.repository}>{license.repository}</a>
+              </LicenseInfo>
+            )}
+          </LicenseRow>
+        ))
+      ) : (
+        <LicenseInfo variant="p">{t('about.noFile')}</LicenseInfo>
+      )}
     </Container>
   );
 };

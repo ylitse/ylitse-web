@@ -5,7 +5,8 @@
     "open": "Avaa lisenssit",
     "close": "Sulje lisenssit",
     "ui": "UI Version",
-    "api": "API Version 2.0"
+    "api": "API Version 2.0",
+    "noFile": "Lisenssitiedostoa ei löytynyt"
   },
   "footer": "Palvelun tarjoaa",
   "navigation": {
