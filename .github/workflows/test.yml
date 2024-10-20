@@ -28,7 +28,7 @@ jobs:
       - name: Lint
         run: npm run lint
       - name: Create licenses list
-        run: npm run licenses:create
+        run: npm run licensesjson:create
       - name: Run unit tests
         run: npm run test:unit
       - name: Clone the back end
