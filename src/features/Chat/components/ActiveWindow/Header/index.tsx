@@ -58,8 +58,11 @@ type Props = {
 
 const Header = ({ chat }: Props) => {
   const { t } = useTranslation('chat');
-  const { isTablet } = useGetLayoutMode();
   const dispatch = useAppDispatch();
+  const { isTablet } = useGetLayoutMode();
+  const [updateChatStatus] = useUpdateStatusMutation();
+  const userId = useAppSelector(selectUserId);
+
   // Clearing the active chat will return to the menu in tablet mode
   const returnToTabletMenu = () => dispatch(clearActiveChat());
 
@@ -78,22 +81,40 @@ const Header = ({ chat }: Props) => {
     setDialogVariant(variant);
     setIsDialogOpen(true);
   };
-  const closeDialog = () => setIsDialogOpen(false);
-
-  const [updateChatStatus] = useUpdateStatusMutation();
-  const userId = useAppSelector(selectUserId);
 
   const confirm = () => {
-    closeDialog();
-    if (!userId) return;
-    if (dialogVariant !== 'report') {
-      const status: ChatFolder = confirmDialogMap[dialogVariant].targetFolder;
-      updateChatStatus({ userId, buddyId: chat.buddyId, status });
-    }
+    setIsDialogOpen(false);
+    if (!userId || dialogVariant == 'report') return;
+    updateChatStatus({
+      userId,
+      buddyId: chat.buddyId,
+      status: confirmDialogMap[dialogVariant].targetFolder,
+    });
   };
 
   return (
     <Container tablet={isTablet}>
+      {isConfirmDialogOpen && (
+        <Dialog // REFAKTOROI
+          borderColor={confirmDialogMap[dialogVariant].borderColor}
+          closeText={t('dialog.cancel')}
+          confirmId={`confirm-${dialogVariant}`}
+          confirmText={t(`dialog.${dialogVariant}.confirm`)}
+          onClose={() => setIsDialogOpen(false)}
+          onConfirm={confirm}
+          description={t(`dialog.${dialogVariant}.description`, {
+            buddyName: chat.displayName,
+          })}
+          title={t(`dialog.${dialogVariant}.title`)}
+        />
+      )}
+      {isReportModalOpen && (
+        <ReportModal
+          buddyId={chat.buddyId}
+          close={() => setIsDialogOpen(false)}
+        />
+      )}
+
       {isTablet && (
         <IconButton
           variant="back"
@@ -108,23 +129,6 @@ const Header = ({ chat }: Props) => {
       )}
 
       <ButtonsWrapper>
-        {isConfirmDialogOpen && (
-          <Dialog
-            borderColor={confirmDialogMap[dialogVariant].borderColor}
-            closeText={t('dialog.cancel')}
-            confirmId={`confirm-${dialogVariant}`}
-            confirmText={t(`dialog.${dialogVariant}.confirm`)}
-            onClose={close}
-            onConfirm={confirm}
-            description={t(`dialog.${dialogVariant}.description`, {
-              buddyName: chat.displayName,
-            })}
-            title={t(`dialog.${dialogVariant}.title`)}
-          />
-        )}
-        {isReportModalOpen && (
-          <ReportModal buddyId={chat.buddyId} close={closeDialog} />
-        )}
         {isTablet ? (
           <TabletButtons chat={chat} openDialog={openDialog} />
         ) : (

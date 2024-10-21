@@ -45,7 +45,7 @@ const AccountInfo = ({ isMobile = false }: Props) => {
   return (
     <Container isMentor={isMentor} isMobile={isMobile}>
       {isDeleteConfirmationOpen && (
-        <Dialog
+        <Dialog // REFAKTOROI
           borderColor={palette.redSalmon}
           closeText={t('account.delete.cancel')}
           confirmId="confirm-delete"

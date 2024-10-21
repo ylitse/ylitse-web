@@ -53,7 +53,7 @@ const ReportModal = ({ buddyId, close }: Props) => {
     isContactInfoTooLong(contactInfo);
 
   return isReported ? (
-    <Dialog
+    <Dialog // REFAKTOROI
       borderColor={palette.blue}
       closeText={t(`dialog.report.success.confirm`)}
       confirmId="confirm-report-success"
