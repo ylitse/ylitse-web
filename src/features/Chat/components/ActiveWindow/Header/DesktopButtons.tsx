@@ -9,21 +9,25 @@ import { ICON_SIZES } from '@/components/constants';
 
 import type { ChatBuddy } from '@/features/Chat/mappers';
 
-type DialogVariant = 'archive' | 'block' | 'restore' | 'report';
+type DialogVariant = 'archive' | 'block' | 'restore';
 
 type Props = {
   chat: ChatBuddy;
-  openDialog: (variant: DialogVariant) => void;
+  confirmStatusChange: (variant: DialogVariant) => void;
+  openReportModal: () => void;
 };
 
-const DesktopButtons = ({ chat, openDialog }: Props) => {
+const DesktopButtons = ({
+  chat,
+  confirmStatusChange,
+  openReportModal,
+}: Props) => {
   const { t } = useTranslation('chat');
   const isMentee = useAppSelector(selectIsMentee);
 
-  const openArchiveDialog = () => openDialog('archive');
-  const openBlockDialog = () => openDialog('block');
-  const openRestoreDialog = () => openDialog('restore');
-  const openReportModal = () => openDialog('report');
+  const openArchiveDialog = () => confirmStatusChange('archive');
+  const openBlockDialog = () => confirmStatusChange('block');
+  const openRestoreDialog = () => confirmStatusChange('restore');
 
   return (
     <Container>

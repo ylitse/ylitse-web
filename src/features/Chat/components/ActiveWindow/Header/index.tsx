@@ -9,6 +9,7 @@ import {
 } from '@/features/Authentication/userSlice';
 import { selectMentorById } from '@/features/MentorPage/selectors';
 import { useAppDispatch, useAppSelector } from '@/store';
+import { useConfirm } from '@/hooks/useConfirm';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useGetMentorsQuery } from '@/features/MentorPage/mentorPageApi';
 import { useUpdateStatusMutation } from '@/features/Chat/chatPageApi';
@@ -24,7 +25,6 @@ import { CONTENT_WIDTH, ICON_SIZES, palette } from '@/components/constants';
 import ArchivedIcon from '@/static/icons/archived-chats.svg';
 import BlockedIcon from '@/static/icons/blocked-chats.svg';
 import DesktopButtons from './DesktopButtons';
-import Dialog from '@/components/Dialog';
 import { IconButton } from '@/components/Buttons';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import ReportModal from '../ReportModal';
@@ -34,11 +34,10 @@ import Text from '@/components/Text';
 import type { ChatBuddy } from '@/features/Chat/mappers';
 import type { ChatFolder } from '@/features/Chat/chatPageApi';
 
-type ConfirmDialogVariant = 'archive' | 'block' | 'restore';
-type DialogVariant = ConfirmDialogVariant | 'report';
+type DialogVariant = 'archive' | 'block' | 'restore';
 
 const confirmDialogMap: Record<
-  ConfirmDialogVariant,
+  DialogVariant,
   { borderColor: string; targetFolder: ChatFolder }
 > = {
   archive: { borderColor: palette.orange, targetFolder: 'archived' },
@@ -60,6 +59,7 @@ const Header = ({ chat }: Props) => {
   const { t } = useTranslation('chat');
   const dispatch = useAppDispatch();
   const { isTablet } = useGetLayoutMode();
+  const { getConfirmation } = useConfirm();
   const [updateChatStatus] = useUpdateStatusMutation();
   const userId = useAppSelector(selectUserId);
 
@@ -71,47 +71,34 @@ const Header = ({ chat }: Props) => {
   const isMentor = useAppSelector(selectIsMentor);
   const mentor = useAppSelector(selectMentorById(chat.buddyId));
 
-  const [dialogVariant, setDialogVariant] = useState<DialogVariant>('archive');
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
-  const isConfirmDialogOpen = isDialogOpen && dialogVariant !== 'report';
-  const isReportModalOpen = isDialogOpen && dialogVariant === 'report';
-
-  const openDialog = (variant: DialogVariant) => {
-    setDialogVariant(variant);
-    setIsDialogOpen(true);
-  };
-
-  const confirm = () => {
-    setIsDialogOpen(false);
-    if (!userId || dialogVariant == 'report') return;
-    updateChatStatus({
-      userId,
-      buddyId: chat.buddyId,
-      status: confirmDialogMap[dialogVariant].targetFolder,
+  const openDialog = async (variant: DialogVariant) => {
+    const isConfirmed = await getConfirmation({
+      borderColor: confirmDialogMap[variant].borderColor,
+      closeText: t('dialog.cancel'),
+      confirmId: `confirm-${variant}`,
+      confirmText: t(`dialog.${variant}.confirm`),
+      description: t(`dialog.${variant}.description`, {
+        buddyName: chat.displayName,
+      }),
+      title: t(`dialog.${variant}.title`),
     });
+    if (isConfirmed) {
+      updateChatStatus({
+        userId,
+        buddyId: chat.buddyId,
+        status: confirmDialogMap[variant].targetFolder,
+      });
+    }
   };
 
   return (
     <Container tablet={isTablet}>
-      {isConfirmDialogOpen && (
-        <Dialog // REFAKTOROI
-          borderColor={confirmDialogMap[dialogVariant].borderColor}
-          closeText={t('dialog.cancel')}
-          confirmId={`confirm-${dialogVariant}`}
-          confirmText={t(`dialog.${dialogVariant}.confirm`)}
-          onClose={() => setIsDialogOpen(false)}
-          onConfirm={confirm}
-          description={t(`dialog.${dialogVariant}.description`, {
-            buddyName: chat.displayName,
-          })}
-          title={t(`dialog.${dialogVariant}.title`)}
-        />
-      )}
       {isReportModalOpen && (
         <ReportModal
           buddyId={chat.buddyId}
-          close={() => setIsDialogOpen(false)}
+          close={() => setIsReportModalOpen(false)}
         />
       )}
 
@@ -130,9 +117,17 @@ const Header = ({ chat }: Props) => {
 
       <ButtonsWrapper>
         {isTablet ? (
-          <TabletButtons chat={chat} openDialog={openDialog} />
+          <TabletButtons
+            chat={chat}
+            confirmStatusChange={openDialog}
+            openReportModal={() => setIsReportModalOpen(true)}
+          />
         ) : (
-          <DesktopButtons chat={chat} openDialog={openDialog} />
+          <DesktopButtons
+            chat={chat}
+            confirmStatusChange={openDialog}
+            openReportModal={() => setIsReportModalOpen(true)}
+          />
         )}
       </ButtonsWrapper>
     </Container>

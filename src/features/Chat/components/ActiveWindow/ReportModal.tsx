@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import { selectUserId } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useConfirm } from '@/hooks/useConfirm';
 import { useReportMentorMutation } from '@/features/Chat/chatPageApi';
 
-import Dialog from '@/components/Dialog';
 import { DIALOG_WIDTH, ICON_SIZES } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import {
@@ -24,7 +24,7 @@ type Props = {
 
 const ReportModal = ({ buddyId, close }: Props) => {
   const { t } = useTranslation('chat');
-
+  const { getConfirmation } = useConfirm();
   const userId = useAppSelector(selectUserId);
   const [reportMentor] = useReportMentorMutation();
 
@@ -37,13 +37,18 @@ const ReportModal = ({ buddyId, close }: Props) => {
         reportReason,
         userId,
       }).unwrap();
-      setIsReported(true);
+      await getConfirmation({
+        borderColor: palette.blue,
+        closeText: t(`dialog.report.success.confirm`),
+        confirmId: `confirm-report-success`,
+        description: t(`dialog.report.success.description`),
+        title: t(`dialog.report.success.title`),
+      });
     } catch (err) {
       console.error(err);
     }
   };
 
-  const [isReported, setIsReported] = useState(false);
   const [reportReason, setReportReason] = useState('');
   const [contactInfo, setContactInfo] = useState('');
 
@@ -52,17 +57,7 @@ const ReportModal = ({ buddyId, close }: Props) => {
     isReportReasonTooLong(reportReason) ||
     isContactInfoTooLong(contactInfo);
 
-  return isReported ? (
-    <Dialog // REFAKTOROI
-      borderColor={palette.blue}
-      closeText={t(`dialog.report.success.confirm`)}
-      confirmId="confirm-report-success"
-      description={t(`dialog.report.success.description`)}
-      iconVariant="success"
-      onClose={close}
-      title={t(`dialog.report.success.title`)}
-    />
-  ) : (
+  return (
     <>
       <Overlay />
       <Container>

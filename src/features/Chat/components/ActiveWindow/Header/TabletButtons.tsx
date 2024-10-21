@@ -13,14 +13,19 @@ import { ICON_SIZES, palette } from '@/components/constants';
 // Components
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
 
-type DialogVariant = 'archive' | 'block' | 'restore' | 'report';
+type DialogVariant = 'archive' | 'block' | 'restore';
 
 type Props = {
   chat: ChatBuddy;
-  openDialog: (variant: DialogVariant) => void;
+  confirmStatusChange: (variant: DialogVariant) => void;
+  openReportModal: () => void;
 };
 
-const TabletButtons = ({ chat, openDialog }: Props) => {
+const TabletButtons = ({
+  chat,
+  confirmStatusChange,
+  openReportModal,
+}: Props) => {
   const { t } = useTranslation('chat');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
@@ -28,13 +33,16 @@ const TabletButtons = ({ chat, openDialog }: Props) => {
 
   const openDialogVariant = (variant: DialogVariant) => {
     closeDropdown();
-    openDialog(variant);
+    confirmStatusChange(variant);
   };
 
   const openArchiveDialog = () => openDialogVariant('archive');
   const openBlockDialog = () => openDialogVariant('block');
   const openRestoreDialog = () => openDialogVariant('restore');
-  const openReportModal = () => openDialogVariant('report');
+  const openReportDialog = () => {
+    closeDropdown();
+    openReportModal();
+  };
 
   return (
     <Container>
@@ -66,7 +74,7 @@ const TabletButtons = ({ chat, openDialog }: Props) => {
             />
           )}
           <ReportButton
-            onClick={openReportModal}
+            onClick={openReportDialog}
             leftIcon={'danger'}
             sizeInPx={ICON_SIZES.SMALL}
             text={{

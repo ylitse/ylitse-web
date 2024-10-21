@@ -7,7 +7,7 @@ import IconSuccess from '@/static/icons/success.svg';
 import IconWarning from '@/static/icons/warning.svg';
 import Text from '@/components/Text';
 
-type IconVariant = 'success' | 'warning';
+export type IconVariant = 'success' | 'warning';
 
 const iconMap: Record<IconVariant, string> = {
   success: IconSuccess,
