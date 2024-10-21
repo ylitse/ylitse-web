@@ -18,7 +18,7 @@ import {
   HIGH_ROW_HEIGHT,
   ROW_HEIGHT,
 } from '@/features/Chat/constants';
-import { CONTENT_WIDTH, palette } from '@/components/constants';
+import { CONTENT_WIDTH, ICON_SIZES, palette } from '@/components/constants';
 
 // Components
 import ArchivedIcon from '@/static/icons/archived-chats.svg';
@@ -65,67 +65,59 @@ const Header = ({ chat }: Props) => {
   const closeDialog = () => setIsDialogOpen(false);
 
   return (
-    <Container isTablet={isTablet}>
-      {isConfirmDialogOpen && (
-        <ConfirmationDialog
-          variant={dialogVariant}
-          chat={chat}
-          close={closeDialog}
+    <Container tablet={isTablet}>
+      {isTablet && (
+        <IconButton
+          variant="back"
+          sizeInPx={ICON_SIZES.LARGE}
+          onClick={returnToTabletMenu}
         />
       )}
-
-      {isReportDialogOpen && (
-        <ReportDialog buddyId={chat.buddyId} close={closeDialog} />
+      <IconContainer>{icons[chat.status]}</IconContainer>
+      <DisplayName variant="h2">{chat.displayName}</DisplayName>
+      {isMentor && (
+        <MentorBio isTablet={isTablet}>{mentor?.statusMessage}</MentorBio>
       )}
 
-      {isTablet ? (
-        <>
-          <IconButton
-            variant="back"
-            sizeInPx={40}
-            onClick={returnToTabletMenu}
+      <ButtonsWrapper>
+        {isConfirmDialogOpen && (
+          <ConfirmationDialog
+            variant={dialogVariant}
+            chat={chat}
+            close={closeDialog}
           />
-          {icons[chat.status]}
-          <div>
-            <DisplayName variant="h2">{chat.displayName}</DisplayName>
-            {isMentor && (
-              <MentorBio isTablet>{mentor?.statusMessage}</MentorBio>
-            )}
-          </div>
-          <ButtonsWrapper>
-            <TabletButtons chat={chat} openDialog={openDialog} />
-          </ButtonsWrapper>
-        </>
-      ) : (
-        <>
-          {icons[chat.status]}
-          <DisplayName variant="h2">{chat.displayName}</DisplayName>
-          {isMentor && (
-            <MentorBio isTablet={false}>{mentor?.statusMessage}</MentorBio>
-          )}
-          <ButtonsWrapper>
-            <DesktopButtons chat={chat} openDialog={openDialog} />
-          </ButtonsWrapper>
-        </>
-      )}
+        )}
+        {isReportDialogOpen && (
+          <ReportDialog buddyId={chat.buddyId} close={closeDialog} />
+        )}
+        {isTablet ? (
+          <TabletButtons chat={chat} openDialog={openDialog} />
+        ) : (
+          <DesktopButtons chat={chat} openDialog={openDialog} />
+        )}
+      </ButtonsWrapper>
     </Container>
   );
 };
 
-const Container = styled.div<{ isTablet: boolean }>`
+const Container = styled.div<{ tablet: boolean }>`
   align-items: center;
   border-bottom: 1px solid ${palette.greyLight};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
   box-sizing: border-box;
   display: flex;
   gap: 30px;
-  height: ${({ isTablet }) => (isTablet ? HIGH_ROW_HEIGHT : ROW_HEIGHT)};
+  height: ${({ tablet }) => (tablet ? HIGH_ROW_HEIGHT : ROW_HEIGHT)};
   justify-content: flex-start;
   padding: 14px 40px;
-  width: ${({ isTablet }) =>
-    isTablet
+  width: ${({ tablet }) =>
+    tablet
       ? '100vw'
       : `calc(${CONTENT_WIDTH}-${CHAT_MENU_WIDTH}-${CHAT_GAP_WIDTH}})`};
+`;
+
+const IconContainer = styled.div`
+  flex-shrink: 0;
 `;
 
 const DisplayName = styled(Text)`

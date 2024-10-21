@@ -7,8 +7,8 @@ import { useUpdateAccountMutation } from '@/features/Authentication/authenticati
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
-import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
+import { ICON_SIZES } from '@/components/constants';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';
 import { validateEmail } from '../validators';
@@ -71,7 +71,7 @@ const EmailEditor = () => {
         <IconButton
           id="open-email-editor"
           onClick={toggleIsOpen}
-          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+          sizeInPx={ICON_SIZES.HUGE}
           variant="edit"
         />
       </SpacedRow>

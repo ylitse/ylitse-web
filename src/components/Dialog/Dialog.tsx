@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 import { DIALOG_WIDTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
+import { ICON_SIZES, palette } from '@/components/constants';
 import IconWarning from '@/static/icons/warning.svg';
-import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
 import Text from '@/components/Text';
 
 type Props = {
@@ -26,31 +26,29 @@ export const Dialog = ({
   onConfirm,
   description,
   title,
-}: Props) => {
-  return (
-    <>
-      <Overlay />
-      <Container borderColor={borderColor}>
-        <WarningIcon src={IconWarning} />
-        <CloseButton
-          variant="closeWithBackground"
-          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
-          onClick={onClose}
-        />
-        <Text variant="h3">{title}</Text>
-        <Text>{description}</Text>
-        <ButtonContainer>
-          <TextButton onClick={onClose} variant="light">
-            {closeText}
-          </TextButton>
-          <TextButton id={confirmId} onClick={onConfirm} variant="dark">
-            {confirmText}
-          </TextButton>
-        </ButtonContainer>
-      </Container>
-    </>
-  );
-};
+}: Props) => (
+  <>
+    <Overlay />
+    <Container borderColor={borderColor}>
+      <WarningIcon src={IconWarning} />
+      <CloseButton
+        variant="closeWithBackground"
+        sizeInPx={ICON_SIZES.MEDIUM}
+        onClick={onClose}
+      />
+      <Text variant="h3">{title}</Text>
+      <Text>{description}</Text>
+      <ButtonContainer>
+        <TextButton onClick={onClose} variant="light">
+          {closeText}
+        </TextButton>
+        <TextButton id={confirmId} onClick={onConfirm} variant="dark">
+          {confirmText}
+        </TextButton>
+      </ButtonContainer>
+    </Container>
+  </>
+);
 
 const Overlay = styled.div`
   background: var(--greyscale-overlay, rgba(57, 57, 57, 0.75));

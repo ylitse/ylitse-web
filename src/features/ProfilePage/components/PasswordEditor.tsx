@@ -7,8 +7,8 @@ import { useChangePasswordMutation } from '@/features/Authentication/authenticat
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
-import { DEFAULT_ICON_SIZE } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
+import { ICON_SIZES } from '@/components/constants';
 import { isPasswordTooShort } from '../validators';
 import PasswordInput from '@/components/PasswordInput';
 import Text from '@/components/Text';
@@ -108,7 +108,7 @@ const PasswordEditor = () => {
         <IconButton
           id="open-password-editor"
           onClick={toggleIsOpen}
-          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+          sizeInPx={ICON_SIZES.HUGE}
           variant="edit"
         />
       </SpacedRow>
