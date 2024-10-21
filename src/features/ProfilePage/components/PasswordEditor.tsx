@@ -7,8 +7,8 @@ import { useChangePasswordMutation } from '@/features/Authentication/authenticat
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
-import { ICON_SIZES } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
+import { ICON_SIZES } from '@/components/constants';
 import { isPasswordTooShort } from '../validators';
 import PasswordInput from '@/components/PasswordInput';
 import Text from '@/components/Text';

@@ -11,8 +11,8 @@ import {
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
-import { ICON_SIZES, palette } from '@/components/constants';
 import { IconButton } from '@/components/Buttons';
+import { ICON_SIZES, palette } from '@/components/constants';
 import TextInput from '@/components/TextInput';
 
 type Props = {

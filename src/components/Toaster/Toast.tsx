@@ -6,8 +6,8 @@ import {
 } from 'react-hot-toast';
 import styled from 'styled-components';
 
-import { ICON_SIZES, palette } from '../constants';
 import { IconButton } from '../Buttons';
+import { ICON_SIZES, palette } from '../constants';
 import { Success } from '@/components/Icons/Success';
 import Text from '../Text';
 import { Warning } from '@/components/Icons/Warning';
@@ -22,18 +22,14 @@ export const AppToast = ({ toast }: Props) => {
       case 'error': {
         return {
           mainColor: palette.red,
-          Icon: (
-            <Warning color={'blueDark'} sizeInPx={ICON_SIZES.SMALL} />
-          ),
+          Icon: <Warning color={'blueDark'} sizeInPx={ICON_SIZES.SMALL} />,
         };
       }
 
       case 'success': {
         return {
           mainColor: palette.blue,
-          Icon: (
-            <Success color={'blueDark'} sizeInPx={ICON_SIZES.SMALL} />
-          ),
+          Icon: <Success color={'blueDark'} sizeInPx={ICON_SIZES.SMALL} />,
         };
       }
 

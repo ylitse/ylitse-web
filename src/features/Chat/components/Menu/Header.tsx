@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { setShowFolders } from '@/features/Chat/chatSlice';
 import { useAppDispatch, useAppSelector } from '@/store';
 
-import { ICON_SIZES } from '@/components/constants';
 import IconButton from '@/components/Buttons/IconButton';
+import { ICON_SIZES } from '@/components/constants';
 import { Row } from './Row';
 import Text from '@/components/Text';
 

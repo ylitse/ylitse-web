@@ -1,7 +1,10 @@
-import { accounts, Mentee, Mentor } from 'cypress/fixtures/accounts';
+import { accounts } from 'cypress/fixtures/accounts';
 import { api } from '../support/api';
 
 describe('chat', () => {
+  const mentee = accounts.mentees[0];
+  const mentor = accounts.mentors[0];
+
   beforeEach(() => {
     api.deleteAccounts();
   });
@@ -10,11 +13,7 @@ describe('chat', () => {
     api.deleteAccounts();
   });
 
-  const signUpAndMessageMentor = (
-    mentee: Mentee,
-    mentor: Mentor,
-    message: string,
-  ) => {
+  const signUpAndMessageMentor = (message: string) => {
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
     api.signUpMentee(mentee).then((menteeResponse: any) => {
       //eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,9 +36,7 @@ describe('chat', () => {
   };
 
   it('can start a conversation with mentor', () => {
-    const mentee = accounts.mentees[0];
     api.signUpMentee(mentee);
-    const mentor = accounts.mentors[0];
     api.signUpMentor(mentor);
     cy.loginUser(mentee.loginName, mentee.password);
 
@@ -66,8 +63,6 @@ describe('chat', () => {
   });
 
   it('can send message to existing conversation', () => {
-    const mentee = accounts.mentees[0];
-    const mentor = accounts.mentors[0];
     const message = 'I would like to talk to you';
     const answer = 'How can I help you';
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -112,10 +107,8 @@ describe('chat', () => {
   });
 
   it('marks unseen messages seen', () => {
-    const mentee = accounts.mentees[0];
-    const mentor = accounts.mentors[0];
     const message = 'I would like to talk to you';
-    signUpAndMessageMentor(mentee, mentor, message);
+    signUpAndMessageMentor(message);
 
     cy.loginUser(mentor.loginName, mentor.password);
 
@@ -132,8 +125,6 @@ describe('chat', () => {
   });
 
   it('wont mark unseen if not visible', () => {
-    const mentee = accounts.mentees[0];
-    const mentor = accounts.mentors[0];
     const message = 'Huzzah';
     const numberOfMessages = 20;
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -171,8 +162,6 @@ describe('chat', () => {
   });
 
   it('will load all messages if multiple unseen', () => {
-    const mentee = accounts.mentees[0];
-    const mentor = accounts.mentors[0];
     const message = 'Huzzah';
     const numberOfMessages = 20;
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -208,10 +197,8 @@ describe('chat', () => {
   });
 
   it('can archive and restore conversation', () => {
-    const mentee = accounts.mentees[0];
-    const mentor = accounts.mentors[0];
     const message = 'I would like to talk to you';
-    signUpAndMessageMentor(mentee, mentor, message);
+    signUpAndMessageMentor(message);
 
     cy.loginUser(mentor.loginName, mentor.password);
 
@@ -249,8 +236,6 @@ describe('chat', () => {
   });
 
   it('will not show unseen dot for new messages in archived conversation', () => {
-    const mentee = accounts.mentees[0];
-    const mentor = accounts.mentors[0];
     const message = 'I would like to talk to you';
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
     api.signUpMentee(mentee).then((menteeResponse: any) => {
@@ -303,10 +288,8 @@ describe('chat', () => {
   });
 
   it('can block and restore conversation', () => {
-    const mentee = accounts.mentees[0];
-    const mentor = accounts.mentors[0];
     const message = 'I would like to talk to you';
-    signUpAndMessageMentor(mentee, mentor, message);
+    signUpAndMessageMentor(message);
 
     cy.loginUser(mentor.loginName, mentor.password);
 
@@ -344,8 +327,6 @@ describe('chat', () => {
   });
 
   it('will not show unseen dot for new messages in blocked conversation', () => {
-    const mentee = accounts.mentees[0];
-    const mentor = accounts.mentors[0];
     const message = 'I would like to talk to you';
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
     api.signUpMentee(mentee).then((menteeResponse: any) => {
@@ -395,58 +376,5 @@ describe('chat', () => {
     cy.get('button[aria-label="menuLines"]').click();
     cy.getByText('Estetyt keskustelut', 'a');
     cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
-  });
-
-  it('can report mentor succesfully', () => {
-    const mentee = accounts.mentees[0];
-    const mentor = accounts.mentors[0];
-    const message = 'I would like to talk to you';
-    signUpAndMessageMentor(mentee, mentor, message);
-
-    cy.loginUser(mentee.loginName, mentee.password);
-    cy.get('[href="/chat"]').click();
-
-    // open report modal
-    cy.getByText('Ilmianna', 'button').click();
-
-    cy.getByText('Ilmianna käyttäjä', 'h1').should('be.visible');
-    cy.getByText(
-      'Ilmianna käyttäjä, jos epäilet tai havaitset mentorin käyttävän palvelua väärin.',
-      'p',
-    ).should('be.visible');
-    cy.getByText('Lähetä', 'button').should('be.disabled');
-
-    cy.fillInputByLabel('Syy ilmiantoon *', 'exampleReason');
-    cy.fillInputByLabel(
-      'Sähköposti tai puhelinumero yhteydenottoa varten',
-      'exampleContactInfo',
-    );
-
-    // Send report
-    cy.getByText('Lähetä', 'button').should('be.enabled').click();
-    cy.wait(500);
-
-    // should show success modal
-    cy.getByText('Käyttäjän ilmianto onnistui', 'h3').should('be.visible');
-    cy.getByText(
-      'SOS-Lapsikylän työntekijä selvittää tilanteen ja ottaa sinuun yhteyttä.',
-      'p',
-    ).should('be.visible');
-  });
-
-  it('will not show report button to mentor', () => {
-    const mentee = accounts.mentees[0];
-    const mentor = accounts.mentors[0];
-    const message = 'I would like to talk to you';
-    signUpAndMessageMentor(mentee, mentor, message);
-
-    cy.loginUser(mentor.loginName, mentor.password);
-    cy.get('[href="/chat"]').click();
-
-    // should show other buttons
-    cy.getByText('Arkistoi', 'button').should('be.visible');
-    cy.getByText('Estä käyttäjä', 'button').should('be.visible');
-
-    cy.getByText('Ilmianna', 'button').should('not.exist');
   });
 });

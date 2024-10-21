@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 import { DIALOG_WIDTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
-import IconWarning from '@/static/icons/warning.svg';
 import { ICON_SIZES, palette } from '@/components/constants';
+import IconWarning from '@/static/icons/warning.svg';
 import Text from '@/components/Text';
 
 type Props = {

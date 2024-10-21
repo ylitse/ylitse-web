@@ -7,8 +7,8 @@ import { useUpdateAccountMutation } from '@/features/Authentication/authenticati
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
-import { ICON_SIZES } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
+import { ICON_SIZES } from '@/components/constants';
 import LabeledInput from '@/components/LabeledInput';
 import Text from '@/components/Text';
 import { validateEmail } from '../validators';

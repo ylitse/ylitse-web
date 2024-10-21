@@ -6,11 +6,7 @@ import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { Column, SpacedRow } from '@/components/common';
 import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 import ProfilePicPlaceholderForMe from '@/static/icons/chat-profilepic-me.svg';
-import {
-  breakpoints,
-  ICON_SIZES,
-  palette,
-} from '@/components/constants';
+import { breakpoints, ICON_SIZES, palette } from '@/components/constants';
 import { IconButton } from '@/components/Buttons';
 import { BasicInfo } from './BasicInfo';
 import { Tag } from './Tag';

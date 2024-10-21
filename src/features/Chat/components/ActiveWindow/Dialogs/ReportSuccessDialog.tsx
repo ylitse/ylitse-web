@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { ICON_SIZES, palette } from '@/components/constants';
 import { DIALOG_WIDTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
+import { ICON_SIZES, palette } from '@/components/constants';
 import IconSuccess from '@/static/icons/success.svg';
 import Text from '@/components/Text';
 

@@ -6,7 +6,7 @@ import { selectUserId } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 import { useReportMentorMutation } from '@/features/Chat/chatPageApi';
 
-import { ICON_SIZES, DIALOG_WIDTH } from '@/components/constants';
+import { DIALOG_WIDTH, ICON_SIZES } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import {
   isContactInfoTooLong,
