@@ -120,6 +120,11 @@ npx cypress run --spec 'cypress/tests/logout.cy.ts' --headed --browser firefox -
 
 To target test run to a specific step you can use `it.only()`.
 
+## How to create lisences list
+
+If the licenses.json file is not found, a warning will be displayed. 
+To create a new licenses list run `npm run licensesjson:create`.
+
 ## Development
 
 1. Create a branch with your name and a name which describes the change for example john/add-login-page
