@@ -1,17 +1,18 @@
-import { useState } from 'react';
-// Libraries
 import styled from 'styled-components';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-// Store and hooks, type ChatBuddy
-import type { ChatBuddy } from '@/features/Chat/mappers';
 import { clearActiveChat } from '@/features/Chat/chatSlice';
-import { selectIsMentor } from '@/features/Authentication/userSlice';
+import {
+  selectIsMentor,
+  selectUserId,
+} from '@/features/Authentication/userSlice';
 import { selectMentorById } from '@/features/MentorPage/selectors';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useGetMentorsQuery } from '@/features/MentorPage/mentorPageApi';
+import { useUpdateStatusMutation } from '@/features/Chat/chatPageApi';
 
-// Variables
 import {
   CHAT_GAP_WIDTH,
   CHAT_MENU_WIDTH,
@@ -20,23 +21,44 @@ import {
 } from '@/features/Chat/constants';
 import { CONTENT_WIDTH, ICON_SIZES, palette } from '@/components/constants';
 
-// Components
 import ArchivedIcon from '@/static/icons/archived-chats.svg';
 import BlockedIcon from '@/static/icons/blocked-chats.svg';
 import DesktopButtons from './DesktopButtons';
+import Dialog from '@/components/Dialog';
 import { IconButton } from '@/components/Buttons';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
+import ReportModal from '../ReportModal';
 import TabletButtons from './TabletButtons';
 import Text from '@/components/Text';
-import { ConfirmationDialog, DialogVariant, ReportModal } from '../Dialogs';
+
+import type { ChatBuddy } from '@/features/Chat/mappers';
+import type { ChatFolder } from '@/features/Chat/chatPageApi';
+
+type ConfirmDialogVariant = 'archive' | 'block' | 'restore';
+type DialogVariant = ConfirmDialogVariant | 'report';
+
+const confirmDialogMap: Record<
+  ConfirmDialogVariant,
+  { borderColor: string; targetFolder: ChatFolder }
+> = {
+  archive: { borderColor: palette.orange, targetFolder: 'archived' },
+  block: { borderColor: palette.redSalmon, targetFolder: 'banned' },
+  restore: { borderColor: palette.blue2, targetFolder: 'ok' },
+};
+
+const iconMap = {
+  ok: <ProfileIcon color="purpleDark" />,
+  archived: <img src={ArchivedIcon} />,
+  banned: <img src={BlockedIcon} />,
+};
 
 type Props = {
   chat: ChatBuddy;
 };
 
 const Header = ({ chat }: Props) => {
+  const { t } = useTranslation('chat');
   const { isTablet } = useGetLayoutMode();
-
   const dispatch = useAppDispatch();
   // Clearing the active chat will return to the menu in tablet mode
   const returnToTabletMenu = () => dispatch(clearActiveChat());
@@ -45,12 +67,6 @@ const Header = ({ chat }: Props) => {
 
   const isMentor = useAppSelector(selectIsMentor);
   const mentor = useAppSelector(selectMentorById(chat.buddyId));
-
-  const icons = {
-    ok: <ProfileIcon color="purpleDark" />,
-    archived: <img src={ArchivedIcon} />,
-    banned: <img src={BlockedIcon} />,
-  };
 
   const [dialogVariant, setDialogVariant] = useState<DialogVariant>('archive');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -64,6 +80,18 @@ const Header = ({ chat }: Props) => {
   };
   const closeDialog = () => setIsDialogOpen(false);
 
+  const [updateChatStatus] = useUpdateStatusMutation();
+  const userId = useAppSelector(selectUserId);
+
+  const confirm = () => {
+    closeDialog();
+    if (!userId) return;
+    if (dialogVariant !== 'report') {
+      const status: ChatFolder = confirmDialogMap[dialogVariant].targetFolder;
+      updateChatStatus({ userId, buddyId: chat.buddyId, status });
+    }
+  };
+
   return (
     <Container tablet={isTablet}>
       {isTablet && (
@@ -73,7 +101,7 @@ const Header = ({ chat }: Props) => {
           onClick={returnToTabletMenu}
         />
       )}
-      <IconContainer>{icons[chat.status]}</IconContainer>
+      <IconContainer>{iconMap[chat.status]}</IconContainer>
       <DisplayName variant="h2">{chat.displayName}</DisplayName>
       {isMentor && (
         <MentorBio isTablet={isTablet}>{mentor?.statusMessage}</MentorBio>
@@ -81,10 +109,17 @@ const Header = ({ chat }: Props) => {
 
       <ButtonsWrapper>
         {isConfirmDialogOpen && (
-          <ConfirmationDialog
-            variant={dialogVariant}
-            chat={chat}
-            close={closeDialog}
+          <Dialog
+            borderColor={confirmDialogMap[dialogVariant].borderColor}
+            closeText={t('dialog.cancel')}
+            confirmId={`confirm-${dialogVariant}`}
+            confirmText={t(`dialog.${dialogVariant}.confirm`)}
+            onClose={close}
+            onConfirm={confirm}
+            description={t(`dialog.${dialogVariant}.description`, {
+              buddyName: chat.displayName,
+            })}
+            title={t(`dialog.${dialogVariant}.title`)}
           />
         )}
         {isReportModalOpen && (

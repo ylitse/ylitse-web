@@ -1,13 +1,15 @@
-import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+
+import { selectIsMentee } from '@/features/Authentication/userSlice';
+import { useAppSelector } from '@/store';
 
 import { Button, StatusButton } from '@/components/Buttons';
 import { ICON_SIZES } from '@/components/constants';
 
 import type { ChatBuddy } from '@/features/Chat/mappers';
-import type { DialogVariant } from '../Dialogs';
-import { useAppSelector } from '@/store';
-import { selectIsMentee } from '@/features/Authentication/userSlice';
+
+type DialogVariant = 'archive' | 'block' | 'restore' | 'report';
 
 type Props = {
   chat: ChatBuddy;

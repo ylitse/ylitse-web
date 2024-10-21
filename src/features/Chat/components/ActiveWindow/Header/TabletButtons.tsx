@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 // Types
 import type { ChatBuddy } from '@/features/Chat/mappers';
-import type { DialogVariant } from '../Dialogs';
 
 // Variables
 import { HIGH_ROW_HEIGHT } from '@/features/Chat/constants';
@@ -13,6 +12,8 @@ import { ICON_SIZES, palette } from '@/components/constants';
 
 // Components
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
+
+type DialogVariant = 'archive' | 'block' | 'restore' | 'report';
 
 type Props = {
   chat: ChatBuddy;
