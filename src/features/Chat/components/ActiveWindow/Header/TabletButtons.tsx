@@ -33,7 +33,7 @@ const TabletButtons = ({ chat, openDialog }: Props) => {
   const openArchiveDialog = () => openDialogVariant('archive');
   const openBlockDialog = () => openDialogVariant('block');
   const openRestoreDialog = () => openDialogVariant('restore');
-  const openReportDialog = () => openDialogVariant('report');
+  const openReportModal = () => openDialogVariant('report');
 
   return (
     <Container>
@@ -65,7 +65,7 @@ const TabletButtons = ({ chat, openDialog }: Props) => {
             />
           )}
           <ReportButton
-            onClick={openReportDialog}
+            onClick={openReportModal}
             leftIcon={'danger'}
             sizeInPx={ICON_SIZES.SMALL}
             text={{

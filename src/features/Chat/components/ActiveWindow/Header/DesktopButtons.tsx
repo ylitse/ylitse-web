@@ -21,7 +21,7 @@ const DesktopButtons = ({ chat, openDialog }: Props) => {
   const openArchiveDialog = () => openDialog('archive');
   const openBlockDialog = () => openDialog('block');
   const openRestoreDialog = () => openDialog('restore');
-  const openReportDialog = () => openDialog('report');
+  const openReportModal = () => openDialog('report');
 
   return (
     <Container>
@@ -47,7 +47,7 @@ const DesktopButtons = ({ chat, openDialog }: Props) => {
       )}
       {isMentee && (
         <Button
-          onClick={openReportDialog}
+          onClick={openReportModal}
           leftIcon={'danger'}
           sizeInPx={ICON_SIZES.SMALL}
           text={{

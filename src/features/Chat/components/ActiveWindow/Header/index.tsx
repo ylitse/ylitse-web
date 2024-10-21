@@ -28,7 +28,7 @@ import { IconButton } from '@/components/Buttons';
 import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import TabletButtons from './TabletButtons';
 import Text from '@/components/Text';
-import { ConfirmationDialog, DialogVariant, ReportDialog } from '../Dialogs';
+import { ConfirmationDialog, DialogVariant, ReportModal } from '../Dialogs';
 
 type Props = {
   chat: ChatBuddy;
@@ -56,7 +56,7 @@ const Header = ({ chat }: Props) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const isConfirmDialogOpen = isDialogOpen && dialogVariant !== 'report';
-  const isReportDialogOpen = isDialogOpen && dialogVariant === 'report';
+  const isReportModalOpen = isDialogOpen && dialogVariant === 'report';
 
   const openDialog = (variant: DialogVariant) => {
     setDialogVariant(variant);
@@ -87,8 +87,8 @@ const Header = ({ chat }: Props) => {
             close={closeDialog}
           />
         )}
-        {isReportDialogOpen && (
-          <ReportDialog buddyId={chat.buddyId} close={closeDialog} />
+        {isReportModalOpen && (
+          <ReportModal buddyId={chat.buddyId} close={closeDialog} />
         )}
         {isTablet ? (
           <TabletButtons chat={chat} openDialog={openDialog} />
