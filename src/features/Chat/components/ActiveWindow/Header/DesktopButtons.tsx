@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { Button, StatusButton } from '@/components/Buttons';
-import { DEFAULT_ICON_SIZE } from '@/components/constants';
+import { ICON_SIZES } from '@/components/constants';
 
 import type { ChatBuddy } from '@/features/Chat/mappers';
 import type { DialogVariant } from '../Dialogs';
@@ -49,7 +49,7 @@ const DesktopButtons = ({ chat, openDialog }: Props) => {
         <Button
           onClick={openReportDialog}
           leftIcon={'danger'}
-          sizeInPx={DEFAULT_ICON_SIZE.SMALL}
+          sizeInPx={ICON_SIZES.SMALL}
           text={{
             color: 'purple',
             text: t('header.report'),

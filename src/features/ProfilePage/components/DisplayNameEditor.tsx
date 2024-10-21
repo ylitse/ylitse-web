@@ -7,7 +7,7 @@ import { useUpdateUserMutation } from '@/features/Authentication/authenticationA
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';
-import { DEFAULT_ICON_SIZE } from '@/components/constants';
+import { ICON_SIZES } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import { isDisplayNameTooLong, isDisplayNameTooShort } from '../validators';
 import LabeledInput from '@/components/LabeledInput';
@@ -76,7 +76,7 @@ const DisplayNameEditor = () => {
         <IconButton
           id="open-display-name-editor"
           onClick={toggleIsOpen}
-          sizeInPx={DEFAULT_ICON_SIZE.HUGE}
+          sizeInPx={ICON_SIZES.HUGE}
           variant="edit"
         />
       </SpacedRow>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
+import { ICON_SIZES, palette } from '@/components/constants';
 import { DIALOG_WIDTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import IconSuccess from '@/static/icons/success.svg';
@@ -19,7 +19,7 @@ const ReportSuccessDialog = ({ close }: Props) => {
       <SuccessIcon src={IconSuccess} />
       <SuccessCloseButton
         variant="closeWithBackground"
-        sizeInPx={DEFAULT_ICON_SIZE.MEDIUM}
+        sizeInPx={ICON_SIZES.MEDIUM}
         onClick={close}
       />
       <Text variant="h3">{t(`dialog.report.success.title`)}</Text>

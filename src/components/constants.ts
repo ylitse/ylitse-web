@@ -34,7 +34,7 @@ export const palette = {
 };
 
 // Size
-export const DEFAULT_ICON_SIZE = {
+export const ICON_SIZES = {
   SMALL: 23,
   MEDIUM: 38,
   LARGE: 40,

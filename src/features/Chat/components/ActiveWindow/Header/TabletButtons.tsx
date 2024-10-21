@@ -9,7 +9,7 @@ import type { DialogVariant } from '../Dialogs';
 
 // Variables
 import { HIGH_ROW_HEIGHT } from '@/features/Chat/constants';
-import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
+import { ICON_SIZES, palette } from '@/components/constants';
 
 // Components
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
@@ -39,7 +39,7 @@ const TabletButtons = ({ chat, openDialog }: Props) => {
     <Container>
       <IconButton
         variant="menuLines"
-        sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+        sizeInPx={ICON_SIZES.LARGE}
         onClick={toggleDropdown}
       />
       {isDropdownOpen && (
@@ -67,7 +67,7 @@ const TabletButtons = ({ chat, openDialog }: Props) => {
           <ReportButton
             onClick={openReportDialog}
             leftIcon={'danger'}
-            sizeInPx={DEFAULT_ICON_SIZE.SMALL}
+            sizeInPx={ICON_SIZES.SMALL}
             text={{
               color: 'purple',
               text: t('header.report'),

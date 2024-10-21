@@ -8,7 +8,7 @@ import ProfilePicPlaceholder from '@/static/icons/chat-profilepic.svg';
 import ProfilePicPlaceholderForMe from '@/static/icons/chat-profilepic-me.svg';
 import {
   breakpoints,
-  DEFAULT_ICON_SIZE,
+  ICON_SIZES,
   palette,
 } from '@/components/constants';
 import { IconButton } from '@/components/Buttons';
@@ -53,7 +53,7 @@ export const Header = ({
         <CloseButton
           onClick={onDismiss}
           variant="closeWithBackground"
-          sizeInPx={DEFAULT_ICON_SIZE.MEDIUM}
+          sizeInPx={ICON_SIZES.MEDIUM}
         />
       </SpacedRow>
     </Container>

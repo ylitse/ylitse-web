@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { DEFAULT_ICON_SIZE, palette } from '@/components/constants';
+import { ICON_SIZES, palette } from '@/components/constants';
 import TextInput from '@/components/TextInput';
 
 const closeInputIconSize = 34;
@@ -22,7 +22,7 @@ const Search = ({ hideSearch }: Props) => {
         variant="iconInput"
         color={searchValue ? 'blueDark' : 'greyFaded'}
         leftIcon={{
-          sizeInPx: DEFAULT_ICON_SIZE.SMALL,
+          sizeInPx: ICON_SIZES.SMALL,
           variant: 'search',
         }}
         rightButton={{
@@ -43,7 +43,7 @@ const SearchBar = styled.div`
   display: flex;
   flex: 1;
   justify-content: flex-end;
-  margin-left: -${DEFAULT_ICON_SIZE.SMALL}px;
+  margin-left: -${ICON_SIZES.SMALL}px;
   margin-right: -${closeInputIconSize}px;
 `;
 

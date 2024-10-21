@@ -7,7 +7,7 @@ import { setConversation } from '@/features/Chat/chatSlice';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
-import { breakpoints, DEFAULT_ICON_SIZE } from '@/components/constants';
+import { breakpoints, ICON_SIZES } from '@/components/constants';
 import { IconButton } from '@/components/Buttons';
 import { Languages } from './Languages';
 import { Skills } from './Skills';
@@ -44,7 +44,7 @@ export const Content = ({
           <IconButton
             onClick={onDismiss}
             variant="closeWithBackground"
-            sizeInPx={DEFAULT_ICON_SIZE.MEDIUM}
+            sizeInPx={ICON_SIZES.MEDIUM}
           />
         </CloseContainer>
       )}

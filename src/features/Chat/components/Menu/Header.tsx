@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { setShowFolders } from '@/features/Chat/chatSlice';
 import { useAppDispatch, useAppSelector } from '@/store';
 
-import { DEFAULT_ICON_SIZE } from '@/components/constants';
+import { ICON_SIZES } from '@/components/constants';
 import IconButton from '@/components/Buttons/IconButton';
 import { Row } from './Row';
 import Text from '@/components/Text';
@@ -24,7 +24,7 @@ const Header = () => {
       <Buttons>
         <IconButton
           variant="menuLines"
-          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+          sizeInPx={ICON_SIZES.LARGE}
           onClick={toggleFolders}
         />
       </Buttons>

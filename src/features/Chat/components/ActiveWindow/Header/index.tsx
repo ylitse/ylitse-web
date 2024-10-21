@@ -20,7 +20,7 @@ import {
 } from '@/features/Chat/constants';
 import {
   CONTENT_WIDTH,
-  DEFAULT_ICON_SIZE,
+  ICON_SIZES,
   palette,
 } from '@/components/constants';
 
@@ -73,7 +73,7 @@ const Header = ({ chat }: Props) => {
       {isTablet && (
         <IconButton
           variant="back"
-          sizeInPx={DEFAULT_ICON_SIZE.LARGE}
+          sizeInPx={ICON_SIZES.LARGE}
           onClick={returnToTabletMenu}
         />
       )}

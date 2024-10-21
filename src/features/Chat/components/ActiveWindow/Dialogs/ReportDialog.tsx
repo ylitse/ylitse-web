@@ -6,7 +6,7 @@ import { selectUserId } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 import { useReportMentorMutation } from '@/features/Chat/chatPageApi';
 
-import { DEFAULT_ICON_SIZE, DIALOG_WIDTH } from '@/components/constants';
+import { ICON_SIZES, DIALOG_WIDTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import {
   isContactInfoTooLong,
@@ -61,7 +61,7 @@ const ReportDialog = ({ buddyId, close }: Props) => {
         <Container>
           <CloseButton
             variant="closeWithBackground"
-            sizeInPx={DEFAULT_ICON_SIZE.MEDIUM}
+            sizeInPx={ICON_SIZES.MEDIUM}
             onClick={close}
           />
           <Title color="white" variant="h1">
