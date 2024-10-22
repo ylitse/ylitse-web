@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 // Types
 import type { ChatBuddy } from '@/features/Chat/mappers';
-import type { DialogVariant } from '../Dialogs';
 
 // Variables
 import { HIGH_ROW_HEIGHT } from '@/features/Chat/constants';
@@ -14,26 +13,33 @@ import { ICON_SIZES, palette } from '@/components/constants';
 // Components
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
 
+type DialogVariant = 'archive' | 'block' | 'restore';
+
 type Props = {
   chat: ChatBuddy;
-  openDialog: (variant: DialogVariant) => void;
+  confirmStatusChange: (variant: DialogVariant) => void;
+  openReportModal: () => void;
 };
 
-const TabletButtons = ({ chat, openDialog }: Props) => {
+const TabletButtons = ({
+  chat,
+  confirmStatusChange,
+  openReportModal,
+}: Props) => {
   const { t } = useTranslation('chat');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
   const closeDropdown = () => setIsDropdownOpen(false);
 
-  const openDialogVariant = (variant: DialogVariant) => {
+  const confirmAction = (variant: DialogVariant) => {
     closeDropdown();
-    openDialog(variant);
+    confirmStatusChange(variant);
   };
 
-  const openArchiveDialog = () => openDialogVariant('archive');
-  const openBlockDialog = () => openDialogVariant('block');
-  const openRestoreDialog = () => openDialogVariant('restore');
-  const openReportDialog = () => openDialogVariant('report');
+  const showReportModal = () => {
+    closeDropdown();
+    openReportModal();
+  };
 
   return (
     <Container>
@@ -47,25 +53,25 @@ const TabletButtons = ({ chat, openDialog }: Props) => {
           {chat.status === 'ok' ? (
             <>
               <TabletStatusButton
-                onClick={openArchiveDialog}
+                onClick={() => confirmAction('archive')}
                 icon="archive"
                 text={t('header.archive')}
               />
               <TabletStatusButton
-                onClick={openBlockDialog}
+                onClick={() => confirmAction('block')}
                 icon="block"
                 text={t('header.block')}
               />
             </>
           ) : (
             <TabletStatusButton
-              onClick={openRestoreDialog}
+              onClick={() => confirmAction('restore')}
               icon="return"
               text={t('header.restore')}
             />
           )}
           <ReportButton
-            onClick={openReportDialog}
+            onClick={showReportModal}
             leftIcon={'danger'}
             sizeInPx={ICON_SIZES.SMALL}
             text={{
