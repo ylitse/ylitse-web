@@ -52,12 +52,12 @@ export const MOBILE_AND_TABLET_CONTENT_HEIGHT = `calc(100vh - (${NAVIGATION_HEIG
 
 // Width
 export const CONTENT_WIDTH = '76vw';
-export const DIALOG_WIDTH = '687px';
+export const DIALOG_WIDTH = '700px';
 export const OUTER_HORIZONTAL_MARGIN = '6vw';
 
 // Breakpoints
 export const TABLET_TRESHOLD = 1510; // (CHAT_MENU_WIDTH + 5 * CHAT_GAP_WIDTH + CHAT_WINDOW_MIN_WIDTH)
-export const MOBILE_TRESHOLD = 600;
+export const MOBILE_TRESHOLD = 768;
 export const breakpoints = {
   mobile: `${MOBILE_TRESHOLD}px`,
   tablet: `${TABLET_TRESHOLD}px`,

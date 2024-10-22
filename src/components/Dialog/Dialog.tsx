@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
+
 import { DIALOG_WIDTH } from '@/components/constants';
 import { IconButton, TextButton } from '@/components/Buttons';
 import { ICON_SIZES, palette } from '@/components/constants';
@@ -38,37 +40,70 @@ export const Dialog = ({
   onClose,
   onConfirm = null,
   title,
-}: Props) => (
-  <>
-    <Overlay />
-    <Container borderColor={borderColor}>
-      <WarningIcon src={iconMap[iconVariant]} />
-      <CloseButton
-        variant="closeWithBackground"
-        sizeInPx={ICON_SIZES.MEDIUM}
-        onClick={onClose}
-      />
-      <Text variant="h3">{title}</Text>
-      <Text>{description}</Text>
-      {isConfirmRequired && onConfirm ? (
-        <ButtonContainer>
-          <TextButton onClick={onClose} variant="light">
-            {closeText}
-          </TextButton>
-          <TextButton id={confirmId} onClick={onConfirm} variant="dark">
-            {confirmText}
-          </TextButton>
-        </ButtonContainer>
+}: Props) => {
+  const { isMobile } = useGetLayoutMode();
+  console.log('mobiili', isMobile);
+
+  return (
+    <>
+      <Overlay />
+      {isMobile ? (
+        <MobileContainer>
+          <Header backgroundColor={borderColor}>
+            <img src={iconMap[iconVariant]} />
+            <Text variant="h3">{title}</Text>
+          </Header>
+          <Content>
+            <Text>{description}</Text>
+            {isConfirmRequired && onConfirm ? (
+              <ButtonContainer>
+                <TextButton onClick={onClose} variant="light">
+                  {closeText}
+                </TextButton>
+                <TextButton id={confirmId} onClick={onConfirm} variant="dark">
+                  {confirmText}
+                </TextButton>
+              </ButtonContainer>
+            ) : (
+              <ButtonContainer>
+                <TextButton onClick={onClose} variant="dark">
+                  {closeText}
+                </TextButton>
+              </ButtonContainer>
+            )}
+          </Content>
+        </MobileContainer>
       ) : (
-        <ButtonContainer>
-          <TextButton onClick={onClose} variant="dark">
-            {closeText}
-          </TextButton>
-        </ButtonContainer>
+        <Container borderColor={borderColor}>
+          <Icon src={iconMap[iconVariant]} />
+          <CloseButton
+            variant="closeWithBackground"
+            sizeInPx={ICON_SIZES.MEDIUM}
+            onClick={onClose}
+          />
+          <Text variant="h3">{title}</Text>
+          <Text>{description}</Text>
+          {isConfirmRequired && onConfirm ? (
+            <ButtonContainer>
+              <TextButton onClick={onClose} variant="light">
+                {closeText}
+              </TextButton>
+              <TextButton id={confirmId} onClick={onConfirm} variant="dark">
+                {confirmText}
+              </TextButton>
+            </ButtonContainer>
+          ) : (
+            <ButtonContainer>
+              <TextButton onClick={onClose} variant="dark">
+                {closeText}
+              </TextButton>
+            </ButtonContainer>
+          )}
+        </Container>
       )}
-    </Container>
-  </>
-);
+    </>
+  );
+};
 
 const Overlay = styled.div`
   background: var(--greyscale-overlay, rgba(57, 57, 57, 0.75));
@@ -80,14 +115,41 @@ const Overlay = styled.div`
   z-index: 100;
 `;
 
+const MobileContainer = styled.div`
+  background-color: ${palette.white};
+  border-radius: 10px;
+  box-sizing: border-box;
+  height: fit-content;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  z-index: 200;
+`;
+
+const Header = styled.div<{ backgroundColor: string }>`
+  align-items: center;
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  border-radius: 10px 10px 0 0;
+  box-sizing: border-box;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 2rem;
+`;
+
+const Content = styled.div`
+  padding: 0 2rem 2rem;
+`;
+
 const Container = styled.div<{ borderColor: string }>`
   background-color: ${palette.white};
   border-left: ${({ borderColor }) => `110px solid ${borderColor}`};
   border-radius: 10px;
   box-sizing: border-box;
-  height: 223px;
+  height: 250px;
   left: 50%;
-  padding: 1rem 3rem;
+  padding: 2rem 3rem;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -95,7 +157,7 @@ const Container = styled.div<{ borderColor: string }>`
   z-index: 200;
 `;
 
-const WarningIcon = styled.img`
+const Icon = styled.img`
   left: -79px;
   position: absolute;
   top: 56px;
