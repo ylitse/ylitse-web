@@ -17,7 +17,7 @@ export const ConfirmationDialogContext =
 export type Dialog = {
   borderColor: string;
   closeText: string;
-  confirmId: string;
+  confirmId?: string;
   confirmText?: string;
   description: string;
   iconVariant?: IconVariant;

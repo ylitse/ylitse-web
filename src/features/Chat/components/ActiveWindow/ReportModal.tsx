@@ -41,7 +41,6 @@ const ReportModal = ({ buddyId, close }: Props) => {
       await getConfirmation({
         borderColor: palette.blue,
         closeText: t(`dialog.report.success.confirm`),
-        confirmId: `confirm-report-success`,
         description: t(`dialog.report.success.description`),
         isConfirmRequired: false,
         title: t(`dialog.report.success.title`),

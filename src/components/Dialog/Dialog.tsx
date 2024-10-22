@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import { DIALOG_WIDTH } from '@/components/constants';
-import { IconButton, TextButton } from '@/components/Buttons';
+import { IconButton } from '@/components/Buttons';
 import { ICON_SIZES, palette } from '@/components/constants';
 import IconSuccess from '@/static/icons/success.svg';
 import IconWarning from '@/static/icons/warning.svg';
 import Text from '@/components/Text';
+import ButtonGroup from './ButtonGroup';
 
 export type IconVariant = 'success' | 'warning';
 
@@ -19,13 +20,13 @@ const iconMap: Record<IconVariant, string> = {
 type Props = {
   borderColor: string;
   closeText: string;
-  confirmId: string;
+  confirmId?: string;
   confirmText?: string;
   description: string;
   iconVariant?: IconVariant;
   isConfirmRequired?: boolean;
   onClose: () => void;
-  onConfirm?: (() => void) | null;
+  onConfirm?: () => void;
   title: string;
 };
 
@@ -38,11 +39,10 @@ export const Dialog = ({
   iconVariant = 'warning',
   isConfirmRequired = true,
   onClose,
-  onConfirm = null,
+  onConfirm,
   title,
 }: Props) => {
   const { isMobile } = useGetLayoutMode();
-  console.log('mobiili', isMobile);
 
   return (
     <>
@@ -55,22 +55,14 @@ export const Dialog = ({
           </Header>
           <Content>
             <Text>{description}</Text>
-            {isConfirmRequired && onConfirm ? (
-              <ButtonContainer>
-                <TextButton onClick={onClose} variant="light">
-                  {closeText}
-                </TextButton>
-                <TextButton id={confirmId} onClick={onConfirm} variant="dark">
-                  {confirmText}
-                </TextButton>
-              </ButtonContainer>
-            ) : (
-              <ButtonContainer>
-                <TextButton onClick={onClose} variant="dark">
-                  {closeText}
-                </TextButton>
-              </ButtonContainer>
-            )}
+            <ButtonGroup
+              closeText={closeText}
+              confirmId={confirmId}
+              confirmText={confirmText}
+              isConfirmRequired={isConfirmRequired}
+              onClose={onClose}
+              onConfirm={onConfirm}
+            />
           </Content>
         </MobileContainer>
       ) : (
@@ -83,22 +75,14 @@ export const Dialog = ({
           />
           <Text variant="h3">{title}</Text>
           <Text>{description}</Text>
-          {isConfirmRequired && onConfirm ? (
-            <ButtonContainer>
-              <TextButton onClick={onClose} variant="light">
-                {closeText}
-              </TextButton>
-              <TextButton id={confirmId} onClick={onConfirm} variant="dark">
-                {confirmText}
-              </TextButton>
-            </ButtonContainer>
-          ) : (
-            <ButtonContainer>
-              <TextButton onClick={onClose} variant="dark">
-                {closeText}
-              </TextButton>
-            </ButtonContainer>
-          )}
+          <ButtonGroup
+            closeText={closeText}
+            confirmId={confirmId}
+            confirmText={confirmText}
+            isConfirmRequired={isConfirmRequired}
+            onClose={onClose}
+            onConfirm={onConfirm}
+          />
         </Container>
       )}
     </>
@@ -167,10 +151,4 @@ const CloseButton = styled(IconButton)`
   position: absolute;
   right: 13px;
   top: 13px;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 1.75rem;
-  justify-content: center;
 `;
