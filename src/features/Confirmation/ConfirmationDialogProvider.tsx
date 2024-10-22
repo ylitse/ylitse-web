@@ -4,12 +4,12 @@ import Dialog from '@/components/Dialog';
 import type { IconVariant } from '@/components/Dialog/Dialog';
 
 type ConfirmationDialogContextType = {
-  openDialog: (config: DialogConfig) => void;
+  confirmAction: (config: DialogConfig) => void;
 };
 
 export const ConfirmationDialogContext =
   createContext<ConfirmationDialogContextType>({
-    openDialog: () => {
+    confirmAction: () => {
       throw new Error('Function not implemented.');
     },
   });
@@ -46,7 +46,7 @@ export const ConfirmationDialogProvider = ({ children }: Props) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogConfig, setDialogConfig] = useState<DialogConfig>(defaultConfig);
 
-  const openDialog = (config: DialogConfig) => {
+  const confirmAction = (config: DialogConfig) => {
     setDialogOpen(true);
     setDialogConfig(config);
   };
@@ -67,7 +67,7 @@ export const ConfirmationDialogProvider = ({ children }: Props) => {
   };
 
   return (
-    <ConfirmationDialogContext.Provider value={{ openDialog }}>
+    <ConfirmationDialogContext.Provider value={{ confirmAction }}>
       {dialogOpen && (
         <Dialog
           borderColor={dialogConfig.borderColor}

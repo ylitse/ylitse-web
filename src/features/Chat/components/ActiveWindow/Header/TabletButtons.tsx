@@ -31,15 +31,12 @@ const TabletButtons = ({
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
   const closeDropdown = () => setIsDropdownOpen(false);
 
-  const openDialogVariant = (variant: DialogVariant) => {
+  const confirmAction = (variant: DialogVariant) => {
     closeDropdown();
     confirmStatusChange(variant);
   };
 
-  const openArchiveDialog = () => openDialogVariant('archive');
-  const openBlockDialog = () => openDialogVariant('block');
-  const openRestoreDialog = () => openDialogVariant('restore');
-  const openReportDialog = () => {
+  const showReportModal = () => {
     closeDropdown();
     openReportModal();
   };
@@ -56,25 +53,25 @@ const TabletButtons = ({
           {chat.status === 'ok' ? (
             <>
               <TabletStatusButton
-                onClick={openArchiveDialog}
+                onClick={() => confirmAction('archive')}
                 icon="archive"
                 text={t('header.archive')}
               />
               <TabletStatusButton
-                onClick={openBlockDialog}
+                onClick={() => confirmAction('block')}
                 icon="block"
                 text={t('header.block')}
               />
             </>
           ) : (
             <TabletStatusButton
-              onClick={openRestoreDialog}
+              onClick={() => confirmAction('restore')}
               icon="return"
               text={t('header.restore')}
             />
           )}
           <ReportButton
-            onClick={openReportDialog}
+            onClick={showReportModal}
             leftIcon={'danger'}
             sizeInPx={ICON_SIZES.SMALL}
             text={{

@@ -73,7 +73,7 @@ const Header = ({ chat }: Props) => {
 
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
-  const openDialog = async (variant: DialogVariant) => {
+  const confirmAction = async (variant: DialogVariant) => {
     const isConfirmed = await getConfirmation({
       borderColor: confirmDialogMap[variant].borderColor,
       closeText: t('dialog.cancel'),
@@ -119,13 +119,13 @@ const Header = ({ chat }: Props) => {
         {isTablet ? (
           <TabletButtons
             chat={chat}
-            confirmStatusChange={openDialog}
+            confirmStatusChange={confirmAction}
             openReportModal={() => setIsReportModalOpen(true)}
           />
         ) : (
           <DesktopButtons
             chat={chat}
-            confirmStatusChange={openDialog}
+            confirmStatusChange={confirmAction}
             openReportModal={() => setIsReportModalOpen(true)}
           />
         )}

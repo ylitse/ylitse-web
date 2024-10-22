@@ -3,11 +3,11 @@ import { ConfirmationDialogContext } from '@/features/Confirmation/ConfirmationD
 import type { Dialog } from '@/features/Confirmation/ConfirmationDialogProvider';
 
 export const useConfirm = () => {
-  const { openDialog } = useContext(ConfirmationDialogContext);
+  const { confirmAction } = useContext(ConfirmationDialogContext);
 
   const getConfirmation = (config: Dialog) =>
     new Promise(res => {
-      openDialog({ actionCallback: res, ...config });
+      confirmAction({ actionCallback: res, ...config });
     });
 
   return { getConfirmation };
