@@ -21,6 +21,7 @@ export type Dialog = {
   confirmText?: string;
   description: string;
   iconVariant?: IconVariant;
+  isConfirmRequired?: boolean;
   title: string;
 };
 
@@ -28,7 +29,7 @@ export type DialogConfig = Dialog & {
   actionCallback: (res: boolean) => void;
 };
 
-const defaultConfig = {
+const defaultConfig: DialogConfig = {
   actionCallback: () => null,
   borderColor: '',
   closeText: '',
@@ -75,6 +76,7 @@ export const ConfirmationDialogProvider = ({ children }: Props) => {
           confirmText={dialogConfig.confirmText}
           description={dialogConfig.description}
           iconVariant={dialogConfig.iconVariant}
+          isConfirmRequired={dialogConfig.isConfirmRequired}
           onClose={onClose}
           onConfirm={onConfirm}
           title={dialogConfig.title}

@@ -21,6 +21,7 @@ type Props = {
   confirmText?: string;
   description: string;
   iconVariant?: IconVariant;
+  isConfirmRequired?: boolean;
   onClose: () => void;
   onConfirm?: (() => void) | null;
   title: string;
@@ -33,6 +34,7 @@ export const Dialog = ({
   confirmText = '',
   description,
   iconVariant = 'warning',
+  isConfirmRequired = true,
   onClose,
   onConfirm = null,
   title,
@@ -48,7 +50,7 @@ export const Dialog = ({
       />
       <Text variant="h3">{title}</Text>
       <Text>{description}</Text>
-      {onConfirm ? (
+      {isConfirmRequired && onConfirm ? (
         <ButtonContainer>
           <TextButton onClick={onClose} variant="light">
             {closeText}
