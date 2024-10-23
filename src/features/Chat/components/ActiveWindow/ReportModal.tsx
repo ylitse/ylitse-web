@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { selectUserId } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
 import { useConfirm } from '@/features/Confirmation/useConfirm';
+import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useReportMentorMutation } from '@/features/Chat/chatPageApi';
 
 import { DIALOG_WIDTH, ICON_SIZES } from '@/components/constants';
@@ -24,6 +25,7 @@ type Props = {
 
 const ReportModal = ({ buddyId, close }: Props) => {
   const { t } = useTranslation('chat');
+  const { isMobile } = useGetLayoutMode();
   const { getConfirmation } = useConfirm();
   const userId = useAppSelector(selectUserId);
   const [reportMentor] = useReportMentorMutation();
@@ -61,16 +63,18 @@ const ReportModal = ({ buddyId, close }: Props) => {
   return (
     <>
       <Overlay />
-      <Container>
-        <CloseButton
-          variant="closeWithBackground"
-          sizeInPx={ICON_SIZES.MEDIUM}
-          onClick={close}
-        />
-        <Title color="white" variant="h1">
-          {t('dialog.report.title')}
-        </Title>
-        <Content>
+      <Container isMobile={isMobile}>
+        <Header>
+          <Text color="white" variant="h1">
+            {t('dialog.report.title')}
+          </Text>
+          <CloseButton
+            variant="closeWithBackground"
+            sizeInPx={ICON_SIZES.MEDIUM}
+            onClick={close}
+          />
+        </Header>
+        <Content isMobile={isMobile}>
           <Paragraph>{t('dialog.report.description1')}</Paragraph>
           <Paragraph>{t('dialog.report.description2')}</Paragraph>
           <Paragraph>{t('dialog.report.description3')}</Paragraph>
@@ -94,7 +98,7 @@ const ReportModal = ({ buddyId, close }: Props) => {
             onChange={setContactInfo}
             value={contactInfo}
           />
-          <ButtonContainerWithMargin>
+          <Buttons>
             <ActionButton onClick={close} variant="light">
               {t('dialog.cancel')}
             </ActionButton>
@@ -105,7 +109,7 @@ const ReportModal = ({ buddyId, close }: Props) => {
             >
               {t('dialog.report.confirm')}
             </ActionButton>
-          </ButtonContainerWithMargin>
+          </Buttons>
         </Content>
       </Container>
     </>
@@ -122,36 +126,43 @@ const Overlay = styled.div`
   z-index: 100;
 `;
 
-const Container = styled.div`
-  align-items: center;
+const Container = styled.div<{ isMobile: boolean }>`
   background-color: ${palette.white};
   border-radius: 20px;
-  border-top: 140px solid ${palette.purple};
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   height: fit-content;
   left: 50%;
+  max-height: 80vh;
+  overflow-y: auto;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: ${DIALOG_WIDTH};
+  width: ${({ isMobile }) => (isMobile ? '90%' : DIALOG_WIDTH)};
   z-index: 200;
+`;
+
+const Header = styled.div`
+  align-items: center;
+  background-color: ${palette.purple};
+  display: flex;
+  justify-content: center;
+  max-height: 140px;
+  padding: 2rem;
+  position: relative;
 `;
 
 const CloseButton = styled(IconButton)`
   position: absolute;
-  right: 17px;
-  top: -123px;
+  right: 1rem;
+  top: 1rem;
 `;
 
-const Title = styled(Text)`
-  position: absolute;
-  top: -100px;
-`;
-
-const Content = styled.div`
-  padding: 2rem 5rem;
+const Content = styled.div<{ isMobile: boolean }>`
+  display: flex;
+  flex-direction: column;
+  padding: ${({ isMobile }) => (isMobile ? '2rem' : '2rem 5rem')};
 `;
 
 const Paragraph = styled(Text)`
@@ -159,10 +170,10 @@ const Paragraph = styled(Text)`
   margin-top: 0;
 `;
 
-const ButtonContainerWithMargin = styled.div`
+const Buttons = styled.div`
   display: flex;
-  gap: 3rem;
-  margin-top: 2.5rem;
+  gap: 2rem;
+  margin-top: 2rem;
 `;
 
 const ActionButton = styled(TextButton)`
