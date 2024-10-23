@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { selectUserId } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
-import { useConfirm } from '@/hooks/useConfirm';
+import { useConfirm } from '@/features/Confirmation/useConfirm';
 import { useReportMentorMutation } from '@/features/Chat/chatPageApi';
 
 import { DIALOG_WIDTH, ICON_SIZES } from '@/components/constants';

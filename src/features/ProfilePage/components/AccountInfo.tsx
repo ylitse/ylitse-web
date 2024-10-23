@@ -6,8 +6,8 @@ import {
   selectIsMentor,
 } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useConfirm } from '@/features/Confirmation/useConfirm';
 import { useDeleteAccountMutation } from '@/features/Authentication/authenticationApi';
-import { useConfirm } from '@/hooks/useConfirm';
 
 import AdminIcon from '@/static/icons/admin.svg';
 import DisplayNameEditor from './DisplayNameEditor';

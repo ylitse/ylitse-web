@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TextButton } from '../Buttons';
+import { TextButton } from '@/components/Buttons';
 
 type Props = {
   closeText: string;

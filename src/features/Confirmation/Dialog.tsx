@@ -30,7 +30,7 @@ type Props = {
   title: string;
 };
 
-export const Dialog = ({
+const Dialog = ({
   borderColor,
   closeText,
   confirmId,
@@ -152,3 +152,5 @@ const CloseButton = styled(IconButton)`
   right: 13px;
   top: 13px;
 `;
+
+export default Dialog;
