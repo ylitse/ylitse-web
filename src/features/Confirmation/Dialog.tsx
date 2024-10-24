@@ -49,11 +49,34 @@ const Dialog = ({
       <Overlay />
       {isMobile ? (
         <MobileContainer>
-          <Header backgroundColor={borderColor}>
+          <MobileHeader backgroundColor={borderColor}>
             <img src={iconMap[iconVariant]} />
             <Text variant="h3">{title}</Text>
-          </Header>
+          </MobileHeader>
+          <MobileContent>
+            <Text>{description}</Text>
+            <ButtonGroup
+              closeText={closeText}
+              confirmId={confirmId}
+              confirmText={confirmText}
+              isConfirmRequired={isConfirmRequired}
+              onClose={onClose}
+              onConfirm={onConfirm}
+            />
+          </MobileContent>
+        </MobileContainer>
+      ) : (
+        <Container>
+          <LeftBorder backgroundColor={borderColor}>
+            <Icon src={iconMap[iconVariant]} />
+          </LeftBorder>
           <Content>
+            <CloseButton
+              variant="closeWithBackground"
+              sizeInPx={ICON_SIZES.MEDIUM}
+              onClick={onClose}
+            />
+            <Text variant="h3">{title}</Text>
             <Text>{description}</Text>
             <ButtonGroup
               closeText={closeText}
@@ -64,25 +87,6 @@ const Dialog = ({
               onConfirm={onConfirm}
             />
           </Content>
-        </MobileContainer>
-      ) : (
-        <Container borderColor={borderColor}>
-          <Icon src={iconMap[iconVariant]} />
-          <CloseButton
-            variant="closeWithBackground"
-            sizeInPx={ICON_SIZES.MEDIUM}
-            onClick={onClose}
-          />
-          <Text variant="h3">{title}</Text>
-          <Text>{description}</Text>
-          <ButtonGroup
-            closeText={closeText}
-            confirmId={confirmId}
-            confirmText={confirmText}
-            isConfirmRequired={isConfirmRequired}
-            onClose={onClose}
-            onConfirm={onConfirm}
-          />
         </Container>
       )}
     </>
@@ -112,7 +116,7 @@ const MobileContainer = styled.div`
   z-index: 200;
 `;
 
-const Header = styled.div<{ backgroundColor: string }>`
+const MobileHeader = styled.div<{ backgroundColor: string }>`
   align-items: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 10px 10px 0 0;
@@ -122,18 +126,18 @@ const Header = styled.div<{ backgroundColor: string }>`
   padding: 1rem 2rem;
 `;
 
-const Content = styled.div`
+const MobileContent = styled.div`
   padding: 0 2rem 2rem;
 `;
 
-const Container = styled.div<{ borderColor: string }>`
+const Container = styled.div`
   background-color: ${palette.white};
-  border-left: ${({ borderColor }) => `110px solid ${borderColor}`};
   border-radius: 10px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
   height: 250px;
   left: 50%;
-  padding: 2rem 3rem;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -141,16 +145,29 @@ const Container = styled.div<{ borderColor: string }>`
   z-index: 200;
 `;
 
+const LeftBorder = styled.div<{ backgroundColor: string }>`
+  align-items: center;
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  justify-content: center;
+  min-width: 110px;
+`;
+
 const Icon = styled.img`
-  left: -79px;
   position: absolute;
-  top: 56px;
+  top: 33%;
+  transform: translateY(-50%);
+`;
+
+const Content = styled.div`
+  padding: 2rem 3rem;
 `;
 
 const CloseButton = styled(IconButton)`
   position: absolute;
-  right: 13px;
-  top: 13px;
+  right: 1rem;
+  top: 1rem;
 `;
 
 export default Dialog;
