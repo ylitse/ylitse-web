@@ -116,7 +116,6 @@ export const variants = {
       fontStyle: 'normal',
       fontWeight: 600,
       lineHeight: '2rem',
-      whiteSpace: 'nowrap',
     },
   },
   link: {

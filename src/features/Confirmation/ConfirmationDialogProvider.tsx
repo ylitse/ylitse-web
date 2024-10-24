@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from 'react';
-import Dialog from '@/components/Dialog';
+import Dialog from './Dialog';
 
-import type { IconVariant } from '@/components/Dialog/Dialog';
+import type { IconVariant } from './Dialog';
 
 type ConfirmationDialogContextType = {
   confirmAction: (config: DialogConfig) => void;
@@ -17,7 +17,7 @@ export const ConfirmationDialogContext =
 export type Dialog = {
   borderColor: string;
   closeText: string;
-  confirmId: string;
+  confirmId?: string;
   confirmText?: string;
   description: string;
   iconVariant?: IconVariant;

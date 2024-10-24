@@ -9,7 +9,7 @@ import {
 } from '@/features/Authentication/userSlice';
 import { selectMentorById } from '@/features/MentorPage/selectors';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { useConfirm } from '@/hooks/useConfirm';
+import { useConfirm } from '@/features/Confirmation/useConfirm';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useGetMentorsQuery } from '@/features/MentorPage/mentorPageApi';
 import { useUpdateStatusMutation } from '@/features/Chat/chatPageApi';
