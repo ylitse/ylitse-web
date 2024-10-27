@@ -25,7 +25,13 @@ const Welcome = ({ isMobile = false }: Props) => {
     mentee: '/chat',
   };
 
-  const navigateBasedOnRole = () => userRole && navigate(navigation[userRole]);
+  const navigateBasedOnRole = () => {
+    if (userRole == 'admin') {
+      location.href = navigation[userRole];
+    }
+
+    userRole && navigate(navigation[userRole]);
+  };
 
   return (
     <Container isDesktop={!isMobile}>
