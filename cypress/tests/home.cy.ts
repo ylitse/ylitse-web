@@ -29,7 +29,7 @@ describe('home', () => {
     cy.url().should('match', /mentors/);
 
     // return to home page
-    cy.visit('/');
+    cy.get('[href="/"]').click();
 
     cy.getByText('Tiedotteet', 'h2').should('be.visible');
     cy.getByText('Käsitteet', 'h2').should('be.visible');
