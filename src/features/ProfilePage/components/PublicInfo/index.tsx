@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components';
-import { useBlocker } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { selectMentor, selectUser } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
-import { useConfirm } from '@/features/Confirmation/useConfirm';
+import { useConfirmDirtyLeave } from '@/features/Confirmation/useConfirmDirtyLeave';
 import { useUpdateMentorMutation } from '@/features/MentorPage/mentorPageApi';
 import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
 
@@ -33,7 +32,6 @@ type Props = {
 
 const PublicInfo = ({ isMobile = false }: Props) => {
   const { t } = useTranslation('profile');
-  const { getConfirmation } = useConfirm();
   const user = useAppSelector(selectUser);
   const mentor = useAppSelector(selectMentor);
   const [updateMentor, { isLoading: isLoadingMentor }] =
@@ -73,27 +71,14 @@ const PublicInfo = ({ isMobile = false }: Props) => {
   };
 
   // Block navigating elsewhere in the app if there are unsaved changes
-  const blocker = useBlocker(() => isDirty);
-
-  useEffect(() => {
-    const confirmLeave = async () => {
-      const isConfirmed = await getConfirmation({
-        borderColor: palette.redSalmon,
-        closeText: t('public.mentor.leavePage.cancel'),
-        confirmId: 'confirm-leave',
-        confirmText: t('public.mentor.leavePage.confirm'),
-        description: t('public.mentor.leavePage.description'),
-        title: t('public.mentor.leavePage.title'),
-      });
-      if (isConfirmed) {
-        if (blocker.state === 'blocked') blocker.proceed();
-      } else {
-        if (blocker.state === 'blocked') blocker.reset();
-      }
-    };
-
-    if (blocker.state === 'blocked') confirmLeave();
-  }, [blocker.state]);
+  useConfirmDirtyLeave(isDirty, {
+    borderColor: palette.redSalmon,
+    closeText: t('public.mentor.leavePage.cancel'),
+    confirmId: 'confirm-leave',
+    confirmText: t('public.mentor.leavePage.confirm'),
+    description: t('public.mentor.leavePage.description'),
+    title: t('public.mentor.leavePage.title'),
+  });
 
   const isLoading = isLoadingMentor || isLoadingUser;
   const isDiscardingDisabled = !isDirty || isLoading;
