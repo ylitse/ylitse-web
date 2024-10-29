@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { selectMentor, selectUser } from '@/features/Authentication/userSlice';
 import { useAppSelector } from '@/store';
+import { useConfirmDirtyLeave } from '@/features/Confirmation/useConfirmDirtyLeave';
 import { useUpdateMentorMutation } from '@/features/MentorPage/mentorPageApi';
 import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
 
@@ -68,6 +69,16 @@ const PublicInfo = ({ isMobile = false }: Props) => {
       return;
     }
   };
+
+  // Block navigating elsewhere in the app if there are unsaved changes
+  useConfirmDirtyLeave(isDirty, {
+    borderColor: palette.redSalmon,
+    closeText: t('public.mentor.leavePage.cancel'),
+    confirmId: 'confirm-leave',
+    confirmText: t('public.mentor.leavePage.confirm'),
+    description: t('public.mentor.leavePage.description'),
+    title: t('public.mentor.leavePage.title'),
+  });
 
   const isLoading = isLoadingMentor || isLoadingUser;
   const isDiscardingDisabled = !isDirty || isLoading;

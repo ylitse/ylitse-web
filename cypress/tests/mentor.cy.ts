@@ -136,6 +136,38 @@ describe('mentor profile', () => {
     );
   });
 
+  it('confirmation is needed to leave profile page with unsaved changes', () => {
+    cy.fillInputByLabel('Julkinen nimimerkki *', NEW_DISPLAY_NAME);
+
+    // try to navigate away
+    cy.getByText('Mentorit', 'a').click();
+    cy.wait(200);
+
+    // should show notification
+    cy.contains('Sinulla on tallentamattomia muutoksia').should('be.visible');
+
+    // should stay on profile page after canceling dialog
+    cy.getByText('Peruuta', 'button').click();
+    cy.url().should('match', /profile/);
+    cy.getInputByLabel('Julkinen nimimerkki *').should(
+      'have.value',
+      NEW_DISPLAY_NAME,
+    );
+
+    // confirming leave discards changes
+    cy.getByText('Mentorit', 'a').click();
+    cy.wait(200);
+    cy.getByText('Poistu tallentamatta', 'button').click();
+    cy.wait(200);
+    cy.url().should('match', /mentors/);
+
+    cy.get('[href="/profile"]').click();
+    cy.getInputByLabel('Julkinen nimimerkki *').should(
+      'have.value',
+      mentor.displayName,
+    );
+  });
+
   it('display name error message is shown for invalid inputs ', () => {
     cy.fillInputByLabel('Julkinen nimimerkki *', TOO_SHORT_DISPLAY_NAME);
     cy.wait(200);
