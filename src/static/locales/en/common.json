@@ -1,6 +1,7 @@
 {
   "about": {
     "title": "Application info",
+    "description": "Ylitse is a digital service by SOS Children's Village Association, designed for all young people over the age of 17 who are seeking a long-term mentor. In this service, users can search for a mentor based on their own issues or topics of interest. They can have conversations with their mentor at mutually agreed times for as long as they wish. Mentors can be selected from profile cards, and users can search for mentors by text or filter through keywords. Each mentor's card provides details on their peer experience and response times. All mentors are volunteers who respond on their own time. The mentors come from various partner organizations, and SOS Children's Village collaborates to continuously improve the digital mentoring platform for these organizations. Ylitse is developed as open-source and is continuously improved based on user feedback. SOS Children's Village organizes development events for those in need of help as well as for mentors. Leave feedback and join the testing team!",
     "licenses": "Licenses",
     "open": "Open licenses",
     "close": "Close licenses",
