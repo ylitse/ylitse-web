@@ -35,15 +35,18 @@ export const About = ({ onDismiss }: Props) => {
             sizeInPx={38}
           />
         </CloseContainer>
-        <Text variant="h1">{t('about.title')}</Text>
-        <InfoText variant="p">
-          {t('about.ui')} {version.version}+git:{COMMIT_HASH}
-        </InfoText>
-        <InfoText variant="p">{t('about.api')} </InfoText>
-        {isLicenseModalVisible && <LicenseModal />}
-        <LicensesButton onClick={toggleLicenseModal}>
-          {!isLicenseModalVisible ? t('about.open') : t('about.close')}
-        </LicensesButton>
+        <AboutCardContent>
+          <Text variant="h1">{t('about.title')}</Text>
+          <InfoText variant="p">{t('about.description')}</InfoText>
+          <InfoText variant="p">
+            {t('about.ui')} {version.version}+git:{COMMIT_HASH}
+          </InfoText>
+          <InfoText variant="p">{t('about.api')} </InfoText>
+          {isLicenseModalVisible && <LicenseModal />}
+          <LicensesButton onClick={toggleLicenseModal}>
+            {!isLicenseModalVisible ? t('about.open') : t('about.close')}
+          </LicensesButton>
+        </AboutCardContent>
       </AboutCard>
     </Container>
   );
@@ -55,7 +58,6 @@ const AboutCard = styled.div<{ isMobile: boolean }>`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  height: fit-content;
   justify-content: center;
   left: 50%;
   margin: auto;
@@ -67,11 +69,24 @@ const AboutCard = styled.div<{ isMobile: boolean }>`
   ${({ isMobile }) =>
     isMobile
       ? css`
+          max-height: 90vh;
           width: 80vw;
         `
       : css`
+          height: fit-content;
+          max-height: 90vh;
           width: 35vw;
         `}
+`;
+
+const AboutCardContent = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100% - 2rem);
+  overflow-y: auto;
+  padding: 1rem;
+  width: 100%;
 `;
 
 const Container = styled.div`
@@ -104,6 +119,7 @@ const LicensesButton = styled(TextButton)`
 
 const InfoText = styled(Text)`
   margin: 10px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
 `;
 
 export default About;
