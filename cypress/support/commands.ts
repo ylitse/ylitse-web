@@ -39,7 +39,7 @@ Cypress.Commands.add('registerUser', (username: string, password: string) => {
 
 Cypress.Commands.add('loginUser', (username: string, password: string) => {
   cy.visit('/login/');
-  cy.fillInput('login_name', username);
+  cy.fillInput('username', username);
   cy.fillInput('password', password);
   cy.get('button[id="submit"]').click();
 
