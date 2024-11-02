@@ -35,17 +35,6 @@ export const parseAndTransformTo = <A, B, C>(
 
 const baseQuery = fetchBaseQuery({
   baseUrl: '/api',
-  prepareHeaders: headers => {
-    const accessToken = sessionStorage.getItem('access_token');
-    if (accessToken) {
-      headers.set('Authorization', `Bearer ${accessToken}`);
-    }
-    return headers;
-  },
-});
-
-const refreshResponse = D.struct({
-  access_token: D.string,
 });
 
 export const refreshingBaseQuery: BaseQueryFn<
@@ -58,25 +47,16 @@ export const refreshingBaseQuery: BaseQueryFn<
   // if unauthorized try to refresh
   const isUnauthorized = result.error && result.error.status === 401;
   if (isUnauthorized) {
-    const refresh_token = sessionStorage.getItem('refresh_token');
     const refreshResult = await baseQuery(
       {
-        url: 'refresh',
-        method: 'POST',
-        body: JSON.stringify({ refresh_token }),
+        url: 'webrefresh',
+        method: 'GET',
       },
       api,
       extraOptions,
     );
 
-    if (refreshResult.data) {
-      const token = parseAndTransformTo(
-        refreshResult.data,
-        refreshResponse,
-        { access_token: '' },
-        ({ access_token }) => access_token,
-      );
-      sessionStorage.setItem('access_token', token);
+    if (refreshResult.meta?.response?.ok) {
       // retry the initial query
       return await baseQuery(args, api, extraOptions);
     } else {
