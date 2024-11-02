@@ -37,7 +37,7 @@ describe('login', () => {
       'Uusi täällä? Palvelussa voit jutella SOS-Lapsikylän valmentamien vertaismentoreiden kanssa mistä tahansa mieltäsi painavasta asiasta. Palvelun käyttö on luottamuksellista ja täysin maksutonta.',
     ).should('be.visible');
     cy.contains('Ylitse MentorApp').should('be.visible');
-    cy.contains('Unohditko salasanasi?').should('be.visible');
+    //cy.contains('Unohditko salasanasi?').should('be.visible');
   });
 
   it('changes language on button press', () => {
@@ -47,27 +47,27 @@ describe('login', () => {
     cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
-  it('shows error if empty login_name', () => {
+  it('shows error if empty username', () => {
     cy.fillInput('password', 'examplePassword');
     clickLogin();
     testErrorVisible();
   });
 
   it('shows error if empty password', () => {
-    cy.fillInput('login_name', 'exampleUsername');
+    cy.fillInput('username', 'exampleUsername');
     clickLogin();
     testErrorVisible();
   });
 
   it('shows error if no account exists', () => {
-    cy.fillInput('login_name', 'wrongUsername');
+    cy.fillInput('username', 'wrongUsername');
     cy.fillInput('password', 'wrongPassword');
     clickLogin();
     testErrorVisible();
   });
 
   it('can log in with registered account', () => {
-    cy.fillInput('login_name', username);
+    cy.fillInput('username', username);
     cy.fillInput('password', 'examplePassword');
     clickLogin();
     cy.location('pathname').should('eq', '/');

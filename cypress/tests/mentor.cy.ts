@@ -81,7 +81,7 @@ describe('mentor profile', () => {
     cy.getByText('Kirjaudu ulos').click();
 
     // old password should not work
-    cy.fillInput('login_name', mentor.loginName);
+    cy.fillInput('username', mentor.loginName);
     cy.fillInput('password', mentor.password);
     cy.get('button[id="submit"]').click();
     cy.get('[id="login-error"]').should('be.visible');
