@@ -8,6 +8,7 @@
     try {
       // Create a new account
       const createAccountResponse = await fetch('/api/accounts', {
+        method: 'POST',
         body: JSON.stringify({
           account: {
             email: formData.get('email'),
@@ -20,25 +21,25 @@
         headers: {
           'Content-Type': 'application/json',
         },
-        method: 'POST',
       });
       const accountData = await createAccountResponse.json();
       const createdUser = accountData.user;
 
+      const loginFormData = new FormData();
+      loginFormData.append("username", formData.get('username'));
+      loginFormData.append("password", formData.get('password'));
+
       // Log in using the created account
-      const loginResponse = await fetch('/api/login', {
-        body: JSON.stringify({
-          login_name: formData.get('username'),
-          password: formData.get('password'),
-        }),
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
+      const loginResponse = await fetch('/api/weblogin', {
         method: 'POST',
+        body: loginFormData,
+        credentials: 'include',
       });
       const loginData = await loginResponse.json();
 
       // Update the user by adding the display name
       const updateUserResponse = await fetch(`/api/users/${createdUser.id}`, {
+        method: 'PUT',
         body: JSON.stringify({
           account_id: createdUser.account_id,
           display_name: formData.get('display-name'),
@@ -46,19 +47,15 @@
           role: createdUser.role,
         }),
         credentials: 'include',
-        headers: {
-          Authorization: `Bearer ${loginData.tokens.access_token}`,
-          'Content-Type': 'application/json',
-        },
-        method: 'PUT',
       });
 
-      // Redirect to login page
+      // Redirect to root
       if (updateUserResponse.ok) {
-        window.location.replace('/login/');
+        window.location.replace('/');
       }
     } catch (error) {
       console.log(error.message);
+      window.location.replace('/login/');
     }
   });
 })(window, document);
