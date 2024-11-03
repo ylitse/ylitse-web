@@ -7,7 +7,6 @@ import {
   FetchBaseQueryError,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/dist/query';
-import { authenticationApi } from '@/features/Authentication/authenticationApi';
 
 const parse =
   <A, B>(model: D.Decoder<A, B>, onError?: (error: D.DecodeError) => void) =>
@@ -61,8 +60,7 @@ export const refreshingBaseQuery: BaseQueryFn<
       return await baseQuery(args, api, extraOptions);
     } else {
       // if refresh fail, logout
-      api.dispatch(authenticationApi.endpoints.logout.initiate());
-      return { data: result.data };
+      window.location.href = '/login/';
     }
   }
 
