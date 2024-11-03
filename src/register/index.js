@@ -26,8 +26,8 @@
       const createdUser = accountData.user;
 
       const loginFormData = new FormData();
-      loginFormData.append("username", formData.get('username'));
-      loginFormData.append("password", formData.get('password'));
+      loginFormData.append('username', formData.get('username'));
+      loginFormData.append('password', formData.get('password'));
 
       // Log in using the created account
       const loginResponse = await fetch('/api/weblogin', {
@@ -35,7 +35,10 @@
         body: loginFormData,
         credentials: 'include',
       });
-      const loginData = await loginResponse.json();
+
+      if (!loginResponse.ok) {
+        window.location.replace('/login/');
+      }
 
       // Update the user by adding the display name
       const updateUserResponse = await fetch(`/api/users/${createdUser.id}`, {

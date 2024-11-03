@@ -26,6 +26,7 @@ describe('register', () => {
   };
 
   beforeEach(() => {
+    cy.visit('/logout/');
     cy.visit('/register/');
     cy.switchLanguageBeforeLogin('fi');
     cy.getByText('Rekisteröidy', 'h1').should('be.visible');
@@ -51,8 +52,9 @@ describe('register', () => {
 
   it('registers new user if form is correctly filled', () => {
     cy.registerUser(username, 'examplePassword');
-    cy.location('pathname').should('contain', '/login');
-    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.location('pathname').should('eq', '/');
+    cy.switchLanguageAfterLogin('fi');
+    cy.contains('Kirjaudu ulos').should('be.visible');
   });
 
   // Username
