@@ -36,8 +36,6 @@ export const user = createSlice({
         (_, { payload }) => payload,
       )
       .addMatcher(authenticationApi.endpoints.logout.matchFulfilled, () => {
-        sessionStorage.removeItem('refresh_token');
-        sessionStorage.removeItem('access_token');
         window.location.href = '/login/';
         return initialState;
       });
