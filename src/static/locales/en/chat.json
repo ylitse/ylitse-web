@@ -8,7 +8,7 @@
     "block": {
       "confirm": "Block user",
       "description": "Do you want to block user {{buddyName}}?",
-      "title": "Blocking user"
+      "title": "Block user"
     },
     "cancel": "Cancel",
     "report": {
@@ -30,9 +30,9 @@
       "title": "Report user"
     },
     "restore": {
-      "confirm": "Restore conversation",
-      "description": "Do you want to restore the conversation with {{buddyName}}?",
-      "title": "Restoring conversation"
+      "confirm": "Unarchive",
+      "description": "Do you want to unarchive and restore the conversation with {{buddyName}}?",
+      "title": "Unarchive conversation"
     },
     "unblock": {
       "confirm": "Unblock",
@@ -44,7 +44,7 @@
     "archive": "Archive",
     "block": "Block user",
     "report": "Report",
-    "restore": "Restore conversation",
+    "restore": "Unarchive",
     "search": "Search conversation",
     "unblock": "Unblock"
   },

@@ -30,8 +30,8 @@
       "title": "Ilmianna käyttäjä"
     },
     "restore": {
-      "confirm": "Palauta keskustelu",
-      "description": "Haluatko palauttaa keskustelun käyttäjän {{buddyName}} kanssa?",
+      "confirm": "Palauta arkistosta",
+      "description": "Haluatko palauttaa keskustelun arkistosta käyttäjän {{buddyName}} kanssa?",
       "title": "Keskustelun palauttaminen"
     },
     "unblock": {
