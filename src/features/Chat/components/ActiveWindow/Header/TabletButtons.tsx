@@ -13,7 +13,7 @@ import { ICON_SIZES, palette } from '@/components/constants';
 // Components
 import { Button, IconButton, StatusButton } from '@/components/Buttons';
 
-type DialogVariant = 'archive' | 'block' | 'restore';
+type DialogVariant = 'archive' | 'block' | 'restore' | 'unblock';
 
 type Props = {
   chat: ChatBuddy;
@@ -50,7 +50,7 @@ const TabletButtons = ({
       />
       {isDropdownOpen && (
         <Dropdown>
-          {chat.status === 'ok' ? (
+          {chat.status === 'ok' && (
             <>
               <TabletStatusButton
                 onClick={() => confirmAction('archive')}
@@ -63,11 +63,19 @@ const TabletButtons = ({
                 text={t('header.block')}
               />
             </>
-          ) : (
+          )}
+          {chat.status === 'archived' && (
             <TabletStatusButton
               onClick={() => confirmAction('restore')}
               icon="return"
               text={t('header.restore')}
+            />
+          )}
+          {chat.status === 'banned' && (
+            <TabletStatusButton
+              onClick={() => confirmAction('unblock')}
+              icon="return"
+              text={t('header.unblock')}
             />
           )}
           <ReportButton

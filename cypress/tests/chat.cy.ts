@@ -224,7 +224,7 @@ describe('chat', () => {
     // unarchive chat
     cy.getByText('Palauta keskustelu', 'button').click();
     cy.contains(
-      `Haluatko palauttaa keskustelun käyttäjän ${mentee.displayName} kanssa?`,
+      `Haluatko palauttaa keskustelun arkistosta käyttäjän ${mentee.displayName} kanssa?`,
     ).should('be.visible');
     cy.get('button[id="confirm-restore"]').click();
 
@@ -311,11 +311,11 @@ describe('chat', () => {
     cy.contains('Kirjoita viestisi tähän').should('not.exist');
 
     // unarchive chat
-    cy.getByText('Palauta keskustelu', 'button').click();
+    cy.getByText('Poista esto', 'button').click();
     cy.contains(
-      `Haluatko palauttaa keskustelun käyttäjän ${mentee.displayName} kanssa?`,
+      `Haluatko poistaa eston ja palauttaa keskustelun käyttäjän ${mentee.displayName} kanssa?`,
     ).should('be.visible');
-    cy.get('button[id="confirm-restore"]').click();
+    cy.get('button[id="confirm-unblock"]').click();
 
     // should show notification
     cy.contains('Keskustelu palautettu onnistuneesti').should('be.visible');

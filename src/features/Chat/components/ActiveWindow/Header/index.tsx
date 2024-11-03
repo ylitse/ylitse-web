@@ -34,7 +34,7 @@ import Text from '@/components/Text';
 import type { ChatBuddy } from '@/features/Chat/mappers';
 import type { ChatFolder } from '@/features/Chat/chatPageApi';
 
-type DialogVariant = 'archive' | 'block' | 'restore';
+type DialogVariant = 'archive' | 'block' | 'restore' | 'unblock';
 
 const confirmDialogMap: Record<
   DialogVariant,
@@ -43,6 +43,7 @@ const confirmDialogMap: Record<
   archive: { borderColor: palette.orange, targetFolder: 'archived' },
   block: { borderColor: palette.redSalmon, targetFolder: 'banned' },
   restore: { borderColor: palette.blue2, targetFolder: 'ok' },
+  unblock: { borderColor: palette.redSalmon, targetFolder: 'ok' },
 };
 
 const iconMap = {
