@@ -6,9 +6,9 @@
     <meta name="description" content="Ylitse web registration" />
     <meta name="author" content="SOS Children's Villages Finland" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="styles/normalize.css" />
-    <link rel="stylesheet" href="styles/static-pages.css" />
-    <link rel="stylesheet" href="styles/fonts.css" />
+    <link rel="stylesheet" href="../static/styles/normalize.css" />
+    <link rel="stylesheet" href="../static/styles/static-pages.css" />
+    <link rel="stylesheet" href="../static/styles/fonts.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
 
@@ -27,12 +27,12 @@
           <a href="https://apuu.fi">
             <img
               class="fi-alt-text"
-              src="icons/outsidelink.svg"
+              src="../static/icons/outsidelink.svg"
               alt="Siirry apuu.fi verkkosivulle."
             />
             <img
               class="en-alt-text"
-              src="icons/outsidelink.svg"
+              src="../static/icons/outsidelink.svg"
               alt="Visit the apuu.fi website."
             />
           </a>
@@ -44,7 +44,7 @@
             <span localization-key="usernameLabel"></span>
             <span class="align-right">
               <span class="tooltip">
-                <img src="icons/tooltip.svg" />
+                <img src="../static/icons/tooltip.svg" />
                 <span class="tooltip-text" localization-key="usernameTooltip">
                 </span>
               </span>
@@ -61,7 +61,7 @@
             required
           />
           <label class="error-message">
-            <img src="icons/warning-with-background.svg" />
+            <img src="../static/icons/warning-with-background.svg" />
             <span
               id="too-short-message"
               localization-key="usernameTooShortError"
@@ -92,7 +92,7 @@
                 localization-key="hidePassword"
               ></button>
               <span class="tooltip">
-                <img src="icons/tooltip.svg" />
+                <img src="../static/icons/tooltip.svg" />
                 <span class="tooltip-text" localization-key="passwordTooltip">
                 </span>
               </span>
@@ -109,7 +109,7 @@
             required
           />
           <label class="error-message">
-            <img src="icons/warning-with-background.svg" />
+            <img src="../static/icons/warning-with-background.svg" />
             <span localization-key="passwordTooShortError"></span>
           </label>
         </fieldset>
@@ -132,7 +132,7 @@
                 localization-key="hidePassword"
               ></button>
               <span class="tooltip">
-                <img src="icons/tooltip.svg" />
+                <img src="../static/icons/tooltip.svg" />
                 <span class="tooltip-text" localization-key="passwordTooltip">
                 </span>
               </span>
@@ -147,7 +147,7 @@
             required
           />
           <label class="error-message">
-            <img src="icons/warning-with-background.svg" />
+            <img src="../static/icons/warning-with-background.svg" />
             <span localization-key="passwordsDontMatchError"></span>
           </label>
         </fieldset>
@@ -162,7 +162,7 @@
             pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
           />
           <label class="error-message">
-            <img src="icons/warning-with-background.svg" />
+            <img src="../static/icons/warning-with-background.svg" />
             <span localization-key="emailError"> </span>
           </label>
           <p class="field-info" localization-key="emailFieldInfo"></p>
@@ -172,7 +172,7 @@
             <span localization-key="displayNameLabel"></span>
             <span class="align-right">
               <span class="tooltip">
-                <img src="icons/tooltip.svg" />
+                <img src="../static/icons/tooltip.svg" />
                 <span
                   class="tooltip-text"
                   localization-key="displayNameTooltip"
@@ -192,7 +192,7 @@
             required
           />
           <label class="error-message">
-            <img src="icons/warning-with-background.svg" />
+            <img src="../static/icons/warning-with-background.svg" />
             <span localization-key="displayNameTooShortError"></span>
           </label>
           <p class="field-info" localization-key="displayNameFieldInfo"></p>
@@ -213,12 +213,12 @@
             >
               <img
                 class="fi-alt-text"
-                src="icons/outsidelink.svg"
+                src="../static/icons/outsidelink.svg"
                 alt="Lataa tietosuojaseloste."
               />
               <img
                 class="en-alt-text"
-                src="icons/outsidelink.svg"
+                src="../static/icons/outsidelink.svg"
                 alt="Download privacy policy."
               />
             </a>
@@ -268,6 +268,6 @@
       <footer localization-key="footer"></footer>
     </main>
     <script src="index.js"></script>
-    <script src="localization.js"></script>
+    <script src="../static/localization.js"></script>
   </body>
 </html>
