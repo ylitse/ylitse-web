@@ -77,18 +77,12 @@ module.exports = {
           context: path.resolve(__dirname, 'src'),
         },
         {
-          from: '**/*',
-          to: path.resolve(__dirname, 'dist/login'),
-          context: path.resolve(__dirname, 'src', 'static'),
-        },
-        {
           from: 'register/**/*',
           context: path.resolve(__dirname, 'src'),
         },
         {
-          from: '**/*',
-          to: path.resolve(__dirname, 'dist/register'),
-          context: path.resolve(__dirname, 'src', 'static'),
+          from: 'static/**/*',
+          context: path.resolve(__dirname, 'src'),
         },
         {
           from: path.resolve(__dirname, 'licenses.json'),
