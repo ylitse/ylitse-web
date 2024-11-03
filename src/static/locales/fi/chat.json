@@ -33,6 +33,11 @@
       "confirm": "Palauta keskustelu",
       "description": "Haluatko palauttaa keskustelun käyttäjän {{buddyName}} kanssa?",
       "title": "Keskustelun palauttaminen"
+    },
+    "unblock": {
+      "confirm": "Poista esto",
+      "description": "Haluatko poistaa eston ja palauttaa keskustelun käyttäjän {{buddyName}} kanssa?",
+      "title": "Poista esto"
     }
   },
   "header": {
@@ -40,7 +45,8 @@
     "block": "Estä käyttäjä",
     "report": "Ilmianna",
     "restore": "Palauta keskustelu",
-    "search": "Etsi keskustelusta"
+    "search": "Etsi keskustelusta",
+    "unblock": "Poista esto"
   },
   "input": {
     "placeholder": "Kirjoita viestisi tähän"

@@ -33,6 +33,11 @@
       "confirm": "Restore conversation",
       "description": "Do you want to restore the conversation with {{buddyName}}?",
       "title": "Restoring conversation"
+    },
+    "unblock": {
+      "confirm": "Unblock",
+      "description": "Do you want to unblock {{buddyName}} and restore the conversation?",
+      "title": "Unblock"
     }
   },
   "header": {
@@ -40,7 +45,8 @@
     "block": "Block user",
     "report": "Report",
     "restore": "Restore conversation",
-    "search": "Search conversation"
+    "search": "Search conversation",
+    "unblock": "Unblock"
   },
   "input": {
     "placeholder": "Write your message here"

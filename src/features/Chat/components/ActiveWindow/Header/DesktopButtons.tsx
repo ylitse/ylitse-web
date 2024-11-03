@@ -9,7 +9,7 @@ import { ICON_SIZES } from '@/components/constants';
 
 import type { ChatBuddy } from '@/features/Chat/mappers';
 
-type DialogVariant = 'archive' | 'block' | 'restore';
+type DialogVariant = 'archive' | 'block' | 'restore' | 'unblock';
 
 type Props = {
   chat: ChatBuddy;
@@ -28,10 +28,11 @@ const DesktopButtons = ({
   const openArchiveDialog = () => confirmStatusChange('archive');
   const openBlockDialog = () => confirmStatusChange('block');
   const openRestoreDialog = () => confirmStatusChange('restore');
+  const openUnblockDialog = () => confirmStatusChange('unblock');
 
   return (
     <Container>
-      {chat.status === 'ok' ? (
+      {chat.status === 'ok' && (
         <>
           <StatusButton
             onClick={openArchiveDialog}
@@ -44,11 +45,19 @@ const DesktopButtons = ({
             text={t('header.block')}
           />
         </>
-      ) : (
+      )}
+      {chat.status === 'archived' && (
         <StatusButton
           onClick={openRestoreDialog}
           icon="return"
           text={t('header.restore')}
+        />
+      )}
+      {chat.status === 'banned' && (
+        <StatusButton
+          onClick={openUnblockDialog}
+          icon="return"
+          text={t('header.unblock')}
         />
       )}
       {isMentee && (
