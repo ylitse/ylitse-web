@@ -313,7 +313,7 @@ describe('chat', () => {
 
     // go to the blocked chat
     cy.get('button[aria-label="menuLines"]').click();
-    cy.getByText('Estetyt keskustelut', 'a');
+    cy.getByText('Estetyt keskustelut', 'a').click();
     cy.getByText(mentee.displayName, 'p').click();
 
     // unblock chat
@@ -380,7 +380,7 @@ describe('chat', () => {
     // go to blocked conversations
     cy.get('[href="/chat"]').click();
     cy.get('button[aria-label="menuLines"]').click();
-    cy.getByText('Estetyt keskustelut', 'a');
+    cy.getByText('Estetyt keskustelut', 'a').click();
     cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
   });
 });
