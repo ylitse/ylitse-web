@@ -38,6 +38,8 @@ export const Content = ({
     navigate('/chat');
   };
 
+  const areLanguagesDisplayed = !isMobile && languages.length > 0;
+
   return (
     <Container isMobile={isMobile}>
       {!isMobile && (
@@ -53,7 +55,7 @@ export const Content = ({
         {t('card.bio')}
       </StoryHeader>
       <Text>{story}</Text>
-      {isMobile && (
+      {areLanguagesDisplayed && (
         <Languages isMe={isMe} languages={languages} isMobile={isMobile} />
       )}
       <Skills skills={skills} />

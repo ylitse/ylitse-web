@@ -19,6 +19,7 @@ export const BasicInfo = ({
 }: Props) => {
   const { isMobile } = useGetLayoutMode();
   const { t } = useTranslation('mentors');
+  const areLanguagesDisplayed = !isMobile && languages.length > 0;
 
   return (
     <Container isMobile={isMobile}>
@@ -36,7 +37,7 @@ export const BasicInfo = ({
       <TruncateText isMobile={isMobile} color={isMe ? 'blueDark' : 'white'}>
         {statusMessage}
       </TruncateText>
-      {!isMobile && (
+      {areLanguagesDisplayed && (
         <Languages languages={languages} isMe={isMe} isMobile={isMobile} />
       )}
     </Container>
