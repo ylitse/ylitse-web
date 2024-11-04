@@ -35,6 +35,18 @@ describe('chat', () => {
     });
   };
 
+  it('mentor can not start a conversation with themselves', () => {
+    api.signUpMentor(mentor);
+    cy.loginUser(mentor.loginName, mentor.password);
+
+    // go to mentors page
+    cy.get('[href="/mentors"]').click();
+    cy.getByText(mentor.displayName, 'h2').should('be.visible');
+
+    cy.getByText('Avaa kortti', 'button').scrollIntoView().click();
+    cy.getByText('Aloita keskustelu', 'button').should('be.disabled');
+  });
+
   it('can start a conversation with mentor', () => {
     api.signUpMentee(mentee);
     api.signUpMentor(mentor);
