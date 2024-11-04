@@ -16,7 +16,7 @@ export const Languages = ({
 }) => {
   const { t } = useTranslation('mentors');
   return (
-    <>
+    <div>
       <Header variant="h3" color={isMobile || isMe ? 'blueDark' : 'white'}>
         {t('card.languages')}
       </Header>
@@ -25,7 +25,7 @@ export const Languages = ({
           <SimpleChip key={item} text={item} />
         ))}
       </Chips>
-    </>
+    </div>
   );
 };
 

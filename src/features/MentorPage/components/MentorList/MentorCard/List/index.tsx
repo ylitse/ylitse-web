@@ -126,9 +126,9 @@ const CardContent = styled.div<{ isMobile: boolean }>`
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: ${({ isMobile }) => (isMobile ? '0.5rem' : '1.5rem')};
+  gap: 1.5rem;
   justify-content: space-between;
-  padding: 1.5rem;
+  padding: ${({ isMobile }) => (isMobile ? '1.5rem' : '2.5rem')};
 `;
 
 export default ListCard;

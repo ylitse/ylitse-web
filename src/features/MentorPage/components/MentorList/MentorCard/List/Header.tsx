@@ -75,7 +75,7 @@ const Container = styled.div<{ statusColor: string; isMobile: boolean }>`
   flex: 0 0 auto;
   height: 7.5rem;
   max-height: 7.5rem;
-  padding: ${({ isMobile }) => (isMobile ? '1rem' : '1.9rem')};
+  padding: ${({ isMobile }) => (isMobile ? '1.5rem' : '2.5rem')};
   position: relative;
   width: 100%;
 `;
