@@ -19,6 +19,8 @@ export const BasicInfo = ({
 }: Props) => {
   const { isMobile } = useGetLayoutMode();
   const { t } = useTranslation('mentors');
+  const areLanguagesDisplayed = !isMobile && languages.length > 0;
+  const isDividerDisplayed = Boolean(age) && Boolean(region);
 
   return (
     <Container isMobile={isMobile}>
@@ -30,13 +32,15 @@ export const BasicInfo = ({
       </NameText>
       {!isMobile && <NameDivider isMe={isMe} />}
       <WrappedText color={isMe ? 'blueDark' : 'white'}>
-        {age} {t('card.age')} <Divider>|</Divider>
+        {age}
+        {t('card.age')}
+        {isDividerDisplayed && <Divider>|</Divider>}
         {region}
       </WrappedText>
       <TruncateText isMobile={isMobile} color={isMe ? 'blueDark' : 'white'}>
         {statusMessage}
       </TruncateText>
-      {!isMobile && (
+      {areLanguagesDisplayed && (
         <Languages languages={languages} isMe={isMe} isMobile={isMobile} />
       )}
     </Container>

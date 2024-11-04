@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -38,28 +38,29 @@ export const Content = ({
     navigate('/chat');
   };
 
+  const areLanguagesDisplayed = isMobile && languages.length > 0;
+
   return (
     <Container isMobile={isMobile}>
       {!isMobile && (
-        <CloseContainer>
-          <IconButton
-            onClick={onDismiss}
-            variant="closeWithBackground"
-            sizeInPx={ICON_SIZES.MEDIUM}
-          />
-        </CloseContainer>
+        <CloseButton
+          onClick={onDismiss}
+          variant="closeWithBackground"
+          sizeInPx={ICON_SIZES.MEDIUM}
+        />
       )}
-      <StoryHeader isMobile={isMobile} variant="h3">
-        {t('card.bio')}
-      </StoryHeader>
-      <Text>{story}</Text>
-      {isMobile && (
-        <Languages isMe={isMe} languages={languages} isMobile={isMobile} />
+      <div>
+        <Text variant="h3">{t('card.bio')}</Text>
+        <Text>{story}</Text>
+      </div>
+      {areLanguagesDisplayed && (
+        <Languages isMe={isMe} isMobile={isMobile} languages={languages} />
       )}
       <Skills skills={skills} />
       <OpenConversationButton
         isDisabled={isMe}
         onClick={handleClick}
+        size="large"
         variant={isMe ? 'disabled' : 'dark'}
       >
         {t('card.chat')}
@@ -72,20 +73,15 @@ const Container = styled.div<{ isMobile: boolean }>`
   display: flex;
   flex: 1;
   flex-direction: column;
+  gap: 1.5rem;
   overflow-y: auto;
-  padding: ${({ isMobile }) => (isMobile ? '1rem' : '1rem 1rem 2rem 2rem')};
+  padding: ${({ isMobile }) => (isMobile ? '1rem 1.25rem' : '4rem 5rem')};
 `;
 
-const CloseContainer = styled.div`
-  align-self: flex-end;
-`;
-
-const StoryHeader = styled(Text)<{ isMobile: boolean }>`
-  ${({ isMobile }) =>
-    !isMobile &&
-    css`
-      flex-grow: 1;
-    `};
+const CloseButton = styled(IconButton)`
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
 `;
 
 const OpenConversationButton = styled(TextButton)`

@@ -27,6 +27,7 @@ export const ListCard: React.FC<Props> = ({
   const { isMobile } = useGetLayoutMode();
   const currentUserId = useAppSelector(selectUserId);
   const isLessThan90DaysOld = getIsOlderThanDaysAgo(90, mentor.created);
+  const areLanguagesDisplayed = mentor.languages.length > 0;
 
   return (
     <Container isHomePage={isHomePage} isMobile={isMobile}>
@@ -41,7 +42,7 @@ export const ListCard: React.FC<Props> = ({
       />
       <CardContent isMobile={isMobile}>
         <Story story={mentor.story} />
-        <Languages languages={mentor.languages} />
+        {areLanguagesDisplayed && <Languages languages={mentor.languages} />}
         <Skills skills={mentor.skills} />
         <ExpandButton setVisibleCard={setVisibleCard} mentor={mentor} />
       </CardContent>
@@ -125,9 +126,9 @@ const CardContent = styled.div<{ isMobile: boolean }>`
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: ${({ isMobile }) => (isMobile ? '0.5rem' : '1.5rem')};
+  gap: 1.5rem;
   justify-content: space-between;
-  padding: 1.5rem;
+  padding: ${({ isMobile }) => (isMobile ? '1.5rem' : '2.5rem')};
 `;
 
 export default ListCard;

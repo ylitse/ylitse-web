@@ -41,6 +41,8 @@ export const Header: React.FC<Props> = ({
     empty: palette.purple,
   };
 
+  const isDividerDisplayed = Boolean(age) && Boolean(region);
+
   return (
     <Container statusColor={statusColors[status]} isMobile={isMobile}>
       <Tag status={status}></Tag>
@@ -50,7 +52,9 @@ export const Header: React.FC<Props> = ({
           {name}
         </NameText>
         <WrappedText color={isMe ? 'blueDark' : 'white'}>
-          {age} {t('card.age')} <Divider>|</Divider>
+          {age}
+          {t('card.age')}
+          {isDividerDisplayed && <Divider>|</Divider>}
           {region}
         </WrappedText>
         <TruncateText isMobile={isMobile} color={isMe ? 'blueDark' : 'white'}>
@@ -71,7 +75,7 @@ const Container = styled.div<{ statusColor: string; isMobile: boolean }>`
   flex: 0 0 auto;
   height: 7.5rem;
   max-height: 7.5rem;
-  padding: ${({ isMobile }) => (isMobile ? '1rem' : '1.9rem')};
+  padding: ${({ isMobile }) => (isMobile ? '1.5rem' : '2.5rem')};
   position: relative;
   width: 100%;
 `;
