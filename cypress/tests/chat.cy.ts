@@ -307,10 +307,16 @@ describe('chat', () => {
     // should show notification
     cy.contains('Keskustelu estetty onnistuneesti').should('be.visible');
 
-    // should not have message field anymore
-    cy.contains('Kirjoita viestisi tähän').should('not.exist');
+    // should not show chat anymore
+    cy.contains(mentee.displayName).should('not.exist');
+    cy.getByText(message, 'p').should('not.exist');
 
-    // unarchive chat
+    // go to the blocked chat
+    cy.get('button[aria-label="menuLines"]').click();
+    cy.getByText('Estetyt keskustelut', 'a');
+    cy.getByText(mentee.displayName, 'p').click();
+
+    // unblock chat
     cy.getByText('Poista esto', 'button').click();
     cy.contains(
       `Haluatko poistaa eston ja palauttaa keskustelun käyttäjän ${mentee.displayName} kanssa?`,
