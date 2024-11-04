@@ -1,21 +1,20 @@
+import styled from 'styled-components';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { selectSkills } from '../../selectors';
 import {
   changeSearchString,
   selectSearchString,
 } from '@/features/MentorPage/mentorsFilterSlice';
+import { selectSkills } from '@/features/MentorPage/selectors';
 import { useAppSelector, useAppDispatch } from '@/store';
-
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
-import { useTranslation } from 'react-i18next';
 
-import styled from 'styled-components';
-import { palette } from '@/components/constants';
-import { Text } from '@/components/Text/Text';
 import DesktopSearch from './MentorSearch';
 import MobileSearch from './MobileSearch';
+import { palette } from '@/components/constants';
 import Skills from './Skills';
+import { Text } from '@/components/Text/Text';
 
 const MentorsFilter = () => {
   const [isSkillFilterExpanded, setIsSKillFilterExpanded] = useState(false);
