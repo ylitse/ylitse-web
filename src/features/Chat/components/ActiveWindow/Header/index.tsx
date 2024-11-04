@@ -86,11 +86,12 @@ const Header = ({ chat }: Props) => {
       title: t(`dialog.${variant}.title`),
     });
     if (isConfirmed) {
-      updateChatStatus({
+      await updateChatStatus({
         userId,
         buddyId: chat.buddyId,
         status: confirmDialogMap[variant].targetFolder,
-      });
+      }).unwrap();
+      if (variant === 'block') dispatch(clearActiveChat());
     }
   };
 
