@@ -241,10 +241,19 @@ describe('chat', () => {
     // should show notification
     cy.contains('Keskustelu arkistoitu onnistuneesti').should('be.visible');
 
+    // should not show chat anymore
+    cy.contains(mentee.displayName).should('not.exist');
+    cy.getByText(message, 'p').should('not.exist');
+
     // should not have message field anymore
     cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(
       'not.exist',
     );
+
+    // go to the archived chat
+    cy.get('button[aria-label="menuLines"]').click();
+    cy.getByText('Arkistoidut keskustelut', 'a').click();
+    cy.getByText(mentee.displayName, 'p').click();
 
     // unarchive chat
     cy.getByText('Palauta keskustelu', 'button').click();
