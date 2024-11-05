@@ -33,7 +33,7 @@ export const messageColors = {
 // Widths
 export const CHAT_GAP_WIDTH = '22px';
 export const CHAT_MENU_WIDTH = '400px';
-export const CHAT_WINDOW_MIN_WIDTH = '1000px';
+export const CHAT_WINDOW_MIN_WIDTH = '800px';
 
 // Heights
 export const CHAT_MIN_HEIGHT = '600px';

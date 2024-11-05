@@ -56,7 +56,7 @@ export const DIALOG_WIDTH = '700px';
 export const OUTER_HORIZONTAL_MARGIN = '6vw';
 
 // Breakpoints
-export const TABLET_TRESHOLD = 1510; // (CHAT_MENU_WIDTH + 5 * CHAT_GAP_WIDTH + CHAT_WINDOW_MIN_WIDTH)
+export const TABLET_TRESHOLD = 1310; // (CHAT_MENU_WIDTH + 5 * CHAT_GAP_WIDTH + CHAT_WINDOW_MIN_WIDTH)
 export const MOBILE_TRESHOLD = 768;
 export const breakpoints = {
   mobile: `${MOBILE_TRESHOLD}px`,
