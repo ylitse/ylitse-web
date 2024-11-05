@@ -74,6 +74,19 @@ describe('chat', () => {
     cy.getByText('Hello there', 'p').should('be.visible');
   });
 
+  it('send button is disabled if input is only whitespace', () => {
+    const message = 'I would like to talk to you';
+    signUpAndMessageMentor(message);
+
+    cy.loginUser(mentor.loginName, mentor.password);
+
+    cy.get('[href="/chat"]').click();
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]')
+      .click()
+      .type(' ');
+    cy.get('button[aria-label="send"]').should('be.disabled');
+  });
+
   it('can send message to existing conversation', () => {
     const message = 'I would like to talk to you';
     const answer = 'How can I help you';

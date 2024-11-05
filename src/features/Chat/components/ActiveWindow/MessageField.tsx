@@ -32,7 +32,8 @@ const MessageField = ({ chat }: Props) => {
     if (!userId || isLoadingNewMessage) return;
 
     setIsLoadingNewMessage(true);
-    const message = toSendMessage(buddyId, userId, text);
+    const trimmedText = text.trim();
+    const message = toSendMessage(buddyId, userId, trimmedText);
 
     try {
       await sendMessage({ userId, message }).unwrap();
@@ -48,6 +49,8 @@ const MessageField = ({ chat }: Props) => {
     }
   }, [chat.messages]);
 
+  const isSendingDisabled = isLoadingNewMessage || text.trim().length < 1;
+
   return (
     <Container>
       <Input
@@ -61,7 +64,7 @@ const MessageField = ({ chat }: Props) => {
       />
       <SendButton
         variant="send"
-        isDisabled={isLoadingNewMessage}
+        isDisabled={isSendingDisabled}
         sizeInPx={ICON_SIZES.HUGE}
         onClick={() => handleMessageSend(chat.buddyId, text)}
       />
