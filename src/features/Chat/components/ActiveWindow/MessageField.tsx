@@ -32,7 +32,8 @@ const MessageField = ({ chat }: Props) => {
     if (!userId || isLoadingNewMessage) return;
 
     setIsLoadingNewMessage(true);
-    const message = toSendMessage(buddyId, userId, text);
+    const trimmedText = text.trim();
+    const message = toSendMessage(buddyId, userId, trimmedText);
 
     try {
       await sendMessage({ userId, message }).unwrap();
