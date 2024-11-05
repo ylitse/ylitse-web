@@ -24,13 +24,14 @@ export const BottomBar = ({
   skillsInPage,
   setSkillsInPage,
 }: Props) => {
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation('mentors');
+
   const paginationRange = usePagination({
     currentPage,
     pageSize: skillsInPage,
     totalCount: skillTotalAmount,
   });
-  const dispatch = useAppDispatch();
-  const { t } = useTranslation('mentors');
 
   const handleReset = () => {
     dispatch(resetFilters());
@@ -44,6 +45,7 @@ export const BottomBar = ({
 
   const isLastPage = currentPage === paginationRange?.slice(-1)[0];
   const isFirstPage = currentPage === paginationRange?.[0];
+  const isPaginated = paginationRange ? paginationRange.length > 1 : false;
 
   return (
     <Container>
@@ -67,14 +69,15 @@ export const BottomBar = ({
           />
         )}
 
-        {paginationRange?.map((page, index) => (
-          <PageButton
-            key={`${page}_${index}`}
-            isSelected={currentPage === page}
-            page={page}
-            onClick={() => setCurrentPage(Number(page))}
-          />
-        ))}
+        {isPaginated &&
+          paginationRange?.map((page, index) => (
+            <PageButton
+              key={`${page}_${index}`}
+              isSelected={currentPage === page}
+              page={page}
+              onClick={() => setCurrentPage(Number(page))}
+            />
+          ))}
         {!isLastPage && (
           <Next
             variant="next"
