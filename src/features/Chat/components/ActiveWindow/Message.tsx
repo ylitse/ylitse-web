@@ -80,6 +80,7 @@ const Bubble = styled.div<{
 
 const Content = styled(Text)`
   margin: 0;
+  white-space: pre-wrap;
 `;
 
 const Timestamp = styled(Text)<{ isSent: boolean }>`
