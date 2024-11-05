@@ -91,7 +91,8 @@ const Header = ({ chat }: Props) => {
         buddyId: chat.buddyId,
         status: confirmDialogMap[variant].targetFolder,
       }).unwrap();
-      if (variant === 'block') dispatch(clearActiveChat());
+      if (variant === 'block' || variant === 'archive')
+        dispatch(clearActiveChat());
     }
   };
 
