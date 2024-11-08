@@ -50,13 +50,11 @@ export const LicenseModal = () => {
     <Container isMobile={isMobile}>
       {licenseMap.length > 0 ? (
         licenseMap.map(license => (
-          <LicenseRow key={license.name}>
-            <LicenseInfo variant="p">
-              {license.name} {license.licenses}
-            </LicenseInfo>
+          <LicenseRow isMobile={isMobile} key={license.name}>
+            <LicenseInfo variant="p">{license.name}</LicenseInfo>
             {license.repository && (
               <LicenseInfo variant="p">
-                <a href={license.repository}>{license.repository}</a>
+                <a href={license.repository}>{license.licenses}</a>
               </LicenseInfo>
             )}
           </LicenseRow>
@@ -68,13 +66,21 @@ export const LicenseModal = () => {
   );
 };
 
-const LicenseRow = styled.div`
+const LicenseRow = styled.div<{ isMobile: boolean }>`
   align-items: left;
   display: flex;
   flex-direction: row;
   flexwrap: wrap;
   justify-content: space-between;
   margin: 0px;
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          padding: 0 0.5rem 0.5rem 0.5rem;
+        `
+      : css`
+          padding: 0 1.5rem 0 1.5rem;
+        `}
 `;
 
 const LicenseInfo = styled(Text)`
@@ -92,18 +98,19 @@ const Container = styled.div<{ isMobile: boolean }>`
   margin: 1rem;
   opacity: 1;
   overflow: auto;
-  padding: 1rem 1rem 2rem 1rem;
+  overflow-x: hidden
+  padding: 1rem 0 2rem 0;
   scroll-snap-type: x mandatory;
 
   ${({ isMobile }) =>
     isMobile
       ? css`
-          height: 10rem;
-          width: 80vw;
+          max-width: 80vw;
+          min-height: 10rem;
         `
       : css`
-          height: 10rem;
-          width: 35vw;
+          max-width: 35vw;
+          min-height: 10rem;
         `}
 `;
 
