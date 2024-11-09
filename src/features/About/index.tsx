@@ -37,7 +37,11 @@ export const About = ({ onDismiss }: Props) => {
         </CloseContainer>
         <AboutCardContent>
           <Text variant="h1">{t('about.title')}</Text>
-          <InfoText variant="p">{t('about.description')}</InfoText>
+          <Description isMobile={isMobile}>
+            <InfoText variant="p">{t('about.description.paragraph1')}</InfoText>
+            <InfoText variant="p">{t('about.description.paragraph2')}</InfoText>
+            <InfoText variant="p">{t('about.description.paragraph3')}</InfoText>
+          </Description>
           <InfoText variant="p">
             {t('about.ui')} {version.version}+git:{COMMIT_HASH}
           </InfoText>
@@ -70,7 +74,7 @@ const AboutCard = styled.div<{ isMobile: boolean }>`
     isMobile
       ? css`
           max-height: 90vh;
-          width: 80vw;
+          width: 85vw;
         `
       : css`
           height: fit-content;
@@ -85,8 +89,20 @@ const AboutCardContent = styled.div`
   flex-direction: column;
   max-height: calc(100% - 2rem);
   overflow-y: auto;
-  padding: 1rem;
+  padding: 0 2rem 1rem 2rem;
   width: 100%;
+`;
+
+const Description = styled.div<{ isMobile: boolean }>`
+  gap: 0.5rem;
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          padding: 0.5rem 0.5rem 1rem 0.5rem;
+        `
+      : css`
+          padding: 0.5rem 1.5rem 1rem 1.5rem;
+        `}
 `;
 
 const Container = styled.div`
@@ -118,8 +134,7 @@ const LicensesButton = styled(TextButton)`
 `;
 
 const InfoText = styled(Text)`
-  margin: 10px;
-  padding: 0.5rem 1rem 0.5rem 1rem;
+  padding: 0 1rem 0 1rem;
 `;
 
 export default About;
