@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectAccountId } from '@/features/Authentication/userSlice';
+import { selectAccountId } from '@/features/Authentication/selectors';
 import { useAppSelector } from '@/store';
-import { useChangePasswordMutation } from '@/features/Authentication/authenticationApi';
+import { useChangePasswordMutation } from '@/features/ProfilePage/profileApi';
 
 import { ButtonRow, Section, Value } from '.';
 import { Column, SpacedRow } from '@/components/common';

@@ -1,6 +1,6 @@
 import { useAppSelector } from './store';
 import useAuthenticated from './features/Authentication/useAuthenticated';
-import { selectUserId } from './features/Authentication/userSlice';
+import { selectUserId } from './features/Authentication/selectors';
 import {
   useGetContactsQuery,
   useGetMessagesQuery,
@@ -10,9 +10,9 @@ import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 import Navigation from './features/Navigation';
 import Footer from './components/Footer';
-import Spinner from './components/Spinner';
 import AppToaster from './components/Toaster';
 import styled from 'styled-components';
+import LandingPage from './features/LandingPage';
 
 const App = () => {
   const isAuthenticated = useAuthenticated();
@@ -33,7 +33,7 @@ const App = () => {
       <AppToaster />
     </AppWrapper>
   ) : (
-    <Spinner variant="large" />
+    <LandingPage />
   );
 };
 

@@ -1,9 +1,9 @@
 import { useEffect, useRef, Fragment } from 'react';
+import type { AppMessage, ChatFolder } from '@/features/Chat/models';
 
 import { useAppDispatch } from '@/store';
 import { addPollParam } from '@/features/Chat/chatSlice';
 
-import type { AppMessage, ChatFolder } from '@/features/Chat/chatPageApi';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 

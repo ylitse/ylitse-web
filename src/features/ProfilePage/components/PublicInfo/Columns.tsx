@@ -1,3 +1,5 @@
+import type { ApiMentor } from '@/features/MentorPage/models';
+
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
@@ -5,8 +7,6 @@ import { Column } from '@/components/common';
 import LabeledInput from '@/components/LabeledInput';
 import Slider from '@/components/Slider';
 import Text from '@/components/Text';
-
-import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
 
 type Props = {
   birthYearError: string | null;

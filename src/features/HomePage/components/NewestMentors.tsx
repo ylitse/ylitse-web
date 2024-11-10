@@ -2,10 +2,8 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-  Mentor,
-  useGetMentorsQuery,
-} from '@/features/MentorPage/mentorPageApi';
+import { type Mentor } from '@/features/MentorPage/models';
+import { useGetMentorsQuery } from '@/features/MentorPage/mentorPageApi';
 import { selectNewestMentors } from '@/features/MentorPage/selectors';
 import { useAppSelector } from '@/store';
 

@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { type Mentor } from '@/features/MentorPage/models';
 
 import { palette } from '@/components/constants';
 import Text from '@/components/Text';
-import { Mentor } from '@/features/MentorPage/mentorPageApi';
 import { Link } from 'react-router-dom';
 
 type Props = {

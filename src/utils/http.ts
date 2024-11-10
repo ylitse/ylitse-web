@@ -7,6 +7,7 @@ import {
   FetchBaseQueryError,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/dist/query';
+import { baseApi } from '@/baseApi';
 
 const parse =
   <A, B>(model: D.Decoder<A, B>, onError?: (error: D.DecodeError) => void) =>
@@ -60,6 +61,7 @@ export const refreshingBaseQuery: BaseQueryFn<
       return await baseQuery(args, api, extraOptions);
     } else {
       // if refresh fail, logout
+      baseApi.util.resetApiState();
       window.location.href = '/login/';
     }
   }

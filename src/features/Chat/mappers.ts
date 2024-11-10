@@ -1,4 +1,4 @@
-import type { AppMessage, MessageResponse, Buddy } from './chatPageApi';
+import { type AppMessage, type MessageResponse, type Buddy } from './models';
 import { sortByCreated } from './chatPageApi';
 
 export type Conversation = {

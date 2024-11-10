@@ -1,79 +1,26 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import * as D from 'io-ts/Decoder';
-import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
-import { pipe } from 'fp-ts/lib/function';
+import { parseAndTransformTo } from '@/utils/http';
 import type { ChatBuddy, PollingParam } from './mappers';
+import {
+  type Buddy,
+  type MessageResponse,
+  type MessageData,
+  type Message,
+  type AppMessage,
+  type Contact,
+  type ChatFolder,
+} from './models';
 import toast from 'react-hot-toast';
 import { t } from 'i18next';
 import {
   statusUpdateErrorMessages,
   statusUpdateSuccessMessages,
 } from './constants';
-import { role } from '../Authentication/authenticationApi';
-
-const status = D.literal('banned', 'archived', 'ok', 'deleted');
-
-const optionalProperties = D.partial({
-  status: status,
-});
-const mandatoryProperties = D.struct({
-  display_name: D.string,
-  id: D.string,
-  role: role,
-});
-
-const contactCodec = pipe(mandatoryProperties, D.intersect(optionalProperties));
-
-const contactsResponseCodec = D.struct({ resources: D.array(contactCodec) });
-
-const messageData = D.struct({
-  content: D.string,
-  opened: D.boolean,
-  recipient_id: D.string,
-  sender_id: D.string,
-});
-
-const messageDetails = D.struct({
-  id: D.string,
-  created: D.string,
-});
-
-const messageCodec = pipe(messageData, D.intersect(messageDetails));
-
-const messagesResponseCodec = D.struct({
-  resources: D.array(messageCodec),
-  contacts: D.array(contactCodec),
-});
-
-type MessageData = D.TypeOf<typeof messageData>;
-type Message = D.TypeOf<typeof messageCodec>;
-export type AppMessage = {
-  isSent: boolean;
-  id: string;
-  content: string;
-  opened: boolean;
-  created: string;
-  buddyId: string;
-};
-
-type ChatStatus = D.TypeOf<typeof status>;
-export type ChatFolder = Exclude<ChatStatus, 'deleted'>;
-
-type Contact = D.TypeOf<typeof contactCodec>;
-export type Buddy = Omit<Contact, 'display_name' | 'id' | 'status'> & {
-  buddyId: string;
-  displayName: string;
-  status: ChatFolder;
-};
+import { contactsResponseCodec, messagesResponseCodec } from './models';
+import { baseApi } from '@/baseApi';
 
 type MessageQuery = {
   userId: string;
   params: PollingParam;
-};
-
-export type MessageResponse = {
-  messages: Array<AppMessage>;
-  buddies: Array<Buddy>;
 };
 
 export type NewMessage = {
@@ -99,29 +46,7 @@ type reportMessage = {
   userId: string;
 };
 
-const toQueryString = (params: PollingParam) => {
-  const maxMessagesAtOnce = 10;
-
-  if (params.type === 'New' && params.previousMsgId.length > 0) {
-    return `from_message_id=${params.previousMsgId}&desc=false&max=${maxMessagesAtOnce}`;
-  }
-
-  if (params.type === 'OlderThan') {
-    return `contact_user_ids=${params.buddyId}&from_message_id=${params.messageId}&max=${maxMessagesAtOnce}&desc=true`;
-  }
-
-  if (params.type === 'InitialMessages') {
-    const userIds = params.buddyIds.join(',');
-
-    return `contact_user_ids=${userIds}&max=${maxMessagesAtOnce}&desc=true`;
-  }
-
-  return `max=${maxMessagesAtOnce}&desc=true`;
-};
-
-export const chatApi = createApi({
-  baseQuery: refreshingBaseQuery,
-  reducerPath: 'chatsApi',
+export const chatApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     getContacts: builder.query<Array<Buddy>, string>({
       query: userId => `users/${userId}/contacts`,
@@ -232,6 +157,26 @@ export const chatApi = createApi({
     }),
   }),
 });
+
+const toQueryString = (params: PollingParam) => {
+  const maxMessagesAtOnce = 10;
+
+  if (params.type === 'New' && params.previousMsgId.length > 0) {
+    return `from_message_id=${params.previousMsgId}&desc=false&max=${maxMessagesAtOnce}`;
+  }
+
+  if (params.type === 'OlderThan') {
+    return `contact_user_ids=${params.buddyId}&from_message_id=${params.messageId}&max=${maxMessagesAtOnce}&desc=true`;
+  }
+
+  if (params.type === 'InitialMessages') {
+    const userIds = params.buddyIds.join(',');
+
+    return `contact_user_ids=${userIds}&max=${maxMessagesAtOnce}&desc=true`;
+  }
+
+  return `max=${maxMessagesAtOnce}&desc=true`;
+};
 
 const toAppBuddies = (contacts: Array<Contact>): Array<Buddy> =>
   contacts.flatMap(toBuddy);

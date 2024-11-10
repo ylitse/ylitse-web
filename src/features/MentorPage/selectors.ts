@@ -1,6 +1,6 @@
-import type { Mentor, Mentors } from './mentorPageApi';
+import type { Mentor, Mentors } from './models';
 import { createSelector } from 'reselect';
-import { selectUserId } from '../Authentication/userSlice';
+import { selectUserId } from '../Authentication/selectors';
 import { mentorsApi } from './mentorPageApi';
 import { selectSearchString, selectSelectedSkills } from './mentorsFilterSlice';
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { selectIsMentee } from '@/features/Authentication/userSlice';
+import { selectIsMentee } from '@/features/Authentication/selectors';
 import { useAppSelector } from '@/store';
 
 import { Button, StatusButton } from '@/components/Buttons';

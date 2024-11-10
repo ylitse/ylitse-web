@@ -5,10 +5,8 @@ import {
 } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 
-import { authenticationApi } from './features/Authentication/authenticationApi';
-import { chatApi } from '@/features/Chat/chatPageApi';
+import { baseApi } from './baseApi';
 import { chats } from './features/Chat/chatSlice';
-import { mentorsApi } from '@/features/MentorPage/mentorPageApi';
 import { mentorsFilter } from '@/features/MentorPage/mentorsFilterSlice';
 import { user } from './features/Authentication/userSlice';
 
@@ -16,18 +14,13 @@ const rootReducer = combineReducers({
   [user.name]: user.reducer,
   [mentorsFilter.name]: mentorsFilter.reducer,
   [chats.name]: chats.reducer,
-  [authenticationApi.reducerPath]: authenticationApi.reducer,
-  [chatApi.reducerPath]: chatApi.reducer,
-  [mentorsApi.reducerPath]: mentorsApi.reducer,
+  [baseApi.reducerPath]: baseApi.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware({ immutableCheck: true })
-        .concat(authenticationApi.middleware)
-        .concat(chatApi.middleware)
-        .concat(mentorsApi.middleware),
+      getDefaultMiddleware({ immutableCheck: true }).concat(baseApi.middleware),
     preloadedState,
     reducer: rootReducer,
   });
