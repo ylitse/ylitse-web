@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-import { Mentor, useGetMentorsQuery } from './mentorPageApi';
+import { type Mentor } from './models';
+import { useGetMentorsQuery } from './mentorPageApi';
 import { selectFilteredMentors } from './selectors';
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';

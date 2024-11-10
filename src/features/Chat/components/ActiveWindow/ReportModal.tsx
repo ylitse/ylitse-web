@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { selectUserId } from '@/features/Authentication/userSlice';
+import { selectUserId } from '@/features/Authentication/selectors';
 import { useAppSelector } from '@/store';
 import { useConfirm } from '@/features/Confirmation/useConfirm';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';

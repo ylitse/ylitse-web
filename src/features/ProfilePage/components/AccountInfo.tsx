@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import {
   selectAccount,
   selectIsMentor,
-} from '@/features/Authentication/userSlice';
+} from '@/features/Authentication/selectors';
 import { useAppSelector } from '@/store';
 import { useConfirm } from '@/features/Confirmation/useConfirm';
-import { useDeleteAccountMutation } from '@/features/Authentication/authenticationApi';
+import { useDeleteAccountMutation } from '@/features/ProfilePage/profileApi';
 
 import AdminIcon from '@/static/icons/admin.svg';
 import DisplayNameEditor from './DisplayNameEditor';

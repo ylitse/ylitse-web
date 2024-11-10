@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { selectIsMentor } from '../Authentication/userSlice';
+import { selectIsMentor } from '../Authentication/selectors';
 import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 

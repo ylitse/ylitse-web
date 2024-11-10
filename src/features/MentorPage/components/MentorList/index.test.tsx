@@ -1,6 +1,6 @@
 import { renderWithProviders } from '@/test/testStore';
 import MentorList from '.';
-import { Mentor } from '../../mentorPageApi';
+import { type Mentor } from '../../models';
 
 const mentorListCards: Array<Mentor> = [
   {

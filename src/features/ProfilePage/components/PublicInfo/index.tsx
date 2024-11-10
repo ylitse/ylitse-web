@@ -1,15 +1,7 @@
-import styled, { css } from 'styled-components';
+import type { ApiMentor } from '@/features/MentorPage/models';
+
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { selectMentor, selectUser } from '@/features/Authentication/userSlice';
-import { useAppSelector } from '@/store';
-import { useConfirmDirtyLeave } from '@/features/Confirmation/useConfirmDirtyLeave';
-import { useUpdateMentorMutation } from '@/features/MentorPage/mentorPageApi';
-import { useUpdateUserMutation } from '@/features/Authentication/authenticationApi';
-
-import { ButtonRow } from '..';
-import Columns from './Columns';
 import {
   isDisplayNameTooLong,
   isDisplayNameTooShort,
@@ -18,13 +10,21 @@ import {
   isStoryTooLong,
   validateBirthYear,
 } from '@/features/ProfilePage/validators';
-import LabeledInput from '@/components/LabeledInput';
+
+import { selectMentor, selectUser } from '@/features/Authentication/selectors';
+import { useAppSelector } from '@/store';
+import { useConfirmDirtyLeave } from '@/features/Confirmation/useConfirmDirtyLeave';
+import { useUpdateMentorMutation } from '@/features/MentorPage/mentorPageApi';
+import { useUpdateUserMutation } from '@/features/ProfilePage/profileApi';
+
+import styled, { css } from 'styled-components';
 import { palette } from '@/components/constants';
+import { ButtonRow } from '..';
+import Columns from './Columns';
+import LabeledInput from '@/components/LabeledInput';
 import SkillsEditor from '../SkillsEditor';
 import Text from '@/components/Text';
 import { TextButton } from '@/components/Buttons';
-
-import type { ApiMentor } from '@/features/MentorPage/mentorPageApi';
 
 type Props = {
   isMobile?: boolean;

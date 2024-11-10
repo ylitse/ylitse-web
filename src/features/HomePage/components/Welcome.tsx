@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { selectAppRole } from '@/features/Authentication/userSlice';
+import { selectAppRole } from '@/features/Authentication/selectors';
 import { useAppSelector } from '@/store';
 
 import { palette } from '@/components/constants';

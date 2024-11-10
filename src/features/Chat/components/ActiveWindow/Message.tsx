@@ -1,15 +1,11 @@
 import { useEffect, useRef } from 'react';
+import { type AppMessage, type ChatFolder } from '@/features/Chat/models';
 
 import { useAppSelector } from '@/store';
-import { selectUserId } from '@/features/Authentication/userSlice';
+import { selectUserId } from '@/features/Authentication/selectors';
 import { useIsVisible } from '@/hooks/useIsVisible';
 
-import {
-  AppMessage,
-  ChatFolder,
-  toPutMessage,
-  useMarkSeenMutation,
-} from '@/features/Chat/chatPageApi';
+import { toPutMessage, useMarkSeenMutation } from '@/features/Chat/chatPageApi';
 
 import styled from 'styled-components';
 import { messageColors } from '@/features/Chat/constants';
