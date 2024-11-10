@@ -37,7 +37,7 @@
       });
 
       if (!loginResponse.ok) {
-        window.location.replace('/login/');
+        // window.location.replace('/login/');
       }
 
       // Update the user by adding the display name
@@ -58,7 +58,7 @@
       }
     } catch (error) {
       console.log(error.message);
-      window.location.replace('/login/');
+      // window.location.replace('/login/');
     }
   });
 })(window, document);

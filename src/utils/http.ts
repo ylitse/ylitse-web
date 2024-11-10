@@ -62,7 +62,6 @@ export const refreshingBaseQuery: BaseQueryFn<
     } else {
       // if refresh fail, logout
       baseApi.util.resetApiState();
-      window.location.href = '/login/';
     }
   }
 
