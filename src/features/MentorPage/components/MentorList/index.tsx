@@ -1,4 +1,4 @@
-import type { Mentor } from '@/features/MentorPage/mentorPageApi';
+import type { Mentor } from '@/features/MentorPage/models';
 
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 

@@ -2,7 +2,7 @@ import { useAppDispatch } from '@/store';
 import { setActiveFolder, setShowFolders } from '@/features/Chat/chatSlice';
 import { useTranslation } from 'react-i18next';
 
-import type { ChatFolder } from '@/features/Chat/chatPageApi';
+import type { ChatFolder } from '@/features/Chat/models';
 
 import styled, { css } from 'styled-components';
 import BackArrowIcon from '@/static/icons/back-arrow.svg';

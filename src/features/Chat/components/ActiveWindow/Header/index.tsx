@@ -2,11 +2,14 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import type { ChatBuddy } from '@/features/Chat/mappers';
+import type { ChatFolder } from '@/features/Chat/models';
+
 import { clearActiveChat } from '@/features/Chat/chatSlice';
 import {
   selectIsMentor,
   selectUserId,
-} from '@/features/Authentication/userSlice';
+} from '@/features/Authentication/selectors';
 import { selectMentorById } from '@/features/MentorPage/selectors';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useConfirm } from '@/features/Confirmation/useConfirm';
@@ -30,9 +33,6 @@ import { Profile as ProfileIcon } from '@/components/Icons/Profile';
 import ReportModal from '../ReportModal';
 import TabletButtons from './TabletButtons';
 import Text from '@/components/Text';
-
-import type { ChatBuddy } from '@/features/Chat/mappers';
-import type { ChatFolder } from '@/features/Chat/chatPageApi';
 
 type DialogVariant = 'archive' | 'block' | 'restore' | 'unblock';
 

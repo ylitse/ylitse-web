@@ -1,8 +1,8 @@
-import type { Mentor } from '@/features/MentorPage/mentorPageApi';
+import type { Mentor } from '@/features/MentorPage/models';
 
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useAppSelector } from '@/store';
-import { selectUserId } from '@/features/Authentication/userSlice';
+import { selectUserId } from '@/features/Authentication/selectors';
 import { getIsOlderThanDaysAgo } from '@/utils/utils';
 
 import styled, { css } from 'styled-components';

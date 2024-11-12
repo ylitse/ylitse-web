@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { ChatFolder } from './chatPageApi';
+import type { ChatFolder } from './models';
 import type { Conversation, PollingParam, ChatBuddy } from './mappers';
 import { chatApi, extractMostRecentId } from './chatPageApi';
 import {

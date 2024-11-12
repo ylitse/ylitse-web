@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { selectUserId } from '@/features/Authentication/userSlice';
+import type { Mentor } from '@/features/MentorPage/models';
+
+import { selectUserId } from '@/features/Authentication/selectors';
 import { setConversation } from '@/features/Chat/chatSlice';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
@@ -13,8 +15,6 @@ import { Languages } from './Languages';
 import { Skills } from './Skills';
 import { Text } from '@/components/Text/Text';
 import { TextButton } from '@/components/Buttons';
-
-import type { Mentor } from '@/features/MentorPage/mentorPageApi';
 
 type Props = {
   mentor: Mentor;

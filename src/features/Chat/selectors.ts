@@ -1,5 +1,5 @@
 import type { RootState } from '@/store';
-import type { AppMessage } from './chatPageApi';
+import type { AppMessage } from './models';
 import type { ChatBuddy, PollingParam } from './mappers';
 
 import { createSelector } from 'reselect';

@@ -1,79 +1,13 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import * as D from 'io-ts/Decoder';
-import { parseAndTransformTo, refreshingBaseQuery } from '@/utils/http';
+import { parseAndTransformTo } from '@/utils/http';
 import toast from 'react-hot-toast';
 import { t } from 'i18next';
+import { mentorListResponseType, toMentorRecord } from './models';
 
-import { authenticationApi } from '../Authentication/authenticationApi';
+import { type ApiMentor, type Mentors } from './models';
 
-export type ApiMentor = D.TypeOf<typeof mentorCodec>;
+import { baseApi } from '@/baseApi';
 
-export const mentorCodec = D.struct({
-  account_id: D.string,
-  active: D.boolean,
-  birth_year: D.number,
-  communication_channels: D.array(D.string),
-  created: D.string,
-  display_name: D.string,
-  gender: D.string,
-  id: D.string,
-  is_vacationing: D.boolean,
-  languages: D.array(D.string),
-  region: D.string,
-  skills: D.array(D.string),
-  status_message: D.string,
-  story: D.string,
-  user_id: D.string,
-});
-
-const mentorListResponseType = D.struct({ resources: D.array(mentorCodec) });
-type MentorsResponse = D.TypeOf<typeof mentorListResponseType>;
-
-export type Mentor = ReturnType<typeof toMentor>;
-
-const toMentor = ({
-  birth_year,
-  communication_channels,
-  created,
-  display_name,
-  gender,
-  id,
-  is_vacationing,
-  languages,
-  region,
-  skills,
-  status_message,
-  story,
-  user_id,
-}: ApiMentor) => ({
-  age: new Date().getFullYear() - birth_year,
-  buddyId: user_id,
-  communicationChannels: communication_channels,
-  created: new Date(created).getTime(),
-  gender,
-  isVacationing: is_vacationing,
-  languages,
-  mentorId: id,
-  name: display_name,
-  region,
-  skills,
-  statusMessage: status_message,
-  story,
-});
-
-export type Mentors = Record<string, Mentor>;
-
-const toMentorRecord = ({ resources }: MentorsResponse) =>
-  resources.reduce((acc: Mentors, apiMentor) => {
-    const mentor: Mentor = toMentor(apiMentor);
-    return { ...acc, [mentor.buddyId]: mentor };
-  }, {});
-
-export const mentorsApi = createApi({
-  baseQuery: refreshingBaseQuery,
-  reducerPath: 'mentors',
-  tagTypes: ['mentors'],
-
+export const mentorsApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     getMentors: builder.query<Mentors, void>({
       query: () => 'mentors',
@@ -105,11 +39,10 @@ export const mentorsApi = createApi({
         method: 'put',
         body: mentor,
       }),
-      invalidatesTags: ['mentors'],
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      invalidatesTags: ['mentors', 'myuser'],
+      async onQueryStarted(_, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          dispatch(authenticationApi.util.invalidateTags(['myuser']));
           toast.success(t('profile:notification.success.update'), {
             id: 'update-success',
           });

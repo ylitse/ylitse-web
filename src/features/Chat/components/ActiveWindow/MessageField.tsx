@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { ChatBuddy } from '@/features/Chat/mappers';
-import { selectUserId } from '@/features/Authentication/userSlice';
+import { selectUserId } from '@/features/Authentication/selectors';
 import {
   toSendMessage,
   useSendMessageMutation,
