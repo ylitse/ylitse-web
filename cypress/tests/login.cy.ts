@@ -18,7 +18,6 @@ describe('login', () => {
 
   beforeEach(() => {
     cy.visit('/login/');
-    cy.switchLanguageBeforeLogin('fi');
     cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
@@ -71,7 +70,6 @@ describe('login', () => {
     cy.fillInput('password', 'examplePassword');
     clickLogin();
     cy.location('pathname').should('eq', '/');
-    cy.switchLanguageAfterLogin('fi');
     cy.contains('Kirjaudu ulos').should('be.visible');
   });
 });

@@ -33,7 +33,6 @@ Cypress.Commands.add('registerUser', (username: string, password: string) => {
   cy.get(`button[id="submit"]`).click();
   cy.wait(500);
 
-  cy.switchLanguageAfterLogin('fi');
   cy.getByText('Ylitse MentorApp -vertaismentoripalvelu', 'p').should(
     'be.visible',
   );
@@ -45,7 +44,6 @@ Cypress.Commands.add('loginUser', (username: string, password: string) => {
   cy.fillInput('password', password);
   cy.get('button[id="submit"]').click();
 
-  cy.switchLanguageAfterLogin('fi');
   cy.getByText('Ylitse MentorApp -vertaismentoripalvelu', 'p').should(
     'be.visible',
   );

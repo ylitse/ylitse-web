@@ -101,7 +101,6 @@ describe('mentor profile', () => {
 
     // check that values were updated
     cy.reload();
-    cy.switchLanguageAfterLogin('fi');
     cy.getInputByLabel('Julkinen nimimerkki *').should(
       'have.value',
       NEW_DISPLAY_NAME,
@@ -120,7 +119,6 @@ describe('mentor profile', () => {
 
     // check that values were discarded
     cy.reload();
-    cy.switchLanguageAfterLogin('fi');
     cy.getInputByLabel('Julkinen nimimerkki *').should(
       'have.value',
       mentor.displayName,
@@ -230,7 +228,6 @@ describe('mentor profile', () => {
 
     // check that values were updated correctly
     cy.reload();
-    cy.switchLanguageAfterLogin('fi');
     // mentor should now have both the original skills and the skills from the second mentor
     mentor.skills.forEach(skill => {
       cy.getByText(skill, 'button').should('be.visible');
@@ -258,7 +255,6 @@ describe('mentor profile', () => {
 
     // check that values were updated correctly
     cy.reload();
-    cy.switchLanguageAfterLogin('fi');
     // mentor should not have any of the former skills
     mentor.skills.forEach(skill => {
       cy.getByText(skill, 'button').should('not.exist');
