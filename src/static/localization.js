@@ -3,23 +3,10 @@
     ? 'login'
     : 'register';
 
-  const supportedLanguages = ['en', 'fi'];
   let translations = {};
 
   const enButton = document.getElementById('en-button');
   const fiButton = document.getElementById('fi-button');
-
-  const getBrowserLocale = () => {
-    const language = navigator.language;
-    if (!language) return null;
-
-    let languageMatch = null;
-    for (const supportedLanguage of supportedLanguages) {
-      if (language.includes(supportedLanguage))
-        languageMatch = supportedLanguage;
-    }
-    return languageMatch;
-  };
 
   const fetchTranslations = async newLocale => {
     const response = await fetch(`../static/locales/${newLocale}/${page}.json`);
@@ -81,8 +68,7 @@
   };
 
   document.addEventListener('DOMContentLoaded', async () => {
-    const browserLocale = getBrowserLocale();
-    setLocale(browserLocale ?? 'fi');
+    setLocale('fi');
   });
 
   enButton.onclick = event => {
