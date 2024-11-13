@@ -67,7 +67,7 @@ describe('home', () => {
     ).should('not.exist');
     cy.getByText(
       'In the Ylitse MentorApp peer mentoring service, mentors help you with your personal situation confidentially. You can choose a suitable mentor based on your problem and get help regardless of time and place.',
-      'h1',
+      'p',
     ).should('be.visible');
 
     cy.switchLanguageAfterLogin('fi');
@@ -75,7 +75,7 @@ describe('home', () => {
     // should show texts in Finnish again
     cy.getByText(
       'In the Ylitse MentorApp peer mentoring service, mentors help you with your personal situation confidentially. You can choose a suitable mentor based on your problem and get help regardless of time and place.',
-      'h1',
+      'p',
     ).should('not.exist');
     cy.getByText(
       'Ylitse MentorApp -vertaismentoripalvelussa mentorit auttavat sinua henkilökohtaisessa tilanteessasi luottamuksellisesti. Voit valita sopivan mentorin ongelmasi perusteella ja saada apua ajasta ja paikasta riippumatta.',
