@@ -19,7 +19,6 @@ describe('logout', () => {
   it('logout redirects user to login page', () => {
     cy.clickLogout();
     cy.url().should('match', /login/);
-    cy.switchLanguageBeforeLogin('fi');
     cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 
@@ -27,12 +26,10 @@ describe('logout', () => {
   xit('logout ends session', () => {
     cy.clickLogout();
     cy.url().should('match', /login/);
-    cy.switchLanguageBeforeLogin('fi');
     cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
 
     cy.visit('/');
     cy.url().should('match', /login/);
-    cy.switchLanguageBeforeLogin('fi');
     cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
   });
 });

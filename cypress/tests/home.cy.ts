@@ -54,6 +54,35 @@ describe('home', () => {
     cy.url().should('match', /mentors/);
   });
 
+  it('changes language on button press', () => {
+    const mentee = accounts.mentees[0];
+    api.signUpMentee(mentee);
+    cy.loginUser(mentee.loginName, mentee.password);
+    cy.switchLanguageAfterLogin('en');
+
+    // should show texts in English
+    cy.getByText(
+      'Ylitse MentorApp -vertaismentoripalvelussa mentorit auttavat sinua henkilökohtaisessa tilanteessasi luottamuksellisesti. Voit valita sopivan mentorin ongelmasi perusteella ja saada apua ajasta ja paikasta riippumatta.',
+      'p',
+    ).should('not.exist');
+    cy.getByText(
+      'In the Ylitse MentorApp peer mentoring service, mentors help you with your personal situation confidentially. You can choose a suitable mentor based on your problem and get help regardless of time and place.',
+      'p',
+    ).should('be.visible');
+
+    cy.switchLanguageAfterLogin('fi');
+
+    // should show texts in Finnish again
+    cy.getByText(
+      'In the Ylitse MentorApp peer mentoring service, mentors help you with your personal situation confidentially. You can choose a suitable mentor based on your problem and get help regardless of time and place.',
+      'p',
+    ).should('not.exist');
+    cy.getByText(
+      'Ylitse MentorApp -vertaismentoripalvelussa mentorit auttavat sinua henkilökohtaisessa tilanteessasi luottamuksellisesti. Voit valita sopivan mentorin ongelmasi perusteella ja saada apua ajasta ja paikasta riippumatta.',
+      'p',
+    ).should('be.visible');
+  });
+
   it('displays right content for mentee that has been chatting', () => {
     const mentee = accounts.mentees[0];
     const mentor = accounts.mentors[0];

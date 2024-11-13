@@ -13,7 +13,7 @@ Cypress.Commands.add('switchLanguageAfterLogin', (lang: LangCode) => {
   if (document.documentElement.lang !== lang) {
     cy.get('button[id="lang-dropdown-button"]').click();
 
-    const langButtonText = lang === 'fi' ? 'Fi - Suomeksi' : 'En - In English';
+    const langButtonText = lang === 'fi' ? 'FI - Suomeksi' : 'EN - In English';
     cy.getByText(langButtonText, 'button').click({ force: true });
   }
 });
@@ -33,7 +33,6 @@ Cypress.Commands.add('registerUser', (username: string, password: string) => {
   cy.get(`button[id="submit"]`).click();
   cy.wait(500);
 
-  cy.switchLanguageAfterLogin('fi');
   cy.getByText('Ylitse MentorApp -vertaismentoripalvelu', 'p').should(
     'be.visible',
   );
@@ -45,7 +44,6 @@ Cypress.Commands.add('loginUser', (username: string, password: string) => {
   cy.fillInput('password', password);
   cy.get('button[id="submit"]').click();
 
-  cy.switchLanguageAfterLogin('fi');
   cy.getByText('Ylitse MentorApp -vertaismentoripalvelu', 'p').should(
     'be.visible',
   );
