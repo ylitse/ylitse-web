@@ -34,11 +34,11 @@
     "language": {
       "en": {
         "long": "EN - In English",
-        "short": "En"
+        "short": "EN"
       },
       "fi": {
-        "long": "Fi - Suomeksi",
-        "short": "Fi"
+        "long": "FI - Suomeksi",
+        "short": "FI"
       }
     },
     "logo": "Ylitse",

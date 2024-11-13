@@ -13,7 +13,7 @@ Cypress.Commands.add('switchLanguageAfterLogin', (lang: LangCode) => {
   if (document.documentElement.lang !== lang) {
     cy.get('button[id="lang-dropdown-button"]').click();
 
-    const langButtonText = lang === 'fi' ? 'Fi - Suomeksi' : 'En - In English';
+    const langButtonText = lang === 'fi' ? 'FI - Suomeksi' : 'EN - In English';
     cy.getByText(langButtonText, 'button').click({ force: true });
   }
 });
