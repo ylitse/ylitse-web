@@ -60,7 +60,7 @@ export const refreshingBaseQuery: BaseQueryFn<
       return await baseQuery(args, api, extraOptions);
     } else {
       // if refresh fail, logout
-      window.location.href = '/login/';
+      window.location.href = '/landing/';
     }
   }
 
