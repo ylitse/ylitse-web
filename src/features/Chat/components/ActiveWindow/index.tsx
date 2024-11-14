@@ -53,12 +53,10 @@ const ActiveWindow = () => {
     if (!userId || isLoadingNewMessage) return;
 
     setIsLoadingNewMessage(true);
-    const trimmedMessage = message.trim();
-
     try {
       await sendMessage({
         userId,
-        message: toSendMessage(chat.buddyId, userId, trimmedMessage),
+        message: toSendMessage(chat.buddyId, userId, message),
       }).unwrap();
     } catch (error) {
       setIsLoadingNewMessage(false);

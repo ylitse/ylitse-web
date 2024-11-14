@@ -251,7 +251,7 @@ export const toSendMessage = (
 ) => ({
   recipient_id: buddyId,
   sender_id: userId,
-  content: text,
+  content: text.trim(),
   opened: false,
 });
 
