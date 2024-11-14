@@ -18,17 +18,14 @@ describe('chat', () => {
     api.signUpMentee(mentee).then((menteeResponse: any) => {
       //eslint-disable-next-line @typescript-eslint/no-explicit-any
       api.signUpMentor(mentor).then((mentorResponse: any) => {
-        const sender = {
-          id: menteeResponse.body.id,
-          loginName: mentee.loginName,
-          password: mentee.password,
-        };
-        const reciever = { id: mentorResponse.body.user_id };
-
-        // send message between users
+        // send message from mentee to mentor
         api.sendMessage({
-          sender,
-          reciever,
+          sender: {
+            id: menteeResponse.body.id,
+            loginName: mentee.loginName,
+            password: mentee.password,
+          },
+          reciever: { id: mentorResponse.body.user_id },
           content: message,
         });
       });
@@ -90,25 +87,7 @@ describe('chat', () => {
   it('can send message to existing conversation', () => {
     const message = 'I would like to talk to you';
     const answer = 'How can I help you';
-    //eslint-disable-next-line @typescript-eslint/no-explicit-any
-    api.signUpMentee(mentee).then((menteeResponse: any) => {
-      //eslint-disable-next-line @typescript-eslint/no-explicit-any
-      api.signUpMentor(mentor).then((mentorResponse: any) => {
-        const sender = {
-          id: menteeResponse.body.id,
-          loginName: mentee.loginName,
-          password: mentee.password,
-        };
-        const reciever = { id: mentorResponse.body.user_id };
-
-        // send message between users
-        api.sendMessage({
-          sender,
-          reciever,
-          content: message,
-        });
-      });
-    });
+    signUpAndMessageMentor(message);
 
     cy.loginUser(mentor.loginName, mentor.password);
 
@@ -144,25 +123,20 @@ describe('chat', () => {
 
       //eslint-disable-next-line @typescript-eslint/no-explicit-any
       api.signUpMentor(mentor).then((mentorResponse: any) => {
-        const reciever = { id: mentorResponse.body.user_id };
-
-        // send message between users
+        // send message from mentee to mentor
         api.sendMessage({
           sender,
-          reciever,
+          reciever: { id: mentorResponse.body.user_id },
           content: message,
         });
       });
 
-      // signup second mentor
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       api.signUpMentor(secondMentor).then((mentorResponse: any) => {
-        const reciever = { id: mentorResponse.body.user_id };
-
-        // send message between users
+        // send message from mentee to mentor
         api.sendMessage({
           sender,
-          reciever,
+          reciever: { id: mentorResponse.body.user_id },
           content: message,
         });
       });
@@ -213,16 +187,13 @@ describe('chat', () => {
     api.signUpMentee(mentee).then((menteeResponse: any) => {
       //eslint-disable-next-line @typescript-eslint/no-explicit-any
       api.signUpMentor(mentor).then((mentorResponse: any) => {
-        const sender = {
-          id: menteeResponse.body.id,
-          loginName: mentee.loginName,
-          password: mentee.password,
-        };
-        const reciever = { id: mentorResponse.body.user_id };
-
         api.sendMultipleMessage({
-          sender,
-          reciever,
+          sender: {
+            id: menteeResponse.body.id,
+            loginName: mentee.loginName,
+            password: mentee.password,
+          },
+          reciever: { id: mentorResponse.body.user_id },
           content: message,
           amountOfMessages: 20,
         });
@@ -250,16 +221,13 @@ describe('chat', () => {
     api.signUpMentee(mentee).then((menteeResponse: any) => {
       //eslint-disable-next-line @typescript-eslint/no-explicit-any
       api.signUpMentor(mentor).then((mentorResponse: any) => {
-        const sender = {
-          id: menteeResponse.body.id,
-          loginName: mentee.loginName,
-          password: mentee.password,
-        };
-        const reciever = { id: mentorResponse.body.user_id };
-
         api.sendMultipleMessage({
-          sender,
-          reciever,
+          sender: {
+            id: menteeResponse.body.id,
+            loginName: mentee.loginName,
+            password: mentee.password,
+          },
+          reciever: { id: mentorResponse.body.user_id },
           content: message,
           amountOfMessages: 20,
         });
