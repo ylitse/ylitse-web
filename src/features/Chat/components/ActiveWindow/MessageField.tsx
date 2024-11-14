@@ -1,14 +1,6 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { ChatBuddy } from '@/features/Chat/mappers';
-import { selectUserId } from '@/features/Authentication/selectors';
-import {
-  toSendMessage,
-  useSendMessageMutation,
-} from '@/features/Chat/chatPageApi';
-import { useAppSelector } from '@/store';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 
 import { IconButton } from '@/components/Buttons';
@@ -16,57 +8,39 @@ import { ICON_SIZES, palette } from '@/components/constants';
 import TextInput from '@/components/TextInput';
 
 type Props = {
-  chat: ChatBuddy;
+  handleSend: () => void;
+  isInputDisabled: boolean;
+  isSendDisabled: boolean;
+  message: string;
+  onChange: (message: string) => void;
 };
 
-const MessageField = ({ chat }: Props) => {
+const MessageField = ({
+  handleSend,
+  isInputDisabled,
+  isSendDisabled,
+  message,
+  onChange,
+}: Props) => {
   const { t } = useTranslation('chat');
   const { isMobile } = useGetLayoutMode();
-  const userId = useAppSelector(selectUserId);
-  const [sendMessage] = useSendMessageMutation();
-
-  const [text, setText] = useState('');
-  const [isLoadingNewMessage, setIsLoadingNewMessage] = useState(false);
-
-  const handleMessageSend = async (buddyId: string, text: string) => {
-    if (!userId || isLoadingNewMessage) return;
-
-    setIsLoadingNewMessage(true);
-    const trimmedText = text.trim();
-    const message = toSendMessage(buddyId, userId, trimmedText);
-
-    try {
-      await sendMessage({ userId, message }).unwrap();
-    } catch (error) {
-      setIsLoadingNewMessage(false);
-    }
-  };
-
-  useEffect(() => {
-    if (isLoadingNewMessage) {
-      setText('');
-      setIsLoadingNewMessage(false);
-    }
-  }, [chat.messages]);
-
-  const isSendingDisabled = isLoadingNewMessage || text.trim().length < 1;
 
   return (
     <Container>
       <Input
         variant="textarea"
-        color={text ? 'blueDark' : 'greyFaded'}
-        isDisabled={isLoadingNewMessage}
-        onChange={setText}
+        color={message ? 'blueDark' : 'greyFaded'}
+        isDisabled={isInputDisabled}
+        onChange={onChange}
         placeholder={t('input.placeholder')}
-        value={text}
+        value={message}
         isMobile={isMobile}
       />
       <SendButton
         variant="send"
-        isDisabled={isSendingDisabled}
+        isDisabled={isSendDisabled}
         sizeInPx={ICON_SIZES.HUGE}
-        onClick={() => handleMessageSend(chat.buddyId, text)}
+        onClick={handleSend}
       />
     </Container>
   );

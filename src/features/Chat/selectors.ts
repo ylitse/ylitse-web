@@ -68,23 +68,23 @@ export const selectOngoingChatsExist = createSelector(
 
 export const selectActiveChat = createSelector(
   selectChatState,
-  ({ activeChatId, chats }) => (activeChatId ? chats[activeChatId] : null),
+  ({ activeChatId, chats }) => {
+    if (activeChatId) return chats[activeChatId];
+
+    // Returns most recent unread chat, or the most recent if all are read
+    const unreadChats = Object.values(chats).filter(chat => {
+      if (chat.status !== 'ok') return false;
+      return chat.messages.some(message => !message.opened);
+    });
+
+    return unreadChats[0] ?? Object.values(chats)[0];
+  },
 );
 
 export const selectActiveChatExists = createSelector(
   selectChatState,
   ({ activeChatId, chats }) => Boolean(activeChatId && chats[activeChatId]),
 );
-
-// Returns most recent unread chat, or the most recent if all are read
-export const selectDefaultChat = createSelector(selectChats, chats => {
-  const unreadChats = chats.filter(chat => {
-    if (chat.status !== 'ok') return false;
-    return chat.messages.some(message => !message.opened);
-  });
-
-  return unreadChats[0] ?? chats[0];
-});
 
 export const selectBuddyMessages = (buddyId: string) =>
   createSelector(

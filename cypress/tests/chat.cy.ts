@@ -18,17 +18,14 @@ describe('chat', () => {
     api.signUpMentee(mentee).then((menteeResponse: any) => {
       //eslint-disable-next-line @typescript-eslint/no-explicit-any
       api.signUpMentor(mentor).then((mentorResponse: any) => {
-        const sender = {
-          id: menteeResponse.body.id,
-          loginName: mentee.loginName,
-          password: mentee.password,
-        };
-        const reciever = { id: mentorResponse.body.user_id };
-
-        // send message between users
+        // send message from mentee to mentor
         api.sendMessage({
-          sender,
-          reciever,
+          sender: {
+            id: menteeResponse.body.id,
+            loginName: mentee.loginName,
+            password: mentee.password,
+          },
+          reciever: { id: mentorResponse.body.user_id },
           content: message,
         });
       });
@@ -90,25 +87,7 @@ describe('chat', () => {
   it('can send message to existing conversation', () => {
     const message = 'I would like to talk to you';
     const answer = 'How can I help you';
-    //eslint-disable-next-line @typescript-eslint/no-explicit-any
-    api.signUpMentee(mentee).then((menteeResponse: any) => {
-      //eslint-disable-next-line @typescript-eslint/no-explicit-any
-      api.signUpMentor(mentor).then((mentorResponse: any) => {
-        const sender = {
-          id: menteeResponse.body.id,
-          loginName: mentee.loginName,
-          password: mentee.password,
-        };
-        const reciever = { id: mentorResponse.body.user_id };
-
-        // send message between users
-        api.sendMessage({
-          sender,
-          reciever,
-          content: message,
-        });
-      });
-    });
+    signUpAndMessageMentor(message);
 
     cy.loginUser(mentor.loginName, mentor.password);
 
@@ -129,6 +108,60 @@ describe('chat', () => {
     // message came
     cy.get('[href="/chat"]').click();
     cy.getByText(answer, 'p').should('be.visible');
+  });
+
+  it('should clear drafted message when changing conversation', () => {
+    const secondMentor = accounts.mentors[1];
+    const message = 'I would like to talk to you';
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    api.signUpMentee(mentee).then((menteeResponse: any) => {
+      const sender = {
+        id: menteeResponse.body.id,
+        loginName: mentee.loginName,
+        password: mentee.password,
+      };
+
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+      api.signUpMentor(mentor).then((mentorResponse: any) => {
+        // send message from mentee to mentor
+        api.sendMessage({
+          sender,
+          reciever: { id: mentorResponse.body.user_id },
+          content: message,
+        });
+      });
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      api.signUpMentor(secondMentor).then((mentorResponse: any) => {
+        // send message from mentee to mentor
+        api.sendMessage({
+          sender,
+          reciever: { id: mentorResponse.body.user_id },
+          content: message,
+        });
+      });
+    });
+
+    // open chat with mentor
+    cy.loginUser(mentee.loginName, mentee.password);
+    cy.get('[href="/chat"]').click();
+    cy.getByText(mentor.displayName, 'p').should('be.visible').click();
+    cy.getByText(mentor.displayName, 'h2').should('be.visible');
+
+    // draft a message
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]')
+      .click()
+      .type('Hello there');
+
+    // change mentor
+    cy.getByText(secondMentor.displayName, 'p').should('be.visible').click();
+    cy.getByText(secondMentor.displayName, 'h2').should('be.visible');
+
+    // verify the message field is cleared by checking that the placeholder is visible
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(
+      'have.value',
+      '',
+    );
   });
 
   it('marks unseen messages seen', () => {
@@ -156,16 +189,13 @@ describe('chat', () => {
     api.signUpMentee(mentee).then((menteeResponse: any) => {
       //eslint-disable-next-line @typescript-eslint/no-explicit-any
       api.signUpMentor(mentor).then((mentorResponse: any) => {
-        const sender = {
-          id: menteeResponse.body.id,
-          loginName: mentee.loginName,
-          password: mentee.password,
-        };
-        const reciever = { id: mentorResponse.body.user_id };
-
         api.sendMultipleMessage({
-          sender,
-          reciever,
+          sender: {
+            id: menteeResponse.body.id,
+            loginName: mentee.loginName,
+            password: mentee.password,
+          },
+          reciever: { id: mentorResponse.body.user_id },
           content: message,
           amountOfMessages: 20,
         });
@@ -193,16 +223,13 @@ describe('chat', () => {
     api.signUpMentee(mentee).then((menteeResponse: any) => {
       //eslint-disable-next-line @typescript-eslint/no-explicit-any
       api.signUpMentor(mentor).then((mentorResponse: any) => {
-        const sender = {
-          id: menteeResponse.body.id,
-          loginName: mentee.loginName,
-          password: mentee.password,
-        };
-        const reciever = { id: mentorResponse.body.user_id };
-
         api.sendMultipleMessage({
-          sender,
-          reciever,
+          sender: {
+            id: menteeResponse.body.id,
+            loginName: mentee.loginName,
+            password: mentee.password,
+          },
+          reciever: { id: mentorResponse.body.user_id },
           content: message,
           amountOfMessages: 20,
         });
