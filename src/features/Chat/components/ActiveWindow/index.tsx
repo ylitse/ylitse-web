@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 import {
   selectActiveChat,
   selectIsLoadingBuddyMessages,
-  selectDefaultChat,
 } from '@/features/Chat/selectors';
 import { selectUserId } from '@/features/Authentication/selectors';
 import { setActiveChat } from '@/features/Chat/chatSlice';
@@ -35,18 +34,11 @@ const ActiveWindow = () => {
   const userId = useAppSelector(selectUserId);
 
   const activeChat = useAppSelector(selectActiveChat);
-  const defaultChat = useAppSelector(selectDefaultChat);
-  const chat = activeChat ?? defaultChat;
-
-  useEffect(() => {
-    dispatch(setActiveChat(chat.buddyId));
-    setMessage('');
-  }, [chat.buddyId]);
 
   const [message, setMessage] = useState('');
 
   const isLoadingBuddyMessages = useAppSelector(
-    selectIsLoadingBuddyMessages(chat?.buddyId),
+    selectIsLoadingBuddyMessages(activeChat?.buddyId),
   );
   const [isLoadingSentMessage, setIsLoadingSentMessage] = useState(false);
   const isSendingDisabled = isLoadingSentMessage || message.trim().length < 1;
@@ -58,12 +50,17 @@ const ActiveWindow = () => {
       setIsLoadingSentMessage(true);
       await sendMessage({
         userId,
-        message: toSendMessage(chat.buddyId, userId, message),
+        message: toSendMessage(activeChat.buddyId, userId, message),
       }).unwrap();
     } catch (error) {
       setIsLoadingSentMessage(false);
     }
   };
+
+  useEffect(() => {
+    dispatch(setActiveChat(activeChat.buddyId));
+    setMessage('');
+  }, [activeChat.buddyId]);
 
   // when the message list is updated we clear the message field and stop loading
   useEffect(() => {
@@ -71,19 +68,19 @@ const ActiveWindow = () => {
       setMessage('');
       setIsLoadingSentMessage(false);
     }
-  }, [chat.messages]);
+  }, [activeChat.messages]);
 
   return (
-    chat && (
+    activeChat && (
       <Container isTablet={isTablet}>
-        <Header chat={chat} />
+        <Header chat={activeChat} />
         <MessageList
-          messageList={chat.messages}
-          buddyId={chat.buddyId}
-          status={chat.status}
+          messageList={activeChat.messages}
+          buddyId={activeChat.buddyId}
+          status={activeChat.status}
           isLoading={isLoadingBuddyMessages}
         />
-        {chat.status === 'ok' && (
+        {activeChat.status === 'ok' && (
           <MessageField
             handleSend={handleMessageSend}
             isInputDisabled={isLoadingSentMessage}
