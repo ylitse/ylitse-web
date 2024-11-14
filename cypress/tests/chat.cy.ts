@@ -131,6 +131,63 @@ describe('chat', () => {
     cy.getByText(answer, 'p').should('be.visible');
   });
 
+  it('should clear drafted message when changing conversation', () => {
+    const secondMentor = accounts.mentors[1];
+    const message = 'I would like to talk to you';
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    api.signUpMentee(mentee).then((menteeResponse: any) => {
+      const sender = {
+        id: menteeResponse.body.id,
+        loginName: mentee.loginName,
+        password: mentee.password,
+      };
+
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+      api.signUpMentor(mentor).then((mentorResponse: any) => {
+        const reciever = { id: mentorResponse.body.user_id };
+
+        // send message between users
+        api.sendMessage({
+          sender,
+          reciever,
+          content: message,
+        });
+      });
+
+      // signup second mentor
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      api.signUpMentor(secondMentor).then((mentorResponse: any) => {
+        const reciever = { id: mentorResponse.body.user_id };
+
+        // send message between users
+        api.sendMessage({
+          sender,
+          reciever,
+          content: message,
+        });
+      });
+    });
+
+    // chat page should open most recent chat by default
+    cy.loginUser(mentee.loginName, mentee.password);
+    cy.get('[href="/chat"]').click();
+    cy.getByText(secondMentor.displayName, 'h2').should('be.visible');
+
+    // draft a message
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]')
+      .click()
+      .type('Hello there');
+
+    // change mentor
+    cy.getByText(mentor.displayName, 'p').should('be.visible').click();
+
+    // verify the message field is cleared by checking that the placeholder is visible
+    cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(
+      'have.value',
+      '',
+    );
+  });
+
   it('marks unseen messages seen', () => {
     const message = 'I would like to talk to you';
     signUpAndMessageMentor(message);
