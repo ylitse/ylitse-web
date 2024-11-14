@@ -31,47 +31,45 @@ import MessageList from './MessageList';
 const ActiveWindow = () => {
   const { isTablet } = useGetLayoutMode();
   const dispatch = useAppDispatch();
-  const [sendMessage, { isLoading: isLoadingSendMessage }] =
-    useSendMessageMutation();
+  const [sendMessage] = useSendMessageMutation();
   const userId = useAppSelector(selectUserId);
 
   const activeChat = useAppSelector(selectActiveChat);
   const defaultChat = useAppSelector(selectDefaultChat);
   const chat = activeChat ?? defaultChat;
 
-  const [message, setMessage] = useState('');
-
-  const isLoadingMessages = useAppSelector(
-    selectIsLoadingBuddyMessages(chat?.buddyId),
-  );
-  const isLoading = isLoadingMessages || isLoadingSendMessage;
-
-  const [isLoadingNewMessage, setIsLoadingNewMessage] = useState(false);
-  const isSendingDisabled = isLoadingNewMessage || message.trim().length < 1;
-
-  const handleMessageSend = async () => {
-    if (!userId || isLoadingNewMessage) return;
-
-    setIsLoadingNewMessage(true);
-    try {
-      await sendMessage({
-        userId,
-        message: toSendMessage(chat.buddyId, userId, message),
-      }).unwrap();
-    } catch (error) {
-      setIsLoadingNewMessage(false);
-    }
-  };
-
   useEffect(() => {
     dispatch(setActiveChat(chat.buddyId));
     setMessage('');
   }, [chat.buddyId]);
 
+  const [message, setMessage] = useState('');
+
+  const isLoadingBuddyMessages = useAppSelector(
+    selectIsLoadingBuddyMessages(chat?.buddyId),
+  );
+  const [isLoadingSentMessage, setIsLoadingSentMessage] = useState(false);
+  const isSendingDisabled = isLoadingSentMessage || message.trim().length < 1;
+
+  const handleMessageSend = async () => {
+    if (!userId || isLoadingSentMessage) return;
+
+    try {
+      setIsLoadingSentMessage(true);
+      await sendMessage({
+        userId,
+        message: toSendMessage(chat.buddyId, userId, message),
+      }).unwrap();
+    } catch (error) {
+      setIsLoadingSentMessage(false);
+    }
+  };
+
+  // when the message list is updated we clear the message field and stop loading
   useEffect(() => {
-    if (isLoadingNewMessage) {
+    if (isLoadingSentMessage) {
       setMessage('');
-      setIsLoadingNewMessage(false);
+      setIsLoadingSentMessage(false);
     }
   }, [chat.messages]);
 
@@ -83,12 +81,12 @@ const ActiveWindow = () => {
           messageList={chat.messages}
           buddyId={chat.buddyId}
           status={chat.status}
-          isLoading={isLoading}
+          isLoading={isLoadingBuddyMessages}
         />
         {chat.status === 'ok' && (
           <MessageField
             handleSend={handleMessageSend}
-            isInputDisabled={isLoadingNewMessage}
+            isInputDisabled={isLoadingSentMessage}
             isSendDisabled={isSendingDisabled}
             message={message}
             onChange={setMessage}
