@@ -127,6 +127,21 @@ button:visited {
 .middle-left-content {
   flex: 1;
   position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 2rem;
+}
+
+.info-ring {
+ border: 6px blue solid;
+ width: 160px;
+ height: 160px;
+ border-radius: 50%;
+ border-color: #ffffff;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
 }
 
 .middle-illustration {
@@ -141,7 +156,7 @@ button:visited {
 
 .middle-right-content {
   flex: 1;
-  padding: 0 1rem 0 0;
+  padding: 0 2rem 0 0;
 }
 
 .middle-bottom-footer {

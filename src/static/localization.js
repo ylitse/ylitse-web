@@ -1,8 +1,18 @@
 (function (document) {
-  const page = window.location.toString().includes('login')
-    ? 'login'
-    : 'register';
-
+  const getPage = path => {
+    switch (path) {
+      case '/login/': {
+        return 'login';
+      }
+      case '/register/': {
+        return 'register';
+      }
+      default: {
+        return 'landing';
+      }
+    }
+  };
+  const page = getPage(window.location.pathname);
   let translations = {};
 
   const enButton = document.getElementById('en-button');
@@ -25,9 +35,11 @@
   };
 
   const styleButton = (button, color, fontWeight, pointerEvents) => {
-    button.style.color = color;
-    button.style.fontWeight = fontWeight;
-    button.style.pointerEvents = pointerEvents;
+    if (button) {
+      button.style.color = color;
+      button.style.fontWeight = fontWeight;
+      button.style.pointerEvents = pointerEvents;
+    }
   };
 
   const showClass = className =>
@@ -71,13 +83,17 @@
     setLocale('fi');
   });
 
-  enButton.onclick = event => {
-    event.preventDefault();
-    setLocale('en');
-  };
+  if (enButton) {
+    enButton.onclick = event => {
+      event.preventDefault();
+      setLocale('en');
+    };
+  }
 
-  fiButton.onclick = event => {
-    event.preventDefault();
-    setLocale('fi');
-  };
+  if (fiButton) {
+    fiButton.onclick = event => {
+      event.preventDefault();
+      setLocale('fi');
+    };
+  }
 })(document);
