@@ -81,6 +81,10 @@ module.exports = {
           context: path.resolve(__dirname, 'src'),
         },
         {
+          from: 'landing/**/*',
+          context: path.resolve(__dirname, 'src'),
+        },
+        {
           from: 'static/**/*',
           context: path.resolve(__dirname, 'src'),
         },

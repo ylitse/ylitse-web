@@ -1,0 +1,200 @@
+html,
+body {
+  min-height: 100%;
+  background-color: #E4F3FB;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.card {
+  flex: 1;
+  background-color: #43BFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0 6.25rem;
+}
+
+.ylitse-logo {
+  background: url(../static/img/ylitse-logo-mountain.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 12.5rem;
+  width: 100%;
+}
+
+.card-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.art-jumbo-container {
+  flex: 2;
+  background: url(../static/img/home-page-background.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 40rem;
+}
+
+p {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 35px;
+  margin: 0;
+  color: #1c325d;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.button,
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  white-space: nowrap;
+  border-radius: 1.75rem;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 12.5rem;
+  height: 3.5rem;
+  max-height: 3.5rem;
+  padding: 1rem 2rem;
+  font-family: 'Baloo 2';
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  align-self: center;
+  color: #F0BA8C; 
+  background-color: #4A2ACB;
+}
+
+.button:hover,
+button:hover {
+  background-color: #37119d;
+  outline: 0;
+}
+
+.button:focus,
+button:focus,
+.button:active,
+button:active,
+.button:target,
+button:target {
+  background-color: #4a2acb;
+  outline: #4a2acb solid 3px;
+  outline-offset: 4px;
+}
+
+.button:visited,
+button:visited {
+  background-color: #5c33ff;
+}
+
+.middle-container {
+  margin: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.middle-card {
+  background-color: #4A2ACB;
+  display: flex;
+  height: 40rem;
+  width: 100%;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.middle-left-content {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 2rem;
+}
+
+.info-ring {
+ border: 6px blue solid;
+ width: 160px;
+ height: 160px;
+ border-radius: 50%;
+ border-color: #ffffff;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+}
+
+.middle-illustration {
+  background: url(../static/img/ylitse-middle-illustration.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 28rem;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.middle-right-content {
+  flex: 1;
+  padding: 0 2rem 0 0;
+}
+
+.middle-bottom-footer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  background-color: #43BFFF;
+  border-radius: 0 0 1rem 1rem;
+  padding: 1rem 0;
+}
+
+h2 {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 42px;
+  margin: 0;
+  margin-top: 30px;
+  color: #ffffff;
+}
+
+footer {
+  background-color: #01A5EC; 
+  color: #1C325D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+}
+
+.footer-logo {
+  background: url(../static/img/footer-logo.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 11rem;
+  height: 2.5rem;
+}
