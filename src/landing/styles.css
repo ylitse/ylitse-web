@@ -28,11 +28,7 @@ main {
 }
 
 .ylitse-logo {
-  background: url(../static/img/ylitse-logo-mountain.svg);
-  background-position: center;
-  background-repeat: no-repeat;
   height: 12.5rem;
-  width: 100%;
 }
 
 .card-buttons {
@@ -173,6 +169,7 @@ button:visited {
 .middle-right-content {
   flex: 1;
   padding: 0 2rem 0 0;
+  overflow: auto;
 }
 
 .middle-bottom-footer {
@@ -203,6 +200,8 @@ button:visited {
 .bottom-bottom-content {
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .mentor-card-item {
@@ -318,4 +317,103 @@ footer {
   background-repeat: no-repeat;
   width: 11rem;
   height: 2.5rem;
+}
+
+@media only screen and (max-width: 1200px){
+  .middle-container {
+      margin: 2rem;
+  }
+
+
+}
+
+@media only screen and (max-width: 1000px){
+  .middle-container {
+      margin: 1rem;
+  }
+
+}
+
+
+
+@media only screen and (max-width: 880px){
+  p {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  h2 {
+    margin-top: 16px;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  a {
+    font-size: 20px !important;
+    line-height: 26px !important;
+    height: 2rem !important;
+    width: 8rem !important;
+  }
+
+  .card-buttons {
+   justify-content: center;
+   gap: 1rem;
+  }
+
+  .middle-container {
+      margin: 0.5rem;
+  }
+
+  .middle-card {
+    flex-direction: column-reverse;
+  }
+  
+  .middle-right-content {
+    padding: 8px;
+  }
+
+  .middle-left-content {
+    flex: 0;
+    display: none;
+  }
+
+  .middle-bottom-footer {
+    gap: 8px;
+    padding 8px;
+  }
+
+  .info-ring {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .bottom-top-content {
+    padding: 8px;
+  } 
+
+  .final-container {
+    padding: 8px;
+  }
+
+  .mentor-card-container {
+    width: 376px;
+  }
+
+  .mentor {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 660px){
+  .top-container {
+    flex-direction: column;
+  }
+
+  .card {
+    padding: 8px;
+  }
+
+  .ylitse-logo {
+    height: 8rem;
+  }
 }
