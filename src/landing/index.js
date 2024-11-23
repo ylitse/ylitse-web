@@ -7,8 +7,8 @@
 
   const getInfoLocalizations = (mentorAmount, yearsOfService) => ({
     en: {
-      infoRing1: `${mentorAmount} mentoria`,
-      infoRing2: `keskusteluja jo ${yearsOfService} vuotta`,
+      infoRing1: `${mentorAmount} mentors`,
+      infoRing2: `${yearsOfService} years of conversations`,
     },
     fi: {
       infoRing1: `${mentorAmount} mentoria`,
