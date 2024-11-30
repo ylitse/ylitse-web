@@ -23,7 +23,7 @@ type Props = {
 };
 
 export const Content = ({
-  mentor: { skills, story, languages, buddyId, name },
+  mentor: { skills, story, languages, buddyId, name, isVacationing },
   onDismiss,
 }: Props) => {
   const { isMobile } = useGetLayoutMode();
@@ -39,6 +39,7 @@ export const Content = ({
   };
 
   const areLanguagesDisplayed = isMobile && languages.length > 0;
+  const isStartingConversationDisabled = isMe || isVacationing;
 
   return (
     <Container isMobile={isMobile}>
@@ -58,10 +59,10 @@ export const Content = ({
       )}
       <Skills skills={skills} />
       <OpenConversationButton
-        isDisabled={isMe}
+        isDisabled={isStartingConversationDisabled}
         onClick={handleClick}
         size="large"
-        variant={isMe ? 'disabled' : 'dark'}
+        variant={isStartingConversationDisabled ? 'disabled' : 'dark'}
       >
         {t('card.chat')}
       </OpenConversationButton>
