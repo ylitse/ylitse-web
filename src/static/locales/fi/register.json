@@ -1,7 +1,7 @@
 {
   "accountInfoTitle": "Tilin tiedot",
   "apuuLink": "Apuu-chatissa.",
-  "description": "Hienoa, että haluat aloittaa palvelun käytön. Huomaathan, että palvelu on tarkoitettu vähintään 15-vuotiaille. Jos olet alle 15-vuotias, vieraile",
+  "description": "Hienoa, että haluat aloittaa palvelun käytön. Huomaathan, että palvelu on tarkoitettu vähintään 17-vuotiaille. Jos olet alle 17-vuotias, vieraile",
   "displayNameFieldInfo": "Syötä nimimerkki, josta sinua ei voi tunnistaa, jos haluat käyttää palvelua anonyymisti.",
   "displayNameLabel": "Julkinen nimimerkki *",
   "displayNameTooShortError": "Nimimerkki on liian lyhyt",
@@ -27,7 +27,7 @@
   "privacyTitle": "Yksityisyydensuoja",
   "registerButton": "Rekisteröidy",
   "registerTitle": "Rekisteröidy",
-  "requiredAgeSwitch": "Olen vähintään 15-vuotias",
+  "requiredAgeSwitch": "Olen vähintään 17-vuotias",
   "requiredFieldInfo": "Tähdellä * merkityt kentät ovat pakollisia.",
   "showPassword": "Näytä salasana",
   "submitError": "Lomakkeen lähettäminen epäonnistui. Yritä hetken kuluttua uudelleen.",

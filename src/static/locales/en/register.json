@@ -1,7 +1,7 @@
 {
   "accountInfoTitle": "Account information",
   "apuuLink": "the Apuu chat.",
-  "description": "Great that you want to start using the application. Please notice that the application is meant for people who are at least 15. If you're under 15, please visit",
+  "description": "Great that you want to start using the application. Please notice that the application is meant for people who are at least 17. If you're under 17, please visit",
   "displayNameFieldInfo": "Provided a display name that can't be identified, if you want to use the application anonymously.",
   "displayNameLabel": "Display name *",
   "displayNameTooShortError": "Display name is too short",
@@ -27,7 +27,7 @@
   "privacyTitle": "Privacy",
   "registerButton": "Register",
   "registerTitle": "Register",
-  "requiredAgeSwitch": "I'm at least 15 years old",
+  "requiredAgeSwitch": "I'm at least 17 years old",
   "requiredFieldInfo": "Fields marked with a star * are required.",
   "showPassword": "Show password",
   "submitError": "Form submission failed. Please try again in a moment.",
