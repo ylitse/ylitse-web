@@ -69,6 +69,7 @@ const Bubble = styled.div<{
   background-color: ${({ background }) => background};
   border-radius: 10px;
   box-sizing: border-box;
+  max-width: 75%;
   padding: 14px 22px;
   text-align: left;
   word-break: break-word;
