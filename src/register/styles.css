@@ -23,7 +23,7 @@ main {
 form {
   display: flex;
   flex-direction: column;
-  max-width: 500px
+  max-width: 500px;
   padding: 60px 100px;
   border-radius: 20px;
   background-color: white;
@@ -327,8 +327,8 @@ input:checked + .slider:before {
   outline: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 880px) {
   form {
-    padding: 30px 50px;
+    padding: 24px 32px !important;
   }
 }
