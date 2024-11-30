@@ -13,7 +13,7 @@
     "test": "npm run test:unit && npm run test:e2e",
     "build": "npm run licensesjson:create && webpack",
     "start": "npm run licensesjson:create && webpack serve --open",
-    "wait": "wait-on http://localhost:8080/version && wait-on http://localhost:8082"
+    "wait": "wait-on http://localhost:8080/mentors && wait-on http://localhost:8082"
   },
   "author": "",
   "license": "AGPL-3.0-or-later",
