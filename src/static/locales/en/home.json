@@ -39,20 +39,20 @@
     "notice1": "Welcome to the Ylitse MentorApp service!"
   },
   "concepts": {
-    "title": "Concepts",
-    "description": "Here are some concepts to make using the service easier.",
-    "equals": "=",
+    "title": "What is Ylitse?",
+    "description": "Here are some facts about the service.",
+    "equals": "→",
     "concept1": {
-      "name": "Status message",
-      "definition": "If a mentor is not available, for example, due to vacation, they can announce it with a status message. The status message is visible in the mentor's profile and in the chat with the mentor."
+      "name": "Chat",
+      "definition": "Chat with the same mentor for longer periods of time and get to know each other. You can agree on when and what you will discuss."
     },
     "concept2": {
-      "name": "Concept 2",
-      "definition": "Lorem ipsum dolor sit amet. Vestibulum eu vulputate ipsum. Proin eget dapibus risus."
+      "name": "Security",
+      "definition": "The service follows the principles of a safer space. Read about it <a>here</a>."
     },
     "concept3": {
-      "name": "Concept 3",
-      "definition": "Ellentesque scelerisque diam eget metus sollicitudin, tristique interdum lacus tristique."
+      "name": "Mobile app",
+      "definition": "You can also use the service with our mobile app, which is available on <a1>Google Play</a1> and <a2>App Store</a2>."
     }
   },
   "newestMentors": {

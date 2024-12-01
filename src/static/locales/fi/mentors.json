@@ -20,7 +20,7 @@
     "search": "Etsi mentoria hakusanalla",
     "show": "Suodata aiheella",
     "title": "Haku",
-    "instructions": "Voit hakea mentoreita hakusanalla kirjoittamalla sen hakukenttään (esimerkiksi <i>masennus</i> tai <i>lapsuuden traumat</i>) ja/tai valita valmiita aiheita \"Suodata aiheella\" -valikon kautta."
+    "instructions": "Voit hakea mentoreita hakusanalla kirjoittamalla sen hakukenttään (esimerkiksi <i>masennus</i> tai <i>lapsuuden traumat</i>) ja/tai valita valmiita aiheita “Suodata aiheella” -valikon kautta."
   },
   "notification": {
     "fetchingMentorsError": "Mentoreiden lataaminen epäonnistui",

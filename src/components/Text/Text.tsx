@@ -9,8 +9,10 @@ type Props = {
   variant?: TextVariant;
   color?: Color;
   className?: string;
-  children: ReactNode;
+  children?: ReactNode;
   inputId?: string;
+  url?: string;
+  isExternalUrl?: boolean;
 };
 
 export const Text: React.FC<Props> = ({
@@ -19,6 +21,8 @@ export const Text: React.FC<Props> = ({
   className,
   children,
   inputId,
+  url,
+  isExternalUrl = false,
 }) => {
   const TextElement = variants[variant].element;
   const variantStyles = variants[variant].styles;
@@ -29,6 +33,8 @@ export const Text: React.FC<Props> = ({
       htmlFor={inputId}
       className={className}
       style={{ ...commonStyles, ...variantStyles, ...variantColor }}
+      {...(url && { href: url })}
+      {...(isExternalUrl && { target: '_blank', rel: 'noreferrer' })}
     >
       {children}
     </TextElement>
