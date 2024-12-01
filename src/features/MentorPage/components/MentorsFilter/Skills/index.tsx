@@ -78,6 +78,7 @@ const Container = styled.div`
   display: flex;
   flex: 0 0 auto;
   flex-wrap: wrap;
+  gap: 1rem;
   height: fit-content;
   justify-content: center;
   overflow: hidden;

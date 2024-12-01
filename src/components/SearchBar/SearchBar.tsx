@@ -18,7 +18,7 @@ type SearchProps = {
 
 const sizingMap: Record<Variant, FlattenSimpleInterpolation> = {
   normal: css`
-    padding: 1rem 4.5rem;
+    padding: 0.75rem 4.5rem;
   `,
   small: css`
     padding: 0.75rem 2rem 0.75rem 4rem;
@@ -88,10 +88,10 @@ const SearchIcon = styled.div`
   background-size: contain;
   display: flex;
   flex: 0 0 auto;
-  height: 2rem;
+  height: 1.5rem;
   left: 1.5rem;
   position: absolute;
-  width: 2rem;
+  width: 1.5rem;
 `;
 
 export default SearchBar;

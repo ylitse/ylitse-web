@@ -17,9 +17,10 @@
     "multipleSelected": "aihetta valittu",
     "oneSelected": "aihe valittu",
     "pageSizeLabel": "Aihetta sivulla:",
-    "search": "Etsi mentoria",
+    "search": "Etsi mentoria hakusanalla",
     "show": "Suodata aiheella",
-    "title": "Haku"
+    "title": "Haku",
+    "instructions": "Voit hakea mentoreita hakusanalla kirjoittamalla sen hakukenttään (esimerkiksi <i>masennus</i> tai <i>lapsuuden traumat</i>) ja/tai valita valmiita aiheita \"Suodata aiheella\" -valikon kautta."
   },
   "notification": {
     "fetchingMentorsError": "Mentoreiden lataaminen epäonnistui",

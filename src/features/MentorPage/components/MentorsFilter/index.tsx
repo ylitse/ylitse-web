@@ -63,7 +63,7 @@ const Filters = styled.div`
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1rem 2.5rem;
   height: auto;
   margin: 0;
   padding: 2.5rem 0;
@@ -73,7 +73,7 @@ const Filters = styled.div`
 
 const Divider = styled.div`
   border-bottom: solid 1px ${palette.purplePale};
-  margin: 0 6%;
+  margin: 1rem 6% 0 6%;
 `;
 
 const PageHeader = styled.div`
