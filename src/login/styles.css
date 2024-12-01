@@ -257,6 +257,24 @@ button:visited {
   background-color: #5c33ff;
 }
 
+#hide-mfa {
+  display: none;
+}
+
+.mfaField {
+  display: none;
+}
+
+.mfa-button {
+  bottom: 24px;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 200px;
+}
+
 #register-button {
   border: 3px solid #f0ba8c !important;
   color: #f0ba8c;

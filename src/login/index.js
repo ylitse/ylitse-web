@@ -30,4 +30,26 @@
     },
     false,
   );
+
+  const showMfaButton = document.getElementById('show-mfa');
+  const hideMfaButton = document.getElementById('hide-mfa');
+  const toggleFields = document.querySelectorAll('.mfaField');
+
+  showMfaButton.addEventListener('click', event => {
+    event.preventDefault();
+    toggleFields.forEach(field => {
+      field.style.display = 'block'; // Show the field
+      showMfaButton.style.display = 'none';
+      hideMfaButton.style.display = 'block';
+    });
+
+    hideMfaButton.addEventListener('click', event => {
+      event.preventDefault();
+      toggleFields.forEach(field => {
+        field.style.display = 'none'; // Hide the field
+        hideMfaButton.style.display = 'none';
+        showMfaButton.style.display = 'block';
+      });
+    });
+  });
 })(window, document);

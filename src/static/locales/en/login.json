@@ -9,6 +9,8 @@
   "longTitle": "Ylitse MentorApp",
   "pageTitle": "Ylitse MentorApp - SOS Children's Village",
   "passwordLabel": "Password",
+  "mfaButtonHide": "Hide MFA field",
+  "mfaButtonShow": "Show MFA field",
   "mfaLabel": "MFA",
   "registrationLink": "Register",
   "retrievePasswordLink": "Forgot your password?",
