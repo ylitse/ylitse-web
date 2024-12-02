@@ -32,7 +32,7 @@ describe('home', () => {
     cy.get('[href="/"]').click();
 
     cy.getByText('Tiedotteet', 'h2').should('be.visible');
-    cy.getByText('Käsitteet', 'h2').should('be.visible');
+    cy.getByText('Mikä on Ylitse?', 'h2').should('be.visible');
 
     // assure that the newest mentor is displayed
     cy.getByText('Uusimmat mentorit', 'h2').should('be.visible');

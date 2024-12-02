@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/store';
 import { selectSelectedSkills } from '@/features/MentorPage/mentorsFilterSlice';
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 import styled from 'styled-components';
 import SearchBar from '@/components/SearchBar';
@@ -32,6 +32,11 @@ const MentorSearch = ({
   return (
     <>
       <SearchHeader variant="h1">{t('filters.title')}</SearchHeader>
+      <Instructions>
+        <Text variant="p">
+          <Trans t={t} i18nKey="filters.instructions" />
+        </Text>
+      </Instructions>
       <Container>
         <NarrowSearchBar
           placeholder={t('filters.search')}
@@ -65,11 +70,18 @@ const SearchHeader = styled(Text)`
   text-align: center;
 `;
 
+const Instructions = styled.div`
+  margin: auto;
+  max-width: 58%;
+  text-align: center;
+  width: 58%;
+`;
+
 const Container = styled.div`
   display: flex;
   flex: 1;
   flex-wrap: wrap;
-  gap: 2.5rem;
+  gap: 4rem;
   justify-content: center;
   margin: auto;
   max-width: 90%;
@@ -98,7 +110,7 @@ const Ball = styled.div`
 `;
 
 const NarrowSearchBar = styled(SearchBar)`
-  width: 50%;
+  width: 44%;
 `;
 
 export default MentorSearch;

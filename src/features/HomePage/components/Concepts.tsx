@@ -1,5 +1,5 @@
+import { useTranslation, Trans } from 'react-i18next';
 import styled, { css } from 'styled-components';
-import { useTranslation } from 'react-i18next';
 
 import { palette } from '@/components/constants';
 import Text from '@/components/Text';
@@ -24,12 +24,50 @@ const Concepts = ({ isMobile = false }: Props) => {
         <Concept>
           <Name variant="bold">{t('concepts.concept2.name')}</Name>
           <Equals>{t('concepts.equals')}</Equals>
-          <Definition>{t('concepts.concept2.definition')}</Definition>
+          <Definition>
+            <Trans
+              t={t}
+              i18nKey="concepts.concept2.definition"
+              components={{
+                a: (
+                  <Text
+                    color="purple"
+                    variant="inlineLink"
+                    url="https://www.sos-lapsikyla.fi/wp-content/uploads/2023/12/Turvallisemman-tilan-periaatteet.pdf"
+                    isExternalUrl
+                  />
+                ),
+              }}
+            />
+          </Definition>
         </Concept>
         <Concept>
           <Name variant="bold">{t('concepts.concept3.name')}</Name>
           <Equals>{t('concepts.equals')}</Equals>
-          <Definition>{t('concepts.concept3.definition')}</Definition>
+          <Definition>
+            <Trans
+              t={t}
+              i18nKey="concepts.concept3.definition"
+              components={{
+                a1: (
+                  <Text
+                    color="purple"
+                    variant="inlineLink"
+                    url="https://play.google.com/store/apps/details?id=com.ylitse"
+                    isExternalUrl
+                  />
+                ),
+                a2: (
+                  <Text
+                    color="purple"
+                    variant="inlineLink"
+                    url="https://apps.apple.com/fi/app/ylitse-mentorapp/id1436844984"
+                    isExternalUrl
+                  />
+                ),
+              }}
+            />
+          </Definition>
         </Concept>
       </InnerContainer>
     </Container>

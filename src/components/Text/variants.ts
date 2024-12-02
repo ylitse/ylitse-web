@@ -118,6 +118,16 @@ export const variants = {
       lineHeight: '2rem',
     },
   },
+  inlineLink: {
+    element: 'a',
+    styles: {
+      fontFamily: '"Baloo 2"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: 700,
+      lineHeight: '1.5rem',
+    },
+  },
   link: {
     element: 'a',
     styles: {
