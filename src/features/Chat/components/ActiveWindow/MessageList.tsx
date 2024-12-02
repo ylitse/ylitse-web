@@ -48,8 +48,6 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
 
   const dispatch = useAppDispatch();
   const oldestMessage = messageList.length > 0 ? messageList[0].id : '0';
-  const newestMessage =
-    messageList.length > 0 ? messageList[messageList.length - 1].id : '0';
 
   const handleFetchOlderMessages = (messageId: string, buddyId: string) => {
     if (isLoading) {
@@ -69,7 +67,7 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
     historyRef.current?.lastElementChild?.scrollIntoView({
       behavior: 'smooth',
     });
-  }, [newestMessage]);
+  }, []);
 
   useEffect(() => {
     if (isScrolledToTop) {
