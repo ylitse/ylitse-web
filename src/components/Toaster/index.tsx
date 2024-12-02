@@ -3,7 +3,14 @@ import { AppToast } from './Toast';
 
 const AppToaster = () => {
   return (
-    <Toaster toastOptions={{ duration: Infinity }}>
+    <Toaster
+      toastOptions={{
+        duration: Infinity,
+        success: {
+          duration: 4000,
+        },
+      }}
+    >
       {toast => <AppToast toast={toast} />}
     </Toaster>
   );
