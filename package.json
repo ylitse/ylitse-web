@@ -1,6 +1,6 @@
 {
   "name": "ylitse-web",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "description": "Ylitse web UI",
   "main": "index.js",
   "scripts": {
