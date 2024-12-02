@@ -17,7 +17,7 @@ describe('home', () => {
     api.signUpMentor(mentor);
     cy.loginUser(mentee.loginName, mentee.password);
 
-    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Tukea ja seuraa', 'h1').should('be.visible');
     cy.getByText(
       'Ylitse MentorApp -vertaismentoripalvelussa mentorit auttavat sinua henkilökohtaisessa tilanteessasi luottamuksellisesti. Voit valita sopivan mentorin ongelmasi perusteella ja saada apua ajasta ja paikasta riippumatta.',
       'p',
@@ -109,7 +109,7 @@ describe('home', () => {
 
     cy.loginUser(mentee.loginName, mentee.password);
 
-    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Tukea ja seuraa', 'h1').should('be.visible');
 
     cy.getByText('Aloita etsimällä mentori', 'h2').should('not.exist');
     cy.getByText('Keskustele mentoreiden kanssa', 'h2').should('be.visible');
@@ -125,12 +125,10 @@ describe('home', () => {
     api.signUpMentor(mentor);
     cy.loginUser(mentor.loginName, mentor.password);
 
-    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Tukea ja seuraa', 'h1').should('be.visible');
 
-    cy.getByText('Keskustele aktoreiden kanssa', 'h2').should('be.visible');
-
-    // assure that go to chat button works
-    cy.getByText('Siirry chattiin', 'button').click();
+    // assure that there is no messages yet
+    cy.get('[href="/chat"]').click();
     cy.url().should('match', /chat/);
     cy.getByText('Sinulla ei ole vielä keskusteluja', 'p').should('be.visible');
   });
@@ -161,7 +159,7 @@ describe('home', () => {
 
     cy.loginUser(mentor.loginName, mentor.password);
 
-    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Tukea ja seuraa', 'h1').should('be.visible');
 
     cy.getByText('Keskustele aktoreiden kanssa', 'h2').should('not.exist');
     cy.getByText('Sinulla on lukemattomia viestejä', 'h2').should('be.visible');
@@ -217,7 +215,7 @@ describe('home', () => {
 
     cy.loginUser(mentor.loginName, mentor.password);
 
-    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Tukea ja seuraa', 'h1').should('be.visible');
 
     cy.getByText('Sinulla on lukemattomia viestejä', 'h2').should('not.exist');
     cy.getByText('Keskustele aktoreiden kanssa', 'h2').should('be.visible');
@@ -268,7 +266,7 @@ describe('home', () => {
 
     cy.loginUser(mentor.loginName, mentor.password);
 
-    cy.getByText('Ylitse MentorApp', 'h1').should('be.visible');
+    cy.getByText('Tukea ja seuraa', 'h1').should('be.visible');
 
     cy.getByText('Sinulla on lukemattomia viestejä', 'h2').should('not.exist');
     cy.getByText('Keskustele aktoreiden kanssa', 'h2').should('be.visible');

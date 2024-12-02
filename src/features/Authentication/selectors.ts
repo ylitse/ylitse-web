@@ -36,6 +36,7 @@ export const selectAppRole = createSelector(
   selectUserRole,
   selectHasBeenChatting,
   (userRole, hasBeenChatting) => {
+    if (userRole === 'mentor' && !hasBeenChatting) return 'freshMentor';
     if (userRole === 'mentee' && !hasBeenChatting) return 'freshMentee';
     return userRole;
   },

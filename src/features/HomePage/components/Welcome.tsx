@@ -20,6 +20,7 @@ const Welcome = ({ isMobile = false }: Props) => {
   const navigate = useNavigate();
   const navigation = {
     admin: '/admin',
+    freshMentor: '/mentors',
     freshMentee: '/mentors',
     mentor: '/chat',
     mentee: '/chat',
@@ -32,6 +33,10 @@ const Welcome = ({ isMobile = false }: Props) => {
 
     userRole && navigate(navigation[userRole]);
   };
+
+  if (userRole == 'freshMentor') {
+    return null;
+  }
 
   return (
     <Container isDesktop={!isMobile}>
