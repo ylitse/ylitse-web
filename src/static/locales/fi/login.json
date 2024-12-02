@@ -9,6 +9,8 @@
   "longTitle": "Ylitse MentorApp",
   "pageTitle": "Ylitse MentorApp - SOS-Lapsikylä",
   "passwordLabel": "Salasana",
+  "mfaButtonHide": "Piilota MFA-kenttä",
+  "mfaButtonShow": "Näytä MFA-kenttä",
   "mfaLabel": "MFA",
   "registrationLink": "Rekisteröidy",
   "retrievePasswordLink": "Unohditko salasanasi?",

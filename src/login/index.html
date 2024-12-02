@@ -50,8 +50,9 @@
                 placeholder=""
               />
               <!--a> href="#" localization-key="retrievePasswordLink"></a-->
-              <label for="mfa_token" localization-key="mfaLabel"></label>
+              <label class="mfaField" for="mfa_token" localization-key="mfaLabel"></label>
               <input
+                class="mfaField"
                 id="mfa_token"
                 name="mfa_token"
                 type="text"
@@ -63,6 +64,16 @@
                 type="submit"
                 localization-key="loginButton"
               ></button>
+              <a
+                class="mfa-button"
+                id="show-mfa"
+                localization-key="mfaButtonShow"
+              ></a>
+              <a
+                class="mfa-button"
+                id="hide-mfa"
+                localization-key="mfaButtonHide"
+              ></a>
             </form>
           </div>
           <div class="right panel">
