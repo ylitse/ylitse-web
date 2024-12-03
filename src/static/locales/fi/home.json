@@ -1,6 +1,6 @@
 {
   "info": {
-    "title": "Ylitse MentorApp",
+    "title": "Tukea ja seuraa vapaaehtoisilta mentoreilta",
     "description": "Ylitse MentorApp -vertaismentoripalvelussa mentorit auttavat sinua henkilökohtaisessa tilanteessasi luottamuksellisesti. Voit valita sopivan mentorin ongelmasi perusteella ja saada apua ajasta ja paikasta riippumatta.",
     "bullet1": "Voit käyttää sovellusta nimettömästi ja luottamuksellisesti.",
     "bullet2": "Palvelun käyttö on sinulle maksutonta.",
@@ -15,17 +15,17 @@
   "welcome": {
     "admin": {
       "title": "Hallinnoi käyttäjätilejä",
-      "text": "Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.",
+      "text": "Lisää, poista ja muokkaa aktoreita ja mentoreita sekä tarkastele tilastoja. Käytä kyselytyökaluja ja hallinnoi asiasanoja ja muita palvelun toiminnallisuuksia.",
       "button": "Siirry tilien hallinnointiin"
     },
     "mentor": {
       "title": "Keskustele aktoreiden kanssa",
-      "text": "Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.",
+      "text": "Palaa keskusteluihin aktoreiden kanssa ja kirjoita viesti.",
       "button": "Siirry chattiin"
     },
     "mentee": {
       "title": "Keskustele mentoreiden kanssa",
-      "text": "Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.",
+      "text": "Palaa keskusteluihin mentoreiden kanssa ja kirjoita viesti.",
       "button": "Siirry chattiin"
     },
     "freshMentee": {
@@ -36,7 +36,7 @@
   },
   "announcements": {
     "title": "Tiedotteet",
-    "notice1": "Tervetuloa käyttämään Ylitse MentorApp -palvelua!"
+    "notice1": "Ylitsen uusi versio on avattu! Tervetuloa!"
   },
   "concepts": {
     "title": "Mikä on Ylitse?",

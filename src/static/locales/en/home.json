@@ -1,6 +1,6 @@
 {
   "info": {
-    "title": "Ylitse MentorApp",
+    "title": "Support and company from volunteer mentors",
     "description": "In the Ylitse MentorApp peer mentoring service, mentors help you with your personal situation confidentially. You can choose a suitable mentor based on your problem and get help regardless of time and place.",
     "bullet1": "You can use the app anonymously and confidentially.",
     "bullet2": "The service is free of charge.",
@@ -15,17 +15,17 @@
   "welcome": {
     "admin": {
       "title": "Manage user accounts",
-      "text": "Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.",
+      "text": "Add, remove and edit actors and mentors, view statistics, use survey tools and manage keywords and other service features.",
       "button": "Go to account management"
     },
     "mentor": {
-      "title": "Chat with mentees",
-      "text": "Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.",
+      "title": "Chat with actors",
+      "text": "Return to the conversations with the actors and write a message.",
       "button": "Go to chat"
     },
     "mentee": {
       "title": "Chat with mentors",
-      "text": "Lorem ipsum aenean fermentum nisl quis risus aliquet consequat. Suspendisse at hendrerit arcu, non consequat sem.",
+      "text": "Return to the conversations with the mentors and write a message.",
       "button": "Go to chat"
     },
     "freshMentee": {
@@ -36,7 +36,7 @@
   },
   "announcements": {
     "title": "Announcements",
-    "notice1": "Welcome to the Ylitse MentorApp service!"
+    "notice1": "The new version of Ylitse has been launched! Welcome!"
   },
   "concepts": {
     "title": "What is Ylitse?",
