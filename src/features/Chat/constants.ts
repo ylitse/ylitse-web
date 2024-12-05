@@ -55,5 +55,5 @@ export const statusUpdateErrorMessages = {
   ok: 'chat:notification.restoringError',
   banned: 'chat:notification.banningError',
   archived: 'chat:notification.archivingError',
-  unblocked: 'chat.notification.unblockingError',
+  unblocked: 'chat:notification.unblockingError',
 } as const;
