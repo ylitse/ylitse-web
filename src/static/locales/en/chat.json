@@ -76,7 +76,9 @@
     "messageSendSuccess": "Message sent successfully",
     "pollingError": "Something went wrong",
     "restoringError": "Restoring conversation failed",
-    "restoringSuccess": "Conversation restored successfully"
+    "restoringSuccess": "Conversation restored successfully",
+    "unblockingSuccess": "Unblocked and conversation restored successfully",
+    "unblockingError": "Unblocking or restoring conversation failed"
   },
   "welcome": {
     "lower": {
