@@ -385,7 +385,9 @@ describe('chat', () => {
     cy.get('button[id="confirm-unblock"]').click();
 
     // should show notification
-    cy.contains('Keskustelu palautettu onnistuneesti').should('be.visible');
+    cy.contains('Esto poistettu ja keskustelu palautettu onnistuneesti').should(
+      'be.visible',
+    );
 
     // should display message field again
     cy.get('textarea[placeholder*="Kirjoita viestisi tähän"]').should(

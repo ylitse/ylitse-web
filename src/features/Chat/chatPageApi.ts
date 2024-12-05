@@ -122,11 +122,11 @@ export const chatApi = baseApi.injectEndpoints({
         method: 'put',
         body: { status: nextStatus },
       }),
-      async onQueryStarted({ nextStatus, originalStatus }, result) {
+      async onQueryStarted({ nextStatus, originalStatus }, { queryFulfilled }) {
         try {
-          await result.queryFulfilled;
+          await queryFulfilled;
           if (originalStatus === 'banned' && nextStatus === 'ok') {
-            toast.success(t('chat:notification.unblockingSuccess'), {
+            toast.success(t(statusUpdateSuccessMessages.unblocked), {
               id: `unblocked-status-success`,
             });
           } else {
