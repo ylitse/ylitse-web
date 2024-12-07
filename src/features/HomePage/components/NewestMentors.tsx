@@ -25,39 +25,71 @@ const NewestMentors = ({ isMobile = false }: Props) => {
   const mentors = useAppSelector(selectNewestMentors(2));
 
   return (
-    <Container>
-      <Title variant="h2" isMobile={isMobile}>
-        {t('newestMentors.title')}
-      </Title>
-      <MentorContainer>
-        {selectedMentor && (
-          <MentorCard
-            mentor={selectedMentor}
-            onDismiss={() => setSelectedMentor(null)}
-          />
-        )}
-        {!isLoading && (
-          <MentorCards isMobile={isMobile}>
-            {mentors.map(mentor => (
-              <ListCard
-                key={mentor.buddyId}
-                isHomePage
-                mentor={mentor}
-                setVisibleCard={() => setSelectedMentor(mentor)}
+    <Container isMobile={isMobile}>
+      {isMobile ? (
+        <>
+          <Title variant="h2" isMobile={isMobile}>
+            {t('newestMentors.title')}
+          </Title>
+          <MentorContainer>
+            {selectedMentor && (
+              <MentorCard
+                mentor={selectedMentor}
+                onDismiss={() => setSelectedMentor(null)}
               />
-            ))}
-          </MentorCards>
-        )}
-        {!isMobile && <FindMentor />}
-      </MentorContainer>
+            )}
+            {!isLoading && (
+              <MentorCards isMobile={isMobile}>
+                {mentors.map(mentor => (
+                  <ListCard
+                    key={mentor.buddyId}
+                    isHomePage
+                    mentor={mentor}
+                    setVisibleCard={() => setSelectedMentor(mentor)}
+                  />
+                ))}
+              </MentorCards>
+            )}
+          </MentorContainer>
+        </>
+      ) : (
+        <>
+          <RightContainer>
+            <Title variant="h2" isMobile={isMobile}>
+              {t('newestMentors.title')}
+            </Title>
+            <MentorContainer>
+              {selectedMentor && (
+                <MentorCard
+                  mentor={selectedMentor}
+                  onDismiss={() => setSelectedMentor(null)}
+                />
+              )}
+              {!isLoading && (
+                <MentorCards isMobile={isMobile}>
+                  {mentors.map(mentor => (
+                    <ListCard
+                      key={mentor.buddyId}
+                      isHomePage
+                      mentor={mentor}
+                      setVisibleCard={() => setSelectedMentor(mentor)}
+                    />
+                  ))}
+                </MentorCards>
+              )}
+            </MentorContainer>
+          </RightContainer>
+          <FindMentor />
+        </>
+      )}
     </Container>
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ isMobile: boolean }>`
   background-color: ${palette.blueWhite};
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => (props.isMobile ? 'column' : 'row')};
   gap: 2rem;
   padding: 4rem ${OUTER_HORIZONTAL_MARGIN};
 `;
@@ -93,6 +125,13 @@ const MentorCards = styled.div<{ isMobile: boolean }>`
         display: none;
       }
     `}
+`;
+
+const RightContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 `;
 
 export default NewestMentors;
