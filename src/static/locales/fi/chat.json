@@ -76,7 +76,9 @@
     "messageSendSuccess": "Viestin lähettäminen onnistui",
     "pollingError": "Jokin meni vikaan",
     "restoringError": "Keskustelun palauttaminen epäonnistui",
-    "restoringSuccess": "Keskustelu palautettu onnistuneesti"
+    "restoringSuccess": "Keskustelu palautettu onnistuneesti",
+    "unblockingSuccess": "Esto poistettu ja keskustelu palautettu onnistuneesti",
+    "unblockingError": "Eston poisto tai keskustelun palautus epäonnistui"
   },
   "welcome": {
     "lower": {

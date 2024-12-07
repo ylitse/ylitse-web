@@ -35,8 +35,9 @@ type PutMessage = {
 
 type PutStatus = {
   buddyId: string;
-  status: ChatFolder;
+  nextStatus: ChatFolder;
   userId: string;
+  originalStatus: ChatFolder;
 };
 
 type reportMessage = {
@@ -116,20 +117,26 @@ export const chatApi = baseApi.injectEndpoints({
       }),
     }),
     updateStatus: builder.mutation<unknown, PutStatus>({
-      query: ({ userId, buddyId, status }) => ({
+      query: ({ userId, buddyId, nextStatus }) => ({
         url: `users/${userId}/contacts/${buddyId}`,
         method: 'put',
-        body: { status },
+        body: { status: nextStatus },
       }),
-      async onQueryStarted({ status }, { queryFulfilled }) {
+      async onQueryStarted({ nextStatus, originalStatus }, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success(t(statusUpdateSuccessMessages[status]), {
-            id: `${status}-status-success`,
-          });
+          if (originalStatus === 'banned' && nextStatus === 'ok') {
+            toast.success(t(statusUpdateSuccessMessages.unblocked), {
+              id: `unblocked-status-success`,
+            });
+          } else {
+            toast.success(t(statusUpdateSuccessMessages[nextStatus]), {
+              id: `${nextStatus}-status-success`,
+            });
+          }
         } catch (err) {
-          toast.error(t(statusUpdateErrorMessages[status]), {
-            id: `${status}-status-failure`,
+          toast.error(t(statusUpdateErrorMessages[nextStatus]), {
+            id: `${nextStatus}-status-failure`,
           });
         }
       },

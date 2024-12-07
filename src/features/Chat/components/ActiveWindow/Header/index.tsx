@@ -89,7 +89,8 @@ const Header = ({ chat }: Props) => {
       await updateChatStatus({
         userId,
         buddyId: chat.buddyId,
-        status: confirmDialogMap[variant].targetFolder,
+        nextStatus: confirmDialogMap[variant].targetFolder,
+        originalStatus: chat.status,
       }).unwrap();
       if (variant === 'block' || variant === 'archive')
         dispatch(clearActiveChat());

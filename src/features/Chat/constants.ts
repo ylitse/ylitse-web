@@ -48,10 +48,12 @@ export const statusUpdateSuccessMessages = {
   ok: 'chat:notification.restoringSuccess',
   banned: 'chat:notification.banningSuccess',
   archived: 'chat:notification.archivingSuccess',
+  unblocked: 'chat:notification.unblockingSuccess',
 } as const;
 
 export const statusUpdateErrorMessages = {
   ok: 'chat:notification.restoringError',
   banned: 'chat:notification.banningError',
   archived: 'chat:notification.archivingError',
+  unblocked: 'chat:notification.unblockingError',
 } as const;

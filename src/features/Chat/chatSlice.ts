@@ -125,13 +125,13 @@ export const chats = createSlice({
       .addMatcher(
         chatApi.endpoints.updateStatus.matchFulfilled,
         ({ chats, ...state }, { meta }) => {
-          const { buddyId, status } = meta.arg.originalArgs;
+          const { buddyId, nextStatus } = meta.arg.originalArgs;
 
           const updatedRecord = {
             ...chats,
             [buddyId]: {
               ...chats[buddyId],
-              status,
+              status: nextStatus,
             },
           };
 
