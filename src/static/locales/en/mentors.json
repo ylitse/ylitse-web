@@ -10,6 +10,16 @@
     "skills": "I can also help with",
     "unavailable": "Unavailable"
   },
+  "empty": {
+    "title": "No Mentors Found",
+    "description": "No mentors were found matching your criteria.",
+    "tips": {
+      "title": "Search Tips",
+      "tip1": "Use words in a basic form in the search field, for example, \"Depression\" or \"Childhood Trauma\".",
+      "tip2": "Make sure the search term is spelled correctly.",
+      "tip3": "It is possible that no mentors match your criteria. Try using less filters."
+    }
+  },
   "filters": {
     "clear": "Clear filters",
     "close": "Close filters",
