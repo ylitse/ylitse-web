@@ -55,6 +55,7 @@ const Container = styled.div<{ isHomePage: boolean; isMobile: boolean }>`
   border-radius: 0.75rem;
   display: flex;
   flex-direction: column;
+  max-width: 450px;
   min-width: 300px;
 
   ${({ isMobile }) =>
@@ -62,7 +63,6 @@ const Container = styled.div<{ isHomePage: boolean; isMobile: boolean }>`
     css`
       margin: 1rem 0;
       max-height: 40%;
-      min-width: 80%;
       scroll-behavior: smooth;
       scroll-snap-align: center;
 
