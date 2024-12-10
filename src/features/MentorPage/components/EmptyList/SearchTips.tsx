@@ -1,5 +1,5 @@
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 import styled, { css } from 'styled-components';
 import { palette } from '@/components/constants';
@@ -13,7 +13,9 @@ const SearchTips = () => {
     <Container isMobile={isMobile}>
       <Text variant="h2">{t('empty.tips.title')}</Text>
       <InnerContainer isMobile={isMobile}>
-        <Text variant="blueBox">{t('empty.tips.tip1')}</Text>
+        <Text variant="blueBox">
+          <Trans t={t} i18nKey="empty.tips.tip1" />
+        </Text>
         <Text variant="blueBox">{t('empty.tips.tip2')}</Text>
         <Text variant="blueBox">{t('empty.tips.tip3')}</Text>
       </InnerContainer>

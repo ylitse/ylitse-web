@@ -16,19 +16,18 @@ const MentorList: React.FC<Props> = ({ setVisibleCard, mentors }) => {
   const { isMobile } = useGetLayoutMode();
   const isMentorsEmpty: boolean = mentors.length === 0;
 
-  return (
-    <>
-      {isMentorsEmpty && <EmptyMentorList />}
-      <CardsList isMobile={isMobile} data-testid="mentor-cards-container">
-        {mentors.map(mentor => (
-          <ListCard
-            key={mentor.buddyId}
-            mentor={mentor}
-            setVisibleCard={setVisibleCard}
-          />
-        ))}
-      </CardsList>
-    </>
+  return isMentorsEmpty ? (
+    <EmptyMentorList />
+  ) : (
+    <CardsList isMobile={isMobile} data-testid="mentor-cards-container">
+      {mentors.map(mentor => (
+        <ListCard
+          key={mentor.buddyId}
+          mentor={mentor}
+          setVisibleCard={setVisibleCard}
+        />
+      ))}
+    </CardsList>
   );
 };
 
