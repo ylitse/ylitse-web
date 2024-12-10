@@ -45,7 +45,7 @@ const InnerContainer = styled.div<{ isMobile: boolean }>`
   ${({ isMobile }) =>
     isMobile
       ? css`
-          width: 90vw;
+          width: 88vw;
         `
       : css`
           width: 36rem;

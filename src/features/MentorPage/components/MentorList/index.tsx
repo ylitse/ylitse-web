@@ -14,11 +14,11 @@ type Props = {
 
 const MentorList: React.FC<Props> = ({ setVisibleCard, mentors }) => {
   const { isMobile } = useGetLayoutMode();
-  const isEmpty: boolean = mentors.length === 0;
+  const isMentorsEmpty: boolean = mentors.length === 0;
 
   return (
     <>
-      {isEmpty && <EmptyMentorList />}
+      {isMentorsEmpty && <EmptyMentorList />}
       <CardsList isMobile={isMobile} data-testid="mentor-cards-container">
         {mentors.map(mentor => (
           <ListCard

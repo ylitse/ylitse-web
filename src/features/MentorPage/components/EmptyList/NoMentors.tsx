@@ -11,8 +11,10 @@ const NoMentors = () => {
 
   return (
     <Container isMobile={isMobile}>
-      <CenteredText variant="h2">{t('empty.title')}</CenteredText>
-      <CenteredText>{t('empty.description')}</CenteredText>
+      <InnerContainer isMobile={isMobile}>
+        <CenteredText variant="h2">{t('empty.title')}</CenteredText>
+        <CenteredText>{t('empty.description')}</CenteredText>
+      </InnerContainer>
     </Container>
   );
 };
@@ -40,6 +42,17 @@ const Container = styled.div<{ isMobile: boolean }>`
 
 const CenteredText = styled(Text)`
   text-align: center;
+`;
+
+const InnerContainer = styled.div<{ isMobile: boolean }>`
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          padding: 0 1rem 0 1rem;
+        `
+      : css`
+          padding: 0;
+        `}
 `;
 
 export default NoMentors;
