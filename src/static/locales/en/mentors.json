@@ -10,6 +10,16 @@
     "skills": "I can also help with",
     "unavailable": "Unavailable"
   },
+  "empty": {
+    "title": "No Mentors Found",
+    "description": "No mentors were found matching your criteria.",
+    "tips": {
+      "title": "Search Tips",
+      "tip1": "Use words in a basic form in the search field, for example, <i>Depression</i> or <i>Childhood Trauma</i>.",
+      "tip2": "Make sure the search term is spelled correctly.",
+      "tip3": "It is possible that no mentors match your criteria. Try using less filters."
+    }
+  },
   "filters": {
     "clear": "Clear filters",
     "close": "Close filters",
@@ -20,7 +30,7 @@
     "search": "Search mentors with a keyword",
     "show": "Filter by tag",
     "title": "Search",
-    "instructions": "You can search for mentors by entering a keyword in the search field (for example, depression or childhood trauma) and/or select ready-made topics through the “Filter by tag” menu."
+    "instructions": "You can search for mentors by entering a keyword in the search field (for example, <i>depression</i> or <i>childhood trauma</i>) and/or select ready-made topics through the “Filter by tag” menu."
   },
   "notification": {
     "fetchingMentorsError": "Failed loading mentors",

@@ -5,6 +5,7 @@ import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import styled, { css } from 'styled-components';
 import { CONTENT_WIDTH, spacing } from '@/components/constants';
 import ListCard from './MentorCard/List';
+import EmptyMentorList from '../EmptyList';
 
 type Props = {
   mentors: Array<Mentor>;
@@ -13,8 +14,11 @@ type Props = {
 
 const MentorList: React.FC<Props> = ({ setVisibleCard, mentors }) => {
   const { isMobile } = useGetLayoutMode();
+  const isMentorsEmpty: boolean = mentors.length === 0;
 
-  return (
+  return isMentorsEmpty ? (
+    <EmptyMentorList />
+  ) : (
     <CardsList isMobile={isMobile} data-testid="mentor-cards-container">
       {mentors.map(mentor => (
         <ListCard
