@@ -16,12 +16,12 @@ const Concepts = ({ isMobile = false }: Props) => {
       <Text variant="h2">{t('concepts.title')}</Text>
       <Text>{t('concepts.description')} </Text>
       <InnerContainer>
-        <Concept>
+        <Concept isMobile={isMobile}>
           <Name variant="bold">{t('concepts.concept1.name')}</Name>
           <Equals>{t('concepts.equals')}</Equals>
           <Definition>{t('concepts.concept1.definition')}</Definition>
         </Concept>
-        <Concept>
+        <Concept isMobile={isMobile}>
           <Name variant="bold">{t('concepts.concept2.name')}</Name>
           <Equals>{t('concepts.equals')}</Equals>
           <Definition>
@@ -41,7 +41,7 @@ const Concepts = ({ isMobile = false }: Props) => {
             />
           </Definition>
         </Concept>
-        <Concept>
+        <Concept isMobile={isMobile}>
           <Name variant="bold">{t('concepts.concept3.name')}</Name>
           <Equals>{t('concepts.equals')}</Equals>
           <Definition>
@@ -95,10 +95,15 @@ const InnerContainer = styled.div`
   gap: 1rem;
 `;
 
-const Concept = styled.div`
+const Concept = styled.div<{ isMobile: boolean }>`
   background-color: ${palette.blueWhite};
   display: flex;
   padding: 1rem;
+  ${({ isMobile }) =>
+    isMobile &&
+    css`
+      flex-wrap: wrap;
+    `}
 `;
 
 const Name = styled(Text)`
