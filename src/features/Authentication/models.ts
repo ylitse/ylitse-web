@@ -14,13 +14,18 @@ const userCodec = D.struct({
   role: role,
 });
 
-const accountCodec = D.struct({
+const accountMandatory = D.struct({
   active: D.boolean,
-  email: D.string,
   id: D.string,
   login_name: D.string,
   role: role,
 });
+
+const accountOptional = D.partial({
+  email: D.string,
+});
+
+const accountCodec = pipe(accountMandatory, D.intersect(accountOptional));
 
 const commonResponse = D.struct({
   account: accountCodec,
