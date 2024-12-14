@@ -41,7 +41,7 @@ const ProfileWidget: React.FC<Props> = ({
       <Text variant="p">
         {t('profileWidget.text')}
         <Link to="/profile">
-          <Text variant="link" color="purple">
+          <Text variant="span" color="purple">
             {t('profileWidget.link')}
           </Text>
         </Link>

@@ -138,6 +138,16 @@ export const variants = {
       lineHeight: '3rem',
     },
   },
+  span: {
+    element: 'span',
+    styles: {
+      fontFamily: '"Baloo 2"',
+      fontSize: '1rem',
+      fontStyle: 'normal',
+      fontWeight: 700,
+      lineHeight: '3rem',
+    },
+  },
   logo: {
     element: 'p',
     styles: {
