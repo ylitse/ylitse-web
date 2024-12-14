@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useEscape } from '@/hooks/useEscape';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
+import { useGetApiVersionQuery } from './apiVersionApi';
 
 import { breakpoints, palette } from '@/components/constants';
 import { Text } from '@/components/Text/Text';
@@ -23,6 +24,9 @@ export const About = ({ onDismiss }: Props) => {
   const toggleLicenseModal = () =>
     setIsLicenseModalVisible(!isLicenseModalVisible);
 
+  const { data: apiVersion } = useGetApiVersionQuery();
+  const uiVersion = `${version.version}+git:${COMMIT_HASH}`;
+
   useEscape(() => onDismiss());
 
   return (
@@ -42,10 +46,8 @@ export const About = ({ onDismiss }: Props) => {
             <InfoText variant="p">{t('about.description.paragraph2')}</InfoText>
             <InfoText variant="p">{t('about.description.paragraph3')}</InfoText>
           </Description>
-          <InfoText variant="p">
-            {t('about.ui')} {version.version}+git:{COMMIT_HASH}
-          </InfoText>
-          <InfoText variant="p">{t('about.api')} </InfoText>
+          <InfoText variant="p">{t('about.ui', { uiVersion })}</InfoText>
+          <InfoText variant="p">{t('about.api', { apiVersion })} </InfoText>
           {isLicenseModalVisible && <LicenseModal />}
           <LicensesButton onClick={toggleLicenseModal}>
             {!isLicenseModalVisible ? t('about.open') : t('about.close')}

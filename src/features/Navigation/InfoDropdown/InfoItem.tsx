@@ -14,7 +14,7 @@ export const InfoItem = ({ text, url }: NavigationItem) => (
       rel="noreferrer"
       style={{ textDecoration: 'none' }}
     >
-      <Text variant="link" color="purple">
+      <Text variant="span" color="purple">
         {text}
       </Text>
     </a>
