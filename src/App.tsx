@@ -33,7 +33,7 @@ const App = () => {
       <AppToaster />
     </AppWrapper>
   ) : (
-    <Spinner variant="large" />
+    <Spinner variant="large" isDark />
   );
 };
 
