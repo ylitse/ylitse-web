@@ -2,14 +2,14 @@ export type Mentee = {
   loginName: string;
   displayName: string;
   password: string;
-  email: string;
+  email?: string;
   role: 'mentee';
 };
 export type Mentor = {
   loginName: string;
   displayName: string;
   password: string;
-  email: string;
+  email?: string;
   role: 'mentor';
   birthYear: number;
   phone: string;
@@ -43,6 +43,13 @@ const mentees: Array<Mentee> = [
     displayName: 'mentee_seppo',
     password: 'Menteementee!',
     email: 'mentee2@mentee.mentee',
+    role: 'mentee',
+  },
+  {
+    loginName: 'userNoEmail',
+    displayName: 'user_no_email',
+    password: 'usernoemail1',
+    email: undefined,
     role: 'mentee',
   },
 ];

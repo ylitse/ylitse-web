@@ -18,7 +18,7 @@ const EmailEditor = () => {
   const account = useAppSelector(selectAccount);
   const [updateAccount, { isLoading }] = useUpdateAccountMutation();
 
-  const [email, setEmail] = useState(account.email);
+  const [email, setEmail] = useState(String(account.email));
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
