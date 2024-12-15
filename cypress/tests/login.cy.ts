@@ -1,8 +1,10 @@
 import { api } from 'cypress/support/api';
+import { accounts } from 'cypress/fixtures/accounts';
 import { v4 as uuidv4 } from 'uuid';
 
 describe('login', () => {
   const username = `login-${uuidv4()}`;
+  const menteeWithoutEmail = accounts.mentees[3];
 
   const testErrorVisible = () => {
     cy.get('[id="login-error"]').should('be.visible');
@@ -13,7 +15,9 @@ describe('login', () => {
   };
 
   before(() => {
+    api.deleteAccounts();
     cy.registerUser(username, 'examplePassword');
+    api.signUpMentee(menteeWithoutEmail);
   });
 
   beforeEach(() => {
@@ -68,6 +72,14 @@ describe('login', () => {
   it('can log in with registered account', () => {
     cy.fillInput('username', username);
     cy.fillInput('password', 'examplePassword');
+    clickLogin();
+    cy.location('pathname').should('eq', '/');
+    cy.contains('Kirjaudu ulos').should('be.visible');
+  });
+
+  it('can log in with user that does not have email-address', () => {
+    cy.fillInput('username', menteeWithoutEmail.loginName);
+    cy.fillInput('password', menteeWithoutEmail.password);
     clickLogin();
     cy.location('pathname').should('eq', '/');
     cy.contains('Kirjaudu ulos').should('be.visible');

@@ -29,7 +29,7 @@ describe('mentee profile', () => {
     cy.getByText('Tilin tiedot', 'h2').should('be.visible');
     cy.getByText('Käyttäjä', 'p').should('be.visible');
     cy.getByText(mentee.loginName, 'p').should('be.visible');
-    cy.getByText(mentee.email, 'p').should('be.visible');
+    cy.getByText(String(mentee?.email), 'p').should('be.visible');
 
     cy.getByText('Julkiset tiedot', 'h2').should('be.visible');
     cy.getByText(mentee.displayName, 'p').should('be.visible');
