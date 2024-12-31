@@ -18,9 +18,10 @@ export const mentorsFilter = createSlice({
       ...state,
       searchString: payload,
     }),
-    resetFilters: () => {
-      return initialState;
-    },
+    resetFilters: state => ({
+      ...state,
+      selectedSkills: [],
+    }),
     toggleSkill: (state, { payload }: PayloadAction<string>) => {
       const isSkillExisting = state.selectedSkills.find(
         skill => skill === payload,
