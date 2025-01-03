@@ -34,6 +34,8 @@ const MentorSearch = ({
 
   const shouldShowFilterBall = !isExpanded && selectedSkills.length > 0;
 
+  const shouldShowResetButton = searchString !== '';
+
   const handleReset = () => {
     dispatch(resetSearch());
   };
@@ -54,13 +56,17 @@ const MentorSearch = ({
             onChange={onSearchStringChange}
             variant="normal"
           />
-          <ResetSearch>
-            <IconButton
-              onClick={handleReset}
-              variant="closeWithBackground"
-              sizeInPx={32}
-            />
-          </ResetSearch>
+          {shouldShowResetButton ? (
+            <ResetSearch>
+              <IconButton
+                onClick={handleReset}
+                variant="closeWithBackground"
+                sizeInPx={32}
+              />
+            </ResetSearch>
+          ) : (
+            <></>
+          )}
         </SearchBarContainer>
         <Anchor>
           <Button
