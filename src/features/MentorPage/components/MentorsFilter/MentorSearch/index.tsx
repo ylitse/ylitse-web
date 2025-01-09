@@ -56,7 +56,7 @@ const MentorSearch = ({
             onChange={onSearchStringChange}
             variant="normal"
           />
-          {shouldShowResetButton ? (
+          {shouldShowResetButton && (
             <ResetSearch>
               <IconButton
                 onClick={handleReset}
@@ -64,8 +64,6 @@ const MentorSearch = ({
                 sizeInPx={32}
               />
             </ResetSearch>
-          ) : (
-            <></>
           )}
         </SearchBarContainer>
         <Anchor>
@@ -103,9 +101,8 @@ const Instructions = styled.div`
 
 const Container = styled.div`
   display: flex;
-  flex: 1;
   flex-wrap: wrap;
-  gap: 4rem;
+  gap: 2rem;
   justify-content: center;
   margin: auto;
   max-width: 90%;
@@ -136,8 +133,7 @@ const Ball = styled.div`
 const SearchBarContainer = styled.div`
   align-items: center;
   display: flex;
-  justify-content: space-between;
-  position: relative;
+  padding-left: 12%;
   width: 44%;
 `;
 
