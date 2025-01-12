@@ -1,9 +1,8 @@
 (async function (_window, document) {
-  const links = await fetch('../static/links.json').then(response => response.json()
-  );
-  const mentors = await fetch('/api/mentors').then(response =>
+  const links = await fetch('../static/links.json').then(response =>
     response.json(),
   );
+  const mentors = await fetch('/api/mentors').then(response => response.json());
 
   const mentorsAmount = mentors.resources.length;
   const yearsOfService = new Date().getFullYear() - 2018;
