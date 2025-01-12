@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import links from '@/static/links.json';
 
-import { breakpoints, FOOTER_HEIGHT, palette } from '../constants';
+import { FOOTER_HEIGHT, palette } from '../constants';
 import FooterLogo from '@/static/img/footer-logo.svg';
 import Text from '../Text';
 
@@ -10,44 +11,30 @@ const Footer = () => {
 
   return (
     <Container>
-      <FooterText variant="footer">{t('footer')}</FooterText>
+      <Link href={links.sosLapsikylaUrl} target="_blank">
+        <Text variant="footer">{t('footer')}</Text>
+        <FooterImage src={FooterLogo} />
+      </Link>
     </Container>
   );
 };
 
 const Container = styled.footer`
-  align-items: center;
   background-color: ${palette.blue};
-  bottom: 0;
-  display: flex;
   height: ${FOOTER_HEIGHT};
-  justify-content: center;
-  left: 0;
-  position: relative;
-  width: 100vw;
 `;
 
-const FooterText = styled(Text)`
-  &:after {
-    background-color: transparent;
-    background-image: url(${FooterLogo});
-    background-position: center left;
-    background-repeat: no-repeat;
-    background-size: contain;
-    content: '';
-    display: block;
-    float: right;
-    height: ${FOOTER_HEIGHT};
-    margin-left: 1rem;
-    position: relative;
-    width: 11rem;
-    @media screen and (max-width: ${breakpoints.mobile}) {
-      background-image: none;
-      content: 'SOS-lapsikylä';
-      font-size: 1rem;
-      width: 6rem;
-    }
-  }
+const Link = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+`;
+
+const FooterImage = styled.img`
+  height: ${FOOTER_HEIGHT};
+  width: 9rem;
 `;
 
 export default Footer;
