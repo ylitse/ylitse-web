@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import links from '@/static/links.json';
 
 import { selectHasUnreadMessages } from '@/features/Chat/selectors';
 import { useAppSelector } from '@/store';
@@ -77,7 +78,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
           <Divider />
 
           <UnstyledLink
-            href={t(`navigation.info.link.feedback.url`)}
+            href={links.ylitseFeedbackUrl}
             target="_blank"
             rel="noreferrer"
           >
@@ -86,7 +87,7 @@ const MobileDropdown: React.FC<Props> = ({ items }) => {
             </Text>
           </UnstyledLink>
           <UnstyledLink
-            href={t(`navigation.info.link.termsAndPrivacy.url`)}
+            href={links.ylitseTermsUrl}
             target="_blank"
             rel="noreferrer"
           >

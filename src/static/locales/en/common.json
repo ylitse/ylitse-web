@@ -21,12 +21,10 @@
       "applicationInfo": "Application info",
       "link": {
         "feedback": {
-          "text": "Give feedback",
-          "url": "https://link.webropolsurveys.com/S/6EB156DA44E93B64"
+          "text": "Give feedback"
         },
         "termsAndPrivacy": {
-          "text": "Terms and privacy policy",
-          "url": "https://www.sos-lapsikyla.fi/tietosuojaselosteet"
+          "text": "Terms and privacy policy"
         }
       },
       "title": "Info"

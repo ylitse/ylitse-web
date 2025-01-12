@@ -1,5 +1,6 @@
 import { useTranslation, Trans } from 'react-i18next';
 import styled, { css } from 'styled-components';
+import links from '@/static/links.json';
 
 import { palette } from '@/components/constants';
 import Text from '@/components/Text';
@@ -33,7 +34,7 @@ const Concepts = ({ isMobile = false }: Props) => {
                   <Text
                     color="purple"
                     variant="inlineLink"
-                    url="https://www.sos-lapsikyla.fi/wp-content/uploads/2023/12/Turvallisemman-tilan-periaatteet.pdf"
+                    url={links.sosLapsikylaSafespaceUrl}
                     isExternalUrl
                   />
                 ),
@@ -53,7 +54,7 @@ const Concepts = ({ isMobile = false }: Props) => {
                   <Text
                     color="purple"
                     variant="inlineLink"
-                    url="https://play.google.com/store/apps/details?id=com.ylitse"
+                    url={links.ylitsePlayStoreUrl}
                     isExternalUrl
                   />
                 ),
@@ -61,7 +62,7 @@ const Concepts = ({ isMobile = false }: Props) => {
                   <Text
                     color="purple"
                     variant="inlineLink"
-                    url="https://apps.apple.com/fi/app/ylitse-mentorapp/id1436844984"
+                    url={links.ylitseAppStoreUrl}
                     isExternalUrl
                   />
                 ),
