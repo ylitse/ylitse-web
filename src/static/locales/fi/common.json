@@ -2,7 +2,7 @@
   "about": {
     "title": "Tietoa palvelusta",
     "description": {
-      "paragraph1": "Ylitse on SOS-Lapsikylä ry:n digitaalinen palvelu kaikille yli 17-vuotiaille nuorille, jotka haluavat pitkäaikaisenkin mentorin. Palvelussa voi hakea mentoria oman ongelman tai kiinnostavan teeman perusteella. Mentorin kanssa voi keskustella yhteisesti sovittujen aikojen puitteissa niin pitkään kuin itse haluaa.",
+      "paragraph1": "<a>Ylitse on SOS-Lapsikylä ry:n digitaalinen palvelu</a> kaikille yli 17-vuotiaille nuorille, jotka haluavat pitkäaikaisenkin mentorin. Palvelussa voi hakea mentoria oman ongelman tai kiinnostavan teeman perusteella. Mentorin kanssa voi keskustella yhteisesti sovittujen aikojen puitteissa niin pitkään kuin itse haluaa.",
       "paragraph2": "Mentorin voi valita profiilikorteista ja mentoria voi hakea tekstihaulla tai suodattamalla hakusanoja. Mentori kertoo kortissaan vertaisuudestaan ja vastausajoista. Kaikki mentorit ovat vapaaehtoisia ja he vastaavat omalla ajallaan. Mentorit tulevat useasta yhteistyöjärjestöstä ja SOS-Lapsikylä tekee yhteistyötä tarjotakseen järjestöille jatkuvasti paremman digitaalisen mentorointialustan.",
       "paragraph3": "Ylitseä kehitetään avoimen lähdekoodin pohjalta ja käyttäjien palautteen perusteella. SOS-Lapsikylä järjestää kehittämistilaisuuksia avun tarvitsijoille ja mentoreille. Jätä palautetta ja tule mukaan testaustiimiin!"
     },
@@ -21,12 +21,10 @@
       "applicationInfo": "Tietoa palvelusta",
       "link": {
         "feedback": {
-          "text": "Anna palautetta",
-          "url": "https://link.webropolsurveys.com/S/6EB156DA44E93B64"
+          "text": "Anna palautetta"
         },
         "termsAndPrivacy": {
-          "text": "Käyttöehdot ja tietosuojaseloste",
-          "url": "https://www.sos-lapsikyla.fi/tietosuojaselosteet"
+          "text": "Käyttöehdot ja tietosuojaseloste"
         }
       },
       "title": "Info"

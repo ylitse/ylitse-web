@@ -1,8 +1,10 @@
 (async function (_window, document) {
-  const mentorsResponse = await fetch('/api/mentors').then(response =>
+  const links = await fetch('../static/links.json').then(response =>
     response.json(),
   );
-  const mentorsAmount = mentorsResponse.resources.length;
+  const mentors = await fetch('/api/mentors').then(response => response.json());
+
+  const mentorsAmount = mentors.resources.length;
   const yearsOfService = new Date().getFullYear() - 2018;
 
   const getInfoLocalizations = (mentorAmount, yearsOfService) => ({
@@ -25,4 +27,7 @@
     let translation = infoLocalizations['fi'][key];
     element.innerText = translation;
   }
+
+  const footerLink = document.getElementById('footer-link-a');
+  footerLink.href = links.sosLapsikylaUrl;
 })(window, document);

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useComponentVisible } from '@/hooks/useComponentShow';
 import { useTranslation } from 'react-i18next';
+import links from '@/static/links.json';
 
 import { animations, NAVIGATION_HEIGHT, palette } from '@/components/constants';
 import styled from 'styled-components';
@@ -29,13 +30,13 @@ const InfoDropdown = () => {
           <InfoItem
             {...{
               text: t('navigation.info.link.feedback.text'),
-              url: t('navigation.info.link.feedback.url'),
+              url: links.ylitseFeedbackUrl,
             }}
           />
           <InfoItem
             {...{
               text: t('navigation.info.link.termsAndPrivacy.text'),
-              url: t('navigation.info.link.termsAndPrivacy.url'),
+              url: links.ylitseTermsUrl,
             }}
           />
           <Container onClick={toggleAbout}>

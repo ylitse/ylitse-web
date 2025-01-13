@@ -1,5 +1,8 @@
-import { useAppSelector } from '@/store';
-import { selectSelectedSkills } from '@/features/MentorPage/mentorsFilterSlice';
+import { useAppDispatch, useAppSelector } from '@/store';
+import {
+  resetSearch,
+  selectSelectedSkills,
+} from '@/features/MentorPage/mentorsFilterSlice';
 
 import { useTranslation, Trans } from 'react-i18next';
 
@@ -8,6 +11,7 @@ import SearchBar from '@/components/SearchBar';
 import { Button } from '@/components/Buttons';
 import { palette } from '@/components/constants';
 import Text from '@/components/Text';
+import { IconButton } from '@/components/Buttons';
 
 type Props = {
   isExpanded: boolean;
@@ -22,12 +26,19 @@ const MentorSearch = ({
   searchString,
   onSearchStringChange,
 }: Props) => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation('mentors');
   const buttonText = isExpanded ? 'filters.close' : 'filters.show';
 
   const selectedSkills = useAppSelector(selectSelectedSkills);
 
   const shouldShowFilterBall = !isExpanded && selectedSkills.length > 0;
+
+  const shouldShowResetButton = searchString !== '';
+
+  const handleReset = () => {
+    dispatch(resetSearch());
+  };
 
   return (
     <>
@@ -38,12 +49,23 @@ const MentorSearch = ({
         </Text>
       </Instructions>
       <Container>
-        <NarrowSearchBar
-          placeholder={t('filters.search')}
-          value={searchString}
-          onChange={onSearchStringChange}
-          variant="normal"
-        />
+        <SearchBarContainer>
+          <NarrowSearchBar
+            placeholder={t('filters.search')}
+            value={searchString}
+            onChange={onSearchStringChange}
+            variant="normal"
+          />
+          {shouldShowResetButton && (
+            <ResetSearch>
+              <IconButton
+                onClick={handleReset}
+                variant="closeWithBackground"
+                sizeInPx={32}
+              />
+            </ResetSearch>
+          )}
+        </SearchBarContainer>
         <Anchor>
           <Button
             onClick={() => toggleExpanded(!isExpanded)}
@@ -79,9 +101,8 @@ const Instructions = styled.div`
 
 const Container = styled.div`
   display: flex;
-  flex: 1;
   flex-wrap: wrap;
-  gap: 4rem;
+  gap: 2rem;
   justify-content: center;
   margin: auto;
   max-width: 90%;
@@ -109,8 +130,21 @@ const Ball = styled.div`
   z-index: 20;
 `;
 
-const NarrowSearchBar = styled(SearchBar)`
+const SearchBarContainer = styled.div`
+  align-items: center;
+  display: flex;
+  padding-left: 12%;
   width: 44%;
+`;
+
+const NarrowSearchBar = styled(SearchBar)`
+  flex: 1;
+  z-index: 1;
+`;
+
+const ResetSearch = styled.div`
+  margin-left: -2.5rem;
+  z-index: 2;
 `;
 
 export default MentorSearch;

@@ -15,13 +15,15 @@ describe('mentors search', () => {
     api.deleteAccounts();
   });
 
-  it('displays right content if mentors are not found', () => {
+  it('displays mentors when page is opened', () => {
     // assure mentors are first visible when mentors page is opened
     cy.getByText(mentor.displayName, 'h2').should('be.visible');
     cy.contains('Tarinani').should('be.visible');
     cy.contains(mentor.story).should('be.visible');
     cy.contains('Puhun näitä kieliä').should('be.visible');
+  });
 
+  it('displays right content if mentors are not found', () => {
     // assurre that if mentor list is empty, right content is displayed
     // type a keyword that should not match any mentors
     cy.get('input[placeholder*="Etsi mentoria hakusanalla"]')

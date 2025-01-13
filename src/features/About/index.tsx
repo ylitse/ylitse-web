@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
+import links from '@/static/links.json';
 import { useEscape } from '@/hooks/useEscape';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
 import { useGetApiVersionQuery } from './apiVersionApi';
@@ -42,7 +43,22 @@ export const About = ({ onDismiss }: Props) => {
         <AboutCardContent>
           <Text variant="h1">{t('about.title')}</Text>
           <Description isMobile={isMobile}>
-            <InfoText variant="p">{t('about.description.paragraph1')}</InfoText>
+            <InfoText>
+              <Trans
+                t={t}
+                i18nKey="about.description.paragraph1"
+                components={{
+                  a: (
+                    <Text
+                      color="purple"
+                      variant="inlineLink"
+                      url={links.sosLapsikylaYlitseUrl}
+                      isExternalUrl
+                    />
+                  ),
+                }}
+              />
+            </InfoText>
             <InfoText variant="p">{t('about.description.paragraph2')}</InfoText>
             <InfoText variant="p">{t('about.description.paragraph3')}</InfoText>
           </Description>
