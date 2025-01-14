@@ -162,6 +162,7 @@ const Icon = styled.img`
 
 const Content = styled.div`
   padding: 2rem 3rem;
+  width: 100%;
 `;
 
 const CloseButton = styled(IconButton)`
