@@ -37,6 +37,7 @@ const ButtonContainer = styled.div`
   display: flex;
   gap: 1.75rem;
   justify-content: center;
+  margin-top: 2rem;
 `;
 
 export default ButtonGroup;

@@ -136,7 +136,7 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  height: 250px;
+  height: auto;
   left: 50%;
   position: absolute;
   top: 50%;
