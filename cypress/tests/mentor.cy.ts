@@ -80,6 +80,9 @@ describe('mentor profile', () => {
     // log out
     cy.getByText('Kirjaudu ulos').click();
 
+    // go to login page
+    cy.getByText('Kirjaudu', 'a').click();
+
     // old password should not work
     cy.fillInput('username', mentor.loginName);
     cy.fillInput('password', mentor.password);

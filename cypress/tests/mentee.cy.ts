@@ -63,6 +63,9 @@ describe('mentee profile', () => {
     // log out
     cy.getByText('Kirjaudu ulos').click();
 
+    // go to login page
+    cy.getByText('Kirjaudu', 'a').click();
+
     // old password should not work
     cy.fillInput('username', mentee.loginName);
     cy.fillInput('password', mentee.password);
@@ -160,7 +163,10 @@ describe('mentee profile', () => {
     cy.getByText('Poista', 'button').click();
 
     // should log out automatically
-    cy.location('pathname').should('eq', '/login/');
+    cy.location('pathname').should('eq', '/landing/');
+
+    // go to login page
+    cy.getByText('Kirjaudu', 'a').click();
 
     // logging in should not be possible anymore
     cy.fillInput('username', mentee.loginName);
