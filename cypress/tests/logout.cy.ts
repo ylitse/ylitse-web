@@ -16,20 +16,20 @@ describe('logout', () => {
     api.deleteAccounts();
   });
 
-  it('logout redirects user to login page', () => {
+  it('logout redirects user to landing page', () => {
     cy.clickLogout();
-    cy.url().should('match', /login/);
-    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.url().should('match', /landing/);
+    cy.getByText('Kirjaudu', 'button').should('be.visible');
   });
 
   // FIXME: re-enable when dev server issue is resolved
   xit('logout ends session', () => {
     cy.clickLogout();
-    cy.url().should('match', /login/);
-    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.url().should('match', /landing/);
+    cy.getByText('Kirjaudu', 'button').should('be.visible');
 
     cy.visit('/');
-    cy.url().should('match', /login/);
-    cy.getByText('Kirjaudu sisään', 'h1').should('be.visible');
+    cy.url().should('match', /landing/);
+    cy.getByText('Kirjaudu', 'button').should('be.visible');
   });
 });
