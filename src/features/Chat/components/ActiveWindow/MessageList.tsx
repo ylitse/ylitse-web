@@ -6,12 +6,14 @@ import { addPollParam } from '@/features/Chat/chatSlice';
 
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
+import { useFixedToParent } from './ScrollToBottomButton/useFixedToParent';
 
 import styled, { css } from 'styled-components';
 import { palette } from '@/components/constants';
 import { Message } from './Message';
 import Text from '@/components/Text';
 import Spinner from '@/components/Spinner';
+import ScrollToBottomButton from './ScrollToBottomButton';
 
 type Props = {
   messageList: Array<AppMessage>;
@@ -48,6 +50,10 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
 
   const dispatch = useAppDispatch();
   const oldestMessage = messageList.length > 0 ? messageList[0].id : '0';
+  const historyRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
+
+  useFixedToParent(historyRef, buttonRef, { bottom: 20, right: 20 });
 
   const handleFetchOlderMessages = (messageId: string, buddyId: string) => {
     if (isLoading) {
@@ -56,8 +62,6 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
 
     dispatch(addPollParam({ type: 'OlderThan', buddyId, messageId }));
   };
-
-  const historyRef = useRef<HTMLDivElement>(null);
 
   const { isScrolledToTop } = useScrollToTop({
     ref: historyRef,
@@ -93,11 +97,20 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
           </Messages>
         </Fragment>
       ))}
+      {true && (
+        <ScrollToBottomButton
+          ref={buttonRef}
+          sizeInPx={32}
+          variant="next"
+          onClick={() => console.log('moi')}
+        />
+      )}
     </ChatHistory>
   );
 };
 
 const ChatHistory = styled.div`
+  position: relative;
   border-bottom: 1px solid ${palette.greyLight};
   flex: 1;
   overflow: auto;
