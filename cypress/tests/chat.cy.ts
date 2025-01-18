@@ -446,4 +446,34 @@ describe('chat', () => {
     cy.getByText('Estetyt keskustelut', 'a').click();
     cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
   });
+
+  it('can use scroll-to-bottom-button to scroll to bottom', () => {
+    const message = 'Huzzah';
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    api.signUpMentee(mentee).then((menteeResponse: any) => {
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+      api.signUpMentor(mentor).then((mentorResponse: any) => {
+        api.sendMultipleMessage({
+          sender: {
+            id: menteeResponse.body.id,
+            loginName: mentee.loginName,
+            password: mentee.password,
+          },
+          reciever: { id: mentorResponse.body.user_id },
+          content: message,
+          amountOfMessages: 20,
+        });
+      });
+    });
+
+    // go to chat page and scroll up
+    cy.loginUser(mentor.loginName, mentor.password);
+    cy.get('[href="/chat"]').click();
+    cy.getByText(message, 'p').should('be.visible');
+    cy.getByText(`${message} 5!`, 'p').scrollIntoView().should('be.visible');
+
+    // click scroll-to-bottom-button
+    cy.get('button[aria-label="scroll-to-bottom-button"]').click();
+    cy.getByText(`${message} 19!`, 'p').scrollIntoView().should('be.visible');
+  });
 });
