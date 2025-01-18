@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-export const useFixedToParent = (
+export const useBottomAction = (
   parentRef: React.RefObject<HTMLDivElement>,
   childRef: React.RefObject<HTMLDivElement>,
   offsets = { bottom: 20, right: 20 },
 ) => {
+  const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const updatePosition = () => {
       if (!parentRef.current || !childRef.current) return;
@@ -15,6 +16,9 @@ export const useFixedToParent = (
       childRef.current.style.position = 'fixed';
       childRef.current.style.bottom = `${window.innerHeight - parentRect.bottom + bottom}px`;
       childRef.current.style.right = `${window.innerWidth - parentRect.right + right}px`;
+
+      const { scrollTop, scrollHeight, clientHeight } = parentRef.current;
+      setIsScrolled(scrollTop + clientHeight >= scrollHeight - 10);
     };
 
     updatePosition();
@@ -29,4 +33,16 @@ export const useFixedToParent = (
       window.removeEventListener('resize', updatePosition);
     };
   }, [parentRef, childRef, offsets]);
+
+  useEffect(() => {
+    handleBottomActionClick();
+  }, []);
+
+  const handleBottomActionClick = () => {
+    parentRef.current?.lastElementChild?.scrollIntoView({
+      behavior: 'smooth',
+    });
+  };
+
+  return { isScrolled, handleBottomActionClick };
 };
