@@ -1,7 +1,7 @@
 import { useRef, Fragment } from 'react';
 import type { AppMessage, ChatFolder } from '@/features/Chat/models';
 
-import { useAppDispatch } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { addPollParam } from '@/features/Chat/chatSlice';
 
 import { useGetLayoutMode } from '@/hooks/useGetLayoutMode';
@@ -15,6 +15,7 @@ import { Message } from './Message';
 import Text from '@/components/Text';
 import Spinner from '@/components/Spinner';
 import ScrollToBottomButton from './ScrollToBottomButton';
+import { selectHasUnreadMessages } from '../../selectors';
 
 type Props = {
   messageList: Array<AppMessage>;
@@ -26,6 +27,7 @@ type Props = {
 const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
   const { isTablet } = useGetLayoutMode();
   const groupedMessages = toGroupedMessages(messageList);
+  const hasUnreadMessages = useAppSelector(selectHasUnreadMessages);
 
   const dispatch = useAppDispatch();
   const oldestMessage = messageList.length > 0 ? messageList[0].id : '0';
@@ -59,10 +61,11 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
       {isLoading && <Spinner variant="small" isDark />}
       <ScrollToBottomButton
         ref={buttonRef}
-        sizeInPx={32}
+        sizeInPx={isTablet ? 48 : 32}
         variant="down"
         onClick={handleBottomActionClick}
         isVisible={isScrolled}
+        hasUnreadMessagesAtBottom={hasUnreadMessages}
       />
       {Object.keys(groupedMessages).map(date => (
         <Fragment key={date}>
