@@ -466,14 +466,26 @@ describe('chat', () => {
       });
     });
 
-    // go to chat page and scroll up
+    // go to chat page
     cy.loginUser(mentor.loginName, mentor.password);
     cy.get('[href="/chat"]').click();
-    cy.getByText(message, 'p').should('be.visible');
+
+    // initially we should see this message
+    // newest message is `Huzzah 20`, but its also shown on the
+    // left conversation-list -> thats why we want to make sure it is scrolled to the bottom
+    cy.getByText(`${message} 19!`, 'p').should('be.visible');
+
+    // then scroll up to see older message
     cy.getByText(`${message} 5!`, 'p').scrollIntoView().should('be.visible');
 
     // click scroll-to-bottom-button
     cy.get('button[aria-label="scroll-to-bottom-button"]').click();
-    cy.getByText(`${message} 19!`, 'p').scrollIntoView().should('be.visible');
+
+    // when scrolled to bottom, this button should disappear
+    cy.get('button[aria-label="scroll-to-bottom-button"]').should(
+      'not.be.visible',
+    );
+    // and a bottom message should be visible
+    cy.getByText(`${message} 19!`, 'p').should('be.visible');
   });
 });

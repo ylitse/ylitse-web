@@ -1,4 +1,4 @@
-import { useRef, Fragment } from 'react';
+import { useRef, useMemo, Fragment } from 'react';
 import type { AppMessage, ChatFolder } from '@/features/Chat/models';
 
 import { useAppDispatch, useAppSelector } from '@/store';
@@ -36,13 +36,11 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
   const historyRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
 
+  const offsets = useMemo(() => ({ bottom: 20, right: 20 }), []);
   const { isScrolled, handleBottomActionClick } = useBottomAction(
     historyRef,
     buttonRef,
-    {
-      bottom: 20,
-      right: 20,
-    },
+    offsets,
   );
 
   const handleFetchOlderMessages = (messageId: string, buddyId: string) => {
@@ -59,16 +57,8 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
   });
 
   return (
-    <ChatHistory ref={historyRef}>
+    <ChatHistory ref={historyRef} aria-label="chat-history">
       {isLoading && <Spinner variant="small" isDark />}
-      <ScrollToBottomButton
-        ref={buttonRef}
-        sizeInPx={isTablet ? 48 : 32}
-        variant="down"
-        onClick={handleBottomActionClick}
-        isVisible={isScrolled}
-        hasUnreadMessagesAtBottom={hasUnread}
-      />
       {Object.keys(groupedMessages).map(date => (
         <Fragment key={date}>
           <DateDivider isTablet={isTablet}>{date}</DateDivider>
@@ -84,6 +74,14 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
           </Messages>
         </Fragment>
       ))}
+      <ScrollToBottomButton
+        ref={buttonRef}
+        sizeInPx={isTablet ? 48 : 32}
+        variant="down"
+        onClick={handleBottomActionClick}
+        isVisible={isScrolled}
+        hasUnreadMessagesAtBottom={hasUnread}
+      />
     </ChatHistory>
   );
 };

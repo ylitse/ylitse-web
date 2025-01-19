@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType, ForwardedRef } from 'react';
+import { ComponentPropsWithoutRef, ElementType } from 'react';
 import styled, { css } from 'styled-components';
 
 import { ButtonIcon, iconVariants } from './variants';
@@ -7,7 +7,6 @@ export type ButtonProps<T extends ElementType> = {
   isDisabled?: boolean;
   sizeInPx: number;
   variant: ButtonIcon;
-  ref?: ForwardedRef<ButtonProps<'button'>>;
 } & ComponentPropsWithoutRef<T>;
 
 const IconButton = <T extends ElementType = 'button'>({

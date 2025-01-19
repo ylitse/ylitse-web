@@ -6,6 +6,7 @@ export const useBottomAction = (
   offsets = { bottom: 20, right: 20 },
 ) => {
   const [isScrolled, setIsScrolled] = useState(false);
+
   useEffect(() => {
     const updatePosition = () => {
       if (!parentRef.current || !childRef.current) return;
@@ -39,9 +40,12 @@ export const useBottomAction = (
   }, []);
 
   const handleBottomActionClick = () => {
-    parentRef.current?.lastElementChild?.scrollIntoView({
-      behavior: 'smooth',
-    });
+    if (parentRef.current) {
+      parentRef.current.scrollTo({
+        top: parentRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return { isScrolled, handleBottomActionClick };
