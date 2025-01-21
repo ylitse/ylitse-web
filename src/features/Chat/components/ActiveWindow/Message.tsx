@@ -50,7 +50,7 @@ export const Message = ({ folder, buddyId, message }: Props) => {
       isSent={message.isSent}
       isVisible={isVisible}
       ref={ref}
-      aria-label="message-bubble"
+      id="message-bubble"
     >
       <Bubble background={background}>
         <Content>{message.content}</Content>

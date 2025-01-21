@@ -57,7 +57,7 @@ const MessageList = ({ messageList, status, buddyId, isLoading }: Props) => {
   });
 
   return (
-    <ChatHistory ref={historyRef} aria-label="chat-history">
+    <ChatHistory ref={historyRef} id="chat-history">
       {isLoading && <Spinner variant="small" isDark />}
       {Object.keys(groupedMessages).map(date => (
         <Fragment key={date}>

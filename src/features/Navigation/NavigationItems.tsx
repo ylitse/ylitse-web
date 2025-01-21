@@ -26,7 +26,7 @@ export const Item = ({ hasNotification, text, url }: NavigationItem) => {
       {hasNotification && (
         <UnseenDot
           withBorder={isHovered || isCurrentLocation}
-          aria-label="unseen-messages-dot"
+          id="unseen-messages-dot-navigation"
         />
       )}
     </Link>

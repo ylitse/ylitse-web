@@ -31,7 +31,7 @@ export const NavigationItem: React.FC<Props> = ({
       {hasNotification && (
         <UnseenDot
           withBorder={isCurrentLocation}
-          aria-label="unseen-messages-dot"
+          id="unseen-messages-dot-navigation"
         />
       )}
     </UnstyledRouteLink>

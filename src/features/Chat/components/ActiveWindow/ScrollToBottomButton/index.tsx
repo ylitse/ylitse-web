@@ -12,9 +12,9 @@ const ScrollToBottomButton = React.forwardRef<HTMLDivElement, Props>(
   ({ isVisible, hasUnreadMessagesAtBottom, ...props }, ref) => {
     return (
       <ButtonContainer ref={ref} isVisible={isVisible}>
-        <IconButton {...props} aria-label="scroll-to-bottom-button" />
+        <IconButton {...props} id="scroll-to-bottom-button" />
         {hasUnreadMessagesAtBottom && (
-          <UnseenDot aria-label="unseen-messages-dot" />
+          <UnseenDot id="unseen-messages-dot-bottom-button" />
         )}
       </ButtonContainer>
     );
