@@ -58,7 +58,7 @@ export const MenuItem = ({ buddy }: Props) => {
         <BuddyName>
           <Text variant="bold">{displayName}</Text>
           {isUnseenDotVisible && (
-            <UnseenDot aria-label="unseen-messages-dot">{count}</UnseenDot>
+            <UnseenDot id="unseen-messages-dot-conversation">{count}</UnseenDot>
           )}
         </BuddyName>
         {isLoading ? (

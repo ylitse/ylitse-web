@@ -171,7 +171,7 @@ describe('chat', () => {
     cy.loginUser(mentor.loginName, mentor.password);
 
     // see unseen-message-ball
-    cy.get('div[aria-label="unseen-messages-dot"]').should('be.visible');
+    cy.get('div[id="unseen-messages-dot-navigation"]').should('be.visible');
     // go to chat-page and mark message unseen
     cy.get('[href="/chat"]').click();
     cy.getByText(message, 'p').should('be.visible');
@@ -179,7 +179,7 @@ describe('chat', () => {
     cy.get('[href="/mentors"]').click();
 
     // unseen-message-ball-disappears
-    cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
+    cy.get('div[id="unseen-messages-dot-navigation"]').should('not.exist');
   });
 
   it('wont mark unseen if not visible', () => {
@@ -213,7 +213,7 @@ describe('chat', () => {
     cy.get('[href="/mentors"]').click();
 
     // see unseen-message-ball still
-    cy.get('div[aria-label="unseen-messages-dot"]').should('be.visible');
+    cy.get('div[id="unseen-messages-dot-navigation"]').should('be.visible');
   });
 
   it('will load all messages if multiple unseen', () => {
@@ -339,13 +339,13 @@ describe('chat', () => {
 
     cy.loginUser(mentor.loginName, mentor.password);
 
-    cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
+    cy.get('div[id="unseen-messages-dot-navigation"]').should('not.exist');
 
     // go to archived conversations
     cy.get('[href="/chat"]').click();
     cy.get('button[aria-label="menuLines"]').click();
     cy.getByText('Arkistoidut keskustelut', 'a');
-    cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
+    cy.get('div[id="unseen-messages-dot-navigation"]').should('not.exist');
   });
 
   it('can block and restore conversation', () => {
@@ -438,12 +438,52 @@ describe('chat', () => {
 
     cy.loginUser(mentor.loginName, mentor.password);
 
-    cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
+    cy.get('div[id="unseen-messages-dot-navigation"]').should('not.exist');
 
     // go to blocked conversations
     cy.get('[href="/chat"]').click();
     cy.get('button[aria-label="menuLines"]').click();
     cy.getByText('Estetyt keskustelut', 'a').click();
-    cy.get('div[aria-label="unseen-messages-dot"]').should('not.exist');
+    cy.get('div[id="unseen-messages-dot-navigation"]').should('not.exist');
+  });
+
+  it('can use scroll-to-bottom-button to scroll to bottom', () => {
+    const message = 'Huzzah';
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    api.signUpMentee(mentee).then((menteeResponse: any) => {
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+      api.signUpMentor(mentor).then((mentorResponse: any) => {
+        api.sendMultipleMessage({
+          sender: {
+            id: menteeResponse.body.id,
+            loginName: mentee.loginName,
+            password: mentee.password,
+          },
+          reciever: { id: mentorResponse.body.user_id },
+          content: message,
+          amountOfMessages: 20,
+        });
+      });
+    });
+
+    // go to chat page
+    cy.loginUser(mentor.loginName, mentor.password);
+    cy.get('[href="/chat"]').click();
+
+    // initially we should see this message
+    // newest message is `Huzzah 20`, but its also shown on the
+    // left conversation-list -> thats why we want to make sure it is scrolled to the bottom
+    cy.getByText(`${message} 19!`, 'p').should('be.visible');
+
+    // then scroll up to see older message
+    cy.getByText(`${message} 5!`, 'p').scrollIntoView().should('be.visible');
+
+    // click scroll-to-bottom-button
+    cy.get('button[id="scroll-to-bottom-button"]').click();
+
+    // when scrolled to bottom, this button should disappear
+    cy.get('button[id="scroll-to-bottom-button"]').should('not.be.visible');
+    // and a bottom message should be visible
+    cy.getByText(`${message} 19!`, 'p').should('be.visible');
   });
 });
