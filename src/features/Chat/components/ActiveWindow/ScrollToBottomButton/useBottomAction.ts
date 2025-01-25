@@ -26,7 +26,6 @@ export const useBottomAction = (
 
     const parent = parentRef.current;
     parent?.addEventListener('scroll', updatePosition);
-
     window.addEventListener('resize', updatePosition);
 
     return () => {
@@ -38,6 +37,21 @@ export const useBottomAction = (
   useEffect(() => {
     handleBottomActionClick();
   }, []);
+
+  // Watch for changes in the content of the parentRef div
+  useEffect(() => {
+    if (!parentRef.current) return;
+
+    const observer = new MutationObserver(() => {
+      if (isScrolled) {
+        handleBottomActionClick();
+      }
+    });
+
+    observer.observe(parentRef.current, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, [isScrolled, parentRef]);
 
   const handleBottomActionClick = () => {
     if (parentRef.current) {
